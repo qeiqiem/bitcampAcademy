@@ -1,0 +1,59 @@
+.post_btn {
+  padding: 3px 5px;
+}
+
+input {
+  padding: 3px;
+  width: 400px;
+}
+
+.title_community {
+  width: 100vh;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.search {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.order_link a {
+  color: rgb(133, 133, 133);
+  padding: 5px;
+  font-size: smaller;
+}
+
+.order_link {
+  margin: 7px 0;
+}
+
+.post {
+  position: relative;
+  display: flex;
+  border: 1px solid #ccc;
+  margin-bottom: -1px;
+  padding: 12px;
+  font-size: 12px;
+  align-items: center;
+  /* margin: 5px; */
+  /* justify-content: ; */
+}
+
+.post div {
+  margin: 0 20px;
+  box-sizing: border-box;
+}
+
+.writer_info {
+  position: absolute;
+  right: 0;
+  line-height: 120%;
+}
+
+.notice {
+  margin-bottom: 30px;
+}
