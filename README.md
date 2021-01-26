@@ -1,3 +1,4 @@
 # survlet-jsp-project
 
-팀플 with 태연씨
+Teamproject: mid-process
+(태연씨와 짝코딩 파일 업로드)
