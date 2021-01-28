@@ -43,7 +43,10 @@ public class BoardDao implements ProjectDao {
 						.setTitle(rs.getString("title"))
 						.setCreatedDate(rs.getDate("cre_date"))
 						.setNname(rs.getString("nname"))
-						.setPin(rs.getInt("pin")));
+						.setPin(rs.getInt("pin"))
+						.setVw(rs.getInt("vw"))
+						.setRecommend(rs.getInt("recommend"))
+						.setComm(rs.getInt("comm")));
 			}
 
 			return posts;
@@ -73,27 +76,55 @@ public class BoardDao implements ProjectDao {
 	}
 	
 
-	public List<Post> searchedList(String title) throws Exception{
+	public List<Post> searchedList(Post post) throws Exception{
 		Connection connection = null;
-		Statement stmt = null;
+		Statement stmt = null;		
 		ResultSet rs = null;
-		final String sqlSelect = "SELECT bno,header,title,nname,cre_date FROM board "
-				+ "WHERE title like '%"+title+"%' "
-				+ "ORDER BY bno DESC ";
-
+		String sqlSelect=null;
+		ArrayList<Post> posts = new ArrayList<Post>();
+		System.out.println(post.getOption() +" , "+post.getSearch());
 		try {
 			connection = ds.getConnection();
-
 			stmt = connection.createStatement();
+			sqlSelect = "SELECT * FROM board "
+					+ "WHERE pin=-1 ORDER BY bno DESC"; //공지글 먼저 출력 (공지글은 검색조건에 영향을 받지 않아야 한다)
 			rs = stmt.executeQuery(sqlSelect);
-
-			ArrayList<Post> posts = new ArrayList<Post>();
-
 			while (rs.next()) {
-				posts.add(new Post().setBno(rs.getInt("bno")).setHeader(rs.getString("header"))
-						.setTitle(rs.getString("title")).setCreatedDate(rs.getDate("cre_date")).setNname(rs.getString("nname")));
+				posts.add(new Post()
+						.setBno(rs.getInt("bno"))
+						.setHeader(rs.getString("header"))
+						.setTitle(rs.getString("title"))
+						.setCreatedDate(rs.getDate("cre_date"))
+						.setNname(rs.getString("nname"))
+						.setPin(rs.getInt("pin"))
+						.setVw(rs.getInt("vw"))
+						.setRecommend(rs.getInt("recommend"))
+						.setComm(rs.getInt("comm")));
+			}			
+			if(post.getOption().equals("all")) {//제목+내용 검색이라면
+				sqlSelect = "SELECT * FROM board "
+						+ "WHERE (title like '%"+ post.getSearch() +"%' OR content like '%"+post.getSearch()+"%') "
+								+ "AND header like '"+post.getHeader()+"' AND pin=0 "
+						+ "ORDER BY bno DESC";
+			} else {//제목 검색 아니면 작성자 검색
+				sqlSelect = "SELECT * FROM board "
+						+ "WHERE "+post.getOption()+" like '%"+post.getSearch()+"%' "
+								+ "AND header like '"+post.getHeader()+"' AND pin=0 "
+						+ "ORDER BY bno DESC";
 			}
-			
+			rs = stmt.executeQuery(sqlSelect);//이렇게 재활용해도 되는지 잘 모르겠다. rs와 stmt의 내부상황을 알아야 한다.
+			while (rs.next()) {
+				posts.add(new Post()
+						.setBno(rs.getInt("bno"))
+						.setHeader(rs.getString("header"))
+						.setTitle(rs.getString("title"))
+						.setCreatedDate(rs.getDate("cre_date"))
+						.setNname(rs.getString("nname"))
+						.setPin(rs.getInt("pin"))
+						.setVw(rs.getInt("vw"))
+						.setRecommend(rs.getInt("recommend"))
+						.setComm(rs.getInt("comm")));
+			}
 			return posts;
 
 		} catch (Exception e) {
@@ -121,7 +152,7 @@ public class BoardDao implements ProjectDao {
 	}
 
 	@Override
-	public int insert(Post board) throws Exception {
+	public int insert(Post post) throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -133,7 +164,7 @@ public class BoardDao implements ProjectDao {
 	}
 
 	@Override
-	public int update(Post board) throws Exception {
+	public int update(Post post) throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
 	}
