@@ -1,3 +1,13 @@
+SET @tables = NULL;
+SELECT GROUP_CONCAT(table_schema, '.', table_name) INTO @tables
+  FROM information_schema.tables
+  WHERE table_schema = 'san_db';
+
+SET @tables = CONCAT('DROP TABLE ', @tables);
+PREPARE stmt FROM @tables;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+
 CREATE TABLE members(
 	mno 	INTEGER NOT NULL COMMENT '회원번호',
     mname	VARCHAR(50) NOT NULL COMMENT '이름',
