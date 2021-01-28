@@ -63,8 +63,14 @@
 							<div class="post_title">
 								<a href="">${post.title}</a>
 							</div>
-							<div class="writer_info">
-								${post.nname} <br> <span style="font-size: x-small;">${post.createdDate}</span>
+							<div class="post_info">
+								<div class="infos">
+									<i class="far fa-thumbs-up"> 추천수 2</i> <i
+										class="far fa-eye"> 조회수 1</i>
+								</div>
+								<div class="writer_info">
+									${post.nname} <br> <span style="font-size: x-small;">${post.createdDate}</span>
+								</div>
 							</div>
 						</div>
 					</c:if>
