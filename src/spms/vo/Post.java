@@ -14,7 +14,23 @@ public class Post {
 	int recommend;
 	int comm;
 	int pin;
+	String option;
+	String search;
 	
+	public String getSearch() {
+		return search;
+	}
+	public Post setSearch(String search) {
+		this.search = search;
+		return this;
+	}
+	public String getOption() {
+		return option;
+	}
+	public Post setOption(String option) {
+		this.option = option;
+		return this;
+	}
 	public int getVw() {
 		return vw;
 	}
