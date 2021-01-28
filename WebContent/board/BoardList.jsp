@@ -42,7 +42,6 @@
                             <option value="none">제목+내용</option>
                             <option value="chat">제목</option>
                             <option value="ques">글작성자</option>
-                            <option value="info">댓글</option>
                         </select>
 
                         <input type="search" placeholder="검색어" value>
