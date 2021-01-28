@@ -65,8 +65,8 @@
 							</div>
 							<div class="post_info">
 								<div class="infos">
-									<i class="far fa-thumbs-up"> 추천수 2</i> <i
-										class="far fa-eye"> 조회수 1</i>
+									<i class="far fa-thumbs-up"> 추천수 ${post.recommend}</i> <i
+										class="far fa-eye"> 조회수 ${post.vw}</i>
 								</div>
 								<div class="writer_info">
 									${post.nname} <br> <span style="font-size: x-small;">${post.createdDate}</span>
@@ -83,8 +83,8 @@
 							</div>
 							<div class="post_info">
 								<div class="infos">
-									<i class="far fa-thumbs-up"> 추천수 2</i> <i
-										class="far fa-eye"> 조회수 1</i>
+									<i class="far fa-thumbs-up"> 추천수 ${post.recommend}</i> <i
+										class="far fa-eye"> 조회수 ${post.vw}</i>
 								</div>
 								<div class="writer_info">
 									${post.nname} <br> <span style="font-size: x-small;">${post.createdDate}</span>
