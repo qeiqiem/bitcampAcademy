@@ -30,21 +30,21 @@
 				</div>
 				<form action="list.do" method="post">
 					<div class="input_search">
-					   <select name="head">
-                            <option value="none">말머리 선택</option>
-                            <option value="none" disabled>======</option>
-                            <option value="chat">사담</option>
-                            <option value="ques">질문</option>
-                            <option value="info">정보</option>
-                            <option value="pr">클럽홍보</option>
+					   <select name="header">
+                            <option value="%%">말머리 선택</option>
+                            <option value="%%" disabled>======</option>
+                            <option value="[사담]">사담</option>
+                            <option value="[질문]">질문</option>
+                            <option value="[정보]">정보</option>
+                            <option value="[클럽홍보]">클럽홍보</option>
                         </select>
-                        <select name="head">
-                            <option value="none">제목+내용</option>
-                            <option value="chat">제목</option>
-                            <option value="ques">글작성자</option>
+                        <select name="option">
+                            <option value="all">제목+내용</option>
+                            <option value="title">제목</option>
+                            <option value="nname">글작성자</option>
                         </select>
 
-                        <input type="search" placeholder="검색어" value>
+                        <input type="search" placeholder="검색어" name="search">
                         <button type="submit" class="post_btn search_btn">
                             <i class="fas fa-search"></i>
                         </button>
