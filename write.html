@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>글 작성</title>
+    <link href="css/write.css" rel="stylesheet" type="text/css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+
+<body>
+    <!-- sumin.html 이거는 나중에 경로 나오면 하기 -->
+    <form action="sumin.html" method="post">
+    <div class="list1">
+        <select id="itemList">
+            <optgroup>
+                <option value="emtpy" selected>말머리 없음</option>
+                <option value="schedule">산악일정잡기</option>
+                <option value="revise">공지:일정변경</option>
+            </optgroup>
+        </select>
+    </div>
+
+    <div class="list2">
+        <select id="numOfPeople">
+            <optgroup>
+                <option value="numOfPeo" selected>인원설정</option>
+                <option value="5p">5명</option>
+                <option value="10p">10명</option>
+                <option value="15p">15명</option>
+            </optgroup>
+        </select></br>
+    </div>
+
+    <div class="title">
+        <input type="text" name="title" placeholder="오늘은 어떤 이야기를 들려주실 건가요?" /><br />
+    </div>
+
+    <!-- 달력넣기! <calendar></calendar> -->
+
+    <div class="textarea">
+        <textarea name="text" rows="10" cols="80"></textarea>
+    </div>
+
+    <!-- <div class="" -->
+        <form action="FileUpload" method="post" enctype="multipart/form-data">
+            <i class="fas fa-image"></i> 사진 :
+            <input type="file" name="photo1"></br>
+            <!-- <input type="file" name="photo2"></br> -->
+            <input type="submit" value="등록하기"></br>
+        </form>
+    </form>
+</body>
+
+</html>
