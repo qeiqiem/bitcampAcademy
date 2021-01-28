@@ -30,21 +30,25 @@
 				</div>
 				<form action="list.do" method="post">
 					<div class="input_search">
-						<select name="header">
-							<option value="none">== 말머리 선택 ==</option>
-							<option value="chat">[사담]</option>
-							<option value="ques">[질문]</option>
-							<option value="info">[정보]</option>
-							<option value="pr">[클럽홍보]</option>
-						</select> 
-						<select name="option">
-							<option value="all">제목+내용</option>
-							<option value="title">제목</option>
-							<option value="nname">글작성자</option>
-						</select> <input type="search" placeholder="검색어" name="title">
-						<button type="submit" class="post_btn">
-							<i class="fas fa-search"></i>
-						</button>
+					   <select name="head">
+                            <option value="none">말머리 선택</option>
+                            <option value="none" disabled>======</option>
+                            <option value="chat">사담</option>
+                            <option value="ques">질문</option>
+                            <option value="info">정보</option>
+                            <option value="pr">클럽홍보</option>
+                        </select>
+                        <select name="head">
+                            <option value="none">제목+내용</option>
+                            <option value="chat">제목</option>
+                            <option value="ques">글작성자</option>
+                            <option value="info">댓글</option>
+                        </select>
+
+                        <input type="search" placeholder="검색어" value>
+                        <button type="submit" class="post_btn search_btn">
+                            <i class="fas fa-search"></i>
+                        </button>
 					</div>
 				</form>
 			</nav>
@@ -85,28 +89,42 @@
 			</c:forEach>
 		</div>
 		</div>
-		<nav class="page_btn">
-            <button>
-                <i class="fas fa-angle-left"></i>
-            </button>
-            <!-- page no 배열..?? -->
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-            <button>4</button>
-            <button>5</button>
-            <button>6</button>
-            <button>7</button>
-            <button>8</button>
-            <button>9</button>
-            <button>10</button>
-            <button disabled><i class="fas fa-ellipsis-h"></i></button>
-            <!-- 마지막 저장값 숫자 -->
-            <button>100</button>
-            <button>
-                <i class="fas fa-angle-right"></i>
-            </button>
-        </nav>
+		
+		 <div class="page_btn_container">
+            <ul class="page_btn">
+                <!-- 맨처음으로 -->
+                <li class="page_first">
+                    <a href=""><i class="fas fa-angle-double-left"></i></a>
+                </li>
+                <!-- 이전 -->
+                <li class="page_prev">
+                    <a href="">
+                        <i class="fas fa-angle-left"></i>
+                    </a>
+                </li>
+
+                <li><a href="">1</a></li>
+                <li><a href="">2</a></li>
+                <li><a href="">3</a></li>
+                <!-- dotdotdot -->
+                <li><i class="fas fa-ellipsis-h"></i></li>
+                <li><a href="">100</a></li>
+
+                <!-- 다음 -->
+                <li class="page_next">
+                    <a href=""> <i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+                <!-- 맨마지막으로 -->
+                <li class="page_last">
+                    <a href=""><i class="fas fa-angle-double-right"></i></a>
+                </li>
+
+            </ul>
+        </div>
+
+		
+	
 	</section>
 
 </body>
