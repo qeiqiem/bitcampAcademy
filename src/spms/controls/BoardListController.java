@@ -18,10 +18,10 @@ public class BoardListController implements Controller,DataBinding {
 	@Override
 	public String execute(Map<String, Object> model) throws Exception {
 		Post post = (Post)model.get("post");
-		if(post.getTitle()==null) {//
+		if(post.getTitle()==null) {//검색어가 없다면
 			model.put("posts", boardDao.selectList());
 			return "/board/BoardList.jsp";	
-		} else {
+		} else {//검색어가 있다면(or 아무것도 입력하지 않고 검색버튼을 눌렀을 경우)
 			String title = post.getTitle();
 			model.put("posts", boardDao.searchedList(title));
 			return "/board/BoardList.jsp";
