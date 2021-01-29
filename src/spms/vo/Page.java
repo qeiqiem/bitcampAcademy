@@ -6,9 +6,17 @@ public class Page {
 	int startNum;
 	int endNum;
 	String search;
-	String header;
+	String filter;
 	String option;
+	String order="bno"; //default 설정
 	
+	public String getOrder() {
+		return order;
+	}
+	public Page setOrder(String order) {
+		this.order = order;
+		return this;
+	}
 	public int getStartNum() {
 		return startNum;
 	}
@@ -44,11 +52,11 @@ public class Page {
 		this.search = search;
 		return this;
 	}
-	public String getHeader() {
-		return header;
+	public String getFilter() {
+		return filter;
 	}
-	public Page setHeader(String header) {
-		this.header = header;
+	public Page setFilter(String filter) {
+		this.filter = filter;
 		return this;
 	}
 	public String getOption() {
