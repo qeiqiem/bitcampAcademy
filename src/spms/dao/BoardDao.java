@@ -91,7 +91,7 @@ public class BoardDao implements ProjectDao {
 		}
 	}
 	
-	public List<Post> searchedList(Post post) throws Exception{
+	public List<Post> searchedList(Post post, Page page) throws Exception{
 		Connection connection = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -115,16 +115,15 @@ public class BoardDao implements ProjectDao {
 						.setRecommend(rs.getInt("recommend"))
 						.setComm(rs.getInt("comm")));
 			}
-			if(post.getOption().equals("all")) {//제목+내용 검색이라면
-				sqlSelect = "SELECT * FROM board "
-						+ "WHERE (title like '%"+ post.getSearch() +"%' OR content like '%"+post.getSearch()+"%') "
-								+ "AND header like '"+post.getHeader()+"' AND pin=0 "
-						+ "ORDER BY bno DESC";
+			System.out.println(page.getFilter());
+			if(page.getOption().equals("all")) {//제목+내용 검색이라면
+				sqlSelect = "SELECT * FROM board WHERE (title like '%"+ page.getSearch() +"%' OR content like '%"+page.getSearch()+"%') "
+								+ "AND header like '"+page.getFilter()+"' AND pin=0 "
+						+ "ORDER BY "+page.getOrder()+" DESC,bno DESC limit 10";
 			} else {//제목 검색 아니면 작성자 검색
-				sqlSelect = "SELECT * FROM board "
-						+ "WHERE "+post.getOption()+" like '%"+post.getSearch()+"%' "
-								+ "AND header like '"+post.getHeader()+"' AND pin=0 "
-						+ "ORDER BY bno DESC";
+				sqlSelect = "SELECT * FROM board WHERE "+page.getOption()+" like '%"+page.getSearch()+"%' "
+								+ "AND header like '"+page.getFilter()+"' AND pin=0 "
+						+ "ORDER BY "+page.getOrder()+" DESC,bno DESC limit 10";
 			}
 			rs = stmt.executeQuery(sqlSelect);//이렇게 재활용해도 되는지 잘 모르겠다. rs와 stmt의 내부상황을 알아야 한다.
 			while (rs.next()) {
@@ -164,7 +163,6 @@ public class BoardDao implements ProjectDao {
 			}
 		}
 	}
-
 	@Override
 	public int insert(Post post) throws Exception {
 		// TODO Auto-generated method stub
@@ -198,7 +196,66 @@ public class BoardDao implements ProjectDao {
 		try {
 		connection = ds.getConnection();
 		stmt = connection.createStatement();
-		sqlSelect = "SELECT @rnum:=@rnum+1 AS no, b.* FROM board b, (SELECT @rnum:=0) AS r ORDER BY no desc limit 1";
+		sqlSelect = "SELECT @rnum:=@rnum+1 AS no, b.* FROM board b, (SELECT @rnum:=0) AS r ORDER BY no DESC LIMIT 1";
+		rs = stmt.executeQuery(sqlSelect);
+		rs.next();
+		int rowMax=rs.getInt("no");
+		if(rowMax%10==0) {//최대 페이지
+			page.setMaxPage(rowMax/10);
+		} else {
+			page.setMaxPage(rowMax/10+1);
+		}
+		page.setCurPage(1);//첫 페이지는 1페이지
+		page.setStartNum(1);//페이지 목록 시작 넘버도 1
+		if((rowMax/101)>=1) {
+			page.setEndNum(10);
+		} else {
+			page.setEndNum(page.getMaxPage());
+		}
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				if(connection != null)
+					connection.close();
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return page;
+	}
+	@Override
+	public Page searchedPage(Page page) throws Exception {
+		Connection connection = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		String sqlSelect=null;
+		try {
+		connection = ds.getConnection();
+		stmt = connection.createStatement();
+		if(page.getOption().equals("all")) {//제목+내용 검색이라면
+			sqlSelect = "SELECT @rnum:=@rnum+1 AS no, b.* FROM board b, (SELECT @rnum:=0) AS r "
+					+ "WHERE (title like '%"+ page.getSearch() +"%' OR content like '%"+page.getSearch()+"%') "
+							+ "AND header like '"+page.getFilter()+"' AND pin=0 "
+					+ "ORDER BY no DESC LIMIT 1";
+		} else {//제목 검색 아니면 작성자 검색
+			sqlSelect = "SELECT @rnum:=@rnum+1 AS no, b.* FROM board b, (SELECT @rnum:=0) AS r "
+					+ "WHERE "+page.getOption()+" like '%"+page.getSearch()+"%' "
+							+ "AND header like '"+page.getFilter()+"' AND pin=0 "
+					+ "ORDER BY no DESC LIMIT 1";
+		}
 		rs = stmt.executeQuery(sqlSelect);
 		rs.next();
 		int rowMax=rs.getInt("no");
