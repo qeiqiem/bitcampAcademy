@@ -28,15 +28,15 @@
 			</div>
 			<nav class="search">
 				<div class="order_link">
-					<a href="boardlist.do?header=${posts[0].header}&search=${posts[0].search}&option=${posts[0].option}">최신순</a>
-					<a href="boardlist.do">추천순</a>
-					<a href="boardlist.do">조회순</a>
+					<a href="#">최신순</a>
+					<a href="#">추천순</a>
+					<a href="#">조회순</a>
 				</div>
-				<form action="boardlist.do" method="post">
+				<form action="page.do" method="post">
 					<div class="input_search">
-					   <select name="header">
-                            <option value="%%">말머리 선택</option>
-                            <option value="%%" disabled>======</option>
+					   <select name="filter">
+                            <option value="%">말머리 선택</option>
+                            <option disabled>======</option>
                             <option value="[사담]">사담</option>
                             <option value="[질문]">질문</option>
                             <option value="[정보]">정보</option>
