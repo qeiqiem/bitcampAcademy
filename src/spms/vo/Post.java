@@ -4,16 +4,16 @@ import java.sql.Date;
 
 public class Post {
 	int bno;
-	String header;
 	int mno;
-	String title;
-	String nname;
-	String content;
-	Date createdDate;
 	int vw;
 	int recommend;
 	int comm;
 	int pin;
+	Date createdDate;
+	String header;
+	String title;
+	String nname;
+	String content;
 	String option;
 	String search;
 	
