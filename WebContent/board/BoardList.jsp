@@ -13,7 +13,6 @@
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
 <link rel="stylesheet" href="css/community.css">
-
 </head>
 
 <body>
@@ -26,7 +25,9 @@
 			</div>
 			<nav class="search">
 				<div class="order_link">
-					<a href="">최신순</a> <a href="">추천순</a> <a href="">조회순</a>
+					<a href="list.do?header='${posts}'&search='${posts[0].search}&option='${posts[0].option}'">최신순</a>
+					<a href="list.do">추천순</a>
+					<a href="list.do">조회순</a>
 				</div>
 				<form action="list.do" method="post">
 					<div class="input_search">
@@ -58,7 +59,7 @@
 					<c:if test="${post.pin==-1}">
 						<div class="notice post">
 							<div class="post_no">${post.bno}</div>
-							<div class="post_head">${post.header}</div>
+							<div class="post_head">[공지사항]</div>
 							<div class="post_title">
 								<a href="">${post.title}</a>
 							</div>
@@ -133,5 +134,4 @@
 	</section>
 
 </body>
-
 </html>
