@@ -21,7 +21,8 @@ public class BoardListController implements Controller,DataBinding {
 		Post post = (Post)model.get("post");
 		if(post.getSearch()==null) {//검색어가 없다면
 			model.put("posts", boardDao.selectList());
-			return "/board/BoardList.jsp";	
+			model.put("page", boardDao.initPage());
+			return "/board/BoardList.jsp";
 		} else {//검색어가 있다면(or 아무것도 입력하지 않고 검색버튼을 눌렀을 경우)
 			model.put("posts", boardDao.searchedList(post));
 			return "/board/BoardList.jsp";
