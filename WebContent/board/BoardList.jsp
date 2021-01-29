@@ -21,7 +21,9 @@
 		<div class="post_community">
 			<div class="title">
 				<h2>커뮤니티 Community</h2>
-				<button type="submit" class="post_btn">글쓰기</button>
+				<button type="submit" class="post_btn">
+				  <i class="fas fa-pencil-alt"> 글쓰기</i>
+				</button>
 			</div>
 			<nav class="search">
 				<div class="order_link">
@@ -65,8 +67,9 @@
 							</div>
 							<div class="post_info">
 								<div class="infos">
-									<i class="far fa-thumbs-up"> 추천수 ${post.recommend}</i> <i
-										class="far fa-eye"> 조회수 ${post.vw}</i>
+									<i class="far fa-thumbs-up"> 추천수 ${post.recommend}</i> 
+									<i class="far fa-comment-dots"> 댓글수 1</i>
+									<i class="far fa-eye"> 조회수 ${post.vw}</i>
 								</div>
 								<div class="writer_info">
 									${post.nname} <br> <span style="font-size: x-small;">${post.createdDate}</span>
@@ -83,8 +86,9 @@
 							</div>
 							<div class="post_info">
 								<div class="infos">
-									<i class="far fa-thumbs-up"> 추천수 ${post.recommend}</i> <i
-										class="far fa-eye"> 조회수 ${post.vw}</i>
+									<i class="far fa-thumbs-up"> 추천수 ${post.recommend}</i>
+									<i class="far fa-comment-dots"> 댓글수 1</i>
+									<i class="far fa-eye"> 조회수 ${post.vw}</i>
 								</div>
 								<div class="writer_info">
 									${post.nname} <br> <span style="font-size: x-small;">${post.createdDate}</span>
