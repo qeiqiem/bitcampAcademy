@@ -273,7 +273,7 @@ VALUES('[공지]',3,'제목5','JENI','내용5',NOW(),-1);
 COMMIT;
 
 
-
+--SELECT @rownum:=@rownum+1 AS no, b.* FROM board b, (SELECT @rownum:=0) AS r ORDER BY no desc limit 1; 행에 번호를 매기고 마지막 행 하나만 출력하는 쿼리문-- 
 
 
 
