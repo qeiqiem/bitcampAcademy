@@ -138,6 +138,136 @@ INSERT INTO board(header,mno,title,nname,content,cre_date)
 VALUES('[정보]',2,'제목3','SANA','내용3',NOW());
 INSERT INTO board(header,mno,title,nname,content,cre_date)
 VALUES('[홍보]',2,'제목4','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
+INSERT INTO board(header,mno,title,nname,content,cre_date)
+VALUES('[홍보]',2,'TEST용','SANA','내용4',NOW());
 INSERT INTO board(header,mno,title,nname,content,cre_date,pin)
 VALUES('[공지]',3,'제목5','JENI','내용5',NOW(),-1);
 COMMIT;
