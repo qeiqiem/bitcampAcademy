@@ -37,12 +37,12 @@
                             <option value="[사담]">사담</option>
                             <option value="[질문]">질문</option>
                             <option value="[정보]">정보</option>
-                            <option value="[클럽홍보]">클럽홍보</option>
+                            <option value="[홍보]">홍보</option>
                         </select>
                         <select name="option">
                             <option value="all">제목+내용</option>
                             <option value="title">제목</option>
-                            <option value="nname">글작성자</option>
+                            <option value="nname">작성자</option>
                         </select>
 
                         <input type="search" placeholder="검색어" name="search">
