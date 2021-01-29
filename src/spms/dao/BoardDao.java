@@ -10,6 +10,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import spms.annotation.Component;
+import spms.vo.Page;
 import spms.vo.Post;
 @Component("boardDao")
 public class BoardDao implements ProjectDao {
@@ -25,8 +26,8 @@ public class BoardDao implements ProjectDao {
 		Connection connection = null;
 		Statement stmt = null;
 		ResultSet rs = null;
-		final String sqlSelect = "SELECT bno,header,title,nname,cre_date,vw,recommend,comm,pin FROM board "
-				+ "ORDER BY pin,bno DESC";
+		String sqlSelect = "SELECT * FROM board "
+				+ "WHERE pin=-1 ORDER BY bno DESC";
 
 		try {
 			connection = ds.getConnection();
@@ -36,7 +37,7 @@ public class BoardDao implements ProjectDao {
 
 			ArrayList<Post> posts = new ArrayList<Post>();
 
-			while (rs.next()) {
+			while (rs.next()) {//공지 먼저
 				posts.add(new Post()
 						.setBno(rs.getInt("bno"))
 						.setHeader(rs.getString("header"))
@@ -48,7 +49,22 @@ public class BoardDao implements ProjectDao {
 						.setRecommend(rs.getInt("recommend"))
 						.setComm(rs.getInt("comm")));
 			}
-
+			
+			sqlSelect = "SELECT * FROM board WHERE pin=0 "
+					+ "ORDER BY bno DESC limit 10";
+			rs = stmt.executeQuery(sqlSelect);
+			while (rs.next()) {// 포스트는 10개만 
+				posts.add(new Post()
+						.setBno(rs.getInt("bno"))
+						.setHeader(rs.getString("header"))
+						.setTitle(rs.getString("title"))
+						.setCreatedDate(rs.getDate("cre_date"))
+						.setNname(rs.getString("nname"))
+						.setPin(rs.getInt("pin"))
+						.setVw(rs.getInt("vw"))
+						.setRecommend(rs.getInt("recommend"))
+						.setComm(rs.getInt("comm")));
+			}
 			return posts;
 
 		} catch (Exception e) {
@@ -75,14 +91,12 @@ public class BoardDao implements ProjectDao {
 		}
 	}
 	
-
 	public List<Post> searchedList(Post post) throws Exception{
 		Connection connection = null;
-		Statement stmt = null;		
+		Statement stmt = null;
 		ResultSet rs = null;
 		String sqlSelect=null;
 		ArrayList<Post> posts = new ArrayList<Post>();
-		System.out.println(post.getOption() +" , "+post.getSearch());
 		try {
 			connection = ds.getConnection();
 			stmt = connection.createStatement();
@@ -100,7 +114,7 @@ public class BoardDao implements ProjectDao {
 						.setVw(rs.getInt("vw"))
 						.setRecommend(rs.getInt("recommend"))
 						.setComm(rs.getInt("comm")));
-			}			
+			}
 			if(post.getOption().equals("all")) {//제목+내용 검색이라면
 				sqlSelect = "SELECT * FROM board "
 						+ "WHERE (title like '%"+ post.getSearch() +"%' OR content like '%"+post.getSearch()+"%') "
@@ -173,6 +187,56 @@ public class BoardDao implements ProjectDao {
 	public int delete(int no) throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	public Page initPage() throws Exception {
+		Page page = new Page(); 
+		Connection connection = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		String sqlSelect=null;
+		try {
+		connection = ds.getConnection();
+		stmt = connection.createStatement();
+		sqlSelect = "SELECT @rnum:=@rnum+1 AS no, b.* FROM board b, (SELECT @rnum:=0) AS r ORDER BY no desc limit 1";
+		rs = stmt.executeQuery(sqlSelect);
+		rs.next();
+		int rowMax=rs.getInt("no");
+		if(rowMax%10==0) {//최대 페이지
+			page.setMaxPage(rowMax/10);
+		} else {
+			page.setMaxPage(rowMax/10+1);
+		}
+		page.setCurPage(1);//첫 페이지는 1페이지
+		page.setStartNum(1);//페이지 목록 시작 넘버도 1
+		if((rowMax/101)>=1) {
+			page.setEndNum(10);
+		} else {
+			page.setEndNum(page.getMaxPage());
+		}
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				if(connection != null)
+					connection.close();
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return page;
 	}
 
 }
