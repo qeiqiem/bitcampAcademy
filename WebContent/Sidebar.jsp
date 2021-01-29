@@ -8,7 +8,9 @@
 	<nav class="sidebar_container">
         <header>
             <div class="index logo">
-                <img src="images/logo.png" alt="">
+            <a href="<%=request.getContextPath() %>/index.do">
+             <img src="images/logo.png" alt="">
+            </a>
             </div>
             <!-- 로그인 O -->
             <!-- <nav class="login">
