@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -112,14 +113,13 @@
                         <i class="fas fa-angle-left"></i>
                     </a>
                 </li>
-
-                <li><a href="">1</a></li>
-                <li><a href="">2</a></li>
-                <li><a href="">3</a></li>
-                <!-- dotdotdot -->
-                <li><i class="fas fa-ellipsis-h"></i></li>
-                <li><a href="">100</a></li>
-
+				<c:forEach var="no" begin='${page.startNum}' end='${page.endNum}'>
+                <li><a href="">${no}</a></li>
+                </c:forEach>
+			<c:if test="${page.endNum!=page.maxPage}">
+				<li><i class="fas fa-ellipsis-h"></i></li>
+                <li><a href="">${page.maxPage}</a></li>
+			</c:if>
                 <!-- 다음 -->
                 <li class="page_next">
                     <a href=""> <i class="fas fa-angle-right"></i>
@@ -129,13 +129,9 @@
                 <li class="page_last">
                     <a href=""><i class="fas fa-angle-double-right"></i></a>
                 </li>
-
             </ul>
         </div>
-
-		
-	
 	</section>
-
 </body>
 </html>
+
