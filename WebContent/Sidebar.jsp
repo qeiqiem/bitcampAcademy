@@ -8,7 +8,7 @@
 	<nav class="sidebar_container">
         <header>
             <div class="index logo">
-            <a href="<%=request.getContextPath() %>/index.do">
+           <a href="/index.do"> 
              <img src="images/logo.png" alt="">
             </a>
             </div>
@@ -24,10 +24,10 @@
 
             <!-- 로그인 X -->
             <div class="index logout">
-                <button type="submit" class="btn login">
+                <button type="button" onclick="location.href='/log/login.jsp'" class="btn login">
                     <i class="fas fa-sign-in-alt"> 로그인</i>
                 </button>
-                <button type="submit" class="btn join">
+                <button type="button" onclick="location.href='/log/join.jsp'" class="btn join">
                     <i class="fas fa-user"> 회원가입</i>
                 </button>
             </div>
