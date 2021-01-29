@@ -27,11 +27,11 @@
 			</div>
 			<nav class="search">
 				<div class="order_link">
-					<a href="list.do?header='${posts}'&search='${posts[0].search}&option='${posts[0].option}'">최신순</a>
-					<a href="list.do">추천순</a>
-					<a href="list.do">조회순</a>
+					<a href="boardlist.do?header=${posts[0].header}&search=${posts[0].search}&option=${posts[0].option}">최신순</a>
+					<a href="boardlist.do">추천순</a>
+					<a href="boardlist.do">조회순</a>
 				</div>
-				<form action="list.do" method="post">
+				<form action="boardlist.do" method="post">
 					<div class="input_search">
 					   <select name="header">
                             <option value="%%">말머리 선택</option>
