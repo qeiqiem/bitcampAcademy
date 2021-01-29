@@ -137,7 +137,7 @@ VALUES('[질문]',2,'제목2','SANA','내용2',NOW());
 INSERT INTO board(header,mno,title,nname,content,cre_date)
 VALUES('[정보]',2,'제목3','SANA','내용3',NOW());
 INSERT INTO board(header,mno,title,nname,content,cre_date)
-VALUES('[클럽홍보]',2,'제목4','SANA','내용4',NOW());
+VALUES('[홍보]',2,'제목4','SANA','내용4',NOW());
 INSERT INTO board(header,mno,title,nname,content,cre_date,pin)
 VALUES('[공지]',3,'제목5','JENI','내용5',NOW(),-1);
 COMMIT;
