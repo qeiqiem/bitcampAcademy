@@ -411,10 +411,59 @@ public class BoardDao implements ProjectDao {
 		}
 	}
 
-	@Override
-	public int insert(Post post) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+public ArrayList<Post> insert(Post post) throws Exception {
+		Connection connection = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			connection = ds.getConnection();
+			String sqlInsert=
+					"INSERT INTO members(bno,header,mno,title,nname,content,cre_date) VALUES (?,?,?,?,?,?,now())";
+			stmt = connection.prepareStatement(sqlInsert);
+			
+			ArrayList<Post> posts = new ArrayList<Post>();
+			while (rs.next()) {
+				posts.add(new Post()
+//					set 회원가입 만들
+						.setBno(rs.getInt("bno"))
+						.setHeader(rs.getString("header"))
+						.setMno(rs.getInt("mno"))
+						.setTitle(rs.getString("title"))
+						.setNname(rs.getString("nname"))
+						.setContent(rs.getString("content"))
+						.setCreatedDate(rs.getDate("cre_date")));
+				
+			}
+
+			rs = stmt.executeQuery(sqlInsert);
+
+			
+			return posts;
+
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				if(connection != null)
+					connection.close();
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	
 	}
 
 	@Override
