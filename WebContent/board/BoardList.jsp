@@ -28,20 +28,14 @@
 			</div>
 			<nav class="search">
 				<div class="order_link">
-				<form name="goLink" method="post" action="page.do">
-				<input type="hidden" name="filter">
-				<input type="hidden" name="option">
-				<input type="hidden" name="search">
-				<input type="hidden" name="order">
-					<a href="javascript:page_move('${page.filter}','${page.option}','${page.search}','cre_date');">최신순</a>
-					<a href="javascript:page_move('${page.filter}','${page.option}','${page.search}','recommend');">추천순</a>
-					<a href="javascript:page_move('${page.filter}','${page.option}','${page.search}','vw');">조회순</a>
-				</form>
+					<a href="page.do?filter=${page.filter}&option=${page.option}&search=${page.search}&order=cre_date">최신순</a>
+					<a href="page.do?filter=${page.filter}&option=${page.option}&search=${page.search}&order=recommend">추천순</a>
+					<a href="page.do?filter=${page.filter}&option=${page.option}&search=${page.search}&order=vw">조회순</a>
 				</div>
 				<form action="page.do" method="post">
 					<div class="input_search">
 					   <select name="filter">
-                            <option value="%">말머리 선택</option>
+                            <option value="all">말머리 선택</option>
                             <option disabled>======</option>
                             <option value="[사담]">사담</option>
                             <option value="[질문]">질문</option>
@@ -111,43 +105,50 @@
             <ul class="page_btn">
                 <!-- 맨처음으로 -->
                 <li class="page_first">
-                    <a href=""><i class="fas fa-angle-double-left"></i></a>
+                    <a href="page.do?
+	                filter=${page.filter}&option=${page.option}&search=${page.search}&order=${page.order}
+	                &curPage=1&movePage=true"><i class="fas fa-angle-double-left"></i></a>
                 </li>
                 <!-- 이전 -->
+                <c:if test="${page.curPage!=1}">
                 <li class="page_prev">
-                    <a href="">
+                    <a href="page.do?
+	                filter=${page.filter}&option=${page.option}&search=${page.search}&order=${page.order}
+	                &curPage=${page.curPage-1}&movePage=true">
                         <i class="fas fa-angle-left"></i>
                     </a>
                 </li>
+                </c:if>
 				<c:forEach var="no" begin='${page.startNum}' end='${page.endNum}'>
-                <li><a href="page.do">${no}</a></li>
+                <li><a href=
+                "page.do?
+                filter=${page.filter}&option=${page.option}&search=${page.search}&order=${page.order}
+                &curPage=${no}&movePage=true">${no}</a></li>
                 </c:forEach>
-			<c:if test="${page.endNum!=page.lastPage}">
-				<li><i class="fas fa-ellipsis-h"></i></li>
-                <li><a href="">${page.lastPage}</a></li>
-			</c:if>
+				<c:if test="${page.endNum!=page.lastPage}">
+					<li><i class="fas fa-ellipsis-h"></i></li>
+	                <li><a href="page.do?
+	                filter=${page.filter}&option=${page.option}&search=${page.search}&order=${page.order}
+	                &curPage=${page.lastPage}&movePage=true">${page.lastPage}</a></li>
+				</c:if>
                 <!-- 다음 -->
-                <li class="page_next">
-                    <a href=""> <i class="fas fa-angle-right"></i>
-                    </a>
-                </li>
+                <c:if test="${page.curPage!=page.lastPage}">
+	                <li class="page_next">
+	                    <a href="page.do?
+	                filter=${page.filter}&option=${page.option}&search=${page.search}&order=${page.order}
+	                &curPage=${page.curPage+1}&movePage=true"> <i class="fas fa-angle-right"></i>
+	                    </a>
+               		</li>
+                </c:if>
                 <!-- 맨마지막으로 -->
                 <li class="page_last">
-                    <a href=""><i class="fas fa-angle-double-right"></i></a>
+                    <a href="page.do?
+                filter=${page.filter}&option=${page.option}&search=${page.search}&order=${page.order}
+                &curPage=${page.lastPage}&movePage=true"><i class="fas fa-angle-double-right"></i></a>
                 </li>
             </ul>
         </div>
 	</section>
-<script>
-function page_move(a,b,c,d){
-  var f=document.goLink;  //폼 name
-  f.filter.value = a;  //POST방식으로 넘기고 싶은 값
-  f.option.value = b;  //POST방식으로 넘기고 싶은 값
-  f.search.value = c;
-  f.order.value = d;
-  f.submit();
-}
-</script>
 </body>
 </html>
 
