@@ -2,6 +2,7 @@ package spms.dao;
 
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -411,45 +412,21 @@ public class BoardDao implements ProjectDao {
 		}
 	}
 
-public ArrayList<Post> insert(Post post) throws Exception {
+	public int insert(Post post) throws Exception {
 		Connection connection = null;
 		PreparedStatement stmt = null;
-		ResultSet rs = null;
-
 		try {
 			connection = ds.getConnection();
 			String sqlInsert=
-					"INSERT INTO members(bno,header,mno,title,nname,content,cre_date) VALUES (?,?,?,?,?,?,now())";
+					"INSERT INTO board (header,mno,title,nname,content,cre_date) VALUES (?,2,?,'hty',?,now())";
 			stmt = connection.prepareStatement(sqlInsert);
-			
-			ArrayList<Post> posts = new ArrayList<Post>();
-			while (rs.next()) {
-				posts.add(new Post()
-//					set 회원가입 만들
-						.setBno(rs.getInt("bno"))
-						.setHeader(rs.getString("header"))
-						.setMno(rs.getInt("mno"))
-						.setTitle(rs.getString("title"))
-						.setNname(rs.getString("nname"))
-						.setContent(rs.getString("content"))
-						.setCreatedDate(rs.getDate("cre_date")));
-				
-			}
-
-			rs = stmt.executeQuery(sqlInsert);
-
-			
-			return posts;
-
+			stmt.setString(1, post.getHeader());
+			stmt.setString(2, post.getTitle());
+			stmt.setString(3, post.getContent());
+			return stmt.executeUpdate();
 		} catch (Exception e) {
 			throw e;
 		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 			try {
 				if (stmt != null)
 					stmt.close();
@@ -465,7 +442,6 @@ public ArrayList<Post> insert(Post post) throws Exception {
 		}
 	
 	}
-
 	@Override
 	public Post selectOne(int no) throws Exception {
 		// TODO Auto-generated method stub
