@@ -2,14 +2,42 @@ package spms.vo;
 
 public class Page {
 	int curPage;
-	int maxPage;
+	int lastPage;
 	int startNum;
 	int endNum;
+	int movePage;
+	int startRow;
+	int totalCount;
+	final double criteria=10.0;
 	String search;
 	String filter;
 	String option;
 	String order="bno"; //default 설정
 	
+	public double getCriteria() {
+		return criteria;
+	}
+	public int getStartRow() {
+		return startRow;
+	}
+	public Page setStartRow(int startRow) {
+		this.startRow = startRow;
+		return this;
+	}
+	public int getTotalCount() {
+		return totalCount;
+	}
+	public Page setTotalCount(int totalCount) {
+		this.totalCount = totalCount;
+		return this;
+	}
+	public int getMovePage() {
+		return movePage;
+	}
+	public Page setMovePage(int movePage) {
+		this.movePage = movePage;
+		return this;
+	}
 	public String getOrder() {
 		return order;
 	}
@@ -38,11 +66,11 @@ public class Page {
 		this.curPage = curPage;
 		return this;
 	}
-	public int getMaxPage() {
-		return maxPage;
+	public int getLastPage() {
+		return lastPage;
 	}
-	public Page setMaxPage(int maxPage) {
-		this.maxPage = maxPage;
+	public Page setLastPage(int lastPage) {
+		this.lastPage = lastPage;
 		return this;
 	}
 	public String getSearch() {
