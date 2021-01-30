@@ -146,6 +146,9 @@ public class BoardDao implements ProjectDao {
 		try {
 		connection = ds.getConnection();
 		stmt = connection.createStatement();
+		if(page.getFilter().equals("all")) {
+			page.setFilter("%");
+		}
 		if(page.getOption().equals("all")) {//제목+내용 검색이라면
 			sqlSelect = "SELECT @rnum:=@rnum+1 AS no, b.* FROM board b, (SELECT @rnum:=0) AS r "
 					+ "WHERE (title like '%"+ page.getSearch() +"%' OR content like '%"+page.getSearch()+"%') "
@@ -229,6 +232,9 @@ public class BoardDao implements ProjectDao {
 						+ "ORDER BY "+page.getOrder()+" DESC,bno DESC limit 10";
 			}
 			rs = stmt.executeQuery(sqlSelect);//이렇게 재활용해도 되는지 잘 모르겠다. rs와 stmt의 내부상황을 알아야 한다.
+			if(page.getFilter().equals("%")) {
+				page.setFilter("all");
+			}
 			while (rs.next()) {
 				posts.add(new Post()
 						.setBno(rs.getInt("bno"))
@@ -240,6 +246,7 @@ public class BoardDao implements ProjectDao {
 						.setRecommend(rs.getInt("recommend"))
 						.setComm(rs.getInt("comm")));
 			}
+			
 			return posts;
 	
 		} catch (Exception e) {
@@ -275,6 +282,9 @@ public class BoardDao implements ProjectDao {
 		try {
 		connection = ds.getConnection();
 		stmt = connection.createStatement();
+		if(page.getFilter().equals("all")) {
+			page.setFilter("%");
+		}
 		if(page.getOption().equals("all")) {//제목+내용 검색이라면
 			sqlSelect = "SELECT @rnum:=@rnum+1 AS no, b.* FROM board b, (SELECT @rnum:=0) AS r "
 					+ "WHERE (title like '%"+ page.getSearch() +"%' OR content like '%"+page.getSearch()+"%') "
@@ -293,7 +303,7 @@ public class BoardDao implements ProjectDao {
 		page.setTotalCount(rs.getInt("no"))//출력 데이터 최대갯수
 			.setLastPage((int)(Math.ceil(page.getTotalCount()/page.getCriteria())))//마지막 페이지 추출
 			.setStartRow((page.getCurPage()-1)*10)//출력 시작 행
-			.setEndNum((int)(Math.ceil(page.getMovePage()/10.0)*10))//페이지 nav 끝 번호
+			.setEndNum((int)(Math.ceil(page.getCurPage()/10.0)*10))//페이지 nav 끝 번호
 			.setStartNum(page.getEndNum()-9);//페이지 nav 시작번호
 		if(page.getEndNum()>page.getLastPage()) {//만약 EndNum이 LastPage보다 클 경우 EndNum=LastPage
 			page.setEndNum(page.getLastPage());
@@ -349,6 +359,9 @@ public class BoardDao implements ProjectDao {
 						.setRecommend(rs.getInt("recommend"))
 						.setComm(rs.getInt("comm")));
 			}
+			if(page.getFilter().equals("all")) {
+				page.setFilter("%");
+			}
 			if(page.getOption().equals("all")) {//제목+내용 검색이라면
 				sqlSelect = "SELECT * FROM board WHERE (title like '%"+ page.getSearch() +"%' OR content like '%"+page.getSearch()+"%') "
 								+ "AND header like '"+page.getFilter()+"' AND pin=0 "
@@ -357,6 +370,9 @@ public class BoardDao implements ProjectDao {
 				sqlSelect = "SELECT * FROM board WHERE "+page.getOption()+" like '%"+page.getSearch()+"%' "
 								+ "AND header like '"+page.getFilter()+"' AND pin=0 "
 						+ "ORDER BY "+page.getOrder()+" DESC,bno DESC limit "+page.getStartRow()+",10";
+			}
+			if(page.getFilter().equals("%")) {
+				page.setFilter("all");
 			}
 			rs = stmt.executeQuery(sqlSelect);//이렇게 재활용해도 되는지 잘 모르겠다. rs와 stmt의 내부상황을 알아야 한다.
 			while (rs.next()) {
