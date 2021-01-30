@@ -21,9 +21,16 @@ public class PageController implements Controller, DataBinding {
 	public String execute(Map<String, Object> model) throws Exception {
 		Post post = (Post)model.get("post");
 		Page page = (Page)model.get("page");
-		model.put("page",boardDao.searchedPage(page));
-		model.put("posts", boardDao.searchedList(post, page));
-		return "/board/BoardList.jsp";	
+		if(page.getMovePage()) {
+			model.put("page",boardDao.movedPage(page));
+			model.put("posts", boardDao.movedList(post, page));
+			return "/board/BoardList.jsp";		
+		} else {
+			model.put("page",boardDao.searchedPage(page));
+			model.put("posts", boardDao.searchedList(post, page));
+			return "/board/BoardList.jsp";		
+		}
+		
 	}
 	@Override
 	public Object[] getDataBinders() {
