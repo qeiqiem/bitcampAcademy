@@ -21,8 +21,8 @@ public class PageController implements Controller, DataBinding {
 	public String execute(Map<String, Object> model) throws Exception {
 		Post post = (Post)model.get("post");
 		Page page = (Page)model.get("page");
-			model.put("posts", boardDao.searchedList(post, page));
-			model.put("page",boardDao.searchedPage(page));
+		model.put("page",boardDao.searchedPage(page));
+		model.put("posts", boardDao.searchedList(post, page));
 		return "/board/BoardList.jsp";	
 	}
 	@Override
