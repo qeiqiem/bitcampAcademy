@@ -5,14 +5,14 @@ public class Page {
 	int lastPage;
 	int startNum;
 	int endNum;
-	int movePage;
 	int startRow;
 	int totalCount;
 	final double criteria=10.0;
-	String search;
-	String filter;
-	String option;
-	String order="bno"; //default 설정
+	String search="";//default
+	String filter="all";//default
+	String option="all";//default
+	String order="bno"; //default
+	boolean movePage=false;//default
 	
 	public double getCriteria() {
 		return criteria;
@@ -31,10 +31,10 @@ public class Page {
 		this.totalCount = totalCount;
 		return this;
 	}
-	public int getMovePage() {
-		return movePage;
+	public boolean getMovePage() {
+		return this.movePage;
 	}
-	public Page setMovePage(int movePage) {
+	public Page setMovePage(boolean movePage) {
 		this.movePage = movePage;
 		return this;
 	}
