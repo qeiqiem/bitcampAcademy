@@ -16,8 +16,8 @@ public class BoardListController implements Controller {
 	@Override
 	public String execute(Map<String, Object> model) throws Exception {
 		Post post = (Post)model.get("post");
-			model.put("posts", boardDao.selectList());
 			model.put("page", boardDao.initPage());
+			model.put("posts", boardDao.selectList());
 			return "/board/BoardList.jsp";
 	}
 }
