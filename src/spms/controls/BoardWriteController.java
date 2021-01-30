@@ -21,15 +21,12 @@ public class BoardWriteController implements Controller,DataBinding {
 	@Override
 	public String execute(Map<String, Object> model) throws Exception {
 		Post post = (Post)model.get("post");
-		if(post!=null) {
-			model.put("posts", boardDao.insert(post));
-			return "/board/write.jsp";
+		if(post.getContent()!=null) {
+			boardDao.insert(post);
+			return "redirect:/board/Boardlist.do";
+		}else {
+			return "/board/BoardWrite.jsp";
 		}
-		else {
-			return "/board/boardlist.do";
-//			return "redirect:/board/boardlist.do\";
-		}
-		
 	}
 	
 	@Override
