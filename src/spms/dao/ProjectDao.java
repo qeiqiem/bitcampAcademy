@@ -15,7 +15,7 @@ public interface ProjectDao {
 	Page initPage() throws Exception;
 	Page searchedPage(Page page) throws Exception;
 	Page movedPage(Page page) throws Exception;	
-	List<Post> insert(Post post) throws Exception;
+	int insert(Post post) throws Exception;
 	Post selectOne(int no) throws Exception;
 	int update(Post post) throws Exception;
 	int delete(int no) throws Exception;
