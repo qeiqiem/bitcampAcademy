@@ -120,11 +120,11 @@
                     </a>
                 </li>
 				<c:forEach var="no" begin='${page.startNum}' end='${page.endNum}'>
-                <li><a href="">${no}</a></li>
+                <li><a href="page.do">${no}</a></li>
                 </c:forEach>
-			<c:if test="${page.endNum!=page.maxPage}">
+			<c:if test="${page.endNum!=page.lastPage}">
 				<li><i class="fas fa-ellipsis-h"></i></li>
-                <li><a href="">${page.maxPage}</a></li>
+                <li><a href="">${page.lastPage}</a></li>
 			</c:if>
                 <!-- 다음 -->
                 <li class="page_next">
