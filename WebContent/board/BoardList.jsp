@@ -28,9 +28,15 @@
 			</div>
 			<nav class="search">
 				<div class="order_link">
-					<a href="#">최신순</a>
-					<a href="#">추천순</a>
-					<a href="#">조회순</a>
+				<form name="goLink" method="post" action="page.do">
+				<input type="hidden" name="filter">
+				<input type="hidden" name="option">
+				<input type="hidden" name="search">
+				<input type="hidden" name="order">
+					<a href="javascript:page_move('${page.filter}','${page.option}','${page.search}','cre_date');">최신순</a>
+					<a href="javascript:page_move('${page.filter}','${page.option}','${page.search}','recommend');">추천순</a>
+					<a href="javascript:page_move('${page.filter}','${page.option}','${page.search}','vw');">조회순</a>
+				</form>
 				</div>
 				<form action="page.do" method="post">
 					<div class="input_search">
@@ -132,6 +138,16 @@
             </ul>
         </div>
 	</section>
+<script>
+function page_move(a,b,c,d){
+  var f=document.goLink;  //폼 name
+  f.filter.value = a;  //POST방식으로 넘기고 싶은 값
+  f.option.value = b;  //POST방식으로 넘기고 싶은 값
+  f.search.value = c;
+  f.order.value = d;
+  f.submit();
+}
+</script>
 </body>
 </html>
 
