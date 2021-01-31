@@ -30,7 +30,7 @@ public class MemberLogInController implements Controller, DataBinding {
 			Member member = memberDao.check(loginInfo.getId(), loginInfo.getPwd());
 			if(member != null) {
 				HttpSession session = (HttpSession)model.get("session");
-				session.setAttribute("member", member);
+				session.setAttribute("loginAc", member);
 				return "redirect:/board/boardlist.do";
 			}else {
 				return "/log/loginFail.jsp";
