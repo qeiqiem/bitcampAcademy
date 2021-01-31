@@ -3,17 +3,17 @@ package spms.vo;
 import java.sql.Date;
 
 public class Post {
-	int bno;
-	int mno;
-	int vw;
-	int recommend;
-	int comm;
-	int pin;
-	Date createdDate;
-	String header;
-	String title;
-	String nname;
-	String content;
+	protected int bno;
+	protected int mno;
+	protected int vw;
+	protected int recommend;
+	protected int comm;
+	protected int pin;
+	protected Date createdDate;
+	protected String header;
+	protected String title;
+	protected String nname;
+	protected String content;
 
 	public int getVw() {
 		return vw;
