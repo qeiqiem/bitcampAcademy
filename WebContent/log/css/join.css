@@ -3,53 +3,67 @@ ul {
   list-style: none;
 }
 
-li {
+.join_input li {
   margin-bottom: 10px;
+ 
 }
 
 input {
   height: 20px;
+  padding: 5px;
+  margin-bottom: 5px;
 }
 
 select {
-  padding: 3px;
+  padding: 6px;
 }
 
+h2 {
+  text-align: center;
+}
 .join_container {
   box-sizing: border-box;
-  border: 1px solid #ccc;
-  width: 500px;
+  width: 550px;
   justify-content: center;
   margin: auto;
   margin-top: 90px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 30px;
 }
-
 .join_list {
   display: flex;
   box-sizing: border-box;
-  flex-direction: row;
-  justify-content: center;
-  /* align-items: center;
-  border: 1px solid #ccc;
+  /* flex-direction: row; */
+  /* justify-content: center; */
   width: 500px;
-  height: 400px; */
-  padding: 20px;
+  height: 300px;
+  margin-top: 40px;
+  margin-left: 60px;
+  margin-bottom: 50px;
 }
 
 .join_info li {
-  margin-top: 17px;
+  margin-bottom: 24px;
 }
 
 .join_info {
-  margin-top: 22px;
+  margin-top: 8px; 
+  margin-right: 40px;
 }
 
 .join_btn {
   text-align: center;
-  padding: 30px;
+  margin-bottom: 30px;
 }
 
 .join_btn button {
   font-size: 14px;
   padding: 7px 10px;
+  margin: 0 20px;
+}
+
+.post_container {
+  display: absolute;
+  margin-left: 300px;
 }

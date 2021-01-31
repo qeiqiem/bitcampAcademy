@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 .login_box {
   list-style: none;
   display: inline;
@@ -16,12 +17,13 @@ input {
 
 .login_container {
   margin: auto;
-  margin-top: 200px;
+  margin-top: 100px;
   text-align: center;
   box-sizing: border-box;
   width: 300px;
   height: 350px;
-  border: 1px solid;
+  border: 1px solid #ccc;
+  border-radius:5px;
   padding: 30px;
 }
 
@@ -29,4 +31,9 @@ input {
   margin: 30px 5px 0;
   font-size: 14px;
   padding: 7px 10px;
+}
+
+.post_container {
+  display: absolute;
+  margin-left: 300px;
 }
