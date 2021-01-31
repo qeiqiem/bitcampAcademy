@@ -57,5 +57,6 @@
                 <li>
                     Copyright © 2021 All right Reserved.
                 </li>
+                </ul>
         </footer>
     </nav>
