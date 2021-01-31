@@ -19,7 +19,7 @@ public class BoardViewController implements Controller,DataBinding {
 	public String execute(Map<String, Object> model) throws Exception {
 		int no = (Integer)model.get("no");
 		model.put("post",boardDao.selectOne(no));
-		return null;//가경씨 프론트 경로 부분
+		return "/board/BoardPost.jsp";
 	}
 
 	@Override
