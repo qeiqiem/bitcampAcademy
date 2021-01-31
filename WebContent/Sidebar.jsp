@@ -4,7 +4,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="/board/css/index.css">
 	<nav class="sidebar_container">
         <header>
             <div class="index logo">
@@ -24,10 +24,10 @@
 
             <!-- 로그인 X -->
             <div class="index logout">
-                <button type="button" onclick="location.href='/log/login.jsp'" class="btn login">
+                <button type="button" onclick="location.href='/log/login.do'" class="btn login">
                     <i class="fas fa-sign-in-alt"> 로그인</i>
                 </button>
-                <button type="button" onclick="location.href='/log/join.jsp'" class="btn join">
+                <button type="button" onclick="location.href='/log/join.do'" class="btn join">
                     <i class="fas fa-user"> 회원가입</i>
                 </button>
             </div>
@@ -43,7 +43,6 @@
                 </ul>
 
             </div>
-
 
         </header>
         <footer>
