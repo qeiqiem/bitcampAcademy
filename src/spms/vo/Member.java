@@ -7,7 +7,8 @@ public class Member {
 	protected String mname;
 	protected String id;
 	protected String pwd;
-	protected String rrn;
+	protected String rrn1;
+	protected String rrn2;
 	protected String phone;
 	protected String address;
 	protected String nname;
@@ -42,11 +43,18 @@ public class Member {
 		this.pwd = pwd;
 		return this;
 	}
-	public String getRrn() {
-		return rrn;
+	public String getRrn1() {
+		return rrn1;
 	}
-	public Member setRrn(String rrn) {
-		this.rrn = rrn;
+	public Member setRrn1(String rrn1) {
+		this.rrn1 = rrn1;
+		return this;
+	}
+	public String getRrn2() {
+		return rrn2;
+	}
+	public Member setRrn2(String rrn2) {
+		this.rrn2 = rrn2;
 		return this;
 	}
 	public String getPhone() {
