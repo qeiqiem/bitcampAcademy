@@ -1,18 +1,18 @@
 package spms.vo;
 
 public class Page {
-	int curPage;
-	int lastPage;
-	int startNum;
-	int endNum;
-	int startRow;
-	int totalCount;
-	final double criteria=10.0;
-	String search="";//default
-	String filter="all";//default
-	String option="all";//default
-	String order="bno"; //default
-	boolean movePage=false;//default
+	protected int curPage;
+	protected int lastPage;
+	protected int startNum;
+	protected int endNum;
+	protected int startRow;
+	protected int totalCount;
+	protected final double criteria=10.0;
+	protected String search="";//default
+	protected String filter="all";//default
+	protected String option="all";//default
+	protected String order="bno"; //default
+	protected boolean movePage=false;//default
 	
 	public double getCriteria() {
 		return criteria;
