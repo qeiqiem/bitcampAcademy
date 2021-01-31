@@ -27,8 +27,7 @@ public class MemberLogInController implements Controller, DataBinding {
 		if(loginInfo.getId() == null) {
 			return "/log/login.jsp";
 		}else {
-			Member member = memberDao.check(loginInfo.getId(), 
-											loginInfo.getPwd());
+			Member member = memberDao.check(loginInfo.getId(), loginInfo.getPwd());
 			if(member != null) {
 				HttpSession session = (HttpSession)model.get("session");
 				session.setAttribute("member", member);
