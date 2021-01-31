@@ -596,12 +596,12 @@ public class BoardDao implements ProjectDao {
 		}
 	}
 
-	public List<Comm> readComms(int no, String table) throws Exception {
+	public List<Comm> readComms(int no) throws Exception {
 		Connection connection = null;
 		Statement stmt = null;
 		ResultSet rs = null;
 		String sqlSelect = "SELECT * FROM comm " 
-				+ "WHERE bname='"+table+"' "
+				+ "WHERE bname='board' "
 				+ "AND bno="+no+" "
 				+ "ORDER BY cre_date";
 		try {
