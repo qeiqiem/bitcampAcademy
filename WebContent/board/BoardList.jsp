@@ -69,7 +69,7 @@
 							<div class="post_info">
 								<div class="infos">
 									<i class="far fa-thumbs-up"> 추천수 ${post.recommend}</i> 
-									<i class="far fa-comment-dots"> 댓글수 1</i>
+									<i class="far fa-comment-dots">댓글수 ${post.comm}</i>
 									<i class="far fa-eye"> 조회수 ${post.vw}</i>
 								</div>
 								<div class="writer_info">
@@ -83,12 +83,12 @@
 							<div class="post_no">${post.bno}</div>
 							<div class="post_head">${post.header}</div>
 							<div class="post_title">
-								<a href="">${post.title}</a>
+								<a href="view.do?no=${post.bno}">${post.title}</a>
 							</div>
 							<div class="post_info">
 								<div class="infos">
 									<i class="far fa-thumbs-up"> 추천수 ${post.recommend}</i>
-									<i class="far fa-comment-dots"> 댓글수 1</i>
+									<i class="far fa-comment-dots"> 댓글수 ${post.comm}</i>
 									<i class="far fa-eye"> 조회수 ${post.vw}</i>
 								</div>
 								<div class="writer_info">
