@@ -530,6 +530,8 @@ public class BoardDao implements ProjectDao {
 			String sqlDelete=
 					"DELETE FROM board WHERE bno="+no;
 			stmt = connection.createStatement();
+			stmt.executeUpdate(sqlDelete);
+			sqlDelete = "DELETE FROM comm WHERE bno="+no+", bname='board'";
 			return stmt.executeUpdate(sqlDelete);
 		} catch (Exception e) {
 			throw e;
