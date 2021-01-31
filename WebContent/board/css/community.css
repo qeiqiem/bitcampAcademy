@@ -44,6 +44,13 @@ select {
 .order_link {
   margin: 7px 0;
 }
+
+.order_link a:hover {
+  text-decoration: underline;
+  font-weight: bolder;
+  color: black;
+}
+
 .post_list {
   margin-bottom: 60px;
 }
