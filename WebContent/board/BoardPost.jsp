@@ -60,7 +60,7 @@
 				<div class="post_title">
 					<h3>${post.title}</h3>
 					<ul>
-						<li><i class="fas fa-user"></i> ${members.nname}</li>
+						<li><i class="fas fa-user"></i> ${post.nname}</li>
 						<li style="color: rgb(156, 156, 156);">${post.createdDate}
 							조회수 ${post.vw}</li>
 					</ul>
@@ -89,4 +89,4 @@
 	</section>
 </body>
 
-</html>
+</html> 
