@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="spms.vo.Member" %>
+<%Member loginAc = (Member)session.getAttribute("loginAc");%>
 <!DOCTYPE html>
-<html lang="en">
 
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -73,17 +76,22 @@
 						<hr>
 						<h4>댓글</h4>
 						<br>
+						<c:forEach var="comm" items="${comms}">
 						<ul>
-							<li><i class="fas fa-user"></i> ${members.nname}</li>
-							<li class="commtext">댓글 내용</li>
-							<li style="color: rgb(156, 156, 156);" class="commtext">댓글
-								생성날짜</li>
+							<li><i class="fas fa-user"></i>${comm.nname}</li>
+							<li class="commtext">${comm.content}</li>
+							<li style="color: rgb(156, 156, 156);" class="commtext">${comm.createdDate}</li>
 						</ul>
+						</c:forEach>
 					</div>
 					<hr>
-					<form action="">
+					<form action="/comm/add.do" method="post">
+					<input type="hidden" name="table" value="board">
+					<input type="hidden" name="bno" value='${post.bno}'>
+					<input type="hidden" name="mno" value='${post.mno}'>
+					<input type="hidden" name="nname" value='<%=loginAc.getNname()%>'>
 						<ul>
-							<li><textarea name="text" rows="3" cols="100"
+							<li><textarea name="content" rows="3" cols="100"
 									style="padding: 10px; resize: none;" placeholder="댓글을 입력하세요"></textarea>
 							</li>
 							<li>
@@ -91,14 +99,12 @@
 							</li>
 						</ul>
 					</form>
-
 				</div>
-
 			</div>
-
 		</div>
 
 	</section>
+
 </body>
 
-</html>
+</html> 
