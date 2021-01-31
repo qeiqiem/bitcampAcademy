@@ -23,7 +23,7 @@ public class BoardWriteController implements Controller,DataBinding {
 		Post post = (Post)model.get("post");
 		if(post.getContent()!=null) {
 			boardDao.insert(post);
-			return "redirect:/board/Boardlist.do";
+			return "redirect:/board/boardlist.do";
 		}else {
 			return "/board/BoardWrite.jsp";
 		}
