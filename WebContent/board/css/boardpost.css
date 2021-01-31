@@ -78,3 +78,17 @@ hr {
 .commtext {
   font-size: 14px;
 }
+
+form li {
+  margin-bottom: 10px;
+}
+
+form button {
+  float: right;
+  /* border: none; */
+  padding: 7px 10px;
+}
+
+form ul {
+  margin-bottom: 50px;
+}
