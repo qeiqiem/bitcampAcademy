@@ -19,13 +19,15 @@ public class BoardViewController implements Controller,DataBinding {
 	public String execute(Map<String, Object> model) throws Exception {
 		int no = (Integer)model.get("no");
 		model.put("post",boardDao.selectOne(no));
+		model.put("comms",boardDao.readComms(no));
 		return "/board/BoardPost.jsp";
 	}
 
 	@Override
 	public Object[] getDataBinders() {
 		return new Object[] {
-			"no", Integer.class
+			"no", Integer.class,
+			"comm", spms.vo.Comm.class
 		};
 	}	 
 }
