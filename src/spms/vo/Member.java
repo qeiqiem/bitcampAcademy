@@ -9,7 +9,9 @@ public class Member {
 	protected String pwd;
 	protected String rrn1;
 	protected String rrn2;
-	protected String phone;
+	protected String phone1;
+	protected String phone2;
+	protected String phone3;
 	protected String address;
 	protected String nname;
 	protected Date createdDate;
@@ -57,11 +59,25 @@ public class Member {
 		this.rrn2 = rrn2;
 		return this;
 	}
-	public String getPhone() {
-		return phone;
+	public String getPhone1() {
+		return phone1;
 	}
-	public Member setPhone(String phone) {
-		this.phone = phone;
+	public Member setPhone1(String phone1) {
+		this.phone1 = phone1;
+		return this;
+	}
+	public String getPhone2() {
+		return phone2;
+	}
+	public Member setPhone2(String phone2) {
+		this.phone2 = phone2;
+		return this;
+	}
+	public String getPhone3() {
+		return phone3;
+	}
+	public Member setPhone3(String phone3) {
+		this.phone3 = phone3;
 		return this;
 	}
 	public String getAddress() {
