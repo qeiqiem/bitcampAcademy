@@ -11,6 +11,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import spms.annotation.Component;
+import spms.vo.Comm;
 import spms.vo.Page;
 import spms.vo.Post;
 @Component("boardDao")
@@ -372,8 +373,8 @@ public class BoardDao implements ProjectDao {
 								+ "AND header like '"+page.getFilter()+"' AND pin=0 "
 						+ "ORDER BY "+page.getOrder()+" DESC,bno DESC limit "+page.getStartRow()+",10";
 			}
-			if(page.getFilter().equals("%")) {
-				page.setFilter("all");
+			if(page.getFilter().equals("%")) {//쿼리문에서 사용 후 jsp로 보내기 때문에 특수문자가 아닌 영어로 변환해야함
+				page.setFilter("all");//아직 인코딩을 다룰 줄 몰라서 잡스러워도 어쩔 수 없음
 			}
 			rs = stmt.executeQuery(sqlSelect);//이렇게 재활용해도 되는지 잘 모르겠다. rs와 stmt의 내부상황을 알아야 한다.
 			while (rs.next()) {
@@ -418,7 +419,7 @@ public class BoardDao implements ProjectDao {
 		try {
 			connection = ds.getConnection();
 			String sqlInsert=
-					"INSERT INTO board (header,mno,title,nname,content,cre_date) VALUES (?,2,?,'hty',?,now())";
+					"INSERT INTO board (header,mno,title,nname,content,cre_date) VALUES (?,2,?,'hty',?,now())";//데모버전 수정요함
 			stmt = connection.prepareStatement(sqlInsert);
 			stmt.setString(1, post.getHeader());
 			stmt.setString(2, post.getTitle());
@@ -444,20 +445,201 @@ public class BoardDao implements ProjectDao {
 	}
 	@Override
 	public Post selectOne(int no) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		Connection connection = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		String sqlSelect = "SELECT * FROM board WHERE bno="+no;
 
+		try {
+			connection = ds.getConnection();
+			stmt = connection.createStatement();
+			rs = stmt.executeQuery(sqlSelect);
+			rs.next();
+			
+			Post post=new Post()
+						.setBno(rs.getInt("bno"))
+						.setHeader(rs.getString("header"))
+						.setTitle(rs.getString("title"))
+						.setCreatedDate(rs.getDate("cre_date"))
+						.setNname(rs.getString("nname"))
+						.setContent(rs.getString("content"))
+						.setVw(rs.getInt("vw"))
+						.setRecommend(rs.getInt("recommend"))
+						.setComm(rs.getInt("comm"));						
+			return post;
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				if(connection != null)
+					connection.close();
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	@Override
 	public int update(Post post) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		Connection connection = null;
+		PreparedStatement stmt = null;
+		try {
+			connection = ds.getConnection();
+			String sqlInsert=
+					"UPDATE board SET header=?,title=?,content=?,cre_date=NOW() WHERE bno=?";
+			stmt = connection.prepareStatement(sqlInsert);
+			stmt.setString(1, post.getHeader());
+			stmt.setString(2, post.getTitle());
+			stmt.setString(3, post.getContent());
+			stmt.setInt(4, post.getBno());
+			return stmt.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				if(connection != null)
+					connection.close();
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
-
 	@Override
 	public int delete(int no) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		Connection connection = null;
+		Statement stmt = null;
+		try {
+			connection = ds.getConnection();
+			String sqlDelete=
+					"DELETE FROM board WHERE bno="+no;
+			stmt = connection.createStatement();
+			return stmt.executeUpdate(sqlDelete);
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				if(connection != null)
+					connection.close();
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
+	public int addComm(Comm comm) throws Exception {
+		Connection connection = null;
+		PreparedStatement pstmt = null;
+		Statement stmt = null;
+		try {
+			connection = ds.getConnection();
+			String sqlInsert=
+					"INSERT INTO comm (bname,bno,mno,nname,content,cre_date) VALUES (?,?,?,?,?,now())";
+			pstmt = connection.prepareStatement(sqlInsert);
+			pstmt.setString(1, comm.getTable());
+			pstmt.setInt(2, comm.getBno());
+			pstmt.setInt(3, comm.getMno());
+			pstmt.setString(4, comm.getNname());
+			pstmt.setString(5, comm.getContent());
+			pstmt.executeUpdate();
+			
+			String sqlUpdate=
+					"UPDATE "+comm.getTable()+" SET comm=comm+1 WHERE bno="+comm.getBno();
+			stmt=connection.createStatement();
+			return stmt.executeUpdate(sqlUpdate);
+			
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				if(connection != null)
+					connection.close();
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public List<Comm> readComms(int no, String table) throws Exception {
+		Connection connection = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		String sqlSelect = "SELECT * FROM comm " 
+				+ "WHERE bname='"+table+"' "
+				+ "AND bno="+no+" "
+				+ "ORDER BY cre_date";
+		try {
+			connection = ds.getConnection();
+			stmt = connection.createStatement();
+			rs = stmt.executeQuery(sqlSelect);
+
+			ArrayList<Comm> comms = new ArrayList<Comm>();
+
+			while (rs.next()) {
+				comms.add(new Comm()
+						.setBno(rs.getInt("bno"))
+						.setMno(rs.getInt("mno"))
+						.setNname(rs.getString("nname"))
+						.setContent(rs.getString("content"))
+						.setCreatedDate(rs.getDate("cre_date"))
+						.setNname(rs.getString("nname")));
+			}
+			return comms;
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				if (stmt != null)
+					stmt.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				if(connection != null)
+					connection.close();
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }
