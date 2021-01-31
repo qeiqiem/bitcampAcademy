@@ -187,7 +187,7 @@ public class MySqlMemberDao implements MemberDao{
 			stmt.setString(2, pwd);
 			rs = stmt.executeQuery();
 			if (rs.next()) {
-				return new Member().setMno(rs.getInt("mno")).setMname(rs.getString("nname"));
+				return new Member().setMno(rs.getInt("mno")).setNname(rs.getString("nname"));
 			} else {
 				throw new Exception("ID 혹은 Password 가 일치하지 않습니다.");
 			}
