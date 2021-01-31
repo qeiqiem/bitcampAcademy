@@ -80,6 +80,18 @@
 								생성날짜</li>
 						</ul>
 					</div>
+					<hr>
+					<form action="">
+						<ul>
+							<li><textarea name="text" rows="3" cols="100"
+									style="padding: 10px; resize: none;" placeholder="댓글을 입력하세요"></textarea>
+							</li>
+							<li>
+								<button type="submit">등록하기</button>
+							</li>
+						</ul>
+					</form>
+
 				</div>
 
 			</div>
@@ -89,4 +101,4 @@
 	</section>
 </body>
 
-</html> 
+</html>
