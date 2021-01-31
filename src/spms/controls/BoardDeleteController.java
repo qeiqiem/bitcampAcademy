@@ -15,7 +15,7 @@ public class BoardDeleteController implements Controller,DataBinding {
 	public String execute(Map<String, Object> model) throws Exception {
 		
 		Integer no = (Integer)model.get("no");
-		boardDao.delete(no);		
+		boardDao.delete(no);
 		return "redirect:/board/boardlist.do";
 	}
 	@Override
