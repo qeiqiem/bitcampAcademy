@@ -21,6 +21,7 @@
                     <div>
                         <ul class="join_info">
                             <li>이름</li>
+                            <li>닉네임</li>
                             <li>아이디</li>
                             <li>비밀번호</li>
                             <li>주민등록번호</li>
@@ -32,22 +33,20 @@
                         <ul>
                             <li>
                                 <input type="text" name="mname">
-
                             </li>
-
+                            <li>
+                                <input type="text" name="nname">
+                            </li>
                             <li>
                                 <input type="text" name="id" placeholder="ID">
                             </li>
-
                             <li>
                                 <input type="password" name="pwd" placeholder="Password">
                             </li>
-
                             <li>
                                 <input type="text" name="rrn1" size="10" maxlength="6"> -
                                 <input type="password" name="rrn2" size="10" maxlength="7">
                             </li>
-
                             <li>
                                 <div class="phone_no">
                                     <select name="phone1">
@@ -75,7 +74,6 @@
                     <button type="submit">취소</button>
                     <button type="submit">가입하기</button>
                 </div>
-
                 <!-- <div class="terms">
                 <ul>
                     <li>
