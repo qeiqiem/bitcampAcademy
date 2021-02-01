@@ -24,7 +24,7 @@ public class MemberAddController implements Controller, DataBinding {
 			return "/log/join.jsp";
 		}else {
 			memberDao.insert(member);	
-			return "redirect:/board/boardlist.do";
+			return "redirect:/log/login.do";
 		}
 	}
 
