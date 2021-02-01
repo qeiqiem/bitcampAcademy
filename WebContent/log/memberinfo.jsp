@@ -16,7 +16,7 @@
 	<jsp:include page="/Sidebar.jsp" />
 	<section class="post_container">
 		<div class="join_container">
-			<form action="">
+			<form action="/log/delete.do">
 
 				<h2>내 정보</h2>
 				<div class="join_list">
@@ -43,6 +43,7 @@
 				</div>
 				<div class="join_btn">
 					<button type="button" onclick="location.href='/log/update.do'">수정</button>
+					<input type="hidden" name="no" value="<%=loginAc.getMno()%>">
 					<button type="submit">탈퇴</button>
 				</div>
 			</form>
