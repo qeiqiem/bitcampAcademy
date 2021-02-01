@@ -2,12 +2,14 @@ package spms.controls;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import spms.annotation.Component;
 import spms.bind.DataBinding;
 import spms.dao.MemberDao;
 import spms.vo.Member;
 
-@Component("/member/update.do")
+@Component("/log/update.do")
 public class MemberUpdateController implements Controller, DataBinding {
 	
 	MemberDao memberDao = null;
@@ -20,35 +22,19 @@ public class MemberUpdateController implements Controller, DataBinding {
 	@Override
 	public String execute(Map<String, Object> model) throws Exception {
 		Member member = (Member)model.get("member");
-		
-		if(member.getId() == null) {
-			Integer no = (Integer)model.get("no");
-			model.put("member", memberDao.selectOne(no));
-			return "/member/MemberUpdateForm.jsp";
-		}else {
+		if (member.getId()==null) {
+			return "/log/MemberUpdate.jsp";
+		} else {
 			memberDao.update(member);
-			return "redirect:/board/boardlist.do";
+			HttpSession session = (HttpSession)model.get("session");
+			session.setAttribute("loginAc", member);
+			return "redirect:/log/info.do";
 		}
 	}
-
 	@Override
 	public Object[] getDataBinders() {
 		return new Object[] {
-			"no", Integer.class,
 			"member", spms.vo.Member.class
 		};
 	}
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
