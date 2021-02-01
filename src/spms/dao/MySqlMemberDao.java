@@ -146,6 +146,7 @@ public class MySqlMemberDao implements MemberDao{
 			// 커넥션풀에서 Connection객체를 빌려온다
 			connection = ds.getConnection();
 			stmt = connection.prepareStatement(sqlUpdate);
+			System.out.println(member.getMname()+","+member.getId()+","+member.getPwd()+","+member.getRrn1()+"-"+member.getRrn2()+","+member.getPhone1()+"-"+member.getPhone2()+"-"+member.getPhone3()+","+member.getAddress()+","+member.getMno());
 			stmt.setString(1, member.getMname());
 			stmt.setString(2, member.getId());
 			stmt.setString(3, member.getPwd());
@@ -177,7 +178,7 @@ public class MySqlMemberDao implements MemberDao{
 		Connection connection = null;
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		final String sqlExist = "SELECT mno,nname FROM MEMBERS WHERE id=? AND pwd=?";
+		final String sqlExist = "SELECT * FROM MEMBERS WHERE id=? AND pwd=?";
 		try {
 			// 커넥션풀에서 Connection객체를 빌려온다
 			connection = ds.getConnection();
@@ -187,7 +188,19 @@ public class MySqlMemberDao implements MemberDao{
 			stmt.setString(2, pwd);
 			rs = stmt.executeQuery();
 			if (rs.next()) {
-				return new Member().setMno(rs.getInt("mno")).setNname(rs.getString("nname"));
+				String[] phone = rs.getString("phone").split("-");
+				return new Member()
+							.setMno(rs.getInt("mno"))
+							.setNname(rs.getString("nname"))
+							.setMname(rs.getString("mname"))
+							.setId(rs.getString("id"))
+							.setPhone1(phone[0])
+							.setPhone2(phone[1])
+							.setPhone3(phone[2])
+							.setAddress(rs.getString("address"))
+							.setRrn1(rs.getString("rrn").substring(0,6))
+							.setRrn2(rs.getString("rrn").substring(7,14))
+							.setPwd(rs.getString("pwd"));
 			} else {
 				throw new Exception("ID 혹은 Password 가 일치하지 않습니다.");
 			}
