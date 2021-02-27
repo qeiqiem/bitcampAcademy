@@ -1,3 +1,4 @@
+
 CREATE TABLE `Member` (
 	`mno`	INTEGER	NOT NULL,
 	`mname`	VARCHAR(40)	NULL,
