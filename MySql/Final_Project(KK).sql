@@ -1,4 +1,3 @@
-
 CREATE TABLE `Member` (
 	`mno`	INTEGER	NOT NULL,
 	`mname`	VARCHAR(40)	NULL,
@@ -22,7 +21,7 @@ CREATE TABLE `Business` (
 	`email`	VARCHAR(40)	NULL,
 	`comment`	VARCHAR(255)	NULL,
 	`time`	VARCHAR(255)	NULL,
-	`typeNum`	INTEGER	NOT NULL
+	`typeNum`	INTEGER NULL
 );
 
 CREATE TABLE `Payment` (
@@ -32,7 +31,7 @@ CREATE TABLE `Payment` (
 
 CREATE TABLE `Bsn_Payment` (
 	`bno`	INTEGER	NOT NULL,
-	`pno`	INTEGER	NOT NULL
+	`pno`	INTEGER	NULL
 );
 
 CREATE TABLE `Bank` (
@@ -42,14 +41,14 @@ CREATE TABLE `Bank` (
 
 CREATE TABLE `Bsn_Account` (
 	`bno`	INTEGER	NOT NULL,
-	`bkno`	INTEGER	NOT NULL,
+	`bkno`	INTEGER	NULL,
 	`acno`	INTEGER	NULL
 );
 
 CREATE TABLE `Laundry_type` (
 	`lno`	INTEGER	NOT NULL,
 	`lname`	VARCHAR(20)	NULL,
-	`prno`	INTEGER	NOT NULL
+	`prno`	INTEGER	NULL
 );
 
 CREATE TABLE `Period` (
@@ -59,7 +58,7 @@ CREATE TABLE `Period` (
 
 CREATE TABLE `Bsn_Laundry` (
 	`bno`	INTEGER	NOT NULL,
-	`lno`	INTEGER	NOT NULL,
+	`lno`	INTEGER	NULL,
 	`price`	INTEGER	NULL
 );
 
@@ -70,7 +69,7 @@ CREATE TABLE `Equipment` (
 
 CREATE TABLE `Bsn_Equipment` (
 	`bno`	INTEGER	NOT NULL,
-	`eno`	INTEGER	NOT NULL,
+	`eno`	INTEGER	NULL,
     `cnt`   INTEGER NULL,
     `price` INTEGER NOT NULL DEFAULT 0
 );
@@ -78,17 +77,17 @@ CREATE TABLE `Bsn_Equipment` (
 CREATE TABLE `Reservation` (
 	`rno`	INTEGER	NOT NULL,
 	`mno`	INTEGER	NOT NULL,
-	`bno`	INTEGER	NOT NULL,
+	`bno`	INTEGER	NULL,
 	`rdate`	date	NULL,
 	`ddate`	date	NULL,
-	`stno`	INTEGER	NOT NULL
+	`stno`	INTEGER	NULL
 );
 
 CREATE TABLE `Rsv_Laundry` (
 	`rno`	INTEGER	NOT NULL,
-	`lno`	INTEGER	NOT NULL,
+	`lno`	INTEGER	NULL,
 	`cnt`	INTEGER	NULL,
-	`stno`	INTEGER	NOT NULL
+	`stno`	INTEGER	NULL
 );
 
 CREATE TABLE `State` (
@@ -98,13 +97,13 @@ CREATE TABLE `State` (
 
 CREATE TABLE `Rsv_Payment` (
 	`rno`	INTEGER	NOT NULL,
-	`pno`	INTEGER	NOT NULL,
+	`pno`	INTEGER	NULL,
 	`price`	INTEGER	NULL
 );
 
 CREATE TABLE `Comment` (
 	`cno`	INTEGER	NOT NULL,
-	`mno`	INTEGER	NOT NULL,
+	`mno`	INTEGER	NULL,
 	`bno`	INTEGER	NOT NULL,
 	`comment`	VARCHAR(255)	NULL,
 	`order`	INTEGER	NULL,
@@ -182,186 +181,186 @@ ALTER TABLE `Bsn_type` ADD CONSTRAINT `PK_BSN_TYPE` PRIMARY KEY (
 );
 ALTER TABLE `Bsn_type` MODIFY COLUMN typeNum INTEGER NOT NULL AUTO_INCREMENT;
 ALTER TABLE `Member` ADD CONSTRAINT `FK_Account_TO_Member_1` FOREIGN KEY (
-	`mno`
+	`mno` 
 )
 REFERENCES `Account` (
 	`mno`
-);
+) ON DELETE CASCADE;
 
 ALTER TABLE `Business` ADD CONSTRAINT `FK_Account_TO_Business_1` FOREIGN KEY (
 	`mno`
 )
 REFERENCES `Account` (
 	`mno`
-);
+) ON DELETE CASCADE;
 
 ALTER TABLE `Business` ADD CONSTRAINT `FK_Bsn_type_TO_Business_1` FOREIGN KEY (
 	`typeNum`
 )
 REFERENCES `Bsn_type` (
 	`typeNum`
-);
+) ON DELETE SET NULL;
 
 ALTER TABLE `Bsn_Payment` ADD CONSTRAINT `FK_Business_TO_Bsn_Payment_1` FOREIGN KEY (
 	`bno`
 )
 REFERENCES `Business` (
 	`bno`
-);
+) ON DELETE CASCADE;
 
 ALTER TABLE `Bsn_Payment` ADD CONSTRAINT `FK_Payment_TO_Bsn_Payment_1` FOREIGN KEY (
 	`pno`
 )
 REFERENCES `Payment` (
 	`pno`
-);
+) ON DELETE SET NULL;
 
 ALTER TABLE `Bsn_Account` ADD CONSTRAINT `FK_Business_TO_Bsn_Account_1` FOREIGN KEY (
 	`bno`
 )
 REFERENCES `Business` (
 	`bno`
-);
+) ON DELETE CASCADE;
 
 ALTER TABLE `Bsn_Account` ADD CONSTRAINT `FK_Bank_TO_Bsn_Account_1` FOREIGN KEY (
 	`bkno`
 )
 REFERENCES `Bank` (
 	`bkno`
-);
+) ON DELETE SET NULL;
 
 ALTER TABLE `Laundry_type` ADD CONSTRAINT `FK_Period_TO_Laundry_type_1` FOREIGN KEY (
 	`prno`
 )
 REFERENCES `Period` (
 	`prno`
-);
+) ON DELETE SET NULL;
 
 ALTER TABLE `Bsn_Laundry` ADD CONSTRAINT `FK_Business_TO_Bsn_Laundry_1` FOREIGN KEY (
 	`bno`
 )
 REFERENCES `Business` (
 	`bno`
-);
+) ON DELETE CASCADE;
 
 ALTER TABLE `Bsn_Laundry` ADD CONSTRAINT `FK_Laundry_type_TO_Bsn_Laundry_1` FOREIGN KEY (
 	`lno`
 )
 REFERENCES `Laundry_type` (
 	`lno`
-);
+) ON DELETE SET NULL;
 
 ALTER TABLE `Bsn_Equipment` ADD CONSTRAINT `FK_Business_TO_Bsn_Equipment_1` FOREIGN KEY (
 	`bno`
 )
 REFERENCES `Business` (
 	`bno`
-);
+) ON DELETE CASCADE;
 
 ALTER TABLE `Bsn_Equipment` ADD CONSTRAINT `FK_Equipment_TO_Bsn_Equipment_1` FOREIGN KEY (
 	`eno`
 )
 REFERENCES `Equipment` (
 	`eno`
-);
+) ON DELETE SET NULL;
 
 ALTER TABLE `Reservation` ADD CONSTRAINT `FK_Member_TO_Reservation_1` FOREIGN KEY (
 	`mno`
 )
 REFERENCES `Member` (
 	`mno`
-);
+) ON DELETE CASCADE;
 
 ALTER TABLE `Reservation` ADD CONSTRAINT `FK_Business_TO_Reservation_1` FOREIGN KEY (
 	`bno`
 )
 REFERENCES `Business` (
 	`bno`
-);
+) ON DELETE SET NULL;
 
 ALTER TABLE `Reservation` ADD CONSTRAINT `FK_State_TO_Reservation_1` FOREIGN KEY (
 	`stno`
 )
 REFERENCES `State` (
 	`stno`
-);
+) ON DELETE SET NULL;
 
 ALTER TABLE `Rsv_Laundry` ADD CONSTRAINT `FK_Reservation_TO_Rsv_Laundry_1` FOREIGN KEY (
 	`rno`
 )
 REFERENCES `Reservation` (
 	`rno`
-);
+) ON DELETE CASCADE;
 
 ALTER TABLE `Rsv_Laundry` ADD CONSTRAINT `FK_Laundry_type_TO_Rsv_Laundry_1` FOREIGN KEY (
 	`lno`
 )
 REFERENCES `Laundry_type` (
 	`lno`
-);
+) ON DELETE SET NULL;
 
 ALTER TABLE `Rsv_Laundry` ADD CONSTRAINT `FK_State_TO_Rsv_Laundry_1` FOREIGN KEY (
 	`stno`
 )
 REFERENCES `State` (
 	`stno`
-);
+) ON DELETE SET NULL;
 
 ALTER TABLE `Rsv_Payment` ADD CONSTRAINT `FK_Reservation_TO_Rsv_Payment_1` FOREIGN KEY (
 	`rno`
 )
 REFERENCES `Reservation` (
 	`rno`
-);
+) ON DELETE CASCADE;
 
 ALTER TABLE `Rsv_Payment` ADD CONSTRAINT `FK_Payment_TO_Rsv_Payment_1` FOREIGN KEY (
 	`pno`
 )
 REFERENCES `Payment` (
 	`pno`
-);
+) ON DELETE SET NULL;
 
 ALTER TABLE `Comment` ADD CONSTRAINT `FK_Member_TO_Comment_1` FOREIGN KEY (
 	`mno`
 )
 REFERENCES `Member` (
 	`mno`
-);
+) ON DELETE SET NULL;
 
 ALTER TABLE `Comment` ADD CONSTRAINT `FK_Business_TO_Comment_1` FOREIGN KEY (
 	`bno`
 )
 REFERENCES `Business` (
 	`bno`
-);
+) ON DELETE CASCADE;
 
 ALTER TABLE `Evaluation` ADD CONSTRAINT `FK_Member_TO_Evaluation_1` FOREIGN KEY (
 	`mno`
 )
 REFERENCES `Member` (
 	`mno`
-);
+) ON DELETE CASCADE;
 
 ALTER TABLE `Evaluation` ADD CONSTRAINT `FK_Business_TO_Evaluation_1` FOREIGN KEY (
 	`bno`
 )
 REFERENCES `Business` (
 	`bno`
-);
+) ON DELETE CASCADE;
 
 ALTER TABLE `Like` ADD CONSTRAINT `FK_Business_TO_Like_1` FOREIGN KEY (
 	`bno`
 )
 REFERENCES `Business` (
 	`bno`
-);
+) ON DELETE CASCADE;
 
 ALTER TABLE `Like` ADD CONSTRAINT `FK_Member_TO_Like_1` FOREIGN KEY (
 	`mno`
 )
 REFERENCES `Member` (
 	`mno`
-);
+) ON DELETE CASCADE;
 -- 설비
 INSERT INTO equipment (ename) VALUES ("세탁기(중형)");
 INSERT INTO equipment (ename) VALUES ("세탁기(대형)");
