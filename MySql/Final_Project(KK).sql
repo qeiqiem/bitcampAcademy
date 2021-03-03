@@ -1,8 +1,8 @@
 CREATE TABLE `Member` (
 	`mno`	INTEGER	NOT NULL,
 	`mname`	VARCHAR(40)	NULL,
-	`phone`	INTEGER	NULL,
-	`birth`	INTEGER	NULL,
+	`phone`	VARCHAR(15)	NULL,
+	`birth`	VARCHAR(10)	NULL,
 	`address`	VARCHAR(100)	NULL,
 	`email`	VARCHAR(40)	NULL
 );
@@ -17,6 +17,7 @@ CREATE TABLE `Business` (
 	`bno`	INTEGER	NOT NULL,
 	`mno`	INTEGER	NOT NULL,
 	`bname`	VARCHAR(40)	NULL,
+    `phone` VARCHAR(15) NULL,
 	`address`	VARCHAR(100)	NULL,
 	`email`	VARCHAR(40)	NULL,
 	`comment`	VARCHAR(255)	NULL,
