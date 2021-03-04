@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reservationDAO">
+	<insert id="insertRsv">
+		
+	</insert>
+	<update id="cancelRsv">
+		UPDATE reservation SET state=4 WHERE rno=#{rno}; 
+	</update>
+	<select id="getRsv" resultType="reservation">
+		SELECT * FROM reservation WHERE mno=#{mno};
+	</select>
+	<select id="getRsvListPs" resultType="reservation">
+		SELECT * FROM reservation WHERE mno=#{mno};
+	</select>
+	<select id="getRsvListBs" resultType="reservation">
+		SELECT * FROM reservation WHERE bno=#{bno};
+	</select>
+	<select id="getLaundry" resultType="laundry">
+		SELECT * FROM rsv_laundry WHERE rno=#{rno};
+	</select>
+</mapper>
