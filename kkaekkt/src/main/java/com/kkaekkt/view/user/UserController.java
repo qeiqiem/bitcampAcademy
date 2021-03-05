@@ -14,6 +14,7 @@ import com.kkaekkt.biz.user.EquipmentVO;
 import com.kkaekkt.biz.user.PersonVO;
 import com.kkaekkt.biz.user.UserService;
 
+// test123 
 @Controller
 public class UserController {
 	@Autowired
