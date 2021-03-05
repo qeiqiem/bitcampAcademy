@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-faq
+자주묻는 질문
+
 </body>
 </html>
