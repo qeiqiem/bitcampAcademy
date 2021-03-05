@@ -5,12 +5,15 @@
 <configuration>
 	<!-- Alias 설정 -->
 	<typeAliases>
-		<typeAlias alias="person" type="com.kkaekkt.bit.user.PersonVO"/>
-		<typeAlias alias="business" type="com.kkaekkt.bit.user.BusinessVO"/>
+		<typeAlias alias="person" type="com.kkaekkt.biz.user.PersonVO"/>
+		<typeAlias alias="business" type="com.kkaekkt.biz.user.BusinessVO"/>
+		<typeAlias alias="reservation" type="com.kkaekkt.biz.reservation.ReservationVO"/>
+		<typeAlias alias="laundry" type="com.kkaekkt.biz.reservation.LaundryVO"/>
 	</typeAliases>
 			
 	<!-- Sql Mapper 설정 -->
 	<mappers>
-		<mapper resource="mappings/sql-mapping.xml"/>
+		<mapper resource="mappings/user-mapping.xml"/>
+		<mapper resource="mappings/rsv-mapping.xml"/>
 	</mappers>
 </configuration>

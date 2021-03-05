@@ -10,7 +10,7 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 	<context:component-scan
-		base-package="com.kkaekkt.bit" />
+		base-package="com.kkaekkt.biz" />
 
 	<!-- AOP 어노테이션 자동 인식 설정 -->
 	<aop:aspectj-autoproxy/>
@@ -43,7 +43,7 @@
 	
 	<aop:config>
 		<aop:pointcut id="txPointcut"
-				expression="execution(* com.springbook.biz..*(..))"/>
+				expression="execution(* com.kkaekkt.biz..*(..))"/>
 		<aop:advisor pointcut-ref="txPointcut" advice-ref="txAdvice"/>
 	</aop:config>
 	

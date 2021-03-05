@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UserDAO">
+	<insert id="insertPs">
+			INSERT INTO account (id,password) VALUES (#{id},#{password});
+			INSERT INTO member VALUES ((SELECT MAX(mno) FROM account),#{name},#{phone},#{birth},#{address},#{email});
+	</insert>
+	<insert id="insertBs" parameterType="Business">
+			
+			<!-- INSERT INTO account (id,password) VALUES (#{id},#{password});
+			INSERT INTO business VALUES ((SELECT MAX(mno) FROM account),#{name},#{address},#{phone},#{email},#{comment},#{time},#{typeNum}); 
+			INSERT INTO bsn_account VALUES ((SELECT MAX(mno) FROM account),#{bankNum},#{accountNum}); 
+			INSERT INTO bsn_payment((SELECT MAX(mno) FROM account),#{paymentTypeNum}); 보류 (실제 서비스 적용시 시행될 쿼리) -->
+			INSERT INTO account (id,password) VALUES (#{id},#{password});
+			INSERT INTO business (mno,bname,address,phone) VALUES ((SELECT MAX(mno) FROM account),#{bname},#{address},#{phone});
+			
+			<choose>
+				<when test="${bizType}==1"> <!-- 일반세탁소라면 -->
+				<foreach collection="laundryList" item="laundry">
+					INSERT INTO bsn_equipment VALUES ((SELECT MAX(bno) FROM business),${laundry.lno},${laundry.price);
+				</foreach>
+				</when>
+				<otherwise> <!-- else문,, 코인세탁소라면 -->
+				<foreach collection="equipmentList" item="equipment">
+					INSERT INTO bsn_equipment VALUES ((SELECT MAX(bno) FROM business),${equipment.eno},${equipment.cnt},${equipment.price});
+				</foreach>
+				</otherwise>
+			</choose>
+	</insert>
+	<update id="updatePs">
+			<if test='password != null and password !=""'>
+			UPDATE account SET password=#{password} WHERE mno=#{no};
+			</if>
+			UPDATE member SET mname=#{name},phone=#{phone},address=#{address},email=#{email} WHERE mno=#{no};
+	</update>
+	<update id="updateBusiness">
+			
+	</update>
+	<delete id="deleteUser">
+			DELETE account WHERE mno=#{no}		
+	</delete>
+	
+	<select id="getPerson">
+			SELECT ac.mno as no, id, password, mname as name, phone, birth, address, email FROM account ac, member mb
+			WHERE ac.mno=mb.mno 
+			AND ac.mno=#{no}
+	</select>
+	
+	<!-- 관리자 페이지 기능이기 때문에 일단 대기.. -->
+	<select id="getUserList">
+		
+	</select>
+</mapper>
