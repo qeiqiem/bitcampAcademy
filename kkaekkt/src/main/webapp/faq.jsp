@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-faq page
+faq
 </body>
 </html>
