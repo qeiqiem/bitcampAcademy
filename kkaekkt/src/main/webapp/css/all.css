@@ -1,0 +1,31 @@
+:root {
+  --key-color: rgb(157, 187, 252);
+  --gray-color: rgb(221, 221, 221);
+  --black-color: rgb(51, 51, 51);
+  --text-gray: rgb(116, 116, 116);
+}
+
+.body_container {
+  position: absolute;
+  top: 65px;
+  width: 100vw;
+  height: 90vh;
+  margin: auto;
+}
+
+.footer {
+  padding: 20px;
+  /* position: absolute;
+  bottom: 20; */
+  /* 왜 안먹지?????????? */
+}
+
+button {
+  outline: 0;
+}
+
+ul {
+  text-decoration: none;
+  list-style: none;
+  padding: 0;
+}
