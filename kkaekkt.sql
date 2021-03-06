@@ -118,7 +118,7 @@ CREATE TABLE `Cancel` (
 	`reason`	VARCHAR(50)	NULL
 );
 
-CREATE TABLE `BusinessType` (
+CREATE TABLE `bizType` (
 	`typeNum`	INTEGER	NOT NULL,
 	`typename`	VARCHAR(20)	NULL
 );
@@ -193,10 +193,10 @@ ALTER TABLE `Cancel` ADD CONSTRAINT `PK_CANCEL` PRIMARY KEY (
 	`cancelNum`
 );
 ALTER TABLE `Cancel` MODIFY COLUMN cancelNum INTEGER NOT NULL AUTO_INCREMENT;
-ALTER TABLE `BusinessType` ADD CONSTRAINT `PK_BUSINESSTYPE` PRIMARY KEY (
+ALTER TABLE `bizType` ADD CONSTRAINT `PK_bizType` PRIMARY KEY (
 	`typeNum`
 );
-ALTER TABLE `BusinessType` MODIFY COLUMN typeNum INTEGER NOT NULL AUTO_INCREMENT;
+ALTER TABLE `bizType` MODIFY COLUMN typeNum INTEGER NOT NULL AUTO_INCREMENT;
 ALTER TABLE `Etc` ADD CONSTRAINT `PK_ETCNO` PRIMARY KEY (
 	`etcno`
 );
@@ -216,10 +216,10 @@ REFERENCES `Account` (
 	`mno`
 ) ON DELETE CASCADE;
 
-ALTER TABLE `Business` ADD CONSTRAINT `FK_BusinessType_TO_Business_1` FOREIGN KEY (
+ALTER TABLE `Business` ADD CONSTRAINT `FK_bizType_TO_Business_1` FOREIGN KEY (
 	`typeNum`
 )
-REFERENCES `BusinessType` (
+REFERENCES `bizType` (
 	`typeNum`
 ) ON DELETE SET NULL;
 
@@ -440,8 +440,8 @@ INSERT INTO cancel (reason) values("기간 내에 작업을 완료할 수 없습
 INSERT INTO cancel (reason) values("가게 내부 사정으로 취소합니다.");
 
 -- 업체유형
-INSERT INTO businessType (typename) values("일반 세탁소");
-INSERT INTO businessType (typename) values("코인 세탁소");
+INSERT INTO bizType (typename) values("일반 세탁소");
+INSERT INTO bizType (typename) values("코인 세탁소");
 
 -- 요일 선택 스케쥴
 INSERT INTO schedule (wkname) values("월");
