@@ -18,6 +18,8 @@ CREATE TABLE `Business` (
 	`mno`	INTEGER	NOT NULL,
 	`bname`	VARCHAR(40)	NULL,
     `phone` VARCHAR(15) NULL,
+    `bkno` INTEGER NULL,
+    `acno` VARCHAR(20) NULL,
 	`address`	VARCHAR(100)	NULL,
 	`email`	VARCHAR(40)	NULL,
 	`comment`	VARCHAR(255)	NULL,
@@ -30,20 +32,9 @@ CREATE TABLE `Payment` (
 	`pname`	VARCHAR(20)	NULL
 );
 
-CREATE TABLE `Bsn_Payment` (
-	`bno`	INTEGER	NOT NULL,
-	`pno`	INTEGER	NULL
-);
-
 CREATE TABLE `Bank` (
 	`bkno`	INTEGER	NOT NULL,
 	`bkname`	VARCHAR(30)	NULL
-);
-
-CREATE TABLE `Bsn_Account` (
-	`bno`	INTEGER	NOT NULL,
-	`bkno`	INTEGER	NULL,
-	`acno`	INTEGER	NULL
 );
 
 CREATE TABLE `Laundry_type` (
@@ -96,12 +87,6 @@ CREATE TABLE `State` (
 	`stname`	VARCHAR(20)	NULL
 );
 
-CREATE TABLE `Rsv_Payment` (
-	`rno`	INTEGER	NOT NULL,
-	`pno`	INTEGER	NULL,
-	`price`	INTEGER	NULL
-);
-
 CREATE TABLE `Comment` (
 	`cno`	INTEGER	NOT NULL,
 	`mno`	INTEGER	NULL,
@@ -141,6 +126,17 @@ CREATE TABLE `Bsn_schedule` (
 	`bno`	INTEGER	NOT NULL,
 	`schno`	INTEGER	NOT NULL,
 	`time`	VARCHAR(15)	NULL
+);
+
+CREATE TABLE `Etc` (
+	`etcno` INTEGER NOT NULL,
+	`etcname` VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE `Bsn_Etc` (
+	`etcno` INTEGER NULL,
+	`bno` INTEGER NOT NULL,
+	`price` INTEGER NOT NULL
 );
 
 ALTER TABLE `Account` ADD CONSTRAINT `PK_ACCOUNT` PRIMARY KEY (
@@ -196,6 +192,11 @@ ALTER TABLE `Bsn_type` ADD CONSTRAINT `PK_BSN_TYPE` PRIMARY KEY (
 	`typeNum`
 );
 ALTER TABLE `Bsn_type` MODIFY COLUMN typeNum INTEGER NOT NULL AUTO_INCREMENT;
+ALTER TABLE `Etc` ADD CONSTRAINT `PK_ETCNO` PRIMARY KEY (
+	`etcno`
+);
+ALTER TABLE `Etc` MODIFY COLUMN etcno INTEGER NOT NULL AUTO_INCREMENT;
+
 ALTER TABLE `Member` ADD CONSTRAINT `FK_Account_TO_Member_1` FOREIGN KEY (
 	`mno` 
 )
@@ -217,28 +218,7 @@ REFERENCES `Bsn_type` (
 	`typeNum`
 ) ON DELETE SET NULL;
 
-ALTER TABLE `Bsn_Payment` ADD CONSTRAINT `FK_Business_TO_Bsn_Payment_1` FOREIGN KEY (
-	`bno`
-)
-REFERENCES `Business` (
-	`bno`
-) ON DELETE CASCADE;
-
-ALTER TABLE `Bsn_Payment` ADD CONSTRAINT `FK_Payment_TO_Bsn_Payment_1` FOREIGN KEY (
-	`pno`
-)
-REFERENCES `Payment` (
-	`pno`
-) ON DELETE SET NULL;
-
-ALTER TABLE `Bsn_Account` ADD CONSTRAINT `FK_Business_TO_Bsn_Account_1` FOREIGN KEY (
-	`bno`
-)
-REFERENCES `Business` (
-	`bno`
-) ON DELETE CASCADE;
-
-ALTER TABLE `Bsn_Account` ADD CONSTRAINT `FK_Bank_TO_Bsn_Account_1` FOREIGN KEY (
+ALTER TABLE `Business` ADD CONSTRAINT `FK_Bank_TO_Business_1` FOREIGN KEY (
 	`bkno`
 )
 REFERENCES `Bank` (
@@ -251,6 +231,8 @@ ALTER TABLE `Laundry_type` ADD CONSTRAINT `FK_Period_TO_Laundry_type_1` FOREIGN 
 REFERENCES `Period` (
 	`prno`
 ) ON DELETE SET NULL;
+
+
 
 ALTER TABLE `Bsn_Laundry` ADD CONSTRAINT `FK_Business_TO_Bsn_Laundry_1` FOREIGN KEY (
 	`bno`
@@ -322,20 +304,6 @@ REFERENCES `State` (
 	`stno`
 ) ON DELETE SET NULL;
 
-ALTER TABLE `Rsv_Payment` ADD CONSTRAINT `FK_Reservation_TO_Rsv_Payment_1` FOREIGN KEY (
-	`rno`
-)
-REFERENCES `Reservation` (
-	`rno`
-) ON DELETE CASCADE;
-
-ALTER TABLE `Rsv_Payment` ADD CONSTRAINT `FK_Payment_TO_Rsv_Payment_1` FOREIGN KEY (
-	`pno`
-)
-REFERENCES `Payment` (
-	`pno`
-) ON DELETE SET NULL;
-
 ALTER TABLE `Comment` ADD CONSTRAINT `FK_Member_TO_Comment_1` FOREIGN KEY (
 	`mno`
 )
@@ -378,11 +346,32 @@ REFERENCES `Member` (
 	`mno`
 ) ON DELETE CASCADE;
 
+ALTER TABLE `Bsn_schedule` ADD CONSTRAINT `FK_Business_TO_Bsn_schedule_1` FOREIGN KEY (
+	`bno`
+)
+REFERENCES `Business` (
+	`bno`
+) ON DELETE CASCADE;
+
 ALTER TABLE `Bsn_schedule` ADD CONSTRAINT `FK_Schedule_TO_Bsn_schedule_1` FOREIGN KEY (
 	`schno`
 )
 REFERENCES `Schedule` (
 	`schno`
+) ON DELETE CASCADE;
+
+ALTER TABLE `Bsn_Etc` ADD CONSTRAINT `FK_Etc_TO_Bsn_Etc_1` FOREIGN KEY (
+	`etcno`
+)
+REFERENCES `Etc` (
+	`etcno`
+) ON DELETE SET NULL;
+
+ALTER TABLE `Bsn_Etc` ADD CONSTRAINT `FK_business_TO_Bsn_Etc_1` FOREIGN KEY (
+	`bno`
+)
+REFERENCES `Business` (
+	`bno`
 ) ON DELETE CASCADE;
 
 -- 설비
@@ -391,6 +380,11 @@ INSERT INTO equipment (ename) VALUES ("세탁기(대형)");
 INSERT INTO equipment (ename) VALUES ("세탁기(특대형)");
 INSERT INTO equipment (ename) VALUES ("건조기");
 
+-- 부가서비스
+INSERT INTO etc (etcname) VALUES("향균세탁");
+INSERT INTO etc (etcname) VALUES("특수세제(울/유아용등)");
+INSERT INTO etc (etcname) VALUES("섬유유연제");
+INSERT INTO etc (etcname) VALUES("픽업봉투");
 
 -- 결제수단
 INSERT INTO Payment (pname) VALUES ("카드");

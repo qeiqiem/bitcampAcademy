@@ -16,14 +16,42 @@ public class BusinessVO implements Serializable {
 	private String phone;
 	private String email;
 	private String comment;
-	private String time; //ex. 월 09~20시
 	private int bizType; //1. 일반 세탁소, 2. 코인 세탁소
+	private int bankNum;
 	private int bankAccountNum;
-	private List<PaymentVO> paymentList;
+	private List<ScheduleVO> scheduleList; 
 	private List<EquipmentVO> equipmentList;
 	private List<LaundryVO> laundryList;
+	private List<EtcVO> etcList;
 	private String equipment;
+	private String laundry;
+	private String schedule;
+	private String etc;
 	
+	public List<EtcVO> getEtcList() {
+		return etcList;
+	}
+	public void setEtcList(List<EtcVO> etcList) {
+		this.etcList = etcList;
+	}
+	public String getEtc() {
+		return etc;
+	}
+	public void setEtc(String etc) {
+		this.etc = etc;
+	}
+	public String getLaundry() {
+		return laundry;
+	}
+	public void setLaundry(String laundry) {
+		this.laundry = laundry;
+	}
+	public int getBankNum() {
+		return bankNum;
+	}
+	public void setBankNum(int bankNum) {
+		this.bankNum = bankNum;
+	}
 	public String getEquipment() {
 		return equipment;
 	}
@@ -84,12 +112,6 @@ public class BusinessVO implements Serializable {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-	public String getTime() {
-		return time;
-	}
-	public void setTime(String time) {
-		this.time = time;
-	}
 	public int getBizType() {
 		return bizType;
 	}
@@ -101,12 +123,6 @@ public class BusinessVO implements Serializable {
 	}
 	public void setBankAccountNum(int bankAccountNum) {
 		this.bankAccountNum = bankAccountNum;
-	}
-	public List<PaymentVO> getPaymentList() {
-		return paymentList;
-	}
-	public void setPaymentList(List<PaymentVO> paymentList) {
-		this.paymentList = paymentList;
 	}
 	public List<EquipmentVO> getEquipmentList() {
 		return equipmentList;
@@ -120,15 +136,26 @@ public class BusinessVO implements Serializable {
 	public void setLaundryList(List<LaundryVO> laundryList) {
 		this.laundryList = laundryList;
 	}
+	public List<ScheduleVO> getScheduleList() {
+		return scheduleList;
+	}
+	public void setScheduleList(List<ScheduleVO> scheduleList) {
+		this.scheduleList = scheduleList;
+	}
+	public String getSchedule() {
+		return schedule;
+	}
+	public void setSchedule(String schedule) {
+		this.schedule = schedule;
+	}
 	@Override
 	public String toString() {
 		return "BusinessVO [bno=" + bno + ", mno=" + mno + ", id=" + id + ", password=" + password + ", bname=" + bname
-				+ ", address=" + address + ", phone=" + phone + ", email=" + email + ", comment=" + comment + ", time="
-				+ time + ", bizType=" + bizType + ", bankAccountNum=" + bankAccountNum + ", paymentList=" + paymentList
-				+ ", equipmentList=" + equipmentList + ", laundryList=" + laundryList + ", equipment=" + equipment
-				+ "]";
+				+ ", address=" + address + ", phone=" + phone + ", email=" + email + ", comment=" + comment
+				+ ", bizType=" + bizType + ", bankNum=" + bankNum + ", bankAccountNum=" + bankAccountNum
+				+ ", scheduleList=" + scheduleList + ", equipmentList=" + equipmentList + ", laundryList=" + laundryList
+				+ ", equipment=" + equipment + ", laundry=" + laundry + ", schedule=" + schedule + "]";
 	}
 
-	
 	
 }
