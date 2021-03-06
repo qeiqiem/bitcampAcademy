@@ -1,0 +1,73 @@
+.selected{
+background: var(--key-color);
+}
+.tabMenu {
+display: inline-block;
+width: 180px;
+height: 85px;
+text-align: center;
+padding: 30px 0px;
+border: 1px solid #000000;
+box-sizing: border-box;
+}
+.rsvList {
+    margin-right: 20px;
+    padding: 10px;
+    border: 2px solid var(--black-color);
+    padding: 20px 40px;
+}
+.rsvTable {
+width: 99%;
+height: 238px;
+}
+.rsvTable th {
+text-align: left;
+}
+.rsvTable .column {
+    text-align: left;
+    width: 80px;
+}
+.btnDiv {
+    text-align: center;
+}
+.rsvList button {
+width: 174px;
+height: 65px;
+margin: 0 3vw;
+background: var(--key-color);
+border-radius: 30px;
+}
+.rsvTable .fas {
+    color: rgb(253, 107, 107);
+}
+.like {
+    float: right;
+    text-align: center;
+    width: 30px;
+    height: 18px;
+    padding: 5px 0;
+    border: 1px solid var(--black-color);
+    border-radius: 10px;
+}
+
+.none {
+    display: none;
+}
+.detail .receipt {
+    text-align: left;
+    width: 90vw;
+}
+.detail .receipt .laundry,
+.detail .receipt .count{
+    padding: 10px 0;
+    width: 15%;
+}
+.detail .result {
+    text-align: left;
+    width: 90vw;
+    padding: 12px 0;
+    font-size: 20px;
+}
+.detail .result th {
+    width: 30%;
+}

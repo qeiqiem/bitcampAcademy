@@ -8,267 +8,270 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="css/all.css">
+    <link rel="stylesheet" href="css/joinBs.css">
+    <script src="jquery-1.12.4.js"></script>
 </head>
 
 <body>
-<jsp:include page="header0.jsp"></jsp:include>
-
+	<jsp:include page="header0.jsp"></jsp:include>
     <!-- 공통 -->
     <div class="body_container">
-        <h4>업체 회원</h4>
-        <form action="">
-            <p>아이디</p>
-            <div>
-                <input type="text" placeholder="아이디를 입력해주세요."><input type="button" value="중복확인">
-            </div>
-            <p>비밀번호</p>
-            <div>
-                <input type="password" placeholder="영어 대문자, 특수문자, 숫자를 포함한 8~16글자" minlength="8" maxlength="16">
-            </div>
-            <p>운영시간</p>
-            <div>
+        <div class="centerDiv">
+            <h4>업체 회원가입</h4>
+            <form action="">
                 <div>
-                    <button>월</button>
-                    <button>화</button>
-                    <button>수</button>
-                    <button>목</button>
-                    <button>금</button>
-                    <button>토</button>
-                    <button>일</button>
-                    <button>매일</button>
-                    <button>평일</button>
-                    <button>주말</button>
+                    <p>아이디</p>
+                    <input name="id" type="text" placeholder="아이디를 입력해주세요."><input type="button" value="중복확인">
+                </div>
+                <div class="full">
+                    <p>비밀번호</p>
+                    <input type="password" placeholder="영어 대문자, 특수문자, 숫자를 포함한 8~16글자" minlength="8" maxlength="16">
+                    <p>비밀번호 확인</p>
+                    <input name="password" type="password" placeholder="영어 대문자, 특수문자, 숫자를 포함한 8~16글자" minlength="8" maxlength="16"
+                        style="margin-bottom: 40px;">
                 </div>
                 <div>
-                    <ul>
-                        <li>
-                            월
-                            <!-- for문 돌려버리는게 나은건가.. -->
-                            시간
-                            <select>
-                                <option>00:00</option>
-                                <option>01:00</option>
-                                <option>02:00</option>
-                                <option>03:00</option>
-                                <option>04:00</option>
-                                <option>05:00</option>
-                                <option>06:00</option>
-                                <option>07:00</option>
-                                <option>08:00</option>
-                                <option>09:00</option>
-                                <option>10:00</option>
-                                <option>11:00</option>
-                                <option>12:00</option>
-                                <option>13:00</option>
-                                <option>14:00</option>
-                                <option>15:00</option>
-                                <option>16:00</option>
-                                <option>17:00</option>
-                                <option>18:00</option>
-                                <option>19:00</option>
-                                <option>20:00</option>
-                                <option>21:00</option>
-                                <option>22:00</option>
-                                <option>23:00</option>
-                                <option>24:00</option>
-                            </select>
-                            ~
-                            <select>
-                                <option>00:00</option>
-                                <option>01:00</option>
-                                <option>02:00</option>
-                                <option>03:00</option>
-                                <option>04:00</option>
-                                <option>05:00</option>
-                                <option>06:00</option>
-                                <option>07:00</option>
-                                <option>08:00</option>
-                                <option>09:00</option>
-                                <option>10:00</option>
-                                <option>11:00</option>
-                                <option>12:00</option>
-                                <option>13:00</option>
-                                <option>14:00</option>
-                                <option>15:00</option>
-                                <option>16:00</option>
-                                <option>17:00</option>
-                                <option>18:00</option>
-                                <option>19:00</option>
-                                <option>20:00</option>
-                                <option>21:00</option>
-                                <option>22:00</option>
-                                <option>23:00</option>
-                                <option>24:00</option>
-                            </select>
-                        </li>
-                    </ul>
-                </div>
-                <p>업체명</p>
-                <div>
-                    <input type="text">
-                </div>
-                <p>연락처</p>
-                <div>
-                    <input type="text" placeholder="ex) 010-1234-5678">
-                </div>
-                <p>사업자등록번호</p>
-                <div>
-                    <ul>
-                        <li>
-                            <input type="text" placeholder="사업자등록번호를 입력해주세요">
-                        </li>
-                    </ul>
-
-
-                </div>
-                <p>주소</p>
-                <div>
-                    <input type="text"><input type="button" value="주소찾기">
-                </div>
-                <p>이메일</p>
-                <div>
-                    <input type="text"> @
-                    <select>
-                        <option>naver.com</option>
-                        <option>daun.net</option>
-                        <option>hanmail.net</option>
-                        <option>gmail.com</option>
-                    </select>
-                </div>
-                <p>계좌등록</p>
-                <div>
-                    <select>
-                        <option>국민</option>
-                        <option>우리</option>
-                        <option>신한</option>
-                        <option>하나</option>
-                        <option>지역농협</option>
-                        <option>농협중앙회</option>
-                        <option>k뱅크</option>
-                        <option>카카오뱅크</option>
-                    </select>
-                    <input type="text" placeholder="수익금 받을 계좌를 입력하세요">
-                </div>
-
-                <!-- 일반세탁소 -->
-                <div>
-                    <div>
-                        <p>세탁소</p>
+                    <p>운영시간</p>
+                    <div class="week">
+                        <button>월</button>
+                        <button>화</button>
+                        <button>수</button>
+                        <button>목</button>
+                        <button>금</button>
+                        <button>토</button>
+                        <button>일</button>
+                        <button class="two">매일</button>
+                        <button class="two">평일</button>
+                        <button class="two">주말</button>
                     </div>
-
-                    <p>취급품목</p>
-                    <div>
-                        <div>
-                            <p>1~3일 소요</p>
-                            <p>금액(개당)</p>
-                            <label for="1"></label>
-                            <input type="checkbox" id="1">일반의류
-                            <input id="1">원<br>
-
-                            <input type="radio" id="1">와이셔츠
-                            <input id="1">원<br>
-
-                            <input type="radio" id="1">이불
-                            <input id="1">원<br>
-
-                            <input type="radio" id="1">운동화
-                            <input id="1">원<br>
+                    <div class="weekBox">
+                        <ul>
+                        </ul>
+                        <input type="hidden" name="schedule">
+                    </div>
+                    <div class="phone">
+                        <p>연락처</p>
+                        <input type="text" placeholder="010"> -
+                        <input type="text" placeholder="0000"> -
+                        <input type="text" placeholder="0000">
+                        <input type="hidden" name="phone">
+                        <button>본인인증</button>
+                    </div>
+                    <div class="full">
+                        <p>업체명</p>
+                        <input type="text" name="bname">
+                        <p>사업자등록번호</p>
+                        <input type="text" name="bno" placeholder="숫자만 작성해주세요">
+                    </div>
+                    <div class="address">
+                        <p>주소</p>
+                        <input name="address" type="text"><input type="button" value="우편번호찾기">
+                    </div>
+                    <div class="email">
+                        <p>이메일</p>
+                        <input name="email" type="text"> <!-- @
+                        <div class="selectbox">
+                            <label class="select">naver.com</label>
+                            <select>
+                                <option>naver.com</option>
+                                <option>daun.net</option>
+                                <option>hanmail.net</option>
+                                <option>gmail.com</option>
+                            </select>
+                        </div> -->
+                    </div>
+                    <div class="bank">
+                        <p>계좌등록</p>
+                        <div class="selectbox">
+                        <label class="select">국민</label>
+                        <select name="bankNum">
+                            <option value=1>국민</option>
+                            <option value=2>신한</option>
+                            <option value=3>하나</option>
+                            <option value=4>우리</option>
+                            <option value=5>IBK기업은행</option>
+                            <option value=6>NH농협은행</option>
+                            <option value=7>카카오뱅크</option>
+                        </select>
                         </div>
-
+                        <input name="bankAccountNum" type="text" placeholder="수익금 받을 계좌를 입력하세요">
+                    </div>
+                    <div class="bizType">
+                        <div class="selected">세탁소</div>
+                        <div class="unselected">코인세탁소</div>
+                        <input type="hidden" name="bizType" value="1">
+                    </div>
+                    <!-- 일반세탁소 -->
+                    <div class="laundry">
+                        <h4 style="text-align: left;">취급품목</h4>
                         <div>
-                            <p>4~7일 소요</p>
-                            <p>금액(개당)</p>
-                            <label for="1"></label>
-                            <input type="radio" id="1">가죽모피
-                            <input id="1">원<br>
+                            <table>
+                                <tr>
+                                    <th colspan="2">1~3일 소요</th>
+                                    <th>금액(개당)</th>
+                                </tr>
+                                <tr>
+                                    <td><input value=0 type="checkbox">일반의류</td>
+                                    <td class="blank"></td>
+                                    <td><input class="won" disabled>원</td>
+                                </tr>
+                                <tr>
+                                    <td><input value=1 type="checkbox">와이셔츠</td>
+                                    <td class="blank"></td>
+                                    <td><input class="won" disabled>원</td>
+                                </tr>
+                                <tr>
+                                    <td><input value=2 type="checkbox">이불</td>
+                                    <td class="blank"></td>
+                                    <td><input class="won" disabled>원</td>
+                                </tr>
+                                <tr>
+                                    <td><input value=3 type="checkbox">운동화</td>
+                                    <td class="blank"></td>
+                                    <td><input class="won" disabled>원</td>
+                                </tr>
+                            </table>
 
-                            <input type="radio" id="1">명품가방
-                            <input id="1">원<br>
+                            <table>
+                                <tr>
+                                    <th colspan="2">4~7일 소요</th>
+                                    <th>금액(개당)</th>
+                                </tr>
+                                <tr>
+                                    <td><input value=4 type="checkbox">가죽모피</td>
+                                    <td class="blank"></td>
+                                    <td><input class="won" disabled>원</td>
+                                </tr>
 
-                            <input type="radio" id="1">아웃도어
-                            <input id="1">원<br>
+                                <tr>
+                                    <td><input value=5 type="checkbox">명품가방</td>
+                                    <td class="blank"></td>
+                                    <td><input class="won" disabled>원</td>
+                                </tr>
 
-                            <input type="radio" id="1">
-                            <input id="1" placeholder="기타(모자/가방/인형등)">
-                            <input id="1">원<br>
+                                <tr>
+                                    <td><input value=6 type="checkbox">아웃도어</td>
+                                    <td class="blank"></td>
+                                    <td><input class="won" disabled>원</td>
+                                </tr>
+
+                                <tr>
+                                    <td><input value=7 type="checkbox">기타</td>
+                                    <td><input class="etc" placeholder="모자/가방/인형"></td>
+                                    <td><input class="won" disabled>원</td>
+                                </tr>
+                                <input type="hidden" name="laundry">
+                            </table>
+                            <input type="button" value="가입신청" onclick="clicked();">
                         </div>
                     </div>
-                </div>
-                <!-- 코인세탁소 -->
-                <div>
-                    <div>
-                        <p>코인세탁소</p>
+                    <!-- 코인세탁소 -->
+                    <div class="coinLaundry hide">
+                        <h4 style="text-align: left;">사양정보</h4>
+                        <div>
+                            <table class="equipment">
+                                <tr>
+                                    <th>세탁기</th>
+                                    <th>개수</th>
+                                    <th>이용금액(분당)</th>
+                                </tr>
+                                <tr>
+                                    <td class="size"><input value=0 type="checkbox">중<span>(20kg미만)</span></td>
+                                    <td class="selectbox">
+                                        <label for="select"></label>
+                                        <select disabled>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                        </select>
+                                    </td>
+                                    <td><input class="won" disabled>원</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="size"><input value=1 type="checkbox">대<span>(20kg~40kg미만)</span></td>
+                                    <td class="selectbox">
+                                        <label for="select"></label>
+                                        <select disabled>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                        </select>
+                                    </td>
+                                    <td><input class="won" disabled>원</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="size"><input value=2 type="checkbox">특대<span>(40kg이상)</span></td>
+                                    <td class="selectbox">
+                                        <label for="select"></label>
+                                        <select disabled>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                        </select>
+                                    </td>
+                                    <td><input class="won" disabled>원</td>
+                                </tr>
+                            </table><br>
+
+                            <table class="dry">
+                                <tr>
+                                    <th>건조기</th>
+                                </tr>
+                                <tr>
+                                    <td>개수</td>
+                                    <td class="blank"></td>
+                                    <td class="selectbox">
+                                        <label for="select"></label>
+                                        <select>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>이용금액</td>
+                                    <td class="blank"></td>
+                                    <td><input class="won">원</td>
+                                </tr>
+                                <input type="hidden" name="equipment">
+                            </table><br>
+                            <table class="etc">
+                                <tr>
+                                    <th>부가서비스</th>
+                                    <th>추가금액</th>
+                                </tr>
+                                <tr>
+                                    <td><input value=4 type="checkbox">향균세탁</td>
+                                    <td><input class="won" disabled>원</td>
+                                </tr>
+                                <tr>
+                                    <td><input value=5 type="checkbox">특수세제(울/유아용등)</td>
+                                    <td><input class="won" disabled>원</td>
+                                </tr>
+
+                                <tr>
+                                    <td><input value=6 type="checkbox">섬유유연제</td>
+                                    <td><input class="won" disabled>원</td>
+                                </tr>
+
+                                <tr>
+                                    <td><input value=7 type="checkbox">픽업봉투</td>
+                                    <td><input class="won" disabled>원</td>
+                                </tr>
+                                <input type="hidden" name="etc">
+                            </table>
+                            <input type="button" value="가입신청" onclick="clicked();">
+                        </div>
                     </div>
-                    <p>사양정보</p>
-                    <div>
-                        <div>
-                            <p>세탁기</p>
-                            <p>개수</p>
-                            <p>이용금액(분당)</p>
-                            <label for="1"></label>
-                            <input type="radio" id="1">중(20kg미만)
-                            <select>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                            </select>
-                            <input id="1">원<br>
-
-                            <label for="1"></label>
-                            <input type="radio" id="1">대(20kg~40kg미만)
-                            <select>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                            </select>
-                            <input id="1">원<br>
-
-                            <label for="1"></label>
-                            <input type="radio" id="1">특대(40kg이상)
-                            <select>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                            </select>
-                            <input id="1">원<br>
-
-                        </div>
-
-                        <div>
-                            <p>건조기</p>
-                            <label for="1"></label>
-                            <p>개수</p>
-                            <select>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                            </select>
-                            <p>이용금액</p>
-                            <input id="1">원<br>
-                        </div>
-                        <div>
-                            <p>부가서비스</p>
-                            <p>추가금액</p>
-
-                            <input type="radio" id="1">향균세탁
-                            <input id="1">원<br>
-
-                            <input type="radio" id="1">특수세제(울/유아용등)
-                            <input id="1">원<br>
-
-                            <input type="radio" id="1">섬유유연제
-                            <input id="1">원<br>
-
-                            <input type="radio" id="1">픽업봉투
-                            <input id="1">원<br>
-
-                        </div>
-                    </div>
                 </div>
-                <input type="submit" value="가입하기">
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
+    <script src="js/joinBs.js"></script>
 </body>
 
 </html>
