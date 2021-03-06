@@ -12,17 +12,25 @@
 			INSERT INTO bsn_account VALUES ((SELECT MAX(mno) FROM account),#{bankNum},#{accountNum}); 
 			INSERT INTO bsn_payment((SELECT MAX(mno) FROM account),#{paymentTypeNum}); 보류 (실제 서비스 적용시 시행될 쿼리) -->
 			INSERT INTO account (id,password) VALUES (#{id},#{password});
-			INSERT INTO business (mno,bname,address,phone) VALUES ((SELECT MAX(mno) FROM account),#{bname},#{address},#{phone});
+			INSERT INTO business (mno,bname,address,phone,bkno,acno,email,typeNum)  
+			VALUES ((SELECT MAX(mno) FROM account),#{bname},#{address},#{phone},#{bkno},#{acno},#{email},#{bizType});
+			
+			<foreach collection="scheduleList" item="schedule"> <!-- 스케쥴 저장 -->
+				INSERT INTO bsn_schedule VALUES ((SELECT MAX(bno) FROM business),${schedule.schno},${schedule.time});
+			</foreach>
 			
 			<choose>
-				<when test="${bizType}==1"> <!-- 일반세탁소라면 -->
+				<when test="bizType==1"> <!-- 일반세탁소라면 -->
 				<foreach collection="laundryList" item="laundry">
-					INSERT INTO bsn_equipment VALUES ((SELECT MAX(bno) FROM business),${laundry.lno},${laundry.price);
+					INSERT INTO bsn_laundry VALUES ((SELECT MAX(bno) FROM business),${laundry.lno},${laundry.price});
 				</foreach>
 				</when>
 				<otherwise> <!-- else문,, 코인세탁소라면 -->
 				<foreach collection="equipmentList" item="equipment">
 					INSERT INTO bsn_equipment VALUES ((SELECT MAX(bno) FROM business),${equipment.eno},${equipment.cnt},${equipment.price});
+				</foreach>
+				<foreach collection="etcList" item="etc">
+					INSERT INTO bsn_etc VALUES((SELECT MAX(bno) FROM business),${etc.etcno},${etc.price});
 				</foreach>
 				</otherwise>
 			</choose>

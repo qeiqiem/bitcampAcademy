@@ -125,6 +125,7 @@ function clicked() {
             }
         }
         $("input[name='etc']")[0].value=JSON.stringify(list);
-    }    
-    // console.log($("form").serializeArray());
+    }
+    $("form").submit();
+    //console.log($("form").serializeArray());
 }

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="css/all.css">
 <link rel="stylesheet" href="css/join.css">
 <script src="https://kit.fontawesome.com/2fc57dd2db.js"
 	crossorigin="anonymous"></script>

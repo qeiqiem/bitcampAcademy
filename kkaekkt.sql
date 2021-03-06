@@ -8,22 +8,21 @@ CREATE TABLE `Member` (
 );
 
 CREATE TABLE `Account` (
-	`mno`	INTEGER	NOT NULL,
-	`id`	VARCHAR(20)	NULL,
+	`mno`		INTEGER	NOT NULL,
+	`id`		VARCHAR(20)	NULL,
 	`password`	VARCHAR(20)	NULL
 );
 
 CREATE TABLE `Business` (
-	`bno`	INTEGER	NOT NULL,
-	`mno`	INTEGER	NOT NULL,
-	`bname`	VARCHAR(40)	NULL,
-    `phone` VARCHAR(15) NULL,
-    `bkno` INTEGER NULL,
-    `acno` VARCHAR(20) NULL,
-	`address`	VARCHAR(100)	NULL,
-	`email`	VARCHAR(40)	NULL,
+	`bno`		INTEGER	NOT NULL,
+	`mno`		INTEGER	NOT NULL,
+	`bname`		VARCHAR(40) NOT NULL,
+   	`phone` 		VARCHAR(15) NOT NULL,
+	`bkno`   	 	INTEGER NOT NULL,
+	`acno`     	VARCHAR(20) NOT NULL,
+	`address`		VARCHAR(100) NOT NULL,
+	`email`		VARCHAR(40)	NULL,
 	`comment`	VARCHAR(255)	NULL,
-	`time`	VARCHAR(255)	NULL,
 	`typeNum`	INTEGER NULL
 );
 
@@ -119,7 +118,7 @@ CREATE TABLE `Cancel` (
 	`reason`	VARCHAR(50)	NULL
 );
 
-CREATE TABLE `Bsn_type` (
+CREATE TABLE `BusinessType` (
 	`typeNum`	INTEGER	NOT NULL,
 	`typename`	VARCHAR(20)	NULL
 );
@@ -194,10 +193,10 @@ ALTER TABLE `Cancel` ADD CONSTRAINT `PK_CANCEL` PRIMARY KEY (
 	`cancelNum`
 );
 ALTER TABLE `Cancel` MODIFY COLUMN cancelNum INTEGER NOT NULL AUTO_INCREMENT;
-ALTER TABLE `Bsn_type` ADD CONSTRAINT `PK_BSN_TYPE` PRIMARY KEY (
+ALTER TABLE `BusinessType` ADD CONSTRAINT `PK_BUSINESSTYPE` PRIMARY KEY (
 	`typeNum`
 );
-ALTER TABLE `Bsn_type` MODIFY COLUMN typeNum INTEGER NOT NULL AUTO_INCREMENT;
+ALTER TABLE `BusinessType` MODIFY COLUMN typeNum INTEGER NOT NULL AUTO_INCREMENT;
 ALTER TABLE `Etc` ADD CONSTRAINT `PK_ETCNO` PRIMARY KEY (
 	`etcno`
 );
@@ -217,10 +216,10 @@ REFERENCES `Account` (
 	`mno`
 ) ON DELETE CASCADE;
 
-ALTER TABLE `Business` ADD CONSTRAINT `FK_Bsn_type_TO_Business_1` FOREIGN KEY (
+ALTER TABLE `Business` ADD CONSTRAINT `FK_BusinessType_TO_Business_1` FOREIGN KEY (
 	`typeNum`
 )
-REFERENCES `Bsn_type` (
+REFERENCES `BusinessType` (
 	`typeNum`
 ) ON DELETE SET NULL;
 
@@ -441,8 +440,8 @@ INSERT INTO cancel (reason) values("기간 내에 작업을 완료할 수 없습
 INSERT INTO cancel (reason) values("가게 내부 사정으로 취소합니다.");
 
 -- 업체유형
-INSERT INTO bsn_type (typename) values("일반 세탁소");
-INSERT INTO bsn_type (typename) values("코인 세탁소");
+INSERT INTO businessType (typename) values("일반 세탁소");
+INSERT INTO businessType (typename) values("코인 세탁소");
 
 -- 요일 선택 스케쥴
 INSERT INTO schedule (wkname) values("월");

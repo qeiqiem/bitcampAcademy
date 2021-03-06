@@ -20,6 +20,7 @@ public class UserDAO {
 		System.out.println("마이바티스 insert완료");
 	}
 	public void insertUser(BusinessVO vo) {
+		System.out.println("DAO진입");
 		mybatis.insert("UserDAO.insertBs",vo);
 	}
 	public void updateUser(PersonVO vo) {

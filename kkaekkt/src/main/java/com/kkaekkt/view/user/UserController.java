@@ -32,16 +32,17 @@ public class UserController {
 	@RequestMapping(value="/joinPs.do", method=RequestMethod.POST)
 	public String Join(PersonVO vo) {
 		userService.insertUser(vo);		
-		return "Join.html";
+		return "index.jsp";
 	}
 	@RequestMapping(value="/joinBs.do", method=RequestMethod.POST)
 	public String Join(BusinessVO vo) {
+		System.out.println("메서드 진입");
 		userService.insertUser(vo);
-		return "Join.html";
+		return "index.jsp";
 	}
 	@RequestMapping(value="/updatePs.do", method=RequestMethod.POST)
 	public String Update(PersonVO vo) {
 		userService.updateUser(vo);
-		return "Join.html";
+		return "index.jsp";
 	}
 }
