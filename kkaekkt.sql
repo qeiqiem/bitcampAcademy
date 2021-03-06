@@ -82,6 +82,12 @@ CREATE TABLE `Rsv_Laundry` (
 	`stno`	INTEGER	NULL
 );
 
+CREATE TABLE `Rsv_Payment` (
+    `rno`    INTEGER    NOT NULL,
+    `pno`    INTEGER    NULL,
+    `price`    INTEGER    NULL
+);
+
 CREATE TABLE `State` (
 	`stno`	INTEGER	NOT NULL,
 	`stname`	VARCHAR(20)	NULL
@@ -232,7 +238,19 @@ REFERENCES `Period` (
 	`prno`
 ) ON DELETE SET NULL;
 
+ALTER TABLE `Rsv_Payment` ADD CONSTRAINT `FK_Reservation_TO_Rsv_Payment_1` FOREIGN KEY (
+    `rno`
+)
+REFERENCES `Reservation` (
+    `rno`
+) ON DELETE CASCADE;
 
+ALTER TABLE `Rsv_Payment` ADD CONSTRAINT `FK_Payment_TO_Rsv_Payment_1` FOREIGN KEY (
+    `pno`
+)
+REFERENCES `Payment` (
+    `pno`
+) ON DELETE SET NULL;
 
 ALTER TABLE `Bsn_Laundry` ADD CONSTRAINT `FK_Business_TO_Bsn_Laundry_1` FOREIGN KEY (
 	`bno`
