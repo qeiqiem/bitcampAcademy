@@ -16,15 +16,15 @@ public class ReservationController {
 	@Autowired
 	ReservationService reservationService;
 	
-	@RequestMapping(value="/myPagePs.do", method=RequestMethod.POST)
+	@RequestMapping(value="/mypagePs.do", method=RequestMethod.POST)
 	public String getRsvListPs(PersonVO vo, Model model) {
-		model.addAttribute("rsvList", reservationService.getRsvListPs(vo));
-		return "Join.html";
+		model.addAttribute("rsvPage", reservationService.getRsvListPs(vo));
+		return "mypagePs.jsp";
 	}
-	@RequestMapping(value="/myPageBs.do", method=RequestMethod.POST)
+	@RequestMapping(value="/mypageBs.do", method=RequestMethod.POST)
 	public String getRsvListBs(BusinessVO vo, Model model) {
-		model.addAttribute("rsvList", reservationService.getRsvListBs(vo));
-		return "Join.html";
+		model.addAttribute("rsvPage", reservationService.getRsvListBs(vo));
+		return "mypageBs.jsp";
 	}
 	@RequestMapping(value="/cancel.do", method=RequestMethod.POST)
 	public String cancelRsv(ReservationVO vo) {

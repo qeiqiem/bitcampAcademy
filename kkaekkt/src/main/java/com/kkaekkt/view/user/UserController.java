@@ -31,7 +31,7 @@ public class UserController {
 //	}
 	@RequestMapping(value="/joinPs.do", method=RequestMethod.POST)
 	public String Join(PersonVO vo) {
-		userService.insertUser(vo);		
+		userService.insertUser(vo);
 		return "index.jsp";
 	}
 	@RequestMapping(value="/joinBs.do", method=RequestMethod.POST)

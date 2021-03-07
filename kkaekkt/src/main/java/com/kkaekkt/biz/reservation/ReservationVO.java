@@ -6,12 +6,14 @@ import java.util.List;
 public class ReservationVO {
 	private int rsvNum;
 	private int mno;
-	private int bno;
+	private String bname;
 	private Date rsvDate;
+	private String phone;
 	private Date dDate;
 	private String state;
 	private List<LaundryVO> laundryList;
-	private int price;
+	private int totalPrice;
+	private int count;
 	public int getRsvNum() {
 		return rsvNum;
 	}
@@ -24,17 +26,23 @@ public class ReservationVO {
 	public void setMno(int mno) {
 		this.mno = mno;
 	}
-	public int getBno() {
-		return bno;
+	public String getBname() {
+		return bname;
 	}
-	public void setBno(int bno) {
-		this.bno = bno;
+	public void setBname(String bname) {
+		this.bname = bname;
 	}
 	public Date getRsvDate() {
 		return rsvDate;
 	}
 	public void setRsvDate(Date rsvDate) {
 		this.rsvDate = rsvDate;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	public Date getdDate() {
 		return dDate;
@@ -48,22 +56,31 @@ public class ReservationVO {
 	public void setState(String state) {
 		this.state = state;
 	}
-	
 	public List<LaundryVO> getLaundryList() {
 		return laundryList;
 	}
 	public void setLaundryList(List<LaundryVO> laundryList) {
+		this.totalPrice=0;
 		this.laundryList = laundryList;
+		this.count=laundryList.size()-1;
+		for(LaundryVO lv : laundryList) {
+			totalPrice+=lv.getPrice();
+		};
 	}
-	public int getPrice() {
-		return price;
+	public int getTotalPrice() {
+		return totalPrice;
 	}
-	public void setPrice(int price) {
-		this.price = price;
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+	public int getCount() {
+		return count;
 	}
 	@Override
 	public String toString() {
-		return "ReservationVO [rsvNum=" + rsvNum + ", mno=" + mno + ", bno=" + bno + ", rsvDate=" + rsvDate + ", dDate="
-				+ dDate + ", state=" + state + ", laundryList=" + laundryList + ", price=" + price + "]";
+		return "ReservationVO [rsvNum=" + rsvNum + ", mno=" + mno + ", bname=" + bname + ", rsvDate=" + rsvDate
+				+ ", phone=" + phone + ", dDate=" + dDate + ", state=" + state + ", laundryList=" + laundryList
+				+ ", totalPrice=" + totalPrice + "]";
 	}
+	
 }

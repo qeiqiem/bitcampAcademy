@@ -11,12 +11,17 @@
 		SELECT * FROM reservation WHERE mno=#{mno};
 	</select>
 	<select id="getRsvListPs" resultType="reservation">
-		SELECT * FROM reservation WHERE mno=#{mno};
+		SELECT rno rsvNum,a.mno,bname,phone,rdate rsvDate FROM (SELECT * FROM reservation WHERE mno=#{mno}) a, business  
+		WHERE a.bno=business.bno;
 	</select>
 	<select id="getRsvListBs" resultType="reservation">
 		SELECT * FROM reservation WHERE bno=#{bno};
 	</select>
 	<select id="getLaundry" resultType="laundry">
-		SELECT * FROM rsv_laundry WHERE rno=#{rno};
+		SELECT r.lno,lname laundry,cnt count,stno state, price*cnt price 
+		FROM rsv_laundry r, laundry_type t, (SELECT * FROM bsn_laundry WHERE bno=1) bl 
+		WHERE r.lno=t.lno 
+		AND bl.lno=r.lno 
+		AND rno=#{rsvNum};
 	</select>
 </mapper>
