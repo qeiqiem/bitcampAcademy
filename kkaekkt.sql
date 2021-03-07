@@ -18,7 +18,7 @@ CREATE TABLE `Business` (
 	`mno`		INTEGER	NOT NULL,
 	`bname`		VARCHAR(40) NOT NULL,
    	`phone` 		VARCHAR(15) NOT NULL,
-	`bkno`   	 	INTEGER NOT NULL,
+	`bkno`   	 	INTEGER NULL,
 	`acno`     	VARCHAR(20) NOT NULL,
 	`address`		VARCHAR(100) NOT NULL,
 	`email`		VARCHAR(40)	NULL,
@@ -384,7 +384,7 @@ REFERENCES `Etc` (
 	`etcno`
 ) ON DELETE SET NULL;
 
-ALTER TABLE `Bsn_Etc` ADD CONSTRAINT `FK_business_TO_Bsn_Etc_1` FOREIGN KEY (
+ALTER TABLE `Bsn_Etc` ADD CONSTRAINT `FK_Business_TO_Bsn_Etc_1` FOREIGN KEY (
 	`bno`
 )
 REFERENCES `Business` (
@@ -454,3 +454,33 @@ INSERT INTO schedule (wkname) values("일");
 INSERT INTO schedule (wkname) values("매일");
 INSERT INTO schedule (wkname) values("평일");
 INSERT INTO schedule (wkname) values("주말");
+
+-- 더미 데이터
+INSERT INTO account (id,password) VALUES ('testps','test');
+INSERT INTO Member VALUES ((SELECT MAX(mno) FROM Account),'테스터','010-1111-2222','920110','서울시 용산구','test@naver.com');
+
+INSERT INTO account (id,password) VALUES ('testbs','test');
+INSERT INTO Business (mno,bname,address,phone,bkno,acno,email,typeNum) 
+VALUES((SELECT MAX(mno) FROM Account),'테스트업체','서울시 용산구','010-111-2222',1,'110-111-1111','test@naver.com',1);
+INSERT INTO bsn_schedule VALUES ((SELECT MAX(bno) FROM business), 8,'08:00~22:00');
+INSERT INTO bsn_Laundry VALUES ((SELECT MAX(bno) FROM business), 1,1200);
+INSERT INTO bsn_Laundry VALUES ((SELECT MAX(bno) FROM business), 2,1500);
+INSERT INTO bsn_Laundry VALUES ((SELECT MAX(bno) FROM business), 3,1800);
+INSERT INTO bsn_Laundry VALUES ((SELECT MAX(bno) FROM business), 4,2000);
+
+INSERT INTO account (id,password) values ('testbs2','test');
+INSERT INTO Business (mno,bname,address,phone,bkno,acno,email,typeNum) 
+values((SELECT MAX(mno) FROM Account),'테스트업체2','서울시 강남구','010-222-3333',2,'110-111-1111','test@naver.com',2);
+INSERT INTO bsn_schedule VALUES ((SELECT MAX(bno) FROM business), 8,'09:00~22:00');
+INSERT INTO bsn_schedule VALUES ((SELECT MAX(bno) FROM business), 9,'04:00~18:00');
+INSERT INTO bsn_equipment VALUES ((SELECT MAX(bno) FROM business), 1,3,1500);
+INSERT INTO bsn_equipment VALUES ((SELECT MAX(bno) FROM business), 2,2,1800);
+INSERT INTO bsn_etc VALUES ((SELECT MAX(bno) FROM business), 2, 500);
+-- INSERT INTO bsn_etc VALUES ((SELECT MAX(bno) FROM business), 3, 800); 이거 왜 안되는지 이유를 모르겠음
+
+INSERT INTO reservation (mno, bno, rdate,ddate,stno) VALUES (1,1,curdate(),curdate()+4,1);
+INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 1,2,1);
+INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 2,1,1);
+INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 3,3,1);
+
+INSERT INTO rsv_payment VALUES ((SELECT MAX(rno) FROM reservation), 1,9300);
