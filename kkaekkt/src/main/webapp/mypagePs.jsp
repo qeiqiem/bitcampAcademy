@@ -13,7 +13,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/mypage.css">
-    <link rel="stylesheet" href="css/all.css">
     <script src="js/jquery-1.12.4.js"></script>
     <script src="js/mypagePs.js"></script>
 </head>
