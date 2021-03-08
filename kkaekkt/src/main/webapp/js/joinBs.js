@@ -40,7 +40,7 @@ $(document).ready(function () {
                 }
             }
         } else {
-            $(".weekBox ul li[style='order:" + idx + "']").remove();
+            $(".weekBox ul li[style='order:" + (idx+1) + "']").remove();
         }
     });
     var chkbox=$(".laundry input[type='checkbox']");

@@ -11,7 +11,7 @@
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 </head>
 <body>
-	<!--<jsp:include page="header0.jsp"></jsp:include>-->
+	<jsp:include page="header0.jsp"></jsp:include>
     <!-- 공통 -->
     <div class="body_container">
         <div class="centerDiv">
@@ -19,13 +19,13 @@
             <form action="joinBs.do" method="POST">
                 <div>
                     <p>아이디</p>
-                    <input name="id" value="testId" type="text" placeholder="아이디를 입력해주세요."><input type="button" value="중복확인">
+                    <input name="id" type="text" placeholder="아이디를 입력해주세요."><input type="button" value="중복확인">
                 </div>
                 <div class="full">
                     <p>비밀번호</p>
-                    <input type="password" value="test" placeholder="영어 대문자, 특수문자, 숫자를 포함한 8~16글자" minlength="8" maxlength="16">
+                    <input type="password" placeholder="영어 대문자, 특수문자, 숫자를 포함한 8~16글자" minlength="8" maxlength="16">
                     <p>비밀번호 확인</p>
-                    <input name="password" value="test" type="password" placeholder="영어 대문자, 특수문자, 숫자를 포함한 8~16글자" minlength="8" maxlength="16"
+                    <input name="password" type="password" placeholder="영어 대문자, 특수문자, 숫자를 포함한 8~16글자" minlength="8" maxlength="16"
                         style="margin-bottom: 40px;">
                 </div>
                 <div> 
@@ -57,17 +57,17 @@
                     </div>
                     <div class="full">
                         <p>업체명</p>
-                        <input type="text" value="test" name="bname">
+                        <input type="text" name="bname">
                         <p>사업자등록번호</p>
-                        <input type="text" value=1234 name="bno" placeholder="숫자만 작성해주세요">
+                        <input type="text" name="bno" placeholder="숫자만 작성해주세요">
                     </div>
                     <div class="address">
                         <p>주소</p>
-                        <input name="address" value="test" type="text"><input type="button" value="우편번호찾기">
+                        <input name="address" type="text"><input type="button" value="우편번호찾기">
                     </div>
                     <div class="email">
                         <p>이메일</p>
-                        <input name="email" value="test" type="text"> <!-- @
+                        <input name="email" type="text"> <!-- @
                         <div class="selectbox">
                             <label class="select">naver.com</label>
                             <select>
@@ -92,7 +92,7 @@
                             <option value=7>카카오뱅크</option>
                         </select>
                         </div>
-                        <input name="bankAccountNum" value="110-111-1111" type="text" placeholder="수익금 받을 계좌를 입력하세요">
+                        <input name="bankAccountNum" type="text" placeholder="수익금 받을 계좌를 입력하세요">
                     </div>
                     <div class="bizType">
                         <div class="selected">세탁소</div>
@@ -111,7 +111,7 @@
                                 <tr>
                                     <td><input value=0 type="checkbox">일반의류</td>
                                     <td class="blank"></td>
-                                    <td><input class="won" value=12 disabled>원</td>
+                                    <td><input class="won" disabled>원</td>
                                 </tr>
                                 <tr>
                                     <td><input value=1 type="checkbox">와이셔츠</td>
