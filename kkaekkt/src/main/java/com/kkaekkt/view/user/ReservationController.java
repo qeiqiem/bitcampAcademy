@@ -26,6 +26,11 @@ public class ReservationController {
 		model.addAttribute("rsvPage", reservationService.getRsvListBs(vo));
 		return "mypageBs.jsp";
 	}
+	@RequestMapping(value="/ajax.do",method=RequestMethod.POST)
+	public String testAjax(BusinessVO vo) {
+		
+		return null;
+	}
 	@RequestMapping(value="/cancel.do", method=RequestMethod.POST)
 	public String cancelRsv(ReservationVO vo) {
 		reservationService.cancelRsv(vo);

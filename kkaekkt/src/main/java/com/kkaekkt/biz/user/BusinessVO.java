@@ -18,7 +18,7 @@ public class BusinessVO implements Serializable {
 	private String comment;
 	private int bizType; //1. 일반 세탁소, 2. 코인 세탁소
 	private int bankNum;
-	private int bankAccountNum;
+	private String bankAccountNum;
 	private List<ScheduleVO> scheduleList; 
 	private List<EquipmentVO> equipmentList;
 	private List<LaundryVO> laundryList;
@@ -118,10 +118,11 @@ public class BusinessVO implements Serializable {
 	public void setBizType(int bizType) {
 		this.bizType = bizType;
 	}
-	public int getBankAccountNum() {
+
+	public String getBankAccountNum() {
 		return bankAccountNum;
 	}
-	public void setBankAccountNum(int bankAccountNum) {
+	public void setBankAccountNum(String bankAccountNum) {
 		this.bankAccountNum = bankAccountNum;
 	}
 	public List<EquipmentVO> getEquipmentList() {

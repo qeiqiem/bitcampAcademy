@@ -79,7 +79,7 @@ function clicked() {
     for(var i=0;i<weekLi.size();i++) {
         var open=weekLi[i].children[1].value;
         var close=weekLi[i].children[2].value;
-        list.push({schno:JSON.parse(weekLi.eq(i).css("order")),time:open+' ~ '+close});
+        list.push({schno:JSON.parse(weekLi.eq(i).css("order")),time:open+'~'+close});
     }
     $(".weekBox input[name='schedule']")[0].value=JSON.stringify(list);
     // 연락처 데이터 처리

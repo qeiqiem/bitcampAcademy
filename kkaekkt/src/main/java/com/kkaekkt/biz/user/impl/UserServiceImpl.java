@@ -29,13 +29,14 @@ public class UserServiceImpl implements UserService {
 	public void insertUser(BusinessVO vo) {
 		System.out.println("서비스진입");
 		vo.setScheduleList(convertToObj(vo.getSchedule(), ScheduleVO.class));
-		
+		System.out.println(vo.getScheduleList());
 		if (vo.getBizType() == 1) { // 일반 세탁소라면
 			vo.setLaundryList(convertToObj(vo.getLaundry(), LaundryVO.class));
 		} else {
 			vo.setEquipmentList(convertToObj(vo.getEquipment(), EquipmentVO.class));
 			vo.setEtcList(convertToObj(vo.getEtc(), EtcVO.class));
 		}
+		
 		userDao.insertUser(vo);
 	}
 

@@ -14,5 +14,10 @@ public class ScheduleVO {
 	}
 	public void setTime(String time) {
 		this.time = time;
+	}
+	@Override
+	public String toString() {
+		return "ScheduleVO [schno=" + schno + ", time=" + time + "]";
 	}	
+	
 }

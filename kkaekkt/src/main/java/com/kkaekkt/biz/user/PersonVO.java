@@ -9,6 +9,14 @@ public class PersonVO {
 	private int birth;
 	private String address;
 	private String email;
+	private int state=1; //기본값 (작업전)
+	
+	public int getState() {
+		return state;
+	}
+	public void setState(int state) {
+		this.state = state;
+	}
 	public int getMno() {
 		return mno;
 	}
@@ -59,8 +67,9 @@ public class PersonVO {
 	}
 	@Override
 	public String toString() {
-		return "PersonVO [no=" + mno + ", id=" + id + ", password=" + password + ", name=" + name + ", phone=" + phone
-				+ ", birth=" + birth + ", address=" + address + ", email=" + email + "]";
+		return "PersonVO [mno=" + mno + ", id=" + id + ", password=" + password + ", name=" + name + ", phone=" + phone
+				+ ", birth=" + birth + ", address=" + address + ", email=" + email + ", state=" + state + "]";
 	}
+
 	
 }

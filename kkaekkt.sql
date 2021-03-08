@@ -428,10 +428,10 @@ INSERT INTO laundry_type (lname,prno) values("아웃도어",2);
 INSERT INTO laundry_type (lname,prno) values("기타",2);
 
 -- 진행상태
-INSERT INTO state (stname) values("취소");
 INSERT INTO state (stname) values("작업 전");
 INSERT INTO state (stname) values("작업 완료");
 INSERT INTO state (stname) values("전달 완료");
+INSERT INTO state (stname) values("취소");
 
 -- 취소사유 (업체용)
 INSERT INTO cancel (reason) values("고객 요청으로 취소합니다.");
@@ -476,9 +476,16 @@ INSERT INTO bsn_schedule VALUES ((SELECT MAX(bno) FROM business), 9,'04:00~18:00
 INSERT INTO bsn_equipment VALUES ((SELECT MAX(bno) FROM business), 1,3,1500);
 INSERT INTO bsn_equipment VALUES ((SELECT MAX(bno) FROM business), 2,2,1800);
 INSERT INTO bsn_etc VALUES ((SELECT MAX(bno) FROM business), 2, 500);
--- INSERT INTO bsn_etc VALUES ((SELECT MAX(bno) FROM business), 3, 800); 이거 왜 안되는지 이유를 모르겠음
+-- INSERT INTO bsn_etc VALUES ((SELECT MAX(bno) FROM business), 3, 800); 이거 왜 안되는지 이유를 모르겠음 
 
-INSERT INTO reservation (mno, bno, rdate,ddate,stno) VALUES (1,1,curdate(),curdate()+4,1);
+INSERT INTO reservation (mno, bno, rdate,ddate,stno) VALUES (1,1,'2021/03/05','2021/03/09',1);
+INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 1,2,1);
+INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 2,1,1);
+INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 3,3,1);
+
+INSERT INTO rsv_payment VALUES ((SELECT MAX(rno) FROM reservation), 1,9300);
+
+INSERT INTO reservation (mno, bno, rdate,ddate,stno) VALUES (1,1,'2021/03/02','2021/03/06',3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 1,2,1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 2,1,1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 3,3,1);

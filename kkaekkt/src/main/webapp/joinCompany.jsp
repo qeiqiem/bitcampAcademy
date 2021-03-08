@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/joinBs.css">
-    <script src="js/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 </head>
 <body>
 	<!--<jsp:include page="header0.jsp"></jsp:include>-->
@@ -28,7 +28,7 @@
                     <input name="password" value="test" type="password" placeholder="영어 대문자, 특수문자, 숫자를 포함한 8~16글자" minlength="8" maxlength="16"
                         style="margin-bottom: 40px;">
                 </div>
-                <div>
+                <div> 
                     <p>운영시간</p>
                     <div class="week">
                         <button>월</button>
@@ -59,7 +59,7 @@
                         <p>업체명</p>
                         <input type="text" value="test" name="bname">
                         <p>사업자등록번호</p>
-                        <input type="text" value="test" name="bno" placeholder="숫자만 작성해주세요">
+                        <input type="text" value=1234 name="bno" placeholder="숫자만 작성해주세요">
                     </div>
                     <div class="address">
                         <p>주소</p>
@@ -92,7 +92,7 @@
                             <option value=7>카카오뱅크</option>
                         </select>
                         </div>
-                        <input name="bankAccountNum" value="test" type="text" placeholder="수익금 받을 계좌를 입력하세요">
+                        <input name="bankAccountNum" value="110-111-1111" type="text" placeholder="수익금 받을 계좌를 입력하세요">
                     </div>
                     <div class="bizType">
                         <div class="selected">세탁소</div>
@@ -158,8 +158,8 @@
                                     <td><input class="etc" placeholder="모자/가방/인형"></td>
                                     <td><input class="won" disabled>원</td>
                                 </tr>
-                                <input type="hidden" name="laundry">
                             </table>
+                                <input type="hidden" name="laundry">
                             <input type="button" value="가입신청" onclick="clicked();">
                         </div>
                     </div>
@@ -234,8 +234,8 @@
                                     <td class="blank"></td>
                                     <td><input class="won">원</td>
                                 </tr>
-                                <input type="hidden" name="equipment">
                             </table><br>
+                                <input type="hidden" name="equipment">
                             <table class="etc">
                                 <tr>
                                     <th>부가서비스</th>
@@ -259,8 +259,8 @@
                                     <td><input value=7 type="checkbox">픽업봉투</td>
                                     <td><input class="won" disabled>원</td>
                                 </tr>
-                                <input type="hidden" name="etc">
                             </table>
+                                <input type="hidden" name="etc">
                             <input type="button" value="가입신청" onclick="clicked();">
                         </div>
                     </div>

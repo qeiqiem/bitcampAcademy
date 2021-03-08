@@ -11,7 +11,7 @@
 		SELECT * FROM reservation WHERE mno=#{mno};
 	</select>
 	<select id="getRsvListPs" resultType="reservation">
-		SELECT rno rsvNum,a.mno,bname,phone,rdate rsvDate FROM (SELECT * FROM reservation WHERE mno=#{mno}) a, business  
+		SELECT rno rsvNum,a.mno,bname,phone,rdate rsvDate FROM (SELECT * FROM reservation WHERE mno=#{mno} AND stno=#{state}) a, business  
 		WHERE a.bno=business.bno;
 	</select>
 	<select id="getRsvListBs" resultType="reservation">

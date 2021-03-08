@@ -13,10 +13,10 @@
 			INSERT INTO bsn_payment((SELECT MAX(mno) FROM account),#{paymentTypeNum}); 보류 (실제 서비스 적용시 시행될 쿼리) -->
 			INSERT INTO account (id,password) VALUES (#{id},#{password});
 			INSERT INTO business (mno,bname,address,phone,bkno,acno,email,typeNum)  
-			VALUES ((SELECT MAX(mno) FROM account),#{bname},#{address},#{phone},#{bkno},#{acno},#{email},#{bizType});
+			VALUES ((SELECT MAX(mno) FROM account),#{bname},#{address},#{phone},#{bankNum},#{bankAccountNum},#{email},#{bizType});
 			
 			<foreach collection="scheduleList" item="schedule"> <!-- 스케쥴 저장 -->
-				INSERT INTO bsn_schedule VALUES ((SELECT MAX(bno) FROM business),${schedule.schno},${schedule.time});
+				INSERT INTO bsn_schedule VALUES ((SELECT MAX(bno) FROM business),${schedule.schno},'${schedule.time}');
 			</foreach>
 			
 			<choose>
