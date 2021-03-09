@@ -6,11 +6,6 @@
 			INSERT INTO member VALUES ((SELECT MAX(mno) FROM account),#{name},#{phone},#{birth},#{address},#{email});
 	</insert>
 	<insert id="insertBs" parameterType="Business">
-			
-			<!-- INSERT INTO account (id,password) VALUES (#{id},#{password});
-			INSERT INTO business VALUES ((SELECT MAX(mno) FROM account),#{name},#{address},#{phone},#{email},#{comment},#{time},#{typeNum}); 
-			INSERT INTO bsn_account VALUES ((SELECT MAX(mno) FROM account),#{bankNum},#{accountNum}); 
-			INSERT INTO bsn_payment((SELECT MAX(mno) FROM account),#{paymentTypeNum}); 보류 (실제 서비스 적용시 시행될 쿼리) -->
 			INSERT INTO account (id,password) VALUES (#{id},#{password});
 			INSERT INTO business (mno,bname,address,phone,bkno,acno,email,typeNum)  
 			VALUES ((SELECT MAX(mno) FROM account),#{bname},#{address},#{phone},#{bankNum},#{bankAccountNum},#{email},#{bizType});

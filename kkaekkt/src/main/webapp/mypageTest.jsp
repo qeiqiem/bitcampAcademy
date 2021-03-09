@@ -11,7 +11,7 @@
 <body>
     <form action="mypagePs.do" method="POST">
         <input type="text" name="mno" value="1">
-        <input type="submit" value="마이페이지"> 
+        <input type="submit" value="마이페이지">
     </form>
 </body>
 </html>

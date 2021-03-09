@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
+<%@ page import="com.kkaekkt.biz.user.PersonVO" %>
 <%@ page import="com.kkaekkt.biz.reservation.ReservationListVO" %>
 <%@ page import="com.kkaekkt.biz.reservation.LaundryVO" %>
 <%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,11 +12,11 @@
     <title>Document</title>
     <link rel="stylesheet" href="css/mypage.css">
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script src="js/mypagePs.js"></script>
+    <!--<script src="js/mypagePs.js"></script>-->
 </head>
 
 <body>
-<jsp:include page="header0.jsp"></jsp:include>
+	<jsp:include page="header0.jsp"></jsp:include>
     <div class="body_container">
         <div class="my_container">
             <!--nav 바2-->
@@ -99,17 +97,21 @@
     </div>
     <script src="https://kit.fontawesome.com/2fc57dd2db.js" crossorigin="anonymous"></script>
     <script>
-        $(document).ready(function () {
-            $("#detailBtn").click(function () {
-                console.log("dd");
-                $(".detail").toggle(".none");
-            });
-            $(".like").click(function () {
-                $(this).toggleClass("fas");
-                $(this).toggleClass("far");
+        $(document).ready(function() {
+            $('.nav2 div').click(function() {
+                if($(this).index()==1) {
+                    var dd={mno:${sessionScope.member.mno}};
+                    $.post({
+                        url:"ajax.do",
+                        data:dd,
+                        success: function(data) {
+                            var test=JSON.parse(data);
+                            console.log(test.mno);
+                        }
+                    });
+                }
             });
         });
     </script>
 </body>
-
 </html>
