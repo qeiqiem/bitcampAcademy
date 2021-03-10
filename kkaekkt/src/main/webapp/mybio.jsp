@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%-- 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+--%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -291,13 +292,7 @@
             }
             
             // 비밀번호 변경하기
-           document.getElementById("btn_updatepwd").onclick = function changePwd() {
-           		var pwd = document.getElementById("newpwd").value;
-           		document.getElementById("curpwd").value = pwd;
-           		
-           	 document.getElementById("mybio").submit();
-              
-           }
+         
 			
             
             
@@ -351,23 +346,30 @@
                 </table>
                     <div id="mybioPhone">
                         연락처<br>
+                       
+                        <!-- 
+                        <%--
                         <c:set var="tel" value="${fn:split(sessionScope.member.phone, '-')}">
-                
                         <input id="phone1" type="text" value="${fn:split(sessionScope.member.phone, '-')[0]}"> - 
                         <input id="phone2" type="text" value="${fn:split(sessionScope.member.phone, '-')[1]}"> -
                         <input id="phone3" type="text" value="${fn:split(sessionScope.member.phone, '-')[2]}">
-           
                         </c:set>
+                        --%>
+                        -->
+                     
+                        <input id="phone1" type="text" > - 
+                        <input id="phone2" type="text" > -
+                        <input id="phone3" type="text" >
                         <input name="phone" type="tel" id="phone" value="0" hidden>
                     </div>
                 <div id="mybioBirth">
                     생년월일<br>
-                    <input name="birth" type="text" id="input2"><label id="checkbirth" value=""></label>
+                    <input name="birth" type="text" id="input2" value="${sessionScope.member.id}"><label id="checkbirth" value=""></label>
                 </div>
                 <div>
                     <!-- 이메일도 api로 하기로 했던 거 같아ㅓ 일단 인풋박스만 만들었습니다 -->
                     이메일<br>
-                    <input name="email" type="email" value="" id="input2"> 
+                    <input name="email" type="email" value="${sessionScope.member.id}" id="input2"> 
                     <button type="button" id="btn_checkemail">이메일인증</button><label id="checkemail" value=""></label>
                 
                 </div>
