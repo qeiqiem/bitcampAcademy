@@ -11,6 +11,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="../css/all.css">
 <link rel="stylesheet" href="/header0.html">
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
    <style>
         .body_container {
             color: rgba(125, 125, 125, 1);
@@ -140,6 +141,11 @@
        
     </style>
   <script>
+  	var fomatpw = 0;
+  	var fomatbirth = 0;			// 1일때가 유효성 통과했을때
+  	
+  	
+  	
         window.onload = function () {
 
             var inputli = document.getElementsByTagName('input');
@@ -185,9 +191,11 @@
        
                 }
                 //본인인증, 우편번호 찾기 버튼 비활성화
+                for (var i = 3; i < buttonli.length; i++) {
                  if (i != 4) {
                         buttonli[i].disabled = true;
                     }
+                }
             }
 
             // 비밀번호 입력 후 수정버튼(비밀번호 변경시) 새 비밀번호, 확인버튼 활성화
@@ -196,6 +204,8 @@
                 var pwd = inputli[2].value
                 // 일치
                 if (pwd == 1) {
+                	formatpw = 1;
+                	
                 	document.getElementById("checkpwd").innerText
                     = "";
                 	
@@ -210,6 +220,7 @@
                     // 변경하기 버튼 활성화
                     buttonli[3].disabled = true;
                     buttonli[4].disabled = false;
+                    
 
                 } else {
                  
@@ -240,6 +251,19 @@
             // 새 비밀번호, 새 비밀번호 확인 인풋 값 같은지 비교 => 비밀법호 업데이트 
             document.getElementById("btn_updatepwd").onclick = function undatePwd() {
                 if (inputli[3].value == inputli[4].value ) {
+                    $.ajax({ 
+                    	url :'updatePs.do', 
+                    	type : 'post', 
+                    	dataType : 'json', 
+                    	data : { 
+                    		mno : $('#mno').val(),
+                    		password : $('#newpwd').val(), 
+                    	}, 
+                    	success: function(data){ 
+                    		console.log("성공"); 
+                    	} 
+                    });
+
                     for (var i = 0; i < inputli.length; i++) {
                         if (i == 2) {
                             inputli[i].disabled = false;
@@ -274,6 +298,7 @@
                         = " 양식과 맞지 않습니다. ex) 20210101";
                 	}
                 } else {
+                	formatbirth = 1;
                     document.getElementById("checkbirth").innerText
                         = "";
                 	
@@ -290,12 +315,7 @@
             	document.getElementById("phone").value = phone;
                
             }
-            
-            // 비밀번호 변경하기
-         
-			
-            
-            
+      
         }
     </script>
 </head>
@@ -317,11 +337,11 @@
                 <table>
                     <tr>
                         <th>아이디</th>
-                        <td><input type="text" id="read" name="id" value="${sessionScope.member.id}" readonly></td>
+                        <td><input type="text" id="read" name="id" value="tnwjd${sessionScope.member.id}" readonly></td>
                     </tr>
                     <tr>
                         <th>이름</th>
-                        <td><input type="text" id="read" name="name" value="${sessionScope.member.name}" readonly></td>
+                        <td><input type="text" id="read" name="name" value="양수정${sessionScope.member.name}" readonly></td>
                     </tr>
                     <tr>
                         <th>비밀번호</th>
@@ -340,7 +360,7 @@
                         </tr>
                     </div>
                     <tr>
-                        <th><input type="hidden" name="mno" value="1"> <!-- 회원번호 -->
+                        <th><input type="hidden" name="mno" value="1" id="mno"> <!-- 회원번호 -->
                    
                     </tr>
                 </table>
@@ -357,9 +377,9 @@
                         --%>
                         -->
                      
-                        <input id="phone1" type="text" > - 
-                        <input id="phone2" type="text" > -
-                        <input id="phone3" type="text" >
+                        <input id="phone1" type="text" maxlength='3'> - 
+                        <input id="phone2" type="text" maxlength='4'> -
+                        <input id="phone3" type="text" maxlength='4'>
                         <input name="phone" type="tel" id="phone" value="0" hidden>
                     </div>
                 <div id="mybioBirth">
