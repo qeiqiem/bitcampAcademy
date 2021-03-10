@@ -28,7 +28,7 @@ public class ReservationDAO {
 		return mybatis.selectOne("getRsv");
 	}
 	public List<ReservationVO> getRsvList(PersonVO vo) {		
-		return mybatis.selectList("getRsvListPs",vo);
+		return mybatis.selectList("reservationDAO.getRsvListPs",vo);
 	}
 	public List<ReservationVO> getRsvList(BusinessVO vo) {
 		return mybatis.selectList("getRsvListBs",vo);

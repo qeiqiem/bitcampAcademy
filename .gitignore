@@ -1,2 +1,3 @@
-*.MF
-/.metadata/
+META-INF/*
+Servers/*
+.metadata/*

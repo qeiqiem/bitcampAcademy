@@ -12,7 +12,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="css/mypage.css">
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <!--<script src="js/mypagePs.js"></script>-->
+    <script src="js/mypagePs.js"></script>
 </head>
 
 <body>
@@ -41,36 +41,16 @@
     <script src="https://kit.fontawesome.com/2fc57dd2db.js" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function() {
-            init();
-            $('.nav2 div').click(function() {
-                // if($(this).index()==1) {
-                //     var dd={mno:${sessionScope.member.mno}};
-                //     $.post({
-                //         url:"ajax.do",
-                //         data:dd,
-                //         success: function(data) {
-                //             var test=JSON.parse(data);
-                //             console.log(test.mno);
-                //         }
-                //     });
-                // }
+            var member={'mno':${sessionScope.member.mno}}; //세션에서 정보를 받아오는건 독립된 js파일에서 불가능, jsp 내에서만 가능하기 때문에 여기서 값을 받아준다.
+            ajax(member); //처음 마이페이지 들어왔을 때, 진행중 주문 항목 출력
+            $('.rsvList').on("click",".detailBtn",function() { // 버블링으로 생성된 주문에 클릭 이벤트 활성화
+                $('#detail'+$(this).val()).toggleClass('none');
+            });
+            $('.nav2 div').click(function() { // 완료된 주문 출력
+                console.log("클릭");
+                ajax(member);
             });
         });
-        function init() {
-            console.log('이닛 진입');
-            var jj={'mno':${sessionScope.member.mno}};
-            $.post({
-                url:"ajax.do",
-                data:jj,
-                success: function(data) {
-                    var rsv=JSON.parse(data);
-                    var list=rsv.rsvList;
-                    var test=list.values;
-                    console.log(typeof test);
-                    
-                }
-            });
-        }
     </script>
 </body>
 </html>
