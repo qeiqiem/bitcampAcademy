@@ -20,7 +20,7 @@
 	<select id="getLaundry" resultType="laundry">
 		SELECT r.lno,lname laundry,cnt count,stno state, price*cnt price 
 		FROM rsv_laundry r, laundry_type t, (SELECT * FROM bsn_laundry WHERE bno=1) bl 
-		WHERE r.lno=t.lno 
+		WHERE r.lno=t.lno
 		AND bl.lno=r.lno 
 		AND rno=#{rsvNum};
 	</select>

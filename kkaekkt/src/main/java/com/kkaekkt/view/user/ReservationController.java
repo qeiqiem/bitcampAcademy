@@ -31,13 +31,15 @@ public class ReservationController {
 		model.addAttribute("rsvPage", reservationService.getRsvListBs(vo));
 		return "mypageBs.jsp";
 	}
-	@RequestMapping(value="/ajax.do",method=RequestMethod.POST)
+	@RequestMapping(value="/ajax.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
 	@ResponseBody
 	public String testAjax(PersonVO vo,Model model) {
 		System.out.println(vo.getMno());
-		model.addAttribute("rsvPage",vo);
+		System.out.println(vo.getState()+"넘버");
+		model.addAttribute("rsvPage", reservationService.getRsvListPs(vo));
+		System.out.println(reservationService.getRsvListPs(vo).getRsvList().toString());
 		Gson gson=new Gson();
-		String test=gson.toJson(vo);
+		String test=gson.toJson(reservationService.getRsvListPs(vo));
 		return test;
 	}
 	@RequestMapping(value="/cancel.do", method=RequestMethod.POST)

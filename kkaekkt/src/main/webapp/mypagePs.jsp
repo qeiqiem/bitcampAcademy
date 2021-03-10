@@ -33,64 +33,7 @@
                 <p>진행중 주문</p>
                 <hr>
                 <div class="rsvList">
-                    <c:forEach var="rsv" items="${rsvPage.rsvList}">
-                    <div class="rsvBox">
-                        <table class="rsvTable">
-                            <tr>
-                                <th colspan="2">${rsv.bname}</th>
-                                <td><i class="fas fa-heart like"></i></td>
-                                <!--버튼 어따가 넣을 지 몰라서 여따가 넣습니다..-->
-                            </tr>
-                            <tr>
-                                <td class="column">주문일시</td>
-                                <td>${rsv.rsvDate}</td>
-                            </tr>
-                            <tr>
-                                <td class="column">예약번호</td>
-                                <td>${rsv.rsvNum}</td>
-                            </tr>
-                            <tr>
-                                <td class="column">전화번호</td>
-                                <td>${rsv.phone}</td>
-                            </tr>
-                            <tr>
-                                <td class="column">주문항목</td><!--..이게 되네..??-->
-                                <td><span>${rsv.laundryList[0].laundry}</span> 외 <span>${rsv.count}</span>개</td>
-                            </tr>
-                        </table>
-                        <div class="btnDiv">
-                            <button>채팅상담</button>
-                            <button id="detailBtn">상세보기</button>
-                            <button>리뷰쓰기</button>
-                        </div>
-                        <div class="detail none">
-                            <hr>
-                            <div1-1>
-                                <table class="receipt">
-                                    <tr class="column">
-                                        <th class="laundry">품목</th>
-                                        <th class="count">개수</th>
-                                        <th class="price">가격</th>
-                                    </tr>
-                                    <!--여기부터 js 반복문 삽입-->
-                                    <c:forEach var="laundry" items="${rsv.laundryList}">
-                                    <tr>
-                                        <td class="laundry">${laundry.laundry}</td>
-                                        <td class="count">${laundry.count}개</td>
-                                        <td class="price">${laundry.price}</td>
-                                    </tr>
-                                    </c:forEach>
-                                </table>
-                            <hr>
-                                <table class="result">
-                                    <th>결제금액</th>
-                                    <td>&nbsp;&nbsp;</td>
-                                    <td><span>${rsv.totalPrice}</span> 원</td>
-                                </table>
-                        </div1-1>
-                        </div>
-                    </div>
-                    </c:forEach>
+
                 </div>
             </div>
         </div>
@@ -98,20 +41,36 @@
     <script src="https://kit.fontawesome.com/2fc57dd2db.js" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function() {
+            init();
             $('.nav2 div').click(function() {
-                if($(this).index()==1) {
-                    var dd={mno:${sessionScope.member.mno}};
-                    $.post({
-                        url:"ajax.do",
-                        data:dd,
-                        success: function(data) {
-                            var test=JSON.parse(data);
-                            console.log(test.mno);
-                        }
-                    });
-                }
+                // if($(this).index()==1) {
+                //     var dd={mno:${sessionScope.member.mno}};
+                //     $.post({
+                //         url:"ajax.do",
+                //         data:dd,
+                //         success: function(data) {
+                //             var test=JSON.parse(data);
+                //             console.log(test.mno);
+                //         }
+                //     });
+                // }
             });
         });
+        function init() {
+            console.log('이닛 진입');
+            var jj={'mno':${sessionScope.member.mno}};
+            $.post({
+                url:"ajax.do",
+                data:jj,
+                success: function(data) {
+                    var rsv=JSON.parse(data);
+                    var list=rsv.rsvList;
+                    var test=list.values;
+                    console.log(typeof test);
+                    
+                }
+            });
+        }
     </script>
 </body>
 </html>
