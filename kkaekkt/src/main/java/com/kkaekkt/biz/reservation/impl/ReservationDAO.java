@@ -27,13 +27,17 @@ public class ReservationDAO {
 		
 		return mybatis.selectOne("getRsv");
 	}
-	public List<ReservationVO> getRsvList(PersonVO vo) {		
+	public List<ReservationVO> getRsvListPs(ReservationListVO vo) {		
 		return mybatis.selectList("reservationDAO.getRsvListPs",vo);
 	}
-	public List<ReservationVO> getRsvList(BusinessVO vo) {
+	public List<ReservationVO> getRsvListBs(ReservationListVO vo) {
 		return mybatis.selectList("getRsvListBs",vo);
 	}
 	public List<LaundryVO> getLaundryList(ReservationVO vo) {
 		return mybatis.selectList("getLaundry",vo);
+	}
+	public int countList(ReservationListVO vo) {
+		int result = mybatis.selectOne("countList",vo);
+		return result;
 	}
 }

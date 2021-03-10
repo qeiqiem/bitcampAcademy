@@ -7,7 +7,6 @@ import com.kkaekkt.biz.reservation.ReservationListVO;
 import com.kkaekkt.biz.reservation.ReservationService;
 import com.kkaekkt.biz.reservation.ReservationVO;
 import com.kkaekkt.biz.user.BusinessVO;
-import com.kkaekkt.biz.user.PersonVO;
 
 @Service("ReservationService")
 public class ReservationServiceImpl implements ReservationService {
@@ -26,16 +25,17 @@ public class ReservationServiceImpl implements ReservationService {
 		reservationDAO.cancelRsv(vo);
 	}
 	@Override
-	public ReservationListVO getRsvListPs(PersonVO vo) {
-		ReservationListVO listVO=new ReservationListVO().setRsvList(reservationDAO.getRsvList(vo));
-		for(ReservationVO rsvVO : listVO.getRsvList()) {
+	public ReservationListVO getRsvListPs(ReservationListVO vo) {
+				vo.setTotalPostCount(reservationDAO.countList(vo))
+				.setRsvList(reservationDAO.getRsvListPs(vo));
+		for(ReservationVO rsvVO : vo.getRsvList()) {
 			rsvVO.setLaundryList(reservationDAO.getLaundryList(rsvVO));
 		}
-		return listVO;
+		return vo;
 	}
 	@Override
-	public ReservationListVO getRsvListBs(BusinessVO vo) {
-		ReservationListVO listVO=new ReservationListVO().setRsvList(reservationDAO.getRsvList(vo));
+	public ReservationListVO getRsvListBs(ReservationListVO vo) {
+		ReservationListVO listVO=new ReservationListVO().setRsvList(reservationDAO.getRsvListBs(vo));
 		for(ReservationVO rsvVO : listVO.getRsvList()) {
 			rsvVO.setLaundryList(reservationDAO.getLaundryList(rsvVO));
 		}

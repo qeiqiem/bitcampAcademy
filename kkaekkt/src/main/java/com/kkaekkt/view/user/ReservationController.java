@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.kkaekkt.biz.reservation.ReservationListVO;
 import com.kkaekkt.biz.reservation.ReservationService;
 import com.kkaekkt.biz.reservation.ReservationVO;
 import com.kkaekkt.biz.user.BusinessVO;
@@ -23,21 +24,18 @@ public class ReservationController {
 	@RequestMapping(value="/mypagePs.do", method=RequestMethod.POST)
 	public String getRsvListPs(PersonVO vo, Model model,HttpSession session) {
 		session.setAttribute("member", vo); //세션 테스트용
-		model.addAttribute("rsvPage", reservationService.getRsvListPs(vo));
 		return "mypagePs.jsp";
 	}
 	@RequestMapping(value="/mypageBs.do", method=RequestMethod.POST)
-	public String getRsvListBs(BusinessVO vo, Model model) {
+	public String getRsvListBs(ReservationListVO vo, Model model) {
 		model.addAttribute("rsvPage", reservationService.getRsvListBs(vo));
 		return "mypageBs.jsp";
 	}
 	@RequestMapping(value="/ajax.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
 	@ResponseBody
-	public String testAjax(PersonVO vo,Model model) {
-		System.out.println(vo.getMno());
+	public String testAjax(ReservationListVO vo) {
+		System.out.println(vo.getNo());
 		System.out.println(vo.getState()+"넘버");
-		model.addAttribute("rsvPage", reservationService.getRsvListPs(vo));
-		System.out.println(reservationService.getRsvListPs(vo).getRsvList().toString());
 		Gson gson=new Gson();
 		String test=gson.toJson(reservationService.getRsvListPs(vo));
 		return test;

@@ -423,10 +423,10 @@ INSERT INTO schedule (wkname) values("평일");
 INSERT INTO schedule (wkname) values("주말");
 
 -- 더미 데이터
-INSERT INTO account (id,password) VALUES ('testps','test',1);
+INSERT INTO account (id,password,mtype) VALUES ('testps','test',1);
 INSERT INTO Member VALUES ((SELECT MAX(mno) FROM Account),'테스터','010-1111-2222','920110','서울시 용산구','test@naver.com');
 
-INSERT INTO account (id,password) VALUES ('testbs','test',2);
+INSERT INTO account (id,password,mtype) VALUES ('testbs','test',2);
 INSERT INTO Business (mno,bname,address,phone,bkno,acno,email,typeNum) 
 VALUES((SELECT MAX(mno) FROM Account),'테스트업체','서울시 용산구','010-111-2222',1,'110-111-1111','test@naver.com',1);
 INSERT INTO bsn_schedule VALUES ((SELECT MAX(bno) FROM business), 8,'08:00~22:00');

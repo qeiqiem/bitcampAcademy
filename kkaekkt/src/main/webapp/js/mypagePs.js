@@ -1,19 +1,48 @@
-function ajax(member) { //ajax로 리스트 받아오기
-    console.log('ajax 출발');
+$(document).ready(function() {
+    ajax(pageObj); //처음 마이페이지 들어왔을 때, 진행중 주문 항목 출력
+    $('.rsvList').on("click",".detailBtn",function() { // 버블링으로 생성된 주문에 클릭 이벤트 활성화
+        $('#detail'+$(this).val()).toggleClass('none');
+    });
+    $('.nav2 div').click(function() { // 완료된 주문 출력
+        if($(this).index()==0){
+            pageObj.state=1;
+            pageObj.currentPageNum=1;
+            ajax(pageObj);
+        }else{
+            pageObj.currentPageNum=1;
+            pageObj.state=3;
+            ajax(pageObj);
+        }
+    });
+});
+function initPageBtn() {
+    if(pageObj.isNextExist) {
+        
+    }
+}
+function initPageObj(data) {
+    pageObj.blockLastPageNum=data.blockLastPageNum;
+    pageObj.blockFirstPageNum=data.blockFirstPageNum;
+    pageObj.isNextBlockExist=data.isNextBlockExist;
+    pageObj.isNextExist=data.isNextExist;
+    pageObj.isPrevBlockExist=data.isPrevBlockExist;
+    pageObj.isPrevExist=data.isPrevExist;
+}
+function ajax(pageObj) { //ajax로 리스트 받아오기
+    console.log('ajax 함수 진입');
     $.post({
         url:"ajax.do",
-        data:member,
+        data:pageObj,
         success: function(data) {
             var rsv=JSON.parse(data);
             var list=rsv.rsvList;
-            console.log(list);
             printlist(list);
+            initPageObj(rsv);
             console.log('ajax 완료');
         }
     });
 }
 function printlist(list) {
-    console.log('리스트출력');
     $('.rsvList').children().remove();
     $.each(list, function(key,value) {
         $('.rsvList').append(

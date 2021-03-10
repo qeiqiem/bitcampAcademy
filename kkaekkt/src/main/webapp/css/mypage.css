@@ -93,3 +93,38 @@ border-radius: 30px;
     color:var(--key-color);
 }
 
+.page_btn button {
+  width: 30px;
+  margin: -2px;
+}
+
+.page_btn_container {
+  text-align: center;
+}
+
+.page_btn {
+  box-sizing: border-box;
+  display: inline-block;
+}
+
+.page_btn li {
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  text-decoration: none;
+  list-style: none;
+  float: left;
+  /* width: 40px; */
+  padding: 5px 10px;
+  text-align: center;
+  font-size: 13px;
+  margin-left: -1px;
+}
+
+.page_first {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.page_last {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
