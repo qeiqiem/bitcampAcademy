@@ -256,7 +256,7 @@
                 } else {
                 	
                     document.getElementById("match").innerText
-                        = " 새 비밀번호와 일치하지 않습니다.";
+                        = " 새 비밀번호와 일치하지 않습니다.123";
                     inputli[4].value = null;
                 }
             }
