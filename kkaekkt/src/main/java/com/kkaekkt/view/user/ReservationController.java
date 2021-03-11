@@ -22,7 +22,7 @@ public class ReservationController {
 	ReservationService reservationService;
 	
 	@RequestMapping(value="/mypagePs.do", method=RequestMethod.POST)
-	public String getRsvListPs(PersonVO vo, Model model,HttpSession session) {
+	public String getRsvListPs(PersonVO vo, HttpSession session) {
 		session.setAttribute("member", vo); //세션 테스트용
 		return "mypagePs.jsp";
 	}
@@ -34,8 +34,6 @@ public class ReservationController {
 	@RequestMapping(value="/ajax.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
 	@ResponseBody
 	public String testAjax(ReservationListVO vo) {
-		System.out.println(vo.getNo());
-		System.out.println(vo.getState()+"넘버");
 		Gson gson=new Gson();
 		String test=gson.toJson(reservationService.getRsvListPs(vo));
 		return test;

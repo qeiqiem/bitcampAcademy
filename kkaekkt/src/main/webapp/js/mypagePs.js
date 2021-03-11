@@ -1,24 +1,35 @@
 $(document).ready(function() {
      /* 사이드창 버튼 이벤트 */
-    $('#orderList').click(function(){ $('.side_sub').show() })
-    $('#myLike').click(function(){ $('.side_sub').hide() })
-    $('#writePro').click(function(){ $('.side_sub').hide() })
-    
+    $('.side button').click(function(){
+        $(this).addClass("side_select");
+        $(this).siblings().removeClass("side_select");
+        if($(this).index()==0) {
+            $('.side_sub').show();
+        }else {
+            $('.side_sub').hide();
+        }
+    });
+
     ajax(pageObj); //처음 마이페이지 들어왔을 때, 진행중 주문 항목 출력
     $('.rsvList').on("click",".detailBtn",function() { // 버블링으로 생성된 주문에 클릭 이벤트 활성화
         $('#detail'+$(this).val()).toggleClass('none');
     });
-    $('.nav2 div').click(function() { // 완료된 주문 출력
+    $('.side_sub button').click(function() { // 완료된 주문 출력
         if($(this).index()==0){
+            $(this).addClass("side_sub_select");
+            $(this).siblings().removeClass("side_sub_select");
             pageObj.state=1;
             pageObj.currentPageNum=1;
             ajax(pageObj);
         }else{
+            $(this).addClass("side_sub_select");
+            $(this).siblings().removeClass("side_sub_select");
             pageObj.currentPageNum=1;
             pageObj.state=3;
             ajax(pageObj);
         }
     });
+    
     $('.page_next').click(function() {
         if(!$(this).hasClass('no')) {
             pageObj.currentPageNum+=1;
@@ -42,7 +53,7 @@ $(document).ready(function() {
             pageObj.currentPageNum=pageObj.blockLastPageNum+1;
             ajax(pageObj);
         }
-    })
+    });
     $('.page_btn').on("click",".page_list",function() {
         if(pageObj.currentPageNum!=JSON.parse($(this).html())) {
             pageObj.currentPageNum=JSON.parse($(this).html());
