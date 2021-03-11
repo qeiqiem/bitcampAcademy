@@ -36,24 +36,17 @@
 				<div class="page_btn_container">
 					<ul class="page_btn">
 						<!-- 맨처음으로 버튼 -->
-						<li class="page_first"><i class="fas fa-angle-double-left"></i></li> 
+						<li class="page_prevBlock"><i class="fas fa-angle-double-left"></i></li> 
 						<!-- 이전 -->
 						<li class="page_prev">
 							<i class="fas fa-angle-left"></i>
 						</li>
-						<!--버튼 출력 시작 -->
-						<li>1</li>
-						<li>2</li>
-						<li>3</li>
-						<!-- ...버튼 -->
-						<li><i class="fas fa-ellipsis-h"></i></li>
-						<li>10</li>
 						<!-- 다음버튼 -->
 						<li class="page_next">
 							<i class="fas fa-angle-right"></i>
 						</li>
 						<!-- 맨마지막으로 버튼 -->
-						<li class="page_last"><i class="fas fa-angle-double-right"></i></li>
+						<li class="page_nextBlock"><i class="fas fa-angle-double-right"></i></li>
 					</ul>
 				</div>
 			</div>
@@ -64,6 +57,7 @@
 	<script>
             var pageObj={//세션에서 정보를 받아오는건 독립된 js파일에서 불가능, jsp 내에서만 가능하기 때문에 여기서 값을 받아준다.
                 no:${sessionScope.member.mno},
+				currentPageNum:1,
                 state:1
             };
     </script>

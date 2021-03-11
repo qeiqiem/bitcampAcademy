@@ -7,7 +7,7 @@ public class ReservationListVO {
 	private final int POSTS_PER_PAGE=5;//한 페이지당 보여줄 Post 개수
 	private int totalPostCount; //총 Post 개수
 	private int totalLastPageNum; // if(totalPostCount==0) {0} else {Math.ceil((double) totalPostCount / POSTS_PER_PAGE)};
-	private int currentPageNum=1;//현재 페이지 번호 (Default=1)
+	private int currentPageNum;//현재 페이지 번호 (Default=1)
 	private int blockLastPageNum;//한 블럭에서 마지막 페이지 번호 = if(totalLastPageNum - totalLastPageNum % PAGES_PER_BLOCK >= currentPageNum) {(int)(Math.ceil((float)currentPageNum / PAGES_PER_BLOCK)*PAGES_PER_BLOCK)};
 	private int blockFirstPageNum;//한 블럭에서 첫번째 페이지 번호 = blockLastPageNum-(PAGES_PER_BLOCK0-1);
 	private int rowStartNum;
@@ -83,7 +83,6 @@ public class ReservationListVO {
 		} else {
 			totalLastPageNum=(int) Math.ceil((double) totalPostCount / POSTS_PER_PAGE);
 		}
-		change();
 		return this;
 	}
 
@@ -93,7 +92,7 @@ public class ReservationListVO {
 
 	public ReservationListVO setCurrentPageNum(int currentPageNum) {
 		this.currentPageNum = currentPageNum;
-		change();
+		rowStartNum=(currentPageNum-1)*POSTS_PER_PAGE;
 		return this;
 	}
 
@@ -145,7 +144,7 @@ public class ReservationListVO {
 		return POSTS_PER_PAGE;
 	}
 	
-	private void change() {
+	public void booleanSet() {
 		if((totalLastPageNum - totalLastPageNum % PAGES_PER_BLOCK) >= currentPageNum) {
 			blockLastPageNum=(int)(Math.ceil((float)currentPageNum / PAGES_PER_BLOCK)*PAGES_PER_BLOCK);
 			blockFirstPageNum=blockLastPageNum-(PAGES_PER_BLOCK-1);
@@ -174,7 +173,6 @@ public class ReservationListVO {
 			isPrevExist=false;
 			isPrevBlockExist=false;
 		}
-		rowStartNum=(currentPageNum-1)*10;
 	}
 
 	@Override

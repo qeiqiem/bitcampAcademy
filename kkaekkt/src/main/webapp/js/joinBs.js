@@ -127,5 +127,5 @@ function clicked() {
         $("input[name='etc']")[0].value=JSON.stringify(list);
     }
     $("form").submit();
-    //console.log($("form").serializeArray());
+	
 }

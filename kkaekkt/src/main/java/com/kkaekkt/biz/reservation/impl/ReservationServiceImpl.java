@@ -26,8 +26,9 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 	@Override
 	public ReservationListVO getRsvListPs(ReservationListVO vo) {
-				vo.setTotalPostCount(reservationDAO.countList(vo))
-				.setRsvList(reservationDAO.getRsvListPs(vo));
+			vo.setTotalPostCount(reservationDAO.countList(vo))
+			.setRsvList(reservationDAO.getRsvListPs(vo))
+			.booleanSet();
 		for(ReservationVO rsvVO : vo.getRsvList()) {
 			rsvVO.setLaundryList(reservationDAO.getLaundryList(rsvVO));
 		}

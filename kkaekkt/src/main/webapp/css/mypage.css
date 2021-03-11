@@ -29,43 +29,53 @@
 background: var(--key-color);
 }
 .rsvBox {
-    margin-right: 20px;
+    width: 500px;
+    margin-bottom: 40px;
     padding: 10px;
-    border: 2px solid var(--black-color);
+    border: 2px solid var(--gray-color);
     padding: 20px 40px;
 }
-.rsvTable {
+table.rsvTable {
 width: 99%;
-height: 238px;
+height: 200px;
+border-collapse: collapse;
 }
+.rsvList .detailBtn {
+    margin:0 54px;
+}
+
 .rsvTable th {
 text-align: left;
+font-size: larger;
 }
 .rsvTable .column {
     text-align: left;
-    width: 80px;
+    width: 100px;
+    color: #616161;
 }
 .btnDiv {
+    margin-top: 25px;
     text-align: center;
 }
 .rsvBox button {
-width: 174px;
-height: 65px;
-margin: 0 3vw;
-background: var(--key-color);
+width: 130px;
+height: 50px;
+background: #8FBCFF;
+opacity: 0.6;
 border-radius: 30px;
+border: 0px;
 }
 .rsvTable .fas {
-    color: rgb(253, 107, 107);
+    color: rgb(253, 44, 44);
 }
 .like {
     float: right;
     text-align: center;
-    width: 30px;
-    height: 18px;
+    font-size: 30px;
+    width: 40px;
+    height: 29px;
     padding: 5px 0;
     border: 1px solid var(--black-color);
-    border-radius: 10px;
 }
 .none {
     display: none;
@@ -118,13 +128,16 @@ border-radius: 30px;
   text-align: center;
   font-size: 13px;
   margin-left: -1px;
+  cursor: pointer;
 }
-
-.page_first {
+.page_btn li.curPage{
+    background: var(--key-color);
+}
+.page_prevBlock {
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
 }
-.page_last {
+.page_nextBlock {
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
 }

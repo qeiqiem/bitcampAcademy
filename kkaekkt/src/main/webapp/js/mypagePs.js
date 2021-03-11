@@ -14,10 +14,55 @@ $(document).ready(function() {
             ajax(pageObj);
         }
     });
+    $('.page_next').click(function() {
+        pageObj.currentPageNum+=1;
+        ajax(pageObj);
+    });
+    $('.page_prev').click(function() {
+        pageObj.currentPageNum-=1;
+        ajax(pageObj);
+    });
+    $('.page_prevBlock').click(function() {
+        pageObj.currentPageNum=pageObj.blockFirstPageNum-1;
+        ajax(pageObj);
+    });
+    $('.page_nextBlock').click(function() {
+        pageObj.currentPageNum=pageObj.blockLastPageNum+1;
+        ajax(pageObj);
+    })
+    $('.page_btn').on("click",".page_list",function() {
+        pageObj.currentPageNum=JSON.parse($(this).html());
+        ajax(pageObj);
+    });
 });
 function initPageBtn() {
     if(pageObj.isNextExist) {
-        
+        $('.page_next').removeClass('none');
+    }else {
+        $('.page_next').addClass('none');
+    }
+    if(pageObj.isNextBlockExist) {
+        $('.page_nextBlock').removeClass('none');
+    }else {
+        $('.page_nextBlock').addClass('none');
+    }
+    if(pageObj.isPrevExist) {
+        $('.page_prev').removeClass('none');
+    }else {
+        $('.page_prev').addClass('none');
+    }
+    if(pageObj.isPrevBlockExist) {
+        $('.page_prevBlock').removeClass('none');
+    }else {
+        $('.page_prevBlock').addClass('none');
+    }
+    $('.page_btn .page_list').remove(); //페이지 리스트 초기화
+    for(var i=pageObj.blockLastPageNum;i>=pageObj.blockFirstPageNum;i--) {
+        if(i==pageObj.currentPageNum) {
+            $("<li class='page_list curPage'>"+i+"</li>").insertAfter($('.page_prev')).trigger("create");
+        } else {
+            $("<li class='page_list'>"+i+"</li>").insertAfter($('.page_prev'));
+        }
     }
 }
 function initPageObj(data) {
@@ -38,6 +83,7 @@ function ajax(pageObj) { //ajax로 리스트 받아오기
             var list=rsv.rsvList;
             printlist(list);
             initPageObj(rsv);
+            initPageBtn();
             console.log('ajax 완료');
         }
     });
