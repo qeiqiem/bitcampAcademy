@@ -1,4 +1,9 @@
 $(document).ready(function() {
+     /* 사이드창 버튼 이벤트 */
+    $('#orderList').click(function(){ $('.side_sub').show() })
+    $('#myLike').click(function(){ $('.side_sub').hide() })
+    $('#writePro').click(function(){ $('.side_sub').hide() })
+    
     ajax(pageObj); //처음 마이페이지 들어왔을 때, 진행중 주문 항목 출력
     $('.rsvList').on("click",".detailBtn",function() { // 버블링으로 생성된 주문에 클릭 이벤트 활성화
         $('#detail'+$(this).val()).toggleClass('none');
@@ -15,46 +20,56 @@ $(document).ready(function() {
         }
     });
     $('.page_next').click(function() {
-        pageObj.currentPageNum+=1;
-        ajax(pageObj);
+        if(!$(this).hasClass('no')) {
+            pageObj.currentPageNum+=1;
+            ajax(pageObj);
+        }        
     });
     $('.page_prev').click(function() {
-        pageObj.currentPageNum-=1;
-        ajax(pageObj);
+        if(!$(this).hasClass('no')) {
+            pageObj.currentPageNum-=1;
+            ajax(pageObj);
+        }
     });
     $('.page_prevBlock').click(function() {
-        pageObj.currentPageNum=pageObj.blockFirstPageNum-1;
-        ajax(pageObj);
+        if(!$(this).hasClass('no')) {
+            pageObj.currentPageNum=pageObj.blockFirstPageNum-1;
+            ajax(pageObj);
+        }
     });
     $('.page_nextBlock').click(function() {
-        pageObj.currentPageNum=pageObj.blockLastPageNum+1;
-        ajax(pageObj);
+        if(!$(this).hasClass('no')) {
+            pageObj.currentPageNum=pageObj.blockLastPageNum+1;
+            ajax(pageObj);
+        }
     })
     $('.page_btn').on("click",".page_list",function() {
-        pageObj.currentPageNum=JSON.parse($(this).html());
-        ajax(pageObj);
+        if(pageObj.currentPageNum!=JSON.parse($(this).html())) {
+            pageObj.currentPageNum=JSON.parse($(this).html());
+            ajax(pageObj);
+        }
     });
 });
 function initPageBtn() {
     if(pageObj.isNextExist) {
-        $('.page_next').removeClass('none');
+        $('.page_next').removeClass('no');
     }else {
-        $('.page_next').addClass('none');
+        $('.page_next').addClass('no');
     }
     if(pageObj.isNextBlockExist) {
-        $('.page_nextBlock').removeClass('none');
+        $('.page_nextBlock').removeClass('no');
     }else {
-        $('.page_nextBlock').addClass('none');
+        $('.page_nextBlock').addClass('no');
     }
     if(pageObj.isPrevExist) {
-        $('.page_prev').removeClass('none');
+        $('.page_prev').removeClass('no');
     }else {
-        $('.page_prev').addClass('none');
+        $('.page_prev').addClass('no');
     }
     if(pageObj.isPrevBlockExist) {
-        $('.page_prevBlock').removeClass('none');
+        $('.page_prevBlock').removeClass('no');
     }else {
-        $('.page_prevBlock').addClass('none');
+        $('.page_prevBlock').addClass('no');
     }
     $('.page_btn .page_list').remove(); //페이지 리스트 초기화
     for(var i=pageObj.blockLastPageNum;i>=pageObj.blockFirstPageNum;i--) {

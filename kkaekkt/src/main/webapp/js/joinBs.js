@@ -31,7 +31,7 @@ $(document).ready(function () {
         event.preventDefault();
         $(this).toggleClass('selected');
         if ($(this).hasClass("selected")) {
-            weekLi.append("<li style='order:" + (idx+1) + "'><button>" + $(this).html() + "</button>시간<select></select>~<select></select></li>");
+            weekLi.append("<li style='order:" + (idx+1) + "'><button>" + $(this).html() + "</button><span>시간<span><select></select>~<select></select></li>");
             var opt = $(".weekBox li[style='order:" + (idx+1) + "'] select");
             for (var i = 0; i < 25; i++) {
                 opt.append("<option>" + (i < 10 ? "0" + i : i) + ":00</option>");

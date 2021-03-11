@@ -1,23 +1,91 @@
 .my_container {
     display: flex;
 }
-.nav2 {
-    width: 173px;
-    height: 100%;
-}
-.nav2 div {
-    width: 100%;
-    height: 88px;
-    background: var(--key-color);
-    display: table;    
-}
-.nav2 div p {
-    display: table-cell;
-    text-align: center;
-    vertical-align: middle;
-}
+        /* 사이드바영역 */
+        .side{
+            background-color: rgb(44, 44, 44);
+            width: 10vw;
+            height: 100vh;
+            float: left;
+        }
+        
+        .side_sub{
+            float: left;
+            background-color: white;
+            border-right: 1px solid var(--gray-color);
+            width: 10vw;
+            height: 100vh;
+            display: none;
+        }
+
+        .side :nth-child(1){
+            width: 100%;
+            height: 10%;
+            border : none;
+            background-color: rgb(44, 44, 44);
+            font-size: 18px;
+            color: white;
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: bold;
+        }
+
+        .side :nth-child(2){
+            width: 100%;
+            height: 10%;
+            border : none;
+            background-color: rgb(44, 44, 44);
+            font-size: 18px;
+            color: white;
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: bold;
+        }
+
+        .side :nth-child(3){
+            width: 100%;
+            height: 10%;
+            border : none;
+            background-color: rgb(44, 44, 44);
+            font-size: 18px;
+            color: white;
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: bold;            
+        }
+        
+        .side :nth-child(1):hover{  background-color: white; color: rgb(44, 44, 44); }
+        .side :nth-child(2):hover{ background-color: white; color: rgb(44, 44, 44); }
+        .side :nth-child(3):hover{ background-color: white; color: rgb(44, 44, 44); }
+
+
+        .side_sub :nth-child(1){
+            width: 100%;
+            height: 10%;
+            border : none;
+            font-size: 18px;
+            color:  rgb(44, 44, 44);
+            background-color: white;
+            font-family: Roboto;
+            font-style: normal;     
+        }
+
+        .side_sub :nth-child(2){
+            width: 100%;
+            height: 10%;
+            border : none;
+            font-size: 18px;
+            color:  rgb(44, 44, 44);
+            background-color: white;
+            font-family: Roboto;
+            font-style: normal;       
+        }
+
+.side_sub :nth-child(1):hover{  font-weight: bold;  }
+.side_sub :nth-child(2):hover{  font-weight: bold;  }
 .content {
-    padding: 0 40px;
+    width: 75vw ;
+    height: 100vh;
 }
 .content hr {
     margin-bottom: 30px;
@@ -109,6 +177,7 @@ border: 0px;
 }
 
 .page_btn_container {
+    position: relative;
   text-align: center;
 }
 

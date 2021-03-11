@@ -18,16 +18,15 @@
 	<jsp:include page="header0.jsp"></jsp:include>
 	<div class="body_container">
 		<div class="my_container">
-			<!--nav 바2-->
-			<div class="nav2">
-				<div>
-					<p>진행중인 주문</p>
-				</div>
-				<div>
-					<p>완료된 주문</p>
-				</div>
+			<div class="side">
+				<button id="orderList">주문내역</button>
+				<button id="myLike">내가 찜한 세탁소</button>
+				<button id="writePro">프로필편집</button>
 			</div>
-			<!--주문목록 내용div-->
+			<div class="side_sub"> 
+				<button id="ingOrder">진행중인 주문</button>
+				<button id="succeOrder">완료된 주문</button>
+			</div>
 			<div class="content">
 				<p>진행중 주문</p>
 				<hr>
