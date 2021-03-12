@@ -1,0 +1,43 @@
+.side{
+    background-color: rgb(44, 44, 44);
+    width: 11vw;
+    height: 100vh;
+    float: left;
+}
+.side_sub{
+    float: left;
+    background-color: white;
+    border-right: 1px solid var(--gray-color);
+    width: 11vw;
+    height: 100vh;
+    display: none;
+}
+.side button {
+    width: 100%;
+    height: 10%;
+    border : none;
+    background-color: rgb(44, 44, 44);
+    font-size: 17px;
+    color: white;
+    font-weight: bold;
+}
+
+.side button:hover{ 
+    background-color: white; color: rgb(44, 44, 44); 
+}
+.side_select {
+	background-color:white !important;
+	color: rgb(44, 44, 44) !important;
+}
+.side_sub_select{
+	font-weight:bold;
+}
+.side_sub button{
+    width: 100%;
+    height: 10%;
+    border : none;
+    font-size: 17px;
+    color:  rgb(44, 44, 44);
+    background-color: white;    
+}
+.side_sub button:hover{  font-weight: bold;  }

@@ -87,7 +87,7 @@ input[type="button"] {
 .weekBox li select {
     width: 85px;
     height: 30px;
-    padding: 0 18px;
+    padding: 0 10px;
     margin: 0 10px;
 }
 .phone input{

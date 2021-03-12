@@ -10,7 +10,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
-<link rel="stylesheet" href="css/mypage.css">
+<link rel="stylesheet" href="css/mypagePs.css">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 </head>
 
@@ -18,17 +18,9 @@
 	<jsp:include page="header0.jsp"></jsp:include>
 	<div class="body_container">
 		<div class="my_container">
-			<div class="side">
-				<button id="orderList">주문내역</button>
-				<button id="myLike">내가 찜한 세탁소</button>
-				<button id="writePro">프로필편집</button>
-			</div>
-			<div class="side_sub"> 
-				<button id="ingOrder">진행중인 주문</button>
-				<button id="succeOrder">완료된 주문</button>
-			</div>
+			<jsp:include page="sidebar_ps.jsp"></jsp:include>
 			<div class="content">
-				<p>진행중 주문</p>
+				<p class="content_header">진행중 주문</p>
 				<hr>
 				<div class="rsvList">
 				</div>

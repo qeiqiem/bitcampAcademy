@@ -32,7 +32,10 @@ $(document).ready(function () {
         $(this).toggleClass('selected');
         if ($(this).hasClass("selected")) {
             if(idx<7) {
-                weekLi.append("<li style='order:" + (idx+1) + "'><button>" + $(this).html() + "요일</button><span>시간<span><select></select>~<select></select></li>");
+                weekLi.append("<li style='order:" + (idx+1) + "'><button>" + 
+                $(this).html() + 
+                "요일</button><span>시간<span>"+
+                "<select></select>~<select></select></li>");
             }else {
                 weekLi.append("<li style='order:" + (idx+1) + "'><button>" + $(this).html() + "</button><span>시간<span><select></select>~<select></select></li>");
             }

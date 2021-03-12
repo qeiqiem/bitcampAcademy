@@ -3,11 +3,12 @@
   --gray-color: rgb(221, 221, 221);
   --black-color: rgb(51, 51, 51);
   --text-gray: rgb(116, 116, 116);
+  --disabled:(#E5E5E5);
 }
 
 .body_container {
   position: absolute;
-  top: 65px;
+  top: 10vh;
   width: 100vw;
   height: 90vh;
   margin: auto;
