@@ -17,7 +17,6 @@
 <body>
 	<jsp:include page="header0.jsp"></jsp:include>
 	<div class="body_container">
-		<div class="my_container">
 			<jsp:include page="sidebar_ps.jsp"></jsp:include>
 			<div class="content">
 				<p class="content_header">진행중 주문</p>
@@ -41,7 +40,6 @@
 					</ul>
 				</div>
 			</div>
-		</div>
 	</div>
 	<script src="https://kit.fontawesome.com/2fc57dd2db.js"
 		crossorigin="anonymous"></script>
