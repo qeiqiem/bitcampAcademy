@@ -41,3 +41,13 @@
     background-color: white;    
 }
 .side_sub button:hover{  font-weight: bold;  }
+/* 제가 작업하는 페이지의 경우 padding 과 width 값이 저렇게 들어가는데, 다른 페이지는 어떻게 되는지 몰라서
+.content 부분은 각자 css 지정해주시는 게 좋을듯 합니다. 
+저의 경우 이렇게 주석처리 해놓고 본문 css에서 처리하고 있습니다. 사용에 유의하시기 바랍니다. 
+.content {
+    float:left;
+    width: 75vw ;
+    height: 100vh;
+    padding: 11px;
+}
+*/
