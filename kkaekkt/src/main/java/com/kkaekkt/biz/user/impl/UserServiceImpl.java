@@ -66,7 +66,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public PersonVO getUser(PersonVO vo) {
-		return null;
+		System.out.println("servie옴");
+		return userDao.getUser(vo);
 	}
 
 	@Override

@@ -37,10 +37,20 @@ public class UserDAO {
 	public void deleteUser(BusinessVO vo) {
 		mybatis.delete("UserDAO.deleteBs",vo);
 	}
-	public PersonVO getUser(PersonVO vo) {
-		mybatis.selectOne("UserDAO.getPs",vo);
-		return null;
-	}
+	// 이해 못해서 잠시 일케 해둠
+//		public PersonVO getUser(PersonVO vo) {
+//			mybatis.selectOne("UserDAO.getPs",vo);
+//			return null;
+//		}
+//		public UserVO getUser(UserVO vo) {
+//			mybatis.selectOne("UserDAO.getUser", vo);
+//			return null;
+//		}
+		
+		public PersonVO getUser(PersonVO vo) {
+			System.out.println("mybatis로 getUser() 기능처리");
+			return (PersonVO)mybatis.selectOne("UserDAO.getPerson", vo);
+		}
 	public BusinessVO getUser(BusinessVO vo) {
 		mybatis.selectOne("UserDAO.getBs",vo);
 		mybatis.selectList("UserDAO.getEquipments",vo);

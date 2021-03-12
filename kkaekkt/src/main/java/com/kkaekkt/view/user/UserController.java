@@ -3,6 +3,8 @@ package com.kkaekkt.view.user;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,4 +47,21 @@ public class UserController {
 		userService.updateUser(vo);
 		return "index.jsp";
 	}
+	
+	// 로그인
+		@RequestMapping(value = "/login.do", method = RequestMethod.POST)
+		public String Login(PersonVO vo, HttpSession session) {
+			System.out.println("로그인처리");
+			userService.getUser(vo);
+			
+			session.setAttribute("personName", vo.getName());
+			
+			if(vo.getId() == null || vo.getPassword() == null) {
+				System.out.println("사용자 정보가 없습니다.");
+				return "login.jsp";
+			}else{	
+				return "index.jsp";
+			}
+
+		}
 }
