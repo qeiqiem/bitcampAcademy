@@ -4,27 +4,34 @@ import java.sql.Date;
 import java.util.List;
 
 public class ReservationVO {
-	private int rsvNum;
-	private int mno;
-	private String bname;
-	private Date rsvDate;
-	private String phone;
-	private Date dDate;
-	private String state;
-	private List<LaundryVO> laundryList;
-	private int totalPrice;
-	private int count;
+	private int rsvNum; // 예약번호
+	private String mname; // 회원명
+	private String bname; // 업체명
+	private Date rsvDate; // 예약일자
+	private String phone; // 전화번호
+	private Date dDate; // 마감일자
+	private int dDay; //마감까지 남은 일자
+	private String state; // 상태명
+	private List<LaundryVO> laundryList; // 품목리스트
+	private int totalPrice; // 총 금액
+	private int count; // ex. 일반의류 외 count 개
+	public int getdDay() {
+		return dDay;
+	}
+	public void setdDay(int dDay) {
+		this.dDay = dDay;
+	}
 	public int getRsvNum() {
 		return rsvNum;
 	}
 	public void setRsvNum(int rsvNum) {
 		this.rsvNum = rsvNum;
 	}
-	public int getMno() {
-		return mno;
+	public String getMname() {
+		return mname;
 	}
-	public void setMno(int mno) {
-		this.mno = mno;
+	public void setMname(String mname) {
+		this.mname = mname;
 	}
 	public String getBname() {
 		return bname;
@@ -76,11 +83,4 @@ public class ReservationVO {
 	public int getCount() {
 		return count;
 	}
-	@Override
-	public String toString() {
-		return "ReservationVO [rsvNum=" + rsvNum + ", mno=" + mno + ", bname=" + bname + ", rsvDate=" + rsvDate
-				+ ", phone=" + phone + ", dDate=" + dDate + ", state=" + state + ", laundryList=" + laundryList
-				+ ", totalPrice=" + totalPrice + "]";
-	}
-	
 }

@@ -22,20 +22,27 @@ public class ReservationController {
 	ReservationService reservationService;
 	
 	@RequestMapping(value="/mypagePs.do", method=RequestMethod.POST)
-	public String getRsvListPs(PersonVO vo, HttpSession session) {
+	public String myPagePs(PersonVO vo, HttpSession session) {
 		session.setAttribute("member", vo); //세션 테스트용
 		return "mypagePs.jsp";
 	}
 	@RequestMapping(value="/mypageBs.do", method=RequestMethod.POST)
-	public String getRsvListBs(ReservationListVO vo, Model model) {
-		model.addAttribute("rsvPage", reservationService.getRsvListBs(vo));
+	public String getRsvListBs(BusinessVO vo, HttpSession session) {
+		session.setAttribute("business",vo);
 		return "mypageBs.jsp";
 	}
-	@RequestMapping(value="/ajax.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
+	@RequestMapping(value="/getRsvListPs.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
 	@ResponseBody
-	public String testAjax(ReservationListVO vo) {
+	public String getRsvListPs(ReservationListVO vo) {
 		Gson gson=new Gson();
 		String test=gson.toJson(reservationService.getRsvListPs(vo));
+		return test;
+	}
+	@RequestMapping(value="/getRsvListBs.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
+	@ResponseBody
+	public String getRsvListBs(ReservationListVO vo) {
+		Gson gson=new Gson();
+		String test=gson.toJson(reservationService.getRsvListBs(vo));
 		return test;
 	}
 	@RequestMapping(value="/cancel.do", method=RequestMethod.POST)

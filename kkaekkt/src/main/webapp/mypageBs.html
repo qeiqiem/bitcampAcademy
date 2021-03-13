@@ -55,7 +55,7 @@
 					</div>
 				</div>
 				<hr>
-				<div class="complete">
+				<div class="process">
 					<p>작업완료</p>
 					<table class="processHeader">
 						<tr>
@@ -69,16 +69,29 @@
 							<th>주문전표</th>
 						</tr>
 					</table>
-					<table class="rsvList">
+					<table class="processList">
 						<tr>
-							<th>2021-01-22<br>14:08:00</th>
-							<th>992810</th>
-							<th>홍길동</th>
-							<th>와이셔츠<br>가죽모피<br>기타(인형,모자)</th>
-							<th>1<br>2<br>2</th>
-							<th>1,000<br>40,000<br>30,000</th>
-							<th>2021-02-01<br>19:22:09</th>
-							<th>주문전표<br>인쇄</th>
+							<td>2021-01-22</td>
+							<td>992810</td>
+							<td>홍길동</td>
+							<td>와이셔츠<br>가죽모피<br>기타</td>
+							<td>1<br>2<br>2</td>
+							<td>1,000<br>40,000<br>30,000</td>
+							<td>2021-02-01</td>
+							<td><div>출력하기</div></td>
+						</tr>
+					</table>
+					<p>전달완료</p>
+					<table class="transList">
+						<tr>
+							<td>2021-01-22</td>
+							<td>992810</td>
+							<td>홍길동</td>
+							<td>와이셔츠<br>가죽모피<br>기타</td>
+							<td>1<br>2<br>2</td>
+							<td>1,000<br>40,000<br>30,000</td>
+							<td>2021-02-01</td>
+							<td><div>출력하기</div></td>
 						</tr>
 					</table>
 				</div>
@@ -103,5 +116,12 @@
 	</div>
 	<script src="https://kit.fontawesome.com/2fc57dd2db.js"
 		crossorigin="anonymous"></script>
+	<script>
+            var pageObj={//세션에서 정보를 받아오는건 독립된 js파일에서 불가능, jsp 내에서만 가능하기 때문에 여기서 값을 받아준다.
+                no:${sessionScope.member.mno},
+				currentPageNum:1,
+                state:1
+            };
+    </script>
 </body>
 </html>

@@ -15,20 +15,48 @@ public class ReservationListVO {
 	private boolean isNextExist;//다음 페이지가 존재하는가
 	private boolean isPrevBlockExist=false;//이전 블럭이 존재하는가(Default=false)
 	private boolean isNextBlockExist;
-	private int no;
+	private int mno;
+	private int bno;
 	private int state;
-	private int dDay;
-	private int laundryType;
-	private String search;
-	private int searchOption;
-	private List<ReservationVO> rsvList;
-
-	public int getNo() {
-		return no;
+	private int state2;
+	private int dDay; //남은 일자
+	private int laundryType; 
+	private String search; //검색어
+	private int searchOption; // 1.이름   2.주문번호 조회
+	private int listType; //1.일반 조회   2.품목별 조회   3.주문번호별-처리중 조회  4.주문번호별-완료목록 조회
+	private List<ReservationVO> rsvListRno; // 주문번호별 리스트
+	private List<LaundryVO> rsvListLno; // 품목별 리스트
+	
+	public int getMno() {
+		return mno;
 	}
 
-	public void setNo(int no) {
-		this.no = no;
+	public void setMno(int mno) {
+		this.mno = mno;
+	}
+
+	public int getBno() {
+		return bno;
+	}
+
+	public void setBno(int bno) {
+		this.bno = bno;
+	}
+
+	public int getListType() {
+		return listType;
+	}
+
+	public void setListType(int listType) {
+		this.listType = listType;
+	}
+
+	public int getState2() {
+		return state2;
+	}
+
+	public void setState2(int state2) {
+		this.state2 = state2;
 	}
 
 	public int getState() {
@@ -62,14 +90,18 @@ public class ReservationListVO {
 	public void setSearchOption(int searchOption) {
 		this.searchOption = searchOption;
 	}
-
-	public List<ReservationVO> getRsvList() {
-		return rsvList;
+	public List<ReservationVO> getRsvListRno() {
+		return rsvListRno;
+	}
+	public void setRsvListRno(List<ReservationVO> rsvListRno) {
+		this.rsvListRno = rsvListRno;
+	}
+	public List<LaundryVO> getRsvListLno() {
+		return rsvListLno;
 	}
 
-	public ReservationListVO setRsvList(List<ReservationVO> rsvList) {
-		this.rsvList = rsvList;
-		return this;
+	public void setRsvListLno(List<LaundryVO> rsvListLno) {
+		this.rsvListLno = rsvListLno;
 	}
 
 	public int getTotalPostCount() {
@@ -173,17 +205,5 @@ public class ReservationListVO {
 			isPrevExist=false;
 			isPrevBlockExist=false;
 		}
-	}
-
-	@Override
-	public String toString() {
-		return "ReservationListVO [PAGES_PER_BLOCK=" + PAGES_PER_BLOCK + ", POSTS_PER_PAGE=" + POSTS_PER_PAGE
-				+ ", totalPostCount=" + totalPostCount + ", totalLastPageNum=" + totalLastPageNum + ", currentPageNum="
-				+ currentPageNum + ", blockLastPageNum=" + blockLastPageNum + ", blockFirstPageNum=" + blockFirstPageNum
-				+ ", isPrevExist=" + isPrevExist + ", isNextExist=" + isNextExist + ", isPrevBlockExist="
-				+ isPrevBlockExist + ", isNextBlockExist=" + isNextBlockExist + ", no=" + no + ", state=" + state
-				+ ", dDay=" + dDay + ", laundryType=" + laundryType + ", search=" + search + ", searchOption="
-				+ searchOption + ", rsvList=" + rsvList + "]";
-	}
-	
+	}	
 }

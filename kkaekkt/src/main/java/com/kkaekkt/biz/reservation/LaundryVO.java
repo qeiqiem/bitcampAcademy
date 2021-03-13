@@ -1,10 +1,15 @@
 package com.kkaekkt.biz.reservation;
 
+import java.sql.Date;
+
 public class LaundryVO {
-	private int lno;
+	private Date rsvDate;
+	private int rsvNum;
+	private String mname;
+	private int dDay;
 	private String laundry;
-	private int count;
-	private String state;
+	private int count; 
+	private String state; 
 	private int price;
 	public String getLaundry() {
 		return laundry;
@@ -21,26 +26,37 @@ public class LaundryVO {
 	public String getState() {
 		return state;
 	}
+	public Date getRsvDate() {
+		return rsvDate;
+	}
+	public void setRsvDate(Date rsvDate) {
+		this.rsvDate = rsvDate;
+	}
+	public int getRsvNum() {
+		return rsvNum;
+	}
+	public void setRsvNum(int rsvNum) {
+		this.rsvNum = rsvNum;
+	}
+	public String getMname() {
+		return mname;
+	}
+	public void setMname(String mname) {
+		this.mname = mname;
+	}
+	public int getdDay() {
+		return dDay;
+	}
+	public void setdDay(int dDay) {
+		this.dDay = dDay;
+	}
 	public void setState(String state) {
 		this.state = state;
 	}
-	
-	public int getLno() {
-		return lno;
-	}
-	public void setLno(int lno) {
-		this.lno = lno;
-	}
-	
 	public int getPrice() {
 		return price;
 	}
 	public void setPrice(int price) {
 		this.price = price;
-	}
-	@Override
-	public String toString() {
-		return "LaundryVO [lno=" + lno + ", laundry=" + laundry + ", count=" + count + ", state=" + state + ", price="
-				+ price + "]";
 	}
 }
