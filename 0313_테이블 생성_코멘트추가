@@ -1,0 +1,200 @@
+CREATE TABLE `Account` (
+  `mno` int(11) NOT NULL AUTO_INCREMENT COMMENT '회원번호',
+  `id` varchar(20) DEFAULT NULL,
+  `password` varchar(20) DEFAULT NULL,
+  `mtype` int(1) DEFAULT NULL COMMENT '회원구분',
+  PRIMARY KEY (`mno`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='계정'
+
+CREATE TABLE `Bank` (
+  `bkno` int(11) NOT NULL AUTO_INCREMENT,
+  `bkname` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '은행명',
+  PRIMARY KEY (`bkno`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='코드_은행'
+
+CREATE TABLE `Bsn_Equipment` (
+  `bno` int(11) NOT NULL COMMENT '사업자번호',
+  `eno` int(11) DEFAULT NULL COMMENT '[코드]설비',
+  `cnt` int(11) DEFAULT NULL COMMENT '개수',
+  `price` int(11) NOT NULL DEFAULT '0' COMMENT '이용금액',
+  KEY `FK_Business_TO_Bsn_Equipment_1` (`bno`),
+  KEY `FK_Equipment_TO_Bsn_Equipment_1` (`eno`),
+  CONSTRAINT `FK_Business_TO_Bsn_Equipment_1` FOREIGN KEY (`bno`) REFERENCES `Business` (`bno`) ON DELETE CASCADE,
+  CONSTRAINT `FK_Equipment_TO_Bsn_Equipment_1` FOREIGN KEY (`eno`) REFERENCES `Equipment` (`eno`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='업체_보유설비'
+
+CREATE TABLE `Bsn_Etc` (
+  `etcno` int(11) DEFAULT NULL COMMENT '부가서비스번호',
+  `bno` int(11) NOT NULL COMMENT '사업자번호',
+  `price` int(11) NOT NULL COMMENT '이용금액',
+  KEY `FK_Etc_TO_Bsn_Etc_1` (`etcno`),
+  KEY `FK_Business_TO_Bsn_Etc_1` (`bno`),
+  CONSTRAINT `FK_Business_TO_Bsn_Etc_1` FOREIGN KEY (`bno`) REFERENCES `Business` (`bno`) ON DELETE CASCADE,
+  CONSTRAINT `FK_Etc_TO_Bsn_Etc_1` FOREIGN KEY (`etcno`) REFERENCES `Etc` (`etcno`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='업체_부가서비스'
+
+CREATE TABLE `Bsn_Laundry` (
+  `bno` int(11) NOT NULL,
+  `lno` int(11) DEFAULT NULL,
+  `price` int(11) DEFAULT NULL,
+  KEY `FK_Business_TO_Bsn_Laundry_1` (`bno`),
+  KEY `FK_Laundry_type_TO_Bsn_Laundry_1` (`lno`),
+  CONSTRAINT `FK_Business_TO_Bsn_Laundry_1` FOREIGN KEY (`bno`) REFERENCES `Business` (`bno`) ON DELETE CASCADE,
+  CONSTRAINT `FK_Laundry_type_TO_Bsn_Laundry_1` FOREIGN KEY (`lno`) REFERENCES `Laundry_type` (`lno`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='업체_취급품목'
+
+CREATE TABLE `Bsn_schedule` (
+  `bno` int(11) NOT NULL,
+  `schno` int(11) NOT NULL,
+  `time` varchar(15) DEFAULT NULL,
+  KEY `FK_Business_TO_Bsn_schedule_1` (`bno`),
+  KEY `FK_Schedule_TO_Bsn_schedule_1` (`schno`),
+  CONSTRAINT `FK_Business_TO_Bsn_schedule_1` FOREIGN KEY (`bno`) REFERENCES `Business` (`bno`) ON DELETE CASCADE,
+  CONSTRAINT `FK_Schedule_TO_Bsn_schedule_1` FOREIGN KEY (`schno`) REFERENCES `Schedule` (`schno`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='업체_스케줄'
+
+CREATE TABLE `Business` (
+  `bno` int(11) NOT NULL AUTO_INCREMENT COMMENT '사업자번호',
+  `mno` int(11) NOT NULL COMMENT '회원번호',
+  `bname` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '업체명',
+  `phone` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '연락처',
+  `bkno` int(11) DEFAULT NULL COMMENT '코드_은행',
+  `acno` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '계좌번호',
+  `address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '주소',
+  `email` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '이메일',
+  `comment` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '기업소개',
+  `typeNum` int(11) DEFAULT NULL COMMENT '가입유형',
+  PRIMARY KEY (`bno`),
+  KEY `FK_Account_TO_Business_1` (`mno`),
+  KEY `FK_bizType_TO_Business_1` (`typeNum`),
+  KEY `FK_Bank_TO_Business_1` (`bkno`),
+  CONSTRAINT `FK_Account_TO_Business_1` FOREIGN KEY (`mno`) REFERENCES `Account` (`mno`) ON DELETE CASCADE,
+  CONSTRAINT `FK_Bank_TO_Business_1` FOREIGN KEY (`bkno`) REFERENCES `Bank` (`bkno`) ON DELETE SET NULL,
+  CONSTRAINT `FK_bizType_TO_Business_1` FOREIGN KEY (`typeNum`) REFERENCES `bizType` (`typeNum`) ON DELETE SET NULL
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='업체_회원'
+
+
+CREATE TABLE `Cancel` (
+  `cancelNum` int(11) NOT NULL AUTO_INCREMENT COMMENT '취소번호',
+  `reason` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '사유',
+  PRIMARY KEY (`cancelNum`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='코드_취소사유'
+
+CREATE TABLE `Comment` (
+  `cno` int(11) NOT NULL AUTO_INCREMENT COMMENT '댓글번호',
+  `mno` int(11) DEFAULT NULL COMMENT '회원번호',
+  `bno` int(11) NOT NULL COMMENT '사업자번호',
+  `comment` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '내용',
+  `order` int(11) DEFAULT NULL COMMENT '순서',
+  `depth` int(11) DEFAULT NULL COMMENT '깊이',
+  `groupNum` int(11) DEFAULT NULL COMMENT '소속',
+  PRIMARY KEY (`cno`),
+  KEY `FK_Member_TO_Comment_1` (`mno`),
+  KEY `FK_Business_TO_Comment_1` (`bno`),
+  CONSTRAINT `FK_Business_TO_Comment_1` FOREIGN KEY (`bno`) REFERENCES `Business` (`bno`) ON DELETE CASCADE,
+  CONSTRAINT `FK_Member_TO_Comment_1` FOREIGN KEY (`mno`) REFERENCES `Member` (`mno`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='후기/댓글'
+
+CREATE TABLE `Equipment` (
+  `eno` int(11) NOT NULL AUTO_INCREMENT COMMENT '설비번호',
+  `ename` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '설비명',
+  PRIMARY KEY (`eno`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='코드_설비'
+
+CREATE TABLE `Etc` (
+  `etcno` int(11) NOT NULL AUTO_INCREMENT COMMENT '부가서비스번호',
+  `etcname` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '서비스명',
+  PRIMARY KEY (`etcno`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='코드_부가서비스'
+
+CREATE TABLE `Evaluation` (
+  `mno` int(11) NOT NULL COMMENT '회원번호',
+  `bno` int(11) NOT NULL COMMENT '사업자번호',
+  `grade` int(11) DEFAULT NULL COMMENT '점수',
+  KEY `FK_Member_TO_Evaluation_1` (`mno`),
+  KEY `FK_Business_TO_Evaluation_1` (`bno`),
+  CONSTRAINT `FK_Business_TO_Evaluation_1` FOREIGN KEY (`bno`) REFERENCES `Business` (`bno`) ON DELETE CASCADE,
+  CONSTRAINT `FK_Member_TO_Evaluation_1` FOREIGN KEY (`mno`) REFERENCES `Member` (`mno`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='평점'
+
+CREATE TABLE `Laundry_type` (
+  `lno` int(11) NOT NULL AUTO_INCREMENT COMMENT '품목번호',
+  `lname` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '품목명',
+  `period` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '1~3일/4~7일',
+  PRIMARY KEY (`lno`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='코드_품목'
+
+CREATE TABLE `Like` (
+  `bno` int(11) NOT NULL,
+  `mno` int(11) NOT NULL,
+  KEY `FK_Business_TO_Like_1` (`bno`),
+  KEY `FK_Member_TO_Like_1` (`mno`),
+  CONSTRAINT `FK_Business_TO_Like_1` FOREIGN KEY (`bno`) REFERENCES `Business` (`bno`) ON DELETE CASCADE,
+  CONSTRAINT `FK_Member_TO_Like_1` FOREIGN KEY (`mno`) REFERENCES `Member` (`mno`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='찜하기'
+
+CREATE TABLE `Member` (
+  `mno` int(11) NOT NULL COMMENT '회원번호',
+  `mname` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '회원이름',
+  `phone` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '연락처',
+  `birth` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '생년월일',
+  `address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '주소',
+  `email` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '이메일',
+  KEY `FK_Account_TO_Member_1` (`mno`),
+  CONSTRAINT `FK_Account_TO_Member_1` FOREIGN KEY (`mno`) REFERENCES `Account` (`mno`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='일반_회원'
+
+CREATE TABLE `Reservation` (
+  `rno` int(11) NOT NULL AUTO_INCREMENT COMMENT '예약번호',
+  `mno` int(11) NOT NULL COMMENT '회원번호',
+  `bno` int(11) DEFAULT NULL COMMENT '사업자번호',
+  `rdate` date DEFAULT NULL COMMENT '등록일자',
+  `ddate` date DEFAULT NULL COMMENT '마감일자',
+  `stno` int(11) DEFAULT NULL COMMENT '상태번호',
+  PRIMARY KEY (`rno`),
+  KEY `FK_Member_TO_Reservation_1` (`mno`),
+  KEY `FK_Business_TO_Reservation_1` (`bno`),
+  KEY `FK_State_TO_Reservation_1` (`stno`),
+  CONSTRAINT `FK_Business_TO_Reservation_1` FOREIGN KEY (`bno`) REFERENCES `Business` (`bno`) ON DELETE SET NULL,
+  CONSTRAINT `FK_Member_TO_Reservation_1` FOREIGN KEY (`mno`) REFERENCES `Member` (`mno`) ON DELETE CASCADE,
+  CONSTRAINT `FK_State_TO_Reservation_1` FOREIGN KEY (`stno`) REFERENCES `State` (`stno`) ON DELETE SET NULL
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='예약_정보'
+
+CREATE TABLE `Rsv_Laundry` (
+  `rno` int(11) NOT NULL COMMENT '예약번호',
+  `lno` int(11) DEFAULT NULL COMMENT '품목번호',
+  `cnt` int(11) DEFAULT NULL COMMENT '개수',
+  `stno` int(11) DEFAULT NULL COMMENT '상태번호',
+  KEY `FK_Reservation_TO_Rsv_Laundry_1` (`rno`),
+  KEY `FK_Laundry_type_TO_Rsv_Laundry_1` (`lno`),
+  KEY `FK_State_TO_Rsv_Laundry_1` (`stno`),
+  CONSTRAINT `FK_Laundry_type_TO_Rsv_Laundry_1` FOREIGN KEY (`lno`) REFERENCES `Laundry_type` (`lno`) ON DELETE SET NULL,
+  CONSTRAINT `FK_Reservation_TO_Rsv_Laundry_1` FOREIGN KEY (`rno`) REFERENCES `Reservation` (`rno`) ON DELETE CASCADE,
+  CONSTRAINT `FK_State_TO_Rsv_Laundry_1` FOREIGN KEY (`stno`) REFERENCES `State` (`stno`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='예약_품목'
+
+CREATE TABLE `Rsv_Payment` (
+  `rno` int(11) NOT NULL COMMENT '예약번호',
+  `price` int(11) DEFAULT NULL COMMENT '결제금액',
+  `payment` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '결제수단',
+  KEY `FK_Reservation_TO_Rsv_Payment_1` (`rno`),
+  CONSTRAINT `FK_Reservation_TO_Rsv_Payment_1` FOREIGN KEY (`rno`) REFERENCES `Reservation` (`rno`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='예약_결제'
+
+CREATE TABLE `Schedule` (
+  `schno` int(11) NOT NULL AUTO_INCREMENT COMMENT '스케줄번호',
+  `wkname` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '요일',
+  PRIMARY KEY (`schno`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='코드_스케줄'
+
+CREATE TABLE `State` (
+  `stno` int(11) NOT NULL AUTO_INCREMENT,
+  `stname` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`stno`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='코드_작업상태'
+
+CREATE TABLE `bizType` (
+  `typeNum` int(11) NOT NULL AUTO_INCREMENT,
+  `typename` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '[유형] - 1:일반, 2:코인',
+  PRIMARY KEY (`typeNum`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='코드_회원구분'
