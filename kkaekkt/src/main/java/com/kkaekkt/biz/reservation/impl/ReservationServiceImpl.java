@@ -26,23 +26,26 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 	@Override
 	public ReservationListVO getRsvListPs(ReservationListVO vo) {
-			vo.setTotalPostCount(reservationDAO.countList(vo))
-			.setRsvList(reservationDAO.getRsvListPs(vo))
-			.booleanSet();
-		for(ReservationVO rsvVO : vo.getRsvList()) {
+			vo.setTotalPostCount(reservationDAO.countList(vo)) //총 데이터행 입력
+			.booleanSet() //페이징 정보 입력
+			.setRsvListRno(reservationDAO.getRsvListPs(vo));
+			
+		for(ReservationVO rsvVO : vo.getRsvListRno()) {
 			rsvVO.setLaundryList(reservationDAO.getLaundryList(rsvVO));
 		}
 		return vo;
 	}
 	@Override
 	public ReservationListVO getRsvListBs(ReservationListVO vo) {
-		vo.setTotalPostCount(reservationDAO.countList(vo))
-		.setRsvList(reservationDAO.getRsvListPs(vo))
-		.booleanSet();
-	for(ReservationVO rsvVO : vo.getRsvList()) {
-		rsvVO.setLaundryList(reservationDAO.getLaundryList(rsvVO));
-	}
+		vo.setTotalPostCount(reservationDAO.countList(vo)).booleanSet();
+		if(vo.getListType()==2) {
+			vo.setRsvListLno(reservationDAO.getRsvListBs_p(vo));
+		} else {
+			vo.setRsvListRno(reservationDAO.getRsvListBs_rn(vo));
+			for(ReservationVO rsvVO : vo.getRsvListRno()) {
+				rsvVO.setLaundryList(reservationDAO.getLaundryList(rsvVO));
+			}
+		}
 	return vo;
 	}
-	
 }

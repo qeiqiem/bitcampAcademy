@@ -34,6 +34,7 @@ public class ReservationController {
 	@RequestMapping(value="/getRsvListPs.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
 	@ResponseBody
 	public String getRsvListPs(ReservationListVO vo) {
+		System.out.println(vo);
 		Gson gson=new Gson();
 		String test=gson.toJson(reservationService.getRsvListPs(vo));
 		return test;
@@ -41,6 +42,7 @@ public class ReservationController {
 	@RequestMapping(value="/getRsvListBs.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
 	@ResponseBody
 	public String getRsvListBs(ReservationListVO vo) {
+		System.out.println(vo);
 		Gson gson=new Gson();
 		String test=gson.toJson(reservationService.getRsvListBs(vo));
 		return test;

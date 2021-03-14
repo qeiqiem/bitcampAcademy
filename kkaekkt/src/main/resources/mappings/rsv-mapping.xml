@@ -10,101 +10,98 @@
 	<select id="getRsv" resultType="reservation">
 		SELECT * FROM reservation WHERE mno=#{mno};
 	</select>
-	<select id="getRsvList1" resultType="reservation"> <!-- 일반회원 예약리스트 출력 -->
+	<select id="getRsvListPs" resultType="reservation"> <!-- 일반회원 예약리스트 출력 -->
 		SELECT r.rno rsvNum,rdate rsvDate,bname,phone 
 		FROM reservation r, business b 
-		WHERE r.mno=m.mno 
-		AND r.bno=b.bno
-		AND mno=#{mno}
+		WHERE r.bno=b.bno
+		AND r.mno=#{mno}
 		AND stno=#{state}
 		ORDER BY rno DESC
 		LIMIT #{rowStartNum},#{POSTS_PER_PAGE};
 	</select>
-	<select id="getRsvList2" resultType="laundry"> <!-- 업체 품목별 리스트 출력 -->
-		SELECT rdate rsvDate, r.rno rsvNum, mname, lname,cnt,DATEDIFF(DAY,'ddate',CURDATE()) dDay 
+	<select id="getRsvListBs_p" resultType="laundry"> <!-- 업체 품목별 리스트 출력 -->
+		SELECT rdate rsvDate, r.rno rsvNum, mname, lname,cnt,DATEDIFF(ddate,CURDATE()) dDay 
 		FROM reservation r, member m, rsv_laundry r_l, laundry_type lt 
 		<where>
 			r.mno=m.mno AND r.rno=r_l.rno AND r_l.lno=lt.lno
 			AND bno=#{bno} AND stno=1
-			<if test="laundryType!=null">
+			<if test="laundryType!=0">
 				AND r_l.lno=#{laundryType}
 			</if>
-			<if test="dDay!=null">
+			<if test="dDay!=0">
 				<![CDATA[AND dDay<=#{dDay}]]>
 			</if>
 		</where>
-		ORDER BY r.rno;
+		ORDER BY r.rno
 		LIMIT #{rowStartNum},#{POSTS_PER_PAGE};
 	</select>
-	<select id="getRsvList3" resultType="reservation"> <!-- 업체회원 주문번호별 리스트 출력 -->
+	<select id="getRsvListBs_rn" resultType="reservation"> <!-- 업체회원 주문번호별 리스트 출력 -->
 		<if test="listType==3">
-			SELECT r.rno rsvNum,rdate rsvdate,mname,DATEDIFF(DAY,'ddate',CURDATE()) dDay 
+			SELECT r.rno rsvNum,rdate rsvdate,mname,DATEDIFF(ddate,CURDATE()) dDay 
 			FROM member m,reservation r
-			<where> 
-			r.mno=m.mno AND bno=#{bno} AND stno=1
-			<if test="dDay!=null">
+			WHERE r.mno=m.mno AND bno=#{bno} AND stno=1  
+			<if test="dDay!=0"> <!-- 마감기한 필터 입력시 -->
 				<![CDATA[AND dDay<=#{dDay}]]>
+				ORDER BY dDay rno DESC;
 			</if>
-			</where>
-			ORDER BY rno DESC;
+			<if test="dDay==0"> <!-- 마감기한 필터가 없을 경우 -->
+				ORDER BY rno DESC
+			</if>
+			LIMIT #{rowStartNum},#{POSTS_PER_PAGE};
 		</if>
-		<if test="listType==4">
-			SELECT r.rno rsvNum,rdate rsvdate,mname,dDate FROM member m,reservation r 
+		<if test="listType==4"> <!-- 업체회원 완료목록 출력 -->
+			SELECT r.rno rsvNum,rdate rsvdate,mname,dDate,stname state FROM member m,reservation r,state s 
 			<where> 
-			r.mno=m.mno AND bno=#{bno}
-				<if test="searchOption==1">
+			r.mno=m.mno AND s.stno=r.stno AND bno=#{bno} 
+				<if test="searchOption==1"> <!-- 검색옵션-이름 입력시 -->
 					AND mname LIKE '%'||#{search}||'%' 
 				</if>
-				<if test="searchOption==2">
+				<if test="searchOption==2"> <!-- 검색옵션-주문번호 입력시 -->
 					AND r.rno LIKE '%'||#{search}||'%'
 				</if>
 			</where>
-			AND stno=2 OR stno=3
-			ORDER BY stno, r.rno DESC;
+			AND (r.stno=2 OR r.stno=3)
+			ORDER BY r.stno, r.rno DESC
+			LIMIT #{rowStartNum},#{POSTS_PER_PAGE};
 		</if>
 	</select>
 	
-	<select id="getLaundry" resultType="laundry">
-		SELECT r.lno,lname laundry,cnt count,stno state, price*cnt price 
-		FROM rsv_laundry r, laundry_type t, (SELECT * FROM bsn_laundry WHERE bno=1) bl 
-		WHERE r.lno=t.lno
-		AND bl.lno=r.lno 
-		AND rno=#{rsvNum};
-		
-		SELECT lname, cnt count, price <if test="listType==3">,stname state </if>
-		FROM reservation r, rsv_laundry r_l, business b, bsn_laundry b_l, laundry_type lt <if test="listType==3">,state s </if>
-		WHERE r.rno=r_l.rno AND r.bno=b.bno AND b.bno=b_l.bno AND lt.lno=r_l.lno <if test="listType==3">AND r_l.stno=s.stno </if>
-		AND r.rno=#{rsvNum};
+	<select id="getLaundry" resultType="laundry"> <!-- 일반 품목 리스트 출력 -->
+			SELECT lname laundry, cnt count, price 
+			FROM reservation r, rsv_laundry r_l, business b, bsn_laundry b_l, laundry_type lt 
+			WHERE r.rno=r_l.rno AND r.bno=b.bno AND b.bno=b_l.bno AND lt.lno=r_l.lno AND b_l.lno=r_l.lno
+			AND r.rno=#{rsvNum};
+	</select>
+	<select id="getLaundry_st" resultType="laundry"> <!-- 상태가 표시된 품목 리스트 출력 -->
+			SELECT lname, cnt count, price,stname state 
+			FROM reservation r, rsv_laundry r_l, business b, bsn_laundry b_l, laundry_type lt,state s
+			WHERE r.rno=r_l.rno AND r.bno=b.bno AND b.bno=b_l.bno AND lt.lno=r_l.lno AND b_l.lno=r_l.lno AND r_l.stno=s.stno
+			AND r.rno=#{rsvNum};
 	</select>
 	<select id="countList" resultType="_int">
-		<if test="listType==2">
 			SELECT count(r.rno) FROM 
-		</if> 
-		<if test="listType!=2">
-			SELECT count(rno) FROM 
-		</if>
 		<choose>
 			<when test="listType==2"> <!-- 품목별 조회일 경우 -->
 				rsv_laundry r, laundry_type l, member m,reservation rsv 			
 			</when>
-			<when test="listType==3"> <!-- 완료목록 조회일 경우 -->
+			<when test="listType==4"> <!-- 완료목록 조회일 경우 -->
 				reservation r, member m 
 			</when>
 			<otherwise> <!-- 일반 조회일 경우 -->
-				reservation
+				reservation r
 			</otherwise>
 		</choose>
 		<where>
 			<if test="listType==2"> <!-- 품목별 조회일 때 -->
 				AND r.lno=l.lno AND rsv.mno=m.mno AND rsv.rno=r.rno
 			</if>
-			<if test="listType==3"> <!-- 완료목록 조회일 때 -->
+			<if test="listType==4"> <!-- 완료목록 조회일 때 -->
 				AND r.mno=m.mno
 			</if>
-			<if test="mno!=null"> <!-- 일반회원의 주문조회 -->
+			<if test='bno==0'> <!-- 일반회원의 주문조회 -->
 				AND mno=#{mno}
 			</if>
-			<if test="bno!=null"> <!-- 업체회원의 주문조회 -->
+			<if test='bno!=0'> <!-- 업체회원의 주문조회 -->
 				AND bno=#{bno}
 			</if>
 			<if test="search!=null and searchOption==1"> <!-- 이름검색 -->
@@ -113,16 +110,17 @@
 			<if test="search!=null and searchOption==2"> <!-- 주문번호검색 -->
 				AND rno LIKE '%'||#{search}||'%'
 			</if>
-			<if test="laundryType!=null"> <!-- 품목 조회일 경우 -->
+			<if test="laundryType!=0"> <!-- 품목 조회일 경우 -->
 				AND l.lno=#{laundryType}
 			</if>
-			<if test="dDay!=null"> <!-- 일자별 조회 -->
-				<![CDATA[AND DATEDIFF(DAY,'ddate',CURDATE())<=#{dDay}]]>
+			<if test="dDay!=0"> <!-- 일자별 조회 -->
+				<![CDATA[AND DATEDIFF(ddate,CURDATE())<=#{dDay}]]>
 			</if>
-				AND stno=#{state} <!-- 기본으로 들어가는 처리상태조건 -->
-			<if test="state2==3">
-				OR stno=#{state2} <!-- 완료목록일 시엔 OR 조건 추가 -->
+				AND (stno=#{state} <!-- 기본으로 들어가는 처리상태조건 -->
+			<if test="listType==4">
+				OR stno=3 <!-- 완료목록일 시엔 OR 조건 추가 -->
 			</if>
+			)
 		</where>
 	</select>
 </mapper>

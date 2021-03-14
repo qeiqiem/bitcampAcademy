@@ -10,18 +10,40 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
-<link rel="stylesheet" href="css/mypagePs.css">
+<link rel="stylesheet" href="css/mypageBs.css">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 </head>
 
 <body>
 	<jsp:include page="header0.jsp"></jsp:include>
 	<div class="body_container">
-			<jsp:include page="sidebar_ps.jsp"></jsp:include>
-			<div class="content">
-				<p class="content_header">진행중 주문</p>
+			<jsp:include page="sidebar_bs.jsp"></jsp:include>
+		<div class="content">
+				<div class="content_header">
+					<p>전체 개수 <span>1,403개</span></p>
+					<div class="searchBox">
+						<select>
+							<option value="">이름</option>
+							<option value="">주문번호</option>
+						</select>
+						<i class="fas fa-search"></i>
+						<input type="text" class="search">
+					</div>
+				</div>
 				<hr>
-				<div class="rsvList">
+				<div class="process">
+					<table class="processHeader">
+						<tr>
+							<th>주문일</th>
+							<th>주문번호</th>
+							<th>주문자</th>
+							<th>상품명</th>
+							<th>개수</th>
+							<th>금액</th>
+							<th>완료날짜</th>
+							<th>주문전표</th>
+						</tr>
+					</table>
 				</div>
 				<div class="page_btn_container">
 					<ul class="page_btn">
@@ -40,17 +62,17 @@
 					</ul>
 				</div>
 			</div>
+		</div>
 	</div>
 	<script src="https://kit.fontawesome.com/2fc57dd2db.js"
 		crossorigin="anonymous"></script>
 	<script>
             var pageObj={//세션에서 정보를 받아오는건 독립된 js파일에서 불가능, jsp 내에서만 가능하기 때문에 여기서 값을 받아준다.
-                mno:${sessionScope.member.mno},
+                bno:1,
 				currentPageNum:1,
-				listType:1,
-                state:1
+				listType:4
             };
     </script>
-    <script src="js/mypagePs.js"></script>
+	<script src="js/mypageBs.js"></script>
 </body>
 </html>

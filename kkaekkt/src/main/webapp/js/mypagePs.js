@@ -106,7 +106,7 @@ function ajax(pageObj) { //ajax로 리스트 받아오기
         data:pageObj,
         success: function(data) {
             var rsv=JSON.parse(data);
-            var list=rsv.rsvList;
+            var list=rsv.rsvListRno;
             printlist(list);
             initPageObj(rsv);
             initPageBtn();
@@ -117,6 +117,7 @@ function ajax(pageObj) { //ajax로 리스트 받아오기
 function printlist(list) {
     $('.rsvList').children().remove();
     $.each(list, function(key,value) {
+        console.log(key)
         $('.rsvList').append(
             '<div class="rsvBox">' +
                 '<table class="rsvTable">'+

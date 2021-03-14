@@ -18,7 +18,6 @@ public class ReservationListVO {
 	private int mno;
 	private int bno;
 	private int state;
-	private int state2;
 	private int dDay; //남은 일자
 	private int laundryType; 
 	private String search; //검색어
@@ -49,14 +48,6 @@ public class ReservationListVO {
 
 	public void setListType(int listType) {
 		this.listType = listType;
-	}
-
-	public int getState2() {
-		return state2;
-	}
-
-	public void setState2(int state2) {
-		this.state2 = state2;
 	}
 
 	public int getState() {
@@ -176,7 +167,7 @@ public class ReservationListVO {
 		return POSTS_PER_PAGE;
 	}
 	
-	public void booleanSet() {
+	public ReservationListVO booleanSet() {
 		if((totalLastPageNum - totalLastPageNum % PAGES_PER_BLOCK) >= currentPageNum) {
 			blockLastPageNum=(int)(Math.ceil((float)currentPageNum / PAGES_PER_BLOCK)*PAGES_PER_BLOCK);
 			blockFirstPageNum=blockLastPageNum-(PAGES_PER_BLOCK-1);
@@ -205,5 +196,14 @@ public class ReservationListVO {
 			isPrevExist=false;
 			isPrevBlockExist=false;
 		}
+		return this;
+	}
+
+	@Override
+	public String toString() {
+		return "ReservationListVO [mno=" + mno + ", bno=" + bno + ", state=" + state + ", dDay=" + dDay
+				+ ", laundryType=" + laundryType + ", search=" + search + ", searchOption=" + searchOption
+				+ ", listType=" + listType + "]";
 	}	
+	
 }

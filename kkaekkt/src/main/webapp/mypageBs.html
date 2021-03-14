@@ -8,6 +8,14 @@
 <link rel="stylesheet" href="css/head0.css">
 <link rel="stylesheet" href="css/sidebar.css">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script>
+	$(document).ready(function() {
+		$('.process > p:nth-child(1)').click(function() {
+			console.log('하하');
+			$('.process > p:nth-child(1)').html('와오');
+		})
+	})
+</script>
 </head>
 
 <body>
@@ -56,7 +64,7 @@
 				</div>
 				<hr>
 				<div class="process">
-					<p>작업완료</p>
+					<p>세탁완료</p>
 					<table class="processHeader">
 						<tr>
 							<th>주문일</th>
@@ -70,6 +78,9 @@
 						</tr>
 					</table>
 					<table class="processList">
+					</table>
+					<p>전달완료</p>
+					<table class="processList">
 						<tr>
 							<td>2021-01-22</td>
 							<td>992810</td>
@@ -81,8 +92,7 @@
 							<td><div>출력하기</div></td>
 						</tr>
 					</table>
-					<p>전달완료</p>
-					<table class="transList">
+					<table class="processList">
 						<tr>
 							<td>2021-01-22</td>
 							<td>992810</td>
@@ -117,11 +127,6 @@
 	<script src="https://kit.fontawesome.com/2fc57dd2db.js"
 		crossorigin="anonymous"></script>
 	<script>
-            var pageObj={//세션에서 정보를 받아오는건 독립된 js파일에서 불가능, jsp 내에서만 가능하기 때문에 여기서 값을 받아준다.
-                no:${sessionScope.member.mno},
-				currentPageNum:1,
-                state:1
-            };
     </script>
 </body>
 </html>

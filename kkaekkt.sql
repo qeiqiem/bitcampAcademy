@@ -1,365 +1,365 @@
-CREATE TABLE `Member` (
-	`mno`	INTEGER	NOT NULL,
-	`mname`	VARCHAR(40)	NULL,
-	`phone`	VARCHAR(15)	NULL,
-	`birth`	VARCHAR(10)	NULL,
-	`address`	VARCHAR(100)	NULL,
-	`email`	VARCHAR(40)	NULL
+CREATE TABLE `member` (
+	`mno`	INTEGER	NOT NULL comment '회원번호',
+	`mname`	VARCHAR(40)	NULL comment '회원이름',
+	`phone`	VARCHAR(15)	NULL comment '연락처',
+	`birth`	VARCHAR(10)	NULL comment '생년월일',
+	`address`	VARCHAR(100)	NULL comment '주소',
+	`email`	VARCHAR(40)	NULL comment '이메일'
 );
 
-CREATE TABLE `Account` (
-	`mno`		INTEGER	NOT NULL,
-	`id`		VARCHAR(20)	NULL,
-	`password`	VARCHAR(20)	NULL,
-	`mtype` 	VARCHAR(10) NULL
+CREATE TABLE `account` (
+	`mno`		INTEGER	NOT NULL comment '회원번호',
+	`id`		VARCHAR(20)	NULL ,
+	`password`	VARCHAR(20)	NULL ,
+	`mtype` 	VARCHAR(10) NULL comment '회원유형구분(일반, 업체)'
 );
 
-CREATE TABLE `Business` (
-	`bno`		INTEGER	NOT NULL,
-	`mno`		INTEGER	NOT NULL,
-	`bname`		VARCHAR(40) NOT NULL,
-   	`phone` 		VARCHAR(15) NOT NULL,
-	`bkno`   	 	INTEGER NULL,
-	`acno`     	VARCHAR(20) NOT NULL,
-	`address`		VARCHAR(100) NOT NULL,
-	`email`		VARCHAR(40)	NULL,
-	`comment`	VARCHAR(255)	NULL,
-	`typeNum`	INTEGER NULL
+CREATE TABLE `business` (
+	`bno`		INTEGER	NOT NULL comment '사업자번호',
+	`mno`		INTEGER	NOT NULL comment '회원번호',
+	`bname`		VARCHAR(40) NOT NULL comment '업체명',
+   	`phone` 		VARCHAR(15) NOT NULL comment '연락처',
+	`bkno`   	 	INTEGER NULL comment '코드_은행',
+	`acno`     	VARCHAR(20) NOT NULL comment '계좌번호',
+	`address`		VARCHAR(100) NOT NULL comment '주소',
+	`email`		VARCHAR(40)	NULL comment '이메일',
+	`comment`	VARCHAR(255)	NULL comment '기업소개',
+	`typeNum`	INTEGER NULL comment '가입유형'
 );
 
-CREATE TABLE `Bank` (
-	`bkno`	INTEGER	NOT NULL,
-	`bkname`	VARCHAR(30)	NULL
+CREATE TABLE `bank` (
+	`bkno`	INTEGER	NOT NULL comment '은행번호',
+	`bkname`	VARCHAR(30)	NULL comment '은행명'
 );
 
-CREATE TABLE `Laundry_type` (
-	`lno`	INTEGER	NOT NULL,
-	`lname`	VARCHAR(20)	NULL,
-	`period`	VARCHAR(10)	NULL
+CREATE TABLE `laundry_type` (
+	`lno`	INTEGER	NOT NULL comment '품목번호',
+	`lname`	VARCHAR(20)	NULL comment '품목명',
+	`period`	VARCHAR(10)	NULL comment '1~3일/4~7일'
 );
 
-CREATE TABLE `Bsn_Laundry` (
-	`bno`	INTEGER	NOT NULL,
-	`lno`	INTEGER	NULL,
-	`price`	INTEGER	NULL
+CREATE TABLE `bsn_laundry` (
+	`bno`	INTEGER	NOT NULL comment '사업자번호',
+	`lno`	INTEGER	NULL comment '품목번호',
+	`price`	INTEGER	NULL comment '가격'
 );
 
-CREATE TABLE `Equipment` (
-	`eno`	INTEGER	NOT NULL,
-	`ename`	VARCHAR(25)	NULL
+CREATE TABLE `equipment` (
+	`eno`	INTEGER	NOT NULL comment '설비번호',
+	`ename`	VARCHAR(25)	NULL comment '설비명'
 );
 
-CREATE TABLE `Bsn_Equipment` (
-	`bno`	INTEGER	NOT NULL,
-	`eno`	INTEGER	NULL,
-    `cnt`   INTEGER NULL,
-    `price` INTEGER NOT NULL DEFAULT 0
+CREATE TABLE `bsn_equipment` (
+	`bno`	INTEGER	NOT NULL comment '사업자번호',
+	`eno`	INTEGER	NULL comment '[코드]설비',
+    `cnt`   INTEGER NULL comment '개수',
+    `price` INTEGER NOT NULL DEFAULT 0 comment '이용금액'
 );
 
-CREATE TABLE `Reservation` (
-	`rno`	INTEGER	NOT NULL,
-	`mno`	INTEGER	NOT NULL,
-	`bno`	INTEGER	NULL,
-	`rdate`	date	NULL,
-	`ddate`	date	NULL,
-	`stno`	INTEGER	NULL
+CREATE TABLE `reservation` (
+	`rno`	INTEGER	NOT NULL comment '예약번호',
+	`mno`	INTEGER	NOT NULL comment '회원번호',
+	`bno`	INTEGER	NULL comment '사업자번호',
+	`rdate`	date	NULL comment '등록일자',
+	`ddate`	date	NULL comment '마감일자',
+	`stno`	INTEGER	NULL comment '상태번호'
 );
 
-CREATE TABLE `Rsv_Laundry` (
-	`rno`	INTEGER	NOT NULL,
-	`lno`	INTEGER	NULL,
-	`cnt`	INTEGER	NULL,
-	`stno`	INTEGER	NULL
+CREATE TABLE `rsv_laundry` (
+	`rno`	INTEGER	NOT NULL comment '예약번호',
+	`lno`	INTEGER	NULL comment '품목번호',
+	`cnt`	INTEGER	NULL comment '개수',
+	`stno`	INTEGER	NULL comment '상태번호'
 );
 
-CREATE TABLE `Rsv_Payment` (
-    `rno`    INTEGER    NOT NULL,
-    `price`    INTEGER    NULL,
-    `payment` VARCHAR(10) NULL
+CREATE TABLE `rsv_payment` (
+    `rno`    INTEGER    NOT NULL comment '예약번호',
+    `price`    INTEGER    NULL comment '결제금액',
+    `payment` VARCHAR(10) NULL comment '결제수단'
 );
 
-CREATE TABLE `State` (
-	`stno`	INTEGER	NOT NULL,
-	`stname`	VARCHAR(20)	NULL
+CREATE TABLE `state` (
+	`stno`	INTEGER	NOT NULL comment '상태번호',
+	`stname`	VARCHAR(20)	NULL comment '상태명'
 );
 
-CREATE TABLE `Comment` (
-	`cno`	INTEGER	NOT NULL,
-	`mno`	INTEGER	NULL,
-	`bno`	INTEGER	NOT NULL,
-	`comment`	VARCHAR(255)	NULL,
-	`order`	INTEGER	NULL,
-	`depth`	INTEGER	NULL,
-	`groupNum`	INTEGER	NULL
+CREATE TABLE `comment` (
+	`cno`	INTEGER	NOT NULL comment '댓글번호',
+	`mno`	INTEGER	NULL comment '회원번호',
+	`bno`	INTEGER	NOT NULL comment '사업자번호',
+	`comment`	VARCHAR(255)	NULL comment '내용',
+	`order`	INTEGER	NULL comment '순서',
+	`depth`	INTEGER	NULL comment '깊이',
+	`groupNum`	INTEGER	NULL comment '소속'
 );
 
-CREATE TABLE `Evaluation` (
-	`mno`	INTEGER	NOT NULL,
-	`bno`	INTEGER	NOT NULL,
-	`grade`	INTEGER	NULL
+CREATE TABLE `evaluation` (
+	`mno`	INTEGER	NOT NULL comment '회원번호',
+	`bno`	INTEGER	NOT NULL comment '사업자번호',
+	`grade`	INTEGER	NULL comment '점수'
 );
 
-CREATE TABLE `Like` (
-	`bno`	INTEGER	NOT NULL,
-	`mno`	INTEGER	NOT NULL
+CREATE TABLE `like` (
+	`bno`	INTEGER	NOT NULL comment '사업자번호',
+	`mno`	INTEGER	NOT NULL comment '회원번호'
 );
 
-CREATE TABLE `Cancel` (
-	`cancelNum`	INTEGER	NOT NULL,
-	`reason`	VARCHAR(50)	NULL
+CREATE TABLE `cancel` (
+	`cancelNum`	INTEGER	NOT NULL comment '취소번호',
+	`reason`	VARCHAR(50)	NULL comment '사유'
 );
 
-CREATE TABLE `bizType` (
-	`typeNum`	INTEGER	NOT NULL,
-	`typename`	VARCHAR(20)	NULL
+CREATE TABLE `biztype` (
+	`typeNum`	INTEGER	NOT NULL comment '업체유형번호',
+	`typename`	VARCHAR(20)	NULL comment '[유형]-1:일반업체, 2:코인업체'
 );
-CREATE TABLE `Schedule` (
-	`schno`	INTEGER	NOT NULL,
-	`wkname`	VARCHAR(10)	NULL
-);
-
-CREATE TABLE `Bsn_schedule` (
-	`bno`	INTEGER	NOT NULL,
-	`schno`	INTEGER	NOT NULL,
-	`time`	VARCHAR(15)	NULL
+CREATE TABLE `schedule` (
+	`schno`	INTEGER	NOT NULL comment '스케쥴번호',
+	`wkname`	VARCHAR(10)	NULL comment '요일'
 );
 
-CREATE TABLE `Etc` (
-	`etcno` INTEGER NOT NULL,
-	`etcname` VARCHAR(30) NOT NULL
+CREATE TABLE `bsn_schedule` (
+	`bno`	INTEGER	NOT NULL comment'사업자번호',
+	`schno`	INTEGER	NOT NULL comment'스케쥴번호',
+	`time`	VARCHAR(15)	NULL comment'08:00~23:00'
 );
 
-CREATE TABLE `Bsn_Etc` (
-	`etcno` INTEGER NULL,
-	`bno` INTEGER NOT NULL,
-	`price` INTEGER NOT NULL
+CREATE TABLE `etc` (
+	`etcno` INTEGER NOT NULL comment '부가서비스번호',
+	`etcname` VARCHAR(30) NOT NULL comment '서비스명'
 );
 
-ALTER TABLE `Account` ADD CONSTRAINT `PK_ACCOUNT` PRIMARY KEY (
+CREATE TABLE `bsn_etc` (
+	`etcno` INTEGER NULL comment '부가서비스 번호',
+	`bno` INTEGER NOT NULL comment '사업자번호',
+	`price` INTEGER NOT NULL comment '이용금액'
+);
+
+ALTER TABLE `account` ADD CONSTRAINT `PK_ACCOUNT` PRIMARY KEY (
 	`mno`
 );
-ALTER TABLE `Account` MODIFY COLUMN mno INTEGER NOT NULL AUTO_INCREMENT;
-ALTER TABLE `Business` ADD CONSTRAINT `PK_BUSINESS` PRIMARY KEY (
+ALTER TABLE `account` MODIFY COLUMN mno INTEGER NOT NULL AUTO_INCREMENT;
+ALTER TABLE `business` ADD CONSTRAINT `PK_BUSINESS` PRIMARY KEY (
 	`bno`
 );
-ALTER TABLE `Business` MODIFY COLUMN bno INTEGER NOT NULL AUTO_INCREMENT;
+ALTER TABLE `business` MODIFY COLUMN bno INTEGER NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `Bank` ADD CONSTRAINT `PK_BANK` PRIMARY KEY (
+ALTER TABLE `bank` ADD CONSTRAINT `PK_BANK` PRIMARY KEY (
 	`bkno`
 );
-ALTER TABLE `Bank` MODIFY COLUMN bkno INTEGER NOT NULL AUTO_INCREMENT;
-ALTER TABLE `Laundry_type` ADD CONSTRAINT `PK_LAUNDRY_TYPE` PRIMARY KEY (
+ALTER TABLE `bank` MODIFY COLUMN bkno INTEGER NOT NULL AUTO_INCREMENT;
+ALTER TABLE `laundry_type` ADD CONSTRAINT `PK_LAUNDRY_TYPE` PRIMARY KEY (
 	`lno`
 );
-ALTER TABLE `Laundry_type` MODIFY COLUMN lno INTEGER NOT NULL AUTO_INCREMENT;
+ALTER TABLE `laundry_type` MODIFY COLUMN lno INTEGER NOT NULL AUTO_INCREMENT;
 
 
-ALTER TABLE `Equipment` ADD CONSTRAINT `PK_EQUIPMENT` PRIMARY KEY (
+ALTER TABLE `equipment` ADD CONSTRAINT `PK_EQUIPMENT` PRIMARY KEY (
 	`eno`
 );
-ALTER TABLE `Equipment` MODIFY COLUMN eno INTEGER NOT NULL AUTO_INCREMENT;
-ALTER TABLE `Reservation` ADD CONSTRAINT `PK_RESERVATION` PRIMARY KEY (
+ALTER TABLE `equipment` MODIFY COLUMN eno INTEGER NOT NULL AUTO_INCREMENT;
+ALTER TABLE `reservation` ADD CONSTRAINT `PK_RESERVATION` PRIMARY KEY (
 	`rno`
 );
-ALTER TABLE `Reservation` MODIFY COLUMN rno INTEGER NOT NULL AUTO_INCREMENT;
-ALTER TABLE `State` ADD CONSTRAINT `PK_STATE` PRIMARY KEY (
+ALTER TABLE `reservation` MODIFY COLUMN rno INTEGER NOT NULL AUTO_INCREMENT;
+ALTER TABLE `state` ADD CONSTRAINT `PK_STATE` PRIMARY KEY (
 	`stno`
 );
 
-ALTER TABLE `Schedule` ADD CONSTRAINT `PK_SCHEDULE` PRIMARY KEY (
+ALTER TABLE `schedule` ADD CONSTRAINT `PK_SCHEDULE` PRIMARY KEY (
 	`schno`
 );
-ALTER TABLE `Schedule` MODIFY COLUMN schno INTEGER NOT NULL AUTO_INCREMENT;
-ALTER TABLE `State` MODIFY COLUMN stno INTEGER NOT NULL AUTO_INCREMENT;
-ALTER TABLE `Comment` ADD CONSTRAINT `PK_COMMENT` PRIMARY KEY (
+ALTER TABLE `schedule` MODIFY COLUMN schno INTEGER NOT NULL AUTO_INCREMENT;
+ALTER TABLE `state` MODIFY COLUMN stno INTEGER NOT NULL AUTO_INCREMENT;
+ALTER TABLE `comment` ADD CONSTRAINT `PK_COMMENT` PRIMARY KEY (
 	`cno`
 );
-ALTER TABLE `Comment` MODIFY COLUMN cno INTEGER NOT NULL AUTO_INCREMENT;
-ALTER TABLE `Cancel` ADD CONSTRAINT `PK_CANCEL` PRIMARY KEY (
-	`cancelNum`
+ALTER TABLE `comment` MODIFY COLUMN cno INTEGER NOT NULL AUTO_INCREMENT;
+ALTER TABLE `cancel` ADD CONSTRAINT `PK_CANCEL` PRIMARY KEY (
+	`cancelnum`
 );
-ALTER TABLE `Cancel` MODIFY COLUMN cancelNum INTEGER NOT NULL AUTO_INCREMENT;
-ALTER TABLE `bizType` ADD CONSTRAINT `PK_bizType` PRIMARY KEY (
-	`typeNum`
+ALTER TABLE `cancel` MODIFY COLUMN cancelNum INTEGER NOT NULL AUTO_INCREMENT;
+ALTER TABLE `biztype` ADD CONSTRAINT `PK_BIZTYPE` PRIMARY KEY (
+	`typenum`
 );
-ALTER TABLE `bizType` MODIFY COLUMN typeNum INTEGER NOT NULL AUTO_INCREMENT;
-ALTER TABLE `Etc` ADD CONSTRAINT `PK_ETCNO` PRIMARY KEY (
+ALTER TABLE `biztype` MODIFY COLUMN typenum INTEGER NOT NULL AUTO_INCREMENT;
+ALTER TABLE `etc` ADD CONSTRAINT `PK_ETCNO` PRIMARY KEY (
 	`etcno`
 );
-ALTER TABLE `Etc` MODIFY COLUMN etcno INTEGER NOT NULL AUTO_INCREMENT;
+ALTER TABLE `etc` MODIFY COLUMN etcno INTEGER NOT NULL AUTO_INCREMENT;
 
-ALTER TABLE `Member` ADD CONSTRAINT `FK_Account_TO_Member_1` FOREIGN KEY (
+ALTER TABLE `member` ADD CONSTRAINT `FK_ACCOUNT_TO_MEMBER_1` FOREIGN KEY (
 	`mno` 
 )
-REFERENCES `Account` (
+REFERENCES `account` (
 	`mno`
 ) ON DELETE CASCADE;
 
-ALTER TABLE `Business` ADD CONSTRAINT `FK_Account_TO_Business_1` FOREIGN KEY (
+ALTER TABLE `business` ADD CONSTRAINT `FK_ACCOUNT_TO_BUSINESS_1` FOREIGN KEY (
 	`mno`
 )
-REFERENCES `Account` (
+REFERENCES `account` (
 	`mno`
 ) ON DELETE CASCADE;
 
-ALTER TABLE `Business` ADD CONSTRAINT `FK_bizType_TO_Business_1` FOREIGN KEY (
-	`typeNum`
+ALTER TABLE `business` ADD CONSTRAINT `FK_BIZTYPE_TO_BUSINESS_1` FOREIGN KEY (
+	`typenum`
 )
-REFERENCES `bizType` (
-	`typeNum`
+REFERENCES `biztype` (
+	`typenum`
 ) ON DELETE SET NULL;
 
-ALTER TABLE `Business` ADD CONSTRAINT `FK_Bank_TO_Business_1` FOREIGN KEY (
+ALTER TABLE `business` ADD CONSTRAINT `FK_BANK_TO_BUSINESS_1` FOREIGN KEY (
 	`bkno`
 )
-REFERENCES `Bank` (
+REFERENCES `bank` (
 	`bkno`
 ) ON DELETE SET NULL;
 
-ALTER TABLE `Rsv_Payment` ADD CONSTRAINT `FK_Reservation_TO_Rsv_Payment_1` FOREIGN KEY (
+ALTER TABLE `rsv_payment` ADD CONSTRAINT `FK_RESERVATION_TO_RSV_PAYMENT_1` FOREIGN KEY (
     `rno`
 )
-REFERENCES `Reservation` (
+REFERENCES `reservation` (
     `rno`
 ) ON DELETE CASCADE;
 
-ALTER TABLE `Bsn_Laundry` ADD CONSTRAINT `FK_Business_TO_Bsn_Laundry_1` FOREIGN KEY (
+ALTER TABLE `bsn_laundry` ADD CONSTRAINT `FK_BUSINESS_TO_BSN_LAUNDRY_1` FOREIGN KEY (
 	`bno`
 )
-REFERENCES `Business` (
+REFERENCES `business` (
 	`bno`
 ) ON DELETE CASCADE;
 
-ALTER TABLE `Bsn_Laundry` ADD CONSTRAINT `FK_Laundry_type_TO_Bsn_Laundry_1` FOREIGN KEY (
+ALTER TABLE `bsn_laundry` ADD CONSTRAINT `FK_LAUNDRY_TYPE_TO_BSN_LAUNDRY_1` FOREIGN KEY (
 	`lno`
 )
-REFERENCES `Laundry_type` (
+REFERENCES `laundry_type` (
 	`lno`
 ) ON DELETE SET NULL;
 
-ALTER TABLE `Bsn_Equipment` ADD CONSTRAINT `FK_Business_TO_Bsn_Equipment_1` FOREIGN KEY (
+ALTER TABLE `bsn_equipment` ADD CONSTRAINT `FK_BUSINESS_TO_BSN_EQUIPMENT_1` FOREIGN KEY (
 	`bno`
 )
-REFERENCES `Business` (
+REFERENCES `business` (
 	`bno`
 ) ON DELETE CASCADE;
 
-ALTER TABLE `Bsn_Equipment` ADD CONSTRAINT `FK_Equipment_TO_Bsn_Equipment_1` FOREIGN KEY (
+ALTER TABLE `bsn_equipment` ADD CONSTRAINT `FK_EQUIPMENT_TO_BSN_EQUIPMENT_1` FOREIGN KEY (
 	`eno`
 )
-REFERENCES `Equipment` (
+REFERENCES `equipment` (
 	`eno`
 ) ON DELETE SET NULL;
 
-ALTER TABLE `Reservation` ADD CONSTRAINT `FK_Member_TO_Reservation_1` FOREIGN KEY (
+ALTER TABLE `reservation` ADD CONSTRAINT `FK_MEMBER_TO_RESERVATION_1` FOREIGN KEY (
 	`mno`
 )
-REFERENCES `Member` (
+REFERENCES `member` (
 	`mno`
 ) ON DELETE CASCADE;
 
-ALTER TABLE `Reservation` ADD CONSTRAINT `FK_Business_TO_Reservation_1` FOREIGN KEY (
+ALTER TABLE `reservation` ADD CONSTRAINT `FK_BUSINESS_TO_RESERVATION_1` FOREIGN KEY (
 	`bno`
 )
-REFERENCES `Business` (
+REFERENCES `business` (
 	`bno`
 ) ON DELETE SET NULL;
 
-ALTER TABLE `Reservation` ADD CONSTRAINT `FK_State_TO_Reservation_1` FOREIGN KEY (
+ALTER TABLE `reservation` ADD CONSTRAINT `FK_STATE_TO_RESERVATION_1` FOREIGN KEY (
 	`stno`
 )
-REFERENCES `State` (
+REFERENCES `state` (
 	`stno`
 ) ON DELETE SET NULL;
 
-ALTER TABLE `Rsv_Laundry` ADD CONSTRAINT `FK_Reservation_TO_Rsv_Laundry_1` FOREIGN KEY (
+ALTER TABLE `rsv_laundry` ADD CONSTRAINT `FK_RESERVATION_TO_RSV_LAUNDRY_1` FOREIGN KEY (
 	`rno`
 )
-REFERENCES `Reservation` (
+REFERENCES `reservation` (
 	`rno`
 ) ON DELETE CASCADE;
 
-ALTER TABLE `Rsv_Laundry` ADD CONSTRAINT `FK_Laundry_type_TO_Rsv_Laundry_1` FOREIGN KEY (
+ALTER TABLE `rsv_laundry` ADD CONSTRAINT `FK_LAUNDRY_TYPE_TO_RSV_LAUNDRY_1` FOREIGN KEY (
 	`lno`
 )
-REFERENCES `Laundry_type` (
+REFERENCES `laundry_type` (
 	`lno`
 ) ON DELETE SET NULL;
 
-ALTER TABLE `Rsv_Laundry` ADD CONSTRAINT `FK_State_TO_Rsv_Laundry_1` FOREIGN KEY (
+ALTER TABLE `rsv_laundry` ADD CONSTRAINT `FK_STATE_TO_RSV_LAUNDRY_1` FOREIGN KEY (
 	`stno`
 )
-REFERENCES `State` (
+REFERENCES `state` (
 	`stno`
 ) ON DELETE SET NULL;
 
-ALTER TABLE `Comment` ADD CONSTRAINT `FK_Member_TO_Comment_1` FOREIGN KEY (
+ALTER TABLE `comment` ADD CONSTRAINT `FK_MEMBER_TO_COMMENT_1` FOREIGN KEY (
 	`mno`
 )
-REFERENCES `Member` (
+REFERENCES `member` (
 	`mno`
 ) ON DELETE SET NULL;
 
-ALTER TABLE `Comment` ADD CONSTRAINT `FK_Business_TO_Comment_1` FOREIGN KEY (
+ALTER TABLE `comment` ADD CONSTRAINT `FK_BUSINESS_TO_COMMENT_1` FOREIGN KEY (
 	`bno`
 )
-REFERENCES `Business` (
+REFERENCES `business` (
 	`bno`
 ) ON DELETE CASCADE;
 
-ALTER TABLE `Evaluation` ADD CONSTRAINT `FK_Member_TO_Evaluation_1` FOREIGN KEY (
+ALTER TABLE `evaluation` ADD CONSTRAINT `FK_MEMBER_TO_EVALUATION_1` FOREIGN KEY (
 	`mno`
 )
-REFERENCES `Member` (
-	`mno`
-) ON DELETE CASCADE;
-
-ALTER TABLE `Evaluation` ADD CONSTRAINT `FK_Business_TO_Evaluation_1` FOREIGN KEY (
-	`bno`
-)
-REFERENCES `Business` (
-	`bno`
-) ON DELETE CASCADE;
-
-ALTER TABLE `Like` ADD CONSTRAINT `FK_Business_TO_Like_1` FOREIGN KEY (
-	`bno`
-)
-REFERENCES `Business` (
-	`bno`
-) ON DELETE CASCADE;
-
-ALTER TABLE `Like` ADD CONSTRAINT `FK_Member_TO_Like_1` FOREIGN KEY (
-	`mno`
-)
-REFERENCES `Member` (
+REFERENCES `member` (
 	`mno`
 ) ON DELETE CASCADE;
 
-ALTER TABLE `Bsn_schedule` ADD CONSTRAINT `FK_Business_TO_Bsn_schedule_1` FOREIGN KEY (
+ALTER TABLE `evaluation` ADD CONSTRAINT `FK_BUSINESS_TO_EVALUATION_1` FOREIGN KEY (
 	`bno`
 )
-REFERENCES `Business` (
+REFERENCES `business` (
 	`bno`
 ) ON DELETE CASCADE;
 
-ALTER TABLE `Bsn_schedule` ADD CONSTRAINT `FK_Schedule_TO_Bsn_schedule_1` FOREIGN KEY (
+ALTER TABLE `like` ADD CONSTRAINT `FK_BUSINESS_TO_LIKE_1` FOREIGN KEY (
+	`bno`
+)
+REFERENCES `business` (
+	`bno`
+) ON DELETE CASCADE;
+
+ALTER TABLE `like` ADD CONSTRAINT `FK_MEMBER_TO_LIKE_1` FOREIGN KEY (
+	`mno`
+)
+REFERENCES `member` (
+	`mno`
+) ON DELETE CASCADE;
+
+ALTER TABLE `bsn_schedule` ADD CONSTRAINT `FK_BUSINESS_TO_BSN_SCHEDULE_1` FOREIGN KEY (
+	`bno`
+)
+REFERENCES `business` (
+	`bno`
+) ON DELETE CASCADE;
+
+ALTER TABLE `bsn_schedule` ADD CONSTRAINT `FK_SCHEDULE_TO_BSN_SCHEDULE_1` FOREIGN KEY (
 	`schno`
 )
-REFERENCES `Schedule` (
+REFERENCES `schedule` (
 	`schno`
 ) ON DELETE CASCADE;
 
-ALTER TABLE `Bsn_Etc` ADD CONSTRAINT `FK_Etc_TO_Bsn_Etc_1` FOREIGN KEY (
+ALTER TABLE `bsn_etc` ADD CONSTRAINT `FK_ETC_TO_Bsn_ETC_1` FOREIGN KEY (
 	`etcno`
 )
-REFERENCES `Etc` (
+REFERENCES `etc` (
 	`etcno`
 ) ON DELETE SET NULL;
 
-ALTER TABLE `Bsn_Etc` ADD CONSTRAINT `FK_Business_TO_Bsn_Etc_1` FOREIGN KEY (
+ALTER TABLE `bsn_etc` ADD CONSTRAINT `FK_BUSINESS_TO_BSN_ETC_1` FOREIGN KEY (
 	`bno`
 )
-REFERENCES `Business` (
+REFERENCES `business` (
 	`bno`
 ) ON DELETE CASCADE;
 
@@ -376,13 +376,13 @@ INSERT INTO etc (etcname) VALUES("섬유유연제");
 INSERT INTO etc (etcname) VALUES("픽업봉투");
 
 -- 은행
-INSERT INTO Bank (bkname) VALUES ("KB국민은행");
-INSERT INTO Bank (bkname) VALUES ("신한은행");
-INSERT INTO Bank (bkname) VALUES ("하나은행");
-INSERT INTO Bank (bkname) VALUES ("우리은행");
-INSERT INTO Bank (bkname) VALUES ("IBK기업은행");
-INSERT INTO Bank (bkname) VALUES ("NH농협은행");
-INSERT INTO Bank (bkname) VALUES ("카카오뱅크");
+INSERT INTO bank (bkname) VALUES ("KB국민은행");
+INSERT INTO bank (bkname) VALUES ("신한은행");
+INSERT INTO bank (bkname) VALUES ("하나은행");
+INSERT INTO bank (bkname) VALUES ("우리은행");
+INSERT INTO bank (bkname) VALUES ("IBK기업은행");
+INSERT INTO bank (bkname) VALUES ("NH농협은행");
+INSERT INTO bank (bkname) VALUES ("카카오뱅크");
 
 -- 취급 품목
 INSERT INTO laundry_type (lname,period) values("일반의류",'1일~3일');
@@ -407,8 +407,8 @@ INSERT INTO cancel (reason) values("기간 내에 작업을 완료할 수 없습
 INSERT INTO cancel (reason) values("가게 내부 사정으로 취소합니다.");
 
 -- 업체유형
-INSERT INTO bizType (typename) values("일반 세탁소");
-INSERT INTO bizType (typename) values("코인 세탁소");
+INSERT INTO biztype (typename) values("일반 세탁소");
+INSERT INTO biztype (typename) values("코인 세탁소");
 
 -- 요일 선택 스케쥴
 INSERT INTO schedule (wkname) values("월");
@@ -424,20 +424,20 @@ INSERT INTO schedule (wkname) values("주말");
 
 -- 더미 데이터
 INSERT INTO account (id,password,mtype) VALUES ('testps','test',1);
-INSERT INTO Member VALUES ((SELECT MAX(mno) FROM Account),'테스터','010-1111-2222','920110','서울시 용산구','test@naver.com');
+INSERT INTO member VALUES ((SELECT MAX(mno) FROM account),'테스터','010-1111-2222','920110','서울시 용산구','test@naver.com');
 
 INSERT INTO account (id,password,mtype) VALUES ('testbs','test',2);
-INSERT INTO Business (mno,bname,address,phone,bkno,acno,email,typeNum) 
-VALUES((SELECT MAX(mno) FROM Account),'테스트업체','서울시 용산구','010-111-2222',1,'110-111-1111','test@naver.com',1);
+INSERT INTO business (mno,bname,address,phone,bkno,acno,email,typeNum) 
+VALUES((SELECT MAX(mno) FROM account),'테스트업체','서울시 용산구','010-111-2222',1,'110-111-1111','test@naver.com',1);
 INSERT INTO bsn_schedule VALUES ((SELECT MAX(bno) FROM business), 8,'08:00~22:00');
-INSERT INTO bsn_Laundry VALUES ((SELECT MAX(bno) FROM business), 1,1200);
-INSERT INTO bsn_Laundry VALUES ((SELECT MAX(bno) FROM business), 2,1500);
-INSERT INTO bsn_Laundry VALUES ((SELECT MAX(bno) FROM business), 3,1800);
-INSERT INTO bsn_Laundry VALUES ((SELECT MAX(bno) FROM business), 4,2000);
+INSERT INTO bsn_laundry VALUES ((SELECT MAX(bno) FROM business), 1,1200);
+INSERT INTO bsn_laundry VALUES ((SELECT MAX(bno) FROM business), 2,1500);
+INSERT INTO bsn_laundry VALUES ((SELECT MAX(bno) FROM business), 3,1800);
+INSERT INTO bsn_laundry VALUES ((SELECT MAX(bno) FROM business), 4,2000);
 
 INSERT INTO account (id,password) values ('testbs2','test');
-INSERT INTO Business (mno,bname,address,phone,bkno,acno,email,typeNum) 
-values((SELECT MAX(mno) FROM Account),'테스트업체2','서울시 강남구','010-222-3333',2,'110-111-1111','test@naver.com',2);
+INSERT INTO business (mno,bname,address,phone,bkno,acno,email,typeNum) 
+values((SELECT MAX(mno) FROM account),'테스트업체2','서울시 강남구','010-222-3333',2,'110-111-1111','test@naver.com',2);
 INSERT INTO bsn_schedule VALUES ((SELECT MAX(bno) FROM business), 8,'09:00~22:00');
 INSERT INTO bsn_schedule VALUES ((SELECT MAX(bno) FROM business), 9,'04:00~18:00');
 INSERT INTO bsn_equipment VALUES ((SELECT MAX(bno) FROM business), 1,3,1500);
