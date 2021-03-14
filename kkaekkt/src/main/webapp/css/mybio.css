@@ -1,0 +1,114 @@
+*:focus {
+    outline: none;
+}
+hr {
+height: 1px;
+border: none;
+background-color: var(--gray-color);
+/* border: solid 0.5px var(--gray-color); */
+width: 85%;
+margin: 10px 0 20px 0;
+}
+input {
+    width: 200px;
+    height: 30px;
+    margin-top: 10px;
+    border: 1px solid var(--gray-color);
+}
+.content {
+float:left;
+width: 65vw;
+height: 100vh;
+padding: 10px 0px 30px 250px;
+font-size: 14px;
+}
+.content div {
+    padding-top: 20px;
+}
+
+.content #mybio_info {
+    color: var(--text-gray);
+    padding: 0;
+}
+
+.content #mybio_info button {
+    height: 35px;
+    width: 100px;
+    background: var(--text-gray);
+    border: none;
+    color: #ffffff;
+    padding: 5px;
+}
+
+.content table th {
+    text-align: left;
+}
+
+.content table td {
+    padding-right: 50px;
+}
+#input2 {
+    width: 300px;
+    height: 30px;
+    margin-top: 10px;
+    border: 1px solid var(--gray-color);
+}
+
+#mybio_title {
+    display: inline-block;
+    color: var(--text-gray)
+}
+
+#btn_mybio {
+    background: var(--key-color);
+    border-radius: 23px;
+    border: none;
+    float: right;
+    margin-top: 1vh;
+    margin-right: 10vW;
+    width: 99px;
+    height: 42px;
+    display: block;
+    /* 수정하기 버튼 클릭시 none으로*/
+
+}
+
+#btn_mybioClick {
+    float: right;
+    margin-top: -1vh;
+    margin-right: 10vw;
+    display: none;
+    /* 수정하기 버튼 클릭시 inline-block으로*/
+    
+}
+
+#btn_mybiofin, #btn_back {
+    background: var(--key-color);
+    border-radius: 23px;
+    border: none;
+    width: 99px;
+    height: 42px;
+    color: var(--black-color);
+
+}
+#btn_mybiopwd{
+    padding: 0;
+}
+
+#read {
+    border: none;
+}
+
+#mybioPhone input {
+    width: 80px;
+    padding-left: 10px;
+}
+
+#mybioBirth #mybioAddress{
+    width: 150px;
+    margin-left: 15px;
+}
+
+#checkval, #checkpwd {
+    color: var(--text-red);
+}
