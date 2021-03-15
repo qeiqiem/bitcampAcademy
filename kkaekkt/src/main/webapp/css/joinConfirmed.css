@@ -1,0 +1,42 @@
+.body_container {
+  padding: 200px;
+}
+
+.find_nav div {
+  display: inline-block;
+  border-bottom: 4px solid;
+  padding: 0 20px 5px;
+  margin-left: -5px;
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+p {
+  color: var(--text-gray);
+}
+
+i {
+  margin-right: 10px;
+}
+
+.veri_btn {
+  width: 800px;
+  height: 120px;
+  box-sizing: border-box;
+  border: solid 1px var(--gray-color);
+  /* border-radius: 10px; */
+  padding: 50px;
+  font-size: 18px;
+  margin: 50px 0 200px;
+}
+
+.mail {
+  color: var(--text-gray);
+  line-height: 180%;
+  font-size: smaller;
+}
+.mail a {
+  margin-left: 10px;
+  text-decoration: underline;
+  text-underline-position: under;
+}
