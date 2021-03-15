@@ -39,7 +39,13 @@
 			<artifactId>aspectjrt</artifactId>
 			<version>${org.aspectj-version}</version>
 		</dependency>	
-		
+		<!-- sql로그 -->
+		<dependency> 
+			<groupId>org.lazyluke</groupId> 
+			<artifactId>log4jdbc-remix</artifactId> 
+			<version>0.2.7</version> 
+		</dependency>
+
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>

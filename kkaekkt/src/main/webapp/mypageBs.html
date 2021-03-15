@@ -3,7 +3,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
-<link rel="stylesheet" href="css/mypageBs.css">
+<link rel="stylesheet" href="css/mypageBs_ing.css">
 <link rel="stylesheet" href="css/all.css">
 <link rel="stylesheet" href="css/head0.css">
 <link rel="stylesheet" href="css/sidebar.css">
@@ -51,12 +51,23 @@
 				<button>주문번호별</button>
 			</div>
 			<div class="content">
+				<ul class="laundry_nav">
+					<li>전체보기</li>
+					<li>일반의류</li>
+					<li>와이셔츠</li>
+					<li>이불</li>
+					<li>운동화</li>
+					<li>가죽모피</li>
+					<li>명품가방</li>
+					<li>아웃도어</li>
+					<li>기타</li>
+				</ul>
 				<div class="content_header">
-					<p>전체 개수 <span>1,403개</span></p>
+					<p>전체 개수<span>1,403</span>개</p>
 					<div class="searchBox">
 						<select>
-							<option value="">이름</option>
-							<option value="">주문번호</option>
+							<option value="1">이름</option>
+							<option value="2">주문번호</option>
 						</select>
 						<i class="fas fa-search"></i>
 						<input type="text" class="search">
@@ -64,7 +75,7 @@
 				</div>
 				<hr>
 				<div class="process">
-					<p>세탁완료</p>
+					<p>오늘 주문</p>
 					<table class="processHeader">
 						<tr>
 							<th>주문일</th>
@@ -79,7 +90,7 @@
 					</table>
 					<table class="processList">
 					</table>
-					<p>전달완료</p>
+					<p>지난 주문</p>
 					<table class="processList">
 						<tr>
 							<td>2021-01-22</td>
@@ -126,7 +137,5 @@
 	</div>
 	<script src="https://kit.fontawesome.com/2fc57dd2db.js"
 		crossorigin="anonymous"></script>
-	<script>
-    </script>
 </body>
 </html>

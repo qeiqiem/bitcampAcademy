@@ -15,6 +15,7 @@ public class ReservationListVO {
 	private boolean isNextExist;//다음 페이지가 존재하는가
 	private boolean isPrevBlockExist=false;//이전 블럭이 존재하는가(Default=false)
 	private boolean isNextBlockExist;
+	
 	private int mno;
 	private int bno;
 	private int state;

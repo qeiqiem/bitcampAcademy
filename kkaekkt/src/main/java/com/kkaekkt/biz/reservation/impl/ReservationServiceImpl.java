@@ -38,6 +38,7 @@ public class ReservationServiceImpl implements ReservationService {
 	@Override
 	public ReservationListVO getRsvListBs(ReservationListVO vo) {
 		vo.setTotalPostCount(reservationDAO.countList(vo)).booleanSet();
+		System.out.println(vo.getTotalPostCount()+" : 포스트 개수");
 		if(vo.getListType()==2) {
 			vo.setRsvListLno(reservationDAO.getRsvListBs_p(vo));
 		} else {

@@ -32,7 +32,19 @@ $(document).ready(function() {
             ajax(pageObj);
         }
     });
+    $('.searchBox i.fas').click(function() {
+	    pageObj.search=$('.search')[0].value;
+        pageObj.searchOption=$('.searchBox select')[0].value;
+        ajax(pageObj);
+    });
 });
+function enter() {
+    if(window.event.keyCode==13) {
+        pageObj.search=$('.search')[0].value;
+        pageObj.searchOption=$('.searchBox select')[0].value;
+        ajax(pageObj);
+    }
+}
 function initPageBtn() {
     if(pageObj.isNextExist) {
         $('.page_next').removeClass('no');
@@ -78,6 +90,7 @@ function ajax(pageObj) { //ajax로 리스트 받아오기
         data:pageObj,
         success: function(data) {
             var rsv=JSON.parse(data);
+            $('.content_header p:nth-child(1) span').html(rsv.totalPostCount);
             var list=rsv.rsvListRno;
             printlist(list);
             initPageObj(rsv);

@@ -10,7 +10,7 @@
     border-right: 1px solid var(--gray-color);
     width: 11vw;
     height: 100vh;
-    display: none;
+    /* display: none; */
 }
 .side button {
     width: 100%;

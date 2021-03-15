@@ -395,8 +395,8 @@ INSERT INTO laundry_type (lname,period) values("아웃도어",'4일~7일');
 INSERT INTO laundry_type (lname,period) values("기타",'4일~7일');
 
 -- 진행상태
-INSERT INTO state (stname) values("작업 전");
-INSERT INTO state (stname) values("작업 완료");
+INSERT INTO state (stname) values("세탁 전");
+INSERT INTO state (stname) values("세탁 완료");
 INSERT INTO state (stname) values("전달 완료");
 INSERT INTO state (stname) values("취소");
 
@@ -434,6 +434,10 @@ INSERT INTO bsn_laundry VALUES ((SELECT MAX(bno) FROM business), 1,1200);
 INSERT INTO bsn_laundry VALUES ((SELECT MAX(bno) FROM business), 2,1500);
 INSERT INTO bsn_laundry VALUES ((SELECT MAX(bno) FROM business), 3,1800);
 INSERT INTO bsn_laundry VALUES ((SELECT MAX(bno) FROM business), 4,2000);
+INSERT INTO bsn_laundry VALUES ((SELECT MAX(bno) FROM business), 5,2000);
+INSERT INTO bsn_laundry VALUES ((SELECT MAX(bno) FROM business), 6,2000);
+INSERT INTO bsn_laundry VALUES ((SELECT MAX(bno) FROM business), 7,2000);
+INSERT INTO bsn_laundry VALUES ((SELECT MAX(bno) FROM business), 8,2000);
 
 INSERT INTO account (id,password) values ('testbs2','test');
 INSERT INTO business (mno,bname,address,phone,bkno,acno,email,typeNum) 
@@ -638,5 +642,24 @@ INSERT INTO reservation (mno, bno, rdate,ddate,stno) VALUES (1,1,'2021/03/02','2
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 1,2,1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 2,1,1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 3,3,1);
+
+INSERT INTO rsv_payment VALUES ((SELECT MAX(rno) FROM reservation), 9300, '카드');
+
+INSERT INTO reservation (mno, bno, rdate,ddate,stno) VALUES (1,1,'2021/03/02','2021/03/06',2);
+INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 2,3,2);
+INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 5,2,2);
+INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 4,3,2);
+
+INSERT INTO rsv_payment VALUES ((SELECT MAX(rno) FROM reservation), 9300, '카드');
+
+INSERT INTO reservation (mno, bno, rdate,ddate,stno) VALUES (1,1,'2021/03/02','2021/03/06',2);
+INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 1,3,2);
+INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 2,2,2);
+INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 3,3,2);
+INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 4,3,2);
+INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 5,3,2);
+INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 6,3,2);
+INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 7,3,2);
+INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 8,3,2);
 
 INSERT INTO rsv_payment VALUES ((SELECT MAX(rno) FROM reservation), 9300, '카드');

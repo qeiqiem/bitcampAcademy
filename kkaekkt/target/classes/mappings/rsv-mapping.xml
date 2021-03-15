@@ -54,10 +54,10 @@
 			<where> 
 			r.mno=m.mno AND s.stno=r.stno AND bno=#{bno} 
 				<if test="searchOption==1"> <!-- 검색옵션-이름 입력시 -->
-					AND mname LIKE '%'||#{search}||'%' 
+					AND mname LIKE CONCAT('%',#{search},'%')
 				</if>
 				<if test="searchOption==2"> <!-- 검색옵션-주문번호 입력시 -->
-					AND r.rno LIKE '%'||#{search}||'%'
+					AND r.rno LIKE CONCAT('%',#{search},'%')
 				</if>
 			</where>
 			AND (r.stno=2 OR r.stno=3)
@@ -67,22 +67,22 @@
 	</select>
 	
 	<select id="getLaundry" resultType="laundry"> <!-- 일반 품목 리스트 출력 -->
-			SELECT lname laundry, cnt count, price 
+			SELECT lname laundry, cnt count, cnt*price price
 			FROM reservation r, rsv_laundry r_l, business b, bsn_laundry b_l, laundry_type lt 
 			WHERE r.rno=r_l.rno AND r.bno=b.bno AND b.bno=b_l.bno AND lt.lno=r_l.lno AND b_l.lno=r_l.lno
 			AND r.rno=#{rsvNum};
 	</select>
 	<select id="getLaundry_st" resultType="laundry"> <!-- 상태가 표시된 품목 리스트 출력 -->
-			SELECT lname, cnt count, price,stname state 
+			SELECT lname, cnt count, cnt*price price,stname state 
 			FROM reservation r, rsv_laundry r_l, business b, bsn_laundry b_l, laundry_type lt,state s
 			WHERE r.rno=r_l.rno AND r.bno=b.bno AND b.bno=b_l.bno AND lt.lno=r_l.lno AND b_l.lno=r_l.lno AND r_l.stno=s.stno
 			AND r.rno=#{rsvNum};
 	</select>
 	<select id="countList" resultType="_int">
-			SELECT count(r.rno) FROM 
+			SELECT count(r.rno) FROM
 		<choose>
 			<when test="listType==2"> <!-- 품목별 조회일 경우 -->
-				rsv_laundry r, laundry_type l, member m,reservation rsv 			
+				rsv_laundry r, laundry_type l, member m,reservation rsv
 			</when>
 			<when test="listType==4"> <!-- 완료목록 조회일 경우 -->
 				reservation r, member m 
@@ -105,10 +105,10 @@
 				AND bno=#{bno}
 			</if>
 			<if test="search!=null and searchOption==1"> <!-- 이름검색 -->
-				AND mname LIKE '%'||#{search}||'%'
+				AND mname LIKE CONCAT('%',#{search},'%')
 			</if>
 			<if test="search!=null and searchOption==2"> <!-- 주문번호검색 -->
-				AND rno LIKE '%'||#{search}||'%'
+				AND rno LIKE CONCAT('%',#{search},'%')
 			</if>
 			<if test="laundryType!=0"> <!-- 품목 조회일 경우 -->
 				AND l.lno=#{laundryType}
@@ -116,11 +116,12 @@
 			<if test="dDay!=0"> <!-- 일자별 조회 -->
 				<![CDATA[AND DATEDIFF(ddate,CURDATE())<=#{dDay}]]>
 			</if>
-				AND (stno=#{state} <!-- 기본으로 들어가는 처리상태조건 -->
 			<if test="listType==4">
-				OR stno=3 <!-- 완료목록일 시엔 OR 조건 추가 -->
+				AND (stno=2 OR stno=3) <!-- 완료목록일 시엔 OR 조건 추가 -->
 			</if>
-			)
+			<if test="listType!=4">
+				AND stno=#{state}
+			</if>
 		</where>
 	</select>
 </mapper>
