@@ -1,42 +1,56 @@
-.body_container {
-  padding: 200px;
+.confirmBox {
+  /* padding-top: 30px; */
 }
 
-.find_nav div {
-  display: inline-block;
-  border-bottom: 4px solid;
-  padding: 0 20px 5px;
-  margin-left: -5px;
-  font-size: 20px;
-  font-weight: bolder;
+.confirmBox img {
+  position: relative;
+  z-index: 1;
+  width: 500px;
 }
 
-p {
-  color: var(--text-gray);
+.confirmBox i {
+  position: relative;
+  top: -200px;
+  left: -200px;
+  z-index: 2;
+  color: rgb(63, 62, 62);
 }
 
-i {
-  margin-right: 10px;
+.imgBox {
+  text-align: center;
+  height: 500px;
 }
 
-.veri_btn {
-  width: 800px;
-  height: 120px;
-  box-sizing: border-box;
-  border: solid 1px var(--gray-color);
-  /* border-radius: 10px; */
-  padding: 50px;
-  font-size: 18px;
-  margin: 50px 0 200px;
+.confirmBox p span {
+  font-size: larger;
+  /* font-weight: bolder; */
+  color: rgb(245, 88, 101);
 }
 
-.mail {
-  color: var(--text-gray);
-  line-height: 180%;
-  font-size: smaller;
+button {
+  width: 100px;
+  height: 50px;
+  padding: 15px;
+  border: none;
+  border-radius: 30px;
+  width: 120px;
+  margin: 15px;
+  font-size: medium;
 }
-.mail a {
-  margin-left: 10px;
-  text-decoration: underline;
-  text-underline-position: under;
+
+button:hover {
+  background-color: var(--gray-color);
+}
+
+.confirmBox p {
+  line-height: 200%;
+  /* font-size: 20px; */
+}
+
+.login_btn:hover {
+  background-color: var(--key-color);
+}
+
+.wrapper_select {
+  height: 1000px;
 }
