@@ -1,0 +1,56 @@
+.confirmBox {
+  /* padding-top: 30px; */
+}
+
+.confirmBox img {
+  position: relative;
+  z-index: 1;
+  width: 500px;
+}
+
+.confirmBox i {
+  position: relative;
+  top: -200px;
+  left: -200px;
+  z-index: 2;
+  color: rgb(63, 62, 62);
+}
+
+.imgBox {
+  text-align: center;
+  height: 500px;
+}
+
+.confirmBox p span {
+  font-size: larger;
+  /* font-weight: bolder; */
+  color: rgb(245, 88, 101);
+}
+
+button {
+  width: 100px;
+  height: 50px;
+  padding: 15px;
+  border: none;
+  border-radius: 30px;
+  width: 120px;
+  margin: 15px;
+  font-size: medium;
+}
+
+button:hover {
+  background-color: var(--gray-color);
+}
+
+.confirmBox p {
+  line-height: 200%;
+  /* font-size: 20px; */
+}
+
+.login_btn:hover {
+  background-color: var(--key-color);
+}
+
+.wrapper_select {
+  height: 1000px;
+}

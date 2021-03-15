@@ -15,6 +15,8 @@
 </head>
 
 <body>
+<jsp:include page="/jsp/header0.jsp"></jsp:include>
+
     <div class="body_container">
         <nav class="find_nav">
             <!-- <ul>
