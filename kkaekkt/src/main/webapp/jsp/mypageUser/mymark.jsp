@@ -45,7 +45,7 @@ color: var(--text-gray);
 </head>
 
 <body>
-	<jsp:include page="header0.jsp"></jsp:include>
+	<jsp:include page="/jsp/header0.jsp"></jsp:include>
 
 	  <div class="body_container">
         <jsp:include page="sidebar_ps.jsp"></jsp:include>

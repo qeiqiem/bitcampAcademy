@@ -1,6 +1,8 @@
 .body_container h2 {
   text-align: center;
-  padding: 50px;
+}
+.body_container h2 span {
+  color: var(--key-color);
 }
 
 .search_btn {

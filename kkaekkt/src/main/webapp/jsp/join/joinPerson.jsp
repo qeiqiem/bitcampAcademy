@@ -11,7 +11,7 @@
 </head>
 
 <body>
-<jsp:include page="header0.jsp"></jsp:include>
+<jsp:include page="/jsp/header0.jsp"></jsp:include>
 
     <div class="body_container">
         <h4>개인 회원</h4>
