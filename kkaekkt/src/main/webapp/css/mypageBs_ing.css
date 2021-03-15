@@ -104,39 +104,36 @@ p{
     padding-left: 30px;
     text-align: left;
 }
-.processList tr td:nth-child(6) {
-    text-align: right;
-    padding-right: 36px;
-}
-.processList tr td:nth-child(8){
+.processList tr td:nth-child(7){
     position: relative;
 }
-.processList tr td:nth-child(8) div:nth-child(1) {
+.processList tr td:nth-child(7) div:nth-child(1) {
     position: absolute;
     margin: auto;
     top:0;
     bottom:0;
     left: 0;
     right: 0;
-    background: var(--key-color);
     width: 60%;
     height: 80%;
     color: black;
 }
-.processList tr td:nth-child(8) div:nth-child(1) div:nth-child(1) {
+.processList tr td:nth-child(7) div:nth-child(1) div:nth-child(1) {
     position: relative;
-    height: 40%;
+    height: 47%;
     background: rgb(251, 135, 135);
     border: 1px solid red;
     margin-bottom: 5px;
     width: 95%;
+    font-size: 1rem;
 }
-.processList tr td:nth-child(8) div:nth-child(1) div:nth-child(2) {
+.processList tr td:nth-child(7) div:nth-child(1) div:nth-child(2) {
     position:relative;
-    height: 40%;
+    height: 47%;
     background: rgb(129, 129, 248);
     border: 1px solid blue;
     width: 95%;
+    font-size: 1rem;
 }
 
 .page_btn button {
