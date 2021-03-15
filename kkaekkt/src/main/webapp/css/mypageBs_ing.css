@@ -32,6 +32,14 @@ p{
     font-size: 20px;
     margin-left: 10px;
 }
+.searchBox .dayCheck {
+    position: absolute;    
+    right: 200px;
+    width: 200px;
+}
+.dayCheck input {
+    
+}
 .content_header .searchBox{
     position: relative;
     margin: 0 0 0 auto;
@@ -103,7 +111,7 @@ p{
 .processList tr td:nth-child(8){
     position: relative;
 }
-.processList tr td:nth-child(8) div {
+.processList tr td:nth-child(8) div:nth-child(1) {
     position: absolute;
     margin: auto;
     top:0;
@@ -113,8 +121,24 @@ p{
     background: var(--key-color);
     width: 60%;
     height: 80%;
-    color: white;    
+    color: black;
 }
+.processList tr td:nth-child(8) div:nth-child(1) div:nth-child(1) {
+    position: relative;
+    height: 40%;
+    background: rgb(251, 135, 135);
+    border: 1px solid red;
+    margin-bottom: 5px;
+    width: 95%;
+}
+.processList tr td:nth-child(8) div:nth-child(1) div:nth-child(2) {
+    position:relative;
+    height: 40%;
+    background: rgb(129, 129, 248);
+    border: 1px solid blue;
+    width: 95%;
+}
+
 .page_btn button {
   width: 30px;
   margin: -2px;
