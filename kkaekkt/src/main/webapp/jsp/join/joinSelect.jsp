@@ -15,6 +15,8 @@
 </head>
 
 <body>
+<jsp:include page="/jsp/header0.jsp"></jsp:include>
+
     <div class="body_container">
         <div>
             <h2>회원가입</h2>
