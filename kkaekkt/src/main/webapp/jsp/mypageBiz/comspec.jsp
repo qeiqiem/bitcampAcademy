@@ -10,9 +10,9 @@
 <script src="js/comspec.js"></script>
 </head>
 <body>
-	<jsp:include page="header0.jsp"></jsp:include>
+	<jsp:include page="/jsp/header0.jsp"></jsp:include>
 	<div class="body_container">
-		<jsp:include page="sidebar_coin.jsp"></jsp:include>
+		<jsp:include page="sidebar_bs.jsp"></jsp:include>
 		<div class="content">
 			<div id="comspec_title">사양관리</div>
 			<hr>

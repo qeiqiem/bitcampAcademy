@@ -45,7 +45,7 @@ input {
 
 
 <body>
-	<jsp:include page="header0.jsp"></jsp:include>
+	<jsp:include page="/jsp/header0.jsp"></jsp:include>
 
 	<div class="body_container">
 		<form action="login.do" method="post">

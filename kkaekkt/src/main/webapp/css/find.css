@@ -1,0 +1,65 @@
+.body_container {
+  padding: 200px;
+}
+
+.find_nav div {
+  display: inline-block;
+  border-bottom: 4px solid;
+  padding: 0 20px 5px;
+  margin-left: -5px;
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+input {
+  width: 200px;
+  padding: 10px;
+  border: 0;
+  border: 1px solid var(--gray-color);
+  border-bottom: 1px solid var(--gray-color);
+  border-radius: 5px;
+  margin: 0 0 25px;
+}
+
+button {
+  width: 80px;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: var(--gray-color);
+}
+
+.next_btn {
+  text-align: center;
+}
+
+p {
+  color: var(--text-gray);
+  line-height: 160%;
+}
+
+i {
+  margin-right: 10px;
+}
+
+.veri_btn {
+  width: 800px;
+  height: 200px;
+  box-sizing: border-box;
+  border: solid 1px var(--gray-color);
+  /* border-radius: 10px; */
+  padding: 50px;
+  font-size: 18px;
+  margin: 50px 0 200px;
+}
+
+.mail {
+  color: var(--text-gray);
+  line-height: 180%;
+  font-size: smaller;
+}
+.mail a {
+  margin-left: 10px;
+  text-decoration: underline;
+  text-underline-position: under;
+}
