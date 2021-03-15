@@ -37,6 +37,21 @@ $(document).ready(function() {
         pageObj.searchOption=$('.searchBox select')[0].value;
         ajax(pageObj);
     });
+    $('.selectbox select').change(function(){
+            var select_name = $(this).children('option:selected').text();
+            $(this).siblings('label').text(select_name);
+            pageObj.order=$('.selectbox select')[0].value;
+            ajax(pageObj);
+    });
+    $('.laundry_nav li').click(function() {
+        if(!$(this).hasClass('selected')) {
+            resetSearch();
+            pageObj.laundryType=$(this)[0].value;
+            $(this).siblings().removeClass('selected');
+            $(this).addClass('selected');
+            ajax(pageObj);
+        }
+    });
 });
 function enter() {
     if(window.event.keyCode==13) {
@@ -83,15 +98,21 @@ function initPageObj(data) {
     pageObj.isPrevBlockExist=data.isPrevBlockExist;
     pageObj.isPrevExist=data.isPrevExist;
 }
+function resetSearch() {
+    pageObj.search='';
+    pageObj.searchOption=0;
+    $('.search')[0].value='';
+    $('.searchBox select').eq(0).prop('selected',true);
+}
 function ajax(pageObj) { //ajax로 리스트 받아오기
     console.log('ajax 함수 진입');
     $.post({
-        url:"getRsvListBs.do",
+        url:"/getRsvListBs.do",
         data:pageObj,
         success: function(data) {
             var rsv=JSON.parse(data);
             $('.content_header p:nth-child(1) span').html(rsv.totalPostCount);
-            var list=rsv.rsvListRno;
+            var list=rsv.rsvListLno;
             printlist(list);
             initPageObj(rsv);
             initPageBtn();
@@ -99,44 +120,58 @@ function ajax(pageObj) { //ajax로 리스트 받아오기
         }
     });
 }
-function printlist(list) {
-    var rsvType=true;
-    $('.process p').remove();
-    $('.processList').remove();
-    $.each(list, function(key,value) {
-        var laundry="";
-        var count="";
-        var price="";
-        $.each(value.laundryList,function(idx,val) {
-            laundry+=val.laundry;
-            count+=val.count;
-            price+=val.price;
-            if(value.laundryList.length!=idx+1) { //마지막이 아니라면 <br>붙이기
-                laundry+='<br>';
-                count+='<br>';
-                price+='<br>';
-            }
-        });
-        if(key==0&&value.state=='세탁 완료') {
-            $('.process').prepend("<p>세탁 완료</p>");
-        }else if(key==0&&value.state=='전달 완료') {
-            rsvType=false;
-            $('.process').prepend("<p>전달 완료</p>");
-        }else if(rsvType&&value.state=='전달 완료') {
-            rsvType=false;
-            $('.process').append('<p>전달 완료</p>');
+function toDay() {
+    var date=new Date();
+    var mm=date.getMonth()+1;
+    var dd=date.getDate();
+    var today=mm+'월 '+dd+', '+date.getFullYear();
+    return today;
+}
+function printHeader(key,value) {
+    if($('.selectbox select')[0].value==1) { //정렬이 주문번호 순이라면,
+        if(key==0&&value.rsvDate==toDay()) {
+            $('.order p')[0].innerHTML="오늘 주문";
+        }else if(key==0) {
+            $('.order p')[0].innerHTML="지난 주문";
+        }else if($('.order p')[0].innerHTML=='오늘 주문'&&value.rsvDate!=toDay()) {
+            $('.process').append('지난 주문');
         }
+    }else { //정렬이 남은일자 순이라면
+        if(key==0) {
+            if(value.dDay<0) {
+                $('.order p')[0].innerHTML="기한을 넘긴 주문";
+                $('.order p')[0].style.color='red';
+            }else if(value.dDay<3) {
+                rsvType=false;
+                $('.order p')[0].innerHTML="마감이 임박한 주문";
+            }else if(value.dDay>=3) {
+                rsvType2=false;
+                $('.order p')[0].innerHTML='기한이 넉넉한 주문';
+            }
+        } else {
+            if($('.order p')[0].innerHTML=='기한을 넘긴 주문'&&value.dDay>0&&value.dDay<3) {
+                $('.process').append("<p style='color:red;'>마감이 임박한 주문</p>");
+            }else if($('.order p')[0].innerHTML!='기한이 넉넉한 주문'&&value.dDay>=3) {
+                $('.process').append('<p>기한이 넉넉한 주문</p>');
+            }
+        }
+    }
+}
+function printlist(list) {
+    $('.processList').remove();
+    $('.order p')[0].style.color=null;
+    $.each(list, function(key,value) {
+        printHeader(key,value);
         $('.process').append(
             '<table class="processList">' +
                 '<tr>' +
                     '<td>'+value.rsvDate+'</td>'+
                     '<td>'+value.rsvNum+'</td>'+
                     '<td>'+value.mname+'</td>'+
-                    '<td>'+laundry+'</td>'+
-                    '<td>'+count+'</td>'+
-                    '<td>'+price+'</td>'+
-                    '<td>'+value.dDate+'</td>'+
-                    '<td><div>출력하기</div></td>'+
+                    '<td>'+value.laundry+'</td>'+
+                    '<td>'+value.count+'</td>'+
+                    '<td>D'+(value.dDay<0?'+':'')+value.dDay*-1+'</td>'+
+                    '<td><div><div>출력하기</div><div>작업완료</div></div></td>'+
                 '</tr>'+
             '</table>'
         );

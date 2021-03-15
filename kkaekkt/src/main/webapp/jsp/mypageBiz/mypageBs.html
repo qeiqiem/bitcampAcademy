@@ -3,19 +3,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
-<link rel="stylesheet" href="css/mypageBs_ing.css">
-<link rel="stylesheet" href="css/all.css">
-<link rel="stylesheet" href="css/head0.css">
-<link rel="stylesheet" href="css/sidebar.css">
+<link rel="stylesheet" href="../../css/mypageBs_ing.css">
+<link rel="stylesheet" href="../../css/all.css">
+<link rel="stylesheet" href="../../css/head0.css">
+<link rel="stylesheet" href="../../css/sidebar.css">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script>
-	$(document).ready(function() {
-		$('.process > p:nth-child(1)').click(function() {
-			console.log('하하');
-			$('.process > p:nth-child(1)').html('와오');
-		})
-	})
-</script>
+
 </head>
 
 <body>
@@ -24,7 +17,7 @@
             <div class="head_left">
                 <div class="logo">
                     <a href="">
-                        <img src="img/logo.svg" alt="">
+                        <img src="../../img/logo.svg" alt="">
                     </a>
                 </div>
                 <div class="menu">
@@ -63,12 +56,8 @@
 					<li>기타</li>
 				</ul>
 				<div class="content_header">
-					<p>전체 개수 : 1,403 개</p>
+					<p>전체 개수 : <span></span> 개</p>
 					<div class="searchBox">
-						<div class="dayCheck">
-							<input type="checkbox" value=3 onclick=""> 3일 이내
-							<input type="checkbox" value=7> 7일 이내
-						</div>
 						<select>
 							<option value="1">이름</option>
 							<option value="2">주문번호</option>
@@ -79,7 +68,16 @@
 				</div>
 				<hr>
 				<div class="process">
-					<p>오늘 주문</p>
+					<div class="order">
+						<p>오늘 주문</p>
+						<div class="selectbox">
+							<label class="select">주문번호 순</label>
+							<select>
+								<option value=1>주문번호 순</option>
+								<option value=2>남은일자 순</option>
+							</select>
+						</div>
+					</div>
 					<table class="processHeader">
 						<tr>
 							<th>주문일</th>
@@ -87,46 +85,8 @@
 							<th>주문자</th>
 							<th>상품명</th>
 							<th>개수</th>
-							<th>금액</th>
-							<th>완료날짜</th>
-							<th>주문전표</th>
-						</tr>
-					</table>
-					<table class="processList">
-						<tr>
-							<td>2021-01-22</td>
-							<td>992810</td>
-							<td>홍길동</td>
-							<td>와이셔츠<br>가죽모피<br>기타</td>
-							<td>1<br>2<br>2</td>
-							<td>1,000<br><br><br><br><br>40,000<br>30,000</td>
-							<td>2021-02-00</td>
-							<td><div><div>품목취소</div><div>작업완료</div></div></td>
-						</tr>
-					</table>
-					<p>지난 주문</p>
-					<table class="processList">
-						<tr>
-							<td>2021-01-22</td>
-							<td>992810</td>
-							<td>홍길동</td>
-							<td>와이셔츠<br>가죽모피<br>기타</td>
-							<td>1<br>2<br>2</td>
-							<td>1,000<br>40,000<br>30,000</td>
-							<td>2021-02-00</td>
-							<td><div>품목취소</div><div>작업완료</div></td>
-						</tr>
-					</table>
-					<table class="processList">
-						<tr>
-							<td>2021-01-22</td>
-							<td>992810</td>
-							<td>홍길동</td>
-							<td>와이셔츠<br>가죽모피<br>기타</td>
-							<td>1<br>2<br>2</td>
-							<td>1,000<br>40,000<br>30,000</td>
-							<td>2021-02-01</td>
-							<td><div>품목취소</div><div>작업완료</div></td>
+							<th>남은일자</th>
+							<th>상태변경</th>
 						</tr>
 					</table>
 				</div>
@@ -151,5 +111,14 @@
 	</div>
 	<script src="https://kit.fontawesome.com/2fc57dd2db.js"
 		crossorigin="anonymous"></script>
+	<script>
+		var pageObj={//세션에서 정보를 받아오는건 독립된 js파일에서 불가능, jsp 내에서만 가능하기 때문에 여기서 값을 받아준다.
+                bno:1,//더미번호 (추후 세션에서 받아올 예정)
+				currentPageNum:1,//현재 페이지 1
+				listType:2,//품목별 조회
+				state:1// 세탁 중 상태번호
+            };
+	</script>
+	<script src="/js/mypageBs_ing.js"></script>
 </body>
 </html>

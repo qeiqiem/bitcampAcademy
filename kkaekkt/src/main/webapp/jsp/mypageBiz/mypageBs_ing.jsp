@@ -1,3 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="java.util.List"%>
+<%@ page import="com.kkaekkt.biz.user.BusinessVO"%>
+<%@ page import="com.kkaekkt.biz.reservation.ReservationListVO"%>
+<%@ page import="com.kkaekkt.biz.reservation.LaundryVO"%>
+<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +15,7 @@
 <link rel="stylesheet" href="/css/head0.css">
 <link rel="stylesheet" href="/css/sidebar.css">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
 </head>
 
 <body>
@@ -44,34 +52,39 @@
 			</div>
 			<div class="content">
 				<ul class="laundry_nav">
-					<li>전체보기</li>
-					<li>일반의류</li>
-					<li>와이셔츠</li>
-					<li>이불</li>
-					<li>운동화</li>
-					<li>가죽모피</li>
-					<li>명품가방</li>
-					<li>아웃도어</li>
-					<li>기타</li>
+					<li value=0 class="selected">전체보기</li>
+					<li value=1>일반의류</li>
+					<li value=2>와이셔츠</li>
+					<li value=3>이불</li>
+					<li value=4>운동화</li>
+					<li value=5>가죽모피</li>
+					<li value=6>명품가방</li>
+					<li value=7>아웃도어</li>
+					<li value=8>기타</li>
 				</ul>
 				<div class="content_header">
-					<p>전체 개수 : 1,403 개</p>
+					<p>전체 개수 : <span></span> 개</p>
 					<div class="searchBox">
-						<div class="dayCheck">
-							<input type="checkbox" value=3 onclick=""> 3일 이내
-							<input type="checkbox" value=7> 7일 이내
-						</div>
 						<select>
 							<option value="1">이름</option>
 							<option value="2">주문번호</option>
 						</select>
 						<i class="fas fa-search"></i>
-						<input type="text" class="search">
+						<input type="text" class="search" value="" onkeypress="enter()">
 					</div>
 				</div>
 				<hr>
 				<div class="process">
-					<p>오늘 주문</p>
+					<div class="order">
+						<p>오늘 주문</p>
+						<div class="selectbox">
+							<label class="select">주문번호 순</label>
+							<select>
+								<option value=1>주문번호 순</option>
+								<option value=2>남은일자 순</option>
+							</select>
+						</div>
+					</div>
 					<table class="processHeader">
 						<tr>
 							<th>주문일</th>
@@ -80,41 +93,7 @@
 							<th>상품명</th>
 							<th>개수</th>
 							<th>남은일자</th>
-							<th>작업처리</th>
-						</tr>
-					</table>
-					<table class="processList">
-						<tr>
-							<td>2021-01-22</td>
-							<td>992810</td>
-							<td>홍길동</td>
-							<td>와이셔츠</td>
-							<td>1</td>
-							<td>D-1</td>
-							<td><div><div>취소</div><div>완료</div></div></td>
-						</tr>
-					</table>
-					<p>지난 주문</p>
-					<table class="processList">
-						<tr>
-							<td>2021-01-22</td>
-							<td>992810</td>
-							<td>홍길동</td>
-							<td>와이셔츠<br>가죽모피<br>기타</td>
-							<td>1<br>2<br>2</td>
-							<td>D-2</td>
-							<td><div>품목취소</div><div>작업완료</div></td>
-						</tr>
-					</table>
-					<table class="processList">
-						<tr>
-							<td>2021-01-22</td>
-							<td>992810</td>
-							<td>홍길동</td>
-							<td>와이셔츠<br>가죽모피<br>기타</td>
-							<td>1<br>2<br>2</td>
-							<td>D-3</td>
-							<td><div>품목취소</div><div>작업완료</div></td>
+							<th>상태변경</th>
 						</tr>
 					</table>
 				</div>
@@ -139,5 +118,14 @@
 	</div>
 	<script src="https://kit.fontawesome.com/2fc57dd2db.js"
 		crossorigin="anonymous"></script>
+	<script>
+		var pageObj={//세션에서 정보를 받아오는건 독립된 js파일에서 불가능, jsp 내에서만 가능하기 때문에 여기서 값을 받아준다.
+                bno:1,//더미번호 (추후 세션에서 받아올 예정)
+				currentPageNum:1,//현재 페이지 1
+				listType:2,//품목별 조회
+				order:1 //주문번호 순
+            };
+	</script>
+	<script src="/js/mypageBs_ing.js"></script>
 </body>
 </html>

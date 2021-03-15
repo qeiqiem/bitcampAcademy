@@ -19,20 +19,28 @@
 		ORDER BY rno DESC
 		LIMIT #{rowStartNum},#{POSTS_PER_PAGE};
 	</select>
-	<select id="getRsvListBs_p" resultType="laundry"> <!-- 업체 품목별 리스트 출력 -->
-		SELECT rdate rsvDate, r.rno rsvNum, mname, lname,cnt,DATEDIFF(ddate,CURDATE()) dDay 
+	<select id="getRsvListBs_ld" resultType="laundry"> <!-- 업체 품목별 리스트 출력 -->
+		SELECT rdate rsvDate, r.rno rsvNum, mname, lname laundry,cnt count,DATEDIFF(ddate,CURDATE()) dDay 
 		FROM reservation r, member m, rsv_laundry r_l, laundry_type lt 
 		<where>
 			r.mno=m.mno AND r.rno=r_l.rno AND r_l.lno=lt.lno
-			AND bno=#{bno} AND stno=1
+			AND bno=#{bno} AND r.stno=1
 			<if test="laundryType!=0">
 				AND r_l.lno=#{laundryType}
 			</if>
-			<if test="dDay!=0">
-				<![CDATA[AND dDay<=#{dDay}]]>
+			<if test="searchOption==1"> <!-- 검색옵션-이름 입력시 -->
+					AND mname LIKE CONCAT('%',#{search},'%')
+			</if>
+			<if test="searchOption==2"> <!-- 검색옵션-주문번호 입력시 -->
+					AND r.rno LIKE CONCAT('%',#{search},'%')
 			</if>
 		</where>
-		ORDER BY r.rno
+		<if test="order==1">
+			ORDER BY r.rno DESC
+		</if>
+		<if test="order==2">
+			ORDER BY dDay, r.rno DESC
+		</if>
 		LIMIT #{rowStartNum},#{POSTS_PER_PAGE};
 	</select>
 	<select id="getRsvListBs_rn" resultType="reservation"> <!-- 업체회원 주문번호별 리스트 출력 -->
@@ -40,13 +48,6 @@
 			SELECT r.rno rsvNum,rdate rsvdate,mname,DATEDIFF(ddate,CURDATE()) dDay 
 			FROM member m,reservation r
 			WHERE r.mno=m.mno AND bno=#{bno} AND stno=1  
-			<if test="dDay!=0"> <!-- 마감기한 필터 입력시 -->
-				<![CDATA[AND dDay<=#{dDay}]]>
-				ORDER BY dDay rno DESC;
-			</if>
-			<if test="dDay==0"> <!-- 마감기한 필터가 없을 경우 -->
-				ORDER BY rno DESC
-			</if>
 			LIMIT #{rowStartNum},#{POSTS_PER_PAGE};
 		</if>
 		<if test="listType==4"> <!-- 업체회원 완료목록 출력 -->
@@ -82,7 +83,7 @@
 			SELECT count(r.rno) FROM
 		<choose>
 			<when test="listType==2"> <!-- 품목별 조회일 경우 -->
-				rsv_laundry r, laundry_type l, member m,reservation rsv
+				rsv_laundry r_l, laundry_type lt, member m,reservation r
 			</when>
 			<when test="listType==4"> <!-- 완료목록 조회일 경우 -->
 				reservation r, member m 
@@ -93,7 +94,7 @@
 		</choose>
 		<where>
 			<if test="listType==2"> <!-- 품목별 조회일 때 -->
-				AND r.lno=l.lno AND rsv.mno=m.mno AND rsv.rno=r.rno
+				AND r_l.lno=lt.lno AND r.mno=m.mno AND r.rno=r_l.rno
 			</if>
 			<if test="listType==4"> <!-- 완료목록 조회일 때 -->
 				AND r.mno=m.mno
@@ -104,23 +105,23 @@
 			<if test='bno!=0'> <!-- 업체회원의 주문조회 -->
 				AND bno=#{bno}
 			</if>
-			<if test="search!=null and searchOption==1"> <!-- 이름검색 -->
+			<if test="searchOption==1"> <!-- 이름검색 -->
 				AND mname LIKE CONCAT('%',#{search},'%')
 			</if>
-			<if test="search!=null and searchOption==2"> <!-- 주문번호검색 -->
-				AND rno LIKE CONCAT('%',#{search},'%')
+			<if test="searchOption==2"> <!-- 주문번호검색 -->
+				AND r.rno LIKE CONCAT('%',#{search},'%')
 			</if>
-			<if test="laundryType!=0"> <!-- 품목 조회일 경우 -->
-				AND l.lno=#{laundryType}
-			</if>
-			<if test="dDay!=0"> <!-- 일자별 조회 -->
-				<![CDATA[AND DATEDIFF(ddate,CURDATE())<=#{dDay}]]>
+			<if test="laundryType!=0"> <!-- 품목 조회에서 '전체보기'가 아닐 경우-->
+				AND r_l.lno=#{laundryType}
 			</if>
 			<if test="listType==4">
 				AND (stno=2 OR stno=3) <!-- 완료목록일 시엔 OR 조건 추가 -->
 			</if>
-			<if test="listType!=4">
-				AND stno=#{state}
+			<if test="listType==2">
+				AND r.stno=1
+			</if>
+			<if test="listType!=4 and listType!=2">
+				AND r.stno=1
 			</if>
 		</where>
 	</select>

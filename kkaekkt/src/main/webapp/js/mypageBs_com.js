@@ -86,7 +86,7 @@ function initPageObj(data) {
 function ajax(pageObj) { //ajax로 리스트 받아오기
     console.log('ajax 함수 진입');
     $.post({
-        url:"getRsvListBs.do",
+        url:"/getRsvListBs.do",
         data:pageObj,
         success: function(data) {
             var rsv=JSON.parse(data);

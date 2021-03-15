@@ -40,7 +40,7 @@ public class ReservationDAO {
 		int result = mybatis.selectOne("countList",vo);
 		return result;
 	}
-	public List<LaundryVO> getRsvListBs_p(ReservationListVO vo) {
-		return mybatis.selectList("getRsvListBs_p",vo);
+	public List<LaundryVO> getRsvListBs_ld(ReservationListVO vo) {
+		return mybatis.selectList("getRsvListBs_ld",vo);
 	}
 }

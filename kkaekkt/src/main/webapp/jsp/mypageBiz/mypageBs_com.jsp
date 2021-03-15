@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List"%>
-<%@ page import="com.kkaekkt.biz.user.PersonVO"%>
+<%@ page import="com.kkaekkt.biz.user.BusinessVO"%>
 <%@ page import="com.kkaekkt.biz.reservation.ReservationListVO"%>
 <%@ page import="com.kkaekkt.biz.reservation.LaundryVO"%>
 <%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
@@ -10,7 +10,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
-<link rel="stylesheet" href="css/mypageBs_com.css">
+<link rel="stylesheet" href="/css/mypageBs_com.css">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 </head>
 
@@ -73,6 +73,6 @@
 				listType:4
             };
     </script>
-	<script src="js/mypageBs_com.js"></script>
+	<script src="/js/mypageBs_com.js"></script>
 </body>
 </html>

@@ -6,27 +6,35 @@ public class ReservationListVO {
 	private final int PAGES_PER_BLOCK=5;//한 블럭당 들어갈 페이지 개수
 	private final int POSTS_PER_PAGE=5;//한 페이지당 보여줄 Post 개수
 	private int totalPostCount; //총 Post 개수
-	private int totalLastPageNum; // if(totalPostCount==0) {0} else {Math.ceil((double) totalPostCount / POSTS_PER_PAGE)};
+	private int totalLastPageNum; // 마지막 페이지 번호
 	private int currentPageNum;//현재 페이지 번호 (Default=1)
-	private int blockLastPageNum;//한 블럭에서 마지막 페이지 번호 = if(totalLastPageNum - totalLastPageNum % PAGES_PER_BLOCK >= currentPageNum) {(int)(Math.ceil((float)currentPageNum / PAGES_PER_BLOCK)*PAGES_PER_BLOCK)};
-	private int blockFirstPageNum;//한 블럭에서 첫번째 페이지 번호 = blockLastPageNum-(PAGES_PER_BLOCK0-1);
-	private int rowStartNum;
+	private int blockLastPageNum;//한 블럭에서 마지막 페이지 번호  
+	private int blockFirstPageNum;//한 블럭에서 첫번째 페이지 번호
+	private int rowStartNum; //시작 행 번호 ex) 2페이지 -> 5
 	private boolean isPrevExist=false;//이전 페이지가 존재하는가(Default=false)
 	private boolean isNextExist;//다음 페이지가 존재하는가
-	private boolean isPrevBlockExist=false;//이전 블럭이 존재하는가(Default=false)
-	private boolean isNextBlockExist;
+	private boolean isPrevBlockExist=false;//이전 페이지블럭이 존재하는가(Default=false)
+	private boolean isNextBlockExist;//다음 페이지블럭이 존재하는가
 	
-	private int mno;
-	private int bno;
-	private int state;
-	private int dDay; //남은 일자
-	private int laundryType; 
+	private int mno;//회원번호
+	private int bno;//업체번호
+	private int state;//작업 상태 : 1.세탁 중 2.세탁 완료 3.전달 완료 4.취소
+	private int laundryType; //품목별 1.일반의류 2.와이셔츠 3.이불 4.운동화 5.가죽모피 6.명품가방 7.아웃도어 8.기타
+	private int order; // 정렬 : 1.주문번호 순  2.남은일자 순
 	private String search; //검색어
 	private int searchOption; // 1.이름   2.주문번호 조회
 	private int listType; //1.일반 조회   2.품목별 조회   3.주문번호별-처리중 조회  4.주문번호별-완료목록 조회
 	private List<ReservationVO> rsvListRno; // 주문번호별 리스트
 	private List<LaundryVO> rsvListLno; // 품목별 리스트
 	
+	public int getOrder() {
+		return order;
+	}
+
+	public void setOrder(int order) {
+		this.order = order;
+	}
+
 	public int getMno() {
 		return mno;
 	}
@@ -57,14 +65,6 @@ public class ReservationListVO {
 
 	public void setState(int state) {
 		this.state = state;
-	}
-
-	public int getdDay() {
-		return dDay;
-	}
-
-	public void setdDay(int dDay) {
-		this.dDay = dDay;
 	}
 
 	public int getLaundryType() {
@@ -202,9 +202,9 @@ public class ReservationListVO {
 
 	@Override
 	public String toString() {
-		return "ReservationListVO [mno=" + mno + ", bno=" + bno + ", state=" + state + ", dDay=" + dDay
+		return "ReservationListVO [mno=" + mno + ", bno=" + bno + ", state=" + state
 				+ ", laundryType=" + laundryType + ", search=" + search + ", searchOption=" + searchOption
-				+ ", listType=" + listType + "]";
+				+ ", listType=" + listType +", order="+order+ "]";
 	}	
 	
 }
