@@ -9,7 +9,11 @@
     <title>Document</title>
 </head>
 <body>
+<<<<<<< HEAD
     <form action="/login.do" method="POST">
+=======
+    <form action="/mypagePs.do" method="POST">
+>>>>>>> ba18ae5593ed10c1bdb2d50df932fb142a839919
         <input type="text" name="mno" value=1>
         <input type="text" name="state" value=1>
         <input type="submit" value="마이페이지">
