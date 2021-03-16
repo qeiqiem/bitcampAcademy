@@ -30,7 +30,7 @@
 				</otherwise>
 			</choose>
 	</insert>
-	<update id="updatePs">			
+	<update id="updatePs">
 			<choose>
 				<when test="name == null">
 					UPDATE account SET password=#{password} WHERE mno=#{mno};

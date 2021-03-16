@@ -3,10 +3,10 @@ package com.kkaekkt.biz.reservation.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kkaekkt.biz.reservation.LaundryVO;
 import com.kkaekkt.biz.reservation.ReservationListVO;
 import com.kkaekkt.biz.reservation.ReservationService;
 import com.kkaekkt.biz.reservation.ReservationVO;
-import com.kkaekkt.biz.user.BusinessVO;
 
 @Service("ReservationService")
 public class ReservationServiceImpl implements ReservationService {
@@ -21,8 +21,12 @@ public class ReservationServiceImpl implements ReservationService {
 		return null;
 	}
 	@Override
-	public void cancelRsv(ReservationVO vo) {
-		reservationDAO.cancelRsv(vo);
+	public void cancel(LaundryVO vo) {
+		reservationDAO.cancel(vo);
+	}
+	@Override
+	public void complete(LaundryVO vo) {
+		reservationDAO.complete(vo);
 	}
 	@Override
 	public ReservationListVO getRsvListPs(ReservationListVO vo) {

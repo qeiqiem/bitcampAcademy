@@ -12,6 +12,7 @@ public class ReservationVO {
 	private Date dDate; // 마감일자
 	private int dDay; //마감까지 남은 일자
 	private String state; // 상태명
+	private int timeOut; //1.취소가능 2.취소불가 
 	private List<LaundryVO> laundryList; // 품목리스트
 	private int totalPrice; // 총 금액
 	private int count; // ex. 일반의류 외 count 개

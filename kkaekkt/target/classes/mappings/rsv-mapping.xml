@@ -4,28 +4,42 @@
 	<insert id="insertRsv">
 		
 	</insert>
-	<update id="cancelRsv">
-		UPDATE reservation SET stno=4 WHERE rno=#{rno};
-		UPDATE rsv_laundry SET stno=4 WHERE rno=#{rno};
+	<update id="cancel">
+		<if test="laundry!=null"> <!-- 품목 삭제일경우 -->
+			UPDATE rsv_laundry SET stno=4 WHERE rno=#{rsvNum}
+			AND lno=(SELECT lno FROM laundry_type WHERE lname=#{laundry});
+		</if>
+		<if test="laundry==null"> <!-- 예약번호 단위 삭제일 경우 -->
+			UPDATE reservation SET stno=4 WHERE rno=#{rsvNum};
+			UPDATE rsv_laundry SET stno=4 WHERE rno=#{rsvNum};
+		</if>
 	</update>
-	<select id="getRsv" resultType="reservation">
-		SELECT * FROM reservation WHERE mno=#{mno};
-	</select>
+	<update id="complete">
+		<if test="laundry!=null"> <!-- 품목 삭제일경우 -->
+			UPDATE rsv_laundry SET stno=3 WHERE rno=#{rsvNum}
+			AND lno=(SELECT lno FROM laundry_type WHERE lname=#{laundry});
+		</if>
+		<if test="laundry==null"> <!-- 예약번호 단위 삭제일 경우 -->
+			UPDATE reservation SET stno=3 WHERE rno=#{rsvNum};
+			UPDATE rsv_laundry SET stno=3 WHERE rno=#{rsvNum};
+		</if>
+	</update>
 	<select id="getRsvListPs" resultType="reservation"> <!-- 일반회원 예약리스트 출력 -->
-		SELECT r.rno rsvNum,rdate rsvDate,bname,phone 
-		FROM reservation r, business b 
+		<![CDATA[		
+		SELECT r.rno rsvNum,rdate rsvDate,bname,phone,TIMESTAMPDIFF(HOUR,rdate,CURDATE())<1 timeOut
+		FROM reservation r, business b
 		WHERE r.bno=b.bno
 		AND r.mno=#{mno}
 		AND stno=#{state}
 		ORDER BY rno DESC
-		LIMIT #{rowStartNum},#{POSTS_PER_PAGE};
+		LIMIT #{rowStartNum},#{POSTS_PER_PAGE};]]>
 	</select>
 	<select id="getRsvListBs_ld" resultType="laundry"> <!-- 업체 품목별 리스트 출력 -->
 		SELECT rdate rsvDate, r.rno rsvNum, mname, lname laundry,cnt count,DATEDIFF(ddate,CURDATE()) dDay 
 		FROM reservation r, member m, rsv_laundry r_l, laundry_type lt 
 		<where>
 			r.mno=m.mno AND r.rno=r_l.rno AND r_l.lno=lt.lno
-			AND bno=#{bno} AND r.stno=1
+			AND bno=#{bno} AND r_l.stno=1
 			<if test="laundryType!=0">
 				AND r_l.lno=#{laundryType}
 			</if>
@@ -77,13 +91,15 @@
 	<select id="getLaundry" resultType="laundry"> <!-- 일반 품목 리스트 출력 -->
 			SELECT lname laundry, cnt count, cnt*price price
 			FROM reservation r, rsv_laundry r_l, business b, bsn_laundry b_l, laundry_type lt 
-			WHERE r.rno=r_l.rno AND r.bno=b.bno AND b.bno=b_l.bno AND lt.lno=r_l.lno AND b_l.lno=r_l.lno
+			WHERE r.rno=r_l.rno AND r.bno=b.bno AND b.bno=b_l.bno 
+			AND lt.lno=r_l.lno AND b_l.lno=r_l.lno
 			AND r.rno=#{rsvNum};
 	</select>
 	<select id="getLaundry_st" resultType="laundry"> <!-- 상태가 표시된 품목 리스트 출력 -->
 			SELECT lname laundry, cnt count, cnt*price price,stname state 
 			FROM reservation r, rsv_laundry r_l, business b, bsn_laundry b_l, laundry_type lt,state s
-			WHERE r.rno=r_l.rno AND r.bno=b.bno AND b.bno=b_l.bno AND lt.lno=r_l.lno AND b_l.lno=r_l.lno AND r_l.stno=s.stno
+			WHERE r.rno=r_l.rno AND r.bno=b.bno AND b.bno=b_l.bno 
+			AND lt.lno=r_l.lno AND b_l.lno=r_l.lno AND r_l.stno=s.stno
 			AND r.rno=#{rsvNum};
 	</select>
 	<select id="countList" resultType="_int">
@@ -104,7 +120,7 @@
 				AND r.mno=m.mno
 			</if>
 			<if test='bno==0'> <!-- 일반회원의 주문조회 -->
-				AND mno=#{mno}
+				AND m.mno=#{mno}
 			</if>
 			<if test='bno!=0'> <!-- 업체회원의 주문조회 -->
 				AND bno=#{bno}
@@ -121,7 +137,10 @@
 			<if test="listType==4">
 				AND (stno=2 OR stno=3) <!-- 완료목록일 시엔 OR 조건 추가 -->
 			</if>
-			<if test="listType!=4"> <!-- 완료목록이 아닐 때 -->
+			<if test="listType==2"> <!-- 품목별 목록 -->
+				AND r_l.stno=1;
+			</if>
+			<if test="listType==1 or listType==3"> <!-- 일반목록 -->
 				AND r.stno=1
 			</if>
 		</where>

@@ -20,12 +20,15 @@ public class ReservationDAO {
 	public void insertRsv(ReservationVO vo) {
 		
 	}
-	public void cancelRsv(ReservationVO vo) {
-		mybatis.update("cancelRsv");
+	public void cancel(LaundryVO vo) {
+		mybatis.update("cancel",vo);
 	}
 	public ReservationVO getRsv(ReservationVO vo) {
 		
 		return mybatis.selectOne("getRsv");
+	}
+	public void complete(LaundryVO vo) {
+		mybatis.update("complete",vo);
 	}
 	public List<ReservationVO> getRsvListPs(ReservationListVO vo) {		
 		return mybatis.selectList("reservationDAO.getRsvListPs",vo);

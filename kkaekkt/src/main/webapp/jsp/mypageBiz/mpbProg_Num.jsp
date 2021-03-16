@@ -85,6 +85,7 @@
 				listType:3,//처리중-주문번호별
 				order:1 //주문번호 순
             };
+		var rsvObj={};
 	</script>
 	<script src="/js/mpbProg_Num.js"></script>
 </body>
