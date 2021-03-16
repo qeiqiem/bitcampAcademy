@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	$(".side_sub").hide();
     // 수정하기 버튼 클릭시 인풋,셀렉박스 비활성화 활성화
         var clickupdate = $("#updateSpec");
         var changebtn = $("#btn_change");

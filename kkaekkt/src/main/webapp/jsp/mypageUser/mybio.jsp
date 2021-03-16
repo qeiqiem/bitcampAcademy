@@ -10,8 +10,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<link rel="stylesheet" href="css/mybio.css">
-<script src="js/mybio.js"></script>
+<link rel="stylesheet" href="/css/mybio.css">
+<script src="/js/mybio.js"></script>
 </head>
 
 <body>

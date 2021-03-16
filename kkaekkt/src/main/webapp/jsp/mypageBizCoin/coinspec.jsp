@@ -6,8 +6,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<link rel="stylesheet" href="css/coinspec.css">
-<script src="js/coinspec.js"></script>
+<link rel="stylesheet" href="/css/coinspec.css">
+<script src="/js/coinspec.js"></script>
 </head>
 <body>
 	<jsp:include page="/jsp/header0.jsp"></jsp:include>
