@@ -54,7 +54,7 @@ public class UserController {
 			System.out.println("로그인처리");
 			userService.getUser(vo);
 			
-			session.setAttribute("personName", vo.getName());
+			session.setAttribute("member", vo.getName());
 			
 			if(vo.getId() == null || vo.getPassword() == null) {
 				System.out.println("사용자 정보가 없습니다.");

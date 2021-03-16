@@ -1,8 +1,10 @@
 $(document).ready(function() {
-
+	initSide();
+	initEvent();
     ajax(pageObj); //처음 마이페이지 들어왔을 때, 진행중 주문 항목 출력
-    
-    $('.page_next').click(function() {
+});
+function initEvent() {
+	$('.page_next').click(function() {
         if(!$(this).hasClass('no')) {
             pageObj.currentPageNum+=1;
             ajax(pageObj);
@@ -32,15 +34,17 @@ $(document).ready(function() {
             ajax(pageObj);
         }
     });
-    $('.searchBox i.fas').click(function() {
+    $('.searchBox i.fas').click(function() { //검색 실행시
 	    pageObj.search=$('.search')[0].value;
         pageObj.searchOption=$('.searchBox select')[0].value;
+        pageObj.currentPageNum=1;
         ajax(pageObj);
     });
     $('.selectbox select').change(function(){
             var select_name = $(this).children('option:selected').text();
             $(this).siblings('label').text(select_name);
             pageObj.order=$('.selectbox select')[0].value;
+            pageObj.currentPageNum=1;
             ajax(pageObj);
     });
     $('.laundry_nav li').click(function() {
@@ -52,13 +56,18 @@ $(document).ready(function() {
             ajax(pageObj);
         }
     });
-});
+}
 function enter() {
     if(window.event.keyCode==13) {
         pageObj.search=$('.search')[0].value;
         pageObj.searchOption=$('.searchBox select')[0].value;
         ajax(pageObj);
     }
+}
+function initSide() {
+		$('.side_sub').css('display','unset');
+		$('.side button').eq(0).addClass("side_select");
+		$('.side_sub button').eq(1).addClass("side_sub_select");
 }
 function initPageBtn() {
     if(pageObj.isNextExist) {
@@ -98,12 +107,6 @@ function initPageObj(data) {
     pageObj.isPrevBlockExist=data.isPrevBlockExist;
     pageObj.isPrevExist=data.isPrevExist;
 }
-function resetSearch() {
-    pageObj.search='';
-    pageObj.searchOption=0;
-    $('.search')[0].value='';
-    $('.searchBox select').eq(0).prop('selected',true);
-}
 function ajax(pageObj) { //ajax로 리스트 받아오기
     console.log('ajax 함수 진입');
     $.post({
@@ -112,7 +115,7 @@ function ajax(pageObj) { //ajax로 리스트 받아오기
         success: function(data) {
             var rsv=JSON.parse(data);
             $('.content_header p:nth-child(1) span').html(rsv.totalPostCount);
-            var list=rsv.rsvListLno;
+            var list=rsv.rsvListRno;
             printlist(list);
             initPageObj(rsv);
             initPageBtn();
@@ -158,9 +161,27 @@ function printHeader(key,value) {
     }
 }
 function printlist(list) {
+    console.log(list);
     $('.processList').remove();
     $('.order p')[0].style.color=null;
     $.each(list, function(key,value) {
+        var laundry="";
+        var count="";
+        var price="";
+        var state="";
+        $.each(value.laundryList,function(idx,val) {
+            laundry+=val.laundry;
+            count+=val.count;
+            price+=val.price;
+            state+=val.state;
+            if(value.laundryList.length!=idx+1) { //마지막이 아니라면 <br>붙이기
+                laundry+='<br>';
+                count+='<br>';
+                price+='<br>';
+                state+='<br>';
+            }
+        });
+        console.log(laundry +"|"+count+"|"+price+"|"+state);
         printHeader(key,value);
         $('.process').append(
             '<table class="processList">' +
@@ -168,10 +189,14 @@ function printlist(list) {
                     '<td>'+value.rsvDate+'</td>'+
                     '<td>'+value.rsvNum+'</td>'+
                     '<td>'+value.mname+'</td>'+
-                    '<td>'+value.laundry+'</td>'+
-                    '<td>'+value.count+'</td>'+
-                    '<td>D'+(value.dDay<0?'+':'')+value.dDay*-1+'</td>'+
-                    '<td><div><div>출력하기</div><div>작업완료</div></div></td>'+
+                    '<td>'+laundry+'</td>'+
+                    '<td>'+count+'</td>'+
+                    '<td>'+price+'</td>'+
+                    '<td>'+state+'</td>'+
+                    (value.dDay<0?
+                    '<td style="color:red;">D+'+value.dDay*-1+'</td>'
+                    :'<td>D'+value.dDay*-1+'</td>')+
+                    '<td><div><button onclick="cancel()">주문취소</button><button onclick="complete()">작업완료</button></div></td>'+
                 '</tr>'+
             '</table>'
         );

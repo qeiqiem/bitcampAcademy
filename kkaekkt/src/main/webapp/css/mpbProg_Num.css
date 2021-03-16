@@ -2,7 +2,7 @@
     float:left;
     width: 65vw;
     height: 100vh;
-    padding: 20px 70px;
+    padding: 35px 70px;
 }
 .content_header {
     display: flex;
@@ -17,20 +17,6 @@
     background: var(--gray-color);
     height: 1px;
     margin-bottom: 30px;
-}
-.content .laundry_nav{
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 50px;
-    padding: 0 10px;
-}
-.laundry_nav li{
-    color: gray;
-    cursor: pointer;
-}
-.selected {
-    color: black !important;
-    font-weight: bold;
 }
 p{
     font-weight: bold;
@@ -81,24 +67,12 @@ p{
 .order p {
     margin: 0 auto 0 10px;
 }
-.order div span {
-    margin: 0 5px;
-    color: gray;
-}
-.order div span:nth-child(n+2):nth-child(n-3){
-    cursor: pointer;
-}
-.order div span:nth-child(n+2):nth-child(n-3):hover{
-    font-weight: bold;
-    color: black;
-}
-
 .processHeader{
     width: 100%;
     border:1px solid var(--gray-color);
 }
 .processHeader tr th{
-    width: 12.5%;
+    width: 11%;
     border: none;
     padding: 10px 0;
 }
@@ -107,23 +81,28 @@ p{
     border: 1px solid var(--gray-color);
     text-align: center;
     margin-bottom: 5px;
+    min-height: 85px;
 }
 .processList tr{
     position: relative;
 }
 .processList tr td{
     padding: 10px 0;
-    width: 12.5%;
+    width: 11%;
     border: none;
 }
 .processList tr td:nth-child(4) {
     padding-left: 30px;
     text-align: left;
 }
-.processList tr td:nth-child(7){
+.processList tr td:nth-child(6) {
+    padding-right: 40px;
+    text-align: right;
+}
+.processList tr td:nth-child(9){
     position: relative;
 }
-.processList tr td:nth-child(7) div:nth-child(1) {
+.processList tr td:nth-child(9) div {
     position: absolute;
     margin: auto;
     top:0;
@@ -134,22 +113,22 @@ p{
     height: 80%;
     color: black;
 }
-.processList tr td:nth-child(7) div:nth-child(1) div:nth-child(1) {
+.processList tr td:nth-child(9) div:nth-child(1) button:nth-child(1) {
     position: relative;
     height: 47%;
     background: rgb(251, 135, 135);
     border: 1px solid red;
     margin-bottom: 5px;
     width: 95%;
-    font-size: 1rem;
+    font-size: 14px;
 }
-.processList tr td:nth-child(7) div:nth-child(1) div:nth-child(2) {
+.processList tr td:nth-child(9) div:nth-child(1) button:nth-child(2) {
     position:relative;
     height: 47%;
     background: rgb(129, 129, 248);
     border: 1px solid blue;
     width: 95%;
-    font-size: 1rem;
+    font-size: 14px;
 }
 
 .page_btn button {

@@ -1,48 +1,24 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="java.util.List"%>
+<%@ page import="com.kkaekkt.biz.user.BusinessVO"%>
+<%@ page import="com.kkaekkt.biz.reservation.ReservationListVO"%>
+<%@ page import="com.kkaekkt.biz.reservation.LaundryVO"%>
+<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
-<link rel="stylesheet" href="../../css/mpbProg_Num.css">
-<link rel="stylesheet" href="../../css/all.css">
-<link rel="stylesheet" href="../../css/head0.css">
-<link rel="stylesheet" href="../../css/sidebar.css">
+<link rel="stylesheet" href="/css/mpbProg_Num.css">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-
 </head>
 
 <body>
-	<header class="head_container">
-        <nav class="head">
-            <div class="head_left">
-                <div class="logo">
-                    <a href="">
-                        <img src="../../img/logo.svg" alt="">
-                    </a>
-                </div>
-                <div class="menu">
-                    <a href="">일반세탁소</a>
-                    <a href="">코인세탁소</a>
-                </div>
-            </div>
-            <div class="head_right">
-                <a href="">회원가입</a>
-                <a href="">로그인</a>
-                <a href="">FAQ</a>
-            </div>
-        </nav>
-    </header>
+	<jsp:include page="/jsp/header2.jsp"/>
 	<div class="body_container">
 		<div class="my_container">
-			<div class="side">
-				<button>처리중</button>
-				<button>완 료</button>
-				<button>매출관리</button>
-			</div>
-			<div class="side_sub">
-				<button>품목별</button>
-				<button>주문번호별</button>
-			</div>
+			<jsp:include page="sidebar_bs.jsp"/>
 			<div class="content">
 				<div class="content_header">
 					<p>전체 개수 : <span></span> 개</p>
@@ -80,19 +56,6 @@
 							<th>상태변경</th>
 						</tr>
 					</table>
-					<table class="processList">
-						<tr>
-							<td>3월 16, 2021</td>
-							<td>992810</td>
-							<td>홍길동</td>
-							<td>와이셔츠<br>가죽모피<br>기타</td>
-							<td>1<br>2<br>2</td>
-							<td>1000<br>40000<br>30000</td>
-							<td>처리중<br>완료<br>처리중</td>
-							<td>D-2</td>
-							<td><div><button>주문취소</button><button>작업완료</button></div></td>
-						</tr>						
-					</table>
 				</div>
 				<div class="page_btn_container">
 					<ul class="page_btn">
@@ -119,7 +82,7 @@
 		var pageObj={//세션에서 정보를 받아오는건 독립된 js파일에서 불가능, jsp 내에서만 가능하기 때문에 여기서 값을 받아준다.
                 bno:1,//더미번호 (추후 세션에서 받아올 예정)
 				currentPageNum:1,//현재 페이지 1
-				listType:3,//처리중-주문번호별 조회
+				listType:3,//처리중-주문번호별
 				order:1 //주문번호 순
             };
 	</script>

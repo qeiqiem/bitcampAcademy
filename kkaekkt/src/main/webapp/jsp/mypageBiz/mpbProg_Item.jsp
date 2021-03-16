@@ -10,46 +10,16 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
-<link rel="stylesheet" href="/css/mypageBs_ing.css">
-<link rel="stylesheet" href="/css/all.css">
-<link rel="stylesheet" href="/css/head0.css">
-<link rel="stylesheet" href="/css/sidebar.css">
+<link rel="stylesheet" href="/css/mpbProg_Item.css">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 
 </head>
 
 <body>
-	<header class="head_container">
-        <nav class="head">
-            <div class="head_left">
-                <div class="logo">
-                    <a href="">
-                        <img src="/img/logo.svg" alt="">
-                    </a>
-                </div>
-                <div class="menu">
-                    <a href="">일반세탁소</a>
-                    <a href="">코인세탁소</a>
-                </div>
-            </div>
-            <div class="head_right">
-                <a href="">회원가입</a>
-                <a href="">로그인</a>
-                <a href="">FAQ</a>
-            </div>
-        </nav>
-    </header>
+	<jsp:include page="/jsp/header2.jsp"></jsp:include>
 	<div class="body_container">
 		<div class="my_container">
-			<div class="side">
-				<button>처리중</button>
-				<button>완 료</button>
-				<button>매출관리</button>
-			</div>
-			<div class="side_sub">
-				<button>품목별</button>
-				<button>주문번호별</button>
-			</div>
+			<jsp:include page="sidebar_bs.jsp"></jsp:include>
 			<div class="content">
 				<ul class="laundry_nav">
 					<li value=0 class="selected">전체보기</li>
@@ -125,7 +95,8 @@
 				listType:2,//품목별 조회
 				order:1 //주문번호 순
             };
+		var rsvObj={};
 	</script>
-	<script src="/js/mypageBs_ing.js"></script>
+	<script src="/js/mpbProg_Item.js"></script>
 </body>
 </html>

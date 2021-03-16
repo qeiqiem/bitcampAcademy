@@ -5,7 +5,8 @@
 		
 	</insert>
 	<update id="cancelRsv">
-		UPDATE reservation SET state=4 WHERE rno=#{rno}; 
+		UPDATE reservation SET stno=4 WHERE rno=#{rno};
+		UPDATE rsv_laundry SET stno=4 WHERE rno=#{rno};
 	</update>
 	<select id="getRsv" resultType="reservation">
 		SELECT * FROM reservation WHERE mno=#{mno};
@@ -43,11 +44,17 @@
 		</if>
 		LIMIT #{rowStartNum},#{POSTS_PER_PAGE};
 	</select>
-	<select id="getRsvListBs_rn" resultType="reservation"> <!-- 업체회원 주문번호별 리스트 출력 -->
-		<if test="listType==3">
+	<select id="getRsvListBs_rn" resultType="reservation"> 
+		<if test="listType==3"><!-- 업체회원 주문번호별 리스트 출력 -->
 			SELECT r.rno rsvNum,rdate rsvdate,mname,DATEDIFF(ddate,CURDATE()) dDay 
 			FROM member m,reservation r
-			WHERE r.mno=m.mno AND bno=#{bno} AND stno=1  
+			WHERE r.mno=m.mno AND bno=#{bno} AND stno=1
+		<if test="order==1">
+			ORDER BY r.rno DESC
+		</if>
+		<if test="order==2">
+			ORDER BY dDay, r.rno DESC
+		</if>
 			LIMIT #{rowStartNum},#{POSTS_PER_PAGE};
 		</if>
 		<if test="listType==4"> <!-- 업체회원 완료목록 출력 -->
@@ -74,7 +81,7 @@
 			AND r.rno=#{rsvNum};
 	</select>
 	<select id="getLaundry_st" resultType="laundry"> <!-- 상태가 표시된 품목 리스트 출력 -->
-			SELECT lname, cnt count, cnt*price price,stname state 
+			SELECT lname laundry, cnt count, cnt*price price,stname state 
 			FROM reservation r, rsv_laundry r_l, business b, bsn_laundry b_l, laundry_type lt,state s
 			WHERE r.rno=r_l.rno AND r.bno=b.bno AND b.bno=b_l.bno AND lt.lno=r_l.lno AND b_l.lno=r_l.lno AND r_l.stno=s.stno
 			AND r.rno=#{rsvNum};
@@ -85,18 +92,15 @@
 			<when test="listType==2"> <!-- 품목별 조회일 경우 -->
 				rsv_laundry r_l, laundry_type lt, member m,reservation r
 			</when>
-			<when test="listType==4"> <!-- 완료목록 조회일 경우 -->
-				reservation r, member m 
-			</when>
 			<otherwise> <!-- 일반 조회일 경우 -->
-				reservation r
+				reservation r, member m
 			</otherwise>
 		</choose>
 		<where>
 			<if test="listType==2"> <!-- 품목별 조회일 때 -->
 				AND r_l.lno=lt.lno AND r.mno=m.mno AND r.rno=r_l.rno
 			</if>
-			<if test="listType==4"> <!-- 완료목록 조회일 때 -->
+			<if test="listType!=2"> <!-- 일반 조회일 때 -->
 				AND r.mno=m.mno
 			</if>
 			<if test='bno==0'> <!-- 일반회원의 주문조회 -->
@@ -117,10 +121,7 @@
 			<if test="listType==4">
 				AND (stno=2 OR stno=3) <!-- 완료목록일 시엔 OR 조건 추가 -->
 			</if>
-			<if test="listType==2">
-				AND r.stno=1
-			</if>
-			<if test="listType!=4 and listType!=2">
+			<if test="listType!=4"> <!-- 완료목록이 아닐 때 -->
 				AND r.stno=1
 			</if>
 		</where>

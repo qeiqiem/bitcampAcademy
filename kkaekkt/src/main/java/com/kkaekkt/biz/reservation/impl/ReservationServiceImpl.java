@@ -37,14 +37,20 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 	@Override
 	public ReservationListVO getRsvListBs(ReservationListVO vo) {
-		vo.setTotalPostCount(reservationDAO.countList(vo)).booleanSet();
+		vo.setTotalPostCount(reservationDAO.countList(vo)).booleanSet(); //행 개수 출력
 		System.out.println(vo.getTotalPostCount()+" : 포스트 개수");
-		if(vo.getListType()==2) {
+		if(vo.getListType()==2) { //품목별 리스트라면,
 			vo.setRsvListLno(reservationDAO.getRsvListBs_ld(vo));
-		} else {
+		} else { //품목별 리스트가 아니라면
 			vo.setRsvListRno(reservationDAO.getRsvListBs_rn(vo));
-			for(ReservationVO rsvVO : vo.getRsvListRno()) {
-				rsvVO.setLaundryList(reservationDAO.getLaundryList(rsvVO));
+			if(vo.getListType()==3) { //상태 정보가 추가된 품목 리스트라면
+				for(ReservationVO rsvVO : vo.getRsvListRno()) {
+					rsvVO.setLaundryList(reservationDAO.getLaundryList_st(rsvVO));
+				}
+			} else { //상태정보가 필요하지 않은 리스트라면
+				for(ReservationVO rsvVO : vo.getRsvListRno()) {
+					rsvVO.setLaundryList(reservationDAO.getLaundryList(rsvVO));
+				}				
 			}
 		}
 	return vo;

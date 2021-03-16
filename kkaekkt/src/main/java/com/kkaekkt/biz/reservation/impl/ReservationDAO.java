@@ -36,6 +36,9 @@ public class ReservationDAO {
 	public List<LaundryVO> getLaundryList(ReservationVO vo) {
 		return mybatis.selectList("getLaundry",vo);
 	}
+	public List<LaundryVO> getLaundryList_st(ReservationVO vo) {
+		return mybatis.selectList("getLaundry_st",vo);
+	}
 	public int countList(ReservationListVO vo) {
 		int result = mybatis.selectOne("countList",vo);
 		return result;
