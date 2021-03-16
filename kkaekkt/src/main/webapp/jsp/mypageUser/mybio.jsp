@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <link rel="stylesheet" href="/css/mybio.css">
-<script src="/js/mybio.js"></script>
+
 </head>
 
 <body>
@@ -32,24 +32,22 @@
                 <table>
                     <tr>
                         <td>아이디</td>
-                        <!--<td><input type="text" id="read" name="id" value="${sessionScope.member.id}" readonly></td>-->
-                        <td><input type="text" id="read" name="id" value="tnwjd" readonly></td>
+                       <td><input type="text" id="read" name="id" value="" readonly></td>
                     </tr>
                     <tr>
                         <td>이름</td>
-                        <!--<td><input type="text" id="read" name="name" value="${sessionScope.member.name}" readonly></td>-->
-                        <td><input type="text" id="read" name="name" value="양수정" readonly></td>
+                    <td><input type="text" id="read" name="name" value="" readonly></td>
                     </tr>
                     </tr>
                     <tr>
                         <td>비밀번호</td>
-                        <td><input name="password" type="password" id="curpwd"> <button type="button" id="btn_checkpwd">수 정</button><label id="checkpwd"></label>
+                        <td><input name="password" type="password" id="curpwd" value=""> <button type="button" id="btn_checkpwd">수 정</button><label id="checkpwd"></label>
                         </td>
                     </tr>
                     <div id="btn_mybiopwd">
                         <tr>
                             <td> 새 비밀번호</td>
-                            <td><input type="password"><label id="checkval"></label></td>
+                            <td><input type="password" id="pwd" ><label id="checkval"></label></td>
                         </tr>
                         <tr>
                             <td>새 비밀번호 확인</td>
@@ -58,37 +56,26 @@
                         </tr>
                     </div>
                     <tr>
-                        <td><input type="hidden" name="mno" value="1" id="mno"> <!-- 회원번호 -->
+                        <td><input type="hidden" name="mno" value="" id="mno"> <!-- 회원번호 -->
                    
                     </tr>
                 </table>
                     <div id="mybioPhone">
                         연락처<br>
                        
-                        <!-- 
-                        <%--
-                        <c:set var="tel" value="${fn:split(sessionScope.member.phone, '-')}">
-                        <input id="phone1" type="text" value="${fn:split(sessionScope.member.phone, '-')[0]}"> - 
-                        <input id="phone2" type="text" value="${fn:split(sessionScope.member.phone, '-')[1]}"> -
-                        <input id="phone3" type="text" value="${fn:split(sessionScope.member.phone, '-')[2]}">
-                        </c:set>
-                        --%>
-                        -->
-                     
-                      	<input id="phone1" type="text" maxlength='3'> - 
+                     <input id="phone1" type="text" maxlength='3'> - 
                         <input id="phone2" type="text" maxlength='4'> -
                         <input id="phone3" type="text" maxlength='4'>
                         <input name="phone" type="tel" id="phone" value="" hidden>
                     </div>
                 <div id="mybioBirth">
                     생년월일<br>
-                    <!--<input name="birth" type="text" id="input2" value="${sessionScope.member.id}"><label id="checkbirth" value=""></label>-->
-                    <input name="birth" type="text" id="input2" value=""><label id="checkbirth" value=""></label>
+                   <input name="birth" type="text" id="input2" value=""><label id="checkbirth" value=""></label>
                 </div>
                 <div>
                     <!-- 이메일도 api로 하기로 했던 거 같아ㅓ 일단 인풋박스만 만들었습니다 -->
                     이메일<br>
-                    <input name="email" type="email" value="${sessionScope.member.id}" id="input2"> 
+                    <input name="email" type="email" value="" id="input2"> 
                     <button type="button" id="btn_checkemail">이메일인증</button><label id="checkemail" value=""></label>
                 
                 </div>
@@ -109,7 +96,21 @@
         </form> 
         </div>
     </div>
-	
+	<script>
+            var pageObj={//세션에서 정보를 받아오는건 독립된 js파일에서 불가능, jsp 내에서만 가능하기 때문에 여기서 값을 받아준다.
+                mno:'${sessionScope.member.mno}',
+                id:'${sessionScope.member.id}',
+                name:'${sessionScope.member.name}',
+                password:'${sessionScope.member.password}',
+                phone:'${sessionScope.member.phone}',
+                birth:'${sessionScope.member.birth}',
+                email:'${sessionScope.member.email}',				
+                state:${sessionScope.member.state}
+            };
+        	
+           
+</script>
+	<script src="/js/mybio.js"></script>
 
 
 

@@ -44,6 +44,7 @@ public class UserController {
 	}
 	@RequestMapping(value="/updatePs.do", method=RequestMethod.POST)
 	public String Update(PersonVO vo) {
+		System.out.println(vo);
 		userService.updateUser(vo);
 		return "index.jsp";
 	}
@@ -52,15 +53,14 @@ public class UserController {
 		@RequestMapping(value = "/login.do", method = RequestMethod.POST)
 		public String Login(PersonVO vo, HttpSession session) {
 			System.out.println("로그인처리");
-			userService.getUser(vo);
+			PersonVO member = userService.getUser(vo);
+			session.setAttribute("member", member);
 			
-			session.setAttribute("member", vo.getName());
-			
-			if(vo.getId() == null || vo.getPassword() == null) {
+			if(member.getId() == null || member.getPassword() == null) {
 				System.out.println("사용자 정보가 없습니다.");
-				return "login.jsp";
+				return "/jsp/login/login.jsp";
 			}else{	
-				return "index.jsp";
+				return "/jsp/index.jsp";
 			}
 
 		}

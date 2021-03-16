@@ -9,7 +9,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="mypagePs.do" method="POST">
+    <form action="/login.do" method="POST">
         <input type="text" name="mno" value=1>
         <input type="text" name="state" value=1>
         <input type="submit" value="마이페이지">

@@ -1,10 +1,29 @@
-var fomatpw = 0;
+	var fomatpw = 0;
+	var fomatnewpw = 0;
 	var fomatbirth = 0;			// 1일때가 유효성 통과했을때
     var content = document.getElementsByClassName("content");
+   
         window.onload = function () {
-                  
+        
+            	//값 넣어주기
+            	//function inputval(pageObj){
+            	document.getElementsByName('mno')[0].value = pageObj["mno"];
+            	document.getElementsByName('id')[0].value = pageObj["id"];
+            	document.getElementsByName('name')[0].value = pageObj["name"];
+            	var phoneSplit = pageObj["phone"].split('-');
+            	document.getElementById('phone1').value = phoneSplit[0];
+            	document.getElementById('phone2').value = phoneSplit[1];
+            	document.getElementById('phone3').value = phoneSplit[2];
+            	document.getElementsByName('birth')[0].value = pageObj["birth"];
+            	document.getElementsByName('email')[0].value = pageObj["email"];
+            	//}
+       
+
+            	
+           // input button 초기값 비활성화  	
+            document.getElementsByClassName("side_sub")[0].style.display = "none"      
             var inputli = content[0].getElementsByTagName('input');
-            for (var i = 3; i < inputli.length; i++) {
+            for (var i = 2; i < inputli.length; i++) {
                 inputli[i].disabled = true;
             }
         
@@ -20,7 +39,7 @@ var fomatpw = 0;
                 document.getElementById("btn_mybio").style.display = "none";
                 document.getElementById("btn_mybioClick").style.display = "block";
                 //인풋창 활성화
-                for (var i = 3; i < inputli.length; i++) {
+                for (var i = 2; i < inputli.length; i++) {
                     if (i != 3 && i != 4) {
                         inputli[i].disabled = false;
                     }
@@ -58,10 +77,11 @@ var fomatpw = 0;
                 // 로그인된 회원의 비밀번호와 일치하는지 확인
                 var pwd = inputli[2].value
                 // 일치
-                if (pwd == 1) {
+                if (pwd == pageObj["password"]) {
                 	formatpw = 1;
                 	document.getElementById("checkpwd").innerText
-                    = "";
+                    = " 아래 새 비밀번호를 입력하세요";
+                    document.getElementById("checkpwd").style.color= "rgb(116, 116, 116)";
                 	
                     // 기존 비밀번호창 비활성화
                     inputli[2].disabled = true;
@@ -94,6 +114,7 @@ var fomatpw = 0;
                         = " 비밀번호 양식과 맞지 않습니다. (특수문자,문자,숫자 포함 8~15자리이내)";
                 	}
                 } else {
+                	fomatnewpw = 1;
                     document.getElementById("checkval").innerText
                         = "";
                 	
@@ -103,9 +124,9 @@ var fomatpw = 0;
 
             // 새 비밀번호, 새 비밀번호 확인 인풋 값 같은지 비교 => 비밀법호 업데이트 
             document.getElementById("btn_updatepwd").onclick = function undatePwd() {
-                if (inputli[3].value == inputli[4].value ) {
+                    if ($('#pwd').val == $('#newpwd').val && fomatnewpw == 1 ) {
                 	 $.ajax({ 
-                     	url :'updatePs.do', 
+                     	url :'/updatePs.do', 
                      	type : 'post', 
                      	dataType : 'json', 
                      	data : { 
@@ -113,7 +134,7 @@ var fomatpw = 0;
                      		password : $('#newpwd').val(), 
                      	}, 
                      	success: function(data){ 
-                     		console.log("성공"); 
+                     		alert("변경완료");
                      	} 
                      });
                 	 
@@ -130,12 +151,19 @@ var fomatpw = 0;
                         = " 변경이 완료되었습니다, 이후 프로필 수정시, 변경된 비밀번호로 입력해주세요.";
                     document.getElementById("match").style.color = "rgba(254, 54, 54, 0.55)";
 
-                } else {
-                	
+                } 
+                if(fomatnewpw == 0){
+                		document.getElementById("match").innerText
+                        = "입력형식을 확인하세요";
+                    	inputli[3].value = null;
+                    	inputli[4].value = null;
+                } 
+                if($('#pwd').val != $('#newpwd').val){
                     document.getElementById("match").innerText
                         = " 새 비밀번호와 일치하지 않습니다.";
                     inputli[4].value = null;
                 }
+                
             }
 
             // 생년월일 입력형식 확인
