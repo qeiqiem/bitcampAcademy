@@ -1,7 +1,7 @@
 $(document).ready(function() {
     initSide();
-    ajax(pageObj); //처음 마이페이지 들어왔을 때, 진행중 주문 항목 출력
     initEvent();
+    ajax(pageObj); //처음 마이페이지 들어왔을 때, 진행중 주문 항목 출력
 });
 function initEvent() {
     $('.rsvList').on("click",".detailBtn",function() { // 버블링으로 생성된 주문에 클릭 이벤트 활성화
@@ -47,6 +47,31 @@ function initEvent() {
         if(pageObj.currentPageNum!=JSON.parse($(this).html())) {
             pageObj.currentPageNum=JSON.parse($(this).html());
             ajax(pageObj);
+        }
+    });
+    $('.rsvList').on('click','i.fa-heart',function() {
+        var rno=JSON.parse($('.rsvTable tr:nth-child(3) td:nth-child(2)')[$(this).attr("value")].innerHTML);
+        likeObj.rsvNum=rno;
+        if($(this).hasClass('fas')) {
+            $(this).removeClass('fas');
+            $(this).addClass('far');
+            likeObj.like=0;
+            like(likeObj);
+        }else {
+            $(this).addClass('fas');
+            $(this).removeClass('far');
+            likeObj.like=1;
+            like(likeObj);
+        }
+    });
+}
+
+function like(likeObj) {
+    $.post({
+        url:"/like.do",
+        data:likeObj,
+        success:function() {
+        	ajax(pageObj);
         }
     });
 }
@@ -109,20 +134,25 @@ function initSide() {
     $('.side_sub button').eq(0).addClass("side_sub_select");
 
     $('.side_sub button').click(function(){
-        $(this).addClass("side_select");
-        $(this).siblings().removeClass("side_select");
+        $(this).addClass("side_sub_select");
+        $(this).siblings().removeClass("side_sub_select");
     });
 }
 function printlist(list) {
+    var btnText;
+    if(list[0].state=='세탁 중') {
+        btnText='주문취소';
+    } else {
+        btnText='리뷰쓰기';
+    }
     $('.rsvList').children().remove();
-	
     $.each(list, function(key,value) {
         $('.rsvList').append(
             '<div class="rsvBox">' +
                 '<table class="rsvTable">'+
                     '<tr>'+
                         '<th colspan="2">'+value.bname+'</th>'+
-                        '<td><i class="fas fa-heart like"></i></td>'+
+                        '<td><i class="'+(value.like==1?'fas':'far')+' fa-heart like" value='+key+'></i></td>'+
                     '</tr>'+
                     '<tr>' +
                         '<td class="column">주문일시</td>' +
@@ -144,7 +174,7 @@ function printlist(list) {
                 '<div class="btnDiv">'+
                     '<button>채팅상담</button>'+
                     '<button class="detailBtn" value="'+key+'">상세보기</button>'+
-                    '<button>리뷰쓰기</button>'+
+                    (value.timeOut==0&&btnText=='주문취소'?'<button disabled>':'<button>')+btnText+'</button>'+
                 '</div>'+
                 '<div class="detail none" id="detail'+key+'">'+
                 '<hr>'+

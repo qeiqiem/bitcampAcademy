@@ -50,6 +50,7 @@
 				listType:1,
                 state:1
             };
+			var likeObj={};
     </script>
     <script src="/js/mypagePs.js"></script>
 </body>

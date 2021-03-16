@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.kkaekkt.biz.reservation.LaundryVO;
 import com.kkaekkt.biz.reservation.ReservationListVO;
 import com.kkaekkt.biz.reservation.ReservationService;
+import com.kkaekkt.biz.reservation.ReservationVO;
 import com.kkaekkt.biz.user.BusinessVO;
 import com.kkaekkt.biz.user.PersonVO;
 
@@ -53,10 +54,12 @@ public class ReservationController {
 	}
 	@RequestMapping(value="/complete.do", method=RequestMethod.POST)
 	@ResponseBody
-	public String completeRsv(LaundryVO vo) {
-		System.out.println("완료진입 :"+vo);
-		reservationService.cancel(vo);
-		return "완료";
+	public void completeRsv(LaundryVO vo) {
+		reservationService.complete(vo);
 	}
-	
+	@RequestMapping(value="/like.do", method=RequestMethod.POST)
+	@ResponseBody
+	public void like(ReservationVO vo) {
+		reservationService.like(vo);
+	}
 }

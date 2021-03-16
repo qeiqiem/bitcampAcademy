@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="reservationDAO">
-	<insert id="insertRsv">
-		
+	<insert id="likeOn">
+		INSERT INTO liked VALUES ((SELECT bno FROM reservation WHERE rno=#{rsvNum}),(SELECT mno FROM reservation WHERE rno=#{rsvNum}));	
 	</insert>
+	<delete id="likeOff">
+		DELETE FROM liked WHERE bno=(SELECT bno FROM reservation WHERE rno=#{rsvNum}) AND mno=(SELECT mno FROM reservation WHERE rno=#{rsvNum});
+	</delete>
+	<select id="checkLiked" resultType="_int">
+		SELECT COUNT(l.bno) FROM liked l,(SELECT mno,bno FROM reservation WHERE rno=#{rsvNum}) r WHERE l.mno=r.mno AND l.bno=r.bno;
+	</select>
 	<update id="cancel">
 		<if test="laundry!=null"> <!-- 품목 삭제일경우 -->
 			UPDATE rsv_laundry SET stno=4 WHERE rno=#{rsvNum}
@@ -26,11 +32,11 @@
 	</update>
 	<select id="getRsvListPs" resultType="reservation"> <!-- 일반회원 예약리스트 출력 -->
 		<![CDATA[		
-		SELECT r.rno rsvNum,rdate rsvDate,bname,phone,TIMESTAMPDIFF(HOUR,rdate,CURDATE())<1 timeOut
-		FROM reservation r, business b
-		WHERE r.bno=b.bno
+		SELECT r.rno rsvNum,rdate rsvDate,bname,phone,TIMESTAMPDIFF(HOUR,rdate,CURDATE())<1 timeOut, stname state
+		FROM reservation r, business b, state s
+		WHERE r.bno=b.bno AND r.stno=s.stno
 		AND r.mno=#{mno}
-		AND stno=#{state}
+		AND r.stno=#{state}
 		ORDER BY rno DESC
 		LIMIT #{rowStartNum},#{POSTS_PER_PAGE};]]>
 	</select>
@@ -87,15 +93,8 @@
 			LIMIT #{rowStartNum},#{POSTS_PER_PAGE};
 		</if>
 	</select>
-	
-	<select id="getLaundry" resultType="laundry"> <!-- 일반 품목 리스트 출력 -->
-			SELECT lname laundry, cnt count, cnt*price price
-			FROM reservation r, rsv_laundry r_l, business b, bsn_laundry b_l, laundry_type lt 
-			WHERE r.rno=r_l.rno AND r.bno=b.bno AND b.bno=b_l.bno 
-			AND lt.lno=r_l.lno AND b_l.lno=r_l.lno
-			AND r.rno=#{rsvNum};
-	</select>
-	<select id="getLaundry_st" resultType="laundry"> <!-- 상태가 표시된 품목 리스트 출력 -->
+
+	<select id="getLaundry" resultType="laundry"> <!-- 상태가 표시된 품목 리스트 출력 -->
 			SELECT lname laundry, cnt count, cnt*price price,stname state 
 			FROM reservation r, rsv_laundry r_l, business b, bsn_laundry b_l, laundry_type lt,state s
 			WHERE r.rno=r_l.rno AND r.bno=b.bno AND b.bno=b_l.bno 
