@@ -5,6 +5,7 @@
 		<button>처리중</button>
 		<button>완 료</button>
 		<button>매출관리</button>
+		<button>사양관리</button>
 		<button>프로필편집</button>
 	</div>
 	<div class="side_sub">
