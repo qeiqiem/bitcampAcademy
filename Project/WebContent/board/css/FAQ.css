@@ -1,0 +1,44 @@
+@charset "UTF-8";
+hr {
+  margin: 20px 0;
+  display: block;
+  /* height: 2px; */
+  border: 0;
+  border-top: 1px solid rgba(216, 216, 216, 0.5);
+  padding: 0;
+}
+
+.post_container{
+	width:800px;
+}
+
+.title h2 {
+  margin-bottom: 20px;
+}
+
+p {
+  line-height: 160%;
+}
+
+.faqs li {
+  line-height: 170%;
+}
+
+.question {
+  font-weight: bolder;
+  margin-bottom: 10px;
+}
+
+.faqs {
+  margin: 40px;
+  margin-top: 60px;
+}
+
+.post_container span {
+  font-weight: bolder;
+  /* color:rgb(169, 211, 198); */
+}
+
+.no {
+  padding-left: 20px;
+}

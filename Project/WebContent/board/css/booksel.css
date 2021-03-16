@@ -1,0 +1,157 @@
+@import
+url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+body,div,p,ul,ol,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,table,tr,th,td,form,fieldset,legend,input,label,textarea,select,button{margin:0; padding:0;}
+body,h1,h2,h3,h4,h5,h6 {font-size:12px; font-family: 'Noto Sans KR', sans-serif; color:#333;}
+a {text-decoration:none; color:#333;}
+img, fieldset {border:none; vertical-align: middle;}
+ul,ol,li {list-style: none;}
+strong,em,address {font-weight:normal; font-style:normal;}
+table {border-collapse:collapse;}
+
+.clearfix:after { /*날아갈경우 높이 지정*/
+    content:"";
+    display:block;
+    clear:both;
+}
+
+#wrap {
+    width: 1160px;
+    margin: 0 auto;
+}
+#conWrap {
+    padding : 30px;
+    width: 810px;
+    position: relative;
+    background-color: #fff;
+}
+#right {
+    float:right;
+}
+#conWrap #titleWrap {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+#conWrap #titleWrap #header > p {
+    font-size: 1.2em;
+    color: #444;
+    margin-bottom: 20px;
+}
+#conWrap #titleWrap #header > h1 {
+    font-size: 3em;
+    float:right;
+}
+
+#conWrap #titleWrap > h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+#profile{
+    height: 70px;
+    line-height: 70px;
+    margin-right: 50px;
+}
+#profile > span {
+    display: inline-block;
+    font-size: 30px;
+}
+#profile > a {
+    margin-left: 10px;
+    font-size: 1.4em;
+}
+#context {
+    padding-bottom: 30px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    font-size: 1.4em;
+}
+#context > p {
+    font-size: 2.2em;
+    margin-bottom: 10px;
+}
+#textWrap {
+    height:auto;
+    padding: 20px;
+    background-color: #f8f8f8;
+    margin-top:50px;
+    margin-bottom: 200px;
+}
+#textWrap > p {
+    font-size: 1.4em;
+    margin-bottom: 20px;
+}
+.box_textarea {
+    background-color: #fff;
+    height: auto;
+}
+.box_textarea > textarea {
+    color: rgb(63, 34, 34);
+    width: 100%;
+    height:80px;
+    border: none;
+    resize: none;
+}
+#inputWrap {
+    background-color: #fff;
+    height: 77px;
+    padding: 20px;
+    /* position: absolute; */
+}
+#inputWrap > input {
+	color: #000;
+    float:right;
+    width: 60px;
+    height:34px;
+    border-radius: 3px;
+    border: none;
+    outline: 0;
+    cursor: pointer;
+    line-height: 30px;
+}
+#inputWrap > input:hover {
+    background-color: #acd4c8;
+    color: #fff;
+    transition: 0.6s;
+}
+#joinWrap > span {
+    float: left;
+    padding-left: 300px;
+    margin-right: 60px;
+    text-align: center;
+}
+#joinWrap > span > p {
+    font-size: 1.4em;
+}
+
+#joinWrap {
+    position: fixed;
+    left:0;
+    bottom: 0;
+    width: 100%;
+    background-color: #fff;
+    padding: 50px 30px 50px 0;
+    box-shadow: 7px 0 7px #adadad;
+}
+#btnWrap {
+	margin-left:500px;
+	width: 810px;
+	text-aline: center;
+}
+#testBtn {
+	font-size:1.4em;
+	border-radius: 15px;
+	width: 300px;
+	height:46px;
+}
+#testBtn:hover {
+	background-color: #acd4c8;
+	transition: 0.7s;
+	color: #fff;
+}
+
+
+/*MountainSelect*/
+#location {
+	margin-bottom: 400px;
+}
