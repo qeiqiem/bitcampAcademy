@@ -24,6 +24,9 @@ background-color: var(--gray-color);
 width: 85%;
 margin: 10px 0 20px 0;
 }
+table tr {
+    padding-bottom: 5px;
+}
 .content {
 float:left;
 width: 65vw;
@@ -51,7 +54,6 @@ color: var(--text-gray);
 #card .fa-star {
     color: var(--text-red);
 }
-
 #mymark_title {
     display: inline-block;
     color: var(--black-color)
@@ -65,10 +67,21 @@ color: var(--text-gray);
     font-size: 25px;
     padding: 5px;
 }
+#bsaddress{
+    color: var(--black-color);
+}
+#bsschedule{
+    border: 0.2px solid var(--gray-color);
+    margin-right: 5px;
+    font-size: 12px;
+}
+#bsphone{
+    color: darkolivegreen;
+}
 #btn_detail{
     border: none;
-    background-color: none;
-    color: var(--key-color);
+    background: none;
+    color: steelblue;
 }
 </style>
 <script>
@@ -96,13 +109,13 @@ color: var(--text-gray);
                             <td id="bsaddress">서울 마포구 독막로38길 22 105-107호</td>
                         </tr>
                         <tr>
-                            <td>(지번)<span>대흥로 330-2</span></td>
+                            <td>(지번) <span>대흥로 330-2</span></td>
                         </tr>
                         <tr>
-                            <td>영업중<span>매일 00:00~24:00</span></td>
+                            <td><span id="bsschedule">영업중</span><span>매일 00:00~24:00</span></td>
                         </tr>
                         <tr>
-                            <td id="bsschedule">02-1234-5678 <button id="btn_detail">상세보기</button></td>
+                            <td id="bsphone">02-1234-5678 <button id="btn_detail">상세보기</button></td>
                         </tr>
                     </table>
                 </div>
@@ -122,10 +135,10 @@ color: var(--text-gray);
                             <td>(지번)<span>대흥로 330-2</span></td>
                         </tr>
                         <tr>
-                            <td>영업중<span>매일 00:00~24:00</span></td>
+                            <td><span id="bsschedule">영업중</span><span>매일 00:00~24:00</span></td>
                         </tr>
                         <tr>
-                            <td id="bsschedule">02-1234-5678 <button id="btn_detail">상세보기</button></td>
+                            <td id="bsphone">02-1234-5678 <button id="btn_detail">상세보기</button></td>
                         </tr>
                     </table>
                 </div>
