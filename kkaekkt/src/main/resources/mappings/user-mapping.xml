@@ -5,6 +5,9 @@
 			INSERT INTO account (id,password) VALUES (#{id},#{password});
 			INSERT INTO member VALUES ((SELECT MAX(mno) FROM account),#{name},#{phone},#{birth},#{address},#{email});
 	</insert>
+	<delete id="likeOff">
+			DELETE FROM liked WHERE mno=#{mno} AND bno=#{bno};
+	</delete>
 	<insert id="insertBs" parameterType="business">
 			INSERT INTO account (id,password) VALUES (#{id},#{password});
 			INSERT INTO business (mno,bname,address,phone,bkno,acno,email,typeNum)  
@@ -52,13 +55,15 @@
 			WHERE ac.mno=mb.mno 
 			AND ac.mno=#{mno};
 	</select>
-	<select id="getLikedBs" resultType="business"> 
-			SELECT count(b.mno) commCount,bname,eval,address,phone
-			FROM comments c, business b,liked l,(SELECT AVG(grade) eval, bno FROM evaluation GROUP BY bno) e
-			WHERE c.bno=b.bno AND l.bno=b.bno AND e.bno=b.bno
-			AND l.mno=#{mno}
-			GROUP BY c.bno
-			LIMIT #{rowStartNum},#{POSTS_PER_PAGE};
+	<select id="getLikedBs" resultType="business">
+		SELECT IFNULL(comm,0) commCount,IFNULL(eCount,0) eCount,l.bno bno,bname,IFNULL(ROUND(eval,1),0) eval,address,phone
+		FROM business b ,liked l 
+		LEFT OUTER JOIN (SELECT AVG(grade) eval,count(mno) eCount,bno FROM evaluation GROUP BY bno) e ON l.bno=e.bno 
+		LEFT OUTER JOIN (SELECT count(mno) comm, bno FROM comments GROUP BY bno) c ON c.bno=e.bno
+		WHERE l.bno=b.bno
+		AND l.mno=#{mno}
+		GROUP BY b.bno
+		LIMIT 0,5;
 	</select>
 	<select id="countList" resultType="_int">
 		SELECT count(bno) FROM liked WHERE mno=#{mno};

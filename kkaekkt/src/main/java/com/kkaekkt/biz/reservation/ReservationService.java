@@ -1,4 +1,5 @@
 package com.kkaekkt.biz.reservation;
+
 import com.kkaekkt.biz.comm.LaundryVO;
 
 public interface ReservationService {

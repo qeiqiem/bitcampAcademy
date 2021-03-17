@@ -9,6 +9,7 @@ function ajax(pageObj) { //ajax로 리스트 받아오기
         url:"/getLikedBs.do",
         data:pageObj,
         success: function(data) {
+        	console.log(data);
             var liked=JSON.parse(data);
             var list=liked.bsList;
             printList(list);
@@ -49,6 +50,21 @@ function initEvent() {
             ajax(pageObj);
         }
     });
+    $('.content').on('click','i.fa-heart',function() {
+        var bno=JSON.parse($('.bsname span')[$(this).attr("value")].innerHTML.replace('#',''));
+        likeObj.bno=bno;
+        likeOff(likeObj);
+    })
+}
+function likeOff(likeObj) {
+    $.post({
+        url:"/likeOff.do",
+        data:likeObj,
+        success:function() {
+            console.log("삭제 성공?")
+            ajax(pageObj);
+        }
+    })
 }
 function initSide() {
     $('.side button').eq(1).addClass("side_select");
@@ -94,13 +110,13 @@ function initPageObj(data) {
 function printList(list) {
     $('.card').remove();
     $.each(list,function(key,value){
-    $('.content').append(
+    $('.page_btn_container').before(
         '<div class="card">'+
             '<div class="info">'+
-                '<p class="bsname">'+value.bname+'</p>'+
+                '<p class="bsname">'+value.bname+'<span style="font-size:14px">#'+value.bno+'</span></p>'+
                 '<table>'+
                     '<tr>'+
-                        '<td><span>'+value.eval+'<i class="fas fa-star"></i> </span>예약 수 | 리뷰 '+value.commCount+'</td>'+
+                        '<td><span>'+value.eval+'<i class="fas fa-star"></i> </span>'+value.eCount+'건 | 리뷰 '+value.commCount+'</td>'+
                     '</tr>'+
                     '<tr>'+
                         '<td class="bsaddress">'+value.address+'</td>'+
@@ -116,7 +132,7 @@ function printList(list) {
                     '</tr>'+
                 '</table>'+
             '</div>'+
-            '<button class="btn_mark"><i class="fas fa-heart"></i></button>'+
+            '<button class="btn_mark"><i class="fas fa-heart" value='+key+'></i></button>'+
         '</div>');
     });
 }

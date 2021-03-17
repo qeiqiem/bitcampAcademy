@@ -29,7 +29,11 @@ public class UserController {
 //		userService.insertUser(vo);		
 //		return "Join.html";
 //	}
-	
+	@RequestMapping(value="/likeOff.do",method=RequestMethod.POST)
+	@ResponseBody
+	public void likeOff(BusinessVO vo) {
+		userService.likeOff(vo);
+	}
 	@RequestMapping(value="/getLikedBs.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
 	@ResponseBody
 	public String getLikedBs(BusinessListVO vo) {

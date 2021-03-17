@@ -27,10 +27,19 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public void likeOff(BusinessVO vo) {
+		userDao.likeOff(vo);
+	}
+
+	@Override
 	public BusinessListVO getLikedBs(BusinessListVO vo) {
 		vo.setTotalPostCount(userDao.countList(vo)); // 총 데이터행 입력
+		System.out.println(vo.getTotalPostCount()+":개 행 출력");
 		vo.booleanSet(); // 페이징 정보 입력
 		vo.setBsList(userDao.getLikedBs(vo));
+		for(BusinessVO bvo:vo.getBsList()) {
+			System.out.println(bvo);
+		}
 		return vo;
 	}
 

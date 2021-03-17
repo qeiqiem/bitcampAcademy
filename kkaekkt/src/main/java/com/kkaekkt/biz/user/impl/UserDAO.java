@@ -14,6 +14,9 @@ public class UserDAO {
 	@Autowired
 	private SqlSessionTemplate mybatis;
 	
+	public void likeOff(BusinessVO vo) {
+		mybatis.delete("UserDAO.likeOff",vo);
+	}
 	public void insertUser(PersonVO vo) {
 		System.out.println("마이바티스 insert");
 		mybatis.insert("UserDAO.insertPs",vo);

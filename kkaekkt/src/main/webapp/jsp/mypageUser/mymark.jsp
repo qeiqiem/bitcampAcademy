@@ -44,6 +44,9 @@
             mno:1,
             currentPageNum:1
         }
+        var likeObj={
+            mno:1,
+        }
     </script>
 </body>
 </html>

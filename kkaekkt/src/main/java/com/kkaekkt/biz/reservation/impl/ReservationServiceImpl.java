@@ -27,7 +27,7 @@ public class ReservationServiceImpl implements ReservationService {
 	@Override
 	public void like(ReservationVO vo) {
 		if(vo.getLike()==0) {//0이면 좋아요 삭제
-			reservationDAO.likeOff(vo);	
+			reservationDAO.likeOff(vo);
 		}else {
 			reservationDAO.likeOn(vo);
 		}

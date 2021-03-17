@@ -32,8 +32,15 @@ public class BusinessVO{
 	private String schedule;
 	private String etc; //부가서비스
 	private double eval; //평가
+	private int eCount; //평가 개수
 	private int commCount; //댓글 개수
 	
+	public int getMcount() {
+		return eCount;
+	}
+	public void setMcount(int mcount) {
+		this.eCount = mcount;
+	}
 	public int getCommCount() {
 		return commCount;
 	}
@@ -180,7 +187,5 @@ public class BusinessVO{
 				+ ", bizType=" + bizType + ", bankNum=" + bankNum + ", bankAccountNum=" + bankAccountNum
 				+ ", scheduleList=" + scheduleList + ", equipmentList=" + equipmentList + ", laundryList=" + laundryList
 				+ ", equipment=" + equipment + ", laundry=" + laundry + ", schedule=" + schedule + "]";
-	}
-
-	
+	}	
 }

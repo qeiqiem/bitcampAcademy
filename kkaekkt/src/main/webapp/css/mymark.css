@@ -6,7 +6,7 @@ height: 1px;
 border: none;
 background-color: var(--gray-color);
 /* border: solid 0.5px var(--gray-color); */
-width: 85%;
+width: 100%;
 margin: 10px 0 20px 0;
 }
 table tr {
@@ -21,20 +21,22 @@ font-size: 16px;
 color: var(--text-gray);
 }
 .content .card {
-    margin: 10px 0 10px 120px ;
-    padding-top: 20px;
+    position: relative;
+    margin: 10px auto;
     border: 1px solid var(--gray-color);
-    width: 40vw;
+    width: 90%;
     height: 200px;
+    padding-bottom: 15px;
 }
 .content > .card > .info {
     width: 35vw;
     float: left;
-    padding-left: 30px;
+    padding-left: 40px;
 }
  .card .bsname {
     color: var(--black-color);
-    font-size: 14px;
+    font-size: 20px;
+    font-weight: bold;
 }
 .card .fa-star {
     color: var(--text-red);
@@ -44,13 +46,22 @@ color: var(--text-gray);
     color: var(--black-color);
     font-weight: bold;
     font-size: 22px;
+    padding-left: 20px;
 }
 .btn_mark{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    right: 25px;
+    top: 20px;
     background: none;
     border: 0.5px solid var(--gray-color);
 }
 .btn_mark .fa-heart{
+    position: absolute;
     color: var(--text-red);
+    top: 1px;
+    right: 2px;
     font-size: 25px;
     padding: 5px;
 }
