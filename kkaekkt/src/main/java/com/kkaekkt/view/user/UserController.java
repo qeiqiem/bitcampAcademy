@@ -43,9 +43,13 @@ public class UserController {
 		return "index.jsp";
 	}
 	@RequestMapping(value="/updatePs.do", method=RequestMethod.POST)
-	public String Update(PersonVO vo) {
+	public String Update(PersonVO vo, HttpSession session) {
 		System.out.println(vo);
 		userService.updateUser(vo);
+		if(vo.getId() != null) {
+			PersonVO member = userService.getUser(vo);
+			session.setAttribute("member", member);
+		} 
 		return "/jsp/mypageUser/mybio.jsp";
 	}
 	

@@ -6,7 +6,7 @@
         window.onload = function () {
         
             	//값 넣어주기
-            	//function inputval(pageObj){
+            	
             	document.getElementsByName('mno')[0].value = pageObj["mno"];
             	document.getElementsByName('id')[0].value = pageObj["id"];
             	document.getElementsByName('name')[0].value = pageObj["name"];
@@ -16,8 +16,7 @@
             	document.getElementById('phone3').value = phoneSplit[2];
             	document.getElementsByName('birth')[0].value = pageObj["birth"];
             	document.getElementsByName('email')[0].value = pageObj["email"];
-            	//}
-       
+            
 
             	
            // input button 초기값 비활성화  	
@@ -196,6 +195,7 @@
             	document.getElementById("phone").value = phone;
                
             }
+		 	// 전체 폼 보낼때 null값 + 유효성 검사 통과 확인 후 submit
             
             
             
