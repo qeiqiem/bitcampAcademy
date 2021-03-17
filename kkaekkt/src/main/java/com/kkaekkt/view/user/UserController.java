@@ -50,7 +50,7 @@ public class UserController {
 	public String Update(PersonVO vo) {
 		System.out.println(vo);
 		userService.updateUser(vo);
-		return "index.jsp";
+		return "/jsp/mypageUser/mybio.jsp";
 	}
 	
 	// 로그인
