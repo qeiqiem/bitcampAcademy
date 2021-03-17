@@ -20,7 +20,7 @@
 	  <div class="body_container">
         <jsp:include page="sidebar_ps.jsp"></jsp:include>
 	  	<div class="content">
-        <form action="updatePs.do" method="POST" name="mybio">
+        <form action="/updatePs.do" method="POST" name="mybio">
         <h3 id="mybio_title">내 정보</h3>
         <button type="button" id="btn_mybio">수정하기</button>
         <div id="btn_mybioClick">
@@ -105,7 +105,7 @@
                 phone:'${sessionScope.member.phone}',
                 birth:'${sessionScope.member.birth}',
                 email:'${sessionScope.member.email}',				
-                state:${sessionScope.member.state}
+                state:'${sessionScope.member.state}'
             };
         	
            
