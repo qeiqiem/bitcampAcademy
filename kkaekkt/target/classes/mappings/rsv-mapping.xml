@@ -119,7 +119,11 @@
 				AND r.mno=m.mno
 			</if>
 			<if test='bno==0'> <!-- 일반회원의 주문조회 -->
+<<<<<<< HEAD
+				AND m.mno=#{mno}
+=======
 				AND r.mno=#{mno}
+>>>>>>> 8e77fb29f0745ab78af909931a5f5be873d5db6b
 			</if>
 			<if test='bno!=0'> <!-- 업체회원의 주문조회 -->
 				AND bno=#{bno}
