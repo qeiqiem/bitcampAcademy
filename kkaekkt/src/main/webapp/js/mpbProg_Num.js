@@ -56,6 +56,32 @@ function initEvent() {
             ajax(pageObj);
         }
     });
+	$('.process').on('click','.cancelBtn',function() {
+		rsvObj.rsvNum=JSON.parse($('.processList tr').eq($(this)[0].value).children().eq(1)[0].innerHTML);
+		cancel(rsvObj);
+	});
+	$('.process').on('click','.completeBtn',function() {
+		rsvObj.rsvNum=JSON.parse($('.processList tr').eq($(this)[0].value).children().eq(1)[0].innerHTML);
+		complete(rsvObj);
+	});
+}
+function cancel(rsvObj) {
+	$.post({
+        url:"/cancel.do",
+        data:rsvObj,
+        success: function(data) {
+			ajax(pageObj);
+		}
+	});
+}
+function complete(rsvObj) {
+	$.post({
+		url:"/complete.do",
+		data:rsvObj,
+		success: function(data) {
+			ajax(pageObj);
+		}
+	});
 }
 function enter() {
     if(window.event.keyCode==13) {
@@ -161,7 +187,6 @@ function printHeader(key,value) {
     }
 }
 function printlist(list) {
-    console.log(list);
     $('.processList').remove();
     $('.order p')[0].style.color=null;
     $.each(list, function(key,value) {
@@ -181,7 +206,6 @@ function printlist(list) {
                 state+='<br>';
             }
         });
-        console.log(laundry +"|"+count+"|"+price+"|"+state);
         printHeader(key,value);
         $('.process').append(
             '<table class="processList">' +
@@ -196,7 +220,8 @@ function printlist(list) {
                     (value.dDay<0?
                     '<td style="color:red;">D+'+value.dDay*-1+'</td>'
                     :'<td>D'+value.dDay*-1+'</td>')+
-                    '<td><div><button onclick="cancel()">주문취소</button><button onclick="complete()">작업완료</button></div></td>'+
+                    '<td><div><button class="cancelBtn" value='+key+'>취소하기</button>'+
+					'<button class="completeBtn" value='+key+'>작업완료</button></div></td>'+
                 '</tr>'+
             '</table>'
         );
