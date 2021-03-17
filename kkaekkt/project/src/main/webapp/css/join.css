@@ -1,0 +1,102 @@
+/* join 공통css */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  /* background-color: rgba(233, 233, 233, 0.048); */
+}
+.body_container {
+  height: 100%;
+  text-align: center;
+}
+
+hr {
+  height: 0.5px;
+  border: none;
+  background-color: var(--gray-color);
+  /* border: solid 0.5px var(--gray-color); */
+  /* width: 95%; */
+}
+
+.join_seq {
+  height: 100px;
+  justify-content: center;
+  align-items: center;
+  margin: 30px;
+}
+
+.join_seq div {
+  display: inline-block;
+  padding: 0 25px;
+  text-align: left;
+  color: var(--text-gray);
+  font-size: larger;
+  /* background-color: white; */
+}
+
+.join_numBox {
+  padding: 10px;
+
+  /* border: solid 1px var(--gray-color);
+  border-radius: 50%; */
+}
+
+.num {
+  font-size: larger;
+  font-weight: bolder;
+}
+
+/* join 01 세부사항 */
+
+.select {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  padding: 50px 50px 100px;
+}
+
+.user_btn {
+  border: none;
+  background-color: white;
+  width: 300px;
+  height: 300px;
+  padding: 20px;
+  margin: 0 50px;
+  /* margin-top: 90px; */
+  justify-content: center;
+  border-radius: 40px;
+  box-shadow: 5px 5px 10px 10px rgba(196, 196, 196, 0.2);
+}
+
+.user_btn:hover {
+  background-color: var(--key-color);
+  color: white;
+}
+/* .btn {
+ 
+  width: 300px;
+  height: 300px;
+  padding: 20px;
+  margin: 20px;
+}
+*/
+.select i {
+  padding: 20px;
+}
+
+.join_text {
+  text-align: left;
+  margin: 3% 30%;
+}
+
+.join_text p {
+  line-height: 160%;
+}
+
+.wrapper_select {
+  position: relative;
+  width: 100%;
+  height: 900px;
+  background-color: var(--background-gray);
+}

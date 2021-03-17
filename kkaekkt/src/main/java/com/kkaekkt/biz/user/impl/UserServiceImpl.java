@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
-import com.kkaekkt.biz.reservation.LaundryVO;
+import com.kkaekkt.biz.comm.EquipmentVO;
+import com.kkaekkt.biz.comm.EtcVO;
+import com.kkaekkt.biz.comm.LaundryVO;
+import com.kkaekkt.biz.comm.ScheduleVO;
 import com.kkaekkt.biz.user.BusinessVO;
-import com.kkaekkt.biz.user.EquipmentVO;
-import com.kkaekkt.biz.user.EtcVO;
 import com.kkaekkt.biz.user.PersonVO;
-import com.kkaekkt.biz.user.ScheduleVO;
 import com.kkaekkt.biz.user.UserService;
 
 @Service("userService")
@@ -23,6 +23,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void insertUser(PersonVO vo) {
 		userDao.insertUser(vo);
+	}
+
+	@Override
+	public List<BusinessVO> getLikedBs(PersonVO vo) {
+		List<BusinessVO> list=userDao.getLikedBs(vo);
+		return list;
 	}
 
 	@Override

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UserDAO">
+	<insert id="insertPs">
+			INSERT INTO account (id,password) VALUES (#{id},#{password});
+			INSERT INTO member VALUES ((SELECT MAX(mno) FROM account),#{name},#{phone},#{birth},#{address},#{email});
+	</insert>
+	<insert id="insertBs" parameterType="business">
+			INSERT INTO account (id,password) VALUES (#{id},#{password});
+			INSERT INTO business (mno,bname,address,phone,bkno,acno,email,typeNum)  
+			VALUES ((SELECT MAX(mno) FROM account),#{bname},#{address},#{phone},#{bankNum},#{bankAccountNum},#{email},#{bizType});
+			
+			<foreach collection="scheduleList" item="schedule"> <!-- 스케쥴 저장 -->
+				INSERT INTO bsn_schedule VALUES ((SELECT MAX(bno) FROM business),${schedule.schno},'${schedule.time}');
+			</foreach>
+			
+			<choose>
+				<when test="bizType==1"> <!-- 일반세탁소라면 -->
+				<foreach collection="laundryList" item="laundry">
+					INSERT INTO bsn_laundry VALUES ((SELECT MAX(bno) FROM business),${laundry.lno},${laundry.price});
+				</foreach>
+				</when>
+				<otherwise> <!-- else문,, 코인세탁소라면 -->
+				<foreach collection="equipmentList" item="equipment">
+					INSERT INTO bsn_equipment VALUES ((SELECT MAX(bno) FROM business),${equipment.eno},${equipment.cnt},${equipment.price});
+				</foreach>
+				<foreach collection="etcList" item="etc">
+					INSERT INTO bsn_etc VALUES((SELECT MAX(bno) FROM business),${etc.etcno},${etc.price});
+				</foreach>
+				</otherwise>
+			</choose>
+	</insert>
+	<update id="updatePs">
+			<choose>
+				<when test="name == null">
+					UPDATE account SET password=#{password} WHERE mno=#{mno};
+				</when>
+				<otherwise>
+					<!-- UPDATE account SET password=#{password} WHERE mno=#{mno}; -->
+					UPDATE member SET mname=#{name},phone=#{phone},birth=#{birth},address=#{address},email=#{email} WHERE mno=#{mno};
+				</otherwise>
+			</choose>
+	</update>
+	<update id="updateBusiness">
+			
+	</update>
+	<delete id="deleteUser">
+			DELETE account WHERE mno=#{no}		
+	</delete>
+	
+	<select id="getPerson" resultType="person">
+			SELECT ac.mno as mno, id, password, mname as name, phone, birth, address, email FROM account ac, member mb
+			WHERE ac.mno=mb.mno 
+			AND ac.mno=#{mno};
+	</select>
+	
+	<select id="getLikedBs" resultType="business"> <!-- 댓글 개수까지 한번에 뽑고 싶었지만 능력 부족으로 나눠야함 -->
+		SELECT bname,address,phone,ROUND(AVG(grade),1) eval 
+		FROM business b, liked l,evaluation e 
+		WHERE b.bno=l.bno AND b.bno=e.bno 
+		AND l.mno=#{mno} 
+		GROUP BY b.bno;
+	</select>
+	<!-- 관리자 페이지 기능이기 때문에 일단 대기.. -->
+	<select id="getUserList">
+		
+	</select>
+</mapper>

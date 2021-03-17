@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- Alias 설정 -->
+	<typeAliases>
+		<typeAlias alias="person" type="com.kkaekkt.biz.user.PersonVO"/>
+		<typeAlias alias="business" type="com.kkaekkt.biz.user.BusinessVO"/>
+		<typeAlias alias="reservation" type="com.kkaekkt.biz.reservation.ReservationVO"/>
+		<typeAlias alias="laundry" type="com.kkaekkt.biz.reservation.LaundryVO"/>
+		<typeAlias alias="schedule" type="com.kkaekkt.biz.user.ScheduleVO"/>
+	</typeAliases>
+			
+	<!-- Sql Mapper 설정 -->
+	<mappers>
+		<mapper resource="mappings/user-mapping.xml"/>
+		<mapper resource="mappings/rsv-mapping.xml"/>
+	</mappers>
+</configuration>
