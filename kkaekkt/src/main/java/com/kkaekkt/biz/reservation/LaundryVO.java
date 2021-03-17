@@ -9,7 +9,7 @@ public class LaundryVO {
 	private int dDay;
 	private String laundry;
 	private int count; 
-	private String state; 
+	private String state;
 	private int price;
 	public String getLaundry() {
 		return laundry;
@@ -59,4 +59,10 @@ public class LaundryVO {
 	public void setPrice(int price) {
 		this.price = price;
 	}
+	@Override
+	public String toString() {
+		return "LaundryVO [rsvDate=" + rsvDate + ", rsvNum=" + rsvNum + ", mname=" + mname + ", dDay=" + dDay
+				+ ", laundry=" + laundry + ", count=" + count + ", state=" + state + ", price=" + price + "]";
+	}
+	
 }

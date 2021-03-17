@@ -57,11 +57,32 @@ function initEvent() {
         }
     });
 	$('.process').on('click','.cancelBtn',function() {
-		//console.log($('.processList')[$(this)[0].value].children('td')[1].innerHTML);
-		console.log($('.processList')[$(this)[0].value].child('td'));
+		rsvObj.laundry=$('.processList tr').eq($(this)[0].value).children().eq(3)[0].innerHTML;
+		rsvObj.rsvNum=JSON.parse($('.processList tr').eq($(this)[0].value).children().eq(1)[0].innerHTML);
+		cancel(rsvObj);
 	});
 	$('.process').on('click','.completeBtn',function() {
-		// console.log($('.processList')[$(this)[0].value()].children('td')[1].innerHTML);
+		rsvObj.laundry=$('.processList tr').eq($(this)[0].value).children().eq(3)[0].innerHTML;
+		rsvObj.rsvNum=JSON.parse($('.processList tr').eq($(this)[0].value).children().eq(1)[0].innerHTML);
+		complete(rsvObj);
+	});
+}
+function cancel(rsvObj) {
+	$.post({
+        url:"/cancel.do",
+        data:rsvObj,
+        success: function(data) {
+			ajax(pageObj);
+		}
+	});
+}
+function complete(rsvObj) {
+	$.post({
+		url:"/complete.do",
+		data:rsvObj,
+		success: function(data) {
+			ajax(pageObj);
+		}
 	});
 }
 function enter() {
@@ -186,7 +207,9 @@ function printlist(list) {
                     '<td>'+value.mname+'</td>'+
                     '<td>'+value.laundry+'</td>'+
                     '<td>'+value.count+'</td>'+
-                    '<td>D'+(value.dDay<0?'+':'')+value.dDay*-1+'</td>'+
+                    (value.dDay<0?
+                    '<td style="color:red;">D+'+value.dDay*-1+'</td>'
+                    :'<td>D'+value.dDay*-1+'</td>')+
                     '<td><div><button class="cancelBtn" value='+key+'>취소하기</button>'+
 					'<button class="completeBtn" value='+key+'>작업완료</button></div></td>'+
                 '</tr>'+

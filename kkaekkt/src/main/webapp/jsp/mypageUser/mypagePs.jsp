@@ -10,7 +10,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
-<link rel="stylesheet" href="css/mypagePs.css">
+<link rel="stylesheet" href="/css/mypagePs.css">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 </head>
 
@@ -50,7 +50,8 @@
 				listType:1,
                 state:1
             };
+			var likeObj={};
     </script>
-    <script src="js/mypagePs.js"></script>
+    <script src="/js/mypagePs.js"></script>
 </body>
 </html>
