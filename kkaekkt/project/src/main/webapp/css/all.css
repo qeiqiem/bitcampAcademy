@@ -1,0 +1,51 @@
+:root {
+  /* --key-color: rgb(152, 206, 255); */
+  --key-color: rgb(200, 228, 255);
+  --background-gray: rgba(221, 221, 221, 0.3);
+  --gray-color: rgb(221, 221, 221);
+  --black-color: rgb(51, 51, 51);
+  --text-gray: rgb(116, 116, 116);
+  --dark-gray: (97, 97, 97);
+  --footer: rgba(207, 207, 207, 0.253);
+  --disabled: (#e5e5e5);
+  --text-red: rgba(254, 54, 54, 0.55);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  color: var(--black-color);
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.body_container {
+  /* position : relative해야 Footer 밑으로 내려감 */
+  position: relative;
+  top: 10vh;
+  width: 100vw;
+  min-height: 90vh;
+  margin: auto;
+}
+
+footer {
+  width: 100%;
+  background-color: var(--footer);
+  bottom: 0;
+  position: absolute;
+  padding: 20px 0;
+}
+
+button {
+  outline: 0;
+}
+
+input {
+  outline: none;
+}
+
+ul {
+  text-decoration: none;
+  list-style: none;
+  padding: 0;
+}

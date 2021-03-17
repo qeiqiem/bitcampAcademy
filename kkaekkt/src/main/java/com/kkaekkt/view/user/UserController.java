@@ -1,18 +1,15 @@
 package com.kkaekkt.view.user;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.kkaekkt.biz.user.BusinessVO;
-import com.kkaekkt.biz.user.EquipmentVO;
 import com.kkaekkt.biz.user.PersonVO;
 import com.kkaekkt.biz.user.UserService;
 
@@ -31,6 +28,13 @@ public class UserController {
 //		userService.insertUser(vo);		
 //		return "Join.html";
 //	}
+	
+	@RequestMapping(value="/getLikedList.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
+	@ResponseBody
+	public String getLikedList(PersonVO vo) {
+		Gson gson=new Gson();
+		return gson.toJson(userService.getLikedBs(vo));
+	}
 	@RequestMapping(value="/joinPs.do", method=RequestMethod.POST)
 	public String Join(PersonVO vo) {
 		userService.insertUser(vo);

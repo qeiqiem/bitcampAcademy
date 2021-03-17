@@ -5,7 +5,7 @@
 			INSERT INTO account (id,password) VALUES (#{id},#{password});
 			INSERT INTO member VALUES ((SELECT MAX(mno) FROM account),#{name},#{phone},#{birth},#{address},#{email});
 	</insert>
-	<insert id="insertBs" parameterType="Business">
+	<insert id="insertBs" parameterType="business">
 			INSERT INTO account (id,password) VALUES (#{id},#{password});
 			INSERT INTO business (mno,bname,address,phone,bkno,acno,email,typeNum)  
 			VALUES ((SELECT MAX(mno) FROM account),#{bname},#{address},#{phone},#{bankNum},#{bankAccountNum},#{email},#{bizType});
@@ -54,6 +54,13 @@
 			AND ac.mno=#{mno};
 	</select>
 	
+	<select id="getLikedBs" resultType="business"> 
+			SELECT count(b.mno) commCount,bname,eval,address,phone
+			FROM comments c, business b,liked l,(SELECT AVG(grade) eval, bno FROM evaluation GROUP BY bno) e
+			WHERE c.bno=b.bno AND l.bno=b.bno AND e.bno=b.bno
+			AND l.mno=#{mno}
+			GROUP BY c.bno;
+	</select>
 	<!-- 관리자 페이지 기능이기 때문에 일단 대기.. -->
 	<select id="getUserList">
 		

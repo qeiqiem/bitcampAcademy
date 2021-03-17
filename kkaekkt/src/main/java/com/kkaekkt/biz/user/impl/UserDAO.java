@@ -1,12 +1,11 @@
 package com.kkaekkt.biz.user.impl;
 
-import java.util.Map;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.google.gson.Gson;
 import com.kkaekkt.biz.user.BusinessVO;
 import com.kkaekkt.biz.user.PersonVO;
 @Repository
@@ -36,6 +35,9 @@ public class UserDAO {
 	}
 	public void deleteUser(BusinessVO vo) {
 		mybatis.delete("UserDAO.deleteBs",vo);
+	}
+	public List<BusinessVO> getLikedBs(PersonVO vo) {
+		return mybatis.selectList("UserDAO.getLikedBs",vo);
 	}
 	// 이해 못해서 잠시 일케 해둠
 //		public PersonVO getUser(PersonVO vo) {

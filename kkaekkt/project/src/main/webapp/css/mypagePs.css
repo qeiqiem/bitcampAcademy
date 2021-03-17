@@ -1,0 +1,138 @@
+/* 사이드바영역 */
+.content {
+    float:left;
+    width: 75vw ;
+    height: 100vh;
+    padding: 11px;
+}
+.content hr {
+	border:0px;
+	background:var(--gray-color);
+	height:1px;
+    margin-bottom: 30px;
+}
+.content_header {
+	font-size:21px;
+	font-weight:bold;
+	padding-left:25px;
+}
+.rsvList {
+    position:relative;
+}
+.selected{
+background: var(--key-color);
+}
+.rsvBox {
+	position:relative;
+    width: 550px;
+    margin: 0 auto 30px auto;
+    border: 1px solid var(--gray-color);
+    padding: 25px 52px;
+}
+table.rsvTable {
+width: 99%;
+height: 200px;
+border-collapse: collapse;
+}
+.rsvList .detailBtn {
+    margin:0 60px;
+}
+.rsvTable th {
+text-align: left;
+font-size: larger;
+}
+.rsvTable .column {
+    text-align: left;
+    width: 100px;
+    color: #616161;
+}
+.btnDiv {
+    margin-top: 25px;
+    text-align: center;
+}
+.rsvBox button {
+width: 120px;
+height: 55px;
+background: #8FBCFF;
+opacity: 0.6;
+border-radius: 31px;
+border: 0px;
+font-size:14px;
+}
+.rsvTable .fas {
+    color: rgb(253, 44, 44,0.8);
+}
+.like {
+    float: right;
+    text-align: center;
+    font-size: 28px;
+    width: 45px;
+    height: 30px;
+    padding: 5px 0;
+    border: 1px solid var(--gray-color);
+}
+.none {
+    display: none;
+}
+.detail .receipt {
+    text-align: center;
+    width: 100%;
+}
+.detail .receipt .laundry,
+.detail .receipt .count{
+    padding: 10px 0;
+    width: 33%;
+}
+.detail .result {
+    text-align: center;
+    padding: 12px 0;
+    width: 100%;
+    font-size: 20px;
+}
+.detail .result th,
+.detail .result td{
+    width: 33%;
+}
+.detail .result td span {
+    color:var(--key-color);
+}
+
+.page_btn button {
+  width: 30px;
+  margin: -2px;
+}
+
+.page_btn_container {
+    position: relative;
+  text-align: center;
+}
+
+.page_btn {
+  box-sizing: border-box;
+  display: inline-block;
+}
+
+.page_btn li {
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  text-decoration: none;
+  list-style: none;
+  float: left;
+  /* width: 40px; */
+  padding: 5px 10px;
+  text-align: center;
+  font-size: 13px;
+  margin-left: -1px;
+  cursor: pointer;
+}
+.page_btn li.curPage{
+    background: var(--key-color);
+}
+.page_prevBlock {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.page_nextBlock {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}

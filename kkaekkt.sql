@@ -99,7 +99,7 @@ CREATE TABLE `evaluation` (
 	`grade`	INTEGER	NULL comment '점수'
 );
 
-CREATE TABLE `like` (
+CREATE TABLE `liked` (
 	`bno`	INTEGER	NOT NULL comment '사업자번호',
 	`mno`	INTEGER	NOT NULL comment '회원번호'
 );
@@ -321,14 +321,14 @@ REFERENCES `business` (
 	`bno`
 ) ON DELETE CASCADE;
 
-ALTER TABLE `like` ADD CONSTRAINT `FK_BUSINESS_TO_LIKE_1` FOREIGN KEY (
+ALTER TABLE `liked` ADD CONSTRAINT `FK_BUSINESS_TO_LIKED_1` FOREIGN KEY (
 	`bno`
 )
 REFERENCES `business` (
 	`bno`
 ) ON DELETE CASCADE;
 
-ALTER TABLE `like` ADD CONSTRAINT `FK_MEMBER_TO_LIKE_1` FOREIGN KEY (
+ALTER TABLE `liked` ADD CONSTRAINT `FK_MEMBER_TO_LIKED_1` FOREIGN KEY (
 	`mno`
 )
 REFERENCES `member` (
@@ -395,7 +395,7 @@ INSERT INTO laundry_type (lname,period) values("아웃도어",'4일~7일');
 INSERT INTO laundry_type (lname,period) values("기타",'4일~7일');
 
 -- 진행상태
-INSERT INTO state (stname) values("세탁 전");
+INSERT INTO state (stname) values("세탁 중");
 INSERT INTO state (stname) values("세탁 완료");
 INSERT INTO state (stname) values("전달 완료");
 INSERT INTO state (stname) values("취소");

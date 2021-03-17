@@ -1,0 +1,317 @@
+table{
+    border-spacing: 2px 15px;   
+}
+p {
+    color: #7D7D7D;
+    font-size: 15px;
+    font-weight: bold;
+}
+input{
+    font-size: 20px;
+}
+input::placeholder{
+    font-size:15px;
+}
+button {
+    border: 0px;
+}
+.centerDiv {
+    display: block;
+    margin: 0px auto;
+    width: 450px;
+}
+.body_container h4 {
+    text-align: center;
+}
+.body_container p {
+    font-size: 15px;
+    line-height: 21px;
+    margin: 0;
+}
+input[type="text"] {
+    width: 315px;
+    height: 45px;
+    margin: 0 3px 15px 0;
+    /* border: 1px solid var(--grey-color); */
+}
+input[type="button"] {
+    position: relative;
+    top: 2px;
+    width: 132px;
+    height: 45px;
+    background: #C8E4FF;
+    border: 0px;
+}
+.selected {
+    background: #C8E4FF;
+    border: 1px solid #2DD1F4 !important;
+}
+.unselected {
+    background:var(--gray-color);
+}
+.week button {
+    font-size: 15px;
+    width: 41px;
+    height: 35px;
+    margin: 5px -1px;
+    border: 1px solid var(--black-color);    
+    box-sizing: border-box;
+    cursor: pointer;
+}
+.week button.two {
+    width: 44px;
+}
+.weekBox {
+    width: 100%;
+    height: 208px;
+    margin: 5px 0 30px 0;    
+    border: 1px solid black;
+    overflow: scroll;
+}
+.weekBox li {
+    text-align: center;
+    font-size: 15px;
+    margin-bottom: 8px;
+}
+.weekBox li button {
+    background-color: #C8E4FF;
+    border: 1px solid #2DD1F4;
+    font-size: 15px;
+    width: 90px;
+    height: 30px;
+    margin: 0 15px;
+}
+.weekBox li span {
+    margin: 0 15px;
+}
+.weekBox li select {
+    width: 85px;
+    height: 30px;
+    padding: 0 10px;
+    margin: 0 10px;
+}
+.phone input{
+    width: 110px;
+    height: 30px;
+    text-align: center;
+}
+.phone input:nth-child(2){
+    width: 80px;
+    height: 30px;
+    text-align: center;
+}
+.phone button {
+    width: 99px;
+    height: 30px;
+    background: #C8E4FF;
+}
+
+.full input{
+    width: 100%;
+    height: 45px;
+    margin: 0 3px 15px 0;
+}
+.email {
+    height: 60px;
+}
+/* 
+.email select {
+    width: 98px;
+    height: 35px;
+} */
+.bank{
+    height: 60px;
+}
+.bank select {
+    height: 35px;
+}
+.bank input {
+    margin-left:7px;
+    position: relative;
+    height: 32px;
+    width: 348px;
+    left: 95px;
+    bottom: 32px;
+}
+.bizType {
+    margin-top: 30px;
+    width: 100%;
+    height: 38px;
+    cursor: pointer;
+}
+.bizType div {
+    float: left;
+    text-align: center;
+    padding-top: 8px;
+    width: 50%;
+    height: 30px;
+    display: inline-block;
+    border: 0px !important;
+}
+.laundry input,
+.coinLaundry input{
+    font-size: 15px;
+}
+.hide {
+    display: none;
+}
+.laundry {
+    padding: 30px;
+    border: 1px solid #C8E4FF;
+    color: #616161;
+}
+.laundry h4 {
+    margin-top: -5px;
+}
+.laundry th {
+    text-align: left;
+    color: #616161;
+}
+.laundry .blank {
+    width: 125px;
+}
+.laundry .etc {
+    margin-left: -30px;
+    width: 90px;
+    height: 30px;
+    box-sizing: border-box;
+    border: 1px solid #E5E5E5;
+}
+.laundry .etc::placeholder{
+    font-size: 12px;
+    text-align: center;
+}
+.won {
+    width: 135px;
+    height: 30px;
+    background: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    box-sizing: border-box;
+    margin-right: 10px;
+}
+.won:disabled{
+    background-color: #E5E5E5;
+}
+input[onclick="clicked();"] {
+    color: #FFFFFF;
+    margin-top: 30px;
+    width: 100%;
+}
+.coinLaundry {
+    padding: 25px;
+    border: 1px solid #C8E4FF;
+    color: #616161;
+}
+.coinLaundry h4 {
+    margin-top: 0px;
+}
+.coinLaundry th {
+    color: #616161;
+}
+.equipment {
+    border-spacing: 0 15px;
+}
+.equipment th:nth-child(1) {
+    width: 170px;
+}
+.equipment th:nth-child(2) {
+    padding-left: 5px;
+    width: 90px;
+}
+.coinLaundry > div > table:nth-child(1) .won {
+    margin-left: 12px;
+}
+.coinLaundry span {
+    font-size: 5px;
+}
+.coinLaundry th {
+    text-align: left;
+}
+.coinLaundry .cnt {
+    width: 40px;
+}
+.coinLaundry .blank {
+    width: 10px;
+}
+.selectbox {
+    position: absolute;
+    width: 50px;  /* 너비설정 */
+    height: 20px;
+    margin: 2px 0 0 -2px;
+    border: 1px solid #999;  /* 테두리 설정 */
+    z-index: 1;
+}
+
+/* 가상 선택자를 활용 화살표 대체 */
+.selectbox:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    width: 0;
+    height: 0;
+    margin-top: -1px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #333;
+}
+.selectbox label {
+    position: absolute;
+    top: 0;  /* 위치정렬 */
+    left: 13px;  /* 위치정렬 */
+    color: #999;
+    z-index: -1;  /* IE8에서 label이 위치한 곳이 클릭되지 않는 것 해결 */
+}
+
+.selectbox select {
+    width: 100%;
+    height: auto;  /* 높이 초기화 */
+    line-height: normal;  /* line-height 초기화 */
+    font-family: inherit;  /* 폰트 상속 */
+    border: 0;
+    opacity: 0;  /* 숨기기 */
+    filter:alpha(opacity=0);  /* IE8 숨기기 */
+    -webkit-appearance: none; /* 네이티브 외형 감추기 */
+    -moz-appearance: none;
+    appearance: none;
+}
+.dry th {
+    width: 80px;
+}
+.dry .selectbox {
+    position: absolute;
+    margin-left: 1px;
+    width: 60px;  /* 너비설정 */
+    border: 1px solid #999;  /* 테두리 설정 */
+    z-index: 1;
+}
+.etc tr:nth-child(1) > th:nth-child(1) {
+    width: 225px;
+}
+.equipment tr td:nth-child(3) > input {
+    width: 100px;
+    border-spacing: 0;
+    margin-left: 0 !important;
+}
+
+/* .email .selectbox {
+    position: relative;
+    top: -43px;
+    left: 194px;
+    width: 156px;
+    height: 24px;
+} */
+.weekBox ul {
+    display: flex;
+    flex-direction: column;
+}
+.bank .selectbox {
+    position: relative;
+    width: 90px;
+    height: 30px;
+    left: 3px;
+    font-size: 10pt;
+}
+.bank .selectbox label {
+    top:5px;
+}

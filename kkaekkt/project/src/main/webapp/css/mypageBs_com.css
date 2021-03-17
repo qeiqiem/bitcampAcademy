@@ -1,0 +1,147 @@
+.content {
+    float:left;
+    width: 75vw;
+    height: 100vh;
+    padding: 40px 70px;
+}
+.content_header {
+    display: flex;
+}
+.content_header p {
+    font-weight: bold;
+    font-size: 20px;
+    margin: 0 auto 0 10px;
+}
+.content hr {
+    border: none;
+    background: var(--gray-color);
+    height: 1px;
+    margin-bottom: 30px;
+}
+p{
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 10px;
+}
+.content_header .searchBox{
+    position: relative;
+    margin: 0 0 0 auto;
+    width: 200px;
+    height: 30px;
+    border-radius: 20px;
+    outline: none;
+    border: 1px solid var(--gray-color);
+    background-color: white;
+}
+.searchBox .search {
+    right: 33px;
+    position: absolute;
+    width: 52%;
+    height: 100%;
+    border: 0;
+    outline: none;
+    background-color: white;
+}
+.searchBox i{
+    position: absolute;
+    top: 7px;
+    right: 13px;
+    cursor: pointer;
+}
+.searchBox select{
+    position:absolute;
+    border:0px;
+    appearance:none;
+    outline: none;
+    border-radius: 20px;
+    top: 8px;
+    left: 8px;
+    /* color: #6D6D6D; */
+    text-align-last: center;
+    background-color: white;
+}
+.processHeader{
+    width: 100%;
+    border:1px solid var(--gray-color);
+}
+.processHeader tr th{
+    width: 12.5%;
+    border: none;
+    padding: 10px 0;
+}
+.processList {
+    width: 100%;
+    border: 1px solid var(--gray-color);
+    text-align: center;
+    margin-bottom: 5px;
+}
+.processList tr{
+    position: relative;
+}
+.processList tr td{
+    padding: 10px 0;
+    width: 12.5%;
+    border: none;
+}
+.processList tr td:nth-child(4) {
+    padding-left: 30px;
+    text-align: left;
+}
+.processList tr td:nth-child(6) {
+    text-align: right;
+    padding-right: 36px;
+}
+.processList tr td:nth-child(8){
+    position: relative;
+}
+.processList tr td:nth-child(8) div {
+    position: absolute;
+    margin: auto;
+    top:0;
+    bottom:0;
+    left: 0;
+    right: 0;
+    background: var(--key-color);
+    width: 60%;
+    height: 80%;
+    color: white;    
+}
+.page_btn button {
+  width: 30px;
+  margin: -2px;
+}
+
+.page_btn_container {
+    position: relative;
+  text-align: center;
+}
+
+.page_btn {
+  box-sizing: border-box;
+  display: inline-block;
+}
+
+.page_btn li {
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  text-decoration: none;
+  list-style: none;
+  float: left;
+  /* width: 40px; */
+  padding: 5px 10px;
+  text-align: center;
+  font-size: 13px;
+  margin-left: -1px;
+  cursor: pointer;
+}
+.page_btn li.curPage{
+    background: var(--key-color);
+}
+.page_prevBlock {
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.page_nextBlock {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
