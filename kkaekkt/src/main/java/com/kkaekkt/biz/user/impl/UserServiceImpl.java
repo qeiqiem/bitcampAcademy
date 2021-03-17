@@ -11,6 +11,7 @@ import com.kkaekkt.biz.comm.EquipmentVO;
 import com.kkaekkt.biz.comm.EtcVO;
 import com.kkaekkt.biz.comm.LaundryVO;
 import com.kkaekkt.biz.comm.ScheduleVO;
+import com.kkaekkt.biz.user.BusinessListVO;
 import com.kkaekkt.biz.user.BusinessVO;
 import com.kkaekkt.biz.user.PersonVO;
 import com.kkaekkt.biz.user.UserService;
@@ -26,9 +27,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<BusinessVO> getLikedBs(PersonVO vo) {
-		List<BusinessVO> list=userDao.getLikedBs(vo);
-		return list;
+	public BusinessListVO getLikedBs(BusinessListVO vo) {
+		vo.setTotalPostCount(userDao.countList(vo)); // 총 데이터행 입력
+		vo.booleanSet(); // 페이징 정보 입력
+		vo.setBsList(userDao.getLikedBs(vo));
+		return vo;
 	}
 
 	@Override

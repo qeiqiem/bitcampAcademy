@@ -57,7 +57,11 @@
 			FROM comments c, business b,liked l,(SELECT AVG(grade) eval, bno FROM evaluation GROUP BY bno) e
 			WHERE c.bno=b.bno AND l.bno=b.bno AND e.bno=b.bno
 			AND l.mno=#{mno}
-			GROUP BY c.bno;
+			GROUP BY c.bno
+			LIMIT #{rowStartNum},#{POSTS_PER_PAGE};
+	</select>
+	<select id="countList" resultType="_int">
+		SELECT count(bno) FROM liked WHERE mno=#{mno};
 	</select>
 	<!-- 관리자 페이지 기능이기 때문에 일단 대기.. -->
 	<select id="getUserList">

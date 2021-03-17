@@ -1,6 +1,5 @@
 package com.kkaekkt.biz.user;
 
-import java.io.Serializable;
 import java.util.List;
 
 import com.kkaekkt.biz.comm.CommVO;
@@ -10,7 +9,7 @@ import com.kkaekkt.biz.comm.LaundryVO;
 import com.kkaekkt.biz.comm.ScheduleVO;
 
 @SuppressWarnings("serial")
-public class BusinessVO implements Serializable {
+public class BusinessVO{
 	private int bno;
 	private int mno;
 	private String id;

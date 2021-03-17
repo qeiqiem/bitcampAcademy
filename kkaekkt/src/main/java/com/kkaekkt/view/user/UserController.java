@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.kkaekkt.biz.user.BusinessListVO;
 import com.kkaekkt.biz.user.BusinessVO;
 import com.kkaekkt.biz.user.PersonVO;
 import com.kkaekkt.biz.user.UserService;
@@ -31,7 +32,7 @@ public class UserController {
 	
 	@RequestMapping(value="/getLikedBs.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
 	@ResponseBody
-	public String getLikedBs(PersonVO vo) {
+	public String getLikedBs(BusinessListVO vo) {
 		Gson gson=new Gson();
 		return gson.toJson(userService.getLikedBs(vo));
 	}

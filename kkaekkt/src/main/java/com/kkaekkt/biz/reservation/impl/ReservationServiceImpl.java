@@ -35,9 +35,9 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Override
 	public ReservationListVO getRsvListPs(ReservationListVO vo) {
-		vo.setTotalPostCount(reservationDAO.countList(vo)) // 총 데이터행 입력
-				.booleanSet() // 페이징 정보 입력
-				.setRsvListRno(reservationDAO.getRsvListPs(vo));
+		vo.setTotalPostCount(reservationDAO.countList(vo)); // 총 데이터행 입력
+		vo.booleanSet(); // 페이징 정보 입력
+		vo.setRsvListRno(reservationDAO.getRsvListPs(vo));
 		
 		for (ReservationVO rsvVO : vo.getRsvListRno()) {
 			rsvVO.setLike(reservationDAO.getLiked(rsvVO));
@@ -48,7 +48,8 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Override
 	public ReservationListVO getRsvListBs(ReservationListVO vo) {
-		vo.setTotalPostCount(reservationDAO.countList(vo)).booleanSet(); // 행 개수 출력
+		vo.setTotalPostCount(reservationDAO.countList(vo));
+		vo.booleanSet(); // 행 개수 출력
 		if (vo.getListType() == 2) { // 품목별 리스트라면,
 			vo.setRsvListLno(reservationDAO.getRsvListBs_ld(vo));
 		} else { // 품목별 리스트가 아니라면

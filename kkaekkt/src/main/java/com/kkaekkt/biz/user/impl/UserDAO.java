@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kkaekkt.biz.user.BusinessListVO;
 import com.kkaekkt.biz.user.BusinessVO;
 import com.kkaekkt.biz.user.PersonVO;
 @Repository
@@ -36,8 +37,11 @@ public class UserDAO {
 	public void deleteUser(BusinessVO vo) {
 		mybatis.delete("UserDAO.deleteBs",vo);
 	}
-	public List<BusinessVO> getLikedBs(PersonVO vo) {
+	public List<BusinessVO> getLikedBs(BusinessListVO vo) {
 		return mybatis.selectList("UserDAO.getLikedBs",vo);
+	}
+	public int countList(BusinessListVO vo) {
+		return mybatis.selectOne("UserDAO.countList",vo);
 	}
 	// 이해 못해서 잠시 일케 해둠
 //		public PersonVO getUser(PersonVO vo) {
