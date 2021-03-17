@@ -47,13 +47,11 @@
 	<delete id="deleteUser">
 			DELETE account WHERE mno=#{no}		
 	</delete>
-	
 	<select id="getPerson" resultType="person">
 			SELECT ac.mno as mno, id, password, mname as name, phone, birth, address, email FROM account ac, member mb
 			WHERE ac.mno=mb.mno 
 			AND ac.mno=#{mno};
 	</select>
-	
 	<select id="getLikedBs" resultType="business"> 
 			SELECT count(b.mno) commCount,bname,eval,address,phone
 			FROM comments c, business b,liked l,(SELECT AVG(grade) eval, bno FROM evaluation GROUP BY bno) e

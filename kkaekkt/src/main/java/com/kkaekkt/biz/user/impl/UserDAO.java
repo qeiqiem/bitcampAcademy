@@ -49,10 +49,10 @@ public class UserDAO {
 //			return null;
 //		}
 		
-		public PersonVO getUser(PersonVO vo) {
-			System.out.println("mybatis로 getUser() 기능처리");
-			return (PersonVO)mybatis.selectOne("UserDAO.getPerson", vo);
-		}
+	public PersonVO getUser(PersonVO vo) {
+		System.out.println("mybatis로 getUser() 기능처리");
+		return (PersonVO)mybatis.selectOne("UserDAO.getPerson", vo);
+	}
 	public BusinessVO getUser(BusinessVO vo) {
 		mybatis.selectOne("UserDAO.getBs",vo);
 		mybatis.selectList("UserDAO.getEquipments",vo);

@@ -29,9 +29,9 @@ public class UserController {
 //		return "Join.html";
 //	}
 	
-	@RequestMapping(value="/getLikedList.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
+	@RequestMapping(value="/getLikedBs.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
 	@ResponseBody
-	public String getLikedList(PersonVO vo) {
+	public String getLikedBs(PersonVO vo) {
 		Gson gson=new Gson();
 		return gson.toJson(userService.getLikedBs(vo));
 	}

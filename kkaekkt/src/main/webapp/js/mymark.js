@@ -3,10 +3,10 @@ $(document).ready(function() {
 });
 function ajax(obj) {
     $.post({
-        url:"/getLikedList.do",
+        url:"/getLikedBs.do",
         data:obj,
         success:function(data) {
-            console.log("무야호");
+            
         }
     });
 }

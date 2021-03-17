@@ -42,7 +42,6 @@ public class UserServiceImpl implements UserService {
 			vo.setEquipmentList(convertToObj(vo.getEquipment(), EquipmentVO.class));
 			vo.setEtcList(convertToObj(vo.getEtc(), EtcVO.class));
 		}
-		
 		userDao.insertUser(vo);
 	}
 
