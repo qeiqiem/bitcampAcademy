@@ -65,7 +65,6 @@ function initEvent() {
         }
     });
 }
-
 function like(likeObj) {
     $.post({
         url:"/like.do",

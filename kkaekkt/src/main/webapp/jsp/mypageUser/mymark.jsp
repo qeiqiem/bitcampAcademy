@@ -21,58 +21,31 @@
         <div class="content">
             <p id="mymark_title">내가찜한세탁소</p>
             <hr>
-            <div id="card">
-                <div id="info">
-                    <p id="bsname">깨끗빨래방 신촌점</p>
-                    <table>
-                        <tr>
-                            <td><span>2.0<i class="fas fa-star"></i> </span>1건 | 리뷰 2</td>
-                        </tr>
-                        <tr>
-                            <td id="bsaddress">서울 마포구 독막로38길 22 105-107호</td>
-                        </tr>
-                        <tr>
-                            <td>(지번) <span>대흥로 330-2</span></td>
-                        </tr>
-                        <tr>
-                            <td><span id="bsschedule">영업중</span><span>매일 00:00~24:00</span></td>
-                        </tr>
-                        <tr>
-                            <td id="bsphone">02-1234-5678 <button id="btn_detail">상세보기</button></td>
-                        </tr>
-                    </table>
-                </div>
-                <button id="btn_mark"><i class="fas fa-heart"></i></button>
-            </div>
-            <div id="card">
-                <div id="info">
-                    <p id="bsname">깨끗빨래방 신촌점</p>
-                    <table>
-                        <tr>
-                            <td><span>2.0<i class="fas fa-star"></i> </span>1건 | 리뷰 2</td>
-                        </tr>
-                        <tr>
-                            <td id="bsaddress">서울 마포구 독막로38길 22 105-107호</td>
-                        </tr>
-                        <tr>
-                            <td>(지번)<span>대흥로 330-2</span></td>
-                        </tr>
-                        <tr>
-                            <td><span id="bsschedule">영업중</span><span>매일 00:00~24:00</span></td>
-                        </tr>
-                        <tr>
-                            <td id="bsphone">02-1234-5678 <button id="btn_detail">상세보기</button></td>
-                        </tr>
-                    </table>
-                </div>
-                <button id="btn_mark"><i class="fas fa-heart"></i></button>
+            <div class="page_btn_container">
+                <ul class="page_btn">
+                    <!-- 맨처음으로 버튼 -->
+                    <li class="page_prevBlock"><i class="fas fa-angle-double-left"></i></li> 
+                    <!-- 이전 -->
+                    <li class="page_prev">
+                        <i class="fas fa-angle-left"></i>
+                    </li>
+                    <!-- 다음버튼 -->
+                    <li class="page_next">
+                        <i class="fas fa-angle-right"></i>
+                    </li>
+                    <!-- 맨마지막으로 버튼 -->
+                    <li class="page_nextBlock"><i class="fas fa-angle-double-right"></i></li>
+                </ul>
             </div>
         </div>
     </div>
     <script>
         var pageObj={
             mno:1,
-            currentPage:1
+            currentPageNum:1
+        }
+        var likeObj={
+            mno:1,
         }
     </script>
 </body>

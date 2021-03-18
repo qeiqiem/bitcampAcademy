@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<link rel="stylesheet" href="../../css/mymark.css">
+<link rel="stylesheet" href="../../css/all.css">
+<link rel="stylesheet" href="../../css/head0.css">
+<link rel="stylesheet" href="../../css/sidebar.css">
+<script src="https://kit.fontawesome.com/2fc57dd2db.js"
+	crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+	rel="stylesheet">
+<!--<script src="/js/mymark.js"></script>-->
+</head>
+
+<body>
+    <header class="head_container">
+        <nav class="head">
+            <div class="head_left">
+                <div class="logo">
+                    <a href=""> <img src="../../img/logo.svg" alt="">
+                    </a>
+                </div>
+                <div class="menu">
+                    <a href="">일반세탁소</a> <a href="">코인세탁소</a>
+                </div>
+            </div>
+    
+            <div class="head_right">
+                <a href="">회원가입</a> <a href="">로그인</a> <a href="">FAQ</a>
+            </div>
+        </nav>
+    </header>
+    <div class="body_container">
+          <div class="side">
+              <button>주문내역</button>
+              <button>내가 찜한 세탁소</button>
+              <button>프로필편집</button>
+          </div>
+          <div class="side_sub">
+              <button>진행중인 주문</button>
+              <button>완료된 주문</button>
+          </div>
+        <div class="content">
+            <p id="mymark_title">내가찜한세탁소</p>
+            <hr>
+            <div class="card">
+                <div class="info">
+                    <p class="bsname">깨끗빨래방 신촌점</p>
+                    <table>
+                        <tr>
+                            <td><span>2.0<i class="fas fa-star"></i> </span>1건 | 리뷰 2</td>
+                        </tr>
+                        <tr>
+                            <td class="bsaddress">서울 마포구 독막로38길 22 105-107호</td>
+                        </tr>
+                        <tr>
+                            <td>(지번) <span>대흥로 330-2</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="bsschedule">영업중</span><span>매일 00:00~24:00</span></td>
+                        </tr>
+                        <tr>
+                            <td class="bsphone">02-1234-5678 <button class="btn_detail">상세보기</button></td>
+                        </tr>
+                    </table>
+                </div>
+                <button class="btn_mark"><i class="fas fa-heart"></i></button>
+            </div>
+            <div class="card">
+                <div class="info">
+                    <p class="bsname">깨끗빨래방 신촌점</p>
+                    <table>
+                        <tr>
+                            <td><span>2.0<i class="fas fa-star"></i> </span>1건 | 리뷰 2</td>
+                        </tr>
+                        <tr>
+                            <td class="bsaddress">서울 마포구 독막로38길 22 105-107호</td>
+                        </tr>
+                        <tr>
+                            <td>(지번)<span>대흥로 330-2</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="bsschedule">영업중</span><span>매일 00:00~24:00</span></td>
+                        </tr>
+                        <tr>
+                            <td class="bsphone">02-1234-5678 <button class="btn_detail">상세보기</button></td>
+                        </tr>
+                    </table>
+                </div>
+                <button class="btn_mark"><i class="fas fa-heart"></i></button>
+            </div>
+            <div class="page_btn_container">
+                <ul class="page_btn">
+                    <!-- 맨처음으로 버튼 -->
+                    <li class="page_prevBlock"><i class="fas fa-angle-double-left"></i></li> 
+                    <!-- 이전 -->
+                    <li class="page_prev">
+                        <i class="fas fa-angle-left"></i>
+                    </li>
+                    <!-- 다음버튼 -->
+                    <li class="page_next">
+                        <i class="fas fa-angle-right"></i>
+                    </li>
+                    <!-- 맨마지막으로 버튼 -->
+                    <li class="page_nextBlock"><i class="fas fa-angle-double-right"></i></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        var pageObj={
+            mno:1,
+            currentPageNum:1
+        }
+    </script>
+</body>
+</html>

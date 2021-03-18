@@ -6,7 +6,7 @@ height: 1px;
 border: none;
 background-color: var(--gray-color);
 /* border: solid 0.5px var(--gray-color); */
-width: 85%;
+width: 100%;
 margin: 10px 0 20px 0;
 }
 table tr {
@@ -14,57 +14,109 @@ table tr {
 }
 .content {
 float:left;
-width: 65vw;
+width: 75vw;
 height: 100vh;
-padding: 10px 0px 30px 250px;
-font-size: 14px;
+padding: 10px 0px 30px 70px;
+font-size: 16px;
 color: var(--text-gray);
 }
-.content #card {
-    margin: 10px 0 10px 120px ;
-    padding-top: 20px;
+.content .card {
+    position: relative;
+    margin: 10px auto;
     border: 1px solid var(--gray-color);
-    width: 40vw;
+    width: 90%;
     height: 200px;
+    padding-bottom: 15px;
 }
-.content > #card > #info {
+.content > .card > .info {
     width: 35vw;
     float: left;
-    padding-left: 30px;
+    padding-left: 40px;
 }
- #card #bsname {
+ .card .bsname {
     color: var(--black-color);
-    font-size: 14px;
+    font-size: 20px;
+    font-weight: bold;
 }
-#card .fa-star {
+.card .fa-star {
     color: var(--text-red);
 }
 #mymark_title {
     display: inline-block;
-    color: var(--black-color)
+    color: var(--black-color);
+    font-weight: bold;
+    font-size: 22px;
+    padding-left: 20px;
 }
-#btn_mark{
+.btn_mark{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    right: 25px;
+    top: 20px;
     background: none;
     border: 0.5px solid var(--gray-color);
 }
-#btn_mark .fa-heart{
+.btn_mark .fa-heart{
+    position: absolute;
     color: var(--text-red);
+    top: 1px;
+    right: 2px;
     font-size: 25px;
     padding: 5px;
 }
-#bsaddress{
+.bsaddress{
     color: var(--black-color);
 }
-#bsschedule{
+.bsschedule{
     border: 0.2px solid var(--gray-color);
     margin-right: 5px;
     font-size: 12px;
 }
-#bsphone{
+.bsphone{
     color: darkolivegreen;
 }
-#btn_detail{
+.btn_detail{
     border: none;
     background: none;
     color: steelblue;
 }
+.page_btn button {
+    width: 30px;
+    margin: -2px;
+  }
+  
+  .page_btn_container {
+      position: relative;
+    text-align: center;
+  }
+  
+  .page_btn {
+    box-sizing: border-box;
+    display: inline-block;
+  }
+  
+  .page_btn li {
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    text-decoration: none;
+    list-style: none;
+    float: left;
+    /* width: 40px; */
+    padding: 5px 10px;
+    text-align: center;
+    font-size: 13px;
+    margin-left: -1px;
+    cursor: pointer;
+  }
+  .page_btn li.curPage{
+      background: var(--key-color);
+  }
+  .page_prevBlock {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+  }
+  .page_nextBlock {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+  }

@@ -19,34 +19,33 @@ public class ReservationDAO {
 		
 	}
 	public void cancel(LaundryVO vo) {
-		mybatis.update("cancel",vo);
+		mybatis.update("reservationDAO.cancel",vo);
 	}
 	public void complete(LaundryVO vo) {
-		mybatis.update("complete",vo);
+		mybatis.update("reservationDAO.complete",vo);
 	}
 	public void likeOn(ReservationVO vo) {
-		mybatis.insert("likeOn",vo);
+		mybatis.insert("reservationDAO.likeOn",vo);
 	}
 	public void likeOff(ReservationVO vo) {
-		mybatis.delete("likeOff",vo);
+		mybatis.delete("reservationDAO.likeOff",vo);
 	}
 	public int getLiked(ReservationVO vo) {
-		return mybatis.selectOne("checkLiked",vo);
+		return mybatis.selectOne("reservationDAO.checkLiked",vo);
 	}
 	public List<ReservationVO> getRsvListPs(ReservationListVO vo) {		
 		return mybatis.selectList("reservationDAO.getRsvListPs",vo);
 	}
 	public List<LaundryVO> getLaundryList(ReservationVO vo) {
-		return mybatis.selectList("getLaundry",vo);
+		return mybatis.selectList("reservationDAO.getLaundry",vo);
 	}
 	public int countList(ReservationListVO vo) {
-		int result = mybatis.selectOne("countList",vo);
-		return result;
+		return mybatis.selectOne("reservationDAO.countList",vo);
 	}
 	public List<ReservationVO> getRsvListBs_rn(ReservationListVO vo) {
-		return mybatis.selectList("getRsvListBs_rn",vo);
+		return mybatis.selectList("reservationDAO.getRsvListBs_rn",vo);
 	}
 	public List<LaundryVO> getRsvListBs_ld(ReservationListVO vo) {
-		return mybatis.selectList("getRsvListBs_ld",vo);
+		return mybatis.selectList("reservationDAO.getRsvListBs_ld",vo);
 	}
 }
