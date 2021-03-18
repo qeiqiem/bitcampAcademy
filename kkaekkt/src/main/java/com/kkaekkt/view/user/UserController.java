@@ -79,6 +79,13 @@ public class UserController {
 		}
 
 	}
+	// 로그아웃
+	@RequestMapping("/logout.do")
+	public String logout(HttpSession session) {
+		System.out.println("로그아웃 처리");
+		session.invalidate();
+		return "index.jsp";
+	}
 	// 일반사양관리
 		@RequestMapping(value="/selectComspec.do", method=RequestMethod.POST, produces="application/text;charset=utf-8")
 		@ResponseBody
