@@ -20,7 +20,6 @@
 				<a href="">일반세탁소</a> <a href="">코인세탁소</a>
 			</div>
 		</div>
-
 		<div class="head_right">
 			<a href="">회원가입</a> <a href="">로그인</a> <a href="">FAQ</a>
 		</div>

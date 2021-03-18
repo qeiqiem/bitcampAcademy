@@ -138,7 +138,7 @@ function printlist(list) {
                     '<td>'+count+'</td>'+
                     '<td>'+price+'</td>'+
                     '<td>'+value.dDate+'</td>'+
-                    '<td><div>출력하기</div></td>'+
+                    '<td><button>출력하기</button></td>'+
                 '</tr>'+
             '</table>'
         );

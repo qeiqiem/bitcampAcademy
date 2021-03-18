@@ -5,7 +5,23 @@ $(document).ready(function() {
 });
 function initEvent() {
     $('.rsvList').on("click",".detailBtn",function() { // 버블링으로 생성된 주문에 클릭 이벤트 활성화
-        $('#detail'+$(this).val()).toggleClass('none');
+        if(!$('.comments').eq($(this).val()).hasClass('none')){ //만약, 상세보기가 열려있다면
+            $('.comments').eq($(this).val()).addClass('none');
+        }
+        $('.detail').eq($(this).val()).toggleClass('none');
+    });
+    $('.rsvList').on("click",".commentBtn",function() {
+        if(!$('.detail').eq($(this).val()).hasClass('none')){ //만약, 상세보기가 열려있다면
+            $('.detail').eq($(this).val()).addClass('none');
+        }
+        $(".comments").eq($(this).val()).toggleClass('none');
+    });
+    $('.rsvList').on("keyup",".commentBox",function() {
+        if($(this).val().length>=3000) {
+            alert("3000자 까지 입력할 수 있습니다.");
+            $(this)[0].value=$(this).val().substr(0,3000);
+        }
+        $('.comments_header span:nth-child(1)')[0].innerHTML=$(this).val().length;
     });
     $('.side_sub button').click(function() { // 완료된 주문 출력
         if($(this).index()==0){ //진행중인 주문
@@ -18,7 +34,6 @@ function initEvent() {
             ajax(pageObj);
         }
     });
-    
     $('.page_next').click(function() {
         if(!$(this).hasClass('no')) {
             pageObj.currentPageNum+=1;
@@ -64,6 +79,7 @@ function initEvent() {
             like(likeObj);
         }
     });
+
 }
 function like(likeObj) {
     $.post({
@@ -139,10 +155,16 @@ function initSide() {
 }
 function printlist(list) {
     var btnText;
+    var btnClass;
     if(list[0].state=='세탁 중') {
+		$('.content_header')[0].innerHTML='진행중 주문';
         btnText='주문취소';
+        btnClass='cancelBtn';
     } else {
         btnText='리뷰쓰기';
+        btnClass='commentBtn';
+		$('.content_header')[0].innerHTML='완료된 주문';
+
     }
     $('.rsvList').children().remove();
     $.each(list, function(key,value) {
@@ -173,27 +195,40 @@ function printlist(list) {
                 '<div class="btnDiv">'+
                     '<button>채팅상담</button>'+
                     '<button class="detailBtn" value="'+key+'">상세보기</button>'+
-                    (value.timeOut==0&&btnText=='주문취소'?'<button disabled>':'<button>')+btnText+'</button>'+
+                    (value.timeOut==0&&btnText=='주문취소'?
+                    '<button disabled>':
+                    '<button class="'+btnClass+'" value='+key+'>')+btnText+'</button>'+
                 '</div>'+
                 '<div class="detail none" id="detail'+key+'">'+
-                '<hr>'+
-                '<div1-1>'+
-                    '<table class="receipt" id="receipt'+key+'">'+
-                        '<tr class="column">'+
-                            '<th class="laundry">품목</th>'+
-                            '<th class="count">개수</th>'+
-                            '<th class="price">가격</th>'+
-                        '</tr>'+
-                    '</table>'+
-                '<hr>'+
-                '<table class="result">'+
-                    '<th>결제금액</th>'+
-                    '<td>&nbsp;&nbsp;</td>'+
-                    '<td><span>'+value.totalPrice+'</span> 원</td>'+
-                '</table>'+
-        '</div1-1>'+
-        '</div>'+
-    '</div>'
+                    '<hr>'+
+                    '<div1-1>'+
+                        '<table class="receipt" id="receipt'+key+'">'+
+                            '<tr class="column">'+
+                                '<th class="laundry">품목</th>'+
+                                '<th class="count">개수</th>'+
+                                '<th class="price">가격</th>'+
+                            '</tr>'+
+                        '</table>'+
+                        '<hr>'+
+                        '<table class="result">'+
+                            '<th>결제금액</th>'+
+                            '<td>&nbsp;&nbsp;</td>'+
+                            '<td><span>'+value.totalPrice+'</span> 원</td>'+
+                        '</table>'+
+                    '</div1-1>'+
+                '</div>'+
+                '<div class="comments none" id="comments'+key+'>'+
+                    '<div class="comments_header">'+
+                        '<span class="length">0</span><span> / 3000</span>'+
+                    '</div>'+
+                    '<textarea id="commBox'+key+'" cols="30" rows="3"></textarea>'+
+                    '<label class="writer" for="comment1">username</label>  '+
+                    '<div class="comments_bottom">'+
+                        '<span>깨끗한 리뷰 부탁드립니다. 불쾌감을 주는 욕설은 삭제될 수 있습니다.</span>'+
+                        '<button value='+key+'>등록</button>'+
+                    '</div>'+
+                '</div>'+
+            '</div>'
         );
     });
     for(var i=0;i<list.length;i++) {//각 주문 별 상세 물품 목록 붙이기

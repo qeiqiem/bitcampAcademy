@@ -104,13 +104,6 @@ p{
     width: 14%;
     border: none;
 }
-.processList tr td:nth-child(4) {
-    padding-left: 30px;
-    text-align: left;
-}
-.processList tr td:nth-child(7){
-    position: relative;
-}
 .processList tr td:nth-child(7) div:nth-child(1) {
     position: absolute;
     margin: auto;
