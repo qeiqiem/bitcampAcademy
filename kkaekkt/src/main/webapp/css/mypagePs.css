@@ -62,6 +62,9 @@ font-size:14px;
 .rsvTable .fas {
     color: rgb(253, 44, 44,0.8);
 }
+.rsvTable tr:nth-child(1) span {
+    font-size: 14px;
+}
 .like {
     float: right;
     text-align: center;

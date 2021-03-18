@@ -26,7 +26,7 @@
 			<a href=""><i class="fas fa-bell"></i></a> 
 			<a href=""><i class="fas fa-comments"></i></a> 
 			<a href="/jsp/mypageUser/mypagePs.jsp">마이페이지</a> 
-			<a href="">로그아웃</a> 
+			<a href="logout.do">로그아웃</a> 
 			<a href="/jsp/faq.jsp">FAQ</a>
 		</div>
 	</nav>

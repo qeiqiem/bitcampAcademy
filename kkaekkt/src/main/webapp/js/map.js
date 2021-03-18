@@ -1,5 +1,6 @@
 
 
+<<<<<<< HEAD
 	/* 실제 사용 이벤트  */
 $(document).ready(function(){
 
@@ -7,12 +8,18 @@ $(document).ready(function(){
 		alert(" 동적 변경 감지");
 	})
 
+=======
+   /* 실제 사용 이벤트  */
+$(document).ready(function(){
+
+>>>>>>> 6e8bbdfc1a32c1bfe44044addaa14796fa5a6462
     var adrress="서울용산"
 
     //사이드바 이벤트
     $('.foldBtn').click(function(){ $('.foldBtn').toggleClass('expand'); $('.slide').toggleClass('hide'); })
 
     //키워드 검색
+<<<<<<< HEAD
     $('.slide_ul').on("click","#all_search"	, function(){ var item = adrress+"클리닝"; searchMajor(item); viewSearch(item) 
     					$('.single').hide(); $('.list').show();})  
     $('.slide_ul').on("click","#basic_search", function(){ var item = adrress+"세탁소"; searchMajor(item); viewSearch(item) 
@@ -39,6 +46,11 @@ $(document).ready(function(){
         $('.list').hide()
         $('.single').show() 
      })
+=======
+    $('.slide_ul').on("click","#all_search"   , function(){ var item = adrress+"클리닝"; searchMajor(item); viewSearch(item) })  
+    $('.slide_ul').on("click","#basic_search", function(){ var item = adrress+"세탁소"; searchMajor(item); viewSearch(item) })  
+    $('.slide_ul').on("click","#coin_search", function(){ var item = adrress+"코인세탁소"; searchMajor(item); viewSearch(item) })
+>>>>>>> 6e8bbdfc1a32c1bfe44044addaa14796fa5a6462
 
 })
 
