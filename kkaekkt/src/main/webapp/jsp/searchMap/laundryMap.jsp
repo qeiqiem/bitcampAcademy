@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,30 +9,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>지도생성하기</title>
     <!-- 헤더에서 필요한 참조 -->
-    <link rel="stylesheet" href="/css/landryMap.css">
+    <link rel="stylesheet" href="/css/laundryMap.css">
     <script src="https://kit.fontawesome.com/2fc57dd2db.js" crossorigin="anonymous"></script>
 
     <!-- map 에서 필요한 참조 -->
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script src="js/map.js"></script>
+    <script src="/js/map.js"></script>
     
     
 </head>
     <body>
-    <jsp:include page="/jsp/header0.jsp"></jsp:include>
+    
+<link rel="stylesheet" href="/css/all.css">
+<link rel="stylesheet" href="/css/head0.css">
+<script src="https://kit.fontawesome.com/2fc57dd2db.js"
+	crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+	rel="stylesheet">
+
+<header class="head_container">
+	<nav class="head">
+		<div class="head_left">
+			<div class="logo">
+				<a href=""> <img src="/img/logo.svg" alt="">
+				</a>
+			</div>
+			<div class="menu">
+				<a href="">일반세탁소</a> <a href="">코인세탁소</a>
+			</div>
+		</div>
+
+		<div class="head_right">
+			<a href="">회원가입</a> <a href="">로그인</a> <a href="">FAQ</a>
+		</div>
+	</nav>
+</header>
         <div class="body_container">
             <div class="map_container">
                 <div class="slide">
                     <div>
-                        <button class="foldBtn"><</button>
-                        <button class="foldBtn expand">></button>
+                        <button class="foldBtn">&lt;</button>
+                        <button class="foldBtn expand">&gt;</button>
                     </div>
                         <div class="slide_top">
                             <img class="map_logo" src="/img/logo.svg" alt="">
                             <p class="here"><input type="radio">내 주변 찾기</p>
                             <div class="slide_search">
                                 <form onsubmit="searchPlaces(); return false;">
-                                    <input class="input_search" id="keyword" type="text" placeholder="동네를 입력해주세요.">
+                                    <input 	class="input_search" 	type="text" id="keyword" placeholder="동네를 입력해주세요.">
                                     <button class="input_searchBtn" type="submit">
                                         <i class="fas fa-search fa-lg "></i>                
                                     </button>
@@ -39,13 +66,13 @@
                             </div>
                             <div class="tag">
                                 <ul class="slide_ul">
-                                    <li id="all_search">전체</li>
-                                    <li id="basic_search">일반세탁소</li>
-                                    <li id="coin_search">코인세탁소</li>
+                                    <li id="all_search" 	value="1">전체</li>
+                                    <li id="basic_search" 	value="2" >일반세탁소</li>
+                                    <li id="coin_search" 	value="3">코인세탁소</li>
                                     <li id="my_search">my</li>
                                 </ul>
                                 <hr>
-                                <p class="slide_mini">동네이름 <b>신촌동</b> 검색결과</p>
+                                <p class="slide_mini"></p>
                             </div>
                         </div>
                         <div class="footer list">
@@ -163,6 +190,7 @@
     </body>    
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3845f493917a302d1ea69e946c0443ff&libraries=services"></script>
     <script>
+
     /* 지도 api에서 제공하는 이벤트 */
         var markers = [];
         var mapContainer = document.getElementById('map'),
@@ -179,11 +207,25 @@
 
 
         // 키워드 검색을 요청하는 함수입니다
-        function searchPlaces() { var keyword = document.getElementById('keyword').value;
-            if (!keyword.replace(/^\s+|\s+$/g, '')) { alert('키워드를 입력해주세요!'); return false;}
+        function searchPlaces() { 
+			
+            var keyword = document.getElementById('keyword').value;
+            if (!keyword.replace(/^\s+|\s+$/g, '')) { 
+                alert('키워드를 입력해주세요!'); 
+            return false;
+            }
 
             // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
             ps.keywordSearch( keyword, placesSearchCB); 
+        }
+
+
+  		// 대분류 검색 
+        function searchMajor(item) { 
+			
+			var item = item		
+			ps.keywordSearch( item, placesSearchCB); 
+	
         }
 
         // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
