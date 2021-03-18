@@ -162,10 +162,11 @@ function initSide() {
 function initModal() {
     /* 모달 생성 */
     $(".rsvList").on("click",".comments_bottom button",function(){ 
-        commObj.content=$('#ta'+$(this).val()).val();
-        var rno=JSON.parse($('.rsvTable tr:nth-child(3) td:nth-child(2)')[$(this).attr("value")].innerHTML);
+        idx=$(this).val();
+        commObj.content=$('#ta'+idx).val();
+        var rno=JSON.parse($('.rsvTable tr:nth-child(3) td:nth-child(2)')[idx].innerHTML);
         commObj.rsvNum=rno;
-        commObj.bno=1; //추후 사업자 번호 항목 추가되면 끌어다 쓸 예정
+        commObj.bno=JSON.parse($('.rsvTable tr:nth-child(1) span')[idx].innerHTML.replace('#',''));
         $("#modal_container").show();
     });
     $("#modal_close").click(function(){ 
@@ -197,8 +198,7 @@ function regit() {
     });
 }
 function viewChange() {
-    //리뷰쓰기 창에서 리뷰 보기 창으로 변경
-    //버튼 변경
+    
 }
 function printlist(list) {
     var btnText;
