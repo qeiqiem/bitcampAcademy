@@ -64,20 +64,21 @@ public class UserController {
 	}
 	
 	// 로그인
-		@RequestMapping(value = "/login.do", method = RequestMethod.POST)
-		public String Login(PersonVO vo, HttpSession session) {
-			System.out.println("로그인처리");
-			PersonVO member = userService.getUser(vo);
-			session.setAttribute("member", member);
-			
-			if(member.getId() == null || member.getPassword() == null) {
-				System.out.println("사용자 정보가 없습니다.");
-				return "/jsp/login/login.jsp";
-			}else{	
-				return "/jsp/index.jsp";
-			}
+	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
+	public String Login(PersonVO vo, HttpSession session) {
+		System.out.println("로그인처리");
+		vo = userService.getUser(vo);
+		System.out.println(vo);
 
+		if (vo != null) {
+			session.setAttribute("person", vo);
+			return "index.jsp";
+		} else {
+			System.out.println("회원정보없음");
+			return "login.jsp";
 		}
+
+	}
 	// 일반사양관리
 		@RequestMapping(value="/selectComspec.do", method=RequestMethod.POST, produces="application/text;charset=utf-8")
 		@ResponseBody
