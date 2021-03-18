@@ -50,7 +50,7 @@ input {
 	<jsp:include page="/jsp/header0.jsp"></jsp:include>
 
 	<div class="body_container">
-		<form action="login.do" method="post">
+		<form action="/login.do" method="post">
 			<h3>로그인</h3>
 			<hr>
 			<div>
