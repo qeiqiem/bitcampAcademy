@@ -2,6 +2,7 @@ $(document).ready(function() {
     initSide();
     initEvent();
 	initModal();
+    initCommObj();
     ajax(pageObj); //처음 마이페이지 들어왔을 때, 진행중 주문 항목 출력
 });
 function initEvent() {
@@ -161,16 +162,43 @@ function initSide() {
 function initModal() {
     /* 모달 생성 */
     $(".rsvList").on("click",".comments_bottom button",function(){ 
+        commObj.content=$('#ta'+$(this).val()).val();
+        var rno=JSON.parse($('.rsvTable tr:nth-child(3) td:nth-child(2)')[$(this).attr("value")].innerHTML);
+        commObj.rsvNum=rno;
+        commObj.bno=1; //추후 사업자 번호 항목 추가되면 끌어다 쓸 예정
         $("#modal_container").show();
     });
     $("#modal_close").click(function(){ 
         $("#modal_container").hide(); 
+    });
+    $("#closeBtn").click(function() {
+        $("#modal_container").hide();
     });
     /* 평점 받기 */
     $(".rating__input").click(function(){ 
         var starVal = $(this).attr('value'); 
         $("#starVal").val(starVal);
     });
+}
+function initCommObj() {
+    commObj.mno=pageObj.mno;
+    commObj.depth=0;
+}
+function regit() {
+    commObj.eval=$('#starVal').val();
+    $.post({
+        url:'/regitComm.do',
+        data:commObj,
+        success:function() {
+            alert("리뷰가 정상적으로 등록되었습니다.");
+            $("#modal_container").hide();
+            viewChange();
+        }
+    });
+}
+function viewChange() {
+    //리뷰쓰기 창에서 리뷰 보기 창으로 변경
+    //버튼 변경
 }
 function printlist(list) {
     var btnText;
@@ -183,7 +211,6 @@ function printlist(list) {
         btnText='리뷰쓰기';
         btnClass='commentBtn';
 		$('.content_header')[0].innerHTML='완료된 주문';
-
     }
     $('.rsvList').children().remove();
     $.each(list, function(key,value) {
@@ -191,7 +218,7 @@ function printlist(list) {
             '<div class="rsvBox">' +
                 '<table class="rsvTable">'+
                     '<tr>'+
-                        '<th colspan="2">'+value.bname+'</th>'+
+                        '<th colspan="2">'+value.bname+'<span>#'+value.bno+'</span></th>'+
                         '<td><i class="'+(value.like==1?'fas':'far')+' fa-heart like" value='+key+'></i></td>'+
                     '</tr>'+
                     '<tr>' +

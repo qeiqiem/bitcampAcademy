@@ -28,6 +28,7 @@ function initModal() {
     /* 모달 생성 */
     $(".rsvList").on("click",".comments_bottom button",function(){ 
         $("#modal_container").show();
+        console.log($('#ta'+$(this).val()).val());
     });
     $("#modal_close").click(function(){ 
         $("#modal_container").hide(); 
