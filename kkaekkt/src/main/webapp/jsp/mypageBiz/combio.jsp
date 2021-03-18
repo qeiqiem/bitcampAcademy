@@ -9,8 +9,8 @@
     <title>Document</title>
     <script src="https://kit.fontawesome.com/415f6f6023.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-  	<link rel="stylesheet" href="../../css/coinbio.css">
-  	<script src="../../js/coinbio.js"></script>
+  	<link rel="stylesheet" href="/css/combio.css">
+  	<script src="/js/combio.js"></script>
 
 </head>
 
