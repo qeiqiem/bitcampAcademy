@@ -5,8 +5,8 @@
 		<button onclick="location.href='mpbProg_Item.jsp'">처리중</button>
 		<button onclick="location.href='mpbCom.jsp'">완 료</button>
 		<button onclick="location.href='salesManage_com.jsp'">매출관리</button>
-		<button>사양관리</button>
-		<button>프로필편집</button>
+		<button onclick="location.href='comspec.jsp'">사양관리</button>
+		<button onclick="location.href='combio.jsp'">프로필편집</button>
 	</div>
 	<div class="side_sub">
 		<button onclick="location.href='mpbProg_Item.jsp'">품목별</button>

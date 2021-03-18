@@ -21,7 +21,7 @@
 			</div>
 		</div>
 		<div class="head_right">
-			<a href="">회원가입</a> <a href="">로그인</a> <a href="">FAQ</a>
+			<a href="">회원가입</a> <a href="login.jsp">로그인</a> <a href="">FAQ</a>
 		</div>
 	</nav>
 </header>

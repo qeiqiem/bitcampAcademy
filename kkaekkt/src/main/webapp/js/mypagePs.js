@@ -4,24 +4,28 @@ $(document).ready(function() {
     ajax(pageObj); //처음 마이페이지 들어왔을 때, 진행중 주문 항목 출력
 });
 function initEvent() {
+	var idx;
     $('.rsvList').on("click",".detailBtn",function() { // 버블링으로 생성된 주문에 클릭 이벤트 활성화
-        if(!$('.comments').eq($(this).val()).hasClass('none')){ //만약, 상세보기가 열려있다면
-            $('.comments').eq($(this).val()).addClass('none');
+		idx=$(this).val();
+        if(!$('.comments').eq(idx).hasClass('none')){ //만약, 상세보기가 열려있다면
+            $('.comments').eq(idx).addClass('none');
         }
-        $('.detail').eq($(this).val()).toggleClass('none');
+        $('.detail').eq(idx).toggleClass('none');
     });
     $('.rsvList').on("click",".commentBtn",function() {
-        if(!$('.detail').eq($(this).val()).hasClass('none')){ //만약, 상세보기가 열려있다면
-            $('.detail').eq($(this).val()).addClass('none');
+		idx=$(this).val();
+        if(!$('.detail').eq(idx).hasClass('none')){ //만약, 상세보기가 열려있다면
+            $('.detail').eq(idx).addClass('none');
         }
-        $(".comments").eq($(this).val()).toggleClass('none');
+        $(".comments").eq(idx).toggleClass('none');
     });
-    $('.rsvList').on("keyup",".commentBox",function() {
+    $('.rsvList').on("keyup",".commBox",function() {
+		idx=JSON.parse($(this).attr("id").substr(2,3));
         if($(this).val().length>=3000) {
             alert("3000자 까지 입력할 수 있습니다.");
             $(this)[0].value=$(this).val().substr(0,3000);
         }
-        $('.comments_header span:nth-child(1)')[0].innerHTML=$(this).val().length;
+        $('.comments_header span:nth-child(1)')[idx].innerHTML=$(this).val().length;
     });
     $('.side_sub button').click(function() { // 완료된 주문 출력
         if($(this).index()==0){ //진행중인 주문
@@ -38,7 +42,7 @@ function initEvent() {
         if(!$(this).hasClass('no')) {
             pageObj.currentPageNum+=1;
             ajax(pageObj);
-        }        
+        }
     });
     $('.page_prev').click(function() {
         if(!$(this).hasClass('no')) {
@@ -217,17 +221,18 @@ function printlist(list) {
                         '</table>'+
                     '</div1-1>'+
                 '</div>'+
-                '<div class="comments none" id="comments'+key+'>'+
-                    '<div class="comments_header">'+
-                        '<span class="length">0</span><span> / 3000</span>'+
-                    '</div>'+
-                    '<textarea id="commBox'+key+'" cols="30" rows="3"></textarea>'+
-                    '<label class="writer" for="comment1">username</label>  '+
-                    '<div class="comments_bottom">'+
-                        '<span>깨끗한 리뷰 부탁드립니다. 불쾌감을 주는 욕설은 삭제될 수 있습니다.</span>'+
-                        '<button value='+key+'>등록</button>'+
-                    '</div>'+
+                (btnText=='주문취소'?'':                
+                '<div class="comments none" id="comments'+key+'">'+
+                '<div class="comments_header">'+
+                    '<span class="length">0</span><span> / 3000</span>'+
                 '</div>'+
+                '<textarea class="commBox" id="ta'+key+'" cols="30" rows="3"></textarea>'+
+                '<label class="writer" for="comment1">username</label>  '+
+                '<div class="comments_bottom">'+
+                    '<span>깨끗한 리뷰 부탁드립니다. 불쾌감을 주는 욕설은 삭제될 수 있습니다.</span>'+
+                    '<button value='+key+'>등록</button>'+
+                '</div>'+
+                '</div>')+
             '</div>'
         );
     });
