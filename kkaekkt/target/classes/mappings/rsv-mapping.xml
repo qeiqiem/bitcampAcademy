@@ -69,13 +69,19 @@
 			SELECT r.rno rsvNum,rdate rsvdate,mname,DATEDIFF(ddate,CURDATE()) dDay 
 			FROM member m,reservation r
 			WHERE r.mno=m.mno AND bno=#{bno} AND stno=1
-		<if test="order==1">
-			ORDER BY r.rno DESC
-		</if>
-		<if test="order==2">
-			ORDER BY dDay, r.rno DESC
-		</if>
-			LIMIT #{rowStartNum},#{POSTS_PER_PAGE};
+			<if test="searchOption==1"> <!-- 검색옵션-이름 입력시 -->
+					AND mname LIKE CONCAT('%',#{search},'%')
+			</if>
+			<if test="searchOption==2"> <!-- 검색옵션-주문번호 입력시 -->
+					AND r.rno LIKE CONCAT('%',#{search},'%')
+			</if>
+			<if test="order==1">
+				ORDER BY r.rno DESC
+			</if>
+			<if test="order==2">
+				ORDER BY dDay, r.rno DESC
+			</if>
+				LIMIT #{rowStartNum},#{POSTS_PER_PAGE};
 		</if>
 		<if test="listType==4"> <!-- 업체회원 완료목록 출력 -->
 			SELECT r.rno rsvNum,rdate rsvdate,mname,dDate,stname state FROM member m,reservation r,state s 

@@ -20,8 +20,11 @@ img {
 }
 
 hr {
-	width: 328px;
-	border: 1px solid #F0F0F0;
+	height: 0.5px;
+	border: none;
+	background-color: var(- -gray-color);
+	/* border: solid 0.5px var(--gray-color); */
+	width: 85%;
 }
 
 #btn_login {
@@ -38,7 +41,6 @@ input {
 	left: 556px;
 	top: 339px;
 	margin: 10px;
-	
 }
 </style>
 </head>
@@ -68,15 +70,16 @@ input {
 					<p>다른 계정으로 로그인</p>
 
 					<!--api끌어오는거에 따라 가지수는 줄 수 있습니다...-->
-					<a href="naverLogin.jsp"><img src="img/naver.png"></a> 
-					<a href="facebookLogin.jsp"><img src="img/facebook.png"></a> 
-					<a href="googleLogin.jsp"><img src="img/google.png"></a> 
-					<a href="kakaoLogin.jsp"><img src="img/kakao.png"></a>
+					<a href="naverLogin.jsp"><img src="../../img/naver.png"></a> <a
+						href="facebookLogin.jsp"><img src="../../img/facebook.png"></a> <a
+						href="googleLogin.jsp"><img src="../../img/google.png"></a> <a
+						href="kakaoLogin.jsp"><img src="../../img/kakao.png"></a>
 				</div>
 				<hr>
 			</div>
 		</form>
-	</div> <!-- 바디콘테이너 -->
+	</div>
+	<!-- 바디콘테이너 -->
 </body>
 
 </html>

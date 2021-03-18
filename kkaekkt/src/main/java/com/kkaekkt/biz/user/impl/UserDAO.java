@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kkaekkt.biz.comm.LaundryVO;
 import com.kkaekkt.biz.user.BusinessListVO;
 import com.kkaekkt.biz.user.BusinessVO;
 import com.kkaekkt.biz.user.PersonVO;
@@ -65,5 +66,9 @@ public class UserDAO {
 		mybatis.selectList("UserDAO.getEquipments",vo);
 		
 		return null;
+	}
+	public List<LaundryVO> getComspec(BusinessVO vo) {
+		System.out.println("dao : " + mybatis.selectList("UserDAO.getcomspecList",vo) );
+		return mybatis.selectList("UserDAO.getcomspecList",vo);
 	}
 }

@@ -1,7 +1,12 @@
 $(document).ready(function() {
-
+    init();
     ajax(pageObj); //처음 마이페이지 들어왔을 때, 진행중 주문 항목 출력
-    
+});
+function init() {
+    initEvent();
+    initSide();
+}
+function initEvent() {
     $('.page_next').click(function() {
         if(!$(this).hasClass('no')) {
             pageObj.currentPageNum+=1;
@@ -38,13 +43,16 @@ $(document).ready(function() {
         pageObj.currentPageNum=1;
         ajax(pageObj);
     });
-});
+}
 function enter() {
     if(window.event.keyCode==13) {
         pageObj.search=$('.search')[0].value;
         pageObj.searchOption=$('.searchBox select')[0].value;
         ajax(pageObj);
     }
+}
+function initSide() {
+    $('.side button').eq(1).addClass("side_select");
 }
 function initPageBtn() {
     if(pageObj.isNextExist) {
@@ -138,7 +146,7 @@ function printlist(list) {
                     '<td>'+count+'</td>'+
                     '<td>'+price+'</td>'+
                     '<td>'+value.dDate+'</td>'+
-                    '<td><div>출력하기</div></td>'+
+                    '<td><button>출력하기</button></td>'+
                 '</tr>'+
             '</table>'
         );

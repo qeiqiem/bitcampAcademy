@@ -17,12 +17,14 @@
 				</a>
 			</div>
 			<div class="menu">
-				<a href="">일반세탁소</a> <a href="">코인세탁소</a>
+				<a href="/jsp/searchMap/laundryMap.jsp">일반세탁소</a>
+				<a href="/jsp/searchMap/laundryMap.jsp">코인세탁소</a>
 			</div>
 		</div>
-
 		<div class="head_right">
-			<a href="">회원가입</a> <a href="">로그인</a> <a href="">FAQ</a>
+			<a href="/jsp/join/joinSelect.jsp">회원가입</a> 
+			<a href="/jsp/login/login.jsp">로그인</a>
+			<a href="/jsp/faq.jsp">FAQ</a>
 		</div>
 	</nav>
 </header>

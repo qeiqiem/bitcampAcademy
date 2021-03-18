@@ -1,0 +1,65 @@
+@charset "UTF-8";
+.body_container {
+    color: rgba(125, 125, 125, 1);
+    margin-left: 270px;
+}
+
+.body_container input {
+    vertical-align: left;
+}
+
+input {
+    width: 200px;
+    height: 30px;
+    margin-top: 10px
+}
+
+select {
+    width: 150px;
+    padding: .8em .5em;
+    border: 1px solid #999;
+}
+
+select::-ms-expand {
+    display: none;
+}
+
+.bioInfo {
+    margin-top: 100px;
+}
+
+.bioleft {
+    float: left;
+    margin-right: 100px;
+}
+
+.bioright {
+    margin-bottom: 120px;
+}
+
+.address {
+    text-align: left;
+}
+.btn_coinbioClick{
+    display: none;
+}
+
+.btn_group button {
+    width: 110px;
+    height: 35px;
+    background-color: #616161;
+    color: white;
+}
+
+.btn_groupUp button {
+    width: 110px;
+    height: 35px;
+    background-color: #8FBCFF;
+    color: #616161;
+
+    text-align: center;
+}
+
+.btn_group th {
+    text-align: left;
+}

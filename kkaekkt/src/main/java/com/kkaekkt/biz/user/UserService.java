@@ -2,6 +2,9 @@ package com.kkaekkt.biz.user;
 
 import java.util.List;
 
+import com.google.gson.JsonElement;
+import com.kkaekkt.biz.comm.LaundryVO;
+
 public interface UserService {
 	public void insertUser(PersonVO vo);
 	public void insertUser(BusinessVO vo);
@@ -13,4 +16,5 @@ public interface UserService {
 	public PersonVO getUser(PersonVO vo);
 	public BusinessVO getUser(BusinessVO vo);
 	public BusinessListVO getLikedBs(BusinessListVO vo);
+	public BusinessVO getComspec(BusinessVO vo);
 }

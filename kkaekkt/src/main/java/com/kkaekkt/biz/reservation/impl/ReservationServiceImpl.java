@@ -48,8 +48,8 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Override
 	public ReservationListVO getRsvListBs(ReservationListVO vo) {
-		vo.setTotalPostCount(reservationDAO.countList(vo));
-		vo.booleanSet(); // 행 개수 출력
+		vo.setTotalPostCount(reservationDAO.countList(vo));// 행 개수 출력
+		vo.booleanSet();
 		if (vo.getListType() == 2) { // 품목별 리스트라면,
 			vo.setRsvListLno(reservationDAO.getRsvListBs_ld(vo));
 		} else { // 품목별 리스트가 아니라면

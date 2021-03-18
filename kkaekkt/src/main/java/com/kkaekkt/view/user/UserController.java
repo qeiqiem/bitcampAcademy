@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.kkaekkt.biz.comm.LaundryVO;
 import com.kkaekkt.biz.user.BusinessListVO;
 import com.kkaekkt.biz.user.BusinessVO;
 import com.kkaekkt.biz.user.PersonVO;
@@ -76,5 +77,15 @@ public class UserController {
 				return "/jsp/index.jsp";
 			}
 
+		}
+	// 일반사양관리
+		@RequestMapping(value="/selectComspec.do", method=RequestMethod.POST, produces="application/text;charset=utf-8")
+		@ResponseBody
+		public String SelcetComspec(BusinessVO vo) {
+			System.out.println(vo);
+			Gson gson=new Gson();
+			String test=gson.toJson(userService.getComspec(vo));
+			System.out.println("test:" + test);
+			return test;
 		}
 }
