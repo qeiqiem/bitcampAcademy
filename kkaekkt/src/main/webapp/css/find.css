@@ -48,9 +48,15 @@ i {
   box-sizing: border-box;
   border: solid 1px var(--gray-color);
   /* border-radius: 10px; */
-  padding: 50px;
+  /* padding: 50px; */
   font-size: 18px;
   margin: 50px 0 200px;
+  text-align: center;
+}
+
+.idBox {
+  height: 260px;
+  padding: 30px;
 }
 
 .mail {
@@ -62,4 +68,12 @@ i {
   margin-left: 10px;
   text-decoration: underline;
   text-underline-position: under;
+}
+
+.pw {
+  color: var(--gray-color);
+}
+
+#findPW {
+  display: none;
 }
