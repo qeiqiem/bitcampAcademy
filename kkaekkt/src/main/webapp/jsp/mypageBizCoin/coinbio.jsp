@@ -5,9 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/css/coinbio.css">
+<script src="/js/coinbio.js"></script>
 </head>
 <body>
+<jsp:include page="/jsp/header0.jsp"></jsp:include>
     <div class="body_container">
+    <jsp:include page="sidebar_coin.jsp"></jsp:include>
         <div class="userinfo">
             <table>
                 <tr>
