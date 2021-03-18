@@ -7,6 +7,6 @@
 		<button onclick='location.href="/jsp/mypageUser/mybio.jsp"'>프로필편집</button>
 	</div>
 	<div class="side_sub">
-		<button>진행중인 주문</button>
+		<button onclick='location.href="/jsp/mypageUser/mypagePs.jsp"'>진행중인 주문</button>
 		<button>완료된 주문</button>
 	</div>
