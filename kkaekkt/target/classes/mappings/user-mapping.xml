@@ -72,4 +72,9 @@
 	<select id="getUserList">
 		
 	</select>
+	<select id="getcomspecList" resultType="laundry">
+		SELECT bs.lno as lno, lname as laundry, price 
+		FROM bsn_laundry bs, laundry_type la, business b 
+		WHERE bs.lno=la.lno AND bs.bno=b.bno AND b.bno=#{bno};
+	</select>
 </mapper>

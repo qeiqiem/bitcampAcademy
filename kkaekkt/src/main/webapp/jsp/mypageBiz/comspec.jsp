@@ -32,7 +32,7 @@
 											<input type="checkbox" id="general"/> <span class="checkbox-icon">
 										</span>
 									</span> 일반의류</td>
-									<td><input id="won" type="text" placeholder="받아온정보"
+									<td><input id="won general_won" type="text" placeholder="받아온정보"
 										disabled> 원</td>
 								</tr>
 								<tr>
@@ -40,7 +40,7 @@
 											<input type="checkbox" id="shirt"/> <span class="checkbox-icon">
 										</span>
 									</span> 와이셔츠</td>
-									<td><input id="won" type="text" placeholder="받아온정보"
+									<td><input id="won shirt_won" type="text" placeholder="받아온정보"
 										disabled> 원</td>
 								</tr>
 								<tr>
@@ -48,7 +48,7 @@
 											<input type="checkbox" id="blanket"/> <span class="checkbox-icon">
 										</span>
 									</span> 이불</td>
-									<td><input id="won" type="text" placeholder="받아온정보"
+									<td><input id="won blanket_won" type="text" placeholder="받아온정보"
 										disabled> 원</td>
 								</tr>
                                 <tr>
@@ -56,7 +56,7 @@
 											<input type="checkbox" id="shoes"/> <span class="checkbox-icon">
 										</span>
 									</span> 운동화</td>
-									<td><input id="won" type="text" placeholder="받아온정보"
+									<td><input id="won shoes_won" type="text" placeholder="받아온정보"
 										disabled> 원</td>
 								</tr>
 							</table>
@@ -73,7 +73,7 @@
 											<input type="checkbox" id="leather"/> <span class="checkbox-icon">
 										</span>
 									</span> 가죽모피</td>
-									<td><input id="won" type="text" placeholder="받아온정보"
+									<td><input id="won leather_won" type="text" placeholder="받아온정보"
 										disabled> 원</td>
 								</tr>
 								<tr>
@@ -81,7 +81,7 @@
 											<input type="checkbox" id="bag"/> <span class="checkbox-icon">
 										</span>
 									</span> 명품가방</td>
-									<td><input id="won" type="text" placeholder="받아온정보"
+									<td><input id="won bag_won" type="text" placeholder="받아온정보"
 										disabled> 원</td>
 								</tr>
 								<tr>
@@ -89,7 +89,7 @@
 											<input type="checkbox" id="outdoor"/> <span class="checkbox-icon">
 										</span>
 									</span> 아웃도어</td>
-									<td><input id="won" type="text" placeholder="받아온정보"
+									<td><input id="won outdoor_won" type="text" placeholder="받아온정보"
 										disabled> 원</td>
 								</tr>
                                 <tr>
@@ -97,7 +97,7 @@
 											<input type="checkbox" id="other"/> <span class="checkbox-icon">
 										</span>
 									</span> <input type="text" placeholder="기타" style="width:100px; height:25px"></td>
-									<td><input id="won" type="text" placeholder="받아온정보"
+									<td><input id="won other_won" type="text" placeholder="받아온정보"
 										disabled> 원</td>
 								</tr>
 							</table>

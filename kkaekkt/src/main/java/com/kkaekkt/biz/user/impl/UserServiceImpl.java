@@ -106,4 +106,11 @@ public class UserServiceImpl implements UserService {
 		return list;
 	}
 
+	@Override
+	public BusinessVO getComspec(BusinessVO vo) {
+		System.out.println("servie옴");
+		vo.setLaundryList(userDao.getComspec(vo));
+		return vo;
+	}
+
 }

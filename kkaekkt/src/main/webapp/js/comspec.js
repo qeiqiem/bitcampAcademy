@@ -91,13 +91,13 @@ function ajax(pageObj) { //ajax로 리스트 받아오기
         url:"/selectComspec.do",
         data:pageObj,
         success: function(data) {
+    console.log('ajax 함수 완료');
             var comspec=JSON.parse(data);
-            $('#general').val(comspec.totalPostCount);
-            var list=rsv.rsvListLno;
-            printlist(list);
-            initPageObj(rsv);
-            initPageBtn();
-            console.log('ajax 완료');
+           //$('#general').val=comspec.laundry;
+            //var list=rsv.rsvListLno;
+            //printlist(list);
+           
+            console.log(comspec);
         }
     });
 }
