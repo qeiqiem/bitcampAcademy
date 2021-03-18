@@ -38,6 +38,9 @@ function initModal() {
         $("#starVal").val(starVal);
     });
 }
+function regit() {
+    console.log($("#starVal").val());
+}
 function initSide() {
     $('.side_sub').css('display','unset');
     $('.side button').eq(0).addClass("side_select");

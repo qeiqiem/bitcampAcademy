@@ -1,13 +1,20 @@
+textarea{
+    resize: none;
+    height: 12em;/* height 안먹는데 이유를 모름.. */
+}
+.word{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+}
+
 /* 모달 container 입니다 기본은 none 상태로 두셔야합니다.
 본인 화면에서 사용할때, position을 정해주셔야 합니다. */
 #modal_container{
     display: none;
-    position: fixed;
+
+    position: relative;
     margin: auto;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
     width: 364px;
     height: 235px;
     background-color: white;
@@ -64,15 +71,27 @@
     text-align: center;
 }
 
-#sub_review{
+#review_text{
     cursor: pointer;
+   width: 100%;
+   background-color:rgba(249, 249, 249, 1);
+   border-radius: 4px;
+   border: 1px solid lightgray;
+}
+
+#review_texter{
+    float: right;
+    font-size: 15px;
+    color: lightgray;
+}
+
+#sub_review{
     background: rgba(143, 188, 255, 0.48);
     border-radius: 30px;
     border: 0px;
     width: 120px;
     height: 40px;
     margin: 0 10px;
-    outline:none;
 }
 
 /* 별 css */

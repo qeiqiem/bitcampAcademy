@@ -71,7 +71,7 @@
 						<div id="modal_foot">
 							<button id="return" onclick="return()">돌아가기</button>
 							<button id="regit" onclick="regit()">등록하기</button>                     
-						</div>                
+						</div>
 				</div>
 			</div>
 	</div>
