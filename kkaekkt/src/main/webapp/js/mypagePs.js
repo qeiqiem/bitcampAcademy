@@ -1,6 +1,7 @@
 $(document).ready(function() {
     initSide();
     initEvent();
+	initModal();
     ajax(pageObj); //처음 마이페이지 들어왔을 때, 진행중 주문 항목 출력
 });
 function initEvent() {
@@ -155,6 +156,20 @@ function initSide() {
     $('.side_sub button').click(function(){
         $(this).addClass("side_sub_select");
         $(this).siblings().removeClass("side_sub_select");
+    });
+}
+function initModal() {
+    /* 모달 생성 */
+    $(".rsvList").on("click",".comments_bottom button",function(){ 
+        $("#modal_container").show();
+    });
+    $("#modal_close").click(function(){ 
+        $("#modal_container").hide(); 
+    });
+    /* 평점 받기 */
+    $(".rating__input").click(function(){ 
+        var starVal = $(this).attr('value'); 
+        $("#starVal").val(starVal);
     });
 }
 function printlist(list) {
