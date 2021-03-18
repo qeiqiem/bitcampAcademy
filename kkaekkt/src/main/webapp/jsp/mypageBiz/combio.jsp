@@ -3,15 +3,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="/css/coinbio.css">
-<script src="/js/coinbio.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/415f6f6023.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+  	<link rel="stylesheet" href="../../css/coinbio.css">
+  	<script src="../../js/coinbio.js"></script>
+
 </head>
+
 <body>
 <jsp:include page="/jsp/header0.jsp"></jsp:include>
     <div class="body_container">
-    <jsp:include page="sidebar_coin.jsp"></jsp:include>
+    <jsp:include page="sidebar_bs.jsp"></jsp:include>
         <div class="userinfo">
             <table>
                 <tr>
@@ -131,4 +137,5 @@
 
     </div>
 </body>
+
 </html>

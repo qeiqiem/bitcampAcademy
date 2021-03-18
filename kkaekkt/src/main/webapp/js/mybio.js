@@ -4,7 +4,7 @@
     var content = document.getElementsByClassName("content");
    
         window.onload = function () {
-        
+                initSide();
             	//값 넣어주기
             	
             	document.getElementsByName('mno')[0].value = pageObj["mno"];
@@ -200,3 +200,6 @@
             
             
         }
+function initSide() {
+    $('.side button').eq(2).addClass("side_select");
+}

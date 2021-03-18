@@ -22,9 +22,11 @@
 		</div>
 
 		<div class="head_right">
-			<a href="">(업체이름)</a> <a href=""><i class="fas fa-bell"></i></a> <a
-				href=""><i class="fas fa-comments"></i></a> <a href="">로그아웃</a> <a
-				href="">FAQ</a>
+			<a href="">(업체이름)</a> 
+			<a href=""><i class="fas fa-bell"></i></a> 
+			<a href=""><i class="fas fa-comments"></i></a> 
+			<a href="">로그아웃</a> 
+			<a href="/jsp/faq.jsp">FAQ</a>
 		</div>
 	</nav>
 </header>
