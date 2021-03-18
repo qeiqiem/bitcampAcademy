@@ -1,6 +1,11 @@
 $(document).ready(function() {
 	$(".side_sub").hide();
-    // 수정하기 버튼 클릭시 인풋,셀렉박스 비활성화 활성화
+	ajax(pageObj);
+	initEvent();
+          
+});
+function initEvent(){
+		//수정하기 버튼 클릭시 인풋,셀렉박스 비활성화 활성화
         var clickupdate = $("#updateSpec");
         var changebtn = $("#btn_change");
         var resetbtn = $("#resetSpec");
@@ -79,5 +84,20 @@ $(document).ready(function() {
                         .stringify(list)
 
             }
-          
-});
+}
+function ajax(pageObj) { //ajax로 리스트 받아오기
+    console.log('ajax 함수 진입');
+    $.post({
+        url:"/selectComspec.do",
+        data:pageObj,
+        success: function(data) {
+            var comspec=JSON.parse(data);
+            $('#general').val(comspec.totalPostCount);
+            var list=rsv.rsvListLno;
+            printlist(list);
+            initPageObj(rsv);
+            initPageBtn();
+            console.log('ajax 완료');
+        }
+    });
+}
