@@ -4,7 +4,7 @@
 	<div class="side">
 		<button onclick="location.href='mpbProg_Item.jsp'">처리중</button>
 		<button onclick="location.href='mpbCom.jsp'">완 료</button>
-		<button>매출관리</button>
+		<button onclick="location.href='salesManage_com.jsp'">매출관리</button>
 		<button>사양관리</button>
 		<button>프로필편집</button>
 	</div>
