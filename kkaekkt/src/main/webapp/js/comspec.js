@@ -107,15 +107,10 @@ function ajax(pageObj) { //ajax로 리스트 받아오기
         }
     }); // ajax
 }
-<<<<<<< HEAD
 
-	
 
-//function initSide() {
-    //$('.side button').eq(3).addClass("side_select");
-//}
-=======
+
 function initSide() {
     $('.side button').eq(3).addClass("side_select");
 }
->>>>>>> 349acdc985a6e0e2428be0ffe16310fdd11afd82
+
