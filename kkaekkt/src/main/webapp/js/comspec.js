@@ -85,22 +85,31 @@ function initEvent(){
 
             }
 }
+
 function ajax(pageObj) { //ajax로 리스트 받아오기
     console.log('ajax 함수 진입');
     $.post({
         url:"/selectComspec.do",
         data:pageObj,
         success: function(data) {
-    console.log('ajax 함수 완료');
+    		console.log('ajax 함수 완료');
             var comspec=JSON.parse(data);
-           //$('#general').val=comspec.laundry;
-            //var list=rsv.rsvListLno;
-            //printlist(list);
-           
-            console.log(comspec);
+
+           	// 품목이 일치하면 값 넣어주기
+			$.each(comspec.laundryList, function(index, item) {
+				console.log(index + ":" + item.laundry +","+ item.price);
+				for(var i = 0; i<8; i++){
+					if(item.laundry == ($("td").eq(i).text().trim())) {
+						$("td").eq(i).next().children("input").val(item.price); 
+					}
+				} 
+			}); // 품목리스트 반복문
         }
-    });
+    }); // ajax
 }
+
+	
+
 //function initSide() {
     //$('.side button').eq(3).addClass("side_select");
 //}
