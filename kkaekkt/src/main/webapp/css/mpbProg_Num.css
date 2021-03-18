@@ -91,6 +91,10 @@ p {
   width: 11%;
   border: none;
 }
+<<<<<<< HEAD
+.processList tr td:nth-child(9){
+    position: relative;
+=======
 
 .processList tr td:nth-child(4) {
   text-align: center;
@@ -113,6 +117,7 @@ p {
 }
 .processList tr td:nth-child(9) {
   position: relative;
+>>>>>>> be221bbf8a931ab20bc3214a103031b74661689b
 }
 .processList tr td:nth-child(9) div {
   position: absolute;
@@ -125,6 +130,24 @@ p {
   height: 80%;
   color: black;
 }
+<<<<<<< HEAD
+.processList tr td:nth-child(9) div button:nth-child(1) {
+    position: relative;
+    height: 47%;
+    background: rgb(251, 135, 135);
+    border: 1px solid red;
+    margin-bottom: 5px;
+    width: 100%;
+    font-size: 14px;
+}
+.processList tr td:nth-child(9) div button:nth-child(2) {
+    position:relative;
+    height: 47%;
+    background: rgb(129, 129, 248);
+    border: 1px solid blue;
+    width: 100%;
+    font-size: 14px;
+=======
 .processList tr td:nth-child(9) div:nth-child(1) button:nth-child(1) {
   position: relative;
   height: 47%;
@@ -141,6 +164,7 @@ p {
   border: 1px solid blue;
   width: 95%;
   font-size: 14px;
+>>>>>>> be221bbf8a931ab20bc3214a103031b74661689b
 }
 
 .page_btn button {

@@ -95,6 +95,7 @@ p{
     border: 1px solid var(--gray-color);
     text-align: center;
     margin-bottom: 5px;
+    min-height:85px;
 }
 .processList tr{
     position: relative;
@@ -104,7 +105,10 @@ p{
     width: 14%;
     border: none;
 }
-.processList tr td:nth-child(7) div:nth-child(1) {
+.processList tr td:nth-child(7) {
+    position: relative;
+}
+.processList tr td:nth-child(7) div{
     position: absolute;
     margin: auto;
     top:0;
