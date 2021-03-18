@@ -30,23 +30,23 @@
             <div id="findID">
                 <p>아이디와 비밀번호를 찾기 위해서는 이름, 회원정보에 등록된 이메일을 통해 본인인증을 받아야 합니다.</p>
 
-             <div class="veri_btn idBox" onclick="">
-                <!-- <i class="far fa-envelope"></i> -->
-                <!-- <i class="fas fa-envelope"></i> -->
-                <!-- 내 정보에 저장된 이메일로 찾기 -->
-                <!-- <input type="button" id="veri" value="" /> -->
-                <ul>
-                    <li>
-                        <input class="inputname" type="text" placeholder="이름을 입력하세요."> <br>
-                    </li>
-                    <li>
-                        <input type="text" placeholder="가입 시 등록한 이메일을 입력하세요."> <br>
-                    </li>
-                </ul>
+                <div class="veri_btn idBox" onclick="check()">
+                    <!-- <i class="far fa-envelope"></i> -->
+                    <!-- <i class="fas fa-envelope"></i> -->
+                    <!-- 내 정보에 저장된 이메일로 찾기 -->
+                    <!-- <input type="button" id="veri" value="" /> -->
+                    <ul>
+                        <li>
+                            <input id="inName" type="text" placeholder="이름을 입력하세요."> <br>
+                        </li>
+                        <li>
+                            <input id="inMail" type="text" placeholder="가입 시 등록한 이메일을 입력하세요."> <br>
+                        </li>
+                    </ul>
 
-                <button type="submit">다음</button>
+                    <button type="submit">다음</button>
 
-            </div>
+                </div>
                 <div class="mail">
                     아이디 찾기 시 문제가 있나요? <a href="mailto:info@kkaekkt.com">고객센터</a>
                 </div>
