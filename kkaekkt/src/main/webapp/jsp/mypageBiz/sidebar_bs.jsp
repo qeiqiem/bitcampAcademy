@@ -6,7 +6,7 @@
 		<button onclick="location.href='/jsp/mypageBiz/mpbCom.jsp'">완 료</button>
 		<button onclick="location.href='/jsp/mypageBiz/salesManage_com.jsp'">매출관리</button>
 		<button onclick="location.href='/jsp/mypageBiz/comspec.jsp'">사양관리</button>
-		<button>프로필편집</button>
+		<button onclick="location.href='/jsp/mypageBiz/combio.jsp'">프로필편집</button>
 	</div>
 	<div class="side_sub">
 		<button onclick="location.href='/jsp/mypageBiz/mpbProg_Item.jsp'">품목별</button>

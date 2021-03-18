@@ -8,12 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>지도생성하기</title>
     <!-- 헤더에서 필요한 참조 -->
-    <link rel="stylesheet" href="/css/landryMap.css">
+    <link rel="stylesheet" href="/css/landryMap.css"/>
     <script src="https://kit.fontawesome.com/2fc57dd2db.js" crossorigin="anonymous"></script>
 
     <!-- map 에서 필요한 참조 -->
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script src="js/map.js"></script>
+    <script src="/js/map.js"></script>
     
     
 </head>

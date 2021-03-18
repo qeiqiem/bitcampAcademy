@@ -3,6 +3,7 @@ package com.kkaekkt.biz.reservation.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kkaekkt.biz.comm.CommVO;
 import com.kkaekkt.biz.comm.LaundryVO;
 import com.kkaekkt.biz.reservation.ReservationListVO;
 import com.kkaekkt.biz.reservation.ReservationService;
@@ -13,6 +14,11 @@ public class ReservationServiceImpl implements ReservationService {
 	@Autowired
 	ReservationDAO reservationDAO;
 
+	
+	@Override
+	public void regitComm(CommVO vo) {
+		reservationDAO.regitComm(vo);		
+	}
 	public void insertRsv(ReservationVO vo) {
 		reservationDAO.insertRsv(vo);
 	}

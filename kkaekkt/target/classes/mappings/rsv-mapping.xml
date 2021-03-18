@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="reservationDAO">
+
+	<insert id="regitComm">
+		INSERT INTO comments (mno,bno,content,depth,groupNum,orderNum) 
+		SELECT #{mno},#{bno},#{content},#{depth},#{rsvNum},IFNULL(MAX(orderNum)+1,1) FROM comments;
+		INSERT INTO evaluation VALUES (#{mno},#{bno},#{eval});
+	</insert>
 	<insert id="likeOn">
 		INSERT INTO liked VALUES ((SELECT bno FROM reservation WHERE rno=#{rsvNum}),(SELECT mno FROM reservation WHERE rno=#{rsvNum}));	
 	</insert>
@@ -30,9 +36,8 @@
 			UPDATE rsv_laundry SET stno=3 WHERE rno=#{rsvNum};
 		</if>
 	</update>
-	<select id="getRsvListPs" resultType="reservation"> <!-- 일반회원 예약리스트 출력 -->
-			
-		SELECT r.rno rsvNum,rdate rsvDate,bname,phone,<![CDATA[	TIMESTAMPDIFF(HOUR,rdate,CURDATE())<1 timeOut]]>, stname state
+	<select id="getRsvListPs" resultType="reservation"> <!-- 일반회원 예약리스트 출력 -->	
+		SELECT r.rno rsvNum,r.bno bno,rdate rsvDate,bname,phone,<![CDATA[	TIMESTAMPDIFF(HOUR,rdate,CURDATE())<1 timeOut]]>, stname state
 		FROM reservation r, business b, state s
 		WHERE r.bno=b.bno AND r.stno=s.stno
 		AND r.mno=#{mno}

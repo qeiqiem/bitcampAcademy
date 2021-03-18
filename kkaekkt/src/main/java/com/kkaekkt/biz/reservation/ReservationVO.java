@@ -7,6 +7,7 @@ import com.kkaekkt.biz.comm.LaundryVO;
 
 public class ReservationVO {
 	private int rsvNum; // 예약번호
+	private int bno;
 	private String mname; // 회원명
 	private String bname; // 업체명
 	private Date rsvDate; // 예약일자
@@ -20,6 +21,12 @@ public class ReservationVO {
 	private int totalPrice; // 총 금액
 	private int count; // ex. 일반의류 외 count 개
 	
+	public int getBno() {
+		return bno;
+	}
+	public void setBno(int bno) {
+		this.bno = bno;
+	}
 	public int getLike() {
 		return like;
 	}

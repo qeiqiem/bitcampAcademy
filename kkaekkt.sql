@@ -87,8 +87,8 @@ CREATE TABLE `comments` (
 	`cno`	INTEGER	NOT NULL comment '댓글번호',
 	`mno`	INTEGER	NULL comment '회원번호',
 	`bno`	INTEGER	NOT NULL comment '사업자번호',
-	`comment`	VARCHAR(255)	NULL comment '내용',
-	`order`	INTEGER	NULL comment '순서',
+	`content`	VARCHAR(255)	NULL comment '내용',
+	`orderNum`	INTEGER	NULL comment '순서',
 	`depth`	INTEGER	NULL comment '깊이',
 	`groupNum`	INTEGER	NULL comment '소속'
 );

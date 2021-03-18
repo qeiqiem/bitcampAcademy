@@ -1,6 +1,7 @@
 $(document).ready(function() {
     initSide();
     initEvent();
+    initModal();
 });
 function initEvent() {
     $('.rsvList').on("click",".detailBtn",function() { // 버블링으로 생성된 주문에 클릭 이벤트 활성화
@@ -22,6 +23,24 @@ function initEvent() {
         }
         $('.comments_header span:nth-child(1)')[0].innerHTML=$(this).val().length;
     });
+}
+function initModal() {
+    /* 모달 생성 */
+    $(".rsvList").on("click",".comments_bottom button",function(){ 
+        $("#modal_container").show();
+        console.log($('#ta'+$(this).val()).val());
+    });
+    $("#modal_close").click(function(){ 
+        $("#modal_container").hide(); 
+    });
+    /* 평점 받기 */
+    $(".rating__input").click(function(){ 
+        var starVal = $(this).attr('value'); 
+        $("#starVal").val(starVal);
+    });
+}
+function regit() {
+    console.log($("#starVal").val());
 }
 function initSide() {
     $('.side_sub').css('display','unset');

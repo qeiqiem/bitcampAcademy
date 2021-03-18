@@ -10,6 +10,7 @@
 		<typeAlias alias="reservation" type="com.kkaekkt.biz.reservation.ReservationVO"/>
 		<typeAlias alias="laundry" type="com.kkaekkt.biz.comm.LaundryVO"/>
 		<typeAlias alias="schedule" type="com.kkaekkt.biz.comm.ScheduleVO"/>
+		<typeAlias alias="comment" type="com.kkaekkt.biz.comm.CommVO"/>
 	</typeAliases>
 			
 	<!-- Sql Mapper 설정 -->

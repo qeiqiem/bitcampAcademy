@@ -1,5 +1,6 @@
 package com.kkaekkt.biz.reservation;
 
+import com.kkaekkt.biz.comm.CommVO;
 import com.kkaekkt.biz.comm.LaundryVO;
 
 public interface ReservationService {
@@ -9,4 +10,5 @@ public interface ReservationService {
 	public void like(ReservationVO vo);
 	public ReservationListVO getRsvListPs(ReservationListVO vo);
 	public ReservationListVO getRsvListBs(ReservationListVO vo);
+	public void regitComm(CommVO vo);
 }

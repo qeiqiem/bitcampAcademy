@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.kkaekkt.biz.comm.CommVO;
 import com.kkaekkt.biz.comm.LaundryVO;
 import com.kkaekkt.biz.reservation.ReservationListVO;
 import com.kkaekkt.biz.reservation.ReservationService;
@@ -61,5 +62,10 @@ public class ReservationController {
 	@ResponseBody
 	public void like(ReservationVO vo) {
 		reservationService.like(vo);
+	}
+	@RequestMapping(value="/regitComm.do", method=RequestMethod.POST)
+	@ResponseBody
+	public void regitComm(CommVO vo) {
+		reservationService.regitComm(vo);
 	}
 }

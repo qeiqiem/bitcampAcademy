@@ -114,6 +114,8 @@
     </style>
     <script>
         $(document).ready(function(){
+        
+
             /* button click event */
             /* 모달 생성 */
             $("#modal_show").click(function(){ $("#modal_container").show() })
@@ -126,6 +128,7 @@
                 var review_text = $(this).val(); 
                 $('#review_texter').html(review_text.length + '/300') })
             $('#review_text').keyup();
+
         })
     </script>
 </head>
@@ -169,7 +172,7 @@
                         <textarea id="review_text" maxlength="300"  placeholder="최소 10자 이상 입력해주세요."></textarea> 
                         <span id="review_texter">###</span><br>
                         <button id="sub_review" type="submit"> 리뷰쓰기</button>                     
-                    </div>                
+                    </div>
                 </form>
             </div>
         </div>

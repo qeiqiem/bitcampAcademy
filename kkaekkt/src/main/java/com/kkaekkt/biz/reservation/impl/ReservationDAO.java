@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kkaekkt.biz.comm.CommVO;
 import com.kkaekkt.biz.comm.LaundryVO;
 import com.kkaekkt.biz.reservation.ReservationListVO;
 import com.kkaekkt.biz.reservation.ReservationVO;
@@ -47,5 +48,8 @@ public class ReservationDAO {
 	}
 	public List<LaundryVO> getRsvListBs_ld(ReservationListVO vo) {
 		return mybatis.selectList("reservationDAO.getRsvListBs_ld",vo);
+	}
+	public void regitComm(CommVO vo) {
+		mybatis.insert("reservationDAO.regitComm",vo);		
 	}
 }
