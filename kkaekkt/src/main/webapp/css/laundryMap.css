@@ -205,14 +205,19 @@
 
 
 #s_title{
-    font-family: Roboto;
+   	font-family: Roboto;
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
     color: rgb(83, 83, 83);
     text-align: center;
-    margin: 10px 0 0 0;
-    height: 22px;
+    margin: 0 0 0 10%;
+    overflow: hidden;
+    height: 30px;
+    width: 300px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
 }
 
 #s_star{
@@ -320,3 +325,4 @@
 td:nth-child(2){
     float: right;
 }
+

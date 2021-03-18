@@ -9,43 +9,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>지도생성하기</title>
     <!-- 헤더에서 필요한 참조 -->
-    <link rel="stylesheet" href="/css/laundryMap.css">
+	<link rel="stylesheet" href="/css/all.css">
+	<link rel="stylesheet" href="/css/head0.css">
     <script src="https://kit.fontawesome.com/2fc57dd2db.js" crossorigin="anonymous"></script>
 
     <!-- map 에서 필요한 참조 -->
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="/js/map.js"></script>
-    
-    
+	<link rel="stylesheet" href="/css/laundryMap.css">
+
 </head>
-    <body>
-    
-<link rel="stylesheet" href="/css/all.css">
-<link rel="stylesheet" href="/css/head0.css">
-<script src="https://kit.fontawesome.com/2fc57dd2db.js"
-	crossorigin="anonymous"></script>
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
-	rel="stylesheet">
-
-<header class="head_container">
-	<nav class="head">
-		<div class="head_left">
-			<div class="logo">
-				<a href=""> <img src="/img/logo.svg" alt="">
-				</a>
-			</div>
-			<div class="menu">
-				<a href="">일반세탁소</a> <a href="">코인세탁소</a>
-			</div>
-		</div>
-
-		<div class="head_right">
-			<a href="">회원가입</a> <a href="">로그인</a> <a href="">FAQ</a>
-		</div>
-	</nav>
-</header>
+<body>
+    <jsp:include page="/jsp/header0.jsp"></jsp:include>
         <div class="body_container">
             <div class="map_container">
                 <div class="slide">
@@ -89,8 +64,8 @@
                         </div>
                         <div class="footer single">
                             <div class="card">
-                                <img id="single_img" src="../img/kkaekkt.png" style="width: 100%; height: 200px; background-color: aliceblue;">
-                                <p id="s_title">비트세탁소 신촌점</p>
+                                <img id="single_img" src="/img/kkaekkt.png" style="width: 100%; height: 200px; background-color: aliceblue;">
+                                <p id="s_title"></p>
                                 <div id="s_star">0.0
                                     <p class="rating-group">
                                         <label aria-label="1 star" class="rating__label" for="rating-1">
@@ -123,10 +98,10 @@
                                             <td><input class="tag_kkaekkt" value="kkarkkt 가맹점 입니다"></td>
                                         </tr>
                                         <tr>
-                                            <td><i class="fas fa-phone" style="color:rgb(90, 90, 90); "></i> 000-1111-2222</td>
+                                            <td ><i class="fas fa-phone" id="s_phone" style="color:rgb(90, 90, 90); "></i></td>
                                         </tr>
                                         <tr>
-                                            <td><i class="fas fa-map-marker-alt" style="color:rgb(90, 90, 90);"></i> 용산구 행복동 초봉 3000호</td>
+                                            <td><i class="fas fa-map-marker-alt" id="s_address" style="color:rgb(90, 90, 90);"></i></td>
                                         </tr>
                                         <tr>
                                             <td><i class="far fa-clock"></i> 00:00~12:00</td>
@@ -186,7 +161,6 @@
             </div>
             
         </div>
-    </div>
     </body>    
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3845f493917a302d1ea69e946c0443ff&libraries=services"></script>
     <script>
@@ -303,8 +277,10 @@
         // 리스트 출력
         function getListItem(index, places) {
             var el = document.createElement('table'),
-            itemStr =  '<tr>'
-                            + '<td><p class="place_name">'+ (index+1)+'&nbsp;&nbsp;' + places.place_name + '</p></td>'
+							
+            itemStr =  		'<tbody class="place_body">'
+							+'<tr>'
+                            + '<td class="place_name">'+ (index+1)+'&nbsp;&nbsp;' + places.place_name + '</td>'
                             + '<td rowspan="3"  style="float: right;">'
                             + '<i class="far fa-heart" id="heart" style="color:lightgray; font-size:30px"></i></td>'
                         + '</tr>'
@@ -315,13 +291,13 @@
                                 }
                             itemStr +='&nbsp;&nbsp;1건 | 리뷰</td>'
                         + '</tr>'
-                        + '<tr><td>' + places.road_address_name + '</td>'
+                        + '<tr><td class="place_address">' + places.road_address_name + '</td>'
                         + '</tr>'
                         + '<tr><td>영업중 | 매일 00:00~24:00</td>'
                         + '</tr>'
-                        + '<tr><td>' +places.phone + '</td>'
-                        + '</tr>';
-
+                        + '<tr><td class="place_phone">' +places.phone + '</td>'
+                        + '</tr>'
+						+'</tbody>';
             el.innerHTML = itemStr;
             el.className = 'item';
 
