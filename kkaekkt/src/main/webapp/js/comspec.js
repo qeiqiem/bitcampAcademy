@@ -101,6 +101,8 @@ function ajax(pageObj) { //ajax로 리스트 받아오기
 				for(var i = 0; i<8; i++){
 					if(item.laundry == ($("td").eq(i).text().trim())) {
 						$("td").eq(i).next().children("input").val(item.price); 
+						console.log($("td").eq(i).children().children("input:checkbox"));
+						$("td").eq(i).children().children("input:checkbox").prop("checked", true);
 					}
 				} 
 			}); // 품목리스트 반복문
