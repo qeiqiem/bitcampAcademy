@@ -100,7 +100,7 @@
                 password:'${sessionScope.member.password}',
                 phone:'${sessionScope.member.phone}',
                 birth:'${sessionScope.member.birth}',
-                email:'${sessionScope.member.email}',				
+                email:'${sessionScope.member.email}',                
                 state:'${sessionScope.member.state}'
             };
         	

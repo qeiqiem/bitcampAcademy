@@ -90,7 +90,8 @@ CREATE TABLE `comments` (
 	`content`	VARCHAR(255)	NULL comment '내용',
 	`orderNum`	INTEGER	NULL comment '순서',
 	`depth`	INTEGER	NULL comment '깊이',
-	`groupNum`	INTEGER	NULL comment '소속'
+	`groupNum`	INTEGER	NULL comment '소속',
+	`rdate` DATE NULL comment '등록일자'
 );
 
 CREATE TABLE `evaluation` (

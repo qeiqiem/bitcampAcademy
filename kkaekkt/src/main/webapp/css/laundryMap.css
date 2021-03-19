@@ -245,7 +245,11 @@
 
 
 #s_title{
+<<<<<<< HEAD
+      font-family: Roboto;
+=======
     font-family: Roboto;
+>>>>>>> b26679f544bcfaf13c729914a757e8124b0f5ff1
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
@@ -365,4 +369,3 @@
 td:nth-child(2){
     float: right;
 }
-
