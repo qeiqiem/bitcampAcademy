@@ -61,7 +61,7 @@
                 //인풋창 비활성화, 입력값 초기화(기존에 받아온 값으로 바껴야하느데..)
                 for (var i = 3; i < inputli.length; i++) {
                     inputli[i].disabled = true;
-       
+
                 }
                 //본인인증, 우편번호 찾기 버튼 비활성화
                  for (var i = 3; i < buttonli.length; i++) {

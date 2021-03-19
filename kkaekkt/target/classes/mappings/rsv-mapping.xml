@@ -3,8 +3,8 @@
 <mapper namespace="reservationDAO">
 
 	<insert id="regitComm">
-		INSERT INTO comments (mno,bno,content,depth,groupNum,orderNum) 
-		SELECT #{mno},#{bno},#{content},#{depth},#{rsvNum},IFNULL(MAX(orderNum)+1,1) FROM comments;
+		INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum) 
+		SELECT #{mno},#{bno},#{content},#{depth},#{rsvNum},CURDATE(),IFNULL(MAX(orderNum)+1,1) FROM comments;
 		INSERT INTO evaluation VALUES (#{mno},#{bno},#{eval});
 	</insert>
 	<insert id="likeOn">

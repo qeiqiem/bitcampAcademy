@@ -9,9 +9,9 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="/mypagePs.do" method="POST">
-        <input type="text" name="mno" value=2>
-        <input type="submit" value="마이페이지">
+    <form action="/updatePs.do" method="POST">
+        <input type="text" name="mno" value=1>
+        <input type="submit" value="회원정보수정">
     </form>
 </body>
 </html>
