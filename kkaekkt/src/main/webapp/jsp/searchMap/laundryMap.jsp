@@ -23,11 +23,8 @@
     <jsp:include page="/jsp/header0.jsp"></jsp:include>
         <div class="body_container">
             <div class="map_container">
-                <div class="slide">
-                    <div>
-                        <button class="foldBtn">&lt;</button>
-                        <button class="foldBtn expand">&gt;</button>
-                    </div>
+                <div class="slide_container">
+                    <div class="slide">
                         <div class="slide_top">
                             <img class="map_logo" src="/img/logo.svg" alt="">
                             <p class="here"><input type="radio">내 주변 찾기</p>
@@ -41,9 +38,9 @@
                             </div>
                             <div class="tag">
                                 <ul class="slide_ul">
-                                    <li id="all_search"    value="1">전체</li>
-                                    <li id="basic_search"   value="2" >일반세탁소</li>
-                                    <li id="coin_search"    value="3">코인세탁소</li>
+                                    <li id="all_search"   value="1">전체</li>
+                                    <li id="basic_search" value="2" >일반세탁소</li>
+                                    <li id="coin_search"  value="3">코인세탁소</li>
                                     <li id="my_search">my</li>
                                 </ul>
                                 <hr>
@@ -89,10 +86,11 @@
                                         <input class="rating__input" name="rating" id="rating-5" value="5" type="radio">
                                         &nbsp; | 리뷰 1건</p>
                                 </div>
+								<div>
+									<button id="res">예약하기</button>
+								</div>
                             </div>
                             <div class="cardinfo">
-                                    <button class="btn" id="info">업체정보</button>
-                                    <button class="btn" id="res">예약하기</button>
                                     <table id="single_table">
                                         <tr>
                                             <td><input class="tag_kkaekkt" value="kkarkkt 가맹점 입니다"></td>
@@ -153,10 +151,16 @@
                                         <td>25,000</td>
                                     </tr>
                                 </table>
-                                <input class="resbtn" value="예약하러 가기 >">
                             </div> 
                         </div>
+                    </div><!-- slide -->
+                    <div class="slide_res">                        
+                    </div><!-- slide --> 
+                    <div class="contBtn">
+                        <button class="foldBtn">&lt;</button>
+                        <button class="foldBtn expand">&gt;</button>
                     </div>
+                </div>
                 <div id="map"></div>
             </div>
             
@@ -167,12 +171,16 @@
 
     /* 지도 api에서 제공하는 이벤트 */
         var markers = [];
-        var mapContainer = document.getElementById('map'),
+        var mapContainer = 
+			map = document.getElementById('map'),
             mapOption = {
                 center: new kakao.maps.LatLng(37.566826, 126.9786567),level: 2
-            };  
-
+            }; 
+        
+		
         var map = new kakao.maps.Map(mapContainer, mapOption);
+			mapContainer.style.position = "initial";
+			
         var ps = new kakao.maps.services.Places();  
 
         // 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다

@@ -3,8 +3,23 @@ $(document).ready(function(){
 
     var adrress="서울 용산"
 
-    //사이드바 이벤트
-    $('.foldBtn').click(function(){ $('.foldBtn').toggleClass('expand'); $('.slide').toggleClass('hide'); })
+    //버튼 이벤트
+    //슬라이드제어
+    $('.foldBtn').click(function(){ 
+      $('.foldBtn').toggleClass('expand') 
+      $('.slide').toggleClass('hide')
+      $('.slide_res').toggleClass('hide')
+      $('.slide_res').hide()  
+   })
+
+   $('#res').click(function(){ 
+      $('.slide_res').show()
+   
+   
+
+   
+   })
+   //예약하기
 
     //키워드/직접 검색 및 결과 반영
     $('.slide_ul').on("click","#all_search"	, function(){ var item = adrress+"클리닝"; navSearch(item) })  
@@ -45,5 +60,6 @@ $(document).ready(function(){
       function viewSearch(clone){
          $(".slide_mini").html(clone+"&nbsp&nbsp검색결과")  
       }
+
 
 })
