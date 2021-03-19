@@ -42,7 +42,7 @@
                             <div class="tag">
                                 <ul class="slide_ul">
                                     <li id="all_search"    value="1">전체</li>
-                                    <li id="basic_search"    value="2" >일반세탁소</li>
+                                    <li id="basic_search"   value="2" >일반세탁소</li>
                                     <li id="coin_search"    value="3">코인세탁소</li>
                                     <li id="my_search">my</li>
                                 </ul>
