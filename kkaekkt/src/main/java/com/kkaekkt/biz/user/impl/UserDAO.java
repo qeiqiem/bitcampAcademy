@@ -73,6 +73,7 @@ public class UserDAO {
 		return mybatis.selectList("UserDAO.getcomspecList",vo);
 	}
 	public List<ScheduleVO> getComspecschedule(BusinessVO vo) {
+		System.out.println("dao : " + mybatis.selectList("UserDAO.getcomscheduleList",vo) );
 		return mybatis.selectList("UserDAO.getcomscheduleList",vo);
 	}
 }
