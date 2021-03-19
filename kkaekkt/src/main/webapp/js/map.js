@@ -16,38 +16,34 @@ $(document).ready(function(){
   	//single List 단일 조회시 데이터 처리
     $('table').on("click",".place_body",function(){        
         var s_title = $(this).find('td')  
-        singleView(s_title)
+         title = s_title[0].innerText
+         title = title.substr(2)
+         var address = s_title[3].innerHTML
+         var phone = s_title[5].innerHTML
+         
+         $("#s_title").html(title)
+         $("#s_address").html(address)
+         $("#s_phone").html(phone)
+
+         $('.list').hide()
+         $('.single').show() 
      })
 
+
+     //관련 function -----------------------------------------------------------
+ 
+      //List 검색결과 반영 및 side 제어이벤트
+      
+      function navSearch(item){
+         searchMajor(item); 
+         viewSearch(item) 
+         $('.single').hide(); 
+         $('.list').show();
+      }
+      
+      //검색결과 COMMENT 보이게하기
+      function viewSearch(clone){
+         $(".slide_mini").html(clone+"&nbsp&nbsp검색결과")  
+      }
+
 })
-
- //관련 function -----------------------------------------------------------
- 
- //List 검색결과 반영 및 side 제어이벤트
- 
- function navSearch(item){
-   searchMajor(item); 
-   viewSearch(item) 
-    $('.single').hide(); 
-    $('.list').show();
- }
- 
- //검색결과 COMMENT 보이게하기
- function viewSearch(clone){
-    $(".slide_mini").html(clone+"&nbsp&nbsp검색결과")  
-}
-
-//단일 조회시 데이터 처리
-function singleView(title){
-   var title = s_title[0].innerText
-   title = title.substr(2)
-   var address = s_title[3].innerHTML
-   var phone = s_title[5].innerHTML
-   
-   $("#s_title").html(title)
-   $("#s_address").html(address)
-   $("#s_phone").html(phone)
-
-   $('.list').hide()
-   $('.single').show() 
-}
