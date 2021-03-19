@@ -9,23 +9,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>지도생성하기</title>
     <!-- 헤더에서 필요한 참조 -->
-<<<<<<< HEAD
 	<link rel="stylesheet" href="/css/all.css">
 	<link rel="stylesheet" href="/css/head0.css">
-=======
-   <link rel="stylesheet" href="/css/all.css">
-   <link rel="stylesheet" href="/css/head0.css">
->>>>>>> 6e8bbdfc1a32c1bfe44044addaa14796fa5a6462
     <script src="https://kit.fontawesome.com/2fc57dd2db.js" crossorigin="anonymous"></script>
 
     <!-- map 에서 필요한 참조 -->
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="/js/map.js"></script>
-<<<<<<< HEAD
 	<link rel="stylesheet" href="/css/laundryMap.css">
-=======
-   <link rel="stylesheet" href="/css/laundryMap.css">
->>>>>>> 6e8bbdfc1a32c1bfe44044addaa14796fa5a6462
 
 </head>
 <body>
@@ -42,11 +33,7 @@
                             <p class="here"><input type="radio">내 주변 찾기</p>
                             <div class="slide_search">
                                 <form onsubmit="searchPlaces(); return false;">
-<<<<<<< HEAD
                                     <input 	class="input_search" 	type="text" id="keyword" placeholder="동네를 입력해주세요.">
-=======
-                                    <input    class="input_search"    type="text" id="keyword" placeholder="동네를 입력해주세요.">
->>>>>>> 6e8bbdfc1a32c1bfe44044addaa14796fa5a6462
                                     <button class="input_searchBtn" type="submit">
                                         <i class="fas fa-search fa-lg "></i>                
                                     </button>
@@ -54,15 +41,9 @@
                             </div>
                             <div class="tag">
                                 <ul class="slide_ul">
-<<<<<<< HEAD
-                                    <li id="all_search" 	value="1">전체</li>
-                                    <li id="basic_search" 	value="2" >일반세탁소</li>
-                                    <li id="coin_search" 	value="3">코인세탁소</li>
-=======
                                     <li id="all_search"    value="1">전체</li>
                                     <li id="basic_search"    value="2" >일반세탁소</li>
                                     <li id="coin_search"    value="3">코인세탁소</li>
->>>>>>> 6e8bbdfc1a32c1bfe44044addaa14796fa5a6462
                                     <li id="my_search">my</li>
                                 </ul>
                                 <hr>
@@ -201,11 +182,7 @@
 
         // 키워드 검색을 요청하는 함수입니다
         function searchPlaces() { 
-<<<<<<< HEAD
-			
-=======
-         
->>>>>>> 6e8bbdfc1a32c1bfe44044addaa14796fa5a6462
+
             var keyword = document.getElementById('keyword').value;
             if (!keyword.replace(/^\s+|\s+$/g, '')) { 
                 alert('키워드를 입력해주세요!'); 
@@ -216,22 +193,12 @@
             ps.keywordSearch( keyword, placesSearchCB); 
         }
 
-
-<<<<<<< HEAD
   		// 대분류 검색 
         function searchMajor(item) { 
 			
 			var item = item		
 			ps.keywordSearch( item, placesSearchCB); 
 	
-=======
-        // 대분류 검색 
-        function searchMajor(item) { 
-         
-         var item = item      
-         ps.keywordSearch( item, placesSearchCB); 
-   
->>>>>>> 6e8bbdfc1a32c1bfe44044addaa14796fa5a6462
         }
 
         // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
