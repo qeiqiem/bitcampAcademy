@@ -1,11 +1,10 @@
 $(document).ready(function() {
 	$(".side_sub").hide();
-	ajax(pageObj);
-	initEvent();
+	//ajax(pageObj);
+	//initEvent();
     initSide();
-});
-function initEvent(){
-		//수정하기 버튼 클릭시 인풋,셀렉박스 비활성화 활성화
+
+		// 수정하기 버튼 클릭시 인풋,셀렉박스 비활성화 활성화
         var clickupdate = $("#updateSpec");
         var changebtn = $("#btn_change");
         var resetbtn = $("#resetSpec");
@@ -84,31 +83,74 @@ function initEvent(){
                         .stringify(list)
 
             }
-}
+});
 
-function ajax(pageObj) { //ajax로 리스트 받아오기
-    console.log('ajax 함수 진입');
-    $.post({
-        url:"/selectComspec.do",
-        data:pageObj,
-        success: function(data) {
-    		console.log('ajax 함수 완료');
-            var comspec=JSON.parse(data);
+// function ajax(pageObj) { //ajax로 리스트 받아오기
+//     console.log('ajax 함수 진입');
+//     $.post({
+//         url:"/selectComspec.do",
+//         data:pageObj,
+//         success: function(data) {
+//     		console.log('ajax 함수 완료');
+//             var comspec=JSON.parse(data);
 
-           	// 품목이 일치하면 값 넣어주기
-			$.each(comspec.laundryList, function(index, item) {
-				console.log(index + ":" + item.laundry +","+ item.price);
-				for(var i = 0; i<8; i++){
-					if(item.laundry == ($("td").eq(i).text().trim())) {
-						$("td").eq(i).next().children("input").val(item.price); 
-						console.log($("td").eq(i).children().children("input:checkbox"));
-						$("td").eq(i).children().children("input:checkbox").prop("checked", true);
-					}
-				} 
-			}); // 품목리스트 반복문
-        }
-    }); // ajax
-}
+//            	// 품목이 일치하면 값 넣어주기
+// 			$.each(comspec.laundryList, function(index, item) {
+// 				console.log(index + ":" + item.laundry +","+ item.price);
+// 				for(var i = 0; i<8; i++){
+// 					if(item.laundry == ($("td").eq(i).text().trim())) {
+// 						$("td").eq(i).next().children("input").val(item.price); 
+// 						//console.log($("td").eq(i).children().children("input:checkbox"));
+// 						$("td").eq(i).children().children("input:checkbox").prop("checked", true);
+// 					}
+// 				} 
+// 			}); // 품목리스트 반복문
+
+           
+// 			// 운영시간 값 넣어주기
+// 			$.each(comspec.scheduleList, function(index, item) {
+// 				console.log(index + ":" + item.schno +","+ item.time);
+// 				var start = (item.time).split("~")[0];
+// 				console.log(start);
+// 				var end = (item.time).split("~")[1];
+// 				var idx = item.schno;
+//                         event.preventDefault();
+//                         $('#'+idx).toggleClass('selected');
+//                         if ($('#'+idx).hasClass("selected")) {
+//                             $('#'+idx).css("background-color","rgb(157, 187, 252)");
+//                             $('#'+idx).css("border","rgb(157, 187, 252)");
+//                             if (idx < 7) {
+//                                 weekLi.append("<li style='order:"
+//                                                 + (idx + 1)
+//                                                 + "'><span>"
+//                                                 + $('#'+idx).html()
+//                                                 + "요일</span>시간 <select>"+start+"</select> ~ <select>"+end+"</select></li>").trigger("create");
+//                             } else {
+//                                 weekLi.append("<li style='order:"
+//                                                 + (idx + 1)
+//                                                 + "'><span>"
+//                                                 + $('#'+idx).html()
+//                                                 + "</span>시간 <select>"+start+"</select> ~ <select>"+end+"</select></li>").trigger("create");
+//                             }
+//                             var opt = $("#weekBox li[style='order:"
+//                                     + (idx + 1) + "'] select");
+//                             for (var i = 0; i < 25; i++) {
+//                                 opt.append("<option>"+ (i < 10 ? "0" + i : i)+ ":00</option>");
+//                                 if (i != 24) {
+//                                     opt.append("<option>"+ (i < 10 ? "0"+ i : i)+ ":30</option>");
+//                                 }
+//                             }
+//                         } else {
+//                             $(this).css("border","1px solid rgb(221, 221, 221)");
+//                             $(this).css("background-color","transparent");
+//                             $("#weekBox ul li[style='order:"+ (idx + 1) + "']").remove();
+//                         }
+			
+// 			}); // 운영시간 반복문
+           
+//         }
+//     }); // ajax
+// }
 
 
 
