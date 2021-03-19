@@ -7,6 +7,12 @@
 .body_container input {
     vertical-align: left;
 }
+.userinfo{
+    float:left;
+    width: 75vw;
+    height: 100vh;
+    padding: 30px 0px 30px 200px;
+}
 
 input {
     width: 200px;
