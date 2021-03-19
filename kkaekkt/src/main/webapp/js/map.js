@@ -61,7 +61,6 @@ $(document).ready(function(){
          $(".slide_mini").html(clone+"&nbsp&nbsp검색결과")  
       }
 <<<<<<< HEAD
-=======
 
 >>>>>>> b26679f544bcfaf13c729914a757e8124b0f5ff1
 
