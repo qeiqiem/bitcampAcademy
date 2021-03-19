@@ -110,6 +110,7 @@ public class UserServiceImpl implements UserService {
 	public BusinessVO getComspec(BusinessVO vo) {
 		System.out.println("servie옴");
 		vo.setLaundryList(userDao.getComspec(vo));
+		vo.setScheduleList(userDao.getComspecschedule(vo));
 		return vo;
 	}
 

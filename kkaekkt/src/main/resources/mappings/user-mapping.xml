@@ -77,4 +77,10 @@
 		FROM bsn_laundry bs, laundry_type la, business b 
 		WHERE bs.lno=la.lno AND bs.bno=b.bno AND b.bno=#{bno};
 	</select>
+	<select id="getcomscheduleList" resultType="schedule">
+		SELECT bs.schno, time 
+		FROM bsn_schedule bs, schedule sc 
+		WHERE bs.schno = sc.schno 
+		AND bno=#{bno};
+	</select>
 </mapper>
