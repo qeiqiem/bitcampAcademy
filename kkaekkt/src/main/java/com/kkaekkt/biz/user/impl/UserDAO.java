@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kkaekkt.biz.comm.LaundryVO;
 import com.kkaekkt.biz.comm.ScheduleVO;
+import com.kkaekkt.biz.user.AccountVO;
 import com.kkaekkt.biz.user.BusinessListVO;
 import com.kkaekkt.biz.user.BusinessVO;
 import com.kkaekkt.biz.user.PersonVO;
@@ -42,6 +43,12 @@ public class UserDAO {
 	public void deleteUser(BusinessVO vo) {
 		mybatis.delete("UserDAO.deleteBs",vo);
 	}
+	
+	public AccountVO findId(AccountVO vo) {
+		return mybatis.selectOne("UserDAO.findId", vo);
+	}
+	
+	
 	public List<BusinessVO> getLikedBs(BusinessListVO vo) {
 		return mybatis.selectList("UserDAO.getLikedBs",vo);
 	}

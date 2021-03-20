@@ -11,6 +11,7 @@ import com.kkaekkt.biz.comm.EquipmentVO;
 import com.kkaekkt.biz.comm.EtcVO;
 import com.kkaekkt.biz.comm.LaundryVO;
 import com.kkaekkt.biz.comm.ScheduleVO;
+import com.kkaekkt.biz.user.AccountVO;
 import com.kkaekkt.biz.user.BusinessListVO;
 import com.kkaekkt.biz.user.BusinessVO;
 import com.kkaekkt.biz.user.PersonVO;
@@ -119,6 +120,17 @@ public class UserServiceImpl implements UserService {
 		vo.setLaundryList(userDao.getComspec(vo));
 		vo.setScheduleList(userDao.getComspecschedule(vo));
 		return vo;
+	}
+
+	@Override
+	public PersonVO getUser(PersonVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public AccountVO findId(AccountVO vo) {
+		return userDao.findId(vo);
 	}
 
 }

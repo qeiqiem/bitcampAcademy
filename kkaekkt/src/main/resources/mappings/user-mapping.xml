@@ -33,6 +33,12 @@
 				</otherwise>
 			</choose>
 	</insert>
+	<select id="findId" resultType="account">
+	SELECT id
+	FROM account ac, member mb, business bs
+	WHERE ac.mno=mb.mno AND ac.mno=bs.mno 
+	AND (mname=#{name} AND mb.email=#{email}) OR (bname=#{name} AND bs.email=#{email});
+	</select>
 	<update id="updatePs">
 			<choose>
 				<when test="name == null">
