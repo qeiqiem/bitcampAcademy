@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="UserDAO">
+
 	<insert id="insertPs">
 			INSERT INTO account (id,password,mtype) VALUES (#{id},#{password},#{mtype});
 			INSERT INTO member VALUES ((SELECT MAX(mno) FROM account),#{name},#{phone},#{birth},#{address},#{email});
@@ -51,7 +52,9 @@
 			</choose>
 	</update>
 	<update id="updateComspec">
-			
+			<foreach collection="laundryList" item="laundry">
+			UPDATE bsn_laundry SET lno=${lno}, price=${price} WHERE bno=${bno};
+			</foreach>
 	</update>
 	<delete id="deleteUser">
 			DELETE account WHERE mno=#{no}		
