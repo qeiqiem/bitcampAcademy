@@ -68,11 +68,18 @@ public class UserDAO {
 		return mybatis.selectOne("UserDAO.getPersonBs",vo);
 	}
 	public List<LaundryVO> getComspec(BusinessVO vo) {
-		System.out.println("dao : " + mybatis.selectList("UserDAO.getcomspecList",vo) );
+		//System.out.println("dao : " + mybatis.selectList("UserDAO.getcomspecList",vo) );
 		return mybatis.selectList("UserDAO.getcomspecList",vo);
 	}
 	public List<ScheduleVO> getComspecschedule(BusinessVO vo) {
-		System.out.println("dao : " + mybatis.selectList("UserDAO.getcomscheduleList",vo) );
+		//System.out.println("dao : " + mybatis.selectList("UserDAO.getcomscheduleList",vo) );
 		return mybatis.selectList("UserDAO.getcomscheduleList",vo);
+	}
+	public void updateComspec(BusinessVO vo) {
+		System.out.println("마이바티스 update");
+		System.out.println(vo);
+		mybatis.update("UserDAO.updateComspec",vo);
+		System.out.println("마이바티스 update완료");
+		
 	}
 }

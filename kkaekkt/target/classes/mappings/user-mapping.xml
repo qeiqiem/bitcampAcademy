@@ -33,6 +33,12 @@
 				</otherwise>
 			</choose>
 	</insert>
+	<select id="findId" resultType="account">
+	SELECT id
+	FROM account ac, member mb, business bs
+	WHERE ac.mno=mb.mno AND ac.mno=bs.mno 
+	AND (mname=#{name} AND mb.email=#{email}) OR (bname=#{name} AND bs.email=#{email});
+	</select>
 	<update id="updatePs">
 			<choose>
 				<when test="name == null">
@@ -44,14 +50,15 @@
 				</otherwise>
 			</choose>
 	</update>
-	<update id="updateBusiness">
+	<update id="updateComspec">
 			
 	</update>
 	<delete id="deleteUser">
 			DELETE account WHERE mno=#{no}		
 	</delete>
-	<select id="getPerson" resultType="person">
-			SELECT ac.mno as mno, id, password, mname as name, phone, birth, address, email FROM account ac, member mb
+		<select id="getPerson" resultType="person">
+			SELECT ac.mno as mno, id, password, mname as name, phone, birth, address, email 
+			FROM account ac, member mb
 			WHERE ac.mno=mb.mno 
 			AND id=#{id} AND password=#{password};
 	</select>

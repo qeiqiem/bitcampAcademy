@@ -16,11 +16,11 @@
 			<div id="comspec_title">사양관리</div>
 			<hr>
 			<div class="comLaundry">
-				<form action="#">
+				<form action="/updateComspec.do" method="POST">
 					<!-- float left -->
 					<div id="comspec_left">
 						<!--세탁기 사양-->
-						<div id="card">
+						<div class="laundry" id="card">
 							1~3일 소요
 							<hr>
 							<table id="fast">
@@ -28,7 +28,7 @@
 								<th>금액(개당)</th>
 								<tr>
 									<td><span class="checkbox checkbox-circle">
-											<input type="checkbox" /> <span class="checkbox-icon">
+											<input type="checkbox" value=1 /> <span class="checkbox-icon">
 										</span>
 									</span> 일반의류</td>
 									<td><input id="won" type="text" placeholder="받아온정보"
@@ -36,7 +36,7 @@
 								</tr>
 								<tr>
 									<td><span class="checkbox checkbox-circle">
-											<input type="checkbox"/> <span class="checkbox-icon">
+											<input type="checkbox" value=2 /> <span class="checkbox-icon">
 										</span>
 									</span> 와이셔츠</td>
 									<td><input id="won" type="text" placeholder="받아온정보"
@@ -44,7 +44,7 @@
 								</tr>
 								<tr>
 									<td><span class="checkbox checkbox-circle">
-											<input type="checkbox"/> <span class="checkbox-icon">
+											<input type="checkbox" value=3 /> <span class="checkbox-icon">
 										</span>
 									</span> 이불</td>
 									<td><input id="won" type="text" placeholder="받아온정보"
@@ -52,7 +52,7 @@
 								</tr>
                                 <tr>
 									<td><span class="checkbox checkbox-circle">
-											<input type="checkbox"/> <span class="checkbox-icon">
+											<input type="checkbox" value=4 /> <span class="checkbox-icon">
 										</span>
 									</span> 운동화</td>
 									<td><input id="won" type="text" placeholder="받아온정보"
@@ -60,7 +60,7 @@
 								</tr>
 							</table>
 						</div>
-						<!--부가서비스-->
+					
 						<div id="card">
 							4~7일 소요
 							<hr>
@@ -69,7 +69,7 @@
 								<th>금액(개당)</th>
 								<tr>
 									<td><span class="checkbox checkbox-circle">
-											<input type="checkbox"/> <span class="checkbox-icon">
+											<input type="checkbox" value=5 /> <span class="checkbox-icon">
 										</span>
 									</span> 가죽모피</td>
 									<td><input id="won" type="text" placeholder="받아온정보"
@@ -77,7 +77,7 @@
 								</tr>
 								<tr>
 									<td><span class="checkbox checkbox-circle">
-											<input type="checkbox"/> <span class="checkbox-icon">
+											<input type="checkbox" value=6 /> <span class="checkbox-icon">
 										</span>
 									</span> 명품가방</td>
 									<td><input id="won" type="text" placeholder="받아온정보"
@@ -85,7 +85,7 @@
 								</tr>
 								<tr>
 									<td><span class="checkbox checkbox-circle">
-											<input type="checkbox"/> <span class="checkbox-icon">
+											<input type="checkbox" value=7 /> <span class="checkbox-icon">
 										</span>
 									</span> 아웃도어</td>
 									<td><input id="won" type="text" placeholder="받아온정보"
@@ -93,13 +93,14 @@
 								</tr>
                                 <tr>
 									<td><span class="checkbox checkbox-circle">
-											<input type="checkbox"/> <span class="checkbox-icon">
+											<input type="checkbox" value=8 /> <span class="checkbox-icon">
 										</span>
 									</span> <input type="text" placeholder="기타" style="width:100px; height:25px"></td>
 									<td><input id="won" type="text" placeholder="받아온정보"
 										disabled> 원</td>
 								</tr>
 							</table>
+							 <input type="hidden" name="laundry">
 						</div>
 					</div>
 
@@ -117,15 +118,16 @@
 								<button id="5">금</button>
 								<button id="6">토</button>
 								<button id="7">일</button>
-								<button id="two 8">매일</button>
-								<button id="two 9">평일</button>
-								<button id="two 10">주말</button>
+								<button id="8">매일</button>
+								<button id="9">평일</button>
+								<button id="10">주말</button>
 							</div>
 
 							<div id="weekBox">
 								<ul>
 
 								</ul>
+								<input type="hidden" name="schedule">
 							</div>
 						</div>
 					</div>
@@ -133,9 +135,11 @@
 						<button type="button" onclick="" id="updateSpec">수정하기</button>
 						<div id="btn_change">
 							<button type="reset" onclick="" id="resetSpec">돌아가기</button>
-							<button type="submit" onclick="" id="submitSpec">수정완료</button>
+							<button type="button" onclick="" id="submitSpec">수정완료</button>
 						</div>
 					</div>
+					<input type="text" name="bno" value="$(ssesionScope.member.bno)" hidden>
+					<input type="text" name="bizType" value="1" hidden>
 				</form>
 			</div>
 			<!-- container -->
