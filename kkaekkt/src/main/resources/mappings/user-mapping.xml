@@ -44,7 +44,7 @@
 				</otherwise>
 			</choose>
 	</update>
-	<update id="updateBusiness">
+	<update id="updateComspec">
 			
 	</update>
 	<delete id="deleteUser">

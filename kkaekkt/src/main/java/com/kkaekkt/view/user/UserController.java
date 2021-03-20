@@ -52,6 +52,7 @@ public class UserController {
 		userService.insertUser(vo);
 		return "index.jsp";
 	}
+	//개인프로필편집
 	@RequestMapping(value="/updatePs.do", method=RequestMethod.POST)
 	public String Update(PersonVO vo, HttpSession session) {
 		System.out.println(vo);
@@ -86,14 +87,23 @@ public class UserController {
 		session.invalidate();
 		return "index.jsp";
 	}
-	// 일반사양관리
+	// 일반사양관리 
 		@RequestMapping(value="/selectComspec.do", method=RequestMethod.POST, produces="application/text;charset=utf-8")
 		@ResponseBody
 		public String SelcetComspec(BusinessVO vo) {
-			System.out.println(vo);
+			//System.out.println(vo);
 			Gson gson=new Gson();
-			String test=gson.toJson(userService.getComspec(vo));
-			System.out.println("test:" + test);
-			return test;
+			String comspec=gson.toJson(userService.getComspec(vo));
+			//System.out.println("test:" + comspec);
+			return comspec;
+		}
+	// 일반사양관리 update
+		@RequestMapping(value="/updateComspec.do", method=RequestMethod.POST)
+		public String Update(BusinessVO vo) {
+			System.out.println("메서드 진입");
+			System.out.println("컨트롤러" + vo);
+			userService.updateComspec(vo);
+			 
+			return "/jsp/mypageBiz/comspec.jsp";
 		}
 }
