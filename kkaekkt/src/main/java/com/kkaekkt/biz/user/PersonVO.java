@@ -18,5 +18,4 @@ public class PersonVO extends AccountVO{
 		return "PersonVO [mno=" + mno + ", birth=" + birth + ", mtype=" + mtype + "]";
 	}
 
-
 }
