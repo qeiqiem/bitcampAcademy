@@ -11,6 +11,7 @@ import com.kkaekkt.biz.comm.EquipmentVO;
 import com.kkaekkt.biz.comm.EtcVO;
 import com.kkaekkt.biz.comm.LaundryVO;
 import com.kkaekkt.biz.comm.ScheduleVO;
+import com.kkaekkt.biz.user.AccountVO;
 import com.kkaekkt.biz.user.BusinessListVO;
 import com.kkaekkt.biz.user.BusinessVO;
 import com.kkaekkt.biz.user.PersonVO;
@@ -82,9 +83,16 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public PersonVO getUser(PersonVO vo) {
+	public PersonVO getUser(AccountVO vo) {
 		System.out.println("servie옴");
-		return userDao.getUser(vo);
+		if(vo.getMtype() == 1) {
+			// 일반유저
+			userDao.getUserPs(vo);			
+		} else {
+			// 업체유저
+			userDao.getUserBs(vo);
+		}
+		return 
 	}
 
 	@Override
@@ -115,6 +123,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public void updateComspec(BusinessVO vo) {
 		System.out.println("서비스진입");
 		vo.setScheduleList(convertToObj(vo.getSchedule(), ScheduleVO.class));
@@ -128,5 +137,16 @@ public class UserServiceImpl implements UserService {
 		userDao.updateComspec(vo);	
 	}
 	
+=======
+	public PersonVO getUser(PersonVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public AccountVO findId(AccountVO vo) {
+		return userDao.findId(vo);
+	}
+>>>>>>> 79f82998ae036ca2d6e400cb5330cc0ad65e3045
 
 }

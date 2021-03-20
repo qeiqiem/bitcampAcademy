@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kkaekkt.biz.comm.LaundryVO;
 import com.kkaekkt.biz.comm.ScheduleVO;
+import com.kkaekkt.biz.user.AccountVO;
 import com.kkaekkt.biz.user.BusinessListVO;
 import com.kkaekkt.biz.user.BusinessVO;
 import com.kkaekkt.biz.user.PersonVO;
@@ -42,6 +43,12 @@ public class UserDAO {
 	public void deleteUser(BusinessVO vo) {
 		mybatis.delete("UserDAO.deleteBs",vo);
 	}
+	
+	public AccountVO findId(AccountVO vo) {
+		return mybatis.selectOne("UserDAO.findId", vo);
+	}
+	
+	
 	public List<BusinessVO> getLikedBs(BusinessListVO vo) {
 		return mybatis.selectList("UserDAO.getLikedBs",vo);
 	}
@@ -49,18 +56,23 @@ public class UserDAO {
 		return mybatis.selectOne("UserDAO.countList",vo);
 	}
 	// 이해 못해서 잠시 일케 해둠
-//		public PersonVO getUser(PersonVO vo) {
-//			mybatis.selectOne("UserDAO.getPs",vo);
-//			return null;
-//		}
+		public PersonVO getUserPs(AccountVO vo) {			
+			System.out.println("mybatis로 기능처리 일반유저");
+			return mybatis.selectOne("UserDAO.getPerson",vo);
+		}
 //		public UserVO getUser(UserVO vo) {
 //			mybatis.selectOne("UserDAO.getUser", vo);
 //			return null;
 //		}
 		
+//	public PersonVO getUser(PersonVO vo) {
+//		System.out.println("mybatis로 getUser() 기능처리");
+//		return (PersonVO)mybatis.selectOne("UserDAO.getPerson", vo);
+//	}
+		
 	public PersonVO getUser(PersonVO vo) {
 		System.out.println("mybatis로 getUser() 기능처리");
-		return (PersonVO)mybatis.selectOne("UserDAO.getPerson", vo);
+		return mybatis.selectOne("UserDAO.getPerson", vo);
 	}
 	public BusinessVO getUser(BusinessVO vo) {
 		mybatis.selectOne("UserDAO.getBs",vo);

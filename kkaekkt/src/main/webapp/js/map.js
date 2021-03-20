@@ -25,10 +25,10 @@ $(document).ready(function(){
     $('.slide_ul').on("click","#all_search"   , function(){ var item = adrress+"클리닝"; navSearch(item) })  
     $('.slide_ul').on("click","#basic_search", function(){ var item = adrress+"세탁소"; navSearch(item)})  
     $('.slide_ul').on("click","#coin_search", function(){ var item = adrress+"코인세탁소"; navSearch(item)})
-                   
-   $('.input_searchBtn').on("click",function(){ var item = $(".input_search").val(); viewSearch(item) })               
+    					
+   $('.input_searchBtn').on("click",function(){ var item = $(".input_search").val(); viewSearch(item) })					
    
-     //single List 단일 조회시 데이터 처리
+  	//single List 단일 조회시 데이터 처리
     $('table').on("click",".place_body",function(){        
         var s_title = $(this).find('td')  
          title = s_title[0].innerText
@@ -60,9 +60,14 @@ $(document).ready(function(){
       function viewSearch(clone){
          $(".slide_mini").html(clone+"&nbsp&nbsp검색결과")  
       }
+<<<<<<< HEAD
 //<<<<<<< HEAD
 //=======
 
 //>>>>>>> b26679f544bcfaf13c729914a757e8124b0f5ff1
+=======
+=======
+>>>>>>> b26679f544bcfaf13c729914a757e8124b0f5ff1
+>>>>>>> 79f82998ae036ca2d6e400cb5330cc0ad65e3045
 
 })
