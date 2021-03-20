@@ -49,14 +49,19 @@ public class UserDAO {
 		return mybatis.selectOne("UserDAO.countList",vo);
 	}
 	// 이해 못해서 잠시 일케 해둠
-//		public PersonVO getUser(PersonVO vo) {
-//			mybatis.selectOne("UserDAO.getPs",vo);
-//			return null;
-//		}
+		public PersonVO getUserPs(AccountVO vo) {			
+			System.out.println("mybatis로 기능처리 일반유저");
+			return mybatis.selectOne("UserDAO.getPerson",vo);
+		}
 //		public UserVO getUser(UserVO vo) {
 //			mybatis.selectOne("UserDAO.getUser", vo);
 //			return null;
 //		}
+		
+//	public PersonVO getUser(PersonVO vo) {
+//		System.out.println("mybatis로 getUser() 기능처리");
+//		return (PersonVO)mybatis.selectOne("UserDAO.getPerson", vo);
+//	}
 		
 	public PersonVO getUser(PersonVO vo) {
 		System.out.println("mybatis로 getUser() 기능처리");
