@@ -17,9 +17,9 @@ public interface UserService {
 	public BusinessVO getUser(BusinessVO vo);
 	public BusinessListVO getLikedBs(BusinessListVO vo);
 	public BusinessVO getComspec(BusinessVO vo);
-<<<<<<< HEAD
+
 	public void updateComspec(BusinessVO vo);
-=======
+
 	public AccountVO findId(AccountVO vo);
->>>>>>> 79f82998ae036ca2d6e400cb5330cc0ad65e3045
+
 }

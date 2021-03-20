@@ -41,15 +41,15 @@ function initEvent(){
         });
 	// 수정완료 버튼 클릭시
 		$("#submitSpec").click(function(){
-			var list = new Array();
 			
 		// 품목 리스트 데이터 처리
         var chkBox=$(".laundry input[type='checkbox']");
         var priceBox=$(".laundry input[id='won']");
        
         for(var i=0; i<chkBox.size();i++) {
+			var list = new Array();
             if(chkBox[i].checked) {
-			console.log(chkBox[1].value);
+			console.log(chkBox[i].value);
                 list.push({lno:JSON.parse(chkBox[i].value),price:JSON.parse(priceBox[i].value)});
             }
         }
