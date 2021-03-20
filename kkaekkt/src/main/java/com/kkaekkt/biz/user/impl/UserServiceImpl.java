@@ -82,9 +82,16 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public PersonVO getUser(PersonVO vo) {
+	public PersonVO getUser(AccountVO vo) {
 		System.out.println("servie옴");
-		return userDao.getUser(vo);
+		if(vo.getMtype() == 1) {
+			// 일반유저
+			userDao.getUserPs(vo);			
+		} else {
+			// 업체유저
+			userDao.getUserBs(vo);
+		}
+		return 
 	}
 
 	@Override
