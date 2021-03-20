@@ -43,8 +43,10 @@
 			<div id="modal_container">
 				<button id="modal_close">x</button>
 				<div id="modal_bodycont">
+					<form>
 						<div id="modal_head">
-							<p>만족도를 평가해주세요</p>
+							<p>이용에 만족하시나요?</p>
+						
 								<input id="starVal" value="1">
 								<div class="rating-group" value="">
 									<label aria-label="1 star" class="rating__label" for="rating-1">
@@ -66,11 +68,15 @@
 									<label aria-label="5 stars" class="rating__label" for="rating-5">
 										<i class="rating__icon rating__icon--star fa fa-star"></i></label>                
 									<input class="rating__input" name="rating" id="rating-5" value="5" type="radio">
-								</div>
+								</div>                
 						</div>
+						<hr style="width: 80%; margin-top: 40px; border: 1px solid #E5E5E5;">
 						<div id="modal_foot">
-							<button id="closeBtn">돌아가기</button>
-							<button id="regit" onclick="regit()">등록하기</button>                     
+							<p style="text-align: center;">어떤 점이 좋았나요?</p>
+							<textarea id="review_text" maxlength="300"  placeholder="최소 10자 이상 입력해주세요."></textarea> 
+							<span id="review_texter">###</span><br>
+							<button id="closeBtn" class="sub_review">돌아가기</button>
+							<button id="regit" class="sub_review" onclick="regit()">등록하기</button>                     
 						</div>
 				</div>
 			</div>

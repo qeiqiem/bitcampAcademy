@@ -11,19 +11,12 @@ function initEvent() {
         $('.detail').eq($(this).val()).toggleClass('none');
     });
     $('.rsvList').on("click",".commentBtn",function() {
-        if(!$('.detail').eq($(this).val()).hasClass('none')){ //만약, 상세보기가 열려있다면
-            $('.detail').eq($(this).val()).addClass('none');
-        }
-        $(".comments").eq($(this).val()).toggleClass('none');
+        $("#modal_container").show();
     });
-    $('.rsvList').on("keyup",".commentBox",function() {
-        if($(this).val().length>=3000) {
-            alert("3000자 까지 입력할 수 있습니다.");
-            $(this)[0].value=$(this).val().substr(0,3000);
-        }
-        $('.comments_header span:nth-child(1)')[0].innerHTML=$(this).val().length;
-    });
-}
+    $('#review_text').keyup(function() {
+        $('#review_texter').html($(this).val().length)});
+    };
+
 function initModal() {
     /* 모달 생성 */
     $(".rsvList").on("click",".comments_bottom button",function(){ 

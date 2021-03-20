@@ -15,17 +15,16 @@ function initEvent() {
         $('.detail').eq(idx).toggleClass('none');
     });
     $('.rsvList').on("click",".commentBtn",function() {
-		idx=$(this).val();
-        if(!$('.detail').eq(idx).hasClass('none')){ //만약, 상세보기가 열려있다면
-            $('.detail').eq(idx).addClass('none');
-        }
-        $(".comments").eq(idx).toggleClass('none');
+        $("#modal_container").show();
     });
+    $('#review_text').keyup(function() {
+        $('#review_texter').html($(this).val().length)});
+    };
     $('.rsvList').on("keyup",".commBox",function() {
 		idx=JSON.parse($(this).attr("id").substr(2,3));
-        if($(this).val().length>=3000) {
-            alert("3000자 까지 입력할 수 있습니다.");
-            $(this)[0].value=$(this).val().substr(0,3000);
+        if($(this).val().length>=300) {
+            alert("300자 까지 입력할 수 있습니다.");
+            $(this)[0].value=$(this).val().substr(0,300);
         }
         $('.comments_header span:nth-child(1)')[idx].innerHTML=$(this).val().length;
     });
