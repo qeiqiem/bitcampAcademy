@@ -83,21 +83,15 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public PersonVO getUser(AccountVO vo) {
-		System.out.println("servie옴");
-		if(vo.getMtype() == 1) {
-			// 일반유저
-			userDao.getUserPs(vo);			
-		} else {
-			// 업체유저
-			userDao.getUserBs(vo);
-		}
-		return 
+	public PersonVO getUser(PersonVO vo) {
+		System.out.println("유저로그인 servie옴");		
+		return userDao.getUserPs(vo);
 	}
 
 	@Override
 	public BusinessVO getUser(BusinessVO vo) {
-		return null;
+		System.out.println("업체로그인 servie옴");
+		return userDao.getUserBs(vo);
 	}
 
 	public <T> List<T> convertToObj(String json, Class<T> type) {
