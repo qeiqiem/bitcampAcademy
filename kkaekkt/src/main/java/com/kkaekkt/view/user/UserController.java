@@ -65,19 +65,29 @@ public class UserController {
 	
 	// 로그인
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
-	public String Login(PersonVO vo, HttpSession session) {
+	public String Login(AccountVO vo, HttpSession session) {
 		System.out.println("로그인처리");
+		
 		vo = userService.getUser(vo);
-		System.out.println(vo);
+		
+		System.out.println(vo); // 뭐가 담기는 지 보려했다
 
-		if (vo.getMno() != 0) {
-			session.setAttribute("person", vo);
-			return "/jsp/index.jsp";
-		} else {
+		if (vo.getMno() == 0) {
+			session.setAttribute("person", null);
 			System.out.println("회원정보없음");
-			return "login.jsp";
+			return "/jsp/login.jsp";
+		} else {
+			session.setAttribute("person", vo);
 		}
+		return "/jsp/index.jsp";
 
+	}
+	// 로그아웃
+	@RequestMapping("/logout.do")
+	public String logout(HttpSession session) {
+		System.out.println("로그아웃 처리");
+		session.invalidate();
+		return "index.jsp";
 	}
 	
 	//아이디찾기
