@@ -50,8 +50,9 @@
 	<delete id="deleteUser">
 			DELETE account WHERE mno=#{no}		
 	</delete>
-	<select id="getPerson" resultType="person">
-			SELECT ac.mno as mno, id, password, mname as name, phone, birth, address, email FROM account ac, member mb
+		<select id="getPerson" resultType="person">
+			SELECT ac.mno as mno, id, password, mname as name, phone, birth, address, email 
+			FROM account ac, member mb
 			WHERE ac.mno=mb.mno 
 			AND id=#{id} AND password=#{password};
 	</select>
