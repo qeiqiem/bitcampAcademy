@@ -12,19 +12,6 @@
     <link rel="stylesheet" href="css/findPw.css">
     <link rel="stylesheet" href="css/head0.css">
     <script src="https://kit.fontawesome.com/2fc57dd2db.js" crossorigin="anonymous"></script>
-    <style>
-        .val input {
-            margin: 0 0 15px;
-        }
-
-        .val button {
-            margin-top: 15px;
-        }
-
-        .veri_btn {
-            height: 250px;
-        }
-    </style>
 </head>
 
 <body>
@@ -40,18 +27,19 @@
             </div>
 
         </nav>
-        <p><span>(id)</span>님, 해당 아이디에 등록된 이름과 이메일 정보를 모두 입력해 주세요.
-            <br>입력하신 정보로 인증 메일이 발송됩니다.
-        </p>
+        <p>비밀번호를 찾을 아이디를 입력해주세요</p>
 
-
-        <div class="veri_btn val" style="text-align: center;">
-            <input type="text" placeholder="이름을 입력해 주세요."> <br>
-            <input type="text" placeholder="이메일을 입력해 주세요."> <br>
-            <button type="submit">인증하기</button>
+        <!--굳이 폼으로 감싸야 할 지, 애매하네요.
+    input submit을 이용하면 편해서 그런거긴 한데,
+    js로 text읽어서 전달할 수 있으면 form 빼고 처리하는 게
+    더 깔끔해보이긴 합니다. 일단 임시로 이렇게 놓겠습니다.-->
+        <!-- <form action=""> -->
+        <div class="veri_btn" style="text-align: center;">
+            <input type="text" placeholder="ID"> <br>
+            <button type="submit">다음</button>
         </div>
 
-
+        <!-- </form> -->
         <div class="mail">
             아이디가 기억나지 않는다면 아이디를 먼저 찾아주세요. <br>
             비밀번호 찾기 시 문제가 있나요?

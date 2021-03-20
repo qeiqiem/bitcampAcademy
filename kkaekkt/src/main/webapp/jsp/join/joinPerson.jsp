@@ -70,8 +70,7 @@
 						<div>
 							<p>비밀번호</p>
 							<label for="pw"> <input type="password"
-								placeholder="Password" id="pw" minlength="8"
-								maxlength="16">
+								placeholder="Password" id="pw" minlength="8" maxlength="16">
 							</label>
 
 							<p>비밀번호 확인</p>
@@ -81,8 +80,7 @@
 							</label>
 							<p style="font-size: smaller;">* 영어 대문자, 특수문자, 숫자를 포함한 8~16글자</p>
 						</div>
-						<br>
-						<br>
+						<br> <br>
 
 						<div>
 							<p>이름</p>

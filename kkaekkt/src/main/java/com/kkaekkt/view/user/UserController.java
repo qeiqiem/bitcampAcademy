@@ -79,6 +79,24 @@ public class UserController {
 		}
 
 	}
+	
+	//아이디찾기
+	@RequestMapping(value="/findId.do", method=RequestMethod.POST)
+	public String findId(PersonVO vo) {
+		userService.insertUser(vo);
+		return "/jsp/index.jsp";
+	}
+	
+	//비밀번호찾기
+	@RequestMapping(value="/findPw.do", method=RequestMethod.POST)
+	public String findPw(PersonVO vo) {
+		userService.insertUser(vo);
+		return "/jsp/index.jsp";
+	}
+	
+	
+	
+	
 	// 로그아웃
 	@RequestMapping("/logout.do")
 	public String logout(HttpSession session) {
