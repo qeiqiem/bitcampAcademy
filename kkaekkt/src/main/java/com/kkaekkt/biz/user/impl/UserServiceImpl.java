@@ -91,7 +91,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public BusinessVO getUser(BusinessVO vo) {
 		System.out.println("업체로그인 servie옴");
-		return userDao.getUserBs(vo);
+		return userDao.getUserPs(vo);
 	}
 
 	public <T> List<T> convertToObj(String json, Class<T> type) {
@@ -121,12 +121,8 @@ public class UserServiceImpl implements UserService {
 		System.out.println("서비스진입");
 		vo.setScheduleList(convertToObj(vo.getSchedule(), ScheduleVO.class));
 		System.out.println(vo.getScheduleList());
-		if (vo.getBizType() == 1) { // 일반 세탁소라면
-			vo.setLaundryList(convertToObj(vo.getLaundry(), LaundryVO.class));
-		} else {
-			vo.setEquipmentList(convertToObj(vo.getEquipment(), EquipmentVO.class));
-			vo.setEtcList(convertToObj(vo.getEtc(), EtcVO.class));
-		}
+		vo.setLaundryList(convertToObj(vo.getLaundry(), LaundryVO.class));
+		
 		userDao.updateComspec(vo);	
 	}
 	

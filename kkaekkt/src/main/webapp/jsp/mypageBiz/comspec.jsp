@@ -15,12 +15,12 @@
 		<div class="content">
 			<div id="comspec_title">사양관리</div>
 			<hr>
-			<div class="comLaundry">
+			<div class="comLaundry ">
 				<form action="/updateComspec.do" method="POST">
 					<!-- float left -->
-					<div id="comspec_left">
+					<div class="laundry" id="comspec_left">
 						<!--세탁기 사양-->
-						<div class="laundry" id="card">
+						<div id="card">
 							1~3일 소요
 							<hr>
 							<table id="fast">
@@ -138,7 +138,7 @@
 							<button type="button" onclick="" id="submitSpec">수정완료</button>
 						</div>
 					</div>
-					<input type="text" name="bno" value="$(ssesionScope.member.bno)" hidden>
+					<input type="text" name="bno" value=1 hidden>
 					<input type="text" name="bizType" value="1" hidden>
 				</form>
 			</div>

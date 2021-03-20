@@ -64,7 +64,7 @@ function initEvent(){
         // 	list.push({schno:JSON.parse(weekLi.eq(i).css("order")),time:open+'~'+close});
     	// }
     	// $("#weekBox input[name='schedule']")[0].value=JSON.stringify(list);
-			$("form").submit();
+		$("form").submit();
 		});
 		
     // 영업시간 
@@ -174,28 +174,28 @@ function ajax(pageObj) { //ajax로 리스트 받아오기
 function initSide() {
     $('.side button').eq(3).addClass("side_select");
 }
-function submitSpec(){
-		var list = new Array();
-		// 품목 리스트 데이터 처리
-        var chkBox=$(".laundry input[type='checkbox']");
-        var priceBox=$(".laundry input[id='won']");
+// function submitSpec(){
+// 		var list = new Array();
+// 		// 품목 리스트 데이터 처리
+//         var chkBox=$(".laundry input[type='checkbox']");
+//         var priceBox=$(".laundry input[id='won']");
        
-        for(var i=0; i<chkBox.size();i++) {
-            if(chkBox[i].checked) {
-			console.log(chkBox[1].checked);
-                list.push({lno:JSON.parse(chkBox[i].value),price:JSON.parse(priceBox[i].value)});
-            }
-        }
-        $("input[name='laundry']")[0].value=JSON.stringify(list);
-		// 운영시간 데이터 처리
-    	var weekLi=$('#weekBox ul li');
-   		 list=[];//위에서 쓰인 리스트 초기화
-    	for(var i=0;i<weekLi.size();i++) {
-        	var open=weekLi[i].children[1].value;
-        	var close=weekLi[i].children[2].value;
-        	list.push({schno:JSON.parse(weekLi.eq(i).css("order")),time:open+'~'+close});
-    	}
-    	$("#weekBox input[name='schedule']")[0].value=JSON.stringify(list);
-	$("form").submit();
-}
+//         for(var i=0; i<chkBox.size();i++) {
+//             if(chkBox[i].checked) {
+// 			console.log(chkBox[1].checked);
+//                 list.push({lno:JSON.parse(chkBox[i].value),price:JSON.parse(priceBox[i].value)});
+//             }
+//         }
+//         $("input[name='laundry']")[0].value=JSON.stringify(list);
+// 		// 운영시간 데이터 처리
+//     	var weekLi=$('#weekBox ul li');
+//    		 list=[];//위에서 쓰인 리스트 초기화
+//     	for(var i=0;i<weekLi.size();i++) {
+//         	var open=weekLi[i].children[1].value;
+//         	var close=weekLi[i].children[2].value;
+//         	list.push({schno:JSON.parse(weekLi.eq(i).css("order")),time:open+'~'+close});
+//     	}
+//     	$("#weekBox input[name='schedule']")[0].value=JSON.stringify(list);
+// 	$("form").submit();
+// }
 
