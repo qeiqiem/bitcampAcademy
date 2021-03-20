@@ -55,30 +55,17 @@ public class UserDAO {
 	public int countList(BusinessListVO vo) {
 		return mybatis.selectOne("UserDAO.countList",vo);
 	}
-	// 이해 못해서 잠시 일케 해둠
-		public PersonVO getUserPs(AccountVO vo) {			
-			System.out.println("mybatis로 기능처리 일반유저");
-			return mybatis.selectOne("UserDAO.getPerson",vo);
-		}
-//		public UserVO getUser(UserVO vo) {
-//			mybatis.selectOne("UserDAO.getUser", vo);
-//			return null;
-//		}
-		
-//	public PersonVO getUser(PersonVO vo) {
-//		System.out.println("mybatis로 getUser() 기능처리");
-//		return (PersonVO)mybatis.selectOne("UserDAO.getPerson", vo);
-//	}
-		
-	public PersonVO getUser(PersonVO vo) {
-		System.out.println("mybatis로 getUser() 기능처리");
-		return mybatis.selectOne("UserDAO.getPerson", vo);
-	}
-	public BusinessVO getUser(BusinessVO vo) {
-		mybatis.selectOne("UserDAO.getBs",vo);
-		mybatis.selectList("UserDAO.getEquipments",vo);
-		
-		return null;
+	
+	// 일반 로그인
+	public PersonVO getUserPs(PersonVO vo) {			
+		System.out.println("mybatis로 기능처리 일반유저");
+		return mybatis.selectOne("UserDAO.getPerson",vo);
+	}		
+	
+	// 업체 로그인
+	public BusinessVO getUserBs(BusinessVO vo) {
+		System.out.println("mybatis로 기능처리 업체유저");		
+		return mybatis.selectOne("UserDAO.getPersonBs",vo);
 	}
 	public List<LaundryVO> getComspec(BusinessVO vo) {
 		System.out.println("dao : " + mybatis.selectList("UserDAO.getcomspecList",vo) );
