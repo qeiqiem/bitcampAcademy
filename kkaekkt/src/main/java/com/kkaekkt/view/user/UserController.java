@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.kkaekkt.biz.comm.LaundryVO;
+import com.kkaekkt.biz.user.AccountVO;
 import com.kkaekkt.biz.user.BusinessListVO;
 import com.kkaekkt.biz.user.BusinessVO;
 import com.kkaekkt.biz.user.PersonVO;
@@ -81,13 +82,6 @@ public class UserController {
 		}
 		return "/jsp/index.jsp";
 
-	}
-	// 로그아웃
-	@RequestMapping("/logout.do")
-	public String logout(HttpSession session) {
-		System.out.println("로그아웃 처리");
-		session.invalidate();
-		return "index.jsp";
 	}
 	
 	//아이디찾기
