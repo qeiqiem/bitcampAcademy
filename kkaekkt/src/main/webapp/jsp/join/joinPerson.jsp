@@ -56,7 +56,7 @@
 			<div class="wrapper_joinCnt">
 				<div class="join_form">
 					<h3>개인 회원</h3>
-					<form action="joinPerson.jsp" method="POST" name="joinPerson"
+					<form action="/joinPs.do" method="POST" name="joinPerson"
 						onsubmit="return check()">
 						<div>
 							<p>아이디</p>
@@ -70,13 +70,13 @@
 						<div>
 							<p>비밀번호</p>
 							<label for="pw"> <input type="password"
-								placeholder="Password" name="pw" id="pw" minlength="8"
+								placeholder="Password" id="pw" minlength="8"
 								maxlength="16">
 							</label>
 
 							<p>비밀번호 확인</p>
 							<label for="repw"> <input type="password"
-								placeholder="Password" name="repw" id="repw" minlength="8"
+								placeholder="Password" name="password" id="repw" minlength="8"
 								maxlength="16">
 							</label>
 							<p style="font-size: smaller;">* 영어 대문자, 특수문자, 숫자를 포함한 8~16글자</p>
@@ -101,7 +101,7 @@
 
 						<div>
 							<p>주소</p>
-							<input type="text" name="ad" id="ad">
+							<input type="text" name="address" id="ad">
 							<button>주소찾기</button>
 						</div>
 

@@ -44,13 +44,13 @@ public class UserController {
 	@RequestMapping(value="/joinPs.do", method=RequestMethod.POST)
 	public String Join(PersonVO vo) {
 		userService.insertUser(vo);
-		return "index.jsp";
+		return "/jsp/index.jsp";
 	}
 	@RequestMapping(value="/joinBs.do", method=RequestMethod.POST)
 	public String Join(BusinessVO vo) {
 		System.out.println("메서드 진입");
 		userService.insertUser(vo);
-		return "index.jsp";
+		return "/jsp/index.jsp";
 	}
 	@RequestMapping(value="/updatePs.do", method=RequestMethod.POST)
 	public String Update(PersonVO vo, HttpSession session) {
@@ -70,9 +70,9 @@ public class UserController {
 		vo = userService.getUser(vo);
 		System.out.println(vo);
 
-		if (vo != null) {
+		if (vo.getMno() != 0) {
 			session.setAttribute("person", vo);
-			return "index.jsp";
+			return "/jsp/index.jsp";
 		} else {
 			System.out.println("회원정보없음");
 			return "login.jsp";

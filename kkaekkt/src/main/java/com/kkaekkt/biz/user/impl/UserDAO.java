@@ -60,7 +60,7 @@ public class UserDAO {
 		
 	public PersonVO getUser(PersonVO vo) {
 		System.out.println("mybatis로 getUser() 기능처리");
-		return (PersonVO)mybatis.selectOne("UserDAO.getPerson", vo);
+		return mybatis.selectOne("UserDAO.getPerson", vo);
 	}
 	public BusinessVO getUser(BusinessVO vo) {
 		mybatis.selectOne("UserDAO.getBs",vo);
