@@ -64,9 +64,9 @@ public class UserController {
 		return "/jsp/mypageUser/mybio.jsp";
 	}
 	
-	// 로그인
-	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
-	public String Login(AccountVO vo, HttpSession session) {
+	// 일반유저 로그인
+	@RequestMapping(value = "/loginPs.do", method = RequestMethod.POST)
+	public String Login(PersonVO vo, HttpSession session) {
 		System.out.println("로그인처리");
 		
 		vo = userService.getUser(vo);
@@ -75,6 +75,25 @@ public class UserController {
 
 		if (vo.getMno() == 0) {
 			session.setAttribute("person", null);
+			System.out.println("회원정보없음");
+			return "/jsp/login.jsp";
+		} else {
+			session.setAttribute("person", vo);
+		}
+		return "/jsp/index.jsp";
+
+	}
+	// 업체유저 로그인
+	@RequestMapping(value = "/loginBs.do", method = RequestMethod.POST)
+	public String Login(BusinessVO vo, HttpSession session) {
+		System.out.println("로그인처리");
+		
+		vo = userService.getUser(vo);
+		
+		System.out.println(vo); // 뭐가 담기는 지 보려했다
+
+		if (vo.getMno() == 0) {
+			session.setAttribute("personBs", null);
 			System.out.println("회원정보없음");
 			return "/jsp/login.jsp";
 		} else {
