@@ -114,7 +114,7 @@ public class UserController {
 	//비밀번호찾기
 	@RequestMapping(value="/findPw.do", method=RequestMethod.POST)
 	public String findPw(AccountVO vo) {
-		userService.insertUser(vo);
+		//userService.insertUser(vo); 에러표시떠서 잠시 주석으로.. 
 		return "/jsp/index.jsp";
 	}
 	

@@ -117,7 +117,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-<<<<<<< HEAD
 	public void updateComspec(BusinessVO vo) {
 		System.out.println("서비스진입");
 		vo.setScheduleList(convertToObj(vo.getSchedule(), ScheduleVO.class));
@@ -131,16 +130,11 @@ public class UserServiceImpl implements UserService {
 		userDao.updateComspec(vo);	
 	}
 	
-=======
-	public PersonVO getUser(PersonVO vo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public AccountVO findId(AccountVO vo) {
 		return userDao.findId(vo);
 	}
->>>>>>> 79f82998ae036ca2d6e400cb5330cc0ad65e3045
+
 
 }
