@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="UserDAO">
+
 	<insert id="insertPs">
-			INSERT INTO account (id,password,mtype) VALUES (#{id},#{password},#{mtype});
+			INSERT INTO account (id,password) VALUES (#{id},#{password});
 			INSERT INTO member VALUES ((SELECT MAX(mno) FROM account),#{name},#{phone},#{birth},#{address},#{email});
 	</insert>
 	<delete id="likeOff">
@@ -33,20 +34,6 @@
 				</otherwise>
 			</choose>
 	</insert>
-	<select id="findId" resultType="account">
-
-		<!-- SELECT * FROM account ac LEFT JOIN member mb on ac.mno=mb.mno LEFT 
-			JOIN business bs on ac.mno=bs.mno WHERE (mname='테스트업체' AND mb.email='test@naver.com') 
-			OR (bname='테스트업체' AND bs.email='test@naver.com'); -->
-
-		SELECT id
-		FROM account ac
-		LEFT JOIN member mb on ac.mno=mb.mno
-		LEFT JOIN business bs on ac.mno=bs.mno
-		WHERE (mname=#{name} AND mb.email=#{email}) OR (bname=#{name} AND
-		bs.email=#{email});
-
-	</select>
 	<update id="updatePs">
 			<choose>
 				<when test="name == null">
@@ -58,24 +45,41 @@
 				</otherwise>
 			</choose>
 	</update>
-	<update id="updateComspec">
-			
+
+	<update id="updateSpec">
+		<choose>
+			<when test="bizType==1"> <!-- 일반세탁소라면 -->
+				<foreach collection="laundryList" item="laundry">
+					UPDATE bsn_laundry SET price=#{laundry.price} WHERE bno=#{bno} AND lno=#{laundry.lno};
+				</foreach>
+				<foreach collection="scheduleList" item="schedule">
+					UPDATE bsn_schedule SET schno=#{schedule.schno}, time=#{schedule.time} WHERE bno=#{bno};
+				</foreach>
+			</when>
+			<otherwise> <!-- else문,, 코인세탁소라면 -->
+				<foreach collection="equipmentList" item="equipment">
+					UPDATE bsn_equipment SET cnt=#{equipment.cnt}, price=#{equipment.price} WHERE bno=#{bno} AND eno=#{equipment.eno};
+				</foreach>
+				<foreach collection="etcList" item="etc">
+					UPDATE bsn_etc SET price=#{etc.price} WHERE bno=#{bno} AND etcno=#{etc.etcno};
+				</foreach>
+				<foreach collection="scheduleList" item="schedule">
+					UPDATE bsn_schedule SET schno=#{schedule.schno}, time=#{schedule.time} WHERE bno=#{bno};
+				</foreach>
+				
+			</otherwise>
+		</choose>
+
+	<update id="updateBusiness">
+
 	</update>
 	<delete id="deleteUser">
 			DELETE account WHERE mno=#{no}		
 	</delete>
 	<select id="getPerson" resultType="person">
-			SELECT ac.mno as mno, id, password, mname as name, phone, birth, address, email 
-			FROM account ac, member mb
+			SELECT ac.mno as mno, id, password, mname as name, phone, birth, address, email FROM account ac, member mb
 			WHERE ac.mno=mb.mno 
-			AND id=#{id} AND password=#{password};
-	</select>
-	<select id="getPersonBs" resultType="business">
-			SELECT ac.mno as mno, bs.bno, id, password, bname, phone, address, email, bz.typenum, bkno, acno, ev.grade
-			FROM account ac, business bs, biztype bz, Evaluation ev
-			WHERE ac.mno=bs.mno
-			AND bs.typeNum=bz.typenum
-			AND id=#{id} AND password=#{password}
+			AND ac.mno=#{mno};
 	</select>
 	<select id="getLikedBs" resultType="business">
 		SELECT IFNULL(comm,0) commCount,IFNULL(eCount,0) eCount,l.bno bno,bname,IFNULL(ROUND(eval,1),0) eval,address,phone
@@ -94,15 +98,24 @@
 	<select id="getUserList">
 		
 	</select>
-	<select id="getcomspecList" resultType="laundry">
+	<!-- 사양관리/설비관리 -->
+	<select id="getLaundryList" resultType="laundry">
 		SELECT bs.lno as lno, lname as laundry, price 
 		FROM bsn_laundry bs, laundry_type la, business b 
 		WHERE bs.lno=la.lno AND bs.bno=b.bno AND b.bno=#{bno};
 	</select>
-	<select id="getcomscheduleList" resultType="schedule">
+	<select id="getEquipmentList" resultType="equipment">
+		SELECT eno, cnt, price FROM bsn_equipment WHERE bno= #{bno};
+	</select>
+	<select id="getEtc" resultType="etc">
+		SELECT etcno, price FROM bsn_etc WHERE bno = #{bno};
+	</select>
+	<select id="getScheduleList" resultType="schedule">
 		SELECT bs.schno, time 
 		FROM bsn_schedule bs, schedule sc 
 		WHERE bs.schno = sc.schno 
 		AND bno=#{bno};
 	</select>
+	
 </mapper>
+

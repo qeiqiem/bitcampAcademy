@@ -8,7 +8,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/css/find.css">
+    <link rel="stylesheet" href="css/all.css">
+    <link rel="stylesheet" href="css/findId.css">
+    <link rel="stylesheet" href="css/head0.css">
     <script src="https://kit.fontawesome.com/2fc57dd2db.js" crossorigin="anonymous"></script>
 </head>
 
@@ -33,7 +35,7 @@
         <p>아이디 찾기가 완료되었습니다.</p>
 
         <div class="veri_btn" onclick="" style="text-align: center;">
-            ID <span style="font-weight: bolder; font-size: x-large; margin-left: 10px;">${userId.id}</span>
+            ID <span style="font-weight: bolder; font-size: x-large; margin-left: 10px;">(아이디)</span>
         </div>
         <div class="mail">
             아이디 찾기 시 문제가 있나요?

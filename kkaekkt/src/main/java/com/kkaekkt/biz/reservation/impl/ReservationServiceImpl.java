@@ -48,6 +48,7 @@ public class ReservationServiceImpl implements ReservationService {
 		for (ReservationVO rsvVO : vo.getRsvListRno()) {
 			rsvVO.setLike(reservationDAO.getLiked(rsvVO));
 			rsvVO.setLaundryList(reservationDAO.getLaundryList(rsvVO));
+			rsvVO.setCommList(reservationDAO.getCommListPs(rsvVO));
 		}
 		return vo;
 	}

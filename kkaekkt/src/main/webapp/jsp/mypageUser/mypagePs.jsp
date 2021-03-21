@@ -43,10 +43,8 @@
 			<div id="modal_container">
 				<button id="modal_close">x</button>
 				<div id="modal_bodycont">
-					<form>
 						<div id="modal_head">
-							<p>이용에 만족하시나요?</p>
-						
+							<p>만족도를 평가해주세요</p>
 								<input id="starVal" value="1">
 								<div class="rating-group" value="">
 									<label aria-label="1 star" class="rating__label" for="rating-1">
@@ -68,19 +66,11 @@
 									<label aria-label="5 stars" class="rating__label" for="rating-5">
 										<i class="rating__icon rating__icon--star fa fa-star"></i></label>                
 									<input class="rating__input" name="rating" id="rating-5" value="5" type="radio">
-								</div>                
+								</div>
 						</div>
-						<hr style="width: 80%; margin-top: 40px; border: 1px solid #E5E5E5;">
 						<div id="modal_foot">
-							<p style="text-align: center;">업체의 서비스는 어떠셨나요?</p>
-							<textarea id="review_text" maxlength="300"  placeholder="최대 300자까지 작성할 수 있습니다."></textarea>
-							<div id="review_sub">
-								<span id="review_texter">0</span><span> / 300</span>
-							</div>
-							<div id="review_btn">
-								<button id="closeBtn">돌아가기</button>
-								<button id="regit">등록하기</button>
-							</div>
+							<button id="closeBtn">돌아가기</button>
+							<button id="regit" onclick="regit()">등록하기</button>                     
 						</div>
 				</div>
 			</div>
@@ -90,7 +80,6 @@
 	<script>
             var pageObj={//세션에서 정보를 받아오는건 독립된 js파일에서 불가능, jsp 내에서만 가능하기 때문에 여기서 값을 받아준다.
                 mno:1,
-				mname:'태연',
 				currentPageNum:1,
 				listType:1,
                 state:1

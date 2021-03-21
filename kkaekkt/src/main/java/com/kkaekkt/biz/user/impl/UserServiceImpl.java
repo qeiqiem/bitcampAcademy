@@ -11,7 +11,6 @@ import com.kkaekkt.biz.comm.EquipmentVO;
 import com.kkaekkt.biz.comm.EtcVO;
 import com.kkaekkt.biz.comm.LaundryVO;
 import com.kkaekkt.biz.comm.ScheduleVO;
-import com.kkaekkt.biz.user.AccountVO;
 import com.kkaekkt.biz.user.BusinessListVO;
 import com.kkaekkt.biz.user.BusinessVO;
 import com.kkaekkt.biz.user.PersonVO;
@@ -84,14 +83,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public PersonVO getUser(PersonVO vo) {
-		System.out.println("유저로그인 servie옴");		
-		return userDao.getUserPs(vo);
+		System.out.println("servie옴");
+		return userDao.getUser(vo);
 	}
 
 	@Override
 	public BusinessVO getUser(BusinessVO vo) {
-		System.out.println("업체로그인 servie옴");
-		return userDao.getUserBs(vo);
+		return null;
 	}
 
 	public <T> List<T> convertToObj(String json, Class<T> type) {
@@ -105,32 +103,41 @@ public class UserServiceImpl implements UserService {
 			}
 			list.add(gson.fromJson(temp2[i], type));
 		}
+		System.out.println(list + json);
 		return list;
 	}
 
 	@Override
 	public BusinessVO getComspec(BusinessVO vo) {
 		//System.out.println("servie옴");
-		vo.setLaundryList(userDao.getComspec(vo));
-		vo.setScheduleList(userDao.getComspecschedule(vo));
+		vo.setLaundryList(userDao.getLaundry(vo));
+		vo.setScheduleList(userDao.getSchedule(vo));
+		return vo;
+	}
+	@Override
+	public BusinessVO getCoinspec(BusinessVO vo) {
+		//System.out.println("servie옴");
+		vo.setEquipmentList(userDao.getEquipment(vo));
+		vo.setEtcList(userDao.getEtc(vo));
+		vo.setScheduleList(userDao.getSchedule(vo));
 		return vo;
 	}
 
-	@Override
-	public void updateComspec(BusinessVO vo) {
+	public void updateSpec(BusinessVO vo) {
 		System.out.println("서비스진입");
 		vo.setScheduleList(convertToObj(vo.getSchedule(), ScheduleVO.class));
 		System.out.println(vo.getScheduleList());
+		
 		if (vo.getBizType() == 1) { // 일반 세탁소라면
 			vo.setLaundryList(convertToObj(vo.getLaundry(), LaundryVO.class));
 		} else {
 			vo.setEquipmentList(convertToObj(vo.getEquipment(), EquipmentVO.class));
 			vo.setEtcList(convertToObj(vo.getEtc(), EtcVO.class));
 		}
-		userDao.updateComspec(vo);	
+
+		userDao.updateSpec(vo);	
 	}
 	
-
 	@Override
 	public AccountVO findId(AccountVO vo) {
 		return userDao.findId(vo);

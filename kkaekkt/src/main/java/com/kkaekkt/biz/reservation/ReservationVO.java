@@ -3,6 +3,7 @@ package com.kkaekkt.biz.reservation;
 import java.sql.Date;
 import java.util.List;
 
+import com.kkaekkt.biz.comm.CommVO;
 import com.kkaekkt.biz.comm.LaundryVO;
 
 public class ReservationVO {
@@ -17,10 +18,17 @@ public class ReservationVO {
 	private String state; // 상태명
 	private int like; // 0.좋아요X 1.좋아요O
 	private int timeOut; //0.취소불가 1.취소가능 
-	private List<LaundryVO> laundryList; // 품목리스트
 	private int totalPrice; // 총 금액
 	private int count; // ex. 일반의류 외 count 개
+	private List<LaundryVO> laundryList; // 품목리스트
+	private List<CommVO> commList; //리뷰 리스트
 	
+	public List<CommVO> getCommList() {
+		return commList;
+	}
+	public void setCommList(List<CommVO> commList) {
+		this.commList = commList;
+	}
 	public int getBno() {
 		return bno;
 	}
