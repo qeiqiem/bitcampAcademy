@@ -72,11 +72,15 @@
 						</div>
 						<hr style="width: 80%; margin-top: 40px; border: 1px solid #E5E5E5;">
 						<div id="modal_foot">
-							<p style="text-align: center;">어떤 점이 좋았나요?</p>
-							<textarea id="review_text" maxlength="300"  placeholder="최소 10자 이상 입력해주세요."></textarea> 
-							<span id="review_texter">###</span><br>
-							<button id="closeBtn" class="sub_review">돌아가기</button>
-							<button id="regit" class="sub_review" onclick="regit()">등록하기</button>                     
+							<p style="text-align: center;">업체의 서비스는 어떠셨나요?</p>
+							<textarea id="review_text" maxlength="300"  placeholder="최대 300자까지 작성할 수 있습니다."></textarea>
+							<div id="review_sub">
+								<span id="review_texter">0</span><span> / 300</span>
+							</div>
+							<div id="review_btn">
+								<button id="closeBtn">돌아가기</button>
+								<button id="regit">등록하기</button>
+							</div>
 						</div>
 				</div>
 			</div>
@@ -86,6 +90,7 @@
 	<script>
             var pageObj={//세션에서 정보를 받아오는건 독립된 js파일에서 불가능, jsp 내에서만 가능하기 때문에 여기서 값을 받아준다.
                 mno:1,
+				mname:'태연',
 				currentPageNum:1,
 				listType:1,
                 state:1

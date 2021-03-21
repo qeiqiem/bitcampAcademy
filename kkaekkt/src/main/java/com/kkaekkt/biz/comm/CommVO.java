@@ -6,7 +6,7 @@ public class CommVO {
 	private int bno; //사업자 번호
 	private int depth; //0.댓글 1.대댓글
 	private int eval;//평가
-	private String content; 
+	private String content;
 	
 	public int getEval() {
 		return eval;

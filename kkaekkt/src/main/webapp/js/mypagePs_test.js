@@ -2,6 +2,7 @@ $(document).ready(function() {
     initSide();
     initEvent();
     initModal();
+    console.log('초기화체크');
 });
 function initEvent() {
     $('.rsvList').on("click",".detailBtn",function() { // 버블링으로 생성된 주문에 클릭 이벤트 활성화
@@ -17,13 +18,17 @@ function initEvent() {
         $('#review_texter').html($(this).val().length)});
     };
 
+
 function initModal() {
     /* 모달 생성 */
     $(".rsvList").on("click",".comments_bottom button",function(){ 
         $("#modal_container").show();
-        console.log($('#ta'+$(this).val()).val());
     });
-    $("#modal_close").click(function(){ 
+    $("#closeBtn").click(function(event){ //모달 닫기
+        event.preventDefault();
+        $("#modal_container").hide(); 
+    });
+    $("#modal_close").click(function(){ //모달 닫기
         $("#modal_container").hide(); 
     });
     /* 평점 받기 */
@@ -31,9 +36,11 @@ function initModal() {
         var starVal = $(this).attr('value'); 
         $("#starVal").val(starVal);
     });
-}
-function regit() {
-    console.log($("#starVal").val());
+    $('#regit').click(function(event) {
+        event.preventDefault();
+        console.log($("#starVal").val());
+        console.log($('#review_text').val());
+    });
 }
 function initSide() {
     $('.side_sub').css('display','unset');
