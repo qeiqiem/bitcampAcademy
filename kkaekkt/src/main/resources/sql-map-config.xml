@@ -12,6 +12,7 @@
 		<typeAlias alias="equipment" type="com.kkaekkt.biz.comm.EquipmentVO"/>
 		<typeAlias alias="etc" type="com.kkaekkt.biz.comm.EtcVO"/>
 		<typeAlias alias="schedule" type="com.kkaekkt.biz.comm.ScheduleVO"/>
+		<typeAlias alias="account" type="com.kkaekkt.biz.user.AccountVO"/>
 		<typeAlias alias="comment" type="com.kkaekkt.biz.comm.CommVO"/>
 	</typeAliases>
 			

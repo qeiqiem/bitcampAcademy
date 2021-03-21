@@ -214,6 +214,7 @@ function printlist(list) {
     }
     $('.rsvList').children().remove();
     $.each(list, function(key,value) {
+        console.log(key+"번째 - " + value.commList.length);
         $('.rsvList').append(
             '<div class="rsvBox">' +
                 '<table class="rsvTable">'+
