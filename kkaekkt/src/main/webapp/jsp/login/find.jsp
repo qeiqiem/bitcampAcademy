@@ -11,6 +11,7 @@
         <script src="https://kit.fontawesome.com/2fc57dd2db.js" crossorigin="anonymous"></script>
         <script src="/js/find.js"></script>
     </head>
+    
 
     <body>
         <jsp:include page="/jsp/header0.jsp"></jsp:include>
