@@ -42,28 +42,28 @@ function initEvent(){
 	// 수정완료 버튼 클릭시
 		$("#submitSpec").click(function(){
 			
+		var list = new Array();
 		// 품목 리스트 데이터 처리
         var chkBox=$(".laundry input[type='checkbox']");
         var priceBox=$(".laundry input[id='won']");
        
         for(var i=0; i<chkBox.size();i++) {
-			var list = new Array();
             if(chkBox[i].checked) {
-			console.log(chkBox[i].value);
                 list.push({lno:JSON.parse(chkBox[i].value),price:JSON.parse(priceBox[i].value)});
             }
         }
-        $("input[name='laundry']")[0].value=JSON.stringify(list);
+	
+        $("input[name='laundry']").val(JSON.stringify(list));
 
 		// 운영시간 데이터 처리
-    	// var weekLi=$('#weekBox ul li');
-   		//  list=[];//위에서 쓰인 리스트 초기화
-    	// for(var i=0;i<weekLi.size();i++) {
-        // 	var open=weekLi[i].children[1].value;
-        // 	var close=weekLi[i].children[2].value;
-        // 	list.push({schno:JSON.parse(weekLi.eq(i).css("order")),time:open+'~'+close});
-    	// }
-    	// $("#weekBox input[name='schedule']")[0].value=JSON.stringify(list);
+    	var weekLi=$('#weekBox ul li');
+   		 list=[];//위에서 쓰인 리스트 초기화
+    	for(var i=0;i<weekLi.size();i++) {
+        	var open=weekLi[i].children[1].value;
+        	var close=weekLi[i].children[2].value;
+        	list.push({schno:JSON.parse(weekLi.eq(i).css("order")),time:open+'~'+close});
+    	}
+    	$("#weekBox input[name='schedule']")[0].value=JSON.stringify(list);
 		$("form").submit();
 		});
 		
@@ -112,12 +112,12 @@ function ajax(pageObj) { //ajax로 리스트 받아오기
         success: function(data) {
     		console.log('ajax 함수 완료');
             var comspec=JSON.parse(data);
-			console.log(comspec.scheduleList);
+			$("input[name='bno']").val(comspec.bno);
+			onsole.log(comspec.scheduleList);
            	// 품목이 일치하면 값 넣어주기
 			$.each(comspec.laundryList, function(index, item) {
 				console.log(index + ":" + item.laundry +","+ item.price);
 				for(var i = 0; i<16; i++){
-						console.log($("td").eq(i).text().trim());
 					if(item.laundry == ($("td").eq(i).text().trim())) {
 						$("td").eq(i).next().children("input").val(item.price); 
 						$("td").eq(i).children().children("input:checkbox").prop("checked", true);
@@ -174,28 +174,3 @@ function ajax(pageObj) { //ajax로 리스트 받아오기
 function initSide() {
     $('.side button').eq(3).addClass("side_select");
 }
-// function submitSpec(){
-// 		var list = new Array();
-// 		// 품목 리스트 데이터 처리
-//         var chkBox=$(".laundry input[type='checkbox']");
-//         var priceBox=$(".laundry input[id='won']");
-       
-//         for(var i=0; i<chkBox.size();i++) {
-//             if(chkBox[i].checked) {
-// 			console.log(chkBox[1].checked);
-//                 list.push({lno:JSON.parse(chkBox[i].value),price:JSON.parse(priceBox[i].value)});
-//             }
-//         }
-//         $("input[name='laundry']")[0].value=JSON.stringify(list);
-// 		// 운영시간 데이터 처리
-//     	var weekLi=$('#weekBox ul li');
-//    		 list=[];//위에서 쓰인 리스트 초기화
-//     	for(var i=0;i<weekLi.size();i++) {
-//         	var open=weekLi[i].children[1].value;
-//         	var close=weekLi[i].children[2].value;
-//         	list.push({schno:JSON.parse(weekLi.eq(i).css("order")),time:open+'~'+close});
-//     	}
-//     	$("#weekBox input[name='schedule']")[0].value=JSON.stringify(list);
-// 	$("form").submit();
-// }
-

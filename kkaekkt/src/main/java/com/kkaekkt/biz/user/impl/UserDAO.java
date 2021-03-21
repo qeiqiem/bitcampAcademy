@@ -6,6 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kkaekkt.biz.comm.EquipmentVO;
+import com.kkaekkt.biz.comm.EtcVO;
 import com.kkaekkt.biz.comm.LaundryVO;
 import com.kkaekkt.biz.comm.ScheduleVO;
 import com.kkaekkt.biz.user.AccountVO;
@@ -67,18 +69,28 @@ public class UserDAO {
 		System.out.println("mybatis로 기능처리 업체유저");		
 		return mybatis.selectOne("UserDAO.getPersonBs",vo);
 	}
-	public List<LaundryVO> getComspec(BusinessVO vo) {
+	// laundry
+	public List<LaundryVO> getLaundry(BusinessVO vo) {
 		//System.out.println("dao : " + mybatis.selectList("UserDAO.getcomspecList",vo) );
-		return mybatis.selectList("UserDAO.getcomspecList",vo);
+		return mybatis.selectList("UserDAO.getLaundryList",vo);
 	}
-	public List<ScheduleVO> getComspecschedule(BusinessVO vo) {
+	// equipment
+	public List<EquipmentVO> getEquipment(BusinessVO vo) {
+		return mybatis.selectList("UserDAO.getEquipmentList",vo);
+	}
+	// etc
+		public List<EtcVO> getEtc(BusinessVO vo) {
+			return mybatis.selectList("UserDAO.getEtc",vo);
+		}
+	// schedule
+	public List<ScheduleVO> getSchedule(BusinessVO vo) {
 		//System.out.println("dao : " + mybatis.selectList("UserDAO.getcomscheduleList",vo) );
-		return mybatis.selectList("UserDAO.getcomscheduleList",vo);
+		return mybatis.selectList("UserDAO.getScheduleList",vo);
 	}
-	public void updateComspec(BusinessVO vo) {
+
+	public void updateSpec(BusinessVO vo) {
 		System.out.println("마이바티스 update");
-		System.out.println(vo);
-		mybatis.update("UserDAO.updateComspec",vo);
+		mybatis.update("UserDAO.updateSpec",vo);
 		System.out.println("마이바티스 update완료");
 		
 	}

@@ -16,7 +16,7 @@
 			<div id="comspec_title">사양관리</div>
 			<hr>
 			<div class="comLaundry ">
-				<form action="/updateComspec.do" method="POST">
+				<form action="/updateSpec.do" method="POST">
 					<!-- float left -->
 					<div class="laundry" id="comspec_left">
 						<!--세탁기 사양-->
@@ -135,10 +135,10 @@
 						<button type="button" onclick="" id="updateSpec">수정하기</button>
 						<div id="btn_change">
 							<button type="reset" onclick="" id="resetSpec">돌아가기</button>
-							<button type="button" onclick="" id="submitSpec">수정완료</button>
+							<button type="submit" onclick="" id="submitSpec">수정완료</button>
 						</div>
 					</div>
-					<input type="text" name="bno" value=1 hidden>
+					<input type="text" name="bno" hidden>
 					<input type="text" name="bizType" value="1" hidden>
 				</form>
 			</div>
@@ -150,7 +150,6 @@
 		var pageObj={//세션에서 정보를 받아오는건 독립된 js파일에서 불가능, jsp 내에서만 가능하기 때문에 여기서 값을 받아준다.
                 bno:1,//더미번호 (추후 세션에서 받아올 예정)
             };
-		var rsvObj={};
 	</script>
 	<script src="/js/comspec.js"></script>
 	

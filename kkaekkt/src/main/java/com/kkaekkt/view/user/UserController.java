@@ -128,7 +128,7 @@ public class UserController {
 		session.invalidate();
 		return "index.jsp";
 	}
-	// 일반사양관리 
+	// 일반사양관리
 		@RequestMapping(value="/selectComspec.do", method=RequestMethod.POST, produces="application/text;charset=utf-8")
 		@ResponseBody
 		public String SelcetComspec(BusinessVO vo) {
@@ -138,13 +138,25 @@ public class UserController {
 			//System.out.println("test:" + comspec);
 			return comspec;
 		}
-	// 일반사양관리 update
-		@RequestMapping(value="/updateComspec.do", method=RequestMethod.POST)
+	// 일반설비관리
+		@RequestMapping(value="/selectCoinspec.do", method=RequestMethod.POST, produces="application/text;charset=utf-8")
+		@ResponseBody
+		public String SelcetCoinspec(BusinessVO vo) {
+			System.out.println(vo);
+			Gson gson=new Gson();
+			String coinspec=gson.toJson(userService.getCoinspec(vo));
+			System.out.println("test:" + coinspec);
+			return coinspec;
+		}	
+	// 일반(사양,설비)관리 update
+		@RequestMapping(value="/updateSpec.do", method=RequestMethod.POST)
 		public String Update(BusinessVO vo) {
-			System.out.println("메서드 진입");
-			System.out.println("컨트롤러" + vo);
-			userService.updateComspec(vo);
-			 
-			return "/jsp/mypageBiz/comspec.jsp";
+			System.out.println("메서드 진입" + vo);
+			userService.updateSpec(vo);
+			if(vo.getBizType() == 1) {
+				return "/jsp/mypageBiz/comspec.jsp";				
+			} 
+			return "/jsp/mypageBizCoin/coinspec.jsp";				
+			
 		}
 }

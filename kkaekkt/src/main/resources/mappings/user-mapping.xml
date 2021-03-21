@@ -51,10 +51,29 @@
 				</otherwise>
 			</choose>
 	</update>
-	<update id="updateComspec">
-			<foreach collection="laundryList" item="laundry">
-			UPDATE bsn_laundry SET lno=${lno}, price=${price} WHERE bno=${bno};
-			</foreach>
+	<update id="updateSpec">
+		<choose>
+			<when test="bizType==1"> <!-- 일반세탁소라면 -->
+				<foreach collection="laundryList" item="laundry">
+					UPDATE bsn_laundry SET price=#{laundry.price} WHERE bno=#{bno} AND lno=#{laundry.lno};
+				</foreach>
+				<foreach collection="scheduleList" item="schedule">
+					UPDATE bsn_schedule SET schno=#{schedule.schno}, time=#{schedule.time} WHERE bno=#{bno};
+				</foreach>
+			</when>
+			<otherwise> <!-- else문,, 코인세탁소라면 -->
+				<foreach collection="equipmentList" item="equipment">
+					UPDATE bsn_equipment SET cnt=#{equipment.cnt}, price=#{equipment.price} WHERE bno=#{bno} AND eno=#{equipment.eno};
+				</foreach>
+				<foreach collection="etcList" item="etc">
+					UPDATE bsn_etc SET price=#{etc.price} WHERE bno=#{bno} AND etcno=#{etc.etcno};
+				</foreach>
+				<foreach collection="scheduleList" item="schedule">
+					UPDATE bsn_schedule SET schno=#{schedule.schno}, time=#{schedule.time} WHERE bno=#{bno};
+				</foreach>
+				
+			</otherwise>
+		</choose>
 	</update>
 	<delete id="deleteUser">
 			DELETE account WHERE mno=#{no}		
@@ -89,15 +108,23 @@
 	<select id="getUserList">
 		
 	</select>
-	<select id="getcomspecList" resultType="laundry">
+	<!-- 사양관리/설비관리 -->
+	<select id="getLaundryList" resultType="laundry">
 		SELECT bs.lno as lno, lname as laundry, price 
 		FROM bsn_laundry bs, laundry_type la, business b 
 		WHERE bs.lno=la.lno AND bs.bno=b.bno AND b.bno=#{bno};
 	</select>
-	<select id="getcomscheduleList" resultType="schedule">
+	<select id="getEquipmentList" resultType="equipment">
+		SELECT eno, cnt, price FROM bsn_equipment WHERE bno= #{bno};
+	</select>
+	<select id="getEtc" resultType="etc">
+		SELECT etcno, price FROM bsn_etc WHERE bno = #{bno};
+	</select>
+	<select id="getScheduleList" resultType="schedule">
 		SELECT bs.schno, time 
 		FROM bsn_schedule bs, schedule sc 
 		WHERE bs.schno = sc.schno 
 		AND bno=#{bno};
 	</select>
+	
 </mapper>

@@ -7,10 +7,18 @@ public class LaundryVO {
 	private int rsvNum;
 	private String mname;
 	private int dDay;
+	private int lno;
 	private String laundry;
 	private int count; 
 	private String state;
 	private int price;
+	
+	public int getLno() {
+		return lno;
+	}
+	public void setLno(int lno) {
+		this.lno = lno;
+	}
 	public String getLaundry() {
 		return laundry;
 	}

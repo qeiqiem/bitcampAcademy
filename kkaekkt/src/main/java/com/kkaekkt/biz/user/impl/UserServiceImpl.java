@@ -91,7 +91,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public BusinessVO getUser(BusinessVO vo) {
 		System.out.println("업체로그인 servie옴");
-		return userDao.getUserPs(vo);
+		return userDao.getUserBs(vo);
 	}
 
 	public <T> List<T> convertToObj(String json, Class<T> type) {
@@ -105,25 +105,39 @@ public class UserServiceImpl implements UserService {
 			}
 			list.add(gson.fromJson(temp2[i], type));
 		}
+		System.out.println(list + json);
 		return list;
 	}
 
 	@Override
 	public BusinessVO getComspec(BusinessVO vo) {
 		//System.out.println("servie옴");
-		vo.setLaundryList(userDao.getComspec(vo));
-		vo.setScheduleList(userDao.getComspecschedule(vo));
+		vo.setLaundryList(userDao.getLaundry(vo));
+		vo.setScheduleList(userDao.getSchedule(vo));
+		return vo;
+	}
+	@Override
+	public BusinessVO getCoinspec(BusinessVO vo) {
+		//System.out.println("servie옴");
+		vo.setEquipmentList(userDao.getEquipment(vo));
+		vo.setEtcList(userDao.getEtc(vo));
+		vo.setScheduleList(userDao.getSchedule(vo));
 		return vo;
 	}
 
-	@Override
-	public void updateComspec(BusinessVO vo) {
+	public void updateSpec(BusinessVO vo) {
 		System.out.println("서비스진입");
 		vo.setScheduleList(convertToObj(vo.getSchedule(), ScheduleVO.class));
 		System.out.println(vo.getScheduleList());
-		vo.setLaundryList(convertToObj(vo.getLaundry(), LaundryVO.class));
 		
-		userDao.updateComspec(vo);	
+		if (vo.getBizType() == 1) { // 일반 세탁소라면
+			vo.setLaundryList(convertToObj(vo.getLaundry(), LaundryVO.class));
+		} else {
+			vo.setEquipmentList(convertToObj(vo.getEquipment(), EquipmentVO.class));
+			vo.setEtcList(convertToObj(vo.getEtc(), EtcVO.class));
+		}
+
+		userDao.updateSpec(vo);	
 	}
 	
 

@@ -143,6 +143,10 @@ public class BusinessVO extends AccountVO{
 	public void setCommCount(int commCount) {
 		this.commCount = commCount;
 	}
-	
+	@Override
+	public String toString() {
+		return "BusinessVO [bno=" + bno + ", bizType="+ bizType + ", scheduleList=" + scheduleList + ", equipmentList=" + equipmentList + ", laundryList=" + laundryList + ", etcList="
+				+ etcList + ", equipment=" + equipment + ", laundry=" + laundry + ", schedule=" + schedule + ", etc=" + etc+ "]";
+	}
 	
 }

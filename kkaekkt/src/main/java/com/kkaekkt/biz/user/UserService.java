@@ -17,7 +17,8 @@ public interface UserService {
 	public BusinessVO getUser(BusinessVO vo);
 	public BusinessListVO getLikedBs(BusinessListVO vo);
 	public BusinessVO getComspec(BusinessVO vo);
-	public void updateComspec(BusinessVO vo);
+	public BusinessVO getCoinspec(BusinessVO vo);
+	public void updateSpec(BusinessVO vo);
 	public AccountVO findId(AccountVO vo);
 
 }
