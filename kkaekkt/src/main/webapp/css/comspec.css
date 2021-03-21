@@ -177,7 +177,10 @@ input{
     border: 1px solid var(--gray-color);
     border-radius: 0px;
 }
-
+#week .selected{
+	background-color: var(--key-color);
+	border: none;
+}
 .checkbox {
     position: relative;
     display: inline-block;

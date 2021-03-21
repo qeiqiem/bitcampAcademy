@@ -127,7 +127,6 @@ function ajax(pageObj) { //ajax로 리스트 받아오기
     		console.log('ajax 함수 완료');
             var comspec=JSON.parse(data);
 			$("input[name='bno']").val(comspec.bno);
-			onsole.log(comspec.scheduleList);
            	// 품목이 일치하면 값 넣어주기
 			$.each(comspec.laundryList, function(index, item) {
 				console.log(index + ":" + item.laundry +","+ item.price);
@@ -141,7 +140,43 @@ function ajax(pageObj) { //ajax로 리스트 받아오기
 					}
 				} 
 			}); // 품목리스트 반복문
+			// 운영시간 값 넣어주기
+            $.each(comspec.scheduleList, function (index, item) {
+                var weekBtn = $('#week button');
+                var weekLi = $('#weekBox ul');
+                console.log(index + ":" + item.schno + "," + item.time);
+                var start = (item.time).split("~")[0];
+                var end = (item.time).split("~")[1];
+                var idx = item.schno;
+                $('#' + idx).toggleClass('selected');
+                if ($('#' + idx).hasClass("selected")) {
+                    if (idx < 7) {
+                        weekLi.append("<li style='order:"
+                            + (idx)
+                            + "'><span>"
+                            + $('#' + idx).html()
+                            + "요일</span>시간 <select disabled><option>" + start + "</option></select> ~ <select disabled><option>" + end + "</option></select></li>").trigger("create");
+                    } else {
+                        weekLi.append("<li style='order:"
+                            + (idx)
+                            + "'><span>"
+                            + $('#' + idx).html()
+                            + "</span>시간 <select disabled><option>" + start + "</option></select> ~ <select disabled><option>" + end + "</option></select></li>").trigger("create");
+                    }
+                    var opt = $("#weekBox li[style='order:"
+                        + (idx) + "'] select");
+                    for (var i = 0; i < 25; i++) {
+                        opt.append("<option>" + (i < 10 ? "0" + i : i) + ":00</option>");
+                        if (i != 24) {
+                            opt.append("<option>" + (i < 10 ? "0" + i : i) + ":30</option>");
+                        }
+                    }
+                } else {
+                    $("#weekBox ul li[style='order:" + (idx) + "']").remove();
+                }
 
+            }); // 운영시간 반복문
+			
         }
     }); // ajax
 }

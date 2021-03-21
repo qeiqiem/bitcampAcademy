@@ -151,7 +151,7 @@ function ajax(pageObj) { //ajax로 리스트 받아오기
             }); // 부가서비스 반복문
 
 
-            // // 운영시간 값 넣어주기
+            // 운영시간 값 넣어주기
             $.each(coinspec.scheduleList, function (index, item) {
                 var weekBtn = $('#week button');
                 var weekLi = $('#weekBox ul');
