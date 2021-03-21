@@ -243,12 +243,17 @@ function printlist(list) {
         btnText='주문취소';
         btnClass='cancelBtn';
     } else {
-        btnText='리뷰쓰기';
-        btnClass='commentBtn';
 		$('.content_header')[0].innerHTML='완료된 주문';
     }
     $('.rsvList').children().remove();
     $.each(list, function(key,value) {
+        if(value.commList.length>0){
+            btnText='리뷰보기';
+            btnClass="reviewBtn";
+        }else {
+            btnText='리뷰쓰기';
+            btnClass='commentBtn';
+        }
         $('.rsvList').append(
             '<div class="rsvBox">' +
                 '<table class="rsvTable">'+
