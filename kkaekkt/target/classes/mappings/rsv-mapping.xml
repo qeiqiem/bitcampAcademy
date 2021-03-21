@@ -108,7 +108,7 @@
 			SELECT mname,r.mno,bname,r.bno,content,c.rdate,depth
 			FROM comments c, reservation r, member m,business b
 			WHERE b.bno=r.bno AND m.mno=r.mno AND c.groupNum=r.rno
-			AND groupNum=#{rsvNum} AND c.mno=#{mno}
+			AND groupNum=#{rsvNum}
 			ORDER BY orderNum;
 	</select>
 	<select id="getCommListBs" resultType="comment">
