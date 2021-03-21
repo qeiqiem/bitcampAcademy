@@ -43,6 +43,9 @@ public class ReservationDAO {
 	public int countList(ReservationListVO vo) {
 		return mybatis.selectOne("reservationDAO.countList",vo);
 	}
+	public List<CommVO> getCommListPs(ReservationVO vo) {
+		return mybatis.selectList("reservationDAO.getCommListPs",vo);
+	}
 	public List<ReservationVO> getRsvListBs_rn(ReservationListVO vo) {
 		return mybatis.selectList("reservationDAO.getRsvListBs_rn",vo);
 	}

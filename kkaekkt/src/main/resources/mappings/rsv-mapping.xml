@@ -104,7 +104,20 @@
 			LIMIT #{rowStartNum},#{POSTS_PER_PAGE};
 		</if>
 	</select>
-
+	<select id="getCommListPs" resultType="comment">
+			SELECT mname,r.mno,bname,r.bno,content,c.rdate,depth
+			FROM comments c, reservation r, member m,business b
+			WHERE b.bno=r.bno AND m.mno=r.mno AND c.groupNum=r.rno
+			AND groupNum=#{rsvNum} AND c.mno=#{mno}
+			ORDER BY orderNum;
+	</select>
+	<select id="getCommListBs" resultType="comment">
+			SELECT mname,r.mno,bname,r.bno,content,c.rdate,depth
+			FROM comments c, reservation r, member m,business b
+			WHERE b.bno=r.bno AND m.mno=r.mno AND c.groupNum=r.rno
+			AND c.bno=#{bno}
+			ORDER BY orderNum;
+	</select>
 	<select id="getLaundry" resultType="laundry"> <!-- 상태가 표시된 품목 리스트 출력 -->
 			SELECT lname laundry, cnt count, cnt*price price,stname state 
 			FROM reservation r, rsv_laundry r_l, business b, bsn_laundry b_l, laundry_type lt,state s
