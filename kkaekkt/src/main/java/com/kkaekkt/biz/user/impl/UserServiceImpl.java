@@ -11,7 +11,6 @@ import com.kkaekkt.biz.comm.EquipmentVO;
 import com.kkaekkt.biz.comm.EtcVO;
 import com.kkaekkt.biz.comm.LaundryVO;
 import com.kkaekkt.biz.comm.ScheduleVO;
-import com.kkaekkt.biz.user.AccountVO;
 import com.kkaekkt.biz.user.BusinessListVO;
 import com.kkaekkt.biz.user.BusinessVO;
 import com.kkaekkt.biz.user.PersonVO;
@@ -84,14 +83,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public PersonVO getUser(PersonVO vo) {
-		System.out.println("유저로그인 servie옴");		
-		return userDao.getUserPs(vo);
+		System.out.println("servie옴");
+		return userDao.getUser(vo);
 	}
 
 	@Override
 	public BusinessVO getUser(BusinessVO vo) {
-		System.out.println("업체로그인 servie옴");
-		return userDao.getUserBs(vo);
+		return null;
 	}
 
 	public <T> List<T> convertToObj(String json, Class<T> type) {
@@ -140,7 +138,6 @@ public class UserServiceImpl implements UserService {
 		userDao.updateSpec(vo);	
 	}
 	
-
 	@Override
 	public AccountVO findId(AccountVO vo) {
 		return userDao.findId(vo);

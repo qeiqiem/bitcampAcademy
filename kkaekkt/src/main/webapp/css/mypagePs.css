@@ -275,8 +275,8 @@ font-size:14px;
     padding: 40px 10px 20px 10px;
     left: 60px;
     top: 0;
-    /* width: 435px; */
-    width: 464px;    
+    width: 435px; /*단축버전*/
+    /* width: 464px;    풀버전*/
     height: 75px;
     border: 1px solid var(--gray-color);
     /* background-color: wheat; */

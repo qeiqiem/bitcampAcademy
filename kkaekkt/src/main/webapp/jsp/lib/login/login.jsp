@@ -63,17 +63,17 @@ input {
 
 			<div>
 				<div>
-					<a href="">아이디/비밀번호 찾기</a>
+					<a href="">아이디 찾기</a> <a href="">비밀번호 찾기</a>
 				</div>
 				<hr>
 				<div>
 					<p>다른 계정으로 로그인</p>
 
 					<!--api끌어오는거에 따라 가지수는 줄 수 있습니다...-->
-					<a href="naverLogin.jsp"><img src="/img/naver.png"></a> <a
-						href="facebookLogin.jsp"><img src="/img/facebook.png"></a> <a
-						href="googleLogin.jsp"><img src="/img/google.png"></a> <a
-						href="kakaoLogin.jsp"><img src="/img/kakao.png"></a>
+					<a href="naverLogin.jsp"><img src="../../img/naver.png"></a> <a
+						href="facebookLogin.jsp"><img src="../../img/facebook.png"></a> <a
+						href="googleLogin.jsp"><img src="../../img/google.png"></a> <a
+						href="kakaoLogin.jsp"><img src="../../img/kakao.png"></a>
 				</div>
 				<hr>
 			</div>

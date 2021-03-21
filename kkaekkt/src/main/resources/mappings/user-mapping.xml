@@ -3,7 +3,7 @@
 <mapper namespace="UserDAO">
 
 	<insert id="insertPs">
-			INSERT INTO account (id,password,mtype) VALUES (#{id},#{password},#{mtype});
+			INSERT INTO account (id,password) VALUES (#{id},#{password});
 			INSERT INTO member VALUES ((SELECT MAX(mno) FROM account),#{name},#{phone},#{birth},#{address},#{email});
 	</insert>
 	<delete id="likeOff">
@@ -34,12 +34,6 @@
 				</otherwise>
 			</choose>
 	</insert>
-	<select id="findId" resultType="account">
-	SELECT id
-	FROM account ac, member mb, business bs
-	WHERE ac.mno=mb.mno AND ac.mno=bs.mno 
-	AND (mname=#{name} AND mb.email=#{email}) OR (bname=#{name} AND bs.email=#{email});
-	</select>
 	<update id="updatePs">
 			<choose>
 				<when test="name == null">
@@ -51,6 +45,7 @@
 				</otherwise>
 			</choose>
 	</update>
+
 	<update id="updateSpec">
 		<choose>
 			<when test="bizType==1"> <!-- 일반세탁소라면 -->
@@ -74,22 +69,17 @@
 				
 			</otherwise>
 		</choose>
+
+	<update id="updateBusiness">
+
 	</update>
 	<delete id="deleteUser">
 			DELETE account WHERE mno=#{no}		
 	</delete>
 	<select id="getPerson" resultType="person">
-			SELECT ac.mno as mno, id, password, mname as name, phone, birth, address, email 
-			FROM account ac, member mb
+			SELECT ac.mno as mno, id, password, mname as name, phone, birth, address, email FROM account ac, member mb
 			WHERE ac.mno=mb.mno 
-			AND id=#{id} AND password=#{password};
-	</select>
-	<select id="getPersonBs" resultType="business">
-			SELECT ac.mno as mno, bs.bno, id, password, bname, phone, address, email, bz.typenum, bkno, acno, ev.grade
-			FROM account ac, business bs, biztype bz, Evaluation ev
-			WHERE ac.mno=bs.mno
-			AND bs.typeNum=bz.typenum
-			AND id=#{id} AND password=#{password}
+			AND ac.mno=#{mno};
 	</select>
 	<select id="getLikedBs" resultType="business">
 		SELECT IFNULL(comm,0) commCount,IFNULL(eCount,0) eCount,l.bno bno,bname,IFNULL(ROUND(eval,1),0) eval,address,phone
@@ -128,3 +118,4 @@
 	</select>
 	
 </mapper>
+
