@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import com.kkaekkt.biz.comm.LaundryVO;
 import com.kkaekkt.biz.comm.ScheduleVO;
-import com.kkaekkt.biz.user.AccountVO;
 import com.kkaekkt.biz.user.BusinessListVO;
 import com.kkaekkt.biz.user.BusinessVO;
 import com.kkaekkt.biz.user.PersonVO;
@@ -43,43 +42,38 @@ public class UserDAO {
 	public void deleteUser(BusinessVO vo) {
 		mybatis.delete("UserDAO.deleteBs",vo);
 	}
-	
-	public AccountVO findId(AccountVO vo) {
-		return mybatis.selectOne("UserDAO.findId", vo);
-	}
-	
-	
 	public List<BusinessVO> getLikedBs(BusinessListVO vo) {
 		return mybatis.selectList("UserDAO.getLikedBs",vo);
 	}
 	public int countList(BusinessListVO vo) {
 		return mybatis.selectOne("UserDAO.countList",vo);
 	}
-	
-	// 일반 로그인
-	public PersonVO getUserPs(PersonVO vo) {			
-		System.out.println("mybatis로 기능처리 일반유저");
-		return mybatis.selectOne("UserDAO.getPerson",vo);
-	}		
-	
-	// 업체 로그인
-	public BusinessVO getUserBs(BusinessVO vo) {
-		System.out.println("mybatis로 기능처리 업체유저");		
-		return mybatis.selectOne("UserDAO.getPersonBs",vo);
+	// 이해 못해서 잠시 일케 해둠
+//		public PersonVO getUser(PersonVO vo) {
+//			mybatis.selectOne("UserDAO.getPs",vo);
+//			return null;
+//		}
+//		public UserVO getUser(UserVO vo) {
+//			mybatis.selectOne("UserDAO.getUser", vo);
+//			return null;
+//		}
+		
+	public PersonVO getUser(PersonVO vo) {
+		System.out.println("mybatis로 getUser() 기능처리");
+		return (PersonVO)mybatis.selectOne("UserDAO.getPerson", vo);
+	}
+	public BusinessVO getUser(BusinessVO vo) {
+		mybatis.selectOne("UserDAO.getBs",vo);
+		mybatis.selectList("UserDAO.getEquipments",vo);
+		
+		return null;
 	}
 	public List<LaundryVO> getComspec(BusinessVO vo) {
-		//System.out.println("dao : " + mybatis.selectList("UserDAO.getcomspecList",vo) );
+		System.out.println("dao : " + mybatis.selectList("UserDAO.getcomspecList",vo) );
 		return mybatis.selectList("UserDAO.getcomspecList",vo);
 	}
 	public List<ScheduleVO> getComspecschedule(BusinessVO vo) {
-		//System.out.println("dao : " + mybatis.selectList("UserDAO.getcomscheduleList",vo) );
+		System.out.println("dao : " + mybatis.selectList("UserDAO.getcomscheduleList",vo) );
 		return mybatis.selectList("UserDAO.getcomscheduleList",vo);
-	}
-	public void updateComspec(BusinessVO vo) {
-		System.out.println("마이바티스 update");
-		System.out.println(vo);
-		mybatis.update("UserDAO.updateComspec",vo);
-		System.out.println("마이바티스 update완료");
-		
 	}
 }

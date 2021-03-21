@@ -61,5 +61,4 @@ $(document).ready(function(){
          $(".slide_mini").html(clone+"&nbsp&nbsp검색결과")  
       }
 
-
 })

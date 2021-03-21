@@ -11,7 +11,6 @@
 		<typeAlias alias="laundry" type="com.kkaekkt.biz.comm.LaundryVO"/>
 		<typeAlias alias="schedule" type="com.kkaekkt.biz.comm.ScheduleVO"/>
 		<typeAlias alias="comment" type="com.kkaekkt.biz.comm.CommVO"/>
-		<typeAlias alias="account" type="com.kkaekkt.biz.user.AccountVO"/>
 	</typeAliases>
 			
 	<!-- Sql Mapper 설정 -->
