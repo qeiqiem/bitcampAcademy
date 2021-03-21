@@ -41,35 +41,17 @@ public class BusinessVO{
 	public void setMcount(int mcount) {
 		this.eCount = mcount;
 	}
-	public int getCommCount() {
-		return commCount;
-	}
-	public void setCommCount(int commCount) {
-		this.commCount = commCount;
-	}
 	public List<CommVO> getCommList() {
 		return commList;
 	}
 	public void setCommList(List<CommVO> commList) {
 		this.commList = commList;
 	}
-	public double getEval() {
-		return eval;
-	}
-	public void setEval(double eval) {
-		this.eval = eval;
-	}
 	public List<EtcVO> getEtcList() {
 		return etcList;
 	}
 	public void setEtcList(List<EtcVO> etcList) {
 		this.etcList = etcList;
-	}
-	public String getEtc() {
-		return etc;
-	}
-	public void setEtc(String etc) {
-		this.etc = etc;
 	}
 	public String getLaundry() {
 		return laundry;

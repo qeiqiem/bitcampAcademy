@@ -4,12 +4,14 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.kkaekkt.biz.comm.LaundryVO;
+import com.kkaekkt.biz.user.AccountVO;
 import com.kkaekkt.biz.user.BusinessListVO;
 import com.kkaekkt.biz.user.BusinessVO;
 import com.kkaekkt.biz.user.PersonVO;
@@ -115,6 +117,12 @@ public class UserController {
 				return "/jsp/mypageBiz/comspec.jsp";				
 			} 
 			return "/jsp/mypageBizCoin/coinspec.jsp";				
-			
-
+		}
+	    @RequestMapping(value="/findId.do", method=RequestMethod.POST)
+	    public String findId(AccountVO vo, Model model) {
+	        System.out.println("findID 진입");
+	        System.out.println(vo);
+	        model.addAttribute("userId", userService.findId(vo));
+	        return "/jsp/login/findIdConfirmed.jsp";
+	    }
 }

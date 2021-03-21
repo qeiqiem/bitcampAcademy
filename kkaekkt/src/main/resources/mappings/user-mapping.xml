@@ -69,6 +69,7 @@
 				
 			</otherwise>
 		</choose>
+	</update>
 
 	<update id="updateBusiness">
 
@@ -116,6 +117,17 @@
 		WHERE bs.schno = sc.schno 
 		AND bno=#{bno};
 	</select>
-	
+	<select id="findId" resultType="account">
+
+        <!-- SELECT * FROM account ac LEFT JOIN member mb on ac.mno=mb.mno LEFT 
+            JOIN business bs on ac.mno=bs.mno WHERE (mname='테스트업체' AND mb.email='test@naver.com') 
+            OR (bname='테스트업체' AND bs.email='test@naver.com'); -->
+        SELECT id
+        FROM account ac
+        LEFT JOIN member mb on ac.mno=mb.mno
+        LEFT JOIN business bs on ac.mno=bs.mno
+        WHERE (mname=#{name} AND mb.email=#{email}) OR (bname=#{name} AND
+        bs.email=#{email});
+    </select>
 </mapper>
 

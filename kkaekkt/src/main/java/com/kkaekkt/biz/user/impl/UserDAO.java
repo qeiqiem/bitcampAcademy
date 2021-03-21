@@ -10,6 +10,7 @@ import com.kkaekkt.biz.comm.EquipmentVO;
 import com.kkaekkt.biz.comm.EtcVO;
 import com.kkaekkt.biz.comm.LaundryVO;
 import com.kkaekkt.biz.comm.ScheduleVO;
+import com.kkaekkt.biz.user.AccountVO;
 import com.kkaekkt.biz.user.BusinessListVO;
 import com.kkaekkt.biz.user.BusinessVO;
 import com.kkaekkt.biz.user.PersonVO;
@@ -94,6 +95,10 @@ public class UserDAO {
 		mybatis.update("UserDAO.updateSpec",vo);
 		System.out.println("마이바티스 update완료");
 		
+	}
+	public AccountVO findId(AccountVO vo) {
+		return mybatis.selectOne("UserDAO.findId",vo);
+		 
 	}
 
 }

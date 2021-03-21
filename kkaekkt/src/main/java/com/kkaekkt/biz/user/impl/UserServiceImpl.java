@@ -11,6 +11,7 @@ import com.kkaekkt.biz.comm.EquipmentVO;
 import com.kkaekkt.biz.comm.EtcVO;
 import com.kkaekkt.biz.comm.LaundryVO;
 import com.kkaekkt.biz.comm.ScheduleVO;
+import com.kkaekkt.biz.user.AccountVO;
 import com.kkaekkt.biz.user.BusinessListVO;
 import com.kkaekkt.biz.user.BusinessVO;
 import com.kkaekkt.biz.user.PersonVO;
@@ -142,6 +143,4 @@ public class UserServiceImpl implements UserService {
 	public AccountVO findId(AccountVO vo) {
 		return userDao.findId(vo);
 	}
-
-
 }
