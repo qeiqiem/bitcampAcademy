@@ -107,8 +107,10 @@ public class UserController {
 	//아이디찾기
 	@RequestMapping(value="/findId.do", method=RequestMethod.POST)
 	public String findId(AccountVO vo, Model model) {
+		System.out.println("findID 진입");
+		System.out.println(vo);
 		model.addAttribute("userId", userService.findId(vo));
-		return "/jsp/findIdConfirmed.jsp";
+		return "/jsp/login/findIdConfirmed.jsp";
 	}
 	
 	//비밀번호찾기
