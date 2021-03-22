@@ -100,5 +100,11 @@ public class UserDAO {
 		return mybatis.selectOne("UserDAO.findId",vo);
 		 
 	}
+	public AccountVO findPw(AccountVO vo) {
+		System.out.println(vo);
+		AccountVO res = mybatis.selectOne("UserDAO.findPw",vo);
+		System.out.println(res);
+		return res;
+	}
 
 }
