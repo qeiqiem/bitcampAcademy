@@ -11,4 +11,7 @@ public interface ReservationService {
 	public ReservationListVO getRsvListPs(ReservationListVO vo);
 	public ReservationListVO getRsvListBs(ReservationListVO vo);
 	public void regitComm(CommVO vo);
+	public void updateComm(CommVO vo);
+	public void deleteCommAb(CommVO vo);
+	public void deleteCommCh(CommVO vo);
 }

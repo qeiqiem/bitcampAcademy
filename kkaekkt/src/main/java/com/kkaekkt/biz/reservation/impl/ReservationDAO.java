@@ -17,7 +17,7 @@ public class ReservationDAO {
 	private SqlSessionTemplate mybatis;
 	
 	public void insertRsv(ReservationVO vo) {
-		
+
 	}
 	public void cancel(LaundryVO vo) {
 		mybatis.update("reservationDAO.cancel",vo);
@@ -54,5 +54,14 @@ public class ReservationDAO {
 	}
 	public void regitComm(CommVO vo) {
 		mybatis.insert("reservationDAO.regitComm",vo);		
+	}
+	public void updateComm(CommVO vo) {
+		mybatis.update("reservationDAO.updateComm",vo);		
+	}
+	public void deleteCommAb(CommVO vo) {
+		mybatis.delete("reservationDAO.deleteCommAb",vo);
+	}
+	public void deleteCommCh(CommVO vo) {
+		mybatis.update("reservationDAO.deleteCommCh",vo);		
 	}
 }

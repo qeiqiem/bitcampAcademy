@@ -1,3 +1,6 @@
+button{
+    cursor: pointer;
+}
 /* 사이드바영역 */
 .content {
     float:left;
@@ -190,6 +193,7 @@ font-size:14px;
     height: 40px;
     border-radius: 0;
     color: white;
+    cursor: pointer;
 }
 .comments_bottom span{
     position: absolute;

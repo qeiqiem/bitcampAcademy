@@ -68,4 +68,18 @@ public class ReservationServiceImpl implements ReservationService {
 		}
 		return vo;
 	}
+	@Override
+	public void updateComm(CommVO vo) {
+		reservationDAO.updateComm(vo);		
+	}
+	@Override
+	public void deleteCommAb(CommVO vo) {
+		reservationDAO.deleteCommAb(vo);
+		
+	}
+	@Override
+	public void deleteCommCh(CommVO vo) {
+		reservationDAO.deleteCommCh(vo);
+		
+	}
 }
