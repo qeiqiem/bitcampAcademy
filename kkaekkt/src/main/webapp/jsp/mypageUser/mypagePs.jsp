@@ -14,7 +14,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 </head>
 <body>
-	<jsp:include page="/jsp/header0.jsp"></jsp:include>
+	<jsp:include page="/jsp/header0.jsp" ></jsp:include>
 	<div class="body_container">
 			<jsp:include page="sidebar_ps.jsp"></jsp:include>
 			<div class="content">
