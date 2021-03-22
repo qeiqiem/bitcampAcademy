@@ -14,91 +14,105 @@ import com.kkaekkt.biz.user.AccountVO;
 import com.kkaekkt.biz.user.BusinessListVO;
 import com.kkaekkt.biz.user.BusinessVO;
 import com.kkaekkt.biz.user.PersonVO;
+
 @Repository
 public class UserDAO {
 	@Autowired
 	private SqlSessionTemplate mybatis;
-	
+
 	public void likeOff(BusinessVO vo) {
-		mybatis.delete("UserDAO.likeOff",vo);
+		mybatis.delete("UserDAO.likeOff", vo);
 	}
+
 	public void insertUser(PersonVO vo) {
 		System.out.println("마이바티스 insert");
-		mybatis.insert("UserDAO.insertPs",vo);
+		mybatis.insert("UserDAO.insertPs", vo);
 		System.out.println("마이바티스 insert완료");
 	}
+
 	public void insertUser(BusinessVO vo) {
 		System.out.println("DAO진입");
-		mybatis.insert("UserDAO.insertBs",vo);
+		mybatis.insert("UserDAO.insertBs", vo);
 	}
+
 	public void updateUser(PersonVO vo) {
 		System.out.println("마이바티스 update");
-		mybatis.update("UserDAO.updatePs",vo);
+		mybatis.update("UserDAO.updatePs", vo);
 		System.out.println("마이바티스 update완료");
 	}
+
 	public void updateUser(BusinessVO vo) {
-		mybatis.update("UserDAO.updateBs",vo);
+		mybatis.update("UserDAO.updateBs", vo);
 	}
+
 	public void deleteUser(PersonVO vo) {
-		mybatis.delete("UserDAO.deletePs",vo);
+		mybatis.delete("UserDAO.deletePs", vo);
 	}
+
 	public void deleteUser(BusinessVO vo) {
-		mybatis.delete("UserDAO.deleteBs",vo);
+		mybatis.delete("UserDAO.deleteBs", vo);
 	}
+
 	public List<BusinessVO> getLikedBs(BusinessListVO vo) {
-		return mybatis.selectList("UserDAO.getLikedBs",vo);
+		return mybatis.selectList("UserDAO.getLikedBs", vo);
 	}
+
 	public int countList(BusinessListVO vo) {
-		return mybatis.selectOne("UserDAO.countList",vo);
+		return mybatis.selectOne("UserDAO.countList", vo);
 	}
-	// 이해 못해서 잠시 일케 해둠
-//		public PersonVO getUser(PersonVO vo) {
-//			mybatis.selectOne("UserDAO.getPs",vo);
-//			return null;
-//		}
-//		public UserVO getUser(UserVO vo) {
-//			mybatis.selectOne("UserDAO.getUser", vo);
-//			return null;
-//		}
-		
-	public PersonVO getUser(PersonVO vo) {
-		System.out.println("mybatis로 getUser() 기능처리");
-		return (PersonVO)mybatis.selectOne("UserDAO.getPerson", vo);
+
+	// 일반 로그인
+	public PersonVO getUserPs(PersonVO vo) {
+		System.out.println("mybatis로 기능처리 일반유저");
+		return mybatis.selectOne("UserDAO.getPerson", vo);
 	}
-	public BusinessVO getUser(BusinessVO vo) {
-		mybatis.selectOne("UserDAO.getBs",vo);
-		mybatis.selectList("UserDAO.getEquipments",vo);
-		
-		return null;
+
+	// 업체 로그인
+	public BusinessVO getUserBs(BusinessVO vo) {
+		System.out.println("mybatis로 기능처리 업체유저");
+		return mybatis.selectOne("UserDAO.getPersonBs", vo);
 	}
+
+	// 소셜 로그인
+	public PersonVO getUserSNS(PersonVO vo) {
+		System.out.println("mybatis로 기능처리 일반유저");
+		return mybatis.selectOne("UserDAO.getPersonSNS", vo);
+	}
+
 	// laundry
 	public List<LaundryVO> getLaundry(BusinessVO vo) {
-		//System.out.println("dao : " + mybatis.selectList("UserDAO.getcomspecList",vo) );
-		return mybatis.selectList("UserDAO.getLaundryList",vo);
+		// System.out.println("dao : " + mybatis.selectList("UserDAO.getcomspecList",vo)
+		// );
+		return mybatis.selectList("UserDAO.getLaundryList", vo);
 	}
+
 	// equipment
 	public List<EquipmentVO> getEquipment(BusinessVO vo) {
-		return mybatis.selectList("UserDAO.getEquipmentList",vo);
+		return mybatis.selectList("UserDAO.getEquipmentList", vo);
 	}
+
 	// etc
-		public List<EtcVO> getEtc(BusinessVO vo) {
-			return mybatis.selectList("UserDAO.getEtc",vo);
-		}
+	public List<EtcVO> getEtc(BusinessVO vo) {
+		return mybatis.selectList("UserDAO.getEtc", vo);
+	}
+
 	// schedule
 	public List<ScheduleVO> getSchedule(BusinessVO vo) {
-		//System.out.println("dao : " + mybatis.selectList("UserDAO.getcomscheduleList",vo) );
-		return mybatis.selectList("UserDAO.getScheduleList",vo);
+		// System.out.println("dao : " +
+		// mybatis.selectList("UserDAO.getcomscheduleList",vo) );
+		return mybatis.selectList("UserDAO.getScheduleList", vo);
 	}
 
 	public void updateSpec(BusinessVO vo) {
 		System.out.println("마이바티스 update");
-		mybatis.update("UserDAO.updateSpec",vo);
+		mybatis.update("UserDAO.updateSpec", vo);
 		System.out.println("마이바티스 update완료");
-		
+
 	}
+
 	public AccountVO findId(AccountVO vo) {
-		return mybatis.selectOne("UserDAO.findId",vo);
-		 
+		return mybatis.selectOne("UserDAO.findId", vo);
+
 	}
 
 }
