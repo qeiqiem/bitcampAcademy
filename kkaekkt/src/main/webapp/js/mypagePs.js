@@ -246,7 +246,7 @@ function viewChange() {
             reviewBtn.eq(i).removeClass('commentBtn');
             reviewBtn.eq(i).addClass('reviewBtn');
             reviewBtn[i].innerHTML='리뷰보기';
-            $('.commBox')[i].append(printComment(commObj.mname,commObj.mno,commObj.content,printDate(),i));
+            $('.commBox')[i].innerHTML=printComment(commObj.mname,commObj.mno,commObj.content,printDate(),i);
         }
     }
 }
@@ -285,9 +285,12 @@ function deleteComm(idx) {
             url:'/deleteCommAb.do',
             data:commObj,
             success:function() {
+                commBtn=$('.btnDiv button:nth-child(3)');
                 alert('삭제가 완료되었습니다.');
                 $('.commBox').eq(idx).children().remove();
-                $('.reviewBtn').eq(idx).attr("disabled",true);
+                commBtn.eq(idx).addClass('commentBtn');
+                commBtn.eq(idx).removeClass('reviewBtn');
+                commBtn[idx].innerHTML='리뷰쓰기';
             }
         });
     }else {//답글이 있을 때
@@ -344,8 +347,7 @@ function printlist(list) {
         if(list[0].state=='세탁 중'){
             btnText='주문취소';
             btnClass='cancelBtn';
-        }
-        else if(value.commList.length>0){
+        }else if(value.commList.length>0){
             btnText='리뷰보기';
             btnClass="reviewBtn";
             var comm=value.commList;
@@ -380,9 +382,9 @@ function printlist(list) {
                 '<div class="btnDiv">'+
                     '<button>채팅상담</button>'+
                     '<button class="detailBtn" value="'+key+'">상세보기</button>'+
-                    (value.timeOut==0?
-                    '<button disabled>':
-                    '<button class="'+btnClass+'" value='+key+'>')+btnText+'</button>'+
+                    (btnText!='리뷰보기'?(value.timeOut==0?'<button disabled>':'<button class="'+btnClass+'" value='+key+'>')// if 리뷰가 없으면 -> 7일이 지났으면 비활성화 아니면 활성화
+                    :(comm[0].content=='삭제된 리뷰입니다.'?'<button disabled>':'<button class="'+btnClass+'" value='+key+'>')// else 삭제된 ~ 이면 비활성화 아니면 활성화
+                    )+btnText+'</button>'+
                 '</div>'+
                 '<div class="detail none" id="detail'+key+'">'+
                     '<hr>'+

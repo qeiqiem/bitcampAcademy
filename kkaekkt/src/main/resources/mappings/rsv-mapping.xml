@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="reservationDAO">
-
+	<select id="searchComm" resultType="comment">
+		SELECT * FROM comments a WHERE groupNum NOT IN (SELECT groupNum FROM comments b WHERE depth=1);
+	</select>
 	<update id="deleteCommCh">
 		UPDATE comments SET mno=#{mno}, content=#{content} WHERE groupNum=#{rsvNum} AND depth=#{depth};
 	</update>
