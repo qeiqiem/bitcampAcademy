@@ -21,7 +21,7 @@ import com.kkaekkt.biz.user.UserService;
 public class UserController {
 	@Autowired
 	UserService userService;
-	
+
 //	@RequestMapping(value="/login.do", method=RequestMethod.POST) //인터페이스로 VO를 합칠지 고민 중..
 //	public String Join(PersonVO vo) {
 //		userService.insertUser(vo);		
@@ -32,39 +32,43 @@ public class UserController {
 //		userService.insertUser(vo);		
 //		return "Join.html";
 //	}
-	@RequestMapping(value="/likeOff.do",method=RequestMethod.POST)
+	@RequestMapping(value = "/likeOff.do", method = RequestMethod.POST)
 	@ResponseBody
 	public void likeOff(BusinessVO vo) {
 		userService.likeOff(vo);
 	}
-	@RequestMapping(value="/getLikedBs.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
+
+	@RequestMapping(value = "/getLikedBs.do", method = RequestMethod.POST, produces = "application/text;charset=utf-8")
 	@ResponseBody
 	public String getLikedBs(BusinessListVO vo) {
-		Gson gson=new Gson();
+		Gson gson = new Gson();
 		return gson.toJson(userService.getLikedBs(vo));
 	}
-	@RequestMapping(value="/joinPs.do", method=RequestMethod.POST)
+
+	@RequestMapping(value = "/joinPs.do", method = RequestMethod.POST)
 	public String Join(PersonVO vo) {
 		userService.insertUser(vo);
 		return "index.jsp";
 	}
-	@RequestMapping(value="/joinBs.do", method=RequestMethod.POST)
+
+	@RequestMapping(value = "/joinBs.do", method = RequestMethod.POST)
 	public String Join(BusinessVO vo) {
 		System.out.println("메서드 진입");
 		userService.insertUser(vo);
 		return "index.jsp";
 	}
-	@RequestMapping(value="/updatePs.do", method=RequestMethod.POST)
+
+	@RequestMapping(value = "/updatePs.do", method = RequestMethod.POST)
 	public String Update(PersonVO vo, HttpSession session) {
 		System.out.println(vo);
 		userService.updateUser(vo);
-		if(vo.getId() != null) {
+		if (vo.getId() != null) {
 			PersonVO member = userService.getUser(vo);
 			session.setAttribute("member", member);
-		} 
+		}
 		return "/jsp/mypageUser/mybio.jsp";
 	}
-	
+
 	// 로그인
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
 	public String Login(PersonVO vo, HttpSession session) {
@@ -81,6 +85,7 @@ public class UserController {
 		}
 
 	}
+
 	// 로그아웃
 	@RequestMapping("/logout.do")
 	public String logout(HttpSession session) {
@@ -88,41 +93,58 @@ public class UserController {
 		session.invalidate();
 		return "index.jsp";
 	}
+
 	// 일반사양관리
-		@RequestMapping(value="/selectComspec.do", method=RequestMethod.POST, produces="application/text;charset=utf-8")
-		@ResponseBody
-		public String SelcetComspec(BusinessVO vo) {
-			System.out.println(vo);
-			Gson gson=new Gson();
-			String comspec=gson.toJson(userService.getComspec(vo));
-			//System.out.println("test:" + comspec);
-			return comspec;
-		}
+	@RequestMapping(value = "/selectComspec.do", method = RequestMethod.POST, produces = "application/text;charset=utf-8")
+	@ResponseBody
+	public String SelcetComspec(BusinessVO vo) {
+		System.out.println(vo);
+		Gson gson = new Gson();
+		String comspec = gson.toJson(userService.getComspec(vo));
+		// System.out.println("test:" + comspec);
+		return comspec;
+	}
+
 	// 일반설비관리
-		@RequestMapping(value="/selectCoinspec.do", method=RequestMethod.POST, produces="application/text;charset=utf-8")
-		@ResponseBody
-		public String SelcetCoinspec(BusinessVO vo) {
-			System.out.println(vo);
-			Gson gson=new Gson();
-			String coinspec=gson.toJson(userService.getCoinspec(vo));
-			System.out.println("test:" + coinspec);
-			return coinspec;
-		}	
+	@RequestMapping(value = "/selectCoinspec.do", method = RequestMethod.POST, produces = "application/text;charset=utf-8")
+	@ResponseBody
+	public String SelcetCoinspec(BusinessVO vo) {
+		System.out.println(vo);
+		Gson gson = new Gson();
+		String coinspec = gson.toJson(userService.getCoinspec(vo));
+		System.out.println("test:" + coinspec);
+		return coinspec;
+	}
+
 	// 일반(사양,설비)관리 update
-		@RequestMapping(value="/updateSpec.do", method=RequestMethod.POST)
-		public String Update(BusinessVO vo) {
-			System.out.println("메서드 진입" + vo);
-			userService.updateSpec(vo);
-			if(vo.getBizType() == 1) {
-				return "/jsp/mypageBiz/comspec.jsp";				
-			} 
-			return "/jsp/mypageBizCoin/coinspec.jsp";				
+	@RequestMapping(value = "/updateSpec.do", method = RequestMethod.POST)
+	public String Update(BusinessVO vo) {
+		System.out.println("메서드 진입" + vo);
+		userService.updateSpec(vo);
+		if (vo.getBizType() == 1) {
+			return "/jsp/mypageBiz/comspec.jsp";
 		}
-	    @RequestMapping(value="/findId.do", method=RequestMethod.POST)
-	    public String findId(AccountVO vo, Model model) {
-	        System.out.println("findID 진입");
-	        System.out.println(vo);
-	        model.addAttribute("userId", userService.findId(vo));
-	        return "/jsp/login/findIdConfirmed.jsp";
-	    }
+		return "/jsp/mypageBizCoin/coinspec.jsp";
+	}
+
+	// 아이디찾기
+	@RequestMapping(value = "/findId.do", method = RequestMethod.POST)
+	public String findId(AccountVO vo, Model model) {
+		System.out.println("findID 진입");
+		System.out.println(vo);
+		model.addAttribute("userId", userService.findId(vo));
+		return "/jsp/login/findIdConfirmed.jsp";
+	}
+
+	// 비밀번호 찾기
+	@RequestMapping(value = "/findPw.do", method = RequestMethod.POST)
+	public String findPw(AccountVO vo, Model model) {
+		System.out.println("findPw 진입");
+		System.out.println(vo);
+		if (vo != null) {
+			model.addAttribute("userPW", userService.findPw(vo));
+			return "/jsp/login/findPwSendMail.jsp";
+		}return "/jsp/login/find.jsp";
+	}
+
 }
