@@ -11,6 +11,4 @@
 		
 	</div>
 	<div class="side_sub">
-		<button onclick="location.href='/jsp/mypageBiz/mpbProg_Item.jsp'">품목별</button>
-		<button onclick="location.href='/jsp/mypageBiz/mpbProg_Num.jsp'">주문번호별</button>
 	</div>

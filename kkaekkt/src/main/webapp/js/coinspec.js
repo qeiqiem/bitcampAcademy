@@ -11,18 +11,52 @@ function initEvent() {
     var clickupdate = $("#updateSpec");
     var changebtn = $("#btn_change");
     var resetbtn = $("#resetSpec");
+    var chkBox=$(".coinLaundry input[type='checkbox']");
+    var priceBox=$(".coinLaundry input[id='won']");
+    var selectBox = $(".equip select");
+
     // 디폴트
     changebtn.hide();
     $("input").attr("disabled", true);
     $("#week button").attr("disabled", true);
     $("select").attr("disabled", true);
+
+    // 체크박스 선택시 해당 품목 가격인풋창 활성화
+    chkBox.click(function(){
+        for(var i=0; i<chkBox.size();i++) {
+        if(chkBox[i].checked){
+            priceBox.eq(i).attr("disabled", false);
+            if(i<3){
+                selectBox.eq(i).attr("disabled", false);
+            }
+        } else{
+            priceBox.eq(i).attr("disabled", true);
+            priceBox.eq(i).val("");
+            if(i<3){
+                selectBox.eq(i).attr("disabled", true);
+                selectBox.eq(i).val("");
+            }
+        }
+    }
+        });
     // 수정하기 버튼 클릭시 
     clickupdate.click(function () {
         clickupdate.hide();
         changebtn.show();
-        $("input").attr("disabled", false);
-        $("select").attr("disabled", false);
+        // 체크된 품목의 인풋창만 활성화
+        for(var i=0; i<chkBox.size();i++) {
+            if(chkBox[i].checked) {
+                selectBox.eq(i).attr("disabled", false);
+                priceBox.eq(i).attr("disabled", false);
+            }else {
+                selectBox.eq(i).attr("disabled", true);
+                priceBox.eq(i).attr("disabled", true);
+            }
+        }
+        chkBox.attr("disabled", false);
+        $("#dry select").attr("disabled", false);
         $("#week button").attr("disabled", false);
+        $("#weekBox select").attr("disabled", false);
     });
     // 돌아가기 버튼 클릭시
     resetbtn.click(function () {
@@ -41,19 +75,25 @@ function initEvent() {
     });
     // 수정완료 버튼 클릭시
     $("#submitSpec").click(function () {
+        //event.preventDefault();
+        $("input").attr("disabled", false);
+        $("select").attr("disabled", false);
         var list = new Array();
+        chkBox = $(".coinLaundry input[type='checkbox'][name='equip']");
+        priceBox = $(".coinLaundry .equip input[id='won']");
         // 설비 리스트 데이터 처리
-        var chkBox = $(".coinLaundry input[type='checkbox'][name='equip']");
-        var priceBox = $(".coinLaundry .equip input[id='won']");
-        var selectBox = $(".equip select");
-
+        console.log(chkBox.eq(0));
         for (var i = 0; i < chkBox.size(); i++) {
             if (chkBox[i].checked) {
+                console.log(selectBox[i].value);
                 list.push({ eno: JSON.parse(chkBox[i].value), cnt: JSON.parse(selectBox[i].value), price: JSON.parse(priceBox[i].value) });
+            } else {
+                list.push({ eno: JSON.parse(chkBox[i].value), cnt:0, price:0 });
             }
         }
-        list.push({ eno: 4, cnt: JSON.parse($('#dry select')[0].value), price: JSON.parse($("#dry input[id='won']")[0].value) });//건조기 추가
+        console.log(list);
         $("input[name='equipment']")[0].value = JSON.stringify(list);
+        console.log($("input[name='equipment']")[0].value);
 
         // 부가서비스 데이터 처리
         chkBox = $(".coinLaundry #etc input[type='checkbox'][id='etc']");
@@ -62,10 +102,13 @@ function initEvent() {
         for (var i = 0; i < chkBox.size(); i++) {
             if (chkBox[i].checked) {
                 list.push({ etcno: i + 1, price: JSON.parse(priceBox[i].value) });
+            } else {
+                list.push({ etcno: i + 1, price: 0 });
             }
         }
+        console.log(list);
         $("input[name='etc']")[0].value = JSON.stringify(list);
-
+        console.log($("input[name='etc']")[0].value);
 
         // 운영시간 데이터 처리
         var weekLi = $('#weekBox ul li');
@@ -73,10 +116,17 @@ function initEvent() {
         for (var i = 0; i < weekLi.size(); i++) {
             var open = weekLi[i].children[1].value;
             var close = weekLi[i].children[2].value;
-            list.push({ schno: JSON.parse(weekLi.eq(i).css("order")), time: open + '~' + close });
+            if ($('#week button').eq(i).hasClass("selected")) {
+                list.push({ schno: JSON.parse(weekLi.eq(i).css("order")), time: open + '~' + close });
+            } else {
+                list.push({ schno: JSON.parse(weekLi.eq(i).css("order")), time: "00:00~00:00" });
+            }
         }
+        console.log(list);
         $("#weekBox input[name='schedule']")[0].value = JSON.stringify(list);
-        $("form").submit();
+
+        // form subbit
+        //$("form").submit();
     });
 
     // 영업시간 
@@ -84,34 +134,13 @@ function initEvent() {
     var weekLi = $('#weekBox ul');
     weekBtn.click(function () {
         var idx = $(this).index();
-        event.preventDefault();
+        console.log($(this));
         $(this).toggleClass('selected');
         if ($(this).hasClass("selected")) {
-            if (idx < 7) {
-                weekLi.append("<li style='order:"
-                    + (idx + 1)
-                    + "'><span>"
-                    + $(this).html()
-                    + "요일</span>시간 <select></select> ~ <select></select></li>").trigger("create");
-            } else {
-                weekLi.append("<li style='order:"
-                    + (idx + 1)
-                    + "'><span>"
-                    + $(this).html()
-                    + "</span>시간 <select></select> ~ <select></select></li>").trigger("create");
-            }
-            var opt = $("#weekBox li[style='order:"
-                + (idx + 1) + "'] select");
-            for (var i = 0; i < 25; i++) {
-                opt.append("<option>" + (i < 10 ? "0" + i : i) + ":00</option>");
-                if (i != 24) {
-                    opt.append("<option>" + (i < 10 ? "0" + i : i) + ":30</option>");
-                }
-            }
+            $("#weekBox ul li").eq(idx).show();
         } else {
-            $("#weekBox ul li[style='order:" + (idx + 1) + "']").remove();
+            $("#weekBox ul li").eq(idx).hide();
         }
-
     });
 
 };
@@ -131,9 +160,11 @@ function ajax(pageObj) { //ajax로 리스트 받아오기
                 var checkli = $("input[type='checkbox'][name='equip']");
                 for (var i = 0; i < checkli.length; i++) {
                     if (item.eno == checkli[i].value) {
+                        if(item.price !=0){
                         $(".equip input[id='won']").eq(item.eno - 1).val(item.price);
                         $(".equip select").eq(item.eno - 1).val(item.cnt).prop("selected", true);
                         checkli.eq(i).prop("checked", true);
+                        }
                     }
                 }
             }); // 설비리스트 반복문
@@ -144,12 +175,13 @@ function ajax(pageObj) { //ajax로 리스트 받아오기
                 var checkli = $("input[type='checkbox'][id='etc']");
                 for (var i = 0; i < checkli.length; i++) {
                     if (item.etcno == checkli[i].value) {
-                        $("#etc input[id='won']").eq(item.etcno - 1).val(item.price);
-                        checkli.eq(i).prop("checked", true);
+                        if(item.price !=0){
+                            checkli.eq(i).prop("checked", true);
+                            $("#etc input[id='won']").eq(item.etcno - 1).val(item.price);
+                        }
                     }
                 }
             }); // 부가서비스 반복문
-
 
             // 운영시간 값 넣어주기
             $.each(coinspec.scheduleList, function (index, item) {
@@ -159,31 +191,33 @@ function ajax(pageObj) { //ajax로 리스트 받아오기
                 var start = (item.time).split("~")[0];
                 var end = (item.time).split("~")[1];
                 var idx = item.schno;
-                $('#' + idx).toggleClass('selected');
-                if ($('#' + idx).hasClass("selected")) {
-                    if (idx < 7) {
-                        weekLi.append("<li style='order:"
-                            + (idx)
-                            + "'><span>"
-                            + $('#' + idx).html()
-                            + "요일</span>시간 <select disabled><option>" + start + "</option></select> ~ <select disabled><option>" + end + "</option></select></li>").trigger("create");
-                    } else {
-                        weekLi.append("<li style='order:"
-                            + (idx)
-                            + "'><span>"
-                            + $('#' + idx).html()
-                            + "</span>시간 <select disabled><option>" + start + "</option></select> ~ <select disabled><option>" + end + "</option></select></li>").trigger("create");
-                    }
-                    var opt = $("#weekBox li[style='order:"
-                        + (idx) + "'] select");
-                    for (var i = 0; i < 25; i++) {
-                        opt.append("<option>" + (i < 10 ? "0" + i : i) + ":00</option>");
-                        if (i != 24) {
-                            opt.append("<option>" + (i < 10 ? "0" + i : i) + ":30</option>");
-                        }
-                    }
+                if (start != "00:00" && end != "00:00") {
+                    $('#' + idx).toggleClass('selected');
+                }
+
+                if (idx <= 7) {
+                    weekLi.append("<li id=" + idx + " style='order:"
+                        + (idx)
+                        + "'><span>"
+                        + $('#' + idx).html()
+                        + "요일</span>시간 <select disabled><option>" + start + "</option></select> ~ <select disabled><option>" + end + "</option></select></li>").trigger("create");
                 } else {
-                    $("#weekBox ul li[style='order:" + (idx) + "']").remove();
+                    weekLi.append("<li id=" + idx + " style='order:"
+                        + (idx)
+                        + "'><span>"
+                        + $('#' + idx).html()
+                        + "</span>시간 <select disabled><option>" + start + "</option></select> ~ <select disabled><option>" + end + "</option></select></li>").trigger("create");
+                }
+                var opt = $("#weekBox li[style='order:"
+                    + (idx) + "'] select");
+                for (var i = 0; i < 25; i++) {
+                    opt.append("<option>" + (i < 10 ? "0" + i : i) + ":00</option>");
+                    if (i != 24) {
+                        opt.append("<option>" + (i < 10 ? "0" + i : i) + ":30</option>");
+                    }
+                }
+                if (!($('#' + idx).hasClass("selected"))) {
+                    $("#weekBox ul li[style='order:" + (idx) + "']").hide();
                 }
 
             }); // 운영시간 반복문

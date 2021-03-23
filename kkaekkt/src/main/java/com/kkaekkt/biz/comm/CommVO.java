@@ -8,11 +8,19 @@ public class CommVO {
 	private int bno; //사업자 번호
 	private String mname;
 	private String bname;
+	private int orderNum;
 	private int depth; //0.댓글 1.대댓글
 	private int eval;//평가
 	private String content;
 	private Date rdate; 
 	
+	
+	public int getOrderNum() {
+		return orderNum;
+	}
+	public void setOrderNum(int orderNum) {
+		this.orderNum = orderNum;
+	}
 	public Date getRdate() {
 		return rdate;
 	}
