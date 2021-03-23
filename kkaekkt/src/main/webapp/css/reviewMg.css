@@ -44,7 +44,7 @@ button{
     right: 33px;
     position: absolute;
     width: 52%;
-    height: 95%;
+    height: 93%;
     border: 0;
     outline: none;
     background-color: white;
@@ -206,7 +206,6 @@ td.cell2:hover{
     height: 30px;
     font-size: 14px;
     cursor: pointer;
-    
 }
 .comments_header button:hover{
     text-decoration: underline;
@@ -220,14 +219,14 @@ td.cell2:hover{
 }
 .comments_body textarea {
     margin-left: 40px;
-    width: 94%;
+    width: 95%;
     resize: none;
     border: 1px solid var(--gray-color);
     outline-color: var(--key-color);
 }
 .comments_body span:nth-child(3) {
     position: absolute;
-    right: 15px;
+    right: 30px;
     bottom: 10px;
     color: gray;
     font-size: 12px;

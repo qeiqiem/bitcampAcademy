@@ -95,6 +95,7 @@ CREATE TABLE `comments` (
 );
 
 CREATE TABLE `evaluation` (
+	`rno` 	INTEGER NOT NULL comment '예약번호',
 	`mno`	INTEGER	NOT NULL comment '회원번호',
 	`bno`	INTEGER	NOT NULL comment '사업자번호',
 	`grade`	INTEGER	NULL comment '점수'
@@ -307,6 +308,13 @@ ALTER TABLE `comments` ADD CONSTRAINT `FK_BUSINESS_TO_comments_1` FOREIGN KEY (
 REFERENCES `business` (
 	`bno`
 ) ON DELETE SET NULL;
+
+ALTER TABLE `evaluation` ADD CONSTRAINT `FK_RESERVATION_TO_EVALUATION_1` FOREIGN KEY (
+	`rno`
+)
+REFERENCES `reservation` (
+	`rno`
+) ON DELETE CASCADE;
 
 ALTER TABLE `evaluation` ADD CONSTRAINT `FK_MEMBER_TO_EVALUATION_1` FOREIGN KEY (
 	`mno`

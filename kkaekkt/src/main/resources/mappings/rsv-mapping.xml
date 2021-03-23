@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="reservationDAO">
-	<select id="searchComm" resultType="comment">
+
+	<select id="getCommListBs" resultType="comment">
+		SELECT orderNum,content,grade
+	</select>
+	<select id="searchComm" resultType="comment"> <!-- 답글이 없는 리뷰 조회 임시 기록 -->
 		SELECT * FROM comments a WHERE groupNum NOT IN (SELECT groupNum FROM comments b WHERE depth=1);
 	</select>
 	<update id="deleteCommCh">

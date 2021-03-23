@@ -1,5 +1,7 @@
 package com.kkaekkt.biz.reservation.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -81,5 +83,9 @@ public class ReservationServiceImpl implements ReservationService {
 	public void deleteCommCh(CommVO vo) {
 		reservationDAO.deleteCommCh(vo);
 		
+	}
+	@Override
+	public List<CommVO> getCommListBs(CommVO vo) {
+		return reservationDAO.getCommListBs(vo);
 	}
 }

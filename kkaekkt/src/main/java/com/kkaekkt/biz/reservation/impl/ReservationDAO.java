@@ -64,4 +64,7 @@ public class ReservationDAO {
 	public void deleteCommCh(CommVO vo) {
 		mybatis.update("reservationDAO.deleteCommCh",vo);		
 	}
+	public List<CommVO> getCommListBs(CommVO vo) {
+		return mybatis.selectList("reservationDAO.getCommListPs",vo);
+	}
 }

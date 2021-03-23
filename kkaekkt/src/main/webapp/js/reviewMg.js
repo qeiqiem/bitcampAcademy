@@ -140,7 +140,7 @@ function submitReply(idx) {//답글 등록
 }
 function successSubmit(idx) {//답글 DB 등록완료
     alert('답글이 정상적으로 작성되었습니다.');
-    $('.comments').remove();//답글 폼 삭제
+    $('#comments'+idx).remove();//답글 폼 삭제
     $('.replyBtn[value='+idx+']')[0].innerHTML='답글완료';//버튼 텍스트 답글으로 전환
     $('<table class="replyList" id="reply'+idx+'">'+
         '<tr>'+
