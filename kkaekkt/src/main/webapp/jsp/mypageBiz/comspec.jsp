@@ -111,21 +111,20 @@
 							운영시간
 							<hr>
 							<div id="week">
-								<button id="1">월</button>
-								<button id="2">화</button>
-								<button id="3">수</button>
-								<button id="4">목</button>
-								<button id="5">금</button>
-								<button id="6">토</button>
-								<button id="7">일</button>
-								<button id="8">매일</button>
-								<button id="9">평일</button>
-								<button id="10">주말</button>
+								<button type="button" id="1">월</button>
+								<button type="button" id="2">화</button>
+								<button type="button" id="3">수</button>
+								<button type="button" id="4">목</button>
+								<button type="button" id="5">금</button>
+								<button type="button" id="6">토</button>
+								<button type="button" id="7">일</button>
+								<button type="button" id="8">매일</button>
+								<button type="button" id="9">평일</button>
+								<button type="button" id="10">주말</button>
 							</div>
 
 							<div id="weekBox">
 								<ul>
-
 								</ul>
 								<input type="hidden" name="schedule">
 							</div>
@@ -135,7 +134,7 @@
 						<button type="button" onclick="" id="updateSpec">수정하기</button>
 						<div id="btn_change">
 							<button type="reset" onclick="" id="resetSpec">돌아가기</button>
-							<button type="submit" onclick="" id="submitSpec">수정완료</button>
+							<button id="submitSpec">수정완료</button>
 						</div>
 					</div>
 					<input type="text" name="bno" hidden>
