@@ -12,12 +12,16 @@
             	document.getElementsByName('id')[0].value = pageObj["id"];
             	document.getElementsByName('name')[0].value = pageObj["name"];
             	var phoneSplit = pageObj["phone"].split('-');
-            	document.getElementById('phone1').value = phoneSplit[0];
-            	document.getElementById('phone2').value = phoneSplit[1];
-            	document.getElementById('phone3').value = phoneSplit[2];
+            	    document.getElementById('phone1').value = phoneSplit[0];
+            	    document.getElementById('phone2').value = phoneSplit[1];
+            	    document.getElementById('phone3').value = phoneSplit[2];
             	document.getElementsByName('birth')[0].value = pageObj["birth"];
             	document.getElementsByName('email')[0].value = pageObj["email"];
-            
+                var addressSplit = pageObj["address"].split(',');
+                    document.getElementById('postcode').value = addressSplit[0];
+                    document.getElementById('roadAddress').value = addressSplit[1];
+                    document.getElementById('detailAddress').value = addressSplit[2];
+                    document.getElementById('extraAddress').value = addressSplit[3];
 
             	
            // input button 초기값 비활성화  	
@@ -206,10 +210,12 @@ if($('#pwd').val != $('#newpwd').val){
             	
             	document.getElementById("phone").value = phone;
                
-                var address = document.getElementById("roadAddress").value  + ", "
-                           +  document.getElementById("detailAddress").value;
+                var address = document.getElementById("postcode").value  + ", "
+                           +  document.getElementById("roadAddress").value + ", "
+                           +  document.getElementById("detailAddress").value + ", "
+                           +  document.getElementById("extraAddress").value;
                console.log(address);
-                document.getElementById("address")[0].value = address;
+                document.getElementById("address").value = address;
             }
            
 		 	// 전체 폼 보낼때 null값 + 유효성 검사 통과 확인 후 submit

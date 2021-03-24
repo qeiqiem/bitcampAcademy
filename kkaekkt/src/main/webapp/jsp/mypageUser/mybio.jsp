@@ -96,15 +96,16 @@
     </div>
 	<script>
             var pageObj={//세션에서 정보를 받아오는건 독립된 js파일에서 불가능, jsp 내에서만 가능하기 때문에 여기서 값을 받아준다.
-                // mno:'${sessionScope.member.mno}',
-                // id:'${sessionScope.member.id}',
-                // name:'${sessionScope.member.name}',
-                // password:'${sessionScope.member.password}',
-                // phone:'${sessionScope.member.phone}',
-                // birth:'${sessionScope.member.birth}',
-                // email:'${sessionScope.member.email}',                
-                // state:'${sessionScope.member.state}'
-                mno:'1'
+                mno:'${sessionScope.person.mno}',
+                id:'${sessionScope.person.id}',
+                name:'${sessionScope.person.name}',
+                password:'${sessionScope.person.password}',
+                phone:'${sessionScope.person.phone}',
+                birth:'${sessionScope.person.birth}',
+                email:'${sessionScope.person.email}',                
+                address:'${sessionScope.person.address}',                
+                state:'${sessionScope.person.state}'
+
             };
         	
            
