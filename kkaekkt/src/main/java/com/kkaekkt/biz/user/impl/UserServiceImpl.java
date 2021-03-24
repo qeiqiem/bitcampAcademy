@@ -2,6 +2,7 @@ package com.kkaekkt.biz.user.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -158,6 +159,18 @@ public class UserServiceImpl implements UserService {
 	public AccountVO findPw(AccountVO vo) {
 		System.out.println("findPw 서비스옴");
 		return userDao.findPw(vo);
+	}
+
+	@Override
+	public int idchk(PersonVO vo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public AccountVO authkey(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

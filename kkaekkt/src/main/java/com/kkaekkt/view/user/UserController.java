@@ -1,6 +1,10 @@
 package com.kkaekkt.view.user;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,8 +110,8 @@ public class UserController {
 			System.out.println(vo); // 뭐가 담기는 지 보려했다
 
 			if (vo.getMno() == 0) {
-				session.setAttribute("person", null);
 				System.out.println("회원정보없음");
+				session.setAttribute("person", null);
 				return "/jsp/login/loginPs.jsp";
 			} else {
 				session.setAttribute("person", vo);
@@ -126,8 +130,8 @@ public class UserController {
 			System.out.println(vo); // 뭐가 담기는 지 보려했다
 
 			if (vo.getMno() == 0) {
-				session.setAttribute("personBs", null);
 				System.out.println("회원정보없음");
+				session.setAttribute("personBs", null);
 				return "/jsp/login/loginBs.jsp";
 			} else {
 				session.setAttribute("personBs", vo);
@@ -138,19 +142,30 @@ public class UserController {
 
 		// 소셜유저 로그인	
 		@PostMapping(value = "/loginSNS.do")
-		public @ResponseBody String method(HttpServletRequest req, PersonVO vo, HttpSession session) {
+		public @ResponseBody String method(HttpServletRequest req, HttpServletResponse resp, PersonVO vo, HttpSession session) {
 			System.out.println("소셜유저 로그인처리");
 			vo = userService.method(vo, req);
 			
 			System.out.println(vo); // 뭐가 담기는 지 보려했다		
 			
 			if (vo.getMno() == 0) {
-				session.setAttribute("personSNS", null);
 				System.out.println("회원정보없음");
+				session.setAttribute("person", null);
 				return "/jsp/login/loginPs.jsp";
 			} else {
-				session.setAttribute("personSNS", vo);
+				System.out.println("회원정보있음~");
+				session.setAttribute("person", vo);
 			}
+
+//			PrintWriter pw;
+//			try {
+//				pw = resp.getWriter();
+//				pw.println("/jsp/indexPerson.jsp");
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+			System.out.println("return /jsp/indexPerson.jsp");
 			return "/jsp/indexPerson.jsp";
 		}
 
