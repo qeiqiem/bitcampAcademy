@@ -9,14 +9,10 @@ public class AccountVO {
     private String bmail;
     private String mmail;
     private int mtype;
-    private String verify;
+    private int idchk;
+    private String authkey;
     
-    public String getVerify() {
-		return verify;
-	}
-	public void setVerify(String verify) {
-		this.verify = verify;
-	}
+    
 	public String getId() {
         return id;
     }
@@ -66,11 +62,19 @@ public class AccountVO {
 	public void setMmail(String mmail) {
 		this.mmail = mmail;
 	}
+	public String getAuthkey() {
+		return authkey;
+	}
+	public void setAuthkey(String authkey) {
+		this.authkey = authkey;
+	}
 	@Override
 	public String toString() {
 		return "AccountVO [id=" + id + ", password=" + password + ", name=" + name + ", phone=" + phone + ", address="
-				+ address + ", bmail=" + bmail + ", mmail=" + mmail + ", mtype=" + mtype + ", verify=" + verify + "]";
+				+ address + ", bmail=" + bmail + ", mmail=" + mmail + ", mtype=" + mtype + ", idchk=" + idchk
+				+ ", authkey=" + authkey + "]";
 	}
-    
+
+
     
 }

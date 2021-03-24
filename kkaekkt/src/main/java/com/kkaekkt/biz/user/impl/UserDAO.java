@@ -110,15 +110,32 @@ public class UserDAO {
 
 	}
 
-	public AccountVO findId(AccountVO vo) {
-		return mybatis.selectOne("UserDAO.findId", vo);
-
+	// 아이디 중복확인
+	public int idchk(PersonVO vo) {
+		System.out.println(vo);
+		int res = mybatis.selectOne("UserDAO.idchk", vo);
+		System.out.println("dao와서 마이바티스 카운트값 가져옴");
+		System.out.println(res);
+		return res;
 	}
+	
+	// 아이디 찾기
+	public AccountVO findId(AccountVO vo) {
+		return mybatis.selectOne("UserDAO.findId",vo);
+		 
+	}
+	// 비밀번호 찾기
 	public AccountVO findPw(AccountVO vo) {
 		System.out.println(vo);
 		AccountVO res = mybatis.selectOne("UserDAO.findPw",vo);
 		System.out.println(res);
 		return res;
+	}
+	
+	// email auth
+	public AccountVO authkey(Map<String, String> map) {
+		System.out.println("mybatis authkey");
+		return null;
 	}
 
 }
