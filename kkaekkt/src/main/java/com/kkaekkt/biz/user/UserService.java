@@ -3,6 +3,8 @@ package com.kkaekkt.biz.user;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.google.gson.JsonElement;
 import com.kkaekkt.biz.comm.LaundryVO;
 
@@ -24,5 +26,7 @@ public interface UserService {
 	public AccountVO findPw(AccountVO vo);
 	public int idchk(PersonVO vo);
 	public AccountVO authkey(Map<String, String> map);
+	
+	public PersonVO method(PersonVO vo, HttpServletRequest req);
 
 }

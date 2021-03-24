@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,8 +24,9 @@
 						<div id="card">
 							세탁기 사양
 							<hr>
-							<table class="equip" id="coinLaundry">
-								<th>용량</th>
+						
+								<table class="equip" id="coinLaundry">
+								<th>용량 </th>
 								<th>개수</th>
 								<th>이용금액(분당)</th>
 								<tr>
@@ -33,7 +35,7 @@
 										</span>
 									</span> 중(20kg미만)</td>
 									<td id="selectbox">
-									<select>
+									<select>										
 											<option value="1">1대</option>
 											<option value="2">2대</option>
 											<option value="3">3대이상</option>
@@ -160,7 +162,7 @@
 						<button type="button" onclick="" id="updateSpec">수정하기</button>
 						<div id="btn_change">
 							<button type="reset" onclick="" id="resetSpec">돌아가기</button>
-							<button onclick="" id="submitSpec">수정완료</button>
+							<button type="button" onclick="" id="submitSpec">수정완료</button>
 						</div>
 					</div>
 					<input type="text" name="bno" hidden>

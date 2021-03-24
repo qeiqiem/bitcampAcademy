@@ -179,7 +179,9 @@ public class UserController {
 			Gson gson=new Gson();
 			String coinspec=gson.toJson(userService.getCoinspec(vo));
 			System.out.println("test:" + coinspec);
-			return coinspec;
+			
+			return coinspec;			
+			
 		}	
 	// 일반(사양,설비)관리 update
 		@RequestMapping(value="/updateSpec.do", method=RequestMethod.POST)

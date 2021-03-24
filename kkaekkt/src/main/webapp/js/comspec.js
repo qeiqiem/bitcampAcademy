@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	$(".side_sub").hide();
 	initEvent();
-	ajax(pageObj);
+	//ajax(pageObj);
     initSide();
     
 		

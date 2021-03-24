@@ -5,6 +5,7 @@
    
         window.onload = function () {
                 initSide();
+
             	//값 넣어주기
             	
             	document.getElementsByName('mno')[0].value = pageObj["mno"];
@@ -121,49 +122,7 @@
             })
 
 
-            // 새 비밀번호, 새 비밀번호 확인 인풋 값 같은지 비교 => 비밀법호 업데이트 
-            document.getElementById("btn_updatepwd").onclick = function undatePwd() {
-                    if ($('#pwd').val == $('#newpwd').val && fomatnewpw == 1 ) {
-                	 $.ajax({ 
-                     	url :'/updatePs.do', 
-                     	type : 'post', 
-                     	dataType : 'json', 
-                     	data : { 
-                     		mno : $('#mno').val(),
-                     		password : $('#newpwd').val(), 
-                     	}, 
-                     	success: function(data){ 
-                     		alert("변경완료");
-                     	} 
-                     });
-                	 
-                    for (var i = 0; i < inputli.length; i++) {
-                        if (i == 2) {
-                            inputli[i].disabled = false;
-                        }
-                        if (i == 3 || i == 4) {
-                            inputli[i].value = null;
-                            inputli[i].disabled = true;
-                        }
-                    }
-                    document.getElementById("match").innerText
-                        = " 변경이 완료되었습니다, 이후 프로필 수정시, 변경된 비밀번호로 입력해주세요.";
-                    document.getElementById("match").style.color = "rgba(254, 54, 54, 0.55)";
-
-                } 
-                if(fomatnewpw == 0){
-                		document.getElementById("match").innerText
-                        = "입력형식을 확인하세요";
-                    	inputli[3].value = null;
-                    	inputli[4].value = null;
-                } 
-                if($('#pwd').val != $('#newpwd').val){
-                    document.getElementById("match").innerText
-                        = " 새 비밀번호와 일치하지 않습니다.";
-                    inputli[4].value = null;
-                }
-                
-            }
+           
 
             // 생년월일 입력형식 확인
             inputli[10].addEventListener('keyup', () => {
@@ -185,17 +144,7 @@
                 }
             })
 
-            // 핸드폰 번호 입력값 합치기 
-           document.getElementById("btn_mybiofin").onclick = function phoneNum() {
-            	var phone = document.getElementById("phone1").value + "-" +
-            				document.getElementById("phone2").value + "-" +
-            				document.getElementById("phone3").value;
             
-            	
-            	document.getElementById("phone").value = phone;
-               
-            }
-		 	// 전체 폼 보낼때 null값 + 유효성 검사 통과 확인 후 submit
             
             
             
@@ -203,3 +152,64 @@
 function initSide() {
     $('.side button').eq(2).addClass("side_select");
 }
+ // 새 비밀번호, 새 비밀번호 확인 인풋 값 같은지 비교 => 비밀법호 업데이트 
+function undatePwd() {
+    var inputli = content[0].getElementsByTagName('input');
+    if ($('#pwd').val == $('#newpwd').val && fomatnewpw == 1 ) {
+     $.ajax({ 
+         url :'/updatePs.do', 
+         type : 'post', 
+         dataType : 'json', 
+         data : { 
+             mno : $('#mno').val(),
+             password : $('#newpwd').val(), 
+         }, 
+         success: function(data){ 
+             alert("변경완료");
+         } 
+     });
+     
+    for (var i = 0; i < inputli.length; i++) {
+        if (i == 2) {
+            inputli[i].disabled = false;
+        }
+        if (i == 3 || i == 4) {
+            inputli[i].value = null;
+            inputli[i].disabled = true;
+        }
+    }
+    document.getElementById("match").innerText
+        = " 변경이 완료되었습니다, 이후 프로필 수정시, 변경된 비밀번호로 입력해주세요.";
+    document.getElementById("match").style.color = "rgba(254, 54, 54, 0.55)";
+
+} 
+if(fomatnewpw == 0){
+        document.getElementById("match").innerText
+        = "입력형식을 확인하세요";
+        inputli[3].value = null;
+        inputli[4].value = null;
+} 
+if($('#pwd').val != $('#newpwd').val){
+    document.getElementById("match").innerText
+        = " 새 비밀번호와 일치하지 않습니다.";
+    inputli[4].value = null;
+}
+
+}
+// 핸드폰 번호 입력값 합치기 
+            // 주소 도로명+상세주소 값 합치기
+            function submitMybio() {
+            	var phone = document.getElementById("phone1").value + "-" +
+            				document.getElementById("phone2").value + "-" +
+            				document.getElementById("phone3").value;
+            
+            	
+            	document.getElementById("phone").value = phone;
+               
+                var address = document.getElementById("roadAddress").value  + ", "
+                           +  document.getElementById("detailAddress").value;
+               console.log(address);
+                document.getElementById("address")[0].value = address;
+            }
+           
+		 	// 전체 폼 보낼때 null값 + 유효성 검사 통과 확인 후 submit
