@@ -10,13 +10,31 @@ function kakaoLogin(){
                 url: '/v2/user/me',
                 success: res => {
                     const kakao_account = res.kakao_account;
-                    console.log(kakao_account);
+                    
+                    var user = kakao_account.email;
+                    console.log(user);
+                    
+$.ajax({
+	url: '/loginSNS.do',
+	type: 'POST',
+	dataType: 'json',
+	data: {
+		email: user
+			},
+		success: function(data){
+		console.log("보냄");
+		}
+}); // ajax
+
                 }
+                
             });
         }
     
     });
 }
+
+
 function kakaoLogout(){
     //Kakao.init();
     //Kakao.isInitialized();

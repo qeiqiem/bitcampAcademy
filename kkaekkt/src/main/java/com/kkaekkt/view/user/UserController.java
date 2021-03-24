@@ -1,10 +1,12 @@
 package com.kkaekkt.view.user;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -106,7 +108,7 @@ public class UserController {
 			if (vo.getMno() == 0) {
 				session.setAttribute("person", null);
 				System.out.println("회원정보없음");
-				return "/jsp/loginPs.jsp";
+				return "/jsp/login/loginPs.jsp";
 			} else {
 				session.setAttribute("person", vo);
 			}
@@ -126,7 +128,7 @@ public class UserController {
 			if (vo.getMno() == 0) {
 				session.setAttribute("personBs", null);
 				System.out.println("회원정보없음");
-				return "/jsp/loginBs.jsp";
+				return "/jsp/login/loginBs.jsp";
 			} else {
 				session.setAttribute("personBs", vo);
 			}
@@ -134,25 +136,22 @@ public class UserController {
 
 		}
 
-		// 소셜유저 로그인
-
-		@RequestMapping(value = "/loginSNS.do", method = RequestMethod.POST)
-		public String SNSLogin(PersonVO vo, HttpSession session) {
-			System.out.println("로그인처리");
-
-			vo = userService.getUser(vo);
-
-			System.out.println(vo); // 뭐가 담기는 지 보려했다
-
+		// 소셜유저 로그인	
+		@PostMapping(value = "/loginSNS.do")
+		public @ResponseBody String method(HttpServletRequest req, PersonVO vo, HttpSession session) {
+			System.out.println("소셜유저 로그인처리");
+			vo = userService.method(vo, req);
+			
+			System.out.println(vo); // 뭐가 담기는 지 보려했다		
+			
 			if (vo.getMno() == 0) {
 				session.setAttribute("personSNS", null);
 				System.out.println("회원정보없음");
-				return "/jsp/loginPs.jsp";
+				return "/jsp/login/loginPs.jsp";
 			} else {
 				session.setAttribute("personSNS", vo);
 			}
 			return "/jsp/indexPerson.jsp";
-
 		}
 
 		// 로그아웃
