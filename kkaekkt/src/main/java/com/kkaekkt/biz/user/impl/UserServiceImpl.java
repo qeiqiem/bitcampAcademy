@@ -2,6 +2,7 @@ package com.kkaekkt.biz.user.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -167,7 +168,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public AccountVO authkey(Map<String, String> map) {
 		System.out.println("authkey 서비스 진입");
-		return userDao.authkey(map);
+		return null; //userDao.authkey(map);
 	}
 
 }

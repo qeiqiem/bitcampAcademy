@@ -148,5 +148,19 @@
         WHERE (mname=#{name} AND mb.email=#{email}) OR (bname=#{name} AND
         bs.email=#{email});
     </select>
+	<select id="findPw" resultType="account">
+		SELECT b.email bmail, m.email
+		mmail, id
+		FROM account ac
+		LEFT OUTER JOIN member m on ac.mno=m.mno
+		LEFT OUTER JOIN business b on
+		ac.mno=b.mno
+		WHERE ac.id=#{id};
+	</select>
+	<select id="idchk" resultType="int">
+		SELECT count(*)
+		FROM account
+		WHERE id=#{id}
+	</select>
 </mapper>
 

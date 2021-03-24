@@ -53,8 +53,7 @@
 				$.ajax({
 					url: "/idchk.do",
 					type: "POST",
-					dataType: "json",
-					data: { "id": $("#id").val() },
+					data: {id: $("#id").val()},
 					/* contentType: "application/json; charset=utf-8", */
 					success: function (data) {
 						console.log(data);
@@ -78,8 +77,6 @@
 			}
 		</script>
 	</head>
-
-
 	<body>
 		<jsp:include page="/jsp/header0.jsp"></jsp:include>
 
