@@ -14,15 +14,22 @@ function kakaoLogin(){
                     var user = kakao_account.email;
                     console.log(user);
                     
+                    var userdata = {
+                    	email: user
+                    }
+                    
 $.ajax({
 	url: '/loginSNS.do',
 	type: 'POST',
-	dataType: 'json',
-	data: {
-		email: user
-			},
+	data: userdata,
 		success: function(data){
+		console.log(data);
 		console.log("보냄");
+		console.log(location.href);
+		console.log(window.location.protocol + "/" + window.location.host + "/" + data);
+		//location.href = "../../" + data;
+		location.href = data;
+
 		}
 }); // ajax
 
