@@ -1,11 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="reservationDAO">
-
+	<update id="updateOrderNum">
+		UPDATE comments SET orderNum=orderNum+1 WHERE <![CDATA[orderNum>=#{orderNum}]]>
+	</update>
+	<select id="getOrderNum" resultType="_int">
+		SELECT orderNum FROM comments WHERE groupNum=#{rsvNum} AND depth=0;
+	</select>
+	<select id="getCommListBs" resultType="comment">
+		SELECT orderNum,content,groupNum rsvNum,rdate,grade eval,mname,c.mno mno,depth
+		FROM comments c,evaluation e, member m
+		<where>
+			c.groupNum=e.rno AND m.mno=c.mno
+			AND c.bno=#{bno}
+			<if test="searchOption==1"><!-- 이름검색 -->
+				AND mname LIKE CONCAT('%',#{search},'%')
+			</if>
+			<if test="searchOption==2"><!-- 주문번호검색 -->
+				AND groupNum LIKE CONCAT('%',#{search},'%')
+			</if>
+			<if test="searchOption==3"><!-- 평점검색 -->
+				AND grade=#{search}
+			</if>
+		</where>
+		<if test="order==1"> <!-- 등록 순이면 -->
+			ORDER BY orderNum DESC
+		</if>
+		<if test="order==2"> <!-- 평점 순이면 -->
+			ORDER BY grade <if test="orderType==2">DESC</if>, orderNum DESC
+		</if>
+		LIMIT #{rowStartNum},#{POSTS_PER_PAGE};
+	</select>
+	<select id="searchComm" resultType="comment"> <!-- 답글이 없는 리뷰 조회 임시 기록 -->
+		SELECT * FROM comments a WHERE groupNum NOT IN (SELECT groupNum FROM comments b WHERE depth=1);
+	</select>
+	<update id="deleteCommCh">
+		UPDATE comments SET mno=#{mno}, content=#{content} WHERE groupNum=#{rsvNum} AND depth=#{depth};
+	</update>
+	<delete id="deleteCommAb">
+		DELETE FROM comments WHERE depth=#{depth} AND mno=#{mno} AND groupNum=#{rsvNum};
+	</delete>
+	<update id="updateComm">
+		UPDATE comments SET content=#{content},mno=#{mno} WHERE groupNum=#{rsvNum} AND depth=#{depth};
+	</update>
 	<insert id="regitComm">
-		INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum) 
-		SELECT #{mno},#{bno},#{content},#{depth},#{rsvNum},CURDATE(),IFNULL(MAX(orderNum)+1,1) FROM comments;
-		INSERT INTO evaluation VALUES (#{mno},#{bno},#{eval});
+		<if test="depth==0">
+			INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum) 
+			SELECT #{mno},#{bno},#{content},#{depth},#{rsvNum},NOW(),IFNULL(MAX(orderNum)+1,1) FROM comments;
+			INSERT INTO evaluation VALUES (#{mno},#{bno},#{eval},);
+		</if>
+		<if test="depth==1">
+			INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum)
+			VALUES (,#{bno},#{content},#{depth},#{rsvNum},NOW(),#{orderNum});
+		</if>
 	</insert>
 	<insert id="likeOn">
 		INSERT INTO liked VALUES ((SELECT bno FROM reservation WHERE rno=#{rsvNum}),(SELECT mno FROM reservation WHERE rno=#{rsvNum}));	
@@ -37,7 +84,14 @@
 		</if>
 	</update>
 	<select id="getRsvListPs" resultType="reservation"> <!-- 일반회원 예약리스트 출력 -->	
-		SELECT r.rno rsvNum,r.bno bno,rdate rsvDate,bname,phone,<![CDATA[	TIMESTAMPDIFF(HOUR,rdate,CURDATE())<1 timeOut]]>, stname state
+		SELECT r.rno rsvNum,r.bno bno,rdate rsvDate,bname,phone,
+		<if test="state==1">
+		<![CDATA[	TIMESTAMPDIFF(HOUR,rdate,NOW())<1 timeOut]]>
+		</if>
+		<if test="state==3">
+		<![CDATA[	TIMESTAMPDIFF(DAY,ddate,NOW())<7 timeOut]]>
+		</if>
+		, stname state
 		FROM reservation r, business b, state s
 		WHERE r.bno=b.bno AND r.stno=s.stno
 		AND r.mno=#{mno}
@@ -45,8 +99,9 @@
 		ORDER BY rno DESC
 		LIMIT #{rowStartNum},#{POSTS_PER_PAGE};
 	</select>
+	
 	<select id="getRsvListBs_ld" resultType="laundry"> <!-- 업체 품목별 리스트 출력 -->
-		SELECT rdate rsvDate, r.rno rsvNum, mname, lname laundry,cnt count,DATEDIFF(ddate,CURDATE()) dDay 
+		SELECT rdate rsvDate, r.rno rsvNum, mname, lname laundry,cnt count,DATEDIFF(ddate,NOW()) dDay 
 		FROM reservation r, member m, rsv_laundry r_l, laundry_type lt 
 		<where>
 			r.mno=m.mno AND r.rno=r_l.rno AND r_l.lno=lt.lno
@@ -71,7 +126,7 @@
 	</select>
 	<select id="getRsvListBs_rn" resultType="reservation"> 
 		<if test="listType==3"><!-- 업체회원 주문번호별 리스트 출력 -->
-			SELECT r.rno rsvNum,rdate rsvdate,mname,DATEDIFF(ddate,CURDATE()) dDay 
+			SELECT r.rno rsvNum,rdate rsvdate,mname,DATEDIFF(ddate,NOW()) dDay 
 			FROM member m,reservation r
 			WHERE r.mno=m.mno AND bno=#{bno} AND stno=1
 			<if test="searchOption==1"> <!-- 검색옵션-이름 입력시 -->
@@ -109,13 +164,6 @@
 			FROM comments c, reservation r, member m,business b
 			WHERE b.bno=r.bno AND m.mno=r.mno AND c.groupNum=r.rno
 			AND groupNum=#{rsvNum}
-			ORDER BY orderNum;
-	</select>
-	<select id="getCommListBs" resultType="comment">
-			SELECT mname,r.mno,bname,r.bno,content,c.rdate,depth
-			FROM comments c, reservation r, member m,business b
-			WHERE b.bno=r.bno AND m.mno=r.mno AND c.groupNum=r.rno
-			AND c.bno=#{bno}
 			ORDER BY orderNum;
 	</select>
 	<select id="getLaundry" resultType="laundry"> <!-- 상태가 표시된 품목 리스트 출력 -->
