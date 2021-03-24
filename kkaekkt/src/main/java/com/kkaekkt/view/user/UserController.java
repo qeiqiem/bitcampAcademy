@@ -140,7 +140,7 @@ public class UserController {
 		@PostMapping(value = "/loginSNS.do")
 		public @ResponseBody String method(HttpServletRequest req, PersonVO vo, HttpSession session) {
 			System.out.println("소셜유저 로그인처리");
-			vo = userService.method(vo, req);
+			//vo = userService.method(vo, req);
 			
 			System.out.println(vo); // 뭐가 담기는 지 보려했다		
 			

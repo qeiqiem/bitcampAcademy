@@ -2,6 +2,7 @@ package com.kkaekkt.biz.user.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -94,7 +95,6 @@ public class UserServiceImpl implements UserService {
 		System.out.println("소셜유저로그인 servie옴");		
 		return userDao.getUserSNS(vo);
 	}
-		
 
 	@Override
 	public BusinessVO getUser(BusinessVO vo) {
@@ -153,12 +153,21 @@ public class UserServiceImpl implements UserService {
 	public AccountVO findId(AccountVO vo) {
 		return userDao.findId(vo);
 	}
+	@Override
+	public int idchk(PersonVO vo) {
+		System.out.println("idchk 서비스옴");
+		return userDao.idchk(vo);
+	}
+
+	@Override
+	public AccountVO authkey(Map<String, String> map) {
+		System.out.println("authkey 서비스 진입");
+		return null; //userDao.authkey(map);
+	}
 
 	@Override
 	public AccountVO findPw(AccountVO vo) {
 		System.out.println("findPw 서비스옴");
 		return userDao.findPw(vo);
-	}
-
-	
+	}	
 }
