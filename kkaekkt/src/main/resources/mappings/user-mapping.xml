@@ -53,7 +53,7 @@
 					UPDATE bsn_laundry SET price=#{laundry.price} WHERE bno=#{bno} AND lno=#{laundry.lno};
 				</foreach>
 				<foreach collection="scheduleList" item="schedule">
-					UPDATE bsn_schedule SET schno=#{schedule.schno}, time=#{schedule.time} WHERE bno=#{bno};
+					UPDATE bsn_schedule SET time=#{schedule.time} WHERE bno=#{bno} AND schno=#{schedule.schno};
 				</foreach>
 			</when>
 			<otherwise> <!-- else문,, 코인세탁소라면 -->
@@ -61,10 +61,10 @@
 					UPDATE bsn_equipment SET cnt=#{equipment.cnt}, price=#{equipment.price} WHERE bno=#{bno} AND eno=#{equipment.eno};
 				</foreach>
 				<foreach collection="etcList" item="etc">
-					UPDATE bsn_etc SET price=#{etc.price} WHERE bno=#{bno} AND etcno=#{etc.etcno};
+					  UPDATE bsn_etc SET price=#{etc.price} WHERE bno=#{bno} AND etcno=#{etc.etcno};
 				</foreach>
 				<foreach collection="scheduleList" item="schedule">
-					UPDATE bsn_schedule SET schno=#{schedule.schno}, time=#{schedule.time} WHERE bno=#{bno};
+					UPDATE bsn_schedule SET time=#{schedule.time} WHERE bno=#{bno} AND schno=#{schedule.schno};
 				</foreach>
 				
 			</otherwise>

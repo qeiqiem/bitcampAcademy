@@ -19,25 +19,29 @@ function initEvent() {
         commObj.bno=JSON.parse($('#bno'+$(this).val())[0].innerHTML.replace('#',''));
         $("#modal_container").show();
     });
-    $('.rsvList').on("keyup",".commBox",function() {
+    $('.rsvList').on("keyup",".commentBox",function() {
 		idx=JSON.parse($(this).attr("id").substr(2,3));
         if($(this).val().length>=300) {
             alert("300자 까지 입력할 수 있습니다.");
             $(this)[0].value=$(this).val().substr(0,300);
         }
-        $('.comments_header span:nth-child(1)')[idx].innerHTML=$(this).val().length;
+        $('.comments_bottom span')[0].innerHTML=$(this).val().length+' / 300';
     });
     $(".rsvList").on("click",".comments_bottom button",function(){ 
         idx=$(this).val();
-        commObj.content=$('#ta'+idx).val();
-        var rno=JSON.parse($('.rsvTable tr:nth-child(3) td:nth-child(2)')[idx].innerHTML);
+        commObj.content=$('.commentBox').eq(0).val();
+        var rno=JSON.parse($('#rsvNum'+idx)[0].innerHTML);
         commObj.rsvNum=rno;
-        commObj.bno=JSON.parse($('.rsvTable tr:nth-child(1) span')[idx].innerHTML.replace('#',''));
-        $("#modal_container").show();
+        edit(idx);
     });
     $('.rsvList').on("click",".reviewBtn",function() {
         idx=$(this).val();
-        $('.comments_view').eq(idx).toggleClass('none');
+        $('.commBox').eq(idx).toggleClass('none');
+    });
+    $('.rsvList').on("click",".cancel",function() {
+        idx=$(this).val();
+        $('.comments').remove();
+        $('.comments_view').eq(idx).removeClass('none');
     });
     $('.side_sub button').click(function() { // 완료된 주문 출력
         if($(this).index()==0){ //진행중인 주문
@@ -50,7 +54,7 @@ function initEvent() {
             ajax(pageObj);
         }
     });
-    
+
     $('.page_next').click(function() {
         if(!$(this).hasClass('no')) {
             pageObj.currentPageNum+=1;
@@ -96,7 +100,21 @@ function initEvent() {
             like(likeObj);
         }
     });
-
+    $('.rsvList').on("click",".dotBtn",function() {
+        $(this).siblings().eq(1).toggleClass('none');
+    });
+    $('.rsvList').on("click",".popMenu button",function() {
+        var idx=$(this).val();
+        $('.popMenu').addClass('none');
+            commObj.rsvNum=JSON.parse($('#rsvNum'+$(this).val())[0].innerHTML);
+        if($(this).index()==0) {
+            commObj.content=$('.comments_content')[idx].innerHTML;
+            editBtn(idx);
+        }else {
+            deleteComm(idx);
+        }
+    });
+    
 }
 function like(likeObj) {
     $.post({
@@ -228,29 +246,112 @@ function viewChange() {
             reviewBtn.eq(i).removeClass('commentBtn');
             reviewBtn.eq(i).addClass('reviewBtn');
             reviewBtn[i].innerHTML='리뷰보기';
-            $('.comments_view').eq(i).removeClass('none');
-            $('.mname')[i].innerHTML=commObj.mname+'<span>#'+commObj.mno+'</span>';
-            $('.comments_content')[i].innerHTML=commObj.content;
-            $('.comments_rdate')[i].innerHTML=printDate();
+            $('.commBox')[i].innerHTML=printComment(commObj.mname,commObj.mno,commObj.content,printDate(),i);
         }
     }
+}
+function printEditBox(idx) {
+    return '<div class="comments">'+
+                '<div class="comments_header">'+
+                    '<button class="cancel" value='+idx+'>취소</button>'+
+                '</div>'+
+                '<textarea class="commentBox" id="ta'+idx+'" cols="30" rows="3">'+commObj.content+'</textarea>'+
+                '<label class="writer">'+commObj.mname+'</label>  '+
+                '<div class="comments_bottom">'+
+                    '<span>0 / 300</span>'+
+                    '<button value='+idx+'>등록</button>'+
+                '</div>'+
+            '</div>'
+}
+function editBtn(idx) {
+    $('.comments_view').eq(idx).addClass('none');
+    $('.commBox').eq(idx).prepend(printEditBox(idx));
+}
+function edit(idx) {
+    $.post({
+        url:'/updateComm.do',
+        data:commObj,
+        success:function() {
+            alert('수정이 완료되었습니다.');
+            $('.comments').remove();
+            $('.comments_content')[idx].innerHTML=commObj.content;
+            $('.comments_view').eq(idx).removeClass('none');
+        }
+    });
+}
+function deleteComm(idx) {
+    if($('.commBox').eq(idx).children()[1]==undefined){//답글이 없을 때
+        $.post({
+            url:'/deleteCommAb.do',
+            data:commObj,
+            success:function() {
+                commBtn=$('.btnDiv button:nth-child(3)');
+                alert('삭제가 완료되었습니다.');
+                $('.commBox').eq(idx).children().remove();
+                commBtn.eq(idx).addClass('commentBtn');
+                commBtn.eq(idx).removeClass('reviewBtn');
+                commBtn[idx].innerHTML='리뷰쓰기';
+            }
+        });
+    }else {//답글이 있을 때
+        commObj.content='삭제된 리뷰입니다.';
+        commObj.mno=1;//고스트계정(이름=알수없음)
+        $.post({
+            url:'/deleteCommCh.do',
+            data:commObj,
+            success:function() {
+                alert('삭제가 완료되었습니다.');
+                $('.commBox').eq(idx).children().remove();
+                $('.reviewBtn').eq(idx).attr("disabled",true);
+                initCommObj();
+            }
+        });
+    }
+}
+function printComment(name,no,content,date,idx) {
+    return '<div class="comments_view">'+
+                    '<div class="comments_writer">'+
+                        '<p class="mname">'+name+'<span class="userNum">#'+no+'</span></p>'+
+                        '<div class="dotBtn"></div>'+
+                        '<div class="popMenu none">'+
+                            '<button value='+idx+'>수정</button>'+
+                            '<button value='+idx+'>삭제</button>'+
+                        '</div>'+
+                    '</div>'+
+                    '<div class="comments_content">'+content+'</div>'+
+                    '<div class="commRdate">'+date+'</div>'+
+                '</div>'
+}
+function printReply(name,no,content,date) {
+    return '<div class="comments_reply">'+
+            '<span>┗</span>'+
+                '<div class="comments_reply_inner">'+
+                    '<div class="comments_reply_writer">'+
+                        '<p>'+name+'<span class="userNum">#'+no+'</span></p>'+
+                    '</div>'+
+                    '<div class="comments_reply_content">'+content+'</div>'+
+                    '<div class="commRdate">'+date+'</div>'+
+                '</div>'+
+            '</div>'
 }
 function printlist(list) {
     var btnText;
     var btnClass;
     if(list[0].state=='세탁 중') {
 		$('.content_header')[0].innerHTML='진행중 주문';
-        btnText='주문취소';
-        btnClass='cancelBtn';
     } else {
 		$('.content_header')[0].innerHTML='완료된 주문';
     }
     $('.rsvList').children().remove();
     $.each(list, function(key,value) {
-        if(value.commList.length>0){
+        if(list[0].state=='세탁 중'){
+            btnText='주문취소';
+            btnClass='cancelBtn';
+        }else if(value.commList.length>0){
             btnText='리뷰보기';
             btnClass="reviewBtn";
-        }else {
+            var comm=value.commList;
+        } else {
             btnText='리뷰쓰기';
             btnClass='commentBtn';
         }
@@ -281,9 +382,9 @@ function printlist(list) {
                 '<div class="btnDiv">'+
                     '<button>채팅상담</button>'+
                     '<button class="detailBtn" value="'+key+'">상세보기</button>'+
-                    (value.timeOut==0&&btnText=='주문취소'?
-                    '<button disabled>':
-                    '<button class="'+btnClass+'" value='+key+'>')+btnText+'</button>'+
+                    (btnText!='리뷰보기'?(value.timeOut==0?'<button disabled>':'<button class="'+btnClass+'" value='+key+'>')// if 리뷰가 없으면 -> 7일이 지났으면 비활성화 아니면 활성화
+                    :(comm[0].content=='삭제된 리뷰입니다.'?'<button disabled>':'<button class="'+btnClass+'" value='+key+'>')// else 삭제된 ~ 이면 비활성화 아니면 활성화
+                    )+btnText+'</button>'+
                 '</div>'+
                 '<div class="detail none" id="detail'+key+'">'+
                     '<hr>'+
@@ -303,32 +404,14 @@ function printlist(list) {
                         '</table>'+
                     '</div1-1>'+
                 '</div>'+
-                (btnText=='주문취소'?'':                
-                '<div class="comments none" id="comments'+key+'">'+
-                    '<div class="comments_header">'+
-                        '<span class="length">0</span><span> / 3000</span>'+
-                    '</div>'+
-                    '<textarea class="commBox" id="ta'+key+'" cols="30" rows="3"></textarea>'+
-                    '<label class="writer" for="comment1">username</label>  '+
-                    '<div class="comments_bottom">'+
-                        '<span>깨끗한 리뷰 부탁드립니다. 불쾌감을 주는 욕설은 삭제될 수 있습니다.</span>'+
-                        '<button value='+key+'>등록</button>'+
-                    '</div>'+
+                '<div class="commBox none">'+
+                    (value.commList.length==0?''://댓글이 없다면 공백, 아니라면 댓글 추가
+                    printComment(comm[0].mname,comm[0].mno,comm[0].content,comm[0].rdate,key))+
+                    (value.commList.length<2?'':
+                    printReply(comm[1].bname,comm[1].bno,comm[1].content,comm[1].rdate))+
                 '</div>'+
-                '<div class="comments_view none">'+
-                    '<div class="comments_writer">'+
-                        '<p class="mname">username<span>#mno</span></p>'+
-                        '<div class="dotBtn"></div>'+
-                        '<div class="popMenu">'+
-                            '<button>수정</button>'+
-                            '<button>삭제</button>'+
-                        '</div>'+
-                    '</div>'+
-                    '<div class="comments_content">content</div>'+
-                    '<div class="comments_rdate">rdate</div>'+
-                '</div>')+
             '</div>')+
-            '</div>'
+        '</div>'
         });
     for(var i=0;i<list.length;i++) {//각 주문 별 상세 물품 목록 붙이기
         $.each(list[i].laundryList,function(key,value) {

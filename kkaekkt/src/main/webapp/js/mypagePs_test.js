@@ -17,12 +17,44 @@ function initEvent() {
         $(".comments").eq($(this).val()).toggleClass('none');
     });
     $('.rsvList').on("keyup",".commentBox",function() {
-        if($(this).val().length>=3000) {
-            alert("3000자 까지 입력할 수 있습니다.");
-            $(this)[0].value=$(this).val().substr(0,3000);
+        if($(this).val().length>=300) {
+            alert("300자 까지 입력할 수 있습니다.");
+            $(this)[0].value=$(this).val().substr(0,300);
         }
-        $('.comments_header span:nth-child(1)')[0].innerHTML=$(this).val().length;
+        $('.comments_bottom span')[0].innerHTML=$(this).val().length+' / 300';
     });
+    $('.rsvList').on("click",".dotBtn",function() {
+        $(this).siblings().eq(1).toggleClass('none');
+    });
+    $('.rsvList').on("click",".popMenu button",function() {
+        var idx=$(this).val();
+        if($(this).index()==0) {
+            commObj.content=$('.comments_content')[idx].innerHTML;
+            editComm($(this).val());
+        }else {
+            // deleteComm($(this).val());
+        }
+    });
+}
+function printComm(idx) {
+    return '<div class="comments">'+
+                '<div class="comments_header">'+
+                    '<button id="cancel'+idx+'">등록</button>'+
+                '</div>'+
+                '<textarea class="commentBox" id="ta'+idx+'" cols="30" rows="3">'+commObj.content+'</textarea>'+
+                '<label class="writer">'+commObj.mname+'</label>  '+
+                '<div class="comments_bottom">'+
+                '<span>0</span><span> / 3000</span>'+
+                    '<button value='+idx+'>등록</button>'+
+                '</div>'+
+            '</div>'
+}
+function editComm(idx) {
+    $('.comments_view').eq(idx).addClass('none');
+    $('.commBox').eq(idx).prepend(printComm(idx));
+}
+function deleteComm(idx) {
+
 }
 function initModal() {
     /* 모달 생성 */
@@ -38,9 +70,6 @@ function initModal() {
         var starVal = $(this).attr('value'); 
         $("#starVal").val(starVal);
     });
-}
-function regit() {
-    console.log($("#starVal").val());
 }
 function initSide() {
     $('.side_sub').css('display','unset');

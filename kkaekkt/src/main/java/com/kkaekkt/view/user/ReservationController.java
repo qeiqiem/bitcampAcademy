@@ -68,4 +68,25 @@ public class ReservationController {
 	public void regitComm(CommVO vo) {
 		reservationService.regitComm(vo);
 	}
+	@RequestMapping(value="/updateComm.do", method=RequestMethod.POST)
+	@ResponseBody
+	public void updateComm(CommVO vo) {
+		reservationService.updateComm(vo);
+	}
+	@RequestMapping(value="/deleteCommAb.do", method=RequestMethod.POST)//완전히 지움
+	@ResponseBody
+	public void deleteCommPf(CommVO vo) {
+		reservationService.deleteCommAb(vo);
+	}
+	@RequestMapping(value="/deleteCommCh.do", method=RequestMethod.POST)//'삭제된 리뷰입니다'로 바꿈
+	@ResponseBody
+	public void deleteCommCh(CommVO vo) {
+		reservationService.deleteCommCh(vo);
+	}
+	@RequestMapping(value="/getCommListBs.do", method=RequestMethod.POST)//리뷰관리 리스트조회
+	@ResponseBody
+	public void getCommListBs(CommVO vo) {
+		reservationService.getCommListBs(vo);
+	}
+	
 }

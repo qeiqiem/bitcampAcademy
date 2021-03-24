@@ -118,7 +118,7 @@
 							<hr>
 							<table class="equip" id="dry">
 								<td>개수</td>
-							<input type="checkbox" name="equip" value=4 hidden />
+							<input type="checkbox" name="equip" value=4 hidden  checked/>
 								<td id="selectbox">
 								<select>
 										<option value="1">1대</option>
@@ -136,16 +136,16 @@
 							운영시간
 							<hr>
 							<div id="week">
-								<button id="1">월</button>
-								<button id="2">화</button>
-								<button id="3">수</button>
-								<button id="4">목</button>
-								<button id="5">금</button>
-								<button id="6">토</button>
-								<button id="7">일</button>
-								<button id="8">매일</button>
-								<button id="9">평일</button>
-								<button id="10">주말</button>
+								<button type="button" id="1">월</button>
+								<button type="button" id="2">화</button>
+								<button type="button" id="3">수</button>
+								<button type="button" id="4">목</button>
+								<button type="button" id="5">금</button>
+								<button type="button" id="6">토</button>
+								<button type="button" id="7">일</button>
+								<button type="button" id="8">매일</button>
+								<button type="button" id="9">평일</button>
+								<button type="button" id="10">주말</button>
 							</div>
 
 							<div id="weekBox">
@@ -160,7 +160,7 @@
 						<button type="button" onclick="" id="updateSpec">수정하기</button>
 						<div id="btn_change">
 							<button type="reset" onclick="" id="resetSpec">돌아가기</button>
-							<button id="submitSpec">수정완료</button>
+							<button onclick="" id="submitSpec">수정완료</button>
 						</div>
 					</div>
 					<input type="text" name="bno" hidden>

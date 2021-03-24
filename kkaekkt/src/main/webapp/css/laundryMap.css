@@ -22,15 +22,16 @@
 .slide_container{
     flex-direction: row;
     position: relative;
-    z-index: 20;
+    z-index: 10;
     height: 100vh;
+    width: 40vw;
 }
 
 
 /* 메인슬라이드 */
 .slide{
     width: 20vw;
-    height: 92vh;
+    height: 90vh;
     float: left;
     background-color: rgb(243, 243, 243);
     -webkit-transition: width 1s;
@@ -43,17 +44,64 @@
 }
 
 
-/* 예약하기 슬라이드 */
+/* 예약하기 슬라이드 ------------------------------------------*/
 .slide_res{
     width: 20vw;
-    height: 92vh;
+    height: 90vh;
     float: left;
-    background-color: rgb(152 206 255);
+    background-color: rgb(255 255 255);
     -webkit-transition: width 1s;
     transition: width 1s;
     display: none;
+    overflow-y: scroll;
+}
+.rescont{
+    width: 80%;
+    height: auto;
+    margin: auto;
+}
+#resShortOpt{
+    width: 100%;
+    height: 160px;   
 }
 
+#resLongOpts{
+    width: 100%;
+    height: 160px;
+    margin: 30px auto;
+}
+
+.slide_res table>td{
+    height: 50px; 
+    border: 1px solid;   
+}
+
+.slide_res>table>td:nth-child(1){
+    text-align: left;
+}
+.slide_res>table>td:nth-child(2){
+    text-align: center;
+}
+.slide_res>table>td:nth-child(3){
+    text-align: right;
+}
+
+#res_p{
+    width: 100%;
+    height: 40px;
+    margin-left: 20px;
+}
+
+#res_p hr{
+    border-bottom: 1px solid;
+    width: 70%;
+    margin-left: 20px;
+}
+
+.htdres{
+    font-weight: 700;
+    border-bottom: 1px solid var(--gray-color);
+}
 
 /* 슬라이드 이벤트 관련 버튼  */
 .contBtn{
@@ -202,7 +250,7 @@
 
 .card{
     width: 100%;
-    height: 58%;
+    height: 66%;
     background-color: white;
     margin-bottom: 20px;
 }
@@ -231,7 +279,7 @@
     top: 907px;
     background: var(--gray-color);
     border-radius: 25px;
-    margin: 8% 35% 0;
+    margin: 5% 35% 4%;
     border: none;
     color: black;
     font-size: 14px;
@@ -245,11 +293,7 @@
 
 
 #s_title{
-<<<<<<< HEAD
-      font-family: Roboto;
-=======
     font-family: Roboto;
->>>>>>> b26679f544bcfaf13c729914a757e8124b0f5ff1
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
@@ -300,7 +344,7 @@
     text-align: center;
     background-color: var(--key-color);
     border: 0px;
-
+    padding-inline: 13px;
 }
 
 #single_table td{
@@ -311,7 +355,6 @@
 .moreinfo{
     margin-top: 20px;
     width: 100%;
-    height: 65%;
     background-color: white;
     padding-block: 1px;
     margin-bottom: 80px;
@@ -365,7 +408,166 @@
     border: 1px solid lightgray;
 }
 
-
-td:nth-child(2){
-    float: right;
+/* 업체정보/리뷰 버튼제어------------------------ */
+.infoBtn{
+    width: 50%;
+    height: 40px;
+    float: left;
+    border: 0px;
+    font-size: 15px;
+    color: white;
+    font-weight: 500;
 }
+#infoData:hover{
+    color: var(--key-color);
+    background-color: white;
+}
+
+#infoData{
+    background-color: white;
+    color: var(--key-color);
+}
+
+#infoReview{
+    background-color:var(--key-color);
+    color:white ;
+}
+#infoReview:hover{
+    background-color: white;
+    color: var(--key-color);
+}
+
+
+/* 리뷰tab ------------------------------------------------*/
+/* box */
+.cominfo{
+    width: 100%;
+    height: 226px;
+    background: white;
+    display: none;
+}
+
+/* 내부요소 */
+.comhead{
+    width: 100%;
+    height: 20px;
+    float: left;
+    text-align: center;
+    padding-block: 26px;
+}
+
+.latest{
+    font-size: 13px;
+
+}
+
+.grade{
+    font-size: 13px;
+
+}
+
+.allCom{
+    width: 80px;
+    display: inline;
+    margin-left: 30%;
+}
+
+.combody{
+    width: 100%;
+    height: 96px;
+    display: inline-block;
+    margin: 0 auto;
+}
+
+.combodyul{
+    width: 100%;
+    height: 41px;
+    display: inline-block;
+    margin: 0 0 0 9%;
+}
+.combodyul li:nth-child(1){
+    font-size: 14px;
+    font-weight: 600;
+}
+.combodyul li:nth-child(2){
+    color: rgb(255, 238, 0)
+}
+
+.combodyul li:nth-child(3){
+    color: lightgray;
+    font-size: 11px;
+}
+
+.combodyul li:nth-child(4){
+    margin-top: 10px;
+}
+
+#comment{
+    width: 80%;
+    height: 58px;
+    border: 0px;
+}
+
+
+/* 예약 모달관련 이벤트 */
+.res_loading {
+    position: fixed;
+    left: 50%;
+    top: 40%;
+    z-index: 999;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    width: 250px;
+    text-align: center;
+    background: #fff;
+    border-radius: 10px;
+    font-size: 14px;
+    display: none;
+    }
+
+  .dot {
+    padding-top: 7px;
+  }
+  
+  .res_loading i {
+    display: inline-block;
+    background-color:var(--key-color);
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    margin-right: 15px;
+    animation: size 0.3s alternate infinite;
+  }
+  
+  .res_loading i:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+  .res_loading i:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+  
+  .res_loading p {
+    margin-top: 10px;
+    font-size: 20px;
+  }
+
+  .res_loading button{
+    width: 99px;
+    height: 42px;
+    background: var(--gray-color);
+    border-radius: 25px;
+    border: none;
+    color: black;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 30px;
+  }
+  
+  @keyframes size {
+    from {
+      transform: scale(0.5);
+    }
+    to {
+      transform: scale(1.0);
+    }
+  }

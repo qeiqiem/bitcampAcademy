@@ -2,6 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="reservationDAO">
 
+	<select id="getCommListBs" resultType="comment">
+		SELECT orderNum,content,grade
+	</select>
+	<select id="searchComm" resultType="comment"> <!-- 답글이 없는 리뷰 조회 임시 기록 -->
+		SELECT * FROM comments a WHERE groupNum NOT IN (SELECT groupNum FROM comments b WHERE depth=1);
+	</select>
+	<update id="deleteCommCh">
+		UPDATE comments SET mno=#{mno}, content=#{content} WHERE groupNum=#{rsvNum} AND depth=#{depth};
+	</update>
+	<delete id="deleteCommAb">
+		DELETE FROM comments WHERE depth=#{depth} AND mno=#{mno} AND groupNum=#{rsvNum};
+	</delete>
+	<update id="updateComm">
+		UPDATE comments SET content=#{content},mno=#{mno} WHERE groupNum=#{rsvNum} AND depth=#{depth};
+	</update>
 	<insert id="regitComm">
 		INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum) 
 		SELECT #{mno},#{bno},#{content},#{depth},#{rsvNum},CURDATE(),IFNULL(MAX(orderNum)+1,1) FROM comments;
@@ -37,7 +52,14 @@
 		</if>
 	</update>
 	<select id="getRsvListPs" resultType="reservation"> <!-- 일반회원 예약리스트 출력 -->	
-		SELECT r.rno rsvNum,r.bno bno,rdate rsvDate,bname,phone,<![CDATA[	TIMESTAMPDIFF(HOUR,rdate,CURDATE())<1 timeOut]]>, stname state
+		SELECT r.rno rsvNum,r.bno bno,rdate rsvDate,bname,phone,
+		<if test="state==1">
+		<![CDATA[	TIMESTAMPDIFF(HOUR,rdate,CURDATE())<1 timeOut]]>
+		</if>
+		<if test="state==3">
+		<![CDATA[	TIMESTAMPDIFF(DAY,ddate,CURDATE())<7 timeOut]]>
+		</if>
+		, stname state
 		FROM reservation r, business b, state s
 		WHERE r.bno=b.bno AND r.stno=s.stno
 		AND r.mno=#{mno}

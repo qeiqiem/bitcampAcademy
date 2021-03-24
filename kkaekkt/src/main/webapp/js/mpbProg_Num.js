@@ -91,6 +91,9 @@ function enter() {
     }
 }
 function initSide() {
+        $('.side_sub')[0].innerHTML=
+        '<button onclick="location.href='+"'/jsp/mypageBiz/mpbProg_Item.jsp'"+'">품목별</button>'+
+        '<button onclick="location.href='+"'/jsp/mypageBiz/mpbProg_Num.jsp'"+'">주문번호별</button>';
 		$('.side_sub').css('display','unset');
 		$('.side button').eq(0).addClass("side_select");
 		$('.side_sub button').eq(1).addClass("side_sub_select");

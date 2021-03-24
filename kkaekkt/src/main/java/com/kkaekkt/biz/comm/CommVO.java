@@ -1,15 +1,31 @@
 package com.kkaekkt.biz.comm;
 
+import java.sql.Date;
+
 public class CommVO {
 	private int rsvNum; //댓글이 달린 주문번호
 	private int mno;//회원번호
 	private int bno; //사업자 번호
 	private String mname;
 	private String bname;
+	private int orderNum;//순서
 	private int depth; //0.댓글 1.대댓글
 	private int eval;//평가
-	private String content; 
+	private String content;
+	private Date rdate; 
 	
+	public int getOrderNum() {
+		return orderNum;
+	}
+	public void setOrderNum(int orderNum) {
+		this.orderNum = orderNum;
+	}
+	public Date getRdate() {
+		return rdate;
+	}
+	public void setRdate(Date rdate) {
+		this.rdate = rdate;
+	}
 	public String getMname() {
 		return mname;
 	}

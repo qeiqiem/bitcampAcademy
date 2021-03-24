@@ -20,6 +20,7 @@ public interface UserService {
 	public BusinessVO getCoinspec(BusinessVO vo);
 	public void updateSpec(BusinessVO vo);
 	public AccountVO findId(AccountVO vo);
+	public AccountVO findPw(AccountVO vo);
 
 
 }
