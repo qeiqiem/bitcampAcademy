@@ -5,10 +5,10 @@ public class Criteria {
 	private final int POSTS_PER_PAGE=5;//한 페이지당 보여줄 Post 개수
 	private int totalPostCount; //총 Post 개수
 	private int totalLastPageNum; // 마지막 페이지 번호
-	private int currentPageNum;//현재 페이지 번호 (Default=1)
+	private int currentPageNum=1;//현재 페이지 번호 (Default=1)
 	private int blockLastPageNum;//한 블럭에서 마지막 페이지 번호  
 	private int blockFirstPageNum;//한 블럭에서 첫번째 페이지 번호
-	private int rowStartNum; //시작 행 번호 ex) 2페이지 -> 5
+	private int rowStartNum=0; //시작 행 번호 (Default=0) ex) 2페이지 -> 5
 	private boolean isPrevExist=false;//이전 페이지가 존재하는가(Default=false)
 	private boolean isNextExist;//다음 페이지가 존재하는가
 	private boolean isPrevBlockExist=false;//이전 페이지블럭이 존재하는가(Default=false)

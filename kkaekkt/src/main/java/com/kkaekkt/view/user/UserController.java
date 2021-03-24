@@ -93,10 +93,10 @@ public class UserController {
 	public String Update(PersonVO vo, HttpSession session) {
 		System.out.println(vo);
 		userService.updateUser(vo);
-		if(vo.getId() != null) {
-			PersonVO member = userService.getUser(vo);
-			session.setAttribute("member", member);
-		} 
+	
+		PersonVO person = userService.getUser(vo);
+		session.setAttribute("person", person);
+		
 		return "/jsp/mypageUser/mybio.jsp";
 	}
 	
@@ -117,7 +117,6 @@ public class UserController {
 				session.setAttribute("person", vo);
 			}
 			return "/jsp/indexPerson.jsp";
-
 		}
 
 		// 업체유저 로그인
@@ -137,14 +136,13 @@ public class UserController {
 				session.setAttribute("personBs", vo);
 			}
 			return "/jsp/indexCompany.jsp";
-
 		}
 
 		// 소셜유저 로그인	
 		@PostMapping(value = "/loginSNS.do")
 		public @ResponseBody String method(HttpServletRequest req, HttpServletResponse resp, PersonVO vo, HttpSession session) {
 			System.out.println("소셜유저 로그인처리");
-			vo = userService.method(vo, req);
+			//vo = userService.method(vo, req);
 			
 			System.out.println(vo); // 뭐가 담기는 지 보려했다		
 			
