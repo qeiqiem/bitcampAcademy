@@ -20,6 +20,7 @@ public class CommVO {
 	public void setOrderNum(int orderNum) {
 		this.orderNum = orderNum;
 	}
+
 	public Date getRdate() {
 		return rdate;
 	}
