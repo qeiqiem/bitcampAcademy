@@ -43,11 +43,41 @@ public class UserController {
 		Gson gson=new Gson();
 		return gson.toJson(userService.getLikedBs(vo));
 	}
-	@RequestMapping(value="/joinPs.do", method=RequestMethod.POST)
-	public String Join(PersonVO vo) {
-		userService.insertUser(vo);
-		return "index.jsp";
+	// 아이디 중복체크
+	@ResponseBody
+	@RequestMapping(value = "/idchk.do", method = RequestMethod.POST)
+	public String idchk(PersonVO vo) {
+		 vo.setState(userService.idchk(vo));
+		Gson gson = new Gson();
+		
+		return gson.toJson(vo);
 	}
+
+	// 회원개입-개인
+	@RequestMapping(value = "/joinPs.do", method = RequestMethod.POST)
+	public String Join(PersonVO vo) throws Exception {
+		userService.insertUser(vo);
+		int res = userService.idchk(vo);
+		try {
+			if (res == 1) {
+				// 아이디 존재 -> 회원가입 페이지로 돌아가기
+				System.out.println("아이디 존재");
+				return "/joinPs.do";
+			} else if (res == 0) {
+				userService.insertUser(vo);
+			}
+		} catch (Exception e) {
+			throw new RuntimeException();
+		}
+		return "/jsp/join/joinConfirmed.jsp";
+	}
+// 	@RequestMapping(value="/joinPs.do", method=RequestMethod.POST)
+// 	public String Join(PersonVO vo) {
+// 		userService.insertUser(vo);
+// 		return "index.jsp";
+// 	}
+	
+	// 회원가입-업체
 	@RequestMapping(value="/joinBs.do", method=RequestMethod.POST)
 	public String Join(BusinessVO vo) {
 		System.out.println("메서드 진입");
