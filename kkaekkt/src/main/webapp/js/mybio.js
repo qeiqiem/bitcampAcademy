@@ -209,7 +209,7 @@ if($('#pwd').val != $('#newpwd').val){
                 var address = document.getElementById("roadAddress").value  + ", "
                            +  document.getElementById("detailAddress").value;
                console.log(address);
-                document.getElementByName("address")[0].value = address;
+                document.getElementById("address")[0].value = address;
             }
            
 		 	// 전체 폼 보낼때 null값 + 유효성 검사 통과 확인 후 submit
