@@ -12,9 +12,8 @@ function ajax(pageObj) {
             console.log('ajax성공');
             var obj=JSON.parse(data);
             var list = obj.commList;
+            initPageObj(obj);//페이지 변수 및 버튼 초기화
             printList(list);
-            initPageObj(obj);
-            initPageBtn();
             console.log('작업완료');
         }
     });
@@ -23,7 +22,7 @@ function printList(list) {//기본틀! 백엔드 작업 후 수정예정
     $('.reviewList').remove();
     $('.replyList').remove();
     $.each(list,function(key,value) {
-        if(value.depth==0) {
+        if(value.depth==0) {//리뷰일 때
             $('.process').append(
                 '<table class="reviewList" id="review'+key+'">'+
                     '<tr>'+
@@ -33,36 +32,39 @@ function printList(list) {//기본틀! 백엔드 작업 후 수정예정
                         '<td class="cell4" id="customer'+key+'">'+value.mname+'</td>'+
                         '<td class="cell5">'+value.rsvNum+'</td>'+
                         '<td class="cell6">'+value.rdate+'</td>'+
-                        '<td class="cell7"><button class="replyBtn" value='+key+'>답글</button></td>'+
+                        '<td class="cell7"><button class="replyBtn" value='+key+
+                        (value.replytf==1?' disabled>답글완료':'>답글')+
+                        '</button></td>'+
                     '</tr>'+
                 '</table>'
             );
         } else { //대댓글일때
             $('.process').append(
-                '<table class="replyList" id="reply'+(key-1)+'">'+
+                '<table class="replyList" id="reply'+key+'">'+
                     '<tr>'+
                         '<td class="cell1">┗</td>'+
                         '<td class="replyCell close">답글:'+value.content+'</td>'+
+                        '<td class="cell5">'+value.rsvNum+'</td>'+
                         '<td class="cell6">'+value.rdate+'</td>'+
-                        '<td class="cell7"><button class="editBtn" value='+(key-1)+'>수정</button><button class="delBtn" value='+(key-1)+'>삭제</button></td>'+
+                        '<td class="cell7"><button class="editBtn" value='+key+'>수정</button><button class="delBtn" value='+(key-1)+'>삭제</button></td>'+
                     '</tr>'+
                 '</table>'
             );
-            btnChange(key-1,'답글완료',true);
         }
     });
 }
-function editAjax(pageObj,idx) {
-    console.log('편집'+idx);
+function editAjax(pageObj) {
+    console.log('편집');
     $.post({
         url:'/updateComm.do',
         data:pageObj,
         success:function() {
-            successSubmit(idx);
+            console.log('편집완료');
+            ajax(pageObj);
         }
     });
 }
-function insertAjax(pageObj,idx) {
+function insertAjax(pageObj) {
     console.log('등록');
     $.post({
         url:'/regitComm.do',
@@ -70,6 +72,17 @@ function insertAjax(pageObj,idx) {
         success:function() {
             console.log('등록완료');
             successSubmit(idx);
+        }
+    });
+}
+function delAjax(pageObj) {
+    console.log('삭제');
+    $.post({
+        url:'/deleteCommAb.do',
+        data:pageObj,
+        success:function() {
+            console.log('삭제완료');
+            ajax(pageObj);//리스트 재출력
         }
     });
 }
@@ -210,6 +223,7 @@ function initPageObj(data) {
     pageObj.isNextExist=data.isNextExist;
     pageObj.isPrevBlockExist=data.isPrevBlockExist;
     pageObj.isPrevExist=data.isPrevExist;
+    initPageBtn();
 }
 function toDay() {//오늘 날짜 출력
     var date=new Date();
@@ -218,20 +232,14 @@ function toDay() {//오늘 날짜 출력
     var today=mm+'월 '+dd+', '+date.getFullYear();
     return today;
 }
-function delReply(idx) {//답글 삭제
-    pageObj.rsvNum=JSON.parse($('#review'+idx+' .cell5')[0].innerHTML);//주문번호 담기
-    //에이잭스 DELETE 메서드 구현 예정
-    //SUCCESS했을 경우 
-    $('#reply'+idx).remove();
-    btnChange(idx,'답글',false);//답글버튼 활성화
+function delReply(idx) {//답글 삭제 (리팩토링 완료 - 03.25)
+    pageObj.rsvNum=JSON.parse($('#reply'+idx+' .cell5')[0].innerHTML);//주문번호 담기
+    delAjax(pageObj);
 }
 function editReply(idx) {//답글 수정
-    //에이잭스 UPDATE 메서드 구현예정
-    pageObj.rsvNum=JSON.parse($('#review'+idx+' .cell5')[0].innerHTML);//주문번호 담기
+    pageObj.rsvNum=JSON.parse($('#reply'+idx+' .cell5')[0].innerHTML);//주문번호 담기
     pageObj.content=$('#commentBox'+idx).val();//답글 내용 담기
     editAjax(pageObj);
-    //만약, success했을 경우 담을 내용
-    // successSubmit(idx);
 }
 function editFormPrint(idx) {//답글 수정폼 출력
     var content=$('#reply'+idx+' .replyCell')[0].innerHTML.replace("답글:",'');
@@ -270,7 +278,7 @@ function cancelReply(idx) {//답글 취소
     }
 }
 function printReplyForm(idx,content,type){//답글 폼 출력 (인덱스,텍스트내용,등록타입-INSERT,UPDATE)
-    console.log(idx);
+    console.log(idx+'번 idx');
     var customer=$('#customer'+idx)[0].innerHTML;//리뷰 작성한 고객명 추출
     $('<div class="comments" id="comments'+idx+'">'+
         '<div class="comments_header">'+
@@ -320,14 +328,6 @@ function initPageBtn() {
             $("<li class='page_list'>"+i+"</li>").insertAfter($('.page_prev'));
         }
     }
-}
-function initPageObj(data) {
-    pageObj.blockLastPageNum=data.blockLastPageNum;
-    pageObj.blockFirstPageNum=data.blockFirstPageNum;
-    pageObj.isNextBlockExist=data.isNextBlockExist;
-    pageObj.isNextExist=data.isNextExist;
-    pageObj.isPrevBlockExist=data.isPrevBlockExist;
-    pageObj.isPrevExist=data.isPrevExist;
 }
 function resetSearch() {
     pageObj.search='';

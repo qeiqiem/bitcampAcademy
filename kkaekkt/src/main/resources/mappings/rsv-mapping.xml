@@ -11,7 +11,7 @@
 		AND groupNum=#{rsvNum} AND depth=0;
 	</select>
 	<select id="getCommListBs" resultType="comment">
-		SELECT orderNum,content,groupNum rsvNum,rdate,grade eval,mname,c.mno mno,depth
+		SELECT orderNum,content,groupNum rsvNum,rdate,grade eval,mname,c.mno mno,depth,replytf
 		FROM comments c,evaluation e, member m
 		<where>
 			c.groupNum=e.rno AND m.mno=c.mno
@@ -23,7 +23,7 @@
 				AND groupNum LIKE CONCAT('%',#{search},'%')
 			</if>
 			<if test="searchOption==3"><!-- 평점검색 -->
-				AND grade=#{search}
+				AND grade LIKE CONCAT('%',#{search},'%')
 			</if>
 		</where>
 		<if test="order==1"> <!-- 등록 순이면 -->
@@ -47,16 +47,16 @@
 		UPDATE comments SET mno=#{mno}, content=#{content} WHERE groupNum=#{rsvNum} AND depth=#{depth};
 	</update>
 	<delete id="deleteCommAb">
-		DELETE FROM comments WHERE depth=#{depth} AND mno=#{mno} AND groupNum=#{rsvNum};
+		DELETE FROM comments WHERE depth=#{depth} AND groupNum=#{rsvNum};
 	</delete>
 	<update id="updateComm">
 		UPDATE comments SET content=#{content} WHERE groupNum=#{rsvNum} AND depth=#{depth};
 	</update>
 	<insert id="regitComm">
 		<if test="depth==0">
-			INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum) 
-			SELECT #{mno},#{bno},#{content},#{depth},#{rsvNum},NOW(),IFNULL(MAX(orderNum)+1,1) FROM comments;
-			INSERT INTO evaluation (mno,bno,grade,rno)VALUES (#{mno},#{bno},#{eval},#{rsvNum});
+			INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum,replytf) 
+			SELECT #{mno},#{bno},#{content},#{depth},#{rsvNum},NOW(),IFNULL(MAX(orderNum)+1,1),0 FROM comments;
+			INSERT INTO evaluation (mno,bno,grade,rno) VALUES (#{mno},#{bno},#{eval},#{rsvNum});
 		</if>
 		<if test="depth==1">
 			INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum)

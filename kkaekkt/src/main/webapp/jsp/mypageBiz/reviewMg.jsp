@@ -113,7 +113,8 @@
 	<script>
 		var pageObj = {
 			bno:1,
-			depth:1
+			depth:1,
+			order:1
 		}
 	</script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>

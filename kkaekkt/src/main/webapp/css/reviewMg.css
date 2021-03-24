@@ -237,7 +237,7 @@ td.cell2:hover{
     height: 48px;
 }
 .replyCell {
-    width: 69%;
+    width: 57%;
     text-align: left;
     overflow: hidden;
     text-overflow: ellipsis;

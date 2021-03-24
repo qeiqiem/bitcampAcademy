@@ -3,6 +3,7 @@ package com.kkaekkt.biz.comm;
 import java.util.List;
 
 public class CommListVO extends Criteria{
+	private final int POSTS_PER_PAGE=10;
 	private int mno;
 	private int bno;
 	private int order; // 정렬 : 1.등록 순  2.평점 순
@@ -10,6 +11,9 @@ public class CommListVO extends Criteria{
 	private int searchOption; // 1.이름   2.주문번호 조회 3.평점
 	private List<CommVO> commList;
 	
+	public int getPOSTS_PER_PAGE() {
+		return POSTS_PER_PAGE;
+	}
 	public int getMno() {
 		return mno;
 	}
