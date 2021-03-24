@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kkaekkt.biz.comm.CommListVO;
 import com.kkaekkt.biz.comm.CommVO;
 import com.kkaekkt.biz.comm.LaundryVO;
 import com.kkaekkt.biz.reservation.ReservationListVO;
@@ -15,11 +16,12 @@ import com.kkaekkt.biz.reservation.ReservationVO;
 public class ReservationServiceImpl implements ReservationService {
 	@Autowired
 	ReservationDAO reservationDAO;
-
 	
 	@Override
 	public void regitComm(CommVO vo) {
-		reservationDAO.regitComm(vo);		
+		vo.setOrderNum(reservationDAO.getOrderNum(vo));
+		reservationDAO.updateOrderNum(vo);
+		reservationDAO.regitComm(vo);
 	}
 	public void insertRsv(ReservationVO vo) {
 		reservationDAO.insertRsv(vo);
@@ -76,16 +78,14 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 	@Override
 	public void deleteCommAb(CommVO vo) {
-		reservationDAO.deleteCommAb(vo);
-		
+		reservationDAO.deleteCommAb(vo);	
 	}
 	@Override
 	public void deleteCommCh(CommVO vo) {
-		reservationDAO.deleteCommCh(vo);
-		
+		reservationDAO.deleteCommCh(vo);	
 	}
 	@Override
-	public List<CommVO> getCommListBs(CommVO vo) {
+	public List<CommVO> getCommListBs(CommListVO vo) {
 		return reservationDAO.getCommListBs(vo);
 	}
 }
