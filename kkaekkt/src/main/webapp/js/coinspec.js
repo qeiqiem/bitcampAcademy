@@ -3,7 +3,7 @@ $(document).ready(function () {
     initEvent();
     ajax(pageObj);
     initSide();
-
+  
 
 });
 function initEvent() {
@@ -126,7 +126,7 @@ function initEvent() {
         $("#weekBox input[name='schedule']")[0].value = JSON.stringify(list);
 
         // form subbit
-        //$("form").submit();
+        $("form").submit();
     });
 
     // 영업시간 

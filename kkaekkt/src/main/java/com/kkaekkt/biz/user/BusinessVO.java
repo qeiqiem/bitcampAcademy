@@ -193,7 +193,7 @@ public class BusinessVO{
 		return "BusinessVO [bno=" + bno + ", mno=" + mno + ", id=" + id + ", password=" + password + ", bname=" + bname
 				+ ", address=" + address + ", phone=" + phone + ", email=" + email + ", comment=" + comment
 				+ ", bizType=" + bizType + ", bankNum=" + bankNum + ", bankAccountNum=" + bankAccountNum
-				+ ", scheduleList=" + scheduleList + ", equipmentList=" + equipmentList + ", laundryList=" + laundryList
+				+ ", scheduleList=" + scheduleList + ", equipmentList=" + equipmentList  + ", etcList=" + etcList+", laundryList=" + laundryList
 				+ ", equipment=" + equipment + ", laundry=" + laundry + ", schedule=" + schedule + "]";
 	}	
 
