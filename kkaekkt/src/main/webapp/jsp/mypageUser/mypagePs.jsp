@@ -13,9 +13,8 @@
 <link rel="stylesheet" href="/css/mypagePs.css">
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 </head>
-
 <body>
-	<jsp:include page="/jsp/header0.jsp"></jsp:include>
+	<jsp:include page="/jsp/header0.jsp" ></jsp:include>
 	<div class="body_container">
 			<jsp:include page="sidebar_ps.jsp"></jsp:include>
 			<div class="content">
@@ -88,7 +87,7 @@
 	<script>
             var pageObj={//세션에서 정보를 받아오는건 독립된 js파일에서 불가능, jsp 내에서만 가능하기 때문에 여기서 값을 받아준다.
                 mno:1,
-				mname:'태연',
+				mname:'테스터',
 				currentPageNum:1,
 				listType:1,
                 state:1

@@ -55,7 +55,7 @@
                 </div>
             </form>
 
-            <form action="/findPw.do" method="POST" onsubmit="return check()">
+            <form action="/findPw.do" method="POST" onsubmit="">
                 <div id="findPW">
                     <p>아이디와 비밀번호를 찾기 위해서는 이름, 회원정보에 등록된 이메일을 통해 본인인증을 받아야 합니다.</p>
 

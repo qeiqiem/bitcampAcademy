@@ -3,6 +3,8 @@ package com.kkaekkt.biz.user.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,10 +37,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public BusinessListVO getLikedBs(BusinessListVO vo) {
 		vo.setTotalPostCount(userDao.countList(vo)); // 총 데이터행 입력
-		System.out.println(vo.getTotalPostCount()+":개 행 출력");
+		System.out.println(vo.getTotalPostCount() + ":개 행 출력");
 		vo.booleanSet(); // 페이징 정보 입력
 		vo.setBsList(userDao.getLikedBs(vo));
-		for(BusinessVO bvo:vo.getBsList()) {
+		for (BusinessVO bvo : vo.getBsList()) {
 			System.out.println(bvo);
 		}
 		return vo;
@@ -84,13 +86,20 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public PersonVO getUser(PersonVO vo) {
-		System.out.println("servie옴");
-		return userDao.getUser(vo);
+		System.out.println("유저로그인 servie옴");		
+		return userDao.getUserPs(vo);
 	}
+	
+	public PersonVO method(PersonVO vo, HttpServletRequest req) {
+		System.out.println("소셜유저로그인 servie옴");		
+		return userDao.getUserSNS(vo);
+	}
+		
 
 	@Override
 	public BusinessVO getUser(BusinessVO vo) {
-		return null;
+		System.out.println("업체로그인 servie옴");
+		return userDao.getUserBs(vo);
 	}
 
 	public <T> List<T> convertToObj(String json, Class<T> type) {
@@ -110,14 +119,15 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public BusinessVO getComspec(BusinessVO vo) {
-		//System.out.println("servie옴");
+		// System.out.println("servie옴");
 		vo.setLaundryList(userDao.getLaundry(vo));
 		vo.setScheduleList(userDao.getSchedule(vo));
 		return vo;
 	}
+
 	@Override
 	public BusinessVO getCoinspec(BusinessVO vo) {
-		//System.out.println("servie옴");
+		// System.out.println("servie옴");
 		vo.setEquipmentList(userDao.getEquipment(vo));
 		vo.setEtcList(userDao.getEtc(vo));
 		vo.setScheduleList(userDao.getSchedule(vo));
@@ -128,7 +138,7 @@ public class UserServiceImpl implements UserService {
 		System.out.println("서비스진입");
 		vo.setScheduleList(convertToObj(vo.getSchedule(), ScheduleVO.class));
 		System.out.println(vo.getScheduleList());
-		
+
 		if (vo.getBizType() == 1) { // 일반 세탁소라면
 			vo.setLaundryList(convertToObj(vo.getLaundry(), LaundryVO.class));
 		} else {
@@ -136,11 +146,19 @@ public class UserServiceImpl implements UserService {
 			vo.setEtcList(convertToObj(vo.getEtc(), EtcVO.class));
 		}
 
-		userDao.updateSpec(vo);	
+		userDao.updateSpec(vo);
 	}
-	
+
 	@Override
 	public AccountVO findId(AccountVO vo) {
 		return userDao.findId(vo);
 	}
+
+	@Override
+	public AccountVO findPw(AccountVO vo) {
+		System.out.println("findPw 서비스옴");
+		return userDao.findPw(vo);
+	}
+
+	
 }

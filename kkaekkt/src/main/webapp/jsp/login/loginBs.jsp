@@ -20,7 +20,7 @@
     <div class="body_container">
         <div class="content">
             <button id="log">
-                <a href="/jsp/login_Ps.jsp">일반로그인</a>
+                <a href="/jsp/login/loginPs.jsp">일반로그인</a>
             </button>
             <button id="log">
                 <a href="#">업체로그인</a>

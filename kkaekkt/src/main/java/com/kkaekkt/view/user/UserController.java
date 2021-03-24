@@ -1,16 +1,17 @@
 package com.kkaekkt.view.user;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
-import com.kkaekkt.biz.comm.LaundryVO;
 import com.kkaekkt.biz.user.AccountVO;
 import com.kkaekkt.biz.user.BusinessListVO;
 import com.kkaekkt.biz.user.BusinessVO;
@@ -43,11 +44,41 @@ public class UserController {
 		Gson gson=new Gson();
 		return gson.toJson(userService.getLikedBs(vo));
 	}
-	@RequestMapping(value="/joinPs.do", method=RequestMethod.POST)
-	public String Join(PersonVO vo) {
-		userService.insertUser(vo);
-		return "index.jsp";
+	// 아이디 중복체크
+	@RequestMapping(value ="/idchk.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String idchk(PersonVO vo) {
+		System.out.println(vo);
+		Gson gson = new Gson();
+		 vo.setState(userService.idchk(vo));
+		return gson.toJson(vo);
 	}
+
+	// 회원개입-개인
+	@RequestMapping(value = "/joinPs.do", method = RequestMethod.POST)
+	public String Join(PersonVO vo) throws Exception {
+		userService.insertUser(vo);
+		int res = userService.idchk(vo);
+		try {
+			if (res == 1) {
+				// 아이디 존재 -> 회원가입 페이지로 돌아가기
+				System.out.println("아이디 존재");
+				return "/joinPs.do";
+			} else if (res == 0) {
+				userService.insertUser(vo);
+			}
+		} catch (Exception e) {
+			throw new RuntimeException();
+		}
+		return "/jsp/join/joinConfirmed.jsp";
+	}
+// 	@RequestMapping(value="/joinPs.do", method=RequestMethod.POST)
+// 	public String Join(PersonVO vo) {
+// 		userService.insertUser(vo);
+// 		return "index.jsp";
+// 	}
+	
+	// 회원가입-업체
 	@RequestMapping(value="/joinBs.do", method=RequestMethod.POST)
 	public String Join(BusinessVO vo) {
 		System.out.println("메서드 진입");
@@ -65,29 +96,71 @@ public class UserController {
 		return "/jsp/mypageUser/mybio.jsp";
 	}
 	
-	// 로그인
-	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
-	public String Login(PersonVO vo, HttpSession session) {
-		System.out.println("로그인처리");
-		vo = userService.getUser(vo);
-		System.out.println(vo);
+	// 일반유저 로그인
+		@RequestMapping(value = "/loginPs.do", method = RequestMethod.POST)
+		public String Login(PersonVO vo, HttpSession session) {
+			System.out.println("로그인처리");
 
-		if (vo != null) {
-			session.setAttribute("person", vo);
-			return "index.jsp";
-		} else {
-			System.out.println("회원정보없음");
-			return "login.jsp";
+			vo = userService.getUser(vo);
+
+			System.out.println(vo); // 뭐가 담기는 지 보려했다
+
+			if (vo.getMno() == 0) {
+				session.setAttribute("person", null);
+				System.out.println("회원정보없음");
+				return "/jsp/login/loginPs.jsp";
+			} else {
+				session.setAttribute("person", vo);
+			}
+			return "/jsp/indexPerson.jsp";
+
 		}
 
-	}
-	// 로그아웃
-	@RequestMapping("/logout.do")
-	public String logout(HttpSession session) {
-		System.out.println("로그아웃 처리");
-		session.invalidate();
-		return "index.jsp";
-	}
+		// 업체유저 로그인
+		@RequestMapping(value = "/loginBs.do", method = RequestMethod.POST)
+		public String Login(BusinessVO vo, HttpSession session) {
+			System.out.println("로그인처리");
+
+			vo = userService.getUser(vo);
+
+			System.out.println(vo); // 뭐가 담기는 지 보려했다
+
+			if (vo.getMno() == 0) {
+				session.setAttribute("personBs", null);
+				System.out.println("회원정보없음");
+				return "/jsp/login/loginBs.jsp";
+			} else {
+				session.setAttribute("personBs", vo);
+			}
+			return "/jsp/indexCompany.jsp";
+
+		}
+
+		// 소셜유저 로그인	
+		@PostMapping(value = "/loginSNS.do")
+		public @ResponseBody String method(HttpServletRequest req, PersonVO vo, HttpSession session) {
+			System.out.println("소셜유저 로그인처리");
+			vo = userService.method(vo, req);
+			
+			System.out.println(vo); // 뭐가 담기는 지 보려했다		
+			
+			if (vo.getMno() == 0) {
+				session.setAttribute("personSNS", null);
+				System.out.println("회원정보없음");
+				return "/jsp/login/loginPs.jsp";
+			} else {
+				session.setAttribute("personSNS", vo);
+			}
+			return "/jsp/indexPerson.jsp";
+		}
+
+		// 로그아웃
+		@RequestMapping("/logout.do")
+		public String logout(HttpSession session) {
+			System.out.println("로그아웃 처리");
+			session.invalidate();
+			return "/jsp/index.jsp";
+		}
 	// 일반사양관리
 		@RequestMapping(value="/selectComspec.do", method=RequestMethod.POST, produces="application/text;charset=utf-8")
 		@ResponseBody

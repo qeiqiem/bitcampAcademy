@@ -9,21 +9,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <link rel="stylesheet" href="/css/login.css">
 </head>
 
 
 <body>
     <jsp:include page="/jsp/header0.jsp"></jsp:include>
-    <a href="http://developers.kakao.com/logout">로그아웃링크?</a>
 
     <div class="body_container">
+    <a href="http://developers.kakao.com/logout">노간지 로그아웃</a>
         <div class="content">
             <button id="log">
                 <a href="#">일반로그인</a>
             </button>
             <button id="log">
-                <a href="/jsp/login_Bs.jsp">업체로그인</a>
+                <a href="/jsp/loginBs.jsp">업체로그인</a>
             </button>
 
             <div class="login">
@@ -56,7 +57,7 @@
             </div>
         </div>
     </div>
-    <!-- 바디콘테이너 -->
+    <!-- 바디콘테이너 --> 
 </body>
 <script src="/js/kakaoLogin.js"></script>
 <script src="/js/facebookLogin.js"></script>

@@ -1,6 +1,7 @@
 package com.kkaekkt.biz.user;
 
 import java.util.List;
+import java.util.Map;
 
 import com.google.gson.JsonElement;
 import com.kkaekkt.biz.comm.LaundryVO;
@@ -20,6 +21,8 @@ public interface UserService {
 	public BusinessVO getCoinspec(BusinessVO vo);
 	public void updateSpec(BusinessVO vo);
 	public AccountVO findId(AccountVO vo);
-
+	public AccountVO findPw(AccountVO vo);
+	public int idchk(PersonVO vo);
+	public AccountVO authkey(Map<String, String> map);
 
 }
