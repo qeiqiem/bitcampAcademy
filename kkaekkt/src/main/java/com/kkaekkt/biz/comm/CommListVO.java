@@ -3,12 +3,26 @@ package com.kkaekkt.biz.comm;
 import java.util.List;
 
 public class CommListVO extends Criteria{
+	private int mno;
+	private int bno;
 	private int order; // 정렬 : 1.등록 순  2.평점 순
 	private int orderType; // 정렬유형 : 1=오름차순, 2=내림차순
 	private String search; //검색어
 	private int searchOption; // 1.이름   2.주문번호 조회 3.평점
 	private List<CommVO> commList;
 	
+	public int getMno() {
+		return mno;
+	}
+	public void setMno(int mno) {
+		this.mno = mno;
+	}
+	public int getBno() {
+		return bno;
+	}
+	public void setBno(int bno) {
+		this.bno = bno;
+	}
 	public int getOrder() {
 		return order;
 	}

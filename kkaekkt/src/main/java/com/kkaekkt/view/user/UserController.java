@@ -113,7 +113,6 @@ public class UserController {
 				session.setAttribute("person", vo);
 			}
 			return "/jsp/indexPerson.jsp";
-
 		}
 
 		// 업체유저 로그인
@@ -133,7 +132,6 @@ public class UserController {
 				session.setAttribute("personBs", vo);
 			}
 			return "/jsp/indexCompany.jsp";
-
 		}
 
 		// 소셜유저 로그인	

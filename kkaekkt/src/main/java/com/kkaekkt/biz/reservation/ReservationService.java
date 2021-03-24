@@ -17,5 +17,5 @@ public interface ReservationService {
 	public void updateComm(CommVO vo);
 	public void deleteCommAb(CommVO vo);
 	public void deleteCommCh(CommVO vo);
-	public List<CommVO> getCommListBs(CommListVO vo);
+	public CommListVO getCommListBs(CommListVO vo);
 }
