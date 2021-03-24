@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kkaekkt.biz.comm.CommListVO;
 import com.kkaekkt.biz.comm.CommVO;
 import com.kkaekkt.biz.comm.LaundryVO;
 import com.kkaekkt.biz.reservation.ReservationListVO;
@@ -64,7 +65,13 @@ public class ReservationDAO {
 	public void deleteCommCh(CommVO vo) {
 		mybatis.update("reservationDAO.deleteCommCh",vo);		
 	}
-	public List<CommVO> getCommListBs(CommVO vo) {
+	public List<CommVO> getCommListBs(CommListVO vo) {
 		return mybatis.selectList("reservationDAO.getCommListPs",vo);
+	}
+	public int getOrderNum(CommVO vo) {
+		return mybatis.selectOne("reservationDAO.getOrderNum",vo);
+	}
+	public void updateOrderNum(CommVO vo) {
+		mybatis.update("reservationDAO.updateOrderNum",vo);
 	}
 }

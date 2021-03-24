@@ -1,5 +1,7 @@
 package com.kkaekkt.view.user;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.kkaekkt.biz.comm.CommListVO;
 import com.kkaekkt.biz.comm.CommVO;
 import com.kkaekkt.biz.comm.LaundryVO;
 import com.kkaekkt.biz.reservation.ReservationListVO;
@@ -37,16 +40,16 @@ public class ReservationController {
 	public String getRsvListPs(ReservationListVO vo) {
 		System.out.println(vo);
 		Gson gson=new Gson();
-		String test=gson.toJson(reservationService.getRsvListPs(vo));
-		return test;
+		String result=gson.toJson(reservationService.getRsvListPs(vo));
+		return result;
 	}
 	@RequestMapping(value="/getRsvListBs.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
 	@ResponseBody
 	public String getRsvListBs(ReservationListVO vo) {
 		System.out.println(vo);
 		Gson gson=new Gson();
-		String test=gson.toJson(reservationService.getRsvListBs(vo));
-		return test;
+		String result=gson.toJson(reservationService.getRsvListBs(vo));
+		return result;
 	}
 	@RequestMapping(value="/cancel.do", method=RequestMethod.POST)
 	@ResponseBody
@@ -85,8 +88,11 @@ public class ReservationController {
 	}
 	@RequestMapping(value="/getCommListBs.do", method=RequestMethod.POST)//리뷰관리 리스트조회
 	@ResponseBody
-	public void getCommListBs(CommVO vo) {
-		reservationService.getCommListBs(vo);
+	public String getCommListBs(CommListVO vo) {
+		System.out.println(vo);
+		Gson gson=new Gson();
+		String result=gson.toJson(reservationService.getCommListBs(vo));
+		return result;
 	}
 	
 }
