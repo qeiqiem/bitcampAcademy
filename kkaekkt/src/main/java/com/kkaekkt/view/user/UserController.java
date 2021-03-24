@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
-import com.kkaekkt.biz.comm.LaundryVO;
 import com.kkaekkt.biz.user.AccountVO;
 import com.kkaekkt.biz.user.BusinessListVO;
 import com.kkaekkt.biz.user.BusinessVO;
@@ -46,12 +45,12 @@ public class UserController {
 		return gson.toJson(userService.getLikedBs(vo));
 	}
 	// 아이디 중복체크
+	@RequestMapping(value ="/idchk.do", method = RequestMethod.POST)
 	@ResponseBody
-	@RequestMapping(value = "/idchk.do", method = RequestMethod.POST)
 	public String idchk(PersonVO vo) {
-		 vo.setState(userService.idchk(vo));
+		System.out.println(vo);
 		Gson gson = new Gson();
-		
+		 vo.setState(userService.idchk(vo));
 		return gson.toJson(vo);
 	}
 
@@ -180,7 +179,9 @@ public class UserController {
 			Gson gson=new Gson();
 			String coinspec=gson.toJson(userService.getCoinspec(vo));
 			System.out.println("test:" + coinspec);
-			return coinspec;
+			
+			return coinspec;			
+			
 		}	
 	// 일반(사양,설비)관리 update
 		@RequestMapping(value="/updateSpec.do", method=RequestMethod.POST)
