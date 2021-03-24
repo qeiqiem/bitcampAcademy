@@ -4,8 +4,11 @@
 	<update id="updateOrderNum">
 		UPDATE comments SET orderNum=orderNum+1 WHERE <![CDATA[orderNum>=#{orderNum}]]>
 	</update>
-	<select id="getOrderNum" resultType="_int">
-		SELECT orderNum FROM comments WHERE groupNum=#{rsvNum} AND depth=0;
+	<select id="getCustomerData" resultType="comment">
+		SELECT c.mno mno,orderNum,grade eval 
+		FROM comments c,evaluation e 
+		WHERE c.groupNum=e.rno
+		AND groupNum=#{rsvNum} AND depth=0;
 	</select>
 	<select id="getCommListBs" resultType="comment">
 		SELECT orderNum,content,groupNum rsvNum,rdate,grade eval,mname,c.mno mno,depth
@@ -26,8 +29,11 @@
 		<if test="order==1"> <!-- 등록 순이면 -->
 			ORDER BY orderNum DESC
 		</if>
-		<if test="order==2"> <!-- 평점 순이면 -->
-			ORDER BY grade <if test="orderType==2">DESC</if>, orderNum DESC
+		<if test="order==2"> <!-- 평점 높은순이면 -->
+			ORDER BY grade DESC, orderNum DESC
+		</if>
+		<if test="order==3"> <!-- 평점 낮은순이면 -->
+			ORDER BY grade, orderNum DESC
 		</if>
 		LIMIT #{rowStartNum},#{POSTS_PER_PAGE};
 	</select>
@@ -44,17 +50,17 @@
 		DELETE FROM comments WHERE depth=#{depth} AND mno=#{mno} AND groupNum=#{rsvNum};
 	</delete>
 	<update id="updateComm">
-		UPDATE comments SET content=#{content},mno=#{mno} WHERE groupNum=#{rsvNum} AND depth=#{depth};
+		UPDATE comments SET content=#{content} WHERE groupNum=#{rsvNum} AND depth=#{depth};
 	</update>
 	<insert id="regitComm">
 		<if test="depth==0">
 			INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum) 
 			SELECT #{mno},#{bno},#{content},#{depth},#{rsvNum},NOW(),IFNULL(MAX(orderNum)+1,1) FROM comments;
-			INSERT INTO evaluation VALUES (#{mno},#{bno},#{eval},);
+			INSERT INTO evaluation (mno,bno,grade,rno)VALUES (#{mno},#{bno},#{eval},#{rsvNum});
 		</if>
 		<if test="depth==1">
 			INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum)
-			VALUES (,#{bno},#{content},#{depth},#{rsvNum},NOW(),#{orderNum});
+			VALUES (#{mno},#{bno},#{content},#{depth},#{rsvNum},NOW(),#{orderNum});
 		</if>
 	</insert>
 	<insert id="likeOn">
@@ -102,6 +108,7 @@
 		ORDER BY rno DESC
 		LIMIT #{rowStartNum},#{POSTS_PER_PAGE};
 	</select>
+	
 	<select id="getRsvListBs_ld" resultType="laundry"> <!-- 업체 품목별 리스트 출력 -->
 		SELECT rdate rsvDate, r.rno rsvNum, mname, lname laundry,cnt count,DATEDIFF(ddate,NOW()) dDay 
 		FROM reservation r, member m, rsv_laundry r_l, laundry_type lt 
