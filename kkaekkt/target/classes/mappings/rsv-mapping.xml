@@ -31,6 +31,9 @@
 		</if>
 		LIMIT #{rowStartNum},#{POSTS_PER_PAGE};
 	</select>
+	<select id="getCommCount" resultType="_int">
+		SELECT count(cno) FROM comments WHERE bno=#{bno};
+	</select>
 	<select id="searchComm" resultType="comment"> <!-- 답글이 없는 리뷰 조회 임시 기록 -->
 		SELECT * FROM comments a WHERE groupNum NOT IN (SELECT groupNum FROM comments b WHERE depth=1);
 	</select>

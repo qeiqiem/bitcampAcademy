@@ -1,14 +1,19 @@
 $(document).ready(function() {
     initSide();
     initEvent();
+    printAjax(pageObj);
 });
-function printAjax(dataObj) {
+function printAjax(pageObj) {
+    console.log('ajax진입');
     $.post({
-        url:'/printCommBs.do',
-        data:dataObj,
+        url:'/getCommListBs.do',
+        data:pageObj,
         success:function(data) {
-            var list=JSON.parse(data);
+            console.log('ajax성공');
+            var obj=JSON.parse(data);
+            var list = obj.commList;
             printList(list);
+            console.log('작업완료');
         }
     });
 }
@@ -16,12 +21,13 @@ function printList(list) {//기본틀! 백엔드 작업 후 수정예정
     $('.reviewList').remove();
     $('.replyList').remove();
     $.each(list,function(key,value) {
+        btnText='임시버튼';
         $('.process').append(
             '<table class="reviewList" id="review'+key+'">'+
                 '<tr>'+
                     '<td class="cell1">'+value.orderNum+'</td>'+
                     '<td class="cell2 close">'+value.content+'</td>'+
-                    '<td class="cell3">'+value.eval+'</td>'+
+                    '<td class="cell3">'+value.eval+'/5</td>'+
                     '<td class="cell4" id="customer'+key+'">'+value.mname+'</td>'+
                     '<td class="cell5">'+value.rsvNum+'</td>'+
                     '<td class="cell6">'+value.rdate+'</td>'+

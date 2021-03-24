@@ -74,4 +74,8 @@ public class ReservationDAO {
 	public void updateOrderNum(CommVO vo) {
 		mybatis.update("reservationDAO.updateOrderNum",vo);
 	}
+	public int getCommCount(CommListVO vo) {
+		return mybatis.selectOne("reservationDAO.getCommCount",vo);
+		
+	}
 }

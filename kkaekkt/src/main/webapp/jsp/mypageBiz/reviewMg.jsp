@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="java.util.List"%>
+<%@ page import="com.kkaekkt.biz.comm.CommListVO"%>
+<%@ page import="com.kkaekkt.biz.comm.CommVO"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,10 +10,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../../css/all.css">
-    <link rel="stylesheet" href="../../css/head0.css">
-    <link rel="stylesheet" href="../../css/sidebar.css">
-    <link rel="stylesheet" href="../../css/reviewMg.css">
+    <link rel="stylesheet" href="/css/all.css">
+    <link rel="stylesheet" href="/css/head0.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+    <link rel="stylesheet" href="/css/reviewMg.css">
     <script src="https://kit.fontawesome.com/2fc57dd2db.js"
         crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -19,7 +24,7 @@
         <nav class="head">
             <div class="head_left">
                 <div class="logo">
-                    <a href=""> <img src="../../img/logo.svg" alt="">
+                    <a href=""> <img src="/img/logo.svg" alt="">
                     </a>
                 </div>
                 <div class="menu">
@@ -164,6 +169,6 @@
 		}
 	</script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <script src="../../js/reviewMg.js"></script>
+    <script src="/js/reviewMg.js"></script>
 </body>
 </html>
