@@ -62,22 +62,22 @@ public class UserDAO {
 	}
 
 	// 일반 로그인
-	public PersonVO getUserPs(PersonVO vo) {
-		System.out.println("mybatis로 기능처리 일반유저");
-		return mybatis.selectOne("UserDAO.getPerson", vo);
-	}
+		public PersonVO getUserPs(PersonVO vo) {
+			System.out.println("mybatis로 기능처리 일반유저");
+			return mybatis.selectOne("UserDAO.getPerson", vo);
+		}
 
-	// 업체 로그인
-	public BusinessVO getUserBs(BusinessVO vo) {
-		System.out.println("mybatis로 기능처리 업체유저");
-		return mybatis.selectOne("UserDAO.getPersonBs", vo);
-	}
+		// 업체 로그인
+		public BusinessVO getUserBs(BusinessVO vo) {
+			System.out.println("mybatis로 기능처리 업체유저");
+			return mybatis.selectOne("UserDAO.getPersonBs", vo);
+		}
 
-	// 소셜 로그인
-	public PersonVO getUserSNS(PersonVO vo) {
-		System.out.println("mybatis로 기능처리 일반유저");
-		return mybatis.selectOne("UserDAO.getPersonSNS", vo);
-	}
+		// 소셜 로그인
+		public PersonVO getUserSNS(PersonVO vo) {
+			System.out.println("mybatis로 기능처리 소셜유저");
+			return mybatis.selectOne("UserDAO.getPersonSNS", vo);
+		}
 
 	// laundry
 	public List<LaundryVO> getLaundry(BusinessVO vo) {
