@@ -92,7 +92,7 @@ CREATE TABLE `comments` (
 	`depth`	INTEGER	NULL comment '깊이',
 	`groupNum`	INTEGER	NULL comment '소속',
 	`rdate` 	DATETIME NULL comment '등록일자'
-	`grade`	INTEGER	NULL comment '점수'
+	`grade`	INTEGER	NOT NULL comment '점수'
 );
 
 CREATE TABLE `liked` (
