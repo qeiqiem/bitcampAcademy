@@ -91,14 +91,9 @@ CREATE TABLE `comments` (
 	`orderNum`	INTEGER	NULL comment '순서',
 	`depth`	INTEGER	NULL comment '깊이',
 	`groupNum`	INTEGER	NULL comment '소속',
-	`rdate` DATETIME NULL comment '등록일자'
-);
-
-CREATE TABLE `evaluation` (
-	`rno` 	INTEGER NOT NULL comment '예약번호',
-	`mno`	INTEGER	NOT NULL comment '회원번호',
-	`bno`	INTEGER	NOT NULL comment '사업자번호',
-	`grade`	INTEGER	NULL comment '점수'
+	`rdate` 	DATETIME NULL comment '등록일자',
+	`grade`	INTEGER	NOT NULL comment '점수',
+	`replytf` TINYINT(1) NOT NULL DEFAULT 0 COMMENT '답글 유무'
 );
 
 CREATE TABLE `liked` (
@@ -315,27 +310,6 @@ ALTER TABLE `comments` ADD CONSTRAINT `FK_RESERVATION_TO_comments_1` FOREIGN KEY
 REFERENCES `reservation` (
 	`rno`
 ) ON DELETE SET NULL;
-
-ALTER TABLE `evaluation` ADD CONSTRAINT `FK_RESERVATION_TO_EVALUATION_1` FOREIGN KEY (
-	`rno`
-)
-REFERENCES `reservation` (
-	`rno`
-) ON DELETE CASCADE;
-
-ALTER TABLE `evaluation` ADD CONSTRAINT `FK_MEMBER_TO_EVALUATION_1` FOREIGN KEY (
-	`mno`
-)
-REFERENCES `member` (
-	`mno`
-) ON DELETE CASCADE;
-
-ALTER TABLE `evaluation` ADD CONSTRAINT `FK_BUSINESS_TO_EVALUATION_1` FOREIGN KEY (
-	`bno`
-)
-REFERENCES `business` (
-	`bno`
-) ON DELETE CASCADE;
 
 ALTER TABLE `liked` ADD CONSTRAINT `FK_BUSINESS_TO_LIKED_1` FOREIGN KEY (
 	`bno`
@@ -629,33 +603,27 @@ INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 3,3,3);
 INSERT INTO rsv_payment VALUES ((SELECT MAX(rno) FROM reservation), 9300, '카드');
 
 -- 리뷰 추가
-INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum) 
-		SELECT 1,1,'테스트답글',1,27,now(),IFNULL(MAX(orderNum)+1,1) FROM comments;
-INSERT INTO evaluation (rno,mno,bno,grade)VALUES (27,1,1,4);
-INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum) 
-		SELECT 1,1,'테스트리뷰',0,27,date_add(now(),INTERVAL 1 HOUR),IFNULL(MAX(orderNum)+1,1) FROM comments;
-INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum) 
-		SELECT 1,1,'테스트답글',1,26,now(),IFNULL(MAX(orderNum)+1,1) FROM comments;
-INSERT INTO evaluation (rno,mno,bno,grade)VALUES (26,1,1,3);
-INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum) 
-		SELECT 1,1,'테스트리뷰',0,26,date_add(now(),INTERVAL 2 HOUR),IFNULL(MAX(orderNum)+1,1) FROM comments;
-INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum) 
-		SELECT 1,1,'테스트리뷰',0,25,date_add(now(),INTERVAL 3 HOUR),IFNULL(MAX(orderNum)+1,1) FROM comments;
-INSERT INTO evaluation (rno,mno,bno,grade)VALUES (25,1,1,2);
-INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum) 
-		SELECT 1,1,'테스트리뷰',0,24,date_add(now(),INTERVAL 4 HOUR),IFNULL(MAX(orderNum)+1,1) FROM comments;
-INSERT INTO evaluation (rno,mno,bno,grade)VALUES (24,1,1,4);
-INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum) 
-		SELECT 1,1,'테스트답글',1,23,date_add(now(),INTERVAL 5 HOUR),IFNULL(MAX(orderNum)+1,1) FROM comments;
-INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum) 
-		SELECT 1,1,'테스트리뷰',0,23,date_add(now(),INTERVAL 5 HOUR),IFNULL(MAX(orderNum)+1,1) FROM comments;
-INSERT INTO evaluation (rno,mno,bno,grade)VALUES (23,1,1,4);
-INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum) 
-		SELECT 1,1,'테스트리뷰',0,22,date_add(now(),INTERVAL 6 HOUR),IFNULL(MAX(orderNum)+1,1) FROM comments;
-INSERT INTO evaluation (rno,mno,bno,grade)VALUES (22,1,1,4);
-INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum) 
-		SELECT 1,1,'테스트답글',1,21,now(),IFNULL(MAX(orderNum)+1,1) FROM comments;
-INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum) 
-		SELECT 1,1,'테스트리뷰',0,21,date_add(now(),INTERVAL 7 HOUR),IFNULL(MAX(orderNum)+1,1) FROM comments;
-INSERT INTO evaluation (rno,mno,bno,grade)VALUES (21,1,1,4);
+INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum,grade) 
+		SELECT 1,1,'테스트답글',1,27,now(),IFNULL(MAX(orderNum)+1,1),1 FROM comments;   
+INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum,replytf,grade) 
+		SELECT 1,1,'테스트리뷰',0,27,date_add(now(),INTERVAL 1 HOUR),IFNULL(MAX(orderNum)+1,1),1,1 FROM comments;
+INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum,grade) 
+		SELECT 1,1,'테스트답글',1,26,now(),IFNULL(MAX(orderNum)+1,1),2 FROM comments;
+INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum,replytf,grade) 
+		SELECT 1,1,'테스트리뷰',0,26,date_add(now(),INTERVAL 2 HOUR),IFNULL(MAX(orderNum)+1,1),1,2 FROM comments;
+INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum,replytf,grade) 
+		SELECT 1,1,'테스트리뷰',0,25,date_add(now(),INTERVAL 3 HOUR),IFNULL(MAX(orderNum)+1,1),0,3 FROM comments;
+INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum,replytf,grade) 
+		SELECT 1,1,'테스트리뷰',0,24,date_add(now(),INTERVAL 4 HOUR),IFNULL(MAX(orderNum)+1,1),0,4 FROM comments;
+INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum,grade) 
+		SELECT 1,1,'테스트답글',1,23,date_add(now(),INTERVAL 5 HOUR),IFNULL(MAX(orderNum)+1,1),4 FROM comments;
+INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum,replytf,grade) 
+		SELECT 1,1,'테스트리뷰',0,23,date_add(now(),INTERVAL 5 HOUR),IFNULL(MAX(orderNum)+1,1),1,4 FROM comments;
+INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum,replytf,grade) 
+		SELECT 1,1,'테스트리뷰',0,22,date_add(now(),INTERVAL 6 HOUR),IFNULL(MAX(orderNum)+1,1),1,2 FROM comments;
+INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum,grade) 
+		SELECT 1,1,'테스트답글',1,21,now(),IFNULL(MAX(orderNum)+1,1),2 FROM comments;
+INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum,replytf,grade) 
+		SELECT 1,1,'테스트리뷰',0,21,date_add(now(),INTERVAL 7 HOUR),IFNULL(MAX(orderNum)+1,1),1,2 FROM comments;
+
 
