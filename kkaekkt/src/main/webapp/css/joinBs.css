@@ -15,7 +15,9 @@ table {
   margin-left: 10px;
   margin-bottom: 0px;
 } */
-
+#chkBtn {
+  height: 45px;
+}
 input {
   font-size: 20px;
 }
@@ -35,13 +37,30 @@ button {
 }
 .body_container p {
   line-height: 160%;
-  margin-bottom: 10px;
 }
 input[type="text"] {
   width: 315px;
   height: 45px;
-  margin: 0 3px 15px 0;
+  margin: 5px 0;
   /* border: 1px solid var(--grey-color); */
+}
+.address input {
+  width: 49%;
+}
+#addressWrap {/*상세주소*/
+  width: 100%;
+  /* background-color:lightpink; */
+  display: flex;
+  justify-content: space-between;
+}
+#roadAddress { /*도로명주소*/
+  width: 100%;
+}
+#btn_address {
+  width: 120px;
+  height: 45px;
+  margin-left: 3px;
+  cursor: pointer;
 }
 input[type="button"] {
   position: relative;
@@ -51,6 +70,7 @@ input[type="button"] {
   background: #c8e4ff;
   border: 0px;
 }
+
 .selected {
   /* background: #c8e4ff; */
   background: white;
@@ -58,7 +78,12 @@ input[type="button"] {
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
 }
-
+.regexChk{
+  margin-left: 15px;
+  display: block;
+  color: red;
+  font-size: 10px;
+}
 .unselected {
   background: var(--gray-color);
   border-top-left-radius: 20px;
@@ -67,7 +92,7 @@ input[type="button"] {
 .week button {
   padding: 0;
   font-size: 14px;
-  width: 42px;
+  width: 40px;
   height: 35px;
   margin: 5px -1px;
   border: 1px solid var(--gray-color);
@@ -134,7 +159,7 @@ input[type="button"] {
 .full input {
   width: 100%;
   height: 45px;
-  margin: 0 3px 15px 0;
+  margin: 5px 0;
 }
 .email {
   height: 60px;
@@ -158,12 +183,8 @@ input[type="button"] {
   border-radius: 10px;
   border: 1px solid var(--gray-color);
   background-color: white;
-  margin-bottom: 50px;
+  margin-bottom: 5px;
 }
-.bank .selectbox label {
-  padding: 10px;
-}
-
 .bank input {
   height: 45px;
 }
@@ -351,11 +372,12 @@ input[onclick="clicked();"] {
   border-right: 5px solid transparent;
   border-top: 5px solid #333;
 }
-.selectbox label {
+.selectbox label.select {
   position: absolute;
   top: 0; /* 위치정렬 */
   left: 13px; /* 위치정렬 */
   color: #999;
+  padding: 10px;
   z-index: -1; /* IE8에서 label이 위치한 곳이 클릭되지 않는 것 해결 */
 }
 

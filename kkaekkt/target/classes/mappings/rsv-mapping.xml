@@ -10,20 +10,18 @@
 		UPDATE comments SET replytf=0 WHERE groupNum=#{rsvNum} AND depth=0;
 	</update>
 	<select id="getCustomerData" resultType="comment">
-		SELECT c.mno mno,orderNum,grade eval 
-		FROM comments c,evaluation e 
-		WHERE c.groupNum=e.rno
-		AND groupNum=#{rsvNum} AND depth=0;
+		SELECT mno,orderNum,grade eval 
+		FROM comments
+		WHERE groupNum=#{rsvNum} AND depth=0;
 	</select>
 	<select id="getOrderNum" resultType="_int">
 		SELECT orderNum FROM comments WHERE groupNum=#{rsvNum} AND depth=#{depth};
 	</select>
 	<select id="getCommListBs" resultType="comment">
 		SELECT cno,orderNum,content,groupNum rsvNum,date_format(rdate,'%c월 %d, %Y %r') rdate,grade eval,mname,depth,replytf
-		FROM comments c,evaluation e, member m
+		FROM comments c, member m
 		<where>
-			c.groupNum=e.rno AND m.mno=c.mno
-			AND c.bno=#{bno}
+			m.mno=c.mno AND c.bno=#{bno}
 			<if test="searchOption==1"><!-- 이름검색 -->
 				AND mname LIKE CONCAT('%',#{search},'%')
 			</if>
@@ -64,17 +62,12 @@
 				AND c.bno=#{bno}
 			</if>
 			<if test="searchOption==3"><!-- 평점검색 -->
-				, evaluation e
-				WHERE c.groupNum=e.rno
-				AND c.bno=#{bno}
+				WHERE c.bno=#{bno}
 				AND grade LIKE CONCAT('%',#{search},'%')
 			</if>
 			<if test="replytf==0"><!-- 답글이 달리지 않은 리뷰 보기 -->
 				AND replytf=0
 			</if>;
-	</select>
-	<select id="searchComm" resultType="comment"> <!-- 답글이 없는 리뷰 조회 임시 기록 -->
-		SELECT * FROM comments a WHERE groupNum NOT IN (SELECT groupNum FROM comments b WHERE depth=1);
 	</select>
 	<update id="deleteCommCh">
 		UPDATE comments SET mno=#{mno}, content=#{content} WHERE groupNum=#{rsvNum} AND depth=#{depth};
@@ -87,9 +80,8 @@
 	</update>
 	<insert id="regitComm">
 		<if test="depth==0">
-			INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum,replytf) 
-			SELECT #{mno},#{bno},#{content},#{depth},#{rsvNum},NOW(),IFNULL(MAX(orderNum)+1,1),0 FROM comments;
-			INSERT INTO evaluation (mno,bno,grade,rno) VALUES (#{mno},#{bno},#{eval},#{rsvNum});
+			INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum,replytf,grade) 
+			SELECT #{mno},#{bno},#{content},#{depth},#{rsvNum},NOW(),IFNULL(MAX(orderNum)+1,1),0,#{eval} FROM comments;
 		</if>
 		<if test="depth==1">
 			INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum)

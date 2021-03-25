@@ -93,7 +93,7 @@ CREATE TABLE `comments` (
 	`groupNum`	INTEGER	NULL comment '소속',
 	`rdate` 	DATETIME NULL comment '등록일자',
 	`grade`	INTEGER	NOT NULL comment '점수',
-	`replytf` TINYINT(1) NOT NULL DEFAULT 0 COMMENT '답글 유무'
+	`replytf` TINYINT(1) NULL COMMENT '답글 유무'
 );
 
 CREATE TABLE `liked` (
@@ -603,7 +603,7 @@ INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 3,3,3);
 INSERT INTO rsv_payment VALUES ((SELECT MAX(rno) FROM reservation), 9300, '카드');
 
 -- 리뷰 추가
-INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum,grade) 
+INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum,grade)
 		SELECT 1,1,'테스트답글',1,27,now(),IFNULL(MAX(orderNum)+1,1),1 FROM comments;   
 INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum,replytf,grade) 
 		SELECT 1,1,'테스트리뷰',0,27,date_add(now(),INTERVAL 1 HOUR),IFNULL(MAX(orderNum)+1,1),1,1 FROM comments;
