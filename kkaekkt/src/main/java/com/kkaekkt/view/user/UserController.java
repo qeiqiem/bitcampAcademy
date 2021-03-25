@@ -89,17 +89,37 @@ public class UserController {
 		userService.insertUser(vo);
 		return "index.jsp";
 	}
+	@RequestMapping(value="/updatePspwd.do", method=RequestMethod.POST)
+	@ResponseBody
+	public String UpdatePw(PersonVO vo, HttpSession session) {
+		System.out.println(vo);
+		userService.updateUser(vo);
+		PersonVO person = userService.getUser(vo);
+		System.out.println("컨트롤러" + person);	
+		session.setAttribute("person", person);
+		System.out.println("세션에 수정한 정보 올리기");
+		Gson gson=new Gson();
+		String password=gson.toJson(vo.getPassword());
+		System.out.println(password);
+		
+		return password;
+		
+	}
 	@RequestMapping(value="/updatePs.do", method=RequestMethod.POST)
 	public String Update(PersonVO vo, HttpSession session) {
 		System.out.println(vo);
 		userService.updateUser(vo);
-	
 		PersonVO person = userService.getUser(vo);
-		System.out.println("컨트롤러" + person);
+		System.out.println("컨트롤러" + person);	
 		session.setAttribute("person", person);
 		System.out.println("세션에 수정한 정보 올리기");
+		
 		return "/jsp/mypageUser/mybio.jsp";
+		
+		
 	}
+	
+	
 	
 	// 일반유저 로그인
 		@RequestMapping(value = "/loginPs.do", method = RequestMethod.POST)

@@ -36,12 +36,12 @@
 	</insert>
 	<update id="updatePs">
 			<choose>
-				<when test="name == null">
+				<when test="email == null">
 					UPDATE account SET password=#{password} WHERE mno=#{mno};
 				</when>
 				<otherwise>
 					<!-- UPDATE account SET password=#{password} WHERE mno=#{mno}; -->
-					UPDATE member SET mname=#{name},phone=#{phone},birth=#{birth},address=#{address},email=#{email} WHERE mno=#{mno};
+					UPDATE member SET phone=#{phone},birth=#{birth},address=#{address},email=#{email} WHERE mno=#{mno};
 				</otherwise>
 			</choose>
 	</update>
