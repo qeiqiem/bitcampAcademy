@@ -14,11 +14,15 @@ import com.kkaekkt.biz.reservation.ReservationVO;
 public class ReservationServiceImpl implements ReservationService {
 	@Autowired
 	ReservationDAO reservationDAO;
-	
 	@Override
 	public void regitComm(CommVO vo) {
-		vo.setOrderNum(reservationDAO.getOrderNum(vo));
-		reservationDAO.updateOrderNum(vo);
+		if(vo.getDepth()==1) {
+			CommVO data=reservationDAO.getCustomerData(vo);
+			vo.setOrderNum(data.getOrderNum());
+			vo.setEval(data.getEval());
+			vo.setMno(data.getMno());
+			reservationDAO.updateOrderNum(vo);			
+		}
 		reservationDAO.regitComm(vo);
 	}
 	public void insertRsv(ReservationVO vo) {

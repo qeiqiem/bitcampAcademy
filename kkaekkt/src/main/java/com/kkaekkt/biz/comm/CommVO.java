@@ -12,8 +12,15 @@ public class CommVO {
 	private int depth; //0.댓글 1.대댓글
 	private int eval;//평가
 	private String content;
-	private Date rdate; 
+	private Date rdate;
+	private int replytf;//답글 여부
 	
+	public int getReplytf() {
+		return replytf;
+	}
+	public void setReplytf(int replytf) {
+		this.replytf = replytf;
+	}
 	public int getOrderNum() {
 		return orderNum;
 	}

@@ -4,36 +4,7 @@ $(document).ready(function() {
     ajax(pageObj); //처음 마이페이지 들어왔을 때, 진행중 주문 항목 출력
 });
 function initEvent() {
-	$('.page_next').click(function() {
-        if(!$(this).hasClass('no')) {
-            pageObj.currentPageNum+=1;
-            ajax(pageObj);
-        }
-    });
-    $('.page_prev').click(function() {
-        if(!$(this).hasClass('no')) {
-            pageObj.currentPageNum-=1;
-            ajax(pageObj);
-        }
-    });
-    $('.page_prevBlock').click(function() {
-        if(!$(this).hasClass('no')) {
-            pageObj.currentPageNum=pageObj.blockFirstPageNum-1;
-            ajax(pageObj);
-        }
-    });
-    $('.page_nextBlock').click(function() {
-        if(!$(this).hasClass('no')) {
-            pageObj.currentPageNum=pageObj.blockLastPageNum+1;
-            ajax(pageObj);
-        }
-    });
-    $('.page_btn').on("click",".page_list",function() {
-        if(pageObj.currentPageNum!=JSON.parse($(this).html())) {
-            pageObj.currentPageNum=JSON.parse($(this).html());
-            ajax(pageObj);
-        }
-    });
+    initPageEvent();
     $('.searchBox i.fas').click(function() {
 	    pageObj.search=$('.search')[0].value;
         pageObj.searchOption=$('.searchBox select')[0].value;
@@ -129,6 +100,38 @@ function initPageBtn() {
             $("<li class='page_list'>"+i+"</li>").insertAfter($('.page_prev'));
         }
     }
+}
+function initPageEvent() {
+    $('.page_next').click(function() {
+        if(!$(this).hasClass('no')) {
+            pageObj.currentPageNum+=1;
+            ajax(pageObj);
+        }
+    });
+    $('.page_prev').click(function() {
+        if(!$(this).hasClass('no')) {
+            pageObj.currentPageNum-=1;
+            ajax(pageObj);
+        }
+    });
+    $('.page_prevBlock').click(function() {
+        if(!$(this).hasClass('no')) {
+            pageObj.currentPageNum=pageObj.blockFirstPageNum-1;
+            ajax(pageObj);
+        }
+    });
+    $('.page_nextBlock').click(function() {
+        if(!$(this).hasClass('no')) {
+            pageObj.currentPageNum=pageObj.blockLastPageNum+1;
+            ajax(pageObj);
+        }
+    });
+    $('.page_btn').on("click",".page_list",function() {
+        if(pageObj.currentPageNum!=JSON.parse($(this).html())) {
+            pageObj.currentPageNum=JSON.parse($(this).html());
+            ajax(pageObj);
+        }
+    });
 }
 function initPageObj(data) {
     pageObj.blockLastPageNum=data.blockLastPageNum;
