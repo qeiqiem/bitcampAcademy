@@ -16,11 +16,11 @@
 	  <div class="body_container">
         <jsp:include page="sidebar_ps.jsp"></jsp:include>
 	  	<div class="content">
-        <form action="/updatePs.do" method="POST" name="mybio">
+        <form action="/updatePs.do" method="POST" name="mybio" onsubmit="return submitMybio();" >
         <h3 id="mybio_title">내 정보</h3>
         <button type="button" id="btn_mybio">수정하기</button>
         <div id="btn_mybioClick">
-            <button type="submit" id="btn_mybiofin" onclick=submitMybio()>수정완료</button>
+            <button type="submit" id="btn_mybiofin">수정완료</button>
             <button type="reset" id="btn_back">돌아가기</button>
         </div>
         <hr>
@@ -47,7 +47,7 @@
                         </tr>
                         <tr>
                             <td>새 비밀번호 확인</td>
-                            <td><input type="password" id="newpwd"> <button type="button" id="btn_updatepwd" onclick="undatePwd()">변경하기</button> 
+                            <td><input type="password" id="newpwd"> <button type="button" id="btn_updatepwd">변경하기</button> 
                             <label id="match"></label></td>
                         </tr>
                     </div>
@@ -59,14 +59,14 @@
                     <div id="mybioPhone">
                         연락처<br>
                        
-                     <input id="phone1" type="text" maxlength='3'> - 
-                        <input id="phone2" type="text" maxlength='4'> -
-                        <input id="phone3" type="text" maxlength='4'>
+                     <input id="phone1" type='text' pattern="[0-9]+" maxlength='3'> - 
+                        <input id="phone2" type="text" pattern="[0-9]+" maxlength='4'> -
+                        <input id="phone3" type="text" pattern="[0-9]+" maxlength='4'>
                         <input name="phone" type="tel" id="phone" value="" hidden>
                     </div>
                 <div id="mybioBirth">
                     생년월일<br>
-                   <input name="birth" type="text" id="input2" value=""><label id="checkbirth" value=""></label>
+                   <input name="birth" type="text" id="input2 birth" value=""><label id="checkbirth" value=""></label>
                 </div>
                 <div>
                     <!-- 이메일도 api로 하기로 했던 거 같아ㅓ 일단 인풋박스만 만들었습니다 -->
@@ -77,12 +77,12 @@
                 </div>
                 <div id="mybioAddress">
                    주소<br>
-                    <input type="text" id="postcode" placeholder="우편번호">
+                    <input type="text" id="postcode" placeholder="우편번호" >
                     <button type="button" onclick=execDaumPostcode() id="btn_address">우편번호 찾기</button><br>
-                    <input type="text" id="roadAddress" placeholder="도로명주소"><br>
+                    <input type="text" id="roadAddress" placeholder="도로명주소" ><br>
                     <!-- <span id="guide" style="color:#999;"></span><br> -->
                     <input type="text" id="detailAddress" placeholder="상세주소">
-                    <input type="text" id="extraAddress" placeholder="참고항목">
+                    <input type="text" id="extraAddress" placeholder="참고항목" >
                     <span id="guide" style="color:#999;display:none"></span><br>
                     <input type="hidden" name="address" id="address" value="">  <!--여기에 디비로 보낼 도로명주소+상세주소 해서 보내기-->
 

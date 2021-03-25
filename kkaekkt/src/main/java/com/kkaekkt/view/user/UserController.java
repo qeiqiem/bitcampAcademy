@@ -95,8 +95,9 @@ public class UserController {
 		userService.updateUser(vo);
 	
 		PersonVO person = userService.getUser(vo);
+		System.out.println("컨트롤러" + person);
 		session.setAttribute("person", person);
-		
+		System.out.println("세션에 수정한 정보 올리기");
 		return "/jsp/mypageUser/mybio.jsp";
 	}
 	
