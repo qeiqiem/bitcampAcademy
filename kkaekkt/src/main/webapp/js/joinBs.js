@@ -99,54 +99,70 @@ function initEvent() {
 function chkId() {//ID 유효성 체크
     if(regId.test(id.value)){//ID유효성 체크
         $('#idchk').addClass('hide');
+        formatArray[0]=true;
     }else {
         $('#idchk').removeClass('hide');
+        formatArray[0]=false;
     }
 }
 function chkPw() {
     if(regPw.test(pw.value)){//ID유효성 체크
         $('#pwchk').addClass('hide');
+        chkRePw();
     }else {
         $('#pwchk').removeClass('hide');
+        formatArray[1]=false;
     }
 }
 function chkRePw() {
     if(pw.value==repw.value){
         $('#pwRechk').addClass('hide');
+        if($('#pwchk').hasClass('hide')){//위의 비밀번호가 정상입력상태라면,
+            formatArray[1]=true;
+        }
     }else {
         $('#pwRechk').removeClass('hide');
+        formatArray[1]=false;
     }
 }
 function chkEmail() {
     if(regEmail.test(email.value)) {
         $('#emailchk').addClass('hide');
+        formatArray[2]=true;
     }else {
         $('#emailchk').removeClass('hide');
+        formatArray[2]=false;
     }
 }
 function chkBno() {
     if(regBno.test(bno.value)){
         $('#bnochk').addClass('hide');
+        formatArray[3]=true;
     }else {
         $('#bnochk').removeClass('hide');
+        formatArray[3]=false;
     }
 }
 function chkAccount() {
     if(regAccount.test(account.value)) {
         $('#accountchk').addClass('hide');
+        formatArray[4]=true;
     }else {
         $('#accountchk').removeClass('hide');
+        formatArray[4]=false;
     }
 }
 function formatChk() {
     for(var i=0; i<formatArray.length;i++) {
         if(!formatArray[i]){//false가 반환된다면
-            alert(alertArray[i]+'의 ')
+            alert(alertArray[i]+'의 입력을 확인해주십시오.')
+            return false;
         }
     }
+    return true;
 }
 function clicked() {
-    
+    if(formatChk()) {    
     // 운영시간 데이터 처리
     var weekLi=$('.weekBox ul li');
     var list = new Array();
@@ -200,4 +216,5 @@ function clicked() {
         $("input[name='etc']")[0].value=JSON.stringify(list);
     }
     $("form").submit();
+    }
 }
