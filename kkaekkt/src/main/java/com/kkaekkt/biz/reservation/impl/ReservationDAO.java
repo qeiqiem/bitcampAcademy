@@ -68,13 +68,20 @@ public class ReservationDAO {
 	public List<CommVO> getCommListBs(CommListVO vo) {
 		return mybatis.selectList("reservationDAO.getCommListBs",vo);
 	}
-	public void updateOrderNum(CommVO vo) {
-		mybatis.update("reservationDAO.updateOrderNum",vo);
+	public void insertUpdateOrderNum(CommVO vo) {
+		mybatis.update("reservationDAO.insertUpdateOrderNum",vo);
 	}
 	public int getCommCount(CommListVO vo) {
 		return mybatis.selectOne("reservationDAO.getCommCount",vo);	
 	}
 	public CommVO getCustomerData(CommVO vo) {
 		return mybatis.selectOne("reservationDAO.getCustomerData",vo);
+	}
+	public void deleteUpdateOrderNum(CommVO vo) {
+		mybatis.update("reservationDAO.deleteUpdateOrderNum",vo);
+		
+	}
+	public int getOrderNum(CommVO vo) {
+		return mybatis.selectOne("reservationDAO.getOrderNum",vo);
 	}
 }

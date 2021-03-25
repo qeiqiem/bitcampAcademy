@@ -8,7 +8,6 @@
 		<button onclick="location.href='/jsp/mypageBiz/comspec.jsp'">사양관리</button>
 		<button onclick="location.href='/jsp/mypageBiz/reviewMg.jsp'">리뷰관리</button>
 		<button onclick="location.href='/jsp/mypageBiz/combio.jsp'">프로필편집</button>
-		
 	</div>
 	<div class="side_sub">
 	</div>

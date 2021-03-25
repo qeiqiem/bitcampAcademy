@@ -1,6 +1,5 @@
 package com.kkaekkt.biz.reservation;
 
-import java.sql.Date;
 import java.util.List;
 
 import com.kkaekkt.biz.comm.CommVO;
@@ -11,9 +10,9 @@ public class ReservationVO {
 	private int bno;
 	private String mname; // 회원명
 	private String bname; // 업체명
-	private Date rsvDate; // 예약일자
+	private String rsvDate; // 예약일자
 	private String phone; // 전화번호
-	private Date dDate; // 마감일자
+	private String dDate; // 마감일자
 	private int dDay; //마감까지 남은 일자
 	private String state; // 상태명
 	private int like; // 0.좋아요X 1.좋아요O
@@ -71,26 +70,40 @@ public class ReservationVO {
 	public void setBname(String bname) {
 		this.bname = bname;
 	}
-	public Date getRsvDate() {
-		return rsvDate;
-	}
-	public void setRsvDate(Date rsvDate) {
-		this.rsvDate = rsvDate;
-	}
+//	public Date getRsvDate() {
+//		return rsvDate;
+//	}
+//	public void setRsvDate(Date rsvDate) {
+//		this.rsvDate = rsvDate;
+//	}
 	public String getPhone() {
 		return phone;
+	}
+	public String getRsvDate() {
+		return rsvDate;
+	}
+	public void setRsvDate(String rsvDate) {
+		this.rsvDate = rsvDate;
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public Date getdDate() {
-		return dDate;
-	}
-	public void setdDate(Date dDate) {
-		this.dDate = dDate;
-	}
+
+//	public Timestamp getdDate() {
+//		return dDate;
+//	}
+//	public void setdDate(Timestamp dDate) {
+//		this.dDate = dDate;
+//	}
+	
 	public String getState() {
 		return state;
+	}
+	public String getdDate() {
+		return dDate;
+	}
+	public void setdDate(String dDate) {
+		this.dDate = dDate;
 	}
 	public void setState(String state) {
 		this.state = state;

@@ -3,7 +3,7 @@ package com.kkaekkt.biz.comm;
 import java.sql.Date;
 
 public class LaundryVO {
-	private Date rsvDate;
+	private String rsvDate;
 	private int rsvNum;
 	private String mname;
 	private int dDay;
@@ -34,10 +34,16 @@ public class LaundryVO {
 	public String getState() {
 		return state;
 	}
-	public Date getRsvDate() {
+//	public Date getRsvDate() {
+//		return rsvDate;
+//	}
+//	public void setRsvDate(Date rsvDate) {
+//		this.rsvDate = rsvDate;
+//	}
+	public String getRsvDate() {
 		return rsvDate;
 	}
-	public void setRsvDate(Date rsvDate) {
+	public void setRsvDate(String rsvDate) {
 		this.rsvDate = rsvDate;
 	}
 	public int getRsvNum() {
