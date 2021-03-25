@@ -9,13 +9,17 @@ function kakaoLogin(){
             window.Kakao.API.request({
                 url: '/v2/user/me',
                 success: res => {
-                    const kakao_account = res.kakao_account;
+                    const kakao = res.kakao_account;
                     
-                    var user = kakao_account.email;
-                    console.log(user);
+                    var userNick = kakao.NickName;
+                    console.log(userNick);
+                    var userEmail = kakao.email;
+                    console.log(userEmail);
+                    
                     
                     var userdata = {
-                    	email: user
+                    	nick: userNick,
+                    	email: userEmail
                     }
                     
 $.ajax({
@@ -23,6 +27,7 @@ $.ajax({
 	type: 'POST',
 	data: userdata,
 		success: function(data){
+		
 		console.log(data);
 		console.log("보냄");
 		console.log(location.href);

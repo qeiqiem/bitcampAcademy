@@ -28,16 +28,16 @@
                 <table>
                     <tr>
                         <td>아이디</td>
-                       <td><input type="text" id="read" name="id" value="" readonly></td>
+                       <td><input type="text" id="read" name="id"  readonly></td>
                     </tr>
                     <tr>
                         <td>이름</td>
-                    <td><input type="text" id="read" name="name" value="" readonly></td>
+                    <td><input type="text" id="read" name="mname"  readonly></td>
                     </tr>
                     </tr>
                     <tr>
                         <td>비밀번호</td>
-                        <td><input name="password" type="password" id="curpwd" value=""> <button type="button" id="btn_checkpwd">수 정</button><label id="checkpwd"></label>
+                        <td><input name="password" type="password" id="curpwd" > <button type="button" id="btn_checkpwd">수 정</button><label id="checkpwd"></label>
                         </td>
                     </tr>
                     <div id="btn_mybiopwd">

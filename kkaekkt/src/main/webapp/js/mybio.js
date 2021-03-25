@@ -12,7 +12,7 @@ window.onload = function () {
 
     document.getElementsByName('mno')[0].value = pageObj["mno"];
     document.getElementsByName('id')[0].value = pageObj["id"];
-    document.getElementsByName('name')[0].value = pageObj["name"];
+    document.getElementsByName('mname')[0].value = pageObj["name"];
     console.log(pageObj["name"]);
     var phoneSplit = pageObj["phone"].split('-');
     document.getElementById('phone1').value = phoneSplit[0];
@@ -135,16 +135,19 @@ window.onload = function () {
         if ($('#pwd').val == $('#newpwd').val && fomatnewpw == 1) {
             console.log($('#pwd').val + $('#newpwd') + fomatnewpw);
             $.ajax({
-                url: '/updatePs.do',
+                url: '/updatePspwd.do',
                 type: 'post',
                 data: {
                     mno: $('#mno').val(),
                     id: $("input[name='id']").val(),
                     password: $('#newpwd').val()
                 }, success: function(data){
-                    console.log(pageObj["password"]);
-                }, error: function(jqXHR, textStatus, errorThrown) {
-                    alert("ERROR : " + textStatus + " : " + errorThrown);
+                    var password = JSON.parse(data);
+                    console.log("ajax성공 "+password);
+                    pageObj["password"] = password;
+                    
+                }, error: function() {
+                   alert("error");
                 }   
     
             });
