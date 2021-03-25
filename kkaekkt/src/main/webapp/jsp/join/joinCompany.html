@@ -5,11 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/css/all.css">
-    <link rel="stylesheet" href="/css/head0.css">
-    <link rel="stylesheet" href="/css/join.css">
-    <link rel="stylesheet" href="/css/joinPerson.css">
-    <link rel="stylesheet" href="/css/joinBs.css">
+    <link rel="stylesheet" href="../../css/all.css">
+    <link rel="stylesheet" href="../../css/head0.css">
+    <link rel="stylesheet" href="../../css/join.css">
+    <link rel="stylesheet" href="../../css/joinPerson.css">
+    <link rel="stylesheet" href="../../css/joinBs.css">
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="https://kit.fontawesome.com/2fc57dd2db.js" crossorigin="anonymous"></script>
 </head>
@@ -20,7 +20,7 @@
             <div class="head_left">
                 <div class="logo">
                     <a href="">
-                        <img src="/img/logo.svg" alt="">
+                        <img src="../../img/logo.svg" alt="">
                     </a>
                 </div>
                 <div class="menu">
@@ -76,34 +76,25 @@
                         <form action="joinBs.do" method="POST">
                             <div>
                                 <p>아이디</p>
-                                <input name="id" type="text" placeholder="아이디를 입력해주세요.">
-                                <button type="button">중복확인</button>
+                                <input name="id" id="id" type="text" onfocusout="chkId()" placeholder="아이디를 입력해주세요.">
+                                <button type="button" id="chkBtn">중복확인</button>
+                                <label id="idchk" class="regexChk hide">아이디는 영문자,숫자로 4~10글자 이내로 작성해주십시오</label>
                             </div>
                             <div class="full">
                                 <p>비밀번호</p>
-                                <input type="password" placeholder="영어 대문자, 특수문자, 숫자를 포함한 8~16글자" minlength="8"
+                                <input type="password" id="pw" onfocusout="chkPw()" placeholder="특수문자,문자,숫자 포함 8~15자리 이내로 입력하세요." minlength="8"
                                     maxlength="16">
+                                    <label id="pwchk" class="regexChk hide">비밀번호는 특수문자,문자,숫자 포함 8~15자리 이내로 작성해주십시오</label>
                                 <p>비밀번호 확인</p>
-                                <input name="password" type="password" placeholder="영어 대문자, 특수문자, 숫자를 포함한 8~16글자"
+                                <input name="password" id="repw" onfocusout="chkRePw()" type="password" placeholder="영어 대문자, 특수문자, 숫자를 포함한 8~16글자"
                                     minlength="8" maxlength="16">
+                                    <label id="pwRechk" class="regexChk hide">비밀번호가 일치하지 않습니다</label>
                             </div>
                             <div class="full">
                                 <p>이메일</p>
-                                <input name="email" type="text" style="margin-bottom: 40px;">
-                                <!-- @
-                    <div class="selectbox">
-                        <label class="select">naver.com</label>
-                        <select>
-                            <option>naver.com</option>
-                            <option>daun.net</option>
-                            <option>hanmail.net</option>
-                            <option>gmail.com</option>
-                        </select>
-                    </div> -->
+                                <input name="email" id="email" onfocusout="chkEmail()" type="text">
+                                <label id="emailchk" class="regexChk">양식과 맞지 않습니다</label>
                             </div>
-
-
-
                             <div>
                                 <p>운영시간</p>
                                 <div class="week">
@@ -127,23 +118,31 @@
 
                                 <div class="phone">
                                     <p>연락처</p>
-                                    <input type="text" placeholder="010"> -
-                                    <input type="text" placeholder="0000"> -
-                                    <input type="text" placeholder="0000">
+                                    <input id="phone1" type='text' pattern="[0-9]+" maxlength='3'> - 
+                                    <input id="phone2" type="text" pattern="[0-9]+" maxlength='4'> -
+                                    <input id="phone3" type="text" pattern="[0-9]+" maxlength='4'>
                                     <input type="hidden" value="test" name="phone">
                                 </div>
                                 <div class="full">
                                     <p>업체명</p>
-                                    <input type="text" name="bname">
+                                    <input type="text" id="bname" name="bname">
                                     <p>사업자등록번호</p>
-                                    <input type="text" name="bno" placeholder="숫자만 작성해주세요">
+                                    <input type="text" name="bno" onfocusout="chkBno()" id="bno" placeholder="숫자만 작성해주세요">
+                                    <label id="bnochk" class="regexChk hide">숫자만 입력해주세요</label>
                                 </div>
                                 <div class="address">
                                     <p>주소</p>
-                                    <input name="address" type="text">
-                                    <button type="button">주소찾기</button>
+                                    <input type="text" id="postcode" placeholder="우편번호" >
+                                    <button type="button" onclick=execDaumPostcode() id="btn_address">우편번호 찾기</button><br>
+                                    <input type="text" id="roadAddress" placeholder="도로명주소" ><br>
+                                    <!-- <span id="guide" style="color:#999;"></span><br> -->
+                                    <div id="addressWrap">
+                                        <input type="text" id="detailAddress" placeholder="상세주소">
+                                        <input type="text" id="extraAddress" placeholder="참고항목" >
+                                    </div>
+                                    <span id="guide" style="color:#999;display:none"></span><br>
+                                    <input type="hidden" name="address" id="address" value="">  <!--여기에 디비로 보낼 도로명주소+상세주소 해서 보내기-->
                                 </div>
-
                                 <div class="bank">
                                     <p>계좌등록</p>
                                     <div class="selectbox">
@@ -157,10 +156,10 @@
                                             <option value=6>NH농협은행</option>
                                             <option value=7>카카오뱅크</option>
                                         </select>
-                                        <input name="bankAccountNum" type="text" placeholder="거래할 계좌를 입력하세요">
+                                        <input name="bankAccountNum" type="text" id="account" onfocusout="chkAccount()" placeholder="거래할 계좌를 입력하세요">
                                     </div>
-
                                 </div>
+                                <label id="accountchk" class="regexChk hide" style="margin-left:120px">하이픈(-)을 포함하여 입력해주세요</label>
                                 <div class="bizType">
                                     <div class="selected">세탁소</div>
                                     <div class="unselected">코인세탁소</div>
@@ -178,23 +177,22 @@
                                             <tr>
                                                 <td><input value=0 type="checkbox"></td>
                                                 <td class="blank">일반의류</td>
-                                                <td><input class="won" disabled>원</td>
+                                                <td><input class="won" pattern="[0-9]+" title="숫자만 입력하세요." disabled>원</td>
                                             </tr>
-
                                             <tr>
                                                 <td><input value=1 type="checkbox"></td>
                                                 <td class="blank">와이셔츠</td>
-                                                <td><input class="won" disabled>원</td>
+                                                <td><input class="won" pattern="[0-9]+" title="숫자만 입력하세요." disabled>원</td>
                                             </tr>
                                             <tr>
                                                 <td><input value=2 type="checkbox"></td>
                                                 <td class="blank">이불</td>
-                                                <td><input class="won" disabled>원</td>
+                                                <td><input class="won" pattern="[0-9]+" title="숫자만 입력하세요." disabled>원</td>
                                             </tr>
                                             <tr>
                                                 <td><input value=3 type="checkbox"></td>
                                                 <td class="blank">운동화</td>
-                                                <td><input class="won" disabled>원</td>
+                                                <td><input class="won" pattern="[0-9]+" title="숫자만 입력하세요." disabled>원</td>
                                             </tr>
                                         </table>
                                         <br>
@@ -206,27 +204,24 @@
                                             <tr>
                                                 <td><input value=4 type="checkbox"></td>
                                                 <td class="blank">가죽모피</td>
-                                                <td><input class="won" disabled>원</td>
+                                                <td><input class="won" pattern="[0-9]+" title="숫자만 입력하세요." disabled>원</td>
                                             </tr>
-
                                             <tr>
                                                 <td><input value=5 type="checkbox"></td>
                                                 <td class="blank">명품가방</td>
-                                                <td><input class="won" disabled>원</td>
+                                                <td><input class="won" pattern="[0-9]+" title="숫자만 입력하세요." disabled>원</td>
                                             </tr>
-
                                             <tr>
                                                 <td><input value=6 type="checkbox"></td>
                                                 <td class="blank">아웃도어</td>
-                                                <td><input class="won" disabled>원</td>
+                                                <td><input class="won" pattern="[0-9]+" title="숫자만 입력하세요." disabled>원</td>
                                             </tr>
-
                                             <tr>
                                                 <td><input value=7 type="checkbox"></td>
                                                 <td class="blank"> 기타 <span style="font-size:smaller;">(모자/가방/인형)</span>
                                                 </td>
                                                 <!-- <input class="etc" placeholder="모자/가방/인형"></td> -->
-                                                <td><input class="won" disabled>원</td>
+                                                <td><input class="won" pattern="[0-9]+" title="숫자만 입력하세요." disabled>원</td>
                                             </tr>
                                         </table>
                                         <input type="hidden" name="laundry">
@@ -258,7 +253,7 @@
                                                         <option>3대 이상</option>
                                                     </select>
                                                 </td>
-                                                <td><input class="won" disabled>원</td>
+                                                <td><input class="won" pattern="[0-9]+" title="숫자만 입력하세요." disabled>원</td>
                                             </tr>
 
                                             <tr>
@@ -272,7 +267,7 @@
                                                         <option>3대 이상</option>
                                                     </select>
                                                 </td>
-                                                <td><input class="won" disabled>원</td>
+                                                <td><input class="won" pattern="[0-9]+" title="숫자만 입력하세요." disabled>원</td>
                                             </tr>
 
                                             <tr>
@@ -287,7 +282,7 @@
                                                         <option>3대 이상</option>
                                                     </select>
                                                 </td>
-                                                <td><input class="won" disabled>원</td>
+                                                <td><input class="won" pattern="[0-9]+" title="숫자만 입력하세요." disabled>원</td>
                                             </tr>
                                         </table><br>
 
@@ -310,7 +305,7 @@
                                                     <option>3대 이상</option>
                                                 </select>
                                             </td>
-                                            <td><input class="won" style="margin:0; margin-right: 10px;">원</td>
+                                            <td><input class="won" pattern="[0-9]+" title="숫자만 입력하세요." style="margin:0; margin-right: 10px;">원</td>
 
                                         </table><br>
 
@@ -324,36 +319,34 @@
                                             <tr>
                                                 <td><input value=4 type="checkbox"></td>
                                                 <td>향균세탁</td>
-                                                <td><input class="won" disabled>원</td>
+                                                <td><input class="won" pattern="[0-9]+" title="숫자만 입력하세요." disabled>원</td>
                                             </tr>
                                             <tr>
                                                 <td><input value=5 type="checkbox"></td>
                                                 <td>특수세제 <span style="font-size:smaller;">(울/유아용등)</span> </td>
-                                                <td><input class="won" disabled>원</td>
+                                                <td><input class="won" pattern="[0-9]+" title="숫자만 입력하세요." disabled>원</td>
                                             </tr>
 
                                             <tr>
                                                 <td><input value=6 type="checkbox"></td>
                                                 <td>섬유유연제</td>
-                                                <td><input class="won" disabled>원</td>
+                                                <td><input class="won" pattern="[0-9]+" title="숫자만 입력하세요." disabled>원</td>
                                             </tr>
 
                                             <tr>
                                                 <td><input value=7 type="checkbox"></td>
                                                 <td>픽업봉투</td>
-                                                <td><input class="won" disabled>원</td>
+                                                <td><input class="won" pattern="[0-9]+" title="숫자만 입력하세요." disabled>원</td>
                                             </tr>
                                         </table>
                                         <input type="hidden" name="etc">
-                                        <!-- <input type="button" value="가입신청" onclick="clicked();"> -->
                                     </div>
                                 </div>
                             </div>
-
                             <div class="join_btn">
                                 <button type="reset" name="reset">다시입력</button>
-                                <button type="submit" name="join"
-                                    style="background-color: var(- -key-color);">가입하기</button>
+                                <button name="join"
+                                    style="background-color: var(- -key-color);" onclick="clicked()">가입하기</button>
                             </div>
                         </form>
                     </div>
@@ -375,7 +368,7 @@
         </footer> -->
     </div>
 
-    <script src="/js/joinBs.js"></script>
+    <script src="../../js/joinBs.js"></script>
 </body>
 
 </html>

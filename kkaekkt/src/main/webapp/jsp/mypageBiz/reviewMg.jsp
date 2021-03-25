@@ -10,9 +10,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/css/all.css">
-    <link rel="stylesheet" href="/css/head0.css">
-    <link rel="stylesheet" href="/css/sidebar.css">
     <link rel="stylesheet" href="/css/reviewMg.css">
     <script src="https://kit.fontawesome.com/2fc57dd2db.js"
         crossorigin="anonymous"></script>
@@ -20,41 +17,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header class="head_container">
-        <nav class="head">
-            <div class="head_left">
-                <div class="logo">
-                    <a href=""> <img src="/img/logo.svg" alt="">
-                    </a>
-                </div>
-                <div class="menu">
-                    <a href="">일반세탁소</a> <a href="">코인세탁소</a> <a href="">매장관리</a>
-                </div>
-            </div>
-            <div class="head_right">
-                <a href="">(업체이름)</a> 
-                <a href=""><i class="fas fa-bell"></i></a> 
-                <a href=""><i class="fas fa-comments"></i></a> 
-                <a href="logout.do">로그아웃</a> 
-                <a href="/jsp/faq.jsp">FAQ</a>
-            </div>
-        </nav>
-    </header>
+    <jsp:include page="/jsp/header2.jsp" ></jsp:include>
     <div class="body_container">
-        <div class="my_container">
-            <div class="side">
-                <button onclick="location.href='/jsp/mypageBiz/mpbProg_Item.jsp'">처리중</button>
-                <button onclick="location.href='/jsp/mypageBiz/mpbCom.jsp'">완 료</button>
-                <button onclick="location.href='/jsp/mypageBiz/salesManage_com.jsp'">매출관리</button>
-                <button onclick="location.href='/jsp/mypageBiz/comspec.jsp'">사양관리</button>
-                <button onclick="location.href='/jsp/mypageBiz/reviewMg.jsp'">리뷰관리</button>
-                <button onclick="location.href='/jsp/mypageBiz/combio.jsp'">프로필편집</button>
-            </div>
-            <div class="side_sub">
-            </div>
+        <jsp:include page="sidebar_bs.jsp"></jsp:include>
             <div class="content">
 				<div class="content_header">
-					<p>전체 개수 : <span>4</span> 개</p>
+					<p>전체 개수 : <span></span> 개</p>
 					<div class="searchBox">
 						<select>
 							<option value="1">이름</option>
@@ -109,7 +77,6 @@
 				</div>
             </div>
         </div>
-    </div>
 	<script>
 		var pageObj = {
 			bno:1,

@@ -52,9 +52,11 @@ public class UserController {
 	@RequestMapping(value ="/idchk.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String idchk(PersonVO vo) {
+		System.out.println("vo 값 담겼음");
 		System.out.println(vo);
 		Gson gson = new Gson();
 		 vo.setState(userService.idchk(vo));
+		 System.out.println("서비스에서 값 담겨 넘어옴");
 		return gson.toJson(vo);
 	}
 
