@@ -22,7 +22,7 @@
 		</div>
 
 		<div class="head_right">
-			<a href="">(업체이름)</a> 
+			<input name="name" id="name" value="${personBs.bname } 님" readonly /> 
 			<a href=""><i class="fas fa-bell"></i></a> 
 			<a href=""><i class="fas fa-comments"></i></a> 
 			<a href="logout.do">로그아웃</a> 

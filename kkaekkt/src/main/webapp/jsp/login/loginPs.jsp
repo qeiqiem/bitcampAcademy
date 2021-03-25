@@ -24,7 +24,7 @@
                 <a href="#">일반로그인</a>
             </button>
             <button id="log">
-                <a href="/jsp/loginBs.jsp">업체로그인</a>
+                <a href="/jsp/login/loginBs.jsp">업체로그인</a>
             </button>
 
             <div class="login">

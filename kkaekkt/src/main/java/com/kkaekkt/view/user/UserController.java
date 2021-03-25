@@ -105,48 +105,55 @@ public class UserController {
 
 	// 일반유저 로그인
 	@RequestMapping(value = "/loginPs.do", method = RequestMethod.POST)
-		public String Login(PersonVO vo, HttpSession session) throws Exception{
-			try {
-				// 로그인 성공
+	public String Login(PersonVO vo, HttpSession session) throws Exception {
+		try {
+			// 로그인 성공
 			System.out.println("로그인처리");
 
-			//vo = userService.getUser(vo);
+			// vo = userService.getUser(vo);
 			PersonVO user = userService.getUser(vo);
 
-			
 			System.out.println(vo); // 뭐가 담기는 지 보려했다
 
 			if (user.getMno() == 0) {
 				System.out.println("회원정보없음");
-				//session.setAttribute("person", null);
-				return "/jsp/loginPs.jsp";
-			} else if(user.getMno() != 0) {
+				// session.setAttribute("person", null);
+				return "/jsp/join/joinNoPs.jsp";
+			} else if (user.getMno() != 0) {
 				session.setAttribute("person", vo);
 			}
 			return "/jsp/indexPerson.jsp";
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("로그인 실패");
-			return "/jsp/join/joinPerson.jsp";
+			return "/jsp/join/joinNoPs.jsp";
 		}
-}
+	}
+
 	// 업체유저 로그인
 	@RequestMapping(value = "/loginBs.do", method = RequestMethod.POST)
-	public String Login(BusinessVO vo, HttpSession session) {
-		System.out.println("로그인처리");
+	public String Login(BusinessVO vo, HttpSession session) throws Exception {
+		try {
+			// 로그인 성공
+			System.out.println("로그인처리");
 
-		vo = userService.getUser(vo);
+			vo = userService.getUser(vo);
 
-		System.out.println(vo); // 뭐가 담기는 지 보려했다
+			System.out.println(vo); // 뭐가 담기는 지 보려했다
 
-		if (vo.getMno() == 0) {
-			System.out.println("회원정보없음");
-			session.setAttribute("personBs", null);
-			return "/jsp/login/loginBs.jsp";
-		} else {
-			session.setAttribute("personBs", vo);
+			if (vo.getMno() == 0) {
+				System.out.println("회원정보없음");
+				session.setAttribute("personBs", null);
+				return "/jsp/login/loginBs.jsp";
+			} else {
+				session.setAttribute("personBs", vo);
+			}
 			return "/jsp/indexCompany.jsp";
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("로그인 실패");
+			return "/jsp/join/joinSelect.jsp"; // 추후 업체로그인 부분으로 변경예정
 		}
 	}
 
@@ -171,7 +178,7 @@ public class UserController {
 			} else if (user.getMno() == 0) {
 				session.setAttribute("person", user);
 				System.out.println("user없는거 출력" + user);
-				return "/jsp/join/joinPerson.jsp";
+				return "/jsp/join/joinNoPs.jsp";
 			}
 
 			return "/jsp/indexPerson.jsp";
