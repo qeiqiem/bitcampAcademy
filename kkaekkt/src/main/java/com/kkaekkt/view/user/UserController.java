@@ -118,7 +118,7 @@ public class UserController {
 		System.out.println("세션에 수정한 정보 올리기");
 
 		return "/jsp/mypageUser/mybio.jsp";
-		
+	}
 		
 	// 일반유저 로그인
 	@RequestMapping(value = "/loginPs.do", method = RequestMethod.POST)
