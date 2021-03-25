@@ -15,7 +15,7 @@ const pw = document.getElementById("pw");
 const repw = document.getElementById("repw");
 const name = document.getElementById("name");
 const phone = document.getElementById("phone");
-const address = document.getElementById("ad");
+const address = document.getElementById("address");
 const email = document.getElementById("email");
 
 // submit
