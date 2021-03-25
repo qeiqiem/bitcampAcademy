@@ -20,6 +20,7 @@
     font-size: 17px;
     color: white;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .side button:hover{ 
@@ -38,7 +39,8 @@
     border : none;
     font-size: 17px;
     color:  rgb(44, 44, 44);
-    background-color: white;    
+    background-color: white;  
+    cursor: pointer;  
 }
 .side_sub button:hover{  font-weight: bold;  }
 /* 제가 작업하는 페이지의 경우 padding 과 width 값이 저렇게 들어가는데, 다른 페이지는 어떻게 되는지 몰라서

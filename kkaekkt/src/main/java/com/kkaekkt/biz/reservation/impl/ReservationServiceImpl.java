@@ -21,7 +21,7 @@ public class ReservationServiceImpl implements ReservationService {
 			vo.setOrderNum(data.getOrderNum());
 			vo.setEval(data.getEval());
 			vo.setMno(data.getMno());
-			reservationDAO.updateOrderNum(vo);			
+			reservationDAO.insertUpdateOrderNum(vo);			
 		}
 		reservationDAO.regitComm(vo);
 	}
@@ -76,11 +76,13 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 	@Override
 	public void updateComm(CommVO vo) {
-		reservationDAO.updateComm(vo);		
+		reservationDAO.updateComm(vo);	
 	}
 	@Override
 	public void deleteCommAb(CommVO vo) {
-		reservationDAO.deleteCommAb(vo);	
+		vo.setOrderNum(reservationDAO.getOrderNum(vo));
+		reservationDAO.deleteUpdateOrderNum(vo);
+		reservationDAO.deleteCommAb(vo);
 	}
 	@Override
 	public void deleteCommCh(CommVO vo) {
