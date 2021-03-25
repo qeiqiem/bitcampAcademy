@@ -91,7 +91,8 @@ CREATE TABLE `comments` (
 	`orderNum`	INTEGER	NULL comment '순서',
 	`depth`	INTEGER	NULL comment '깊이',
 	`groupNum`	INTEGER	NULL comment '소속',
-	`rdate` DATETIME NULL comment '등록일자'
+	`rdate` DATETIME NULL comment '등록일자',
+    `replytf` TINYINT(1) NULL comment '답글유무'
 );
 
 CREATE TABLE `evaluation` (
@@ -630,32 +631,36 @@ INSERT INTO rsv_payment VALUES ((SELECT MAX(rno) FROM reservation), 9300, '카�
 
 -- 리뷰 추가
 INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum) 
-		SELECT 1,1,'테스트답글',1,27,now(),IFNULL(MAX(orderNum)+1,1) FROM comments;
+		SELECT 1,1,'테스트답글',1,27,now(),IFNULL(MAX(orderNum)+1,1) FROM comments;   
 INSERT INTO evaluation (rno,mno,bno,grade)VALUES (27,1,1,4);
+INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum,replytf) 
+		SELECT 1,1,'테스트리뷰',0,27,date_add(now(),INTERVAL 1 HOUR),IFNULL(MAX(orderNum)+1,1,1) FROM comments;
+
 INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum) 
-		SELECT 1,1,'테스트리뷰',0,27,date_add(now(),INTERVAL 1 HOUR),IFNULL(MAX(orderNum)+1,1) FROM comments;
-INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum) 
-		SELECT 1,1,'테스트답글',1,26,now(),IFNULL(MAX(orderNum)+1,1) FROM comments;
+		SELECT 1,1,'테스트답글',1,26,now(),IFNULL(MAX(orderNum)+1,1) FROM comments;     
 INSERT INTO evaluation (rno,mno,bno,grade)VALUES (26,1,1,3);
-INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum) 
-		SELECT 1,1,'테스트리뷰',0,26,date_add(now(),INTERVAL 2 HOUR),IFNULL(MAX(orderNum)+1,1) FROM comments;
-INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum) 
-		SELECT 1,1,'테스트리뷰',0,25,date_add(now(),INTERVAL 3 HOUR),IFNULL(MAX(orderNum)+1,1) FROM comments;
+INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum,replytf) 
+		SELECT 1,1,'테스트리뷰',0,26,date_add(now(),INTERVAL 2 HOUR),IFNULL(MAX(orderNum)+1,1,1) FROM comments;
+
+INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum,replytf) 
+		SELECT 1,1,'테스트리뷰',0,25,date_add(now(),INTERVAL 3 HOUR),IFNULL(MAX(orderNum)+1,1,0) FROM comments;
 INSERT INTO evaluation (rno,mno,bno,grade)VALUES (25,1,1,2);
-INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum) 
-		SELECT 1,1,'테스트리뷰',0,24,date_add(now(),INTERVAL 4 HOUR),IFNULL(MAX(orderNum)+1,1) FROM comments;
+INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum,replytf) 
+		SELECT 1,1,'테스트리뷰',0,24,date_add(now(),INTERVAL 4 HOUR),IFNULL(MAX(orderNum)+1,1,0) FROM comments;
 INSERT INTO evaluation (rno,mno,bno,grade)VALUES (24,1,1,4);
 INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum) 
 		SELECT 1,1,'테스트답글',1,23,date_add(now(),INTERVAL 5 HOUR),IFNULL(MAX(orderNum)+1,1) FROM comments;
-INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum) 
-		SELECT 1,1,'테스트리뷰',0,23,date_add(now(),INTERVAL 5 HOUR),IFNULL(MAX(orderNum)+1,1) FROM comments;
+INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum,replytf) 
+		SELECT 1,1,'테스트리뷰',0,23,date_add(now(),INTERVAL 5 HOUR),IFNULL(MAX(orderNum)+1,1,1) FROM comments;
 INSERT INTO evaluation (rno,mno,bno,grade)VALUES (23,1,1,4);
-INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum) 
-		SELECT 1,1,'테스트리뷰',0,22,date_add(now(),INTERVAL 6 HOUR),IFNULL(MAX(orderNum)+1,1) FROM comments;
+
+INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum,replytf) 
+		SELECT 1,1,'테스트리뷰',0,22,date_add(now(),INTERVAL 6 HOUR),IFNULL(MAX(orderNum)+1,1,0) FROM comments;
 INSERT INTO evaluation (rno,mno,bno,grade)VALUES (22,1,1,4);
 INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum) 
 		SELECT 1,1,'테스트답글',1,21,now(),IFNULL(MAX(orderNum)+1,1) FROM comments;
-INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum) 
-		SELECT 1,1,'테스트리뷰',0,21,date_add(now(),INTERVAL 7 HOUR),IFNULL(MAX(orderNum)+1,1) FROM comments;
+INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum,replytf) 
+		SELECT 1,1,'테스트리뷰',0,21,date_add(now(),INTERVAL 7 HOUR),IFNULL(MAX(orderNum)+1,1,1) FROM comments;
 INSERT INTO evaluation (rno,mno,bno,grade)VALUES (21,1,1,4);
+
 

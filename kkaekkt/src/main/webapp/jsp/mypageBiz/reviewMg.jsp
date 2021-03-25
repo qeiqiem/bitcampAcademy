@@ -69,12 +69,12 @@
                 <div class="process">
 					<div class="order">
 						<p>전체 리뷰</p>
-                        <span class="pick">오름차순 </span><span>내림차순</span>
 						<div class="selectbox">
-							<label class="select">등록 순</label>
+							<label class="select">ㅤ등록순ㅤ</label>
 							<select>
-								<option value=1>등록 순</option>
-								<option value=2>평점 순</option>
+								<option value=1>ㅤ등록순ㅤ</option>
+								<option value=2>평점높은순</option>
+								<option value=3>평점낮은순</option>
 							</select>
 						</div>
 					</div>
@@ -88,59 +88,6 @@
 							<th class="cell5">주문번호</th>
 							<th class="cell6">등록일</th>
 							<th class="cell7">상태 및 변경</th>							
-						</tr>
-					</table>
-                    <table class="reviewList" id="review0">
-						<tr>
-							<td class="cell1">1</td>
-							<td class="cell2 close">asdasdsaasdasdasdasddsdddddddddddddddddddasdasdasdasdasdasdasdadsadasdsaasdsadasdsadsasadsadsadasds</td>
-							<td class="cell3">4/5</td>
-							<td class="cell4" id="customer0">황태연</td>
-							<td class="cell5">132523</td>
-							<td class="cell6">3월 13, 2021</td>
-							<td class="cell7"><button class="replyBtn" value=0 disabled>답글완료</button></td>
-						</tr>
-					</table>
-                    <table class="replyList" id="reply0">
-						<tr>
-							<td class="cell1">┗</td>
-							<td class="replyCell close">[답글:]허허asdsdddddddddddddasdsaasdasdasdasddsdddddddddddddddddddasdasdasdasdasdasdasdadsadasdsaasdsadasdsadsasadsadsadasds</td>
-							<td class="cell6">3월 13, 2021</td>
-							<td class="cell7"><button class="editBtn" value=0>수정</button><button class="delBtn" value=0>삭제</button></td>
-						</tr>
-					</table>
-                    <table class="reviewList" id="review2">
-						<tr>
-							<td class="cell1">1</td>
-							<td class="cell2 close">asdasdsaasdasdasdasddsdddddddddddddddddddasdasdasdasdasdasdasdadsadasdsaasdsadasdsadsasadsadsadasds</td>
-							<td class="cell3">4/5</td>
-							<td class="cell4" id="customer2">황태연</td>
-							<td class="cell5">132523</td>
-							<td class="cell6">3월 13, 2021</td>
-							<td class="cell7"><button class="replyBtn" value=2>답글</button></td>
-						</tr>
-					</table>
-                    <!-- <div class="comments">
-                        <div class="comments_header">
-                            <p><span>알 수 없음</span> 님 리뷰에 대한 답글</p>
-                            <button class="cancel">취소</button>
-							<button value=2>등록</button>
-                        </div>
-                        <div class="comments_body">
-                            <span>┗</span>
-                            <textarea class="commentBox" cols="30" rows="3"></textarea>
-							<span>0 / 300</span>
-                        </div>
-                    </div> -->
-                    <table class="reviewList" id="review3">
-						<tr>
-							<td class="cell1">1</td>
-							<td class="cell2 close">asdasdsaasdasdasdasddsdddddddddddddddddddasdasdasdasdasdasdasdadsadasdsaasdsadasdsadsasadsadsadasds</td>
-							<td class="cell3">4/5</td>
-							<td class="cell4" id="customer3">황태연</td>
-							<td class="cell5">132523</td>
-							<td class="cell6">3월 13, 2021</td>
-							<td class="cell7"><button class="replyBtn" value=3>답글</button></td>
 						</tr>
 					</table>
 				</div>
@@ -165,7 +112,9 @@
     </div>
 	<script>
 		var pageObj = {
-			bno:1
+			bno:1,
+			depth:1,
+			order:1
 		}
 	</script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>

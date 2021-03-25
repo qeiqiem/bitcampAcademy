@@ -1,7 +1,5 @@
 package com.kkaekkt.view.user;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,7 +84,7 @@ public class ReservationController {
 	public void deleteCommCh(CommVO vo) {
 		reservationService.deleteCommCh(vo);
 	}
-	@RequestMapping(value="/getCommListBs.do", method=RequestMethod.POST)//리뷰관리 리스트조회
+	@RequestMapping(value="/getCommListBs.do", method=RequestMethod.POST,produces="application/text;charset=utf-8")//리뷰관리 리스트조회
 	@ResponseBody
 	public String getCommListBs(CommListVO vo) {
 		System.out.println(vo);
