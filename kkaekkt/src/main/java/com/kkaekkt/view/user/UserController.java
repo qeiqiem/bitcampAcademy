@@ -183,6 +183,7 @@ public class UserController {
 			// 로그인 성공했을 때
 			vo = userService.method(vo);
 
+			
 			PersonVO user = vo;
 			System.out.println(vo + "vo카카오"); // 카카오 로그인시 vo 확인
 			System.out.println("user카카2" + user);
