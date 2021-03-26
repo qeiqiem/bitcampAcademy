@@ -13,7 +13,7 @@
 	<nav class="head">
 		<div class="head_left">
 			<div class="logo">
-				<a href=""> <img src="/img/logo.svg" alt="">
+				<a href="/jsp/indexPerson.jsp"> <img src="/img/logo.svg" alt="">
 				</a>
 			</div>
 			<div class="menu">
