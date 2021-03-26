@@ -7,7 +7,27 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <link rel="stylesheet" href="/css/mybio.css">
+<script>
 
+
+</script>
+<style>
+#mail_check_input_box_false{
+    background-color:lightgray;
+}
+ 
+#mail_check_input_box_true{
+    background-color:white;
+}
+.correct{
+    color : var(--key-color);
+}
+.incorrect{
+    color : red;
+}
+
+
+</style>
 </head>
 
 <body>
@@ -71,9 +91,10 @@
                 <div>
                     <!-- 이메일도 api로 하기로 했던 거 같아ㅓ 일단 인풋박스만 만들었습니다 -->
                     이메일<br>
-                    <input name="email" type="email" value="" id="input2"> 
-                    <button type="button" id="btn_checkemail">이메일인증</button><label id="checkemail" value=""></label>
-                
+                    <input name="email" type="email" value="" id="input2" class="mail_input"> 
+                    <button type="button" id="btn_checkemail" class="mail_check_button">이메일인증</button><label id="checkemail" value=""></label></br>
+                    <input class="mail_check_input" id="mail_check_input_box_false" disabled="disabled">
+                    <button type="button" id="mail_check">확인</button><span id="reqinput"></span>
                 </div>
                 <div id="mybioAddress">
                    주소<br>

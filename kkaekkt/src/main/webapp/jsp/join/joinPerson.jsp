@@ -99,8 +99,8 @@
 								<div class="phoneBox">
 									<p>연락처</p>
 									<!-- <input type="tel" placeholder="010-1234-5678" name="phone" id="phone"> -->
-									<input id="phone1" type="text" maxlength='3' name="ph"> -
-									<input id="phone2" type="text" maxlength='4' name="ph"> -
+									<input id="phone1" type="text" maxlength='3' name="ph"> ㅡ
+									<input id="phone2" type="text" maxlength='4' name="ph"> ㅡ
 									<input id="phone3" type="text" maxlength='4' name="ph">
 									<input name="phone" type="tel" id="phone" value="" hidden>
 								</div>

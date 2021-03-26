@@ -1,18 +1,34 @@
+	function facebookLogin(){
+	if(this.value === 'Login'){
+            // now logout
+            FB.login(function(response){
+                console.log('login =>', response);
+                cheekLoginStatus(response);
+            });
+        } else {
+            // now login
+          //  FB.logout(function(response){
+             //   console.log('logout =>', response);
+             //   cheekLoginStatus(response);
+           // });
+        }
+	
 	var cheekLoginStatus = function(response) {
         console.log(response);
         //statusChangeCallback(response);
         // 로그인 된 상태
         if (response.status === 'connected') {
-            document.querySelector('#authBtn').value = 'Logout';
+            //document.querySelector('#authBtn').value = 'Logout';
             FB.api('/me', function(response){
                 document.querySelector('#name').innerHTML = response.name;
             });
         // 로그아웃 된 상태
-        } else {
-            document.querySelector('#authBtn').value = 'Login';
-            document.querySelector('#name').innerHTML = '';
-        }
+        } //else {
+         //  document.querySelector('#authBtn').value = 'Login';
+          // document.querySelector('#name').innerHTML = '';
+       // }
     };
+    
 
     window.fbAsyncInit = function() {
         FB.init({
@@ -36,3 +52,4 @@
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
     
+}
