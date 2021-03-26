@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	$(".side_sub").hide();
 	initEvent();
-	//ajax(pageObj);
+	ajax(pageObj);
     initSide();
     
 		
@@ -64,12 +64,15 @@ function initEvent(){
 
 	// 수정완료 버튼 클릭시
 	$("#submitSpec").click(function(){
-		$("input").attr("disabled", false);
-		var list = new Array();
-
+        var list = new Array();
+        
         // 품목 리스트 데이터 처리
         for(var i=0; i<chkBox.size();i++) {
             if(chkBox[i].checked) {
+                if(priceBox[i].value == "" ){
+                    alert("체크항목을 확인해주세요");
+                    return false;
+                }
                 list.push({lno:JSON.parse(chkBox[i].value),price:JSON.parse(priceBox[i].value)});
             }
             else if(!chkBox[i].checked){
@@ -77,23 +80,28 @@ function initEvent(){
             }
         }
         $("input[name='laundry']").val(JSON.stringify(list));
-
+        
 	    // 운영시간 데이터 처리
     	var weekLi=$('#weekBox ul li');
-   		 list=[];//위에서 쓰인 리스트 초기화
+        list=[];//위에서 쓰인 리스트 초기화
     	for(var i=0;i<weekLi.size();i++) {
         	var open=weekLi[i].children[1].value;
         	var close=weekLi[i].children[2].value;
-        if($('#week button').eq(i).hasClass("selected")){
-        	list.push({schno:JSON.parse(weekLi.eq(i).css("order")),time:open+'~'+close});
-        } else {
-        	list.push({schno:JSON.parse(weekLi.eq(i).css("order")),time:"00:00~00:00"});
+            if($('#week button').eq(i).hasClass("selected")){
+                if(open == "00:00" && close == "00:00"){
+                    alert("운영시간을 확인해주세요");
+                    return false;
+                }
+                list.push({schno:JSON.parse(weekLi.eq(i).css("order")),time:open+'~'+close});
+            } else {
+                list.push({schno:JSON.parse(weekLi.eq(i).css("order")),time:"00:00~00:00"});
             }
     	}
         console.log(list);
     	$("#weekBox input[name='schedule']")[0].value=JSON.stringify(list);
 		
         // form submit
+        $("input").attr("disabled", false);
         $("form").submit();
 	});
 		
