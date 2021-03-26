@@ -118,9 +118,9 @@
 
                                 <div class="phone">
                                     <p>연락처</p>
-                                    <input id="phone1" type='text' pattern="[0-9]+" title="숫자만 입력가능합니다." maxlength='3'> - 
-                                    <input id="phone2" type="text" pattern="[0-9]+" title="숫자만 입력가능합니다." maxlength='4'> -
-                                    <input id="phone3" type="text" pattern="[0-9]+" title="숫자만 입력가능합니다." maxlength='4'>
+                                    <input id="phone1" type='text' pattern="[0-9]+" maxlength='3'> - 
+                                    <input id="phone2" type="text" pattern="[0-9]+" maxlength='4'> -
+                                    <input id="phone3" type="text" pattern="[0-9]+" maxlength='4'>
                                     <input type="hidden" value="test" name="phone">
                                 </div>
                                 <div class="full">
@@ -132,9 +132,9 @@
                                 </div>
                                 <div class="address">
                                     <p>주소</p>
-                                    <input type="text" id="postcode" placeholder="우편번호" readonly>
+                                    <input type="text" id="postcode" placeholder="우편번호" >
                                     <button type="button" onclick=execDaumPostcode() id="btn_address">우편번호 찾기</button><br>
-                                    <input type="text" id="roadAddress" placeholder="도로명주소" readonly ><br>
+                                    <input type="text" id="roadAddress" placeholder="도로명주소" ><br>
                                     <!-- <span id="guide" style="color:#999;"></span><br> -->
                                     <div id="addressWrap">
                                         <input type="text" id="detailAddress" placeholder="상세주소">
@@ -177,22 +177,22 @@
                                             <tr>
                                                 <td><input value=0 type="checkbox"></td>
                                                 <td class="blank">일반의류</td>
-                                                <td><input class="won" pattern="[0-9]+" title="숫자만 입력하세요." disabled>원</td>
+                                                <td><input class="won" pattern="[0-9]+" title="숫자만 입력하세요." v disabled>원</td>
                                             </tr>
                                             <tr>
                                                 <td><input value=1 type="checkbox"></td>
                                                 <td class="blank">와이셔츠</td>
-                                                <td><input class="won" pattern="[0-9]+" title="숫자만 입력하세요." disabled>원</td>
+                                                <td><input class="won" pattern="[0-9]+" title="숫자만 입력하세요." v disabled>원</td>
                                             </tr>
                                             <tr>
                                                 <td><input value=2 type="checkbox"></td>
                                                 <td class="blank">이불</td>
-                                                <td><input class="won" pattern="[0-9]+" title="숫자만 입력하세요." disabled>원</td>
+                                                <td><input class="won" pattern="[0-9]+" title="숫자만 입력하세요." v disabled>원</td>
                                             </tr>
                                             <tr>
                                                 <td><input value=3 type="checkbox"></td>
                                                 <td class="blank">운동화</td>
-                                                <td><input class="won" pattern="[0-9]+" title="숫자만 입력하세요." disabled>원</td>
+                                                <td><input class="won" pattern="[0-9]+" title="숫자만 입력하세요." v disabled>원</td>
                                             </tr>
                                         </table>
                                         <br>
@@ -204,24 +204,24 @@
                                             <tr>
                                                 <td><input value=4 type="checkbox"></td>
                                                 <td class="blank">가죽모피</td>
-                                                <td><input class="won" pattern="[0-9]+" title="숫자만 입력하세요." disabled>원</td>
+                                                <td><input class="won" pattern="[0-9]+" title="숫자만 입력하세요." v disabled>원</td>
                                             </tr>
                                             <tr>
                                                 <td><input value=5 type="checkbox"></td>
                                                 <td class="blank">명품가방</td>
-                                                <td><input class="won" pattern="[0-9]+" title="숫자만 입력하세요." disabled>원</td>
+                                                <td><input class="won" pattern="[0-9]+" title="숫자만 입력하세요." v disabled>원</td>
                                             </tr>
                                             <tr>
                                                 <td><input value=6 type="checkbox"></td>
                                                 <td class="blank">아웃도어</td>
-                                                <td><input class="won" pattern="[0-9]+" title="숫자만 입력하세요." disabled>원</td>
+                                                <td><input class="won" pattern="[0-9]+" title="숫자만 입력하세요." v disabled>원</td>
                                             </tr>
                                             <tr>
                                                 <td><input value=7 type="checkbox"></td>
                                                 <td class="blank"> 기타 <span style="font-size:smaller;">(모자/가방/인형)</span>
                                                 </td>
                                                 <!-- <input class="etc" placeholder="모자/가방/인형"></td> -->
-                                                <td><input class="won" pattern="[0-9]+" title="숫자만 입력하세요." disabled>원</td>
+                                                <td><input class="won" pattern="[0-9]+" title="숫자만 입력하세요." v disabled>원</td>
                                             </tr>
                                         </table>
                                         <input type="hidden" name="laundry">
@@ -346,7 +346,7 @@
                             <div class="join_btn">
                                 <button type="reset" name="reset">다시입력</button>
                                 <button name="join"
-                                    style="background-color: var(--key-color);" id="joinBtn">가입하기</button>
+                                    style="background-color: var(- -key-color);" onclick="clicked()">가입하기</button>
                             </div>
                         </form>
                     </div>
