@@ -1,12 +1,13 @@
 
 var code = "";                //이메일전송 인증번호 저장위한 코드
 
+let formatbirth = 0;			// 1일때가 유효성 통과했을때
+let formatemail = 0;
+
 window.onload = function () {
     console.log("window onload");
     var formatpw = 0;
     var formatnewpw = 0;
-    var formatbirth = 0;			// 1일때가 유효성 통과했을때
-    var formatemail = 0;
     var content = document.getElementsByClassName("content");
     initSide();
 
@@ -254,15 +255,20 @@ window.onload = function () {
 $("#mail_check").click(function(){
     var inputCode = $(".mail_check_input").val();        // 입력코드    
  
-    if(inputCode == code || inputCode!=""){
+
+    if(inputCode == code){
         formatemail = 1;
         $("#reqinput").text("");
         $("#reqinput").html(" 인증번호가 일치합니다.");
+        console.log(formatemail);
+
         $("#reqinput").attr("class", "correct");        
     } else {                                            // 일치하지 않을 경우
         formatemail = 0;
         $("#reqinput").text("");
         $("#reqinput").html(" 인증번호를 다시 확인해주세요.");
+        console.log(formatemail);
+
         $("#reqinput").attr("class", "incorrect");
     } 
 
@@ -325,6 +331,7 @@ function submitMybio() {
     if ($("input[name='email']").val() == "" || formatemail != 1) {
         alert("이메일을 확인하세요.");
         $("input[name='email']").focus();
+        console.log(formatemail);
         return false;
     }
 
