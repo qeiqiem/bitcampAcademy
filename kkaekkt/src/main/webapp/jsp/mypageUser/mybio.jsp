@@ -89,7 +89,6 @@
                    <input name="birth" type="text" id="input2 birth" value=""><label id="checkbirth" value=""></label>
                 </div>
                 <div>
-                    <!-- 이메일도 api로 하기로 했던 거 같아ㅓ 일단 인풋박스만 만들었습니다 -->
                     이메일<br>
                     <input name="email" type="email" value="" id="input2" class="mail_input"> 
                     <button type="button" id="btn_checkemail" class="mail_check_button">이메일인증</button><label id="checkemail" value=""></label></br>
@@ -107,8 +106,8 @@
                     <span id="guide" style="color:#999;display:none"></span><br>
                     <input type="hidden" name="address" id="address" value="">  <!--여기에 디비로 보낼 도로명주소+상세주소 해서 보내기-->
 
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="/js/adress.js"></script>
+                <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+                <script src="/js/adress.js"></script>
 
                 </div>
             </div>
