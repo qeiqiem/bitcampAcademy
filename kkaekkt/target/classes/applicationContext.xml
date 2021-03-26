@@ -66,7 +66,9 @@
 		<constructor-arg ref="sqlSession"></constructor-arg>
 	</bean>
 	
+
 	<!--  이메일인증-->
+
 	<!-- navermail설정 -->
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"> 
      <property name="host" value="smtp.naver.com"/> <!-- 메이서버 호스트 -->
@@ -85,6 +87,7 @@
       </props>
      </property>
     </bean> 
+
 
 
 </beans>

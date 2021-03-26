@@ -238,7 +238,8 @@ public class UserController {
 	        System.out.println("인증번호 " + checkNum);
 	        /* 이메일 보내기 */
 	        String setFrom = "kkaekkt@naver.com";			// bean에 지정해둔 계정
-	        String toMail = "kkaekkt@naver.com";		// 받는메일 테스트 이후 => 받아온 email변수로 변경
+	        String toMail = "kkaekkt@naver.com";		// 받는메일 테스트 이후 받아온 email변수로 변경
+
 	        String title = "회원가입 인증 이메일 입니다.";
 	        String content = 
 	                "홈페이지를 방문해주셔서 감사합니다." +
