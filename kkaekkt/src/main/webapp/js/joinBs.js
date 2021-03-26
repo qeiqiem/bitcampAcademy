@@ -17,6 +17,7 @@ const account= document.getElementById("account");
 var formatArray = [false,false,false,false,false,false];
 var alertArray = ['아이디','비밀번호','비밀번호 확인','이메일','사업자등록번호','계좌번호'];
 var focusArray = [id,pw,repw,email,bno,account];
+var mailCode;
 //요일 출력 배열
 const week=['월요일','화요일','수요일','목요일','금요일','토요일','일요일','매일','평일','주말'];
 $(document).ready(function () {
@@ -113,6 +114,17 @@ function initEvent() {
             formatArray[0]=false;
         }
     });
+    $('#certified').click(function() {//이메일 인증번호 확인란
+        
+    })
+}
+function mailChk() {
+    if($('#mailCodeChk').value==mailCode){
+        alert('인증되었습니다.');
+        formatArray[3]=true;
+    }else {
+        alert('인증번호가 일치하지 않습니다.');
+    }
 }
 function idAjax(data) {
     console.log('ajax진입');
@@ -137,9 +149,10 @@ function emailAjax(email) {//이메일인증검사
     $.get({
         url:'/mailCheck.do',
         data:{email:email},
-        success:function(num) {
-            console.log(num);//인증번호 체크 확인
-            //모달창 띄워서 이퀄 true 나오면 패스하고 진행하는 걸로..!
+        success:function(code) {
+            mailCode=code;
+            alert('인증번호가 전송되었습니다.');
+            //이 부분에 타이머 메서드 구현
         }
     });
 }
