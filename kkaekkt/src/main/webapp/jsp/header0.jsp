@@ -23,7 +23,7 @@
 		</div>
 		<div class="head_right">
 			<a href="/jsp/join/joinSelect.jsp">회원가입</a> 
-			<a href="/jsp/login/login.jsp">로그인</a>
+			<a href="/jsp/login/loginPs.jsp">로그인</a>
 			<a href="/jsp/faq.jsp">FAQ</a>
 		</div>
 	</nav>

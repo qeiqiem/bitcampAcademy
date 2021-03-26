@@ -1,7 +1,12 @@
 .wrapper_select {
   height: 2800px;
 }
-
+button {
+  cursor: pointer;
+}
+form div {
+  margin-bottom: 0;
+}
 table {
   border-spacing: 2px 15px;
 }
@@ -141,12 +146,7 @@ input[type="button"] {
   border: 1px solid var(--gray-color);
 }
 .phone input {
-  width: 120px;
-  height: 40px;
-  text-align: center;
-}
-.phone input:nth-child(2) {
-  width: 100px;
+  width: 138px;
   height: 45px;
   text-align: center;
 }
@@ -432,4 +432,10 @@ td {
   margin-top: 50px;
 
   width: 450px;
+}
+.coinLaundry select{
+  position: absolute;
+  left: 0px;
+  height: 24px;
+  top: -1px;
 }

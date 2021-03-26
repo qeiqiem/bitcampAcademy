@@ -60,12 +60,12 @@ form div button:hover {
 }
 
 .wrapper_select {
-  height: 1500px;
+  /* height: 100%; */
 }
 
-.adBox button {
+/* .adBox button {
   width: 120px;
-}
+} */
 
 /* #postcode {
   width: 130px;

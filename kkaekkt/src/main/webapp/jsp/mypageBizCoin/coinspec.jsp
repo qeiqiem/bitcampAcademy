@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="/css/coinspec.css">
 </head>
 <body>
-	<jsp:include page="/jsp/header0.jsp"></jsp:include>
+	<jsp:include page="/jsp/header2.jsp"></jsp:include>
 	<div class="body_container">
 		<jsp:include page="sidebar_coin.jsp"></jsp:include>
 		<div class="content">
