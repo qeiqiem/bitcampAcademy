@@ -14,22 +14,45 @@ const address = document.getElementById("ad");
 const email = document.getElementById("email");
 
 window.onload = function () {
-  document.getElementById("pw").addEventListener("keyup", () => {
-    //특수문자 / 문자 / 숫자 포함 형태의 8~15자리 이내의 암호 정규식
+  id.addEventListener("keyup", () => {
     // var regex = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
-    if (!regPw.test(pw.value)) {
-      if (pw.value.length == 0) {
-        document.getElementById("checkval").innerText = "";
+    if (!regID.test(id.value)) {
+      if (id.value.length == 0) {
+        document.getElementById("id_label").innerText = "";
       } else {
-        document.getElementById("checkval").innerText =
-          " 특수문자,문자,숫자 포함 8~15자리 이내로 입력하세요.";
+        document.getElementById("id_label").innerText =
+          "영문과 숫자를 모두 사용해 입력하세요.";
       }
     } else {
-      fomatnewpw = 1;
-      document.getElementById("checkval").innerText = "";
+      // fomatnewpw = 1;
+      document.getElementById("id_label").innerText = "";
     }
   });
+
+  if ($("#pw").val != $("#repw").val) {
+    document.getElementById("pw_label").innerText =
+      " 새 비밀번호와 일치하지 않습니다.";
+    repw.value = null;
+  }
 };
+
+// window.onload = function () {
+//   document.getElementById("pw").addEventListener("keyup", () => {
+//     //특수문자 / 문자 / 숫자 포함 형태의 8~15자리 이내의 암호 정규식
+//     // var regex = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+//     if (!regPw.test(pw.value)) {
+//       if (pw.value.length == 0) {
+//         document.getElementById("checkval").innerText = "";
+//       } else {
+//         document.getElementById("checkval").innerText =
+//           " 특수문자,문자,숫자 포함 8~15자리 이내로 입력하세요.";
+//       }
+//     } else {
+//       fomatnewpw = 1;
+//       document.getElementById("checkval").innerText = "";
+//     }
+//   });
+// };
 
 // function check() {
 //   if (id.value == "") {

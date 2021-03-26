@@ -163,14 +163,15 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int idchk(PersonVO vo) {
-		// TODO Auto-generated method stub
-		return 0;
+		System.out.println("idchk 서비스옴");
+		return userDao.idchk(vo);
 	}
 
 	@Override
 	public AccountVO authkey(Map<String, String> map) {
-		// TODO Auto-generated method stub
+		System.out.println("authkey 서비스 진입");
 		return null;
+//		return userDao.authkey(map);
 	}
 
 	
