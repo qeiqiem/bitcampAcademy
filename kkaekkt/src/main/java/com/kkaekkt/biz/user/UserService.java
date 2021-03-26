@@ -28,5 +28,6 @@ public interface UserService {
 	public AccountVO authkey(Map<String, String> map);
 	
 	public PersonVO method(PersonVO vo);
+	public String email(PersonVO vo);
 
 }

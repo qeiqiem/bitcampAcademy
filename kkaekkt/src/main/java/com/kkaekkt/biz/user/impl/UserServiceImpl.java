@@ -174,5 +174,11 @@ public class UserServiceImpl implements UserService {
 //		return userDao.authkey(map);
 	}
 
+	@Override
+	public String email(PersonVO vo) {
+		System.out.println("email 찾는 서비스 옴");
+		return userDao.email(vo);
+	}
+
 	
 }
