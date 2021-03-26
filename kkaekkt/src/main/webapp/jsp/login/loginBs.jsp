@@ -27,7 +27,7 @@
             </button>
 
             <div class="login">
-                <form action="/loginPs.do" method="post">
+                <form action="/loginBs.do" method="post">
                     <h3>로그인</h3>
                     <hr>
                     <div>
