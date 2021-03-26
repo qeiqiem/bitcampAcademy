@@ -1,7 +1,7 @@
 package com.kkaekkt.view.user;
 
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
@@ -91,7 +91,6 @@ public class UserController {
 // 		userService.insertUser(vo);
 // 		return "index.jsp";
 // 	}
-	
 	// 회원가입-업체
 	@RequestMapping(value="/joinBs.do", method=RequestMethod.POST)
 	public String Join(BusinessVO vo) {
@@ -238,7 +237,7 @@ public class UserController {
 	        System.out.println("인증번호 " + checkNum);
 	        /* 이메일 보내기 */
 	        String setFrom = "kkaekkt@naver.com";			// bean에 지정해둔 계정
-	        String toMail = "kkaekkt@naver.com";		// 받는메일 테스트 이후 받아온 email변수로 변경
+	        String toMail = email;		// 받는메일 테스트 이후 받아온 email변수로 변경
 
 	        String title = "회원가입 인증 이메일 입니다.";
 	        String content = 
