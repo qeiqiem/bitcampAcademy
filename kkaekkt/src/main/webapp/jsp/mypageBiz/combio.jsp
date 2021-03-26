@@ -21,7 +21,7 @@
         <div class="userinfo">
             <table>
                 <tr>
-                <td>홍길동</td><td>님 반갑습니다.</td>
+                <input name="name" id="name" value="${personBs.bname } 님 반갑습니다." readonly /> 
             </tr>
             <tr>
                <td> 찜<span>140</span>명/ 내 평점 4.7 <i class="fas fa-star"></i></td>

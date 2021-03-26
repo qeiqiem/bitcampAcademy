@@ -17,7 +17,7 @@
 				</a>
 			</div>
 			<div class="menu">
-				<a href="">일반세탁소</a> <a href="">코인세탁소</a> <a href="">매장관리</a>
+				<a href="">일반세탁소</a> <a href="">코인세탁소</a> <a href="/jsp/mypageBiz/mpbProg_Num.jsp">매장관리</a>
 			</div>
 		</div>
 
@@ -25,7 +25,7 @@
 			<input name="name" id="name" value="${personBs.bname } 님" readonly /> 
 			<a href=""><i class="fas fa-bell"></i></a> 
 			<a href=""><i class="fas fa-comments"></i></a> 
-			<a href="logout.do">로그아웃</a> 
+			<a href="/logout.do">로그아웃</a> 
 			<a href="/jsp/faq.jsp">FAQ</a>
 		</div>
 	</nav>
