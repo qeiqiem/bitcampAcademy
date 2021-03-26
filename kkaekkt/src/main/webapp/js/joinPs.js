@@ -19,9 +19,9 @@ const address = document.getElementById("address");
 const email = document.getElementById("email");
 
 // submit
-const formatpw = 0;
-const formatbirth = 0;
-const formatad = 0;
+let formatpw = 0;
+let formatbirth = 0;
+let formatad = 0;
 
 window.onload = function () {
   // id
