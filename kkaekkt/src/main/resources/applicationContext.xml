@@ -66,23 +66,7 @@
 		<constructor-arg ref="sqlSession"></constructor-arg>
 	</bean>
 	
-	<!-- Gmail 
-  <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-    <property name="host" value="smtp.gmail.com" />
-    <property name="port" value="587" />
-    <property name="username" value="nom.artsy@gmail.com" />
-    <property name="password" value="kkaekkt1234" />
-    <property name="javaMailProperties">
-    <props>
-      	<prop key="mail.transport.protocol">smtp</prop>
-	<prop key="mail.smtp.auth">true</prop>
-	<prop key="mail.smtp.starttls.enable">true</prop>
-	<prop key="mail.debug">true</prop>
-    </props>
-    </property>
-  </bean>-->
-	
-	<!--  이메일인증 테스트 (수정)-->
+	<!--  이메일인증-->
 	<!-- navermail설정 -->
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl"> 
      <property name="host" value="smtp.naver.com"/> <!-- 메이서버 호스트 -->
@@ -100,7 +84,7 @@
       <prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
       </props>
      </property>
-    </bean> <!-- 테스트 -->
+    </bean> 
 
 
 </beans>
