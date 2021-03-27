@@ -115,9 +115,48 @@ function initEvent() {
         }
     });
     $('#certified').click(function() {//이메일 인증번호 확인란
-        
-    })
+        if(mailCode==$('#mailCodeChk').value){
+            alert('메일 인증이 완료되었습니다.');
+            formatArray[3]=true;
+        }
+    });
+    $('#email').keyup(function() {//이메일 인증을 마쳤는데 다시 입력할 경우
+        if(formatArray[3]==true){
+            formatArray[3]=false;
+        }
+    });
 }
+function timer() {
+    
+}
+// function $ComTimer() {}
+// $ComTimer.prototype = {
+//     comSecond : ""
+//     , fnCallback : function(){}
+//     , timer : ""
+//     , domId : ""
+//     , code : ""
+//     , fnTimer : function(){
+//         var min = Math.floor(this.comSecond/60);
+//         var sec = this.comSecond%60;
+//         this.domId.innerText = `${min}:${sec<10?`0${sec}`:sec}`;
+//         this.comSecond--;					// 1초씩 감소
+//         if (this.comSecond < 0) {			// 시간이 종료 되었으면..
+//             clearInterval(this.timer);		// 타이머 해제
+//             alert("인증시간이 초과하였습니다. 다시 인증해주시기 바랍니다.");
+//         }
+//     }
+//     ,fnStop : function(){
+//         clearInterval(this.timer);
+//     }
+// }
+// function timeOut() {
+//     var AuthTimer = new $ComTimer()
+//       AuthTimer.comSecond = 10;
+//       AuthTimer.fnCallback = function(){alert("다시인증을 시도해주세요.")}
+//       AuthTimer.timer =  setInterval(function(){AuthTimer.fnTimer()},1000);
+//       AuthTimer.domId = document.getElementById("timeout");
+// }
 function mailChk() {
     if($('#mailCodeChk').value==mailCode){
         alert('인증되었습니다.');
@@ -146,15 +185,16 @@ function idAjax(data) {
     })
 }
 function emailAjax(email) {//이메일인증검사
-    $.get({
-        url:'/mailCheck.do',
-        data:{email:email},
-        success:function(code) {
-            mailCode=code;
-            alert('인증번호가 전송되었습니다.');
-            //이 부분에 타이머 메서드 구현
-        }
-    });
+    timeOut();
+    // $.get({
+    //     url:'/mailCheck.do',
+    //     data:{email:email},
+    //     success:function(code) {
+    //         mailCode=code;
+    //         alert('인증번호가 전송되었습니다.');
+    //         timeOut();
+    //     }
+    // });
 }
 function chkId() {//ID 유효성 체크
     if(regId.test(id.value)){//ID유효성 체크
@@ -188,10 +228,8 @@ function chkRePw() {
 function chkEmail() {
     if(regEmail.test(email.value)) {
         $('#emailchk').addClass('hide');
-        formatArray[3]=true;
     }else {
         $('#emailchk').removeClass('hide');
-        formatArray[3]=false;
     }
 }
 function chkBno() {
@@ -216,10 +254,14 @@ function formatChk() {//유효성검사가 걸린 차례대로 input값 체크
         for(var i=0; i<formatArray.length;i++) {
             if(!formatArray[i]){//false가 반환된다면
                 if(i==0){
-                    alert('ID 중복검사를 진행해주십시오.')
+                    alert('ID 중복검사를 진행해주세요.');
+                    return false;
+                }else if(i==3) {
+                    alert('이메일 인증을 진행해주세요');
+                    focusArray[i].focus();
                     return false;
                 }else {
-                    alert(alertArray[i]+'의 입력을 확인해주십시오.');
+                    alert(alertArray[i]+'의 입력을 확인해주세요.');
                     focusArray[i].focus();
                     return false;
                 }
@@ -241,7 +283,7 @@ function nullchk() {
             $('#bname').focus();
             return false;
         }
-        if($('#postcode').value==null){//주소 null체크
+        if($('#postcode').value.length==0){//주소 null체크
             alert('주소는 필수입력사항입니다.');
             return false;
         }
