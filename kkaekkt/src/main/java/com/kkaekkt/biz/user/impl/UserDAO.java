@@ -78,6 +78,15 @@ public class UserDAO {
 			System.out.println("mybatis로 기능처리 소셜유저");
 			return mybatis.selectOne("UserDAO.getPersonSNS", vo);
 		}
+		
+		
+		// 이메일 확인
+		public String email(PersonVO vo) {
+			System.out.println("mybatis로 기능처리 -- 이메일 찾기");
+			System.out.println(vo);
+			
+			return mybatis.selectOne("UserDAO.getPersonSNS", vo);
+		}
 
 	// laundry
 	public List<LaundryVO> getLaundry(BusinessVO vo) {

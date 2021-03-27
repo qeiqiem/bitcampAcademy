@@ -62,7 +62,7 @@
         </div>
     </div>
     <!-- 바디콘테이너 --> 
-            <%
+      <%--       <%
         String clientId = "h_yaNKHsI9qSzo9ZPDD8";//애플리케이션 클라이언트 아이디값";
         String redirectURI = URLEncoder.encode("http://localhost:8080/loginSNS.do", "UTF-8");
         SecureRandom random = new SecureRandom();
@@ -75,7 +75,7 @@
         System.out.println(state);
         System.out.println("네이버 로그인 성공?");
         System.out.println(clientId);
-     %>
+     %> --%>
 </body>
 <script src="/js/kakaoLogin.js"></script>
 <script src="/js/TestfacebookLogin.js"></script>

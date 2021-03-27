@@ -119,6 +119,23 @@ public class UserController {
 
 		return "/jsp/mypageUser/mybio.jsp";
 	}
+	
+	// 이메일 체크
+		@RequestMapping(value = "/findemail.do", method = RequestMethod.POST)
+		@ResponseBody
+		public String email(PersonVO vo) {
+			System.out.println("controller에서 이메일 찾음");
+			//vo = userService.email(vo);
+            
+			vo.setEmail(userService.email(vo));
+			System.out.println("vo"+vo);
+            PersonVO findEmail = vo;
+            System.out.println("findEmail"+findEmail);
+
+			
+			Gson gson = new Gson();
+			return gson.toJson(findEmail);
+		}
 		
 	// 일반유저 로그인
 	@RequestMapping(value = "/loginPs.do", method = RequestMethod.POST)
@@ -175,38 +192,30 @@ public class UserController {
 	}
 
 	// 소셜로그인
-	@RequestMapping(value = "/loginSNS.do", method = RequestMethod.POST)
-	public @ResponseBody String kakaologin(PersonVO vo, HttpSession session, HttpServletResponse response)
-			throws Exception {
-		System.out.println("카카오 로그인 컨트롤러 접속");
-		try {
-			// 로그인 성공했을 때
-			vo = userService.method(vo);
+	   @RequestMapping(value = "/loginSNS.do", method = RequestMethod.POST)
+	      public @ResponseBody String kakaologin(PersonVO vo, HttpSession session, HttpServletResponse response){
+	         System.out.println("카카오 로그인 컨트롤러 접속");
+	            // 로그인 성공했을 때
+	            vo = userService.method(vo);
 
-			
-			PersonVO user = vo;
-			System.out.println(vo + "vo카카오"); // 카카오 로그인시 vo 확인
-			System.out.println("user카카2" + user);
+	            
+	            PersonVO user = vo;
+	            System.out.println(vo + "vo카카오"); // 카카오 로그인시 vo 확인
+	            System.out.println("user카카2" + user);
 
-			if (user.getMno() != 0) {
-				session.setAttribute("person", user);
-				System.out.println("user정보 " + user);
-				System.out.println("vo정보" + vo);
-				return "/jsp/indexPerson.jsp";
-			} else if (user.getMno() == 0) {
-				session.setAttribute("person", user);
-				System.out.println("user없는거 출력" + user);
-				return "/jsp/join/joinNoPs.jsp";
-			}
-
-			return "/jsp/indexPerson.jsp";
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("카카오 로그인 실패");
-			return "/jsp/join/joinNoPs.jsp";
-		}
-	}
+	            if (user.getMno() != 0) {
+	               session.setAttribute("person", user);
+	               System.out.println("user정보 " + user);
+	               System.out.println("vo정보" + vo);
+	               return "/jsp/indexPerson.jsp";
+	            }else {
+	               System.out.println("카카오 로그인 실패");
+	               return "/jsp/login/loginPs";
+	            }
+	   
+	            //return "/jsp/indexPerson.jsp";
+	      }
+	
 
 	// 로그아웃
 	@RequestMapping("/logout.do")

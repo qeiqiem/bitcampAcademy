@@ -22,7 +22,7 @@
 		</div>
 
 		<div class="head_right">
-			<input name="name" id="name" value="${person.name } 님" readonly /> 
+			<input name="name" id="name" value="${person.name} 님" readonly /> 
 			<a href=""><i class="fas fa-bell"></i></a> 
 			<a href=""><i class="fas fa-comments"></i></a> 
 			<a href="/jsp/mypageUser/mypagePs.jsp">마이페이지</a> 

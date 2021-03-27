@@ -135,7 +135,6 @@
                                     <input type="text" id="extraAddress" placeholder="참고항목">
                                     <span id="guide" style="color:#999;display:none"></span><br>
                                     <input type="hidden" name="address" id="address" value=""><!--여기에 디비로 보낼 도로명주소+상세주소 해서 보내기-->
-
                                     <script
                                         src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
                                     <script src="/js/adress.js"></script>
