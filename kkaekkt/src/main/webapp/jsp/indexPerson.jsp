@@ -10,7 +10,7 @@
     <title>Document</title>
     <!-- <script src="js/header.js"></script> -->
     <script src="https://kit.fontawesome.com/2fc57dd2db.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="/css/index.css">
 
 </head>
 

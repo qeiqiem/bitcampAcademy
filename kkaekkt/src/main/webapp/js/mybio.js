@@ -1,7 +1,7 @@
 
 var code = "";                //이메일전송 인증번호 저장위한 코드
 
-let formatbirth = 0;			// 1일때가 유효성 통과했을때
+let formatbirth = 1;			// 1일때가 유효성 통과했을때
 let formatemail = 0;
 
 window.onload = function () {
@@ -57,7 +57,7 @@ window.onload = function () {
         //수정, 이메일인증, 우편번호 찾기 버튼 활성화
 
         for (var i = 3; i < buttonli.length; i++) {
-            if (i != 4 || i !=5) {
+            if (i != 4 || i !=5 || i!=6) {
                 buttonli[i].disabled = false;
             }
         }
@@ -243,8 +243,9 @@ window.onload = function () {
             success:function(data){
                 //console.log("data : " + data);
                 $(".mail_check_input").attr("disabled",false);
+                buttonli[6].disabled = false;
                 $(".mail_check_input").attr("id", "mail_check_input_box_true");
-                $("#checkemail").text(" 인증번호를 전송했습니다.");
+                alert(" 인증번호를 전송했습니다.");
                 code = data;
             }
                     
@@ -259,14 +260,17 @@ $("#mail_check").click(function(){
     if(inputCode == code){
         formatemail = 1;
         $("#reqinput").text("");
-        $("#reqinput").html(" 인증번호가 일치합니다.");
+        alert(" 인증번호가 일치합니다.");
+        $(".mail_input").attr("disabled",true);
+        $(".mail_check_input").attr("disabled",true);
+        buttonli[6].disabled = true;
         console.log(formatemail);
 
         $("#reqinput").attr("class", "correct");        
     } else {                                            // 일치하지 않을 경우
         formatemail = 0;
         $("#reqinput").text("");
-        $("#reqinput").html(" 인증번호를 다시 확인해주세요.");
+        alert(" 인증번호를 다시 확인해주세요.");
         console.log(formatemail);
 
         $("#reqinput").attr("class", "incorrect");

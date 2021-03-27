@@ -21,7 +21,7 @@
         <div class="userinfo">
             <table>
                 <tr>
-                <td>홍길동</td><td>님 반갑습니다.</td>
+                <input name="name" id="name" value="${personBs.bname } 님 반갑습니다." readonly /> 
             </tr>
             <tr>
                <td> 찜<span>140</span>명/ 내 평점 4.7 <i class="fas fa-star"></i></td>
@@ -37,7 +37,7 @@
                         <th>사업자등록번호</th>
                         <th>계좌번호</th>
                         <tr>
-                            <td><input type="text" value="받아온 정보"></td>
+                            <td><input type="text" value="${personBs.bname }"></td>
                             <td><input type="text" value="받아온 정보"></td>
                             <td><select>
                                     <option>국민</option>
@@ -48,7 +48,7 @@
                                     <option>농협중앙회</option>
                                     <option>k뱅크</option>
                                     <option>카카오뱅크</option>
-                                </select> <input type="text" placeholder="123-1263-1225-11">
+                                </select> <input type="text" value="${personBs.bankAccountNum}">
 
                             </td>
                         </tr>
@@ -63,7 +63,7 @@
                                 <table>
                                     <tr>
                                         <th>아이디</th>
-                                        <td><input type="text" id="3" value="받아온 정보" readonly></td>
+                                        <td><input type="text" id="3" value="${personBs.id}" readonly></td>
                                     </tr>
                                     <tr>
                                         <th>비밀번호</th>
@@ -88,7 +88,7 @@
                                 <table>
                                     <tr>
                                         <th>연락처</th>
-                                        <td><input value="받아온 정보"></td>
+                                        <td><input value="${personBs.phone }"></td>
                                         <td><button type="button" id="5">본인인증</button></td>
                                     </tr>
                                     <th>이메일</th>

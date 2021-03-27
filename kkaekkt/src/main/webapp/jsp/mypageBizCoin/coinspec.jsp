@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="/css/coinspec.css">
 </head>
 <body>
-	<jsp:include page="/jsp/header0.jsp"></jsp:include>
+	<jsp:include page="/jsp/header2.jsp"></jsp:include>
 	<div class="body_container">
 		<jsp:include page="sidebar_coin.jsp"></jsp:include>
 		<div class="content">
@@ -176,7 +176,7 @@
 		</div>
 		<script>
 		var pageObj={//세션에서 정보를 받아오는건 독립된 js파일에서 불가능, jsp 내에서만 가능하기 때문에 여기서 값을 받아준다.
-                bno:2,//더미번호 (추후 세션에서 받아올 예정)
+                bno:'${sessionScope.personBs.bno}'//더미번호 (추후 세션에서 받아올 예정)
             };
 	</script>
 	<script src="/js/coinspec.js"></script>
