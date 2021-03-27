@@ -155,7 +155,7 @@ select::-ms-expand { /* for IE 11 */
     width: 100px;
     height: 30px;
 }
-#bankNum{
+#bankAccNum{
     width: 250px;
 }
 #phone1, #phone2, #phone3 {

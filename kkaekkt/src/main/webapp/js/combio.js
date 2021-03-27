@@ -198,6 +198,7 @@ function defaultDisable(){
 }
 function inputInfo(){
     document.getElementsByName('bno')[0].value = pageObj["bno"];
+    document.getElementsByName('mno')[0].value = pageObj["mno"];
     document.getElementById('name').innerText = pageObj["bname"];
     document.getElementById('bankNum').value = pageObj["bankNum"];
     document.getElementById('bankAccNum').value = pageObj["bankAccNum"];

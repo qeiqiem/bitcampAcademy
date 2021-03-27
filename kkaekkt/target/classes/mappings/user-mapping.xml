@@ -94,7 +94,18 @@
 		</choose>
 	</update>
 
-	<update id="updateBusiness">
+	<update id="updateBs">
+		<choose>
+			<when test="email == null">
+				UPDATE account SET password=#{password} WHERE bno=#{bno};
+			</when>
+			<otherwise>
+				<!-- UPDATE account SET password=#{password} WHERE mno=#{mno}; -->
+				UPDATE business SET
+				phone=#{phone},birth=#{birth},bkno=#{bankNum},acno=#{bankAccountNum} address=#{address},email=#{email}
+				WHERE bno=#{bno};
+			</otherwise>
+		</choose>
 
 	</update>
 	<delete id="deleteUser">
