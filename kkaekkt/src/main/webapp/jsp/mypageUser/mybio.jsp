@@ -7,10 +7,7 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <link rel="stylesheet" href="/css/mybio.css">
-<script>
 
-
-</script>
 <style>
 #mail_check_input_box_false{
     background-color:lightgray;
@@ -90,7 +87,7 @@
                 </div>
                 <div>
                     이메일<br>
-                    <input name="email" type="email" value="" id="input2" class="mail_input"> 
+                    <input name="email" type="email" value="" id="email" class="mail_input"> 
                     <button type="button" id="btn_checkemail" class="mail_check_button">이메일인증</button><label id="checkemail" value=""></label></br>
                     <input class="mail_check_input" id="mail_check_input_box_false" disabled="disabled">
                     <button type="button" id="mail_check">확인</button><span id="reqinput"></span>
@@ -111,6 +108,7 @@
 
                 </div>
             </div>
+            
         </form> 
         </div>
     </div>
