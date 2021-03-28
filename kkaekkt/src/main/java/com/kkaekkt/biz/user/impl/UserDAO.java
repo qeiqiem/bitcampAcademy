@@ -60,6 +60,7 @@ public class UserDAO {
 	public int countList(BusinessListVO vo) {
 		return mybatis.selectOne("UserDAO.countList", vo);
 	}
+	
 
 	// 일반 로그인
 		public PersonVO getUserPs(PersonVO vo) {
@@ -140,6 +141,11 @@ public class UserDAO {
 		System.out.println(res);
 		return res;
 	}
+
+	public int countListBs(BusinessVO vo) {
+		return  mybatis.selectOne("UserDAO.countListBs", vo);
+	}
+
 	
 	// email auth
 //	public AccountVO authkey(Map<String, String> map) {

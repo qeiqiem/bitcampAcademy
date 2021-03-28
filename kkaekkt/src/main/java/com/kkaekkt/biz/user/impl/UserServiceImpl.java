@@ -46,6 +46,10 @@ public class UserServiceImpl implements UserService {
 		}
 		return vo;
 	}
+	@Override
+	public int getLikedBs(BusinessVO vo) {
+		return userDao.countListBs(vo);
+	}
 
 	@Override
 	public void insertUser(BusinessVO vo) {

@@ -168,6 +168,12 @@
 		SELECT count(bno) FROM liked
 		WHERE mno=#{mno};
 	</select>
+	
+	<!-- 업체프로필편집 자신의 매장을 찜한 회원의 수 -->
+	<select id="countListBs" resultType="_int">
+		SELECT count(mno) FROM liked
+		WHERE bno=#{bno};
+	</select>
 	<!-- 관리자 페이지 기능이기 때문에 일단 대기.. -->
 	<select id="getUserList">
 

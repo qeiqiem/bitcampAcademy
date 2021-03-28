@@ -206,6 +206,7 @@ public class UserController {
 			System.out.println("로그인처리");
 
 			vo = userService.getUser(vo);
+			vo.seteCount(userService.getLikedBs(vo));	// 프로필편집에서 찜 인원 뽑아와야해서 추가
 
 			System.out.println(vo); // 뭐가 담기는 지 보려했다
 

@@ -25,7 +25,8 @@
                             <span id="bname" readonly></span>님 반갑습니다.
                         </li>
                         <li id="title_right">
-                            찜<span id="likeNum">140</span>명/ 내 평점<span id="avglike">4.7</span> <i class="fas fa-star"></i>
+                            찜 <span id="likeNum">140</span>명/ 내 평점 <span id="avglike">4.7</span>
+                            <sapn id="starIcon"><i class="fas fa-star"></i></sapn>
                         </li>
                     </ul>
                 </div>
@@ -42,10 +43,11 @@
                                 <td>계좌번호</td>
                             </tr>
                             <tr>
-                                <td id="bname"></td>
+                                <td id="bizname"></td>
                                 <td name="bno"></td>
                                 <td>
                                     <select id="bankNum">
+                                        <option value=0>선택</option>
                                         <option value=1>국민</option>
                                         <option value=2>신한</option>
                                         <option value=3>하나</option>
@@ -162,6 +164,7 @@
             var pageObj={//세션에서 정보를 받아오는건 독립된 js파일에서 불가능, jsp 내에서만 가능하기 때문에 여기서 값을 받아준다.
                 bno:'${sessionScope.personBs.bno}',
                 mno:'${sessionScope.personBs.mno}',
+                eCount:'${sessionScope.personBs.eCount}',
                 bname:'${sessionScope.personBs.bname}',
                 bankNum:'${sessionScope.personBs.bankNum}',
                 bankAccNum:'${sessionScope.personBs.bankAccountNum}',
