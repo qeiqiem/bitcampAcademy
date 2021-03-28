@@ -4,8 +4,10 @@ const regPw = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
 const regName = /^[가-힝a-zA-Z]{2,}$/;
 const regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 const regBno = /^[0-9]{10}$/;
+const regPhone = /^[0-9]{3}\-[0-9]{3,4}\-[0-9]{4}$/;
 const regAccount=/^[0-9,\-]{3,6}\-[0-9,\-]{2,6}\-[0-9,\-]{3,6}(\-[0-9]{1,3})?$/;
-const regPrice=/^[0-9]+&/;
+const regPrice=/^[0-9]+$/;
+const regMailCode =/^[0-9]{6}$/;
 //비교객체
 const id = document.getElementById("id");
 const pw = document.getElementById("pw");
@@ -13,13 +15,33 @@ const repw = document.getElementById("repw");
 const email = document.getElementById("email");
 const bno = document.getElementById("bno");
 const account= document.getElementById("account");
+const phone = document.getElementById('phoneNum');
 //유효성 통과 여부 체크 객체 (false&true)
-var formatArray = [false,false,false,false,false,false];
-var alertArray = ['아이디','비밀번호','비밀번호 확인','이메일','사업자등록번호','계좌번호'];
-var focusArray = [id,pw,repw,email,bno,account];
-var mailCode;
+var formatArray = [false,false,false,false,false,false,false];
+var alertArray = ['아이디','비밀번호','비밀번호 확인','이메일','휴대폰 번호','사업자등록번호','계좌번호'];
+var focusArray = [id,pw,repw,email,phone,bno,account];
+var mailCode=111111;
 //요일 출력 배열
 const week=['월요일','화요일','수요일','목요일','금요일','토요일','일요일','매일','평일','주말'];
+//타이머 전역변수 지정
+function $ComTimer() {}
+$ComTimer.prototype = {
+    comSecond : ""
+    , timer : ""
+    , domId : ""
+    , fnTimer : function(){
+        var min = Math.floor(this.comSecond/60);
+        var sec = this.comSecond%60;
+        this.domId.innerText = `${min}:${sec<10?`0${sec}`:sec}`;
+        this.comSecond--;					// 1초씩 감소
+        if (this.comSecond < 0) {			// 시간이 종료 되었으면..
+            clearInterval(this.timer);		// 타이머 해제
+            alert("인증시간이 초과하였습니다. 다시 인증해주시기 바랍니다.");
+            mailCode=null;//인증코드 초기화
+        }
+    }
+}
+var AuthTimer = new $ComTimer();
 $(document).ready(function () {
     console.log('레디완료');
     scheduleHtml();//운영시간 html 출력
@@ -115,50 +137,45 @@ function initEvent() {
         }
     });
     $('#certified').click(function() {//이메일 인증번호 확인란
-        if(mailCode==$('#mailCodeChk').value){
-            alert('메일 인증이 완료되었습니다.');
-            formatArray[3]=true;
+        if(regMailCode.test($('#mailCodeChk')[0].value)){//코드 표현식 검사
+            if(mailCode==$('#mailCodeChk')[0].value){//코드가 일치한다면,
+                timeStop();
+                alert('메일 인증이 완료되었습니다.');
+                formatArray[3]=true;
+                console.log(formatArray[3]+": 이메일 3번 확인 완료");
+                $('#timeout').innerText="";
+            }else if($('#timeout')[0].innerText=="0:00"){//시간이 다 됐는데 인증을 누른다면
+                alert('인증번호가 만료되었습니다.');
+            }else if($('#timeout')[0].innerText.length!=0){//시간이 남았는데 코드가 일치하지 않는다면
+                alert('인증번호가 일치하지 않습니다.');
+            }else if(formatArray[3]==false){//타이머가 공백인데 인증이 되지 않았다면
+                alert('이메일 인증을 먼저 진행해주세요.');
+            }else {// 그 외에 경우는 어떻게 정의할 지 잘 모르겠음
+    
+            }
+        }else {//코드가 숫자 6자리가 아니라면
+            alert('인증코드의 양식과 일치하지 않습니다.');
         }
     });
     $('#email').keyup(function() {//이메일 인증을 마쳤는데 다시 입력할 경우
         if(formatArray[3]==true){
-            formatArray[3]=false;
+            formatArray[3]=false;//인증 초기화
         }
     });
+    // $('#join').click(function() {
+    //     clicked();
+    // });
 }
-function timer() {
-    
+function timerStart() {
+    AuthTimer.comSecond = 10;//테스트용 복구시 180으로 돌려놓을 것
+    AuthTimer.timer =  setInterval(function(){AuthTimer.fnTimer()},1000);
+    AuthTimer.domId = document.getElementById("timeout");
 }
-// function $ComTimer() {}
-// $ComTimer.prototype = {
-//     comSecond : ""
-//     , fnCallback : function(){}
-//     , timer : ""
-//     , domId : ""
-//     , code : ""
-//     , fnTimer : function(){
-//         var min = Math.floor(this.comSecond/60);
-//         var sec = this.comSecond%60;
-//         this.domId.innerText = `${min}:${sec<10?`0${sec}`:sec}`;
-//         this.comSecond--;					// 1초씩 감소
-//         if (this.comSecond < 0) {			// 시간이 종료 되었으면..
-//             clearInterval(this.timer);		// 타이머 해제
-//             alert("인증시간이 초과하였습니다. 다시 인증해주시기 바랍니다.");
-//         }
-//     }
-//     ,fnStop : function(){
-//         clearInterval(this.timer);
-//     }
-// }
-// function timeOut() {
-//     var AuthTimer = new $ComTimer()
-//       AuthTimer.comSecond = 10;
-//       AuthTimer.fnCallback = function(){alert("다시인증을 시도해주세요.")}
-//       AuthTimer.timer =  setInterval(function(){AuthTimer.fnTimer()},1000);
-//       AuthTimer.domId = document.getElementById("timeout");
-// }
+function timeStop() {
+    clearInterval(AuthTimer.timer);
+}
 function mailChk() {
-    if($('#mailCodeChk').value==mailCode){
+    if($('#mailCodeChk')[0].value==mailCode){
         alert('인증되었습니다.');
         formatArray[3]=true;
     }else {
@@ -185,14 +202,14 @@ function idAjax(data) {
     })
 }
 function emailAjax(email) {//이메일인증검사
-    timeOut();
-    // $.get({
+    timerStart(); //테스트
+    // $.getmm({
     //     url:'/mailCheck.do',
     //     data:{email:email},
     //     success:function(code) {
     //         mailCode=code;
     //         alert('인증번호가 전송되었습니다.');
-    //         timeOut();
+    //         timerStart(code);
     //     }
     // });
 }
@@ -232,23 +249,33 @@ function chkEmail() {
         $('#emailchk').removeClass('hide');
     }
 }
+function chkPhone() {
+    if(regPhone.test(phone.value)){
+        $('#phonechk').addClass('hide');
+        formatArray[4]=true;
+    }else {
+        $('#phonechk').removeClass('hide');
+        formatArray[4]=false;
+    }
+}
 function chkBno() {
     if(regBno.test(bno.value)){
         $('#bnochk').addClass('hide');
-        formatArray[4]=true;
+        formatArray[5]=true;
     }else {
         $('#bnochk').removeClass('hide');
-        formatArray[4]=false;
+        formatArray[5]=false;
     }
 }
 function chkAccount() {
     if(regAccount.test(account.value)) {
         $('#accountchk').addClass('hide');
-        formatArray[5]=true;
+        formatArray[6]=true;
     }else {
         $('#accountchk').removeClass('hide');
-        formatArray[5]=false;
+        formatArray[6]=false;
     }
+
 }
 function formatChk() {//유효성검사가 걸린 차례대로 input값 체크
         for(var i=0; i<formatArray.length;i++) {
@@ -271,19 +298,12 @@ function formatChk() {//유효성검사가 걸린 차례대로 input값 체크
 }
 function nullchk() {
     if(formatChk()){//유효성검사 true 반환시 null체크 진입
-        for(var i=0;i<3;i++){//휴대폰번호 null체크
-            if($('.phone')[i].value==''){
-                alert('휴대폰번호는 필수입력사항입니다.');
-                $('.phone')[i].focus();
-                return false;
-            }
-        }
-        if($('#bname').value==''){//업체명 null체크
+        if($('#bname')[0].value==''){//업체명 null체크
             alert('업체명은 필수입력사항입니다.');
             $('#bname').focus();
             return false;
         }
-        if($('#postcode').value.length==0){//주소 null체크
+        if($('#postcode')[0].value.length==0){//주소 null체크
             alert('주소는 필수입력사항입니다.');
             return false;
         }
@@ -307,14 +327,6 @@ function clicked() {
             });
         }
         $(".weekBox input[name='schedule']")[0].value=JSON.stringify(list);
-        // 연락처 데이터 처리
-        var number=$(".phone input[type='text']");
-        for(var i=0;i<3;i++) {
-            $(".phone input[type='hidden']")[0].value+=number[i].value;
-            if(i!=2) {
-                $(".phone input[type='hidden']")[0].value+='-';
-            }
-        }
         if($('.bizType input')[0].value==1) { //일반 세탁소를 작성했다면,
             // 품목 리스트 데이터 처리
             var chkBox=$(".laundry input[type='checkbox']");
@@ -375,7 +387,6 @@ function clicked() {
             }
             $("input[name='etc']")[0].value=JSON.stringify(list);
         }
-        console.log($('input[name="equipment"]')[0].value);
         $("form").submit();
     }
-}
+}   

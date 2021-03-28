@@ -112,8 +112,8 @@
 	<select id="getPersonBs" resultType="business">
 		SELECT ac.mno as mno,
 		bs.bno, id, password, bname, phone, address, email, bz.typenum, bkno,
-		acno, ev.grade
-		FROM account ac, business bs, biztype bz, Evaluation ev
+		acno
+		FROM account ac, business bs, biztype bz
 		WHERE ac.mno=bs.mno
 		AND bs.typeNum=bz.typenum
 		AND id=#{id} AND
