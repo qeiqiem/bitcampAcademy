@@ -75,16 +75,20 @@ function initEvent() {
     });
     // 수정완료 버튼 클릭시
     $("#submitSpec").click(function () {
-        //event.preventDefault();
-        $("input").attr("disabled", false);
-        $("select").attr("disabled", false);
+        
+       
         var list = new Array();
+
         chkBox = $(".coinLaundry input[type='checkbox'][name='equip']");
         priceBox = $(".coinLaundry .equip input[id='won']");
         // 설비 리스트 데이터 처리
         console.log(chkBox.eq(0));
         for (var i = 0; i < chkBox.size(); i++) {
             if (chkBox[i].checked) {
+                if(priceBox[i].value == "" ||selectBox[i].value == ""){
+                    alert("체크항목을 확인해주세요");
+                    return false;
+                }
                 console.log(selectBox[i].value);
                 list.push({ eno: JSON.parse(chkBox[i].value), cnt: JSON.parse(selectBox[i].value), price: JSON.parse(priceBox[i].value) });
             } else {
@@ -101,6 +105,10 @@ function initEvent() {
         list = [];//리스트 초기화
         for (var i = 0; i < chkBox.size(); i++) {
             if (chkBox[i].checked) {
+                if(priceBox[i].value == "" ){
+                    alert("체크항목을 확인해주세요");
+                    return false;
+                }
                 list.push({ etcno: i + 1, price: JSON.parse(priceBox[i].value) });
             } else {
                 list.push({ etcno: i + 1, price: 0 });
@@ -117,6 +125,10 @@ function initEvent() {
             var open = weekLi[i].children[1].value;
             var close = weekLi[i].children[2].value;
             if ($('#week button').eq(i).hasClass("selected")) {
+                if(open == "00:00" && close == "00:00"){
+                    alert("운영시간을 확인해주세요");
+                    return false;
+                }
                 list.push({ schno: JSON.parse(weekLi.eq(i).css("order")), time: open + '~' + close });
             } else {
                 list.push({ schno: JSON.parse(weekLi.eq(i).css("order")), time: "00:00~00:00" });
@@ -125,7 +137,9 @@ function initEvent() {
         console.log(list);
         $("#weekBox input[name='schedule']")[0].value = JSON.stringify(list);
 
-        // form subbit
+        // form submit 
+        $("input").attr("disabled", false);
+        $("select").attr("disabled", false);
         $("form").submit();
     });
 

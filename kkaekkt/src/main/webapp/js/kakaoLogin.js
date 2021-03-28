@@ -23,18 +23,24 @@ function kakaoLogin(){
                     }
                     
 $.ajax({
-	url: '/loginSNS.do',
+	url: '/findemail.do',
 	type: 'POST',
-	data: userdata,
-		success: function(data){
-		
-		console.log(data);
+	data: {
+		email: $('#email').val(),
+	},
+	success: function(data){		
 		console.log("보냄");
-		console.log(location.href);
-		console.log(window.location.protocol + "/" + window.location.host + "/" + data);
-		//location.href = "../../" + data;
-		location.href = data;
-
+		console.log(data);
+		var info = JSON.parse(data);
+		
+	if(info.email == null){
+		alert("회원정보 없음");
+	} //else {
+		//console.log(location.href);
+		//console.log(window.location.protocol + "/" + window.location.host + "/" + data);
+		// location.href = "../../" + data;
+		//location.href = data;
+	//}
 		}
 }); // ajax
 

@@ -47,7 +47,7 @@ font-size: 14px;
 .content table td {
     padding-right: 50px;
 }
-#input2 {
+#email {
     width: 300px;
     height: 30px;
     margin-top: 10px;
@@ -111,4 +111,17 @@ font-size: 14px;
 
 #checkval, #checkpwd {
     color: var(--text-red);
+}
+#mail_check_input_box_false{
+    background-color:lightgray;
+}
+ 
+#mail_check_input_box_true{
+    background-color:white;
+}
+.correct{
+    color : var(--key-color);
+}
+.incorrect{
+    color : red;
 }

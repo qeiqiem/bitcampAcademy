@@ -13,7 +13,7 @@
 	<nav class="head">
 		<div class="head_left">
 			<div class="logo">
-				<a href=""> <img src="/img/logo.svg" alt="">
+				<a href="/jsp/indexPerson.jsp"> <img src="/img/logo.svg" alt="">
 				</a>
 			</div>
 			<div class="menu">
@@ -22,11 +22,11 @@
 		</div>
 
 		<div class="head_right">
-			<input name="name" id="name" value="${person.name } 님" readonly /> 
+			<input name="name" id="name" value="${person.name} 님" readonly /> 
 			<a href=""><i class="fas fa-bell"></i></a> 
 			<a href=""><i class="fas fa-comments"></i></a> 
 			<a href="/jsp/mypageUser/mypagePs.jsp">마이페이지</a> 
-			<a href="logout.do">로그아웃</a> 
+			<a href="/logout.do">로그아웃</a> 
 			<a href="/jsp/faq.jsp">FAQ</a>
 		</div>
 	</nav>

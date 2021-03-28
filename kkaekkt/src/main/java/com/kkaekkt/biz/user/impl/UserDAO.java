@@ -132,10 +132,5 @@ public class UserDAO {
 		return res;
 	}
 	
-	// email auth
-//	public AccountVO authkey(Map<String, String> map) {
-//		System.out.println("mybatis authkey");
-//		return null;
-//	}
 
 }

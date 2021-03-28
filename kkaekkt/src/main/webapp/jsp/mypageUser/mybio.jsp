@@ -7,27 +7,7 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <link rel="stylesheet" href="/css/mybio.css">
-<script>
 
-
-</script>
-<style>
-#mail_check_input_box_false{
-    background-color:lightgray;
-}
- 
-#mail_check_input_box_true{
-    background-color:white;
-}
-.correct{
-    color : var(--key-color);
-}
-.incorrect{
-    color : red;
-}
-
-
-</style>
 </head>
 
 <body>
@@ -89,9 +69,8 @@
                    <input name="birth" type="text" id="input2 birth" value=""><label id="checkbirth" value=""></label>
                 </div>
                 <div>
-                    <!-- 이메일도 api로 하기로 했던 거 같아ㅓ 일단 인풋박스만 만들었습니다 -->
                     이메일<br>
-                    <input name="email" type="email" value="" id="input2" class="mail_input"> 
+                    <input name="email" type="email" value="" id="email" class="mail_input"> 
                     <button type="button" id="btn_checkemail" class="mail_check_button">이메일인증</button><label id="checkemail" value=""></label></br>
                     <input class="mail_check_input" id="mail_check_input_box_false" disabled="disabled">
                     <button type="button" id="mail_check">확인</button><span id="reqinput"></span>
@@ -107,11 +86,12 @@
                     <span id="guide" style="color:#999;display:none"></span><br>
                     <input type="hidden" name="address" id="address" value="">  <!--여기에 디비로 보낼 도로명주소+상세주소 해서 보내기-->
 
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script src="/js/adress.js"></script>
+                <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+                <script src="/js/adress.js"></script>
 
                 </div>
             </div>
+            
         </form> 
         </div>
     </div>
