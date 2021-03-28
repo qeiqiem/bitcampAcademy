@@ -88,30 +88,40 @@
 									<!-- <p style="font-size: smaller;"> </p> -->
 								</div>
 								<br> <br>
-								<div>
-									<p>이메일</p>
-									<input type="email" name="email" id="email" disabled>
-								</div>
+
 								<div>
 									<p>이름</p>
 									<input type="text" name="name" id="name" value="" minlength="2">
 								</div>
+								<div>
+									<p>이메일</p>
+									<!-- <input type="email" name="email" id="email" disabled> -->
+									<input name="email" type="email" value="" id="email" class="mail_input">
+									<button type="button" id="btn_checkemail" class="mail_check_button">인증번호
+										전송</button><label id="checkemail" value=""></label></br>
+									<input class="mail_check_input" id="mail_check_input_box_false" disabled="disabled">
+									<button type="button" id="mail_check">인증하기</button>
+									<br><label id="reqinput"></label>
+								</div>
 								<div class="phoneBox">
 									<p>연락처</p>
 									<!-- <input type="tel" placeholder="010-1234-5678" name="phone" id="phone"> -->
-									<input id="phone1" type="text" maxlength='3' name="ph"> ㅡ
-									<input id="phone2" type="text" maxlength='4' name="ph"> ㅡ
+									<input id="phone1" type="text" maxlength='3' name="ph"> -
+									<input id="phone2" type="text" maxlength='4' name="ph"> -
 									<input id="phone3" type="text" maxlength='4' name="ph">
 									<input name="phone" type="tel" id="phone" value="" hidden>
+									<br><label id="phone_label"></label>
 								</div>
 
 								<div>
 									<p>생년월일</p>
-									<input type="text" placeholder="YYYYMMDD" name="birth" id="birth" value="">
+									<input type="text" placeholder="YYYYMMDD" name="birth" id="birth" value=""
+										maxlength="8">
 									<br><label id="birth_label"></label>
 								</div>
 
-								<div class="adBox">
+								<!-- <div class="adBox"> -->
+								<div>
 									<p>주소</p>
 									<!-- <input type="text" name="address" id="ad"> -->
 									<input type="text" id="postcode" placeholder="우편번호" disabled>
@@ -134,7 +144,7 @@
 
 								<div class="join_btn">
 									<button type="reset" name="reset">다시입력</button>
-									<button type="submit" name="join" id="submit"
+									<button type="submit" name="join" id="join_submit"
 										style="background-color: var(- -key-color);">가입하기</button>
 									<!-- <input type="reset" name="reset" value="다시입력">
                         <input type="submit" name="join" value="가입하기"> -->

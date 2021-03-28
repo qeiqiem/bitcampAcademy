@@ -65,20 +65,22 @@ public class UserController {
 
 	// 회원개입-개인
 	@RequestMapping(value = "/joinPs.do", method = RequestMethod.POST)
-	public String Join(PersonVO vo) throws Exception {
+	public String Join(PersonVO vo) {
+		System.out.println("메서드 진입");
 		userService.insertUser(vo);
-		int res = userService.idchk(vo);
-		try {
-			if (res == 1) {
-				// 아이디 존재 -> 회원가입 페이지로 돌아가기
-				System.out.println("아이디 존재");
-				return "/joinPs.do";
-			} else if (res == 0) {
-				userService.insertUser(vo);
-			}
-		} catch (Exception e) {
-			throw new RuntimeException();
-		}
+//		int res = userService.idchk(vo);
+//		try {
+//			if (res == 1) {
+//				// 아이디 존재 -> 회원가입 페이지로 돌아가기
+//				System.out.println("아이디 존재");
+//				return "/joinPs.do";
+//			} else if (res == 0) {
+//				userService.insertUser(vo);
+//			}
+//		} catch (Exception e) {
+//			throw new RuntimeException();
+//		}
+		System.out.println("vo객체 넘어감");
 		return "/jsp/join/joinConfirmed.jsp";
 	}
 // 	@RequestMapping(value="/joinPs.do", method=RequestMethod.POST)
@@ -225,13 +227,13 @@ public class UserController {
 		}
 	}
 
+
 	// 소셜로그인
 	   @RequestMapping(value = "/loginSNS.do", method = RequestMethod.POST)
 	      public @ResponseBody String kakaologin(PersonVO vo, HttpSession session, HttpServletResponse response){
 	         System.out.println("카카오 로그인 컨트롤러 접속");
 	            // 로그인 성공했을 때
 	            vo = userService.method(vo);
-
 	            
 	            PersonVO user = vo;
 	            System.out.println(vo + "vo카카오"); // 카카오 로그인시 vo 확인

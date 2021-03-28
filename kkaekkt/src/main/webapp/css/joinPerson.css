@@ -60,7 +60,7 @@ form div button:hover {
 }
 
 .wrapper_select {
-  /* height: 100%; */
+  height: 2000px;
 }
 
 /* .adBox button {
@@ -80,9 +80,9 @@ form div button:hover {
   width: 100px;
 } */
 
-.phoneBox input {
+/* .phoneBox input {
   width: 90px;
-}
+} */
 
 label {
   font-size: smaller;
