@@ -91,7 +91,7 @@ public class UserController {
 		userService.insertUser(vo);
 		return "index.jsp";
 	}
-
+	// 개인 프로필 편집 (비밀번호 변경)
 	@RequestMapping(value="/updatePspwd.do", method=RequestMethod.POST)
 	@ResponseBody
 	public String UpdatePw(PersonVO vo, HttpSession session) {
@@ -108,6 +108,7 @@ public class UserController {
 		return password;
 		
 	}
+	// 개인 프로필 편집 - 세션
 	@RequestMapping(value="/updatePs.do", method=RequestMethod.POST)
 	public String Update(PersonVO vo, HttpSession session) {
 		System.out.println(vo);
@@ -118,6 +119,35 @@ public class UserController {
 		System.out.println("세션에 수정한 정보 올리기");
 
 		return "/jsp/mypageUser/mybio.jsp";
+	}
+	// 업체  프로필 편집 (비밀번호 변경)
+	@RequestMapping(value="/updateBspwd.do", method=RequestMethod.POST)
+	@ResponseBody
+	public String UpdatePw(BusinessVO vo, HttpSession session) {
+		System.out.println(vo);
+		userService.updateUser(vo);
+		BusinessVO personBs = userService.getUser(vo);
+		System.out.println("컨트롤러" + personBs);	
+		session.setAttribute("personBs", personBs);
+		System.out.println("세션에 수정한 정보 올리기 완료");
+		Gson gson=new Gson();
+		String password=gson.toJson(vo.getPassword());
+		System.out.println(password);
+		
+		return password;
+		
+	}
+	// 업체 프로필편집 - 세션
+	@RequestMapping(value="/updateBs.do", method=RequestMethod.POST)
+	public String Update(BusinessVO vo, HttpSession session) {
+		System.out.println(vo);
+		userService.updateUser(vo);
+		BusinessVO personBs = userService.getUser(vo);
+		System.out.println("컨트롤러" + personBs);	
+		session.setAttribute("personBs", personBs);
+		System.out.println("세션에 수정한 정보 올리기 완료");
+
+		return "/jsp/mypageBiz/combio.jsp";
 	}
 	
 	// 이메일 체크

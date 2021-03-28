@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void updateUser(BusinessVO vo) {
-		// TODO Auto-generated method stub
+		userDao.updateUser(vo);
 
 	}
 

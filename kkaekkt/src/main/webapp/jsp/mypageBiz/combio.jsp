@@ -150,6 +150,7 @@
                                 </div>
                             </div>
                             <input type="hidden" name="bno" value="" id="bno">
+                            <input type="hidden" name="mno" value="" id="mno">
                     
                 </form>
             </div>
@@ -158,11 +159,14 @@
         <script>
             var pageObj={//세션에서 정보를 받아오는건 독립된 js파일에서 불가능, jsp 내에서만 가능하기 때문에 여기서 값을 받아준다.
                 bno:'${sessionScope.personBs.bno}',
+                mno:'${sessionScope.personBs.mno}',
                 bname:'${sessionScope.personBs.bname}',
                 bankNum:'${sessionScope.personBs.bankNum}',
                 bankAccNum:'${sessionScope.personBs.bankAccountNum}',
-                id:'${sessionScope.personBs.id}',
-                password:'${sessionScope.personBs.password}',
+                // id:'${sessionScope.personBs.id}',
+                id:'testbs',
+                // password:'${sessionScope.personBs.password}',
+                password:'test',
                 phone:'${sessionScope.personBs.phone}',
                 email:'${sessionScope.personBs.email}',                
                 address:'${sessionScope.personBs.address}',                
