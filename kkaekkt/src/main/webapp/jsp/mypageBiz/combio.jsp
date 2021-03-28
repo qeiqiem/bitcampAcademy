@@ -22,7 +22,7 @@
                 <div id="combio_title">
                     <ul>
                         <li>
-                            <span id="name" readonly>홍길동</span>님 반갑습니다.
+                            <span id="bname" readonly></span>님 반갑습니다.
                         </li>
                         <li id="title_right">
                             찜<span id="likeNum">140</span>명/ 내 평점<span id="avglike">4.7</span> <i class="fas fa-star"></i>
@@ -42,18 +42,17 @@
                                 <td>계좌번호</td>
                             </tr>
                             <tr>
-                                <td>세탁소</td>
-                                <td>111-1111-1111</td>
+                                <td id="bname"></td>
+                                <td name="bno"></td>
                                 <td>
                                     <select id="bankNum">
-                                        <option>국민</option>
-                                        <option>우리</option>
-                                        <option>신한</option>
-                                        <option>하나</option>
-                                        <option>지역농협</option>
-                                        <option>농협중앙회</option>
-                                        <option>k뱅크</option>
-                                        <option>카카오뱅크</option>
+                                        <option value=1>국민</option>
+                                        <option value=2>신한</option>
+                                        <option value=3>하나</option>
+                                        <option value=4>우리</option>
+                                        <option value=5>IBK기업은행</option>
+                                        <option value=6>NH농협은행</option>
+                                        <option value=7>카카오뱅크</option>
                                     </select>
                                     <input type="text" id="bankAccNum" placeholder="123-1263-1225-11">
 
@@ -74,19 +73,23 @@
                                             <td>비밀번호</td>
                                             <td>
                                                 <input name="password" type="password" id="curpwd"> 
-                                                <button type="button" id="btn_checkpwd">수 정</button>
+                                                <button type="button" id="btn_checkpwd">수 정</button></br>
                                                 <label id="checkpwd"></label>
                                             </td>
                                         </tr>
                                         <br>
                                         <tr>
                                             <td> 새 비밀번호</td>
-                                            <td><input type="password" id="pwd"><label id="checkval"></label></td>
+                                            <td>
+                                                <input type="password" id="pwd"></br>
+                                                <label id="checkval"></label>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>새 비밀번호 확인</td>
-                                            <td><input type="password" id="newpwd"> 
-                                                <button type="button" id="btn_updatepwd">변경하기</button>
+                                            <td>
+                                                <input type="password" id="newpwd"> 
+                                                <button type="button" id="btn_updatepwd">변경하기</button></br>
                                                 <label id="match"></label>
                                             </td>
                                         </tr>
@@ -110,8 +113,8 @@
                                             <td>
                                                 <input name="email" type="email" value="" id="email"
                                                     class="mail_input">
-                                                <button type="button" id="btn_checkemail" class="mail_check_button">이메일인증</button>
-                                                    <label id="checkemail"value=""></label></br>
+                                                    <button type="button" id="btn_checkemail" class="mail_check_button">이메일인증</button></br>
+                                                    <label id="checkemail"value=""></label>
                                                 
                                             </td>
                                         </tr>
@@ -119,7 +122,7 @@
                                             <td></td>
                                             <td>
                                                 <input class="mail_check_input" id="mail_check_input_box_false" disabled="disabled">
-                                                <button type="button" id="mail_check">확인</button>
+                                                <button type="button" id="mail_check">확인</button></td>
                                                 <span id="reqinput"></span>
                                             </td>
                                         </tr>
@@ -149,7 +152,6 @@
                                     <button type="button" onclick="" id="submitBio">수정완료</button>
                                 </div>
                             </div>
-                            <input type="hidden" name="bno" value="" id="bno">
                             <input type="hidden" name="mno" value="" id="mno">
                     
                 </form>
@@ -163,14 +165,13 @@
                 bname:'${sessionScope.personBs.bname}',
                 bankNum:'${sessionScope.personBs.bankNum}',
                 bankAccNum:'${sessionScope.personBs.bankAccountNum}',
-                // id:'${sessionScope.personBs.id}',
-                id:'testbs',
-                // password:'${sessionScope.personBs.password}',
-                password:'test',
+                id:'${sessionScope.personBs.id}',
+                // id:'testbs',
+                password:'${sessionScope.personBs.password}',
+                // password:'test',
                 phone:'${sessionScope.personBs.phone}',
                 email:'${sessionScope.personBs.email}',                
-                address:'${sessionScope.personBs.address}',                
-                state:'${sessionScope.personBs.state}'
+                address:'${sessionScope.personBs.address}'        
 
             };
         	

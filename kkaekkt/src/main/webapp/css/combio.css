@@ -32,11 +32,11 @@ input {
 #combio_title #title_right{
     margin-left: 700px;
 }
-#combio_title #name{
-    font-size: 20px;
+#combio_title #bname{
+    font-size: 22px;
 }
 .bizinfo table td {
-    padding: 0px 210px 0px 10px;
+    padding: 0px 180px 0px 10px;
 }
 input {
     width: 200px;
@@ -166,4 +166,17 @@ select::-ms-expand { /* for IE 11 */
 }
 .mail_check_input{
     width: 180px;
+}
+#mail_check_input_box_false{
+    background-color:lightgray;
+}
+ 
+#mail_check_input_box_true{
+    background-color:white;
+}
+.correct{
+    color : var(--key-color);
+}
+.incorrect{
+    color : red;
 }

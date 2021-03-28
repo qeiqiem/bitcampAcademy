@@ -112,3 +112,16 @@ font-size: 14px;
 #checkval, #checkpwd {
     color: var(--text-red);
 }
+#mail_check_input_box_false{
+    background-color:lightgray;
+}
+ 
+#mail_check_input_box_true{
+    background-color:white;
+}
+.correct{
+    color : var(--key-color);
+}
+.incorrect{
+    color : red;
+}

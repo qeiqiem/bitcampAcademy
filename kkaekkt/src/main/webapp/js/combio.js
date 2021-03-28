@@ -23,10 +23,10 @@ window.onload = function () {
         //수정완료 돌아가기 버튼 활성화,
         document.getElementById("updateBio").style.display = "none";
         document.getElementById("btn_change").style.display = "block";
-
         //인풋창 활성화
         for (let i = 0; i < inputli.length; i++) {
-            if (i != 4 || i != 5) {     // 새 비밀번호 제외
+            if (i != 3 && i != 4 && i != 10 && i != 11 && i != 12 && i != 14 ) {     
+                // 새 비밀번호 제외, 이메일인증번호제외, 주소 상세주소 제외
                 inputli[i].disabled = false;
             }
         }
@@ -34,8 +34,8 @@ window.onload = function () {
             selectli[i].disabled = false;
         }
         // 변경하기, 이메일인증확인 제외
-        for (let i = 3; i < buttonli.length; i++) {
-            if (i != 1 || i!=3) {
+        for (let i = 0; i < buttonli.length; i++) {
+            if (i != 1 && i!=3) {
                 buttonli[i].disabled = false;
             }
         }
@@ -54,17 +54,17 @@ window.onload = function () {
     // 비밀번호 입력 후 수정버튼(비밀번호 변경시) 새 비밀번호, 확인버튼 활성화
     document.getElementById("btn_checkpwd").onclick = function checkPwd() {
         // 로그인된 회원의 비밀번호와 일치하는지 확인
-        let curpwd = document.getElementById("curpwd");
+        const curpwd = document.getElementById("curpwd");
 
         // 일치
-        if (curpwd == pageObj["password"]) {
+        if (curpwd.value == pageObj["password"]) {
             formatpw = 1;
             document.getElementById("checkpwd").innerText = " 아래 새 비밀번호를 입력하세요";
             document.getElementById("checkpwd").style.color = "rgb(116, 116, 116)";
 
             // 기존 비밀번호창 비활성화
-            curpwd.disabled = true;
             curpwd.value = null;
+            document.getElementById("curpwd").disabled = true;
 
             // 새비밀번호 인풋창 활성화
             document.getElementById("pwd").disabled = false;
@@ -82,9 +82,9 @@ window.onload = function () {
 
     // 새 비밀번호 유효성 검사
     document.getElementById("pwd").addEventListener('keyup', () => {
- 
-        if (!regPw.test(this.value)) {
-            if (this.value.length == 0) {
+        let inputNpwd = document.getElementById("pwd");
+        if (!regPw.test(inputNpwd.value)) {
+            if (inputNpwd.value.length == 0) {
                 document.getElementById("checkval").innerText = "";
             } else {
                 document.getElementById("checkval").innerText
@@ -153,8 +153,9 @@ window.onload = function () {
     // 이메일 입력형식 확인
     document.getElementById("email").addEventListener('keyup', () => {
         formatemail = 0;
-       if (!regEmail.test(this.value)) {
-            if (this.value.length == 0) {
+        let inputemail = document.getElementById("email");
+       if (!regEmail.test(inputemail.value)) {
+            if (inputemail.value.length == 0) {
                 document.getElementById("checkemail").innerText
                     = "";
             } else {
@@ -167,13 +168,13 @@ window.onload = function () {
 
         }
     })
-    $(".mail_check_button").click(function(){
+    document.getElementById("btn_checkemail").onclick = function(){
         emailApi();
-    });
+    };
     /* 인증번호 비교 */
-    $("#mail_check").click(function(){
+    document.getElementById("mail_check").onclick = function(){
         checkemailNum();
-    });
+    };
 
 
 
@@ -197,10 +198,10 @@ function defaultDisable(){
     document.getElementById("btn_change").style.display = "none";
 }
 function inputInfo(){
-    document.getElementsByName('bno')[0].value = pageObj["bno"];
+    document.getElementsByName('bno')[0].innerHTML = pageObj["bno"];
     document.getElementsByName('mno')[0].value = pageObj["mno"];
-    document.getElementById('name').innerText = pageObj["bname"];
-    document.getElementById('bankNum').value = pageObj["bankNum"];
+    document.getElementById('bname').innerHTML = pageObj["bname"];
+    document.querySelector('select[id="bankNum"] option:checked').innerText=pageObj["bankNum"];
     document.getElementById('bankAccNum').value = pageObj["bankAccNum"];
     document.getElementsByName('id')[0].value = pageObj["id"];
     var phoneSplit = pageObj["phone"].split('-');
@@ -228,7 +229,7 @@ function emailApi(){
             success:function(data){
                 //console.log("data : " + data);
                 $(".mail_check_input").attr("disabled",false);
-                doncument.getElementById("btn_checkemail").disabled = false;
+                document.getElementById("btn_checkemail").disabled = false;
                 $(".mail_check_input").attr("id", "mail_check_input_box_true");
                 alert(" 인증번호를 전송했습니다.");
                 code = data;
