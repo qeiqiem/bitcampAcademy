@@ -46,6 +46,10 @@ public class UserServiceImpl implements UserService {
 		}
 		return vo;
 	}
+	@Override
+	public int getLikedBs(BusinessVO vo) {
+		return userDao.countListBs(vo);
+	}
 
 	@Override
 	public void insertUser(BusinessVO vo) {
@@ -69,7 +73,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void updateUser(BusinessVO vo) {
-		// TODO Auto-generated method stub
+		userDao.updateUser(vo);
 
 	}
 
@@ -166,12 +170,10 @@ public class UserServiceImpl implements UserService {
 		System.out.println("idchk 서비스옴");
 		return userDao.idchk(vo);
 	}
-
 	@Override
-	public AccountVO authkey(Map<String, String> map) {
-		System.out.println("authkey 서비스 진입");
-		return null;
-//		return userDao.authkey(map);
+	public String email(PersonVO vo) {
+		System.out.println("email 찾는 서비스 옴");
+		return userDao.email(vo);
 	}
 
 	@Override

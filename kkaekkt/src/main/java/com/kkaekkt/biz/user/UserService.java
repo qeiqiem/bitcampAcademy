@@ -25,9 +25,10 @@ public interface UserService {
 	public AccountVO findId(AccountVO vo);
 	public AccountVO findPw(AccountVO vo);
 	public int idchk(PersonVO vo);
-	public AccountVO authkey(Map<String, String> map);
-	
 	public PersonVO method(PersonVO vo);
 	public String email(PersonVO vo);
+
+	public int getLikedBs(BusinessVO vo);
+
 
 }

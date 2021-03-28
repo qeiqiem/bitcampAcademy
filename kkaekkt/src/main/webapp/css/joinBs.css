@@ -23,6 +23,19 @@ table {
 #chkBtn {
   height: 45px;
 }
+#mailChkDiv {
+  position: relative;
+}
+#timeOut{
+  position: absolute;
+  bottom: 7px;
+    left: 165px;
+    font-size: 12px;
+    color: red;
+}
+#mailCodeChk{
+  width: 200px;
+}
 input {
   font-size: 20px;
 }
@@ -145,11 +158,9 @@ input[type="button"] {
   margin: 0 10px;
   border: 1px solid var(--gray-color);
 }
-.phone input {
-  width: 138px;
-  height: 45px;
+/* .phone input {
   text-align: center;
-}
+} */
 .phone button {
   width: 99px;
   height: 30px;

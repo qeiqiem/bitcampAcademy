@@ -8,23 +8,6 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <link rel="stylesheet" href="/css/mybio.css">
 
-<style>
-#mail_check_input_box_false{
-    background-color:lightgray;
-}
- 
-#mail_check_input_box_true{
-    background-color:white;
-}
-.correct{
-    color : var(--key-color);
-}
-.incorrect{
-    color : red;
-}
-
-
-</style>
 </head>
 
 <body>

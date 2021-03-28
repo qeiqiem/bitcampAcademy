@@ -28,15 +28,27 @@ input {
 #combio_title li{
     float: left;
     list-style: none;
+    padding-bottom: 10px;
 }
 #combio_title #title_right{
-    margin-left: 700px;
+    margin-left: 650px;
+
 }
-#combio_title #name{
-    font-size: 20px;
+#combio_title #bname{
+    font-size: 22px;
 }
+
+#likeNum, #avglike{
+    font-size: 16px;
+    font-weight: bold;
+}
+.fa-star{
+    font-size: 16px;
+    color: yellow;
+}
+
 .bizinfo table td {
-    padding: 0px 210px 0px 10px;
+    padding: 0px 180px 0px 10px;
 }
 input {
     width: 200px;
@@ -155,7 +167,7 @@ select::-ms-expand { /* for IE 11 */
     width: 100px;
     height: 30px;
 }
-#bankNum{
+#bankAccNum{
     width: 250px;
 }
 #phone1, #phone2, #phone3 {
@@ -166,4 +178,17 @@ select::-ms-expand { /* for IE 11 */
 }
 .mail_check_input{
     width: 180px;
+}
+#mail_check_input_box_false{
+    background-color:lightgray;
+}
+ 
+#mail_check_input_box_true{
+    background-color:white;
+}
+.correct{
+    color : var(--key-color);
+}
+.incorrect{
+    color : red;
 }
