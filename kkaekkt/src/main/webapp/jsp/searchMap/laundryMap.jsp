@@ -49,11 +49,11 @@
 	                            </div>
 	                        </div>
 	                        <div class="footer list">
-	                            <ul>
-	                                <li><b>장소</b>0</li>
-	                                <li style="margin-left: 45%;font-size: 12px;">거리순</li>
-	                                <li style="font-size: 12px;">인기순</li>
-	                                <li style="font-size: 12px;">평점순</li>
+	                            <ul class="searchtag">
+	                                <li><b id="countp">장 소 </b></li>
+	                               <!--  <li style="margin-left: 45%;font-size: 12px;">거리순</li> -->
+	                                <li class="popul"style="font-size: 12px;">인기순 | </li>
+	                                <li class="gradescore" style="font-size: 12px;">평점순</li>
 	                            </ul>
 	                            <div class="slide_card">
 	                                <table id="placesList"></table>
@@ -64,28 +64,7 @@
 	                            <div class="card">
 	                                <img id="single_img" src="/img/kkaekkt.png" style="width: 100%; height: 200px; background-color: aliceblue;">
 	                                <p id="s_title"> <i class="far fa-heart" id="heart" style="color:lightgray; font-size:30px"></i></p>
-	                                <div id="s_star">0.0
-	                                    <p class="rating-group">
-	                                        <label aria-label="1 star" class="rating__label" for="rating-1">
-	                                        <i class="rating__icon rating__icon--star fa fa-star"></i></label> 
-	                                        <input class="rating__input" name="rating" id="rating-1" value="1" type="radio" checked> 
-	                            
-	                                        <label aria-label="2 stars"   class="rating__label" for="rating-2">
-	                                        <i   class="rating__icon rating__icon--star fa fa-star"></i></label>             
-	                                        <input class="rating__input" name="rating" id="rating-2" value="2" type="radio">
-	                            
-	                                        <label aria-label="3 stars" class="rating__label" for="rating-3">
-	                                            <i class="rating__icon rating__icon--star fa fa-star"></i></label> 
-	                                        <input class="rating__input" name="rating" id="rating-3" value="3" type="radio">
-	                            
-	                                        <label aria-label="4 stars" class="rating__label" for="rating-4">
-	                                            <i class="rating__icon rating__icon--star fa fa-star"></i></label>            
-	                                        <input class="rating__input" name="rating" id="rating-4" value="4" type="radio" >
-	                                        
-	                                        <label aria-label="5 stars" class="rating__label" for="rating-5">
-	                                            <i class="rating__icon rating__icon--star fa fa-star"></i></label>                
-	                                        <input class="rating__input" name="rating" id="rating-5" value="5" type="radio">
-	                                        &nbsp; | 리뷰 1건</p>
+	                                <div id="s_star">
 	                                </div>
 									<div>
 										<button id="res">예약하기</button>
@@ -98,16 +77,16 @@
 	                            <div class="cardinfo"> 
 	                                    <table id="single_table">
 	                                        <tr>
-	                                            <td><input class="tag_kkaekkt" value="kkarkkt 가맹점 입니다"></td>
+	                                            <td id="memberlog"></td>
 	                                        </tr>
 	                                        <tr>
-	                                            <td ><i class="fas fa-phone" id="s_phone" style="color:rgb(90, 90, 90); "></i></td>
+	                                            <td><p id="s_phone" style="color:rgb(90, 90, 90); margin: 0"></p></td>
 	                                        </tr>
 	                                        <tr>
-	                                            <td><i class="fas fa-map-marker-alt" id="s_address" style="color:rgb(90, 90, 90);"></i></td>
+	                                            <td><p id="s_address" style="color:rgb(90, 90, 90); margin: 0"></p></td>
 	                                        </tr>
 	                                        <tr>
-	                                            <td><i class="far fa-clock"></i> 00:00~12:00</td>
+	                                            <td><p id="s_time" style="color:rgb(90, 90, 90); margin: 0"></p></td>
 	                                        </tr>
 	                                        <tr>
 	                                        </tr>
@@ -116,62 +95,16 @@
 	                                    <div class="moreinfo">
 	                                        <p class="more_title">취급 품목</p>
 	                                        <hr>
-	                                        <table id="single_option">
-	                                            <tr>
-	                                                <td class="option_title">1~3일 소요</td>
-	                                                <td class="option_title">금액(개당)</td>
-	                                            </tr>
-	                                            <tr>
-	                                                <td>일반의류</td>
-	                                                <td>3,000</td>
-	                                            </tr>
-	                                            <tr>
-	                                                <td>와이셔츠</td>
-	                                                <td>4,000</td>
-	                                            </tr>
-	                                            <tr>
-	                                                <td>이 불</td>
-	                                                <td>5,000</td>
-	                                            </tr>
-	                                            <tr>
-	                                                <td>운동화</td>
-	                                                <td>25,000</td>
-	                                            </tr>
-	                                        </table>
-	                                        <table id="single_option">
-	                                            <tr>
-	                                                <td class="option_title">4~7일 소요</td>
-	                                                <td class="option_title">금액(개당)</td>
-	                                            </tr>
-	                                            <tr>
-	                                                <td>가죽모피</td>
-	                                                <td>4,000</td>
-	                                            </tr>
-	                                            <tr>
-	                                                <td>명품가방</td>
-	                                                <td>5,000</td>
-	                                            </tr>
-	                                            <tr>
-	                                                <td>아웃도어</td>
-	                                                <td>25,000</td>
-	                                            </tr>
-	                                        </table>
+	                                        <table id="single_option"> </table>
 	                                    </div> 
 	                            </div>
 	                            <div class="cominfo">
 	                                <div class="comhead">
 	                                    <label for="latest"><input type="radio" class="latest">최신순</label>
 	                                    <label for="grade"><input type="radio" class="grade">평점순</label>
-	                                    <p class="allCom">리뷰35</p>
+	                                    <p class="allCom"></p>
 	                                </div>
-	                                <div class="combody">
-	                                    <ul class="combodyul">
-	                                        <li>장개똥</li>
-	                                        <li>★★★★★5</li>
-	                                        <li> 2021.02.09</li>
-	                                        <li> <input id="comment" placeholder="나중에 리뷰가 들어올 공간"></li>
-	                                    </ul>
-	                                </div>                                
+	                                <div class="combody"></div>                                
 	                            </div>
 	                        
 	                        </div>
@@ -181,82 +114,7 @@
 	                        <hr>
 	                        <div class="rescont">
 	                            <p>주문신청</p>
-	                            <table id="resShortOpt">
-	                                <tr>
-	                                    <td class="htdres res_title">1~3일 소요</td>
-	                                    <td class="htdres res_num">개</td>
-	                                    <td class="htdres ores_price">예상비용</td>
-	                                </tr>
-	                                <tr>
-	                                    <td><input type="checkbox" value="0">일반의류</td>
-	                                    <td>
-	                                        <select class="resOpc" disabled></select>
-	                                    </td>
-	                                    <td><p class="res_price"></p></td>
-	                                </tr>
-	                                <tr>
-	                                    <td><input type="checkbox" value="1">와이셔츠</td>
-	                                    <td>
-	                                        <select class="resOpc" disabled></select>
-	                                    </td>
-	                                    <td><p class="res_price"></p></td>
-	                                </tr>
-	                                <tr>
-	                                    <td><input type="checkbox" value="2">이 불</td>
-	                                    <td>
-	                                        <select class="resOpc" disabled></select>
-	                                    </td>
-	                                    <td><p class="res_price"></p></td>
-	                                </tr>
-	                                <tr>
-	                                    <td><input type="checkbox" value="3">운동화</td>
-	                                    <td>
-	                                        <select class="resOpc" disabled></select>
-	                                    </td>
-	                                    <td><p class="res_price"></p></td>
-	                                </tr>
-	                            </table>
-	                            <table id="resLongOpts">
-	                                <tr>
-	                                    <td class="htdres res_title">4~7일 소요</td>
-	                                    <td class="htdres res_num">개</td>
-	                                    <td class="htdres ores_price">예상비용</td>
-	                                </tr>
-	                                <tr>
-	                                    <td>
-	                                        <input type="checkbox" value="4"> 가죽모피
-	                                    </td>
-	                                    <td>
-	                                        <select class="resOpc" disabled></select>
-	                                    </td>
-	                                    <td><p class="res_price"></p></td>
-	                                </tr>
-	                                <tr>
-	                                    <td><input type="checkbox" value="5">명품가방</td>
-	                                    <td>
-	                                        <select class="resOpc" disabled></select>
-	                                    </td>
-	                                    <td><p class="res_price"></p></td>
-	                                </tr>
-	                                <tr>
-	                                    <td><input type="checkbox" value="6">아웃도어</td>
-	                                    <td>
-	                                        <select class="resOpc" disabled></select>
-	                                    </td>
-	                                    <td><p class="res_price"></p></td>
-	                                </tr>
-	                                <tr>
-	                                    <td>결제상세</td>
-	                                </tr>
-	                                <tr>
-	                                    <td>주문금액</td>
-	                                    <td></td>
-	                                </tr>
-	                                <tr>
-	                                    <td>결제예상금액</td>
-	                                    <td></td>
-	                                </tr>
-	                            </table>
+	                            <table id="resShortOpt"></table>
 	                        </div>
 	                        <div class="userInfo">
 	                            <p>예약자정보 &nbsp;</p>
@@ -298,6 +156,14 @@
 	                center: new kakao.maps.LatLng(37.566826, 126.9786567),level: 2
 	            }; 
 	        
+	        /* 주소정보 교환을 위한 변수 */
+	        var name = ""	        	
+        	var address = ""	        	
+        	var phone = ""		        	
+        	var contentNum = ""      	
+        	var grade = ""  
+        	var bno= ""
+
 			
 	        var map = new kakao.maps.Map(mapContainer, mapOption);
 				mapContainer.style.position = "initial";
@@ -309,25 +175,67 @@
 	        var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 	
 	
-	        // 키워드 검색을 요청하는 함수입니다
+	        // 키워드 검색
 	        function searchPlaces() { 
+		        	
+	            var keyword = document.getElementById('keyword').value;      
 	
-	            var keyword = document.getElementById('keyword').value;
+	            
 	            if (!keyword.replace(/^\s+|\s+$/g,'')) { 
 	                alert('키워드를 입력해주세요!'); 
 	            return false;
 	            }
-	            // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
-	            ps.keywordSearch( keyword, placesSearchCB); 
+	            
+	            bindinglandry(keyword)	            
+	           
 	        }
 	
 	  		// 대분류 검색 
-	        function searchMajor(item) { 
-				
+	        function searchMajor(item) { 				
 				var item = item		
-				ps.keywordSearch( item, placesSearchCB); 
-		
+				ps.keywordSearch(item, placesSearchCB); 		
 	        }
+	  		
+	  		// 인기순 검색 
+	        function searchPopul(item) { }	  		
+	     	// 리뷰순 검색 
+	        function searchGrade(item) { }
+	  		
+	        //DB바인딩 값 받는 함수
+	        function splitLand(data) {
+				//추후 for 문을 이용해 길이만큼 추가
+				name = data[0].bname			
+				address = data[0].address
+				phone = data[0].phone
+				contentNum = data[0].content
+				grade = data[0].grade
+				bno = data[0].bno
+			}
+	
+	        //데이터 바인딩
+	        function bindinglandry(keyaddr) {
+	        	
+	        	//0325-주옥 : 검색하려는 키워드 캐치 및 select을 하기위해 controller 접근
+	        	var keyaddr = keyaddr;
+	        	    $.ajax({
+	        	        url:'/maplist.do'
+	        	        , method : 'POST'
+	        	        , data: { keyaddr : keyaddr }
+	        	        , dataType: 'json'
+	        	        , success: function(data){ //성공후 처리는 추후 진행.       						
+		        						if(data==null){
+		        							console.log("data 가 조회되지 않았습니다.")		        							
+		        						}
+	        	        
+		        						splitLand(data)		        						
+		        						 // 장소검색을 요청	        
+		        			            keyaddr = keyaddr+" 크리닝"
+		        			            ps.keywordSearch(keyaddr, placesSearchCB); 
+	        	        			} 
+	        	    })
+	        	 
+	        
+			}
 	
 	        // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
 	        function placesSearchCB(data, status, pagination) {
@@ -347,7 +255,7 @@
 	
 	        // 검색 결과 목록과 마커를 표출
 	        function displayPlaces(places) {
-	
+			
 	            var listEl = document.getElementById('placesList'), 
 	            menuEl = document.getElementById('menu_wrap'),
 	            fragment = document.createDocumentFragment(), 
@@ -362,7 +270,8 @@
 	
 	    
 	            for ( var i=0; i<places.length; i++ ) {
-	
+					$('#countp').html("장 소"+places.length);
+					
 	                // 마커를 생성하고 지도에 표시합니다
 	                var placePosition = new kakao.maps.LatLng(places[i].y, places[i].x),
 	                    marker = addMarker(placePosition, i), 
@@ -404,35 +313,74 @@
 	
 	        // 리스트 출력
 	        function getListItem(index, places) {
+	        	
+	        	
+	        	//api검색결과 출력
+	        	var apiName = places.place_name
+				var apiAddress = places.road_address_name
+				var apiPhone = places.phone
+				var ranNum = Math.random();				
+				var apiContentNum = Math.floor(ranNum*2+1)
+				var apiGrade = Math.floor(ranNum*2+1)
+					
+	        	if(name.indexOf(apiName) == apiName.indexOf(name) && name.indexOf(apiAddress) == apiName.indexOf(address)){
+	        		console.log("DB정보 Bind")
+	        		name = name
+	        		address = address
+	        		phone = phone        	
+	                contentNum = contentNum     	
+	               	grade = grade
+	               	bno = bno
+	               	
+	       		 }else {
+	       			console.log("기존정보 out")
+	       			name = apiName
+	       			address = apiAddress
+	        		phone = apiPhone       	
+	                contentNum = 0   	
+	               	grade = 0	
+	               	bno = 0
+	
+	       		 }
+					        		
+	        	
 	            var el = document.createElement('table'),
 								
-	            itemStr =  		'<tbody class="place_body">'
-								+'<tr>'
-	                            + '<td class="place_name">'+ (index+1)+'&nbsp;&nbsp;' + places.place_name + '</td>'
+	            itemStr =  '<tbody class="place_body">'
+							+'<tr>'
+	                            + '<td class="place_name" value='+bno+'>'+ (index+1)+'&nbsp;&nbsp;' + name + '</td>'
 	                            + '<td rowspan="3"  style="float: right;">'
 	                            + '<i class="far fa-heart" id="heart" style="color:lightgray; font-size:30px"></i></td>'
 	                        + '</tr>'
-	                        + '<tr>'
-	                            + '<td>5.0'
-	                                for(var i=0; i<5; i++) {
-	                                    itemStr += '<i class="rating__icon rating__icon--star fa fa-star"></i>'
-	                                }
-	                            itemStr +='&nbsp;&nbsp;1건 | 리뷰</td>'
-	                        + '</tr>'
-	                        + '<tr><td class="place_address">' + places.road_address_name + '</td>'
-	                        + '</tr>'
-	                        + '<tr><td>영업중 | 매일 00:00~24:00</td>'
-	                        + '</tr>'
-	                        + '<tr><td class="place_phone">' +places.phone + '</td>'
-	                        + '</tr>'
-							+'</tbody>';
+		                        if(grade != 0){
+		                        		itemStr += '<tr><td>'+grade+'.0 &nbsp;'
+					                                for(var i=0; i<grade; i++) {
+					                                    itemStr += '<i class="rating__icon rating__icon--star fa fa-star"></i>'
+					                                }
+					                                for(var i=0; i<(5-grade); i++) {
+					                                    itemStr += '<i class="rating__icon rating__icon--star2 fa fa-star" sytle="color:lightgray"></i>'
+					                                }
+		                            	itemStr +='&nbsp;&nbsp;'+contentNum+'건 | 리뷰</td></tr>'
+	                            }
+	                        itemStr += '<tr><td class="place_address">' + address + '</td></tr>'			                       
+			                        	if(phone!=""){
+			                        		itemStr += '<tr><td class="place_phone">' +phone + '</td><tr>'
+			                        	}	                   
+									+'</tbody>';
 	            el.innerHTML = itemStr;
 	            el.className = 'item';
 	
+		        name = ""	        	
+		        address = ""	        	
+		        phone = ""	        	
+		        contentNum = ""      	
+		        grade = "" 
+		        bno = ""
 	            return el;
-	
+
 	        }
 	
+       
 	        //지도 위에 마커를 표시
 	        function addMarker(position, idx, title) {
 	            var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
@@ -467,6 +415,7 @@
 	                fragment = document.createDocumentFragment(),
 	                i; 
 	
+	            $(paginationEl).show()
 	            // 기존에 추가된 페이지번호를 삭제합니다
 	            while (paginationEl.hasChildNodes()) {
 	                paginationEl.removeChild (paginationEl.lastChild);
@@ -507,6 +456,8 @@
 	                el.removeChild (el.lastChild);
 	            }
 	        }
-	
+	       
+	        
+	     
 	    </script>
 	</html>

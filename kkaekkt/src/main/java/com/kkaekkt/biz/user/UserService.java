@@ -32,7 +32,9 @@ public interface UserService {
 
 
 	public double avgGradeBs(BusinessVO vo);
-	public int countLikeBs(BusinessVO vo);
+	public int countLikeBs(BusinessVO vo);	
+	public int loginchk(AccountVO vo);
+
 
 
 }

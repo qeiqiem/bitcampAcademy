@@ -92,6 +92,14 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 
 	}
+	
+	// 로그인 들
+	
+	@Override
+	public int loginchk(AccountVO vo) {
+		System.out.println("로그인 전 체크하는 service 옴");
+		return userDao.loginchk(vo);
+	}
 
 	@Override
 	public PersonVO getUser(PersonVO vo) {
@@ -160,7 +168,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public AccountVO findId(AccountVO vo) {
-		System.out.println("findId 서비스");
 		return userDao.findId(vo);
 	}
 
@@ -183,10 +190,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public AccountVO joinCfm(AccountVO vo) {
-		System.out.println("가입완료 서비스옴");
-		return userDao.joinCfm(vo);
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-
-	
+	@Override
+	public int getLikedBs(BusinessVO vo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

@@ -15,6 +15,7 @@
 </head>
 
 <body>
+	<div id="mask"></div>
 	<jsp:include page="/jsp/header2.jsp"/>
 	<div class="body_container">
 		<div class="my_container">

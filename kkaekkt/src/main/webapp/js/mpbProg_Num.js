@@ -65,6 +65,7 @@ function initEvent() {
 		rsvObj.rsvNum=JSON.parse($('.processList tr').eq($(this)[0].value).children().eq(1)[0].innerHTML);
 		openModal('complete');
 	});
+    $("#mask").on("click", function() {  $("#modal_container").hide(); $("#mask").hide();});
 }
 function initModal() {
     /* 모달 생성 */
@@ -80,6 +81,7 @@ function initModal() {
     });
 }
 function openModal(button) {
+    $("#mask").show();
     $('#modal_container').show();
     if(button=='cancel'){//취소버튼이 눌려서 모달이 열렸다면
         $('#modal_foot p')[0].innerHTML='정말 취소하시겠습니까?';
@@ -100,7 +102,7 @@ function cancel(rsvObj) {
 	$.post({
         url:"/cancel.do",
         data:rsvObj,
-        success: function(data) {
+        success: function() {
 			ajax(pageObj);
             alert('주문이 정상적으로 취소되었습니다.');
             modalClose();
@@ -109,12 +111,13 @@ function cancel(rsvObj) {
 }
 function modalClose() {
     $('#modal_container').hide();
+    $("#mask").hide();
 }
 function complete(rsvObj) {
 	$.post({
 		url:"/washingDone.do",
 		data:rsvObj,
-		success: function(data) {
+		success: function() {
 			ajax(pageObj);
             alert('작업이 완료되었습니다.');
             modalClose();
