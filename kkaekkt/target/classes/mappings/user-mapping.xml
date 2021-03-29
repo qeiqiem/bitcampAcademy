@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="UserDAO">
-
 	<insert id="insertPs">
 		INSERT INTO account (id,password) VALUES
 		(#{id},#{password});
@@ -122,13 +121,8 @@
 	</select>
 	<select id="getPersonBs" resultType="business">
 		SELECT ac.mno as mno,
-<<<<<<< HEAD
 		bs.bno, id, password, bname, phone, address, email, bz.typenum as bizType, bkno as bankNum,
 		acno as bankAccountNum
-=======
-		bs.bno, id, password, bname, phone, address, email, bz.typenum, bkno,
-		acno
->>>>>>> 56772e435441518fedb420c950dd10a235dee8eb
 		FROM account ac, business bs, biztype bz
 		WHERE ac.mno=bs.mno
 		AND bs.typeNum=bz.typenum
@@ -150,24 +144,8 @@
 		FROM member
 		WHERE email=#{email);
 	</select>
-	<select id="getLikedBs" resultType="business">
-		SELECT IFNULL(comm,0)
-		commCount,IFNULL(eCount,0) eCount,l.bno
-		bno,bname,IFNULL(ROUND(eval,1),0) eval,address,phone
-		FROM business b
-		,liked l
-		LEFT OUTER JOIN (SELECT AVG(grade) eval,count(mno) eCount,bno
-		FROM
-		evaluation GROUP BY bno) e ON l.bno=e.bno
-		LEFT OUTER JOIN (SELECT
-		count(mno) comm, bno FROM comments GROUP BY bno) c
-		ON c.bno=e.bno
-		WHERE
-		l.bno=b.bno
-		AND l.mno=#{mno}
-		GROUP BY b.bno
-		LIMIT
-		0,5;
+	<select id="getLikedBs" resultType="business"><!-- 찜한 업체 목록 조회(뷰테이블 사용예정) -->
+		
 	</select>
 	<select id="countList" resultType="_int">
 		SELECT count(bno) FROM liked
