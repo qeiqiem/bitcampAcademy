@@ -28,13 +28,25 @@ input {
 #combio_title li{
     float: left;
     list-style: none;
+    padding-bottom: 10px;
 }
 #combio_title #title_right{
-    margin-left: 700px;
+    margin-left: 650px;
+
 }
 #combio_title #bname{
     font-size: 22px;
 }
+
+#likeNum, #avglike{
+    font-size: 16px;
+    font-weight: bold;
+}
+.fa-star{
+    font-size: 16px;
+    color: yellow;
+}
+
 .bizinfo table td {
     padding: 0px 180px 0px 10px;
 }

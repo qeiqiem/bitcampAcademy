@@ -20,7 +20,7 @@ const phone = document.getElementById('phoneNum');
 var formatArray = [false,false,false,false,false,false,false];
 var alertArray = ['아이디','비밀번호','비밀번호 확인','이메일','휴대폰 번호','사업자등록번호','계좌번호'];
 var focusArray = [id,pw,repw,email,phone,bno,account];
-var mailCode=111111;
+var mailCode;
 //요일 출력 배열
 const week=['월요일','화요일','수요일','목요일','금요일','토요일','일요일','매일','평일','주말'];
 //타이머 전역변수 지정
@@ -167,7 +167,7 @@ function initEvent() {
     // });
 }
 function timerStart() {
-    AuthTimer.comSecond = 10;//테스트용 복구시 180으로 돌려놓을 것
+    AuthTimer.comSecond = 180;
     AuthTimer.timer =  setInterval(function(){AuthTimer.fnTimer()},1000);
     AuthTimer.domId = document.getElementById("timeout");
 }
@@ -202,16 +202,15 @@ function idAjax(data) {
     })
 }
 function emailAjax(email) {//이메일인증검사
-    timerStart(); //테스트
-    // $.getmm({
-    //     url:'/mailCheck.do',
-    //     data:{email:email},
-    //     success:function(code) {
-    //         mailCode=code;
-    //         alert('인증번호가 전송되었습니다.');
-    //         timerStart(code);
-    //     }
-    // });
+    $.get({
+        url:'/mailCheck.do',
+        data:{email:email},
+        success:function(code) {
+            mailCode=code;
+            alert('인증번호가 전송되었습니다.');
+            timerStart();
+        }
+    });
 }
 function chkId() {//ID 유효성 체크
     if(regId.test(id.value)){//ID유효성 체크

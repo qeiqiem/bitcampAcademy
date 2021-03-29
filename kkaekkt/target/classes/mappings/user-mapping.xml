@@ -122,8 +122,8 @@
 	</select>
 	<select id="getPersonBs" resultType="business">
 		SELECT ac.mno as mno,
-		bs.bno, id, password, bname, phone, address, email, bz.typenum, bkno,
-		acno
+		bs.bno, id, password, bname, phone, address, email, bz.typenum as bizType, bkno as bankNum,
+		acno as bankAccountNum
 		FROM account ac, business bs, biztype bz
 		WHERE ac.mno=bs.mno
 		AND bs.typeNum=bz.typenum
@@ -167,6 +167,14 @@
 	<select id="countList" resultType="_int">
 		SELECT count(bno) FROM liked
 		WHERE mno=#{mno};
+
+	</select>
+	
+	<!-- 업체프로필편집 자신의 매장을 찜한 회원의 수 -->
+	<select id="countListBs" resultType="_int">
+		SELECT count(mno) FROM liked
+		WHERE bno=#{bno};
+
 	</select>
 	<!-- 관리자 페이지 기능이기 때문에 일단 대기.. -->
 	<select id="getUserList">
@@ -215,8 +223,7 @@
 		FROM account ac
 		LEFT OUTER JOIN member m on ac.mno=m.mno
 		LEFT
-		OUTER JOIN business b on
-		ac.mno=b.mno
+		OUTER JOIN business b on ac.mno=b.mno
 		WHERE ac.id=#{id};
 	</select>
 	<select id="idchk" resultType="int">
@@ -224,6 +231,13 @@
 		FROM account
 		WHERE
 		id=#{id}
+	</select>
+	<select id="joinCfm" resultType="account">
+		SELECT id, mname, bname
+		FROM account a
+		LEFT JOIN member m on a.mno=m.mno
+		LEFT JOIN business b on b.mno=a.mno
+		WHERE id=#{id};
 	</select>
 </mapper>
 

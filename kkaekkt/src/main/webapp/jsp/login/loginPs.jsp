@@ -36,12 +36,12 @@
                     <h3>로그인</h3>
                     <hr>
                     <div>
-                        <input type="text" name="id" placeholder="아이디">
+                        <input type="text" name="id" id="id" placeholder="아이디">
                     </div>
                     <div>
                         <input type="password" name="password" placeholder="비밀번호">
                     </div>
-                    <input type="submit" value="로그인">
+                    <input type="submit" value="로그인" onclick="fn_idchk()">
                 </form>
                 <div>
                     <div>
@@ -79,4 +79,5 @@
 </body>
 <script src="/js/kakaoLogin.js"></script>
 <script src="/js/TestfacebookLogin.js"></script>
+<script src="/js/login.js"></script>
 </html>

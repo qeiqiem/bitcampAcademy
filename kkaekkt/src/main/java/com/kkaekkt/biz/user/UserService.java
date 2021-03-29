@@ -27,5 +27,8 @@ public interface UserService {
 	public int idchk(PersonVO vo);
 	public PersonVO method(PersonVO vo);
 	public String email(PersonVO vo);
+	public AccountVO joinCfm(AccountVO vo);
+	public int getLikedBs(BusinessVO vo);
+
 
 }

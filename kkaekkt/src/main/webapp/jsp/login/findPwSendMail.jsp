@@ -34,15 +34,32 @@
 
 			</nav>
 			<p>
-				<span style="font-weight:bolder;">${userPW.id}</span>님, 해당 아이디에 등록된 이메일로 인증 후 비밀번호 변경이 가능합니다.
+				<span style="font-weight:bolder;">${userPw.id}</span>님, 해당 아이디에 등록된 이메일로 인증 후 비밀번호 변경이 가능합니다.
 			</p>
 
 			<form action="" method="POST">
 				<div class="veri_btn val" style="text-align: center;">
 					<p>
-						${userPW.mmail}${userPW.bmail}로 인증 메일을 전송하시겠습니까?
+						${userPw.mmail}${userPw.bmail}로 인증 메일을 전송하시겠습니까?
+						${userPw.mmail}${userPw.bmail}로 인증 메일을 전송하시겠습니까?
 					</p>
-					<button type="submit" name="submit">확인</button>
+
+					<div class="verify">
+						<!-- <input type="email" name="email" id="email" disabled> -->
+						<input name="email" type="email" value="${userPw.mmail}${userPw.bmail}" id="email"
+							class="mail_input" hidden>
+						<!-- <button type="button" id="btn_checkemail" class="mail_check_button" onclick="fn_emailchk()">인증번호
+							전송</button><label id="checkemail" value=""></label></br> -->
+						<input class="mail_check_input" id="mail_check_input_box_false" disabled="disabled">
+						<button type="button" id="mail_check">인증하기</button>
+						<!-- <br><label id="reqinput"></label> -->
+					</div>
+
+
+
+					<!-- <button type="submit" name="submit">확인</button> -->
+					<button type="button" id="btn_checkemail" class="mail_check_button" onclick="fn_emailchk()">인증번호
+						전송</button>
 				</div>
 			</form>
 

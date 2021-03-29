@@ -46,6 +46,10 @@ public class UserServiceImpl implements UserService {
 		}
 		return vo;
 	}
+	@Override
+	public int getLikedBs(BusinessVO vo) {
+		return userDao.countListBs(vo);
+	}
 
 	@Override
 	public void insertUser(BusinessVO vo) {
@@ -170,6 +174,12 @@ public class UserServiceImpl implements UserService {
 	public String email(PersonVO vo) {
 		System.out.println("email 찾는 서비스 옴");
 		return userDao.email(vo);
+	}
+
+	@Override
+	public AccountVO joinCfm(AccountVO vo) {
+		System.out.println("가입완료 서비스옴");
+		return userDao.joinCfm(vo);
 	}
 
 	
