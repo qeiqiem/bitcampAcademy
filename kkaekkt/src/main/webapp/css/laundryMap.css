@@ -15,10 +15,11 @@
 .rating__icon { pointer-events: none; }
 .rating__input { position: absolute !important; left: -9999px !important; }
 .rating__label { cursor: pointer; padding: 0 0.1em; font-size: 14; }
-.rating__icon--star { color: yellow; }
+.rating__icon--star { color: #fcdd03; }
+.rating__icon--star2 { color: lightgray; }
 .rating__icon--none { color: #eee; }
 
-/* 슬라이드 부모 */
+/* �뒳�씪�씠�뱶 遺�紐� */
 .slide_container{
     flex-direction: row;
     position: relative;
@@ -28,7 +29,7 @@
 }
 
 
-/* 메인슬라이드 */
+/* 硫붿씤�뒳�씪�씠�뱶 */
 .slide{
     width: 20vw;
     height: 90vh;
@@ -44,7 +45,7 @@
 }
 
 
-/* 예약하기 슬라이드 ------------------------------------------*/
+/* �삁�빟�븯湲� �뒳�씪�씠�뱶 ------------------------------------------*/
 .slide_res{
     width: 20vw;
     height: 90vh;
@@ -103,7 +104,7 @@
     border-bottom: 1px solid var(--gray-color);
 }
 
-/* 슬라이드 이벤트 관련 버튼  */
+/* �뒳�씪�씠�뱶 �씠踰ㅽ듃 愿��젴 踰꾪듉  */
 .contBtn{
     display: inline;
 }
@@ -204,7 +205,7 @@
     white-space: nowrap;
     margin: 0;
 }
-/* footer : 하단의 리스트/단일조회/예약하기 등 구분 */
+/* footer : �븯�떒�쓽 由ъ뒪�듃/�떒�씪議고쉶/�삁�빟�븯湲� �벑 援щ텇 */
 
 .footer{
     margin-top: 33px;
@@ -228,19 +229,36 @@
 .list li{
     display: inline;
     font-size: 14px;
+    
+}
+.searchtag :nth-child(1) {
+	float: left;
+    font-size: 14px;	
+}
+
+.searchtag :nth-child(2) {
+	float: right;
+    margin-right: 10%;
+    font-size: 12px;	
+}
+
+.searchtag :nth-child(3) {
+	float: right;
+    margin-right: 10%;
+    font-size: 12px;	
 }
 .slide_card{
-    margin-top: 30px;
+    margin-top: 22px;
 }
 .slide_card table{
-    width: 90%;
-    font-size: 11px;
+    width: 88%;
+    font-size: 14px;
     margin-bottom: 20px;
     text-align: left;
 }
 
 #placesList{
-    margin:10px 20px 0 20px;
+    margin: 4%;
 }
 
 /* single_list */
@@ -331,6 +349,14 @@
     padding-left: 31px;
     width: 100%;
     background-color: white;
+    
+}
+#single_table td{
+    font-size: 16px;
+    height: 30px;
+}
+#single_table p{
+  margin: 0
 }
 
 .tag_kkaekkt{
@@ -347,10 +373,7 @@
     padding-inline: 13px;
 }
 
-#single_table td{
-    font-size: 16px;
-    height: 30px;
-}
+
 
 .moreinfo{
     margin-top: 20px;
@@ -408,7 +431,7 @@
     border: 1px solid lightgray;
 }
 
-/* 업체정보/리뷰 버튼제어------------------------ */
+/* �뾽泥댁젙蹂�/由щ럭 踰꾪듉�젣�뼱------------------------ */
 .infoBtn{
     width: 50%;
     height: 40px;
@@ -438,7 +461,7 @@
 }
 
 
-/* 리뷰tab ------------------------------------------------*/
+/* 由щ럭tab ------------------------------------------------*/
 /* box */
 .cominfo{
     width: 100%;
@@ -447,7 +470,7 @@
     display: none;
 }
 
-/* 내부요소 */
+/* �궡遺��슂�냼 */
 .comhead{
     width: 100%;
     height: 20px;
@@ -474,42 +497,45 @@
 
 .combody{
     width: 100%;
-    height: 96px;
+    height: auto;
     display: inline-block;
     margin: 0 auto;
+    padding-block-end: 12%;
+    background-color: white;
 }
 
 .combodyul{
     width: 100%;
     height: 41px;
     display: inline-block;
-    margin: 0 0 0 9%;
+    margin: 10% 0 0 9%;
 }
 .combodyul li:nth-child(1){
     font-size: 14px;
     font-weight: 600;
 }
 .combodyul li:nth-child(2){
-    color: rgb(255, 238, 0)
+    color: lightgray;
+    font-size: 11px;
+    
 }
 
 .combodyul li:nth-child(3){
-    color: lightgray;
-    font-size: 11px;
-}
-
-.combodyul li:nth-child(4){
     margin-top: 10px;
 }
 
-#comment{
-    width: 80%;
+.comment{
+	width: 80%;
     height: 58px;
     border: 0px;
+    margin: 0;
+    font-size: 14px;
 }
 
-
-/* 예약 모달관련 이벤트 */
+.res_totalprice{
+	display: none;
+}
+/* �삁�빟 紐⑤떖愿��젴 �씠踰ㅽ듃 */
 .res_loading {
     position: fixed;
     left: 50%;
@@ -571,3 +597,13 @@
       transform: scale(1.0);
     }
   }
+  
+/* �럹�씠吏� 踰꾪듉 �슚怨� */
+#pagination{
+	text-align: center;
+    border: 1px solid;
+    width: 25px;
+    height: 25px;
+    margin: auto;
+    display: none;
+}
