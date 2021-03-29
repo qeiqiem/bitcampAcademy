@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MapListDAO">
+
+	<select id="selecList" parameterType="String" resultType="maplist">
+			SELECT b.bname 
+				 , b.bno
+				 , b.phone
+				 , b.address
+				 , COUNT(c.content) AS content
+				 , c.rdate
+				 , AVG(c.grade)  AS grade
+			 FROM business b
+			 JOIN comments c ON b.bno = c.bno
+			WHERE b.address LIKE CONCAT('%',#{keyaddr},'%');
+	</select>
+	
+	<select id="selectSingle" parameterType="int" resultType="single">
+			SELECT no
+				 , name
+				 , week
+				 , time
+			  FROM laundrytime
+			 WHERE time NOT LIKE'%00:00~00:00%'
+			   AND no = #{bno};
+	</select>
+	
+	<select id="selectOption" parameterType="int" resultType="single">
+			SELECT bno
+			     , lno
+			     , name
+			     , product
+			     , price 
+			  FROM laundryinfo
+			 WHERE bno = #{bno};
+	</select>
+	
+	<select id="reviewList" parameterType="int" resultType="single">
+			SELECT content
+				 , mname
+				 , DATE(rdate) AS rdate
+				 , grade
+			FROM infor_review 
+			WHERE bno = #{bno}
+			ORDER BY rdate DESC;
+	</select>
+</mapper>
+

@@ -131,7 +131,7 @@ public class UserController {
 	public String UpdatePw(BusinessVO vo, HttpSession session) {
 		System.out.println(vo);
 		userService.updateUser(vo);
-		BusinessVO personBs = userService.getUser(vo);	
+		BusinessVO personBs = userService.getUser(vo);
 		System.out.println("컨트롤러" + personBs);	
 		session.setAttribute("personBs", personBs);
 		System.out.println("세션에 수정한 정보 올리기 완료");
@@ -147,17 +147,15 @@ public class UserController {
 	public String Update(BusinessVO vo, HttpSession session) {
 		System.out.println(vo);
 		userService.updateUser(vo);
-		vo = userService.getUser(vo);
-		vo.setLikedNum(userService.countLikeBs(vo));	// 프로필편집에서 찜 인원 뽑아와야해서 추가
-		vo.setEval(userService.avgGradeBs(vo));	// 프로필편집에서 찜 인원 뽑아와야해서 추가
-		System.out.println("컨트롤러" + vo);	
-		session.setAttribute("personBs", vo);
+		BusinessVO personBs = userService.getUser(vo);
+		System.out.println("컨트롤러" + personBs);	
+		session.setAttribute("personBs", personBs);
 		System.out.println("세션에 수정한 정보 올리기 완료");
 
 		return "/jsp/mypageBiz/combio.jsp";
 	}
 	
-	// 이메일 체크
+	// 이메일 체크 sns에서 로그인할때 디비에 있는지 확인하려고 만든 컨트롤러이다
 		@RequestMapping(value = "/findemail.do", method = RequestMethod.POST)
 		@ResponseBody
 		public String email(PersonVO vo) {
@@ -174,44 +172,53 @@ public class UserController {
 			return gson.toJson(findEmail);
 		}
 		
+	// 로그인할때 아이디나 비밀번호 있는지 체크하려고 만든 컨트롤러이다.
+		@RequestMapping(value = "/loginchk.do", method = RequestMethod.POST)
+		@ResponseBody
+		public String loginChk(AccountVO vo) {
+			System.out.println("컨트롤러 진입");
+			System.out.println(vo + "가 담김");
+			Gson gson = new Gson();
+			vo.setMno(userService.loginchk(vo));
+			return gson.toJson(vo);
+		}
+			
+
+		
 	// 일반유저 로그인
 	@RequestMapping(value = "/loginPs.do", method = RequestMethod.POST)
-	public String Login(PersonVO vo, HttpSession session) throws Exception {
-		try {
+	@ResponseBody
+	public String Login(PersonVO vo, HttpSession session) {
+		
 			// 로그인 성공
 			System.out.println("로그인처리");
 
-			// vo = userService.getUser(vo);
+			vo = userService.getUser(vo);
 			PersonVO user = userService.getUser(vo);
 
 			System.out.println(vo); // 뭐가 담기는 지 보려했다
 
 			if (user.getMno() == 0) {
 				System.out.println("회원정보없음");
-				// session.setAttribute("person", null);
-				return "/jsp/join/joinNoPs.jsp";
-			} else if (user.getMno() != 0) {
+				return "/jsp/login/loginPs.jsp";
+			} else {
 				session.setAttribute("person", vo);
+				return "/jsp/indexPerson.jsp";
 			}
-			return "/jsp/indexPerson.jsp";
 
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("로그인 실패");
-			return "/jsp/join/joinNoPs.jsp";
-		}
-	}
+		} 
+	
 
 	// 업체유저 로그인
 	@RequestMapping(value = "/loginBs.do", method = RequestMethod.POST)
+	@ResponseBody
 	public String Login(BusinessVO vo, HttpSession session) throws Exception {
 		try {
 			// 로그인 성공
 			System.out.println("로그인처리");
 
 			vo = userService.getUser(vo);
-			vo.setLikedNum(userService.countLikeBs(vo));	// 프로필편집에서 찜 인원 뽑아와야해서 추가
-			vo.setEval(userService.avgGradeBs(vo));	// 프로필편집에서 찜 인원 뽑아와야해서 추가
+			vo.seteCount(userService.getLikedBs(vo));	// 프로필편집에서 찜 인원 뽑아와야해서 추가
 
 			System.out.println(vo); // 뭐가 담기는 지 보려했다
 
@@ -251,8 +258,6 @@ public class UserController {
 	               System.out.println("카카오 로그인 실패");
 	               return "/jsp/login/loginPs";
 	            }
-	   
-	            //return "/jsp/indexPerson.jsp";
 	      }
 	
 
