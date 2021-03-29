@@ -98,7 +98,7 @@
 		SELECT COUNT(l.bno) FROM liked l,(SELECT mno,bno FROM reservation WHERE rno=#{rsvNum}) r WHERE l.mno=r.mno AND l.bno=r.bno;
 	</select>
 	<update id="cancelRsv"><!-- 예약번호 단위 주문취소 -->
-			UPDATE reservation SET stno=4,dDate=now() WHERE rno=#{rsvNum};
+			UPDATE reservation SET stno=4,ddate=now() WHERE rno=#{rsvNum};
 			UPDATE rsv_laundry SET stno=4 WHERE rno=#{rsvNum};
 	</update><!-- 품목단위 취소 -->
 	<update id="cancelLaundry">
@@ -113,7 +113,7 @@
 	</select><!-- 1반환이면 완료상태의 품목 존재, 0 반환이면 전체 취소된 상태 -->
 	<update id="completeRsv"><!-- 예약번호 단위 전달완료일 경우 -->
 			UPDATE reservation SET stno=3,dDate=now() WHERE rno=#{rsvNum};
-			UPDATE rsv_laundry SET stno=3,dDate=now() WHERE rno=#{rsvNum} AND stno=2;<!-- 품목 중 세탁완료인 품목들 상태변경 -->
+			UPDATE rsv_laundry SET stno=3 WHERE rno=#{rsvNum} AND stno=2;<!-- 품목 중 세탁완료인 품목들 상태변경 -->
 	</update>
 	<update id="rsvDone"><!-- 예약번호 단위 세탁완료일 경우 -->
 			UPDATE reservation SET stno=2 WHERE rno=#{rsvNum};
@@ -165,7 +165,7 @@
 	</select>
 	<select id="getRsvListBs_rn" resultType="reservation"> 
 		<if test="listType==3"><!-- 업체회원 주문번호별 리스트 출력 -->
-			SELECT r.rno rsvNum,date_format(rdate,'%c월 %d, %Y %r') rsvdate,mname,DATEDIFF(ddate,NOW()) dDay 
+			SELECT r.rno rsvNum,date_format(rdate,'%c월 %d, %Y %r') rsvdate,mname,DATEDIFF(ddate,NOW()) dDay
 			FROM member m,reservation r
 			WHERE r.mno=m.mno AND bno=#{bno} AND stno=1
 			<if test="searchOption==1"> <!-- 검색옵션-이름 입력시 -->
@@ -183,7 +183,7 @@
 				LIMIT #{rowStartNum},#{POSTS_PER_PAGE};
 		</if>
 		<if test="listType==4"> <!-- 업체회원 완료목록 출력 -->
-			SELECT r.rno rsvNum,date_format(rdate,'%c월 %d, %Y %T') rsvdate,mname,dDate,stname state 
+			SELECT r.rno rsvNum,date_format(rdate,'%c월 %d, %Y %T') rsvdate,mname,dDate,stname state,DATEDIFF(ddate,NOW()) dDay 
 			FROM member m,reservation r,state s 
 			<where> 
 			r.mno=m.mno AND s.stno=r.stno AND bno=#{bno} 
@@ -195,7 +195,7 @@
 				</if>
 			</where>
 			AND (r.stno=2 OR r.stno=3)
-			ORDER BY r.stno, r.rno DESC
+			ORDER BY r.stno, r.dDate DESC
 			LIMIT #{rowStartNum},#{POSTS_PER_PAGE};
 		</if>
 	</select>

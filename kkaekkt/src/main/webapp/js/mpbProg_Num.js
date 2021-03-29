@@ -100,7 +100,7 @@ function cancel(rsvObj) {
 	$.post({
         url:"/cancel.do",
         data:rsvObj,
-        success: function(data) {
+        success: function() {
 			ajax(pageObj);
             alert('주문이 정상적으로 취소되었습니다.');
             modalClose();
@@ -114,7 +114,7 @@ function complete(rsvObj) {
 	$.post({
 		url:"/washingDone.do",
 		data:rsvObj,
-		success: function(data) {
+		success: function() {
 			ajax(pageObj);
             alert('작업이 완료되었습니다.');
             modalClose();
