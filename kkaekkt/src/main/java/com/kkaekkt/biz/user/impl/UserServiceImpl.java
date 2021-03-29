@@ -47,8 +47,12 @@ public class UserServiceImpl implements UserService {
 		return vo;
 	}
 	@Override
-	public int getLikedBs(BusinessVO vo) {
-		return userDao.countListBs(vo);
+	public int countLikeBs(BusinessVO vo) {
+		return userDao.countLikeBs(vo);
+	}
+	@Override
+	public double avgGradeBs(BusinessVO vo) {
+		return userDao.avgGradeBs(vo);
 	}
 
 	@Override
@@ -182,6 +186,7 @@ public class UserServiceImpl implements UserService {
 		System.out.println("가입완료 서비스옴");
 		return userDao.joinCfm(vo);
 	}
+
 
 	
 }

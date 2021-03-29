@@ -60,6 +60,7 @@ public class UserDAO {
 	public int countList(BusinessListVO vo) {
 		return mybatis.selectOne("UserDAO.countList", vo);
 	}
+	
 
 	// 일반 로그인
 		public PersonVO getUserPs(PersonVO vo) {
@@ -141,11 +142,18 @@ public class UserDAO {
 		return res;
 	}
 
-	public AccountVO joinCfm(AccountVO vo) {
-		return mybatis.selectOne("UserDAO.joinCfm",vo);
+	// 업체 찜 당한 수
+	public int countLikeBs(BusinessVO vo) {
+		return  mybatis.selectOne("UserDAO.countLikeBs", vo);
 	}
-	public int countListBs(BusinessVO vo) {
-		return  mybatis.selectOne("UserDAO.countListBs", vo);
+	// 업체 평균 평점
+	public double avgGradeBs(BusinessVO vo) {
+		return  mybatis.selectOne("UserDAO.avgGradeBs", vo);
 	}
+    public AccountVO joinCfm(AccountVO vo) {
+        return mybatis.selectOne("UserDAO.joinCfm",vo);
+    }
+
+	
 
 }
