@@ -36,12 +36,12 @@
 					<h3>로그인</h3>
 					<hr>
 					<div>
-						<input type="text" name="id" placeholder="아이디" />
+						<input type="text" name="id" id="id" placeholder="아이디" />
 					</div>
 					<div>
 						<input type="password" name="password" placeholder="비밀번호" />
 					</div>
-					<input type="submit" value="로그인" id="btn_login" onclick="login()" />
+					<input type="submit" value="로그인" id="btn_login" />
 				</form>
 				<div>
 					<div>
@@ -68,7 +68,7 @@
 				<ul>
 					<li>아이디 또는 비밀번호를 다시 한 번 확인해주세요.</li>
 					<li>만약, 회원가입을 하지 않았다면 회원가입 해보세요</li>
-					<li>다양한 서비스를 준비하는 깨끝될듯</li>
+					<li>뭔가 세줄은 되어야 할 것 같아서 일단 세 개</li>
 				</ul>
 				<button id="check">확인</button>
 				<button id="close">취소</button>
@@ -97,5 +97,5 @@
 </body>
 <script src="/js/kakaoLogin.js"></script>
 <script src="/js/TestfacebookLogin.js"></script>
-<script src="/js/login.js"></script>
+<script src="/js/Test_login.js"></script>
 </html>

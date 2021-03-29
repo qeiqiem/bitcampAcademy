@@ -1,10 +1,7 @@
+var id = document.getElementById("id");
+
 // 중복확인
 function login() {
-  if ($("#id").val() == "") {
-    alert("아이디를 입력하세요.");
-    $("#id").focus();
-    return false;
-  }
 
   $.ajax({
     url: "/idchk.do",
@@ -13,15 +10,16 @@ function login() {
       id: $("#id").val(),
     },
     success: function (data) {
-      console.log(data);
-      var test = JSON.parse(data);
-      console.log(test.state);
-      if (test.mno == 0) {
-        alert("아이디없음");
+      var user = JSON.parse(data);
+      console.log(user);
+      
+      if (user.mno == 0) {
+        alert("아이디없음"); // 이부분 모달나오게 하고싶다
         console.log($("#idchk").val());
+      } else {
+      	alert($("#name")+"님 환영한다");
       }
     },
-    
     // , failure: function (errMsg) {
     // 	alert(errMsg);
     // }

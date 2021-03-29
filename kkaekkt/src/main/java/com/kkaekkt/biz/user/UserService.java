@@ -29,6 +29,8 @@ public interface UserService {
 	public String email(PersonVO vo);
 
 	public int getLikedBs(BusinessVO vo);
+	
+	public int loginchk(AccountVO vo);
 
 
 }

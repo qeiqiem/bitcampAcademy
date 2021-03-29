@@ -88,6 +88,14 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 
 	}
+	
+	// 로그인 들
+	
+	@Override
+	public int loginchk(AccountVO vo) {
+		System.out.println("로그인 전 체크하는 service 옴");
+		return userDao.loginchk(vo);
+	}
 
 	@Override
 	public PersonVO getUser(PersonVO vo) {
@@ -175,6 +183,7 @@ public class UserServiceImpl implements UserService {
 		System.out.println("email 찾는 서비스 옴");
 		return userDao.email(vo);
 	}
+
 
 
 

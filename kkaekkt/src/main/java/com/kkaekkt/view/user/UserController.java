@@ -155,7 +155,7 @@ public class UserController {
 		return "/jsp/mypageBiz/combio.jsp";
 	}
 	
-	// 이메일 체크
+	// 이메일 체크 sns에서 로그인할때 디비에 있는지 확인하려고 만든 컨트롤러이다
 		@RequestMapping(value = "/findemail.do", method = RequestMethod.POST)
 		@ResponseBody
 		public String email(PersonVO vo) {
@@ -172,8 +172,21 @@ public class UserController {
 			return gson.toJson(findEmail);
 		}
 		
+	// 로그인할때 아이디나 비밀번호 있는지 체크하려고 만든 컨트롤러이다.
+		@RequestMapping(value = "/loginchk.do", method = RequestMethod.POST)
+		@ResponseBody
+		public String loginChk(AccountVO vo) {
+			System.out.println("컨트롤러 진입");
+			System.out.println(vo + "가 담김");
+			
+			
+			return null;
+			
+		}
+		
 	// 일반유저 로그인
 	@RequestMapping(value = "/loginPs.do", method = RequestMethod.POST)
+	@ResponseBody
 	public String Login(PersonVO vo, HttpSession session) {
 		
 			// 로그인 성공
@@ -197,6 +210,7 @@ public class UserController {
 
 	// 업체유저 로그인
 	@RequestMapping(value = "/loginBs.do", method = RequestMethod.POST)
+	@ResponseBody
 	public String Login(BusinessVO vo, HttpSession session) throws Exception {
 		try {
 			// 로그인 성공
