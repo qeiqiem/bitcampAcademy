@@ -97,13 +97,13 @@
 	<update id="updateBs">
 		<choose>
 			<when test="email == null">
-				UPDATE account SET password=#{password} WHERE bno=#{bno};
+				UPDATE account SET password=#{password} WHERE mno=#{mno};
 			</when>
 			<otherwise>
 				<!-- UPDATE account SET password=#{password} WHERE mno=#{mno}; -->
 				UPDATE business SET
-				phone=#{phone},birth=#{birth},bkno=#{bankNum},acno=#{bankAccountNum} address=#{address},email=#{email}
-				WHERE bno=#{bno};
+				phone=#{phone},bkno=#{bankNum},acno=#{bankAccountNum}, address=#{address},email=#{email}
+				WHERE mno=#{mno};
 			</otherwise>
 		</choose>
 
@@ -122,13 +122,8 @@
 	</select>
 	<select id="getPersonBs" resultType="business">
 		SELECT ac.mno as mno,
-<<<<<<< HEAD
 		bs.bno, id, password, bname, phone, address, email, bz.typenum as bizType, bkno as bankNum,
 		acno as bankAccountNum
-=======
-		bs.bno, id, password, bname, phone, address, email, bz.typenum, bkno,
-		acno
->>>>>>> 56772e435441518fedb420c950dd10a235dee8eb
 		FROM account ac, business bs, biztype bz
 		WHERE ac.mno=bs.mno
 		AND bs.typeNum=bz.typenum
@@ -176,11 +171,16 @@
 	</select>
 	
 	<!-- 업체프로필편집 자신의 매장을 찜한 회원의 수 -->
-	<select id="countListBs" resultType="_int">
+	<select id="countLikeBs" resultType="_int">
 		SELECT count(mno) FROM liked
 		WHERE bno=#{bno};
-
 	</select>
+	<!-- 업체프로필편집 자신의 매장 평균평점 -->
+	<select id="avgGradeBs" resultType="_double">
+		SELECT round(AVG(grade),1) FROM comments 
+		WHERE bno=#{bno};
+	</select>
+	
 	<!-- 관리자 페이지 기능이기 때문에 일단 대기.. -->
 	<select id="getUserList">
 

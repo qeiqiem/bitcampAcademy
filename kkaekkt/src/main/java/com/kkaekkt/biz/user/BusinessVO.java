@@ -34,6 +34,7 @@ public class BusinessVO{
 	private double eval; //평가
 	private int eCount; //평가 개수
 	private int commCount; //댓글 개수
+	private int likedNum;		// 찜당한 수
 	
 	public int getMcount() {
 		return eCount;
@@ -187,12 +188,17 @@ public class BusinessVO{
 	public void setCommCount(int commCount) {
 		this.commCount = commCount;
 	}
-	
+	public int getLikedNum() {
+		return likedNum;
+	}
+	public void setLikedNum(int likedNum) {
+		this.likedNum = likedNum;
+	}
 	@Override
 	public String toString() {
 		return "BusinessVO [bno=" + bno + ", mno=" + mno + ", id=" + id + ", password=" + password + ", bname=" + bname
 				+ ", address=" + address + ", phone=" + phone + ", email=" + email + ", comment=" + comment + ", eCount=" +eCount
-				+ ", bizType=" + bizType + ", bankNum=" + bankNum + ", bankAccountNum=" + bankAccountNum
+				+ ", bizType=" + bizType + ", bankNum=" + bankNum + ", bankAccountNum=" + bankAccountNum + ", likedNum=" +likedNum + ", eval=" +eval
 				+ ", scheduleList=" + scheduleList + ", equipmentList=" + equipmentList  + ", etcList=" + etcList+", laundryList=" + laundryList
 				+ ", equipment=" + equipment + ", laundry=" + laundry + ", schedule=" + schedule + "]";
 	}	
