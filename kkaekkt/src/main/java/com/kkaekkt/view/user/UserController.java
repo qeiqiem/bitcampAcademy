@@ -178,11 +178,12 @@ public class UserController {
 		public String loginChk(AccountVO vo) {
 			System.out.println("컨트롤러 진입");
 			System.out.println(vo + "가 담김");
-			
-			
-			return null;
-			
+			Gson gson = new Gson();
+			vo.setMno(userService.loginchk(vo));
+			return gson.toJson(vo);
 		}
+			
+
 		
 	// 일반유저 로그인
 	@RequestMapping(value = "/loginPs.do", method = RequestMethod.POST)

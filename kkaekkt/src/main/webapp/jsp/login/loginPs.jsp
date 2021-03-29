@@ -16,6 +16,14 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <link rel="stylesheet" href="/css/login.css">
 </head>
+<script>
+$(document).ready(function () {
+	   /* button click event */
+	   /* 모달 생성 */
+	   $("#modal_show").click(function () { $("#modal_container").show() })
+	   $("#modal_close").click(function () { $("#modal_container").hide() })
+	 })
+</script>
 
 
 <body>
@@ -32,14 +40,14 @@
 			</button>
 
 			<div class="login">
-				<form action="/loginPs.do" method="post">
+				<form action="/" method="post">
 					<h3>로그인</h3>
 					<hr>
 					<div>
 						<input type="text" name="id" id="id" placeholder="아이디" />
 					</div>
 					<div>
-						<input type="password" name="password" placeholder="비밀번호" />
+						<input type="password" name="password" id="password"  placeholder="비밀번호" />
 					</div>
 					<input type="submit" value="로그인" id="btn_login" />
 				</form>
@@ -61,21 +69,30 @@
 			</div>
 		</div>
 
-		<div id="modal">
-			<div class="modal_content">
-				<h2>일치하는 회원정보가 없습니다.</h2>
-				<br />
-				<ul>
-					<li>아이디 또는 비밀번호를 다시 한 번 확인해주세요.</li>
-					<li>만약, 회원가입을 하지 않았다면 회원가입 해보세요</li>
-					<li>뭔가 세줄은 되어야 할 것 같아서 일단 세 개</li>
-				</ul>
-				<button id="check">확인</button>
-				<button id="close">취소</button>
+		 <div class="word">
+                <button id="modal_show"> 모달 띄우기</button>
 
-				<div class="modal_layer"></div>
-			</div>
-		</div>
+                <div id="modal_container">
+                    <button id="modal_close">x</button>
+                    <div id="modal_bodycont">
+                        <form>
+                            <div id="modal_head">
+                                <h2>회원정보가 없습니다!</h2>
+                            </div>
+                            <hr style="width: 80%; margin-top: 20px; border: 1px solid #E5E5E5;">
+                            <div id="modal_foot">
+                                <p style="text-align: center;">아이디나 비밀번호를 다시 한 번 확인해주세요!</p>
+
+                                <p style="text-align: center;">가입을 하지 않았다면 회원가입을 이용해주세요.</p>
+                                <div class="btn">
+                                    <button id="back" type="button">돌아가기</button>
+                                    <button id="join" type="submit"><a href="/jsp/join/joinSelect.jsp">회원가입</a></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
 	</div>
 	<!-- 바디콘테이너 -->
