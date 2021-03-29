@@ -56,7 +56,8 @@
                                         <option value=6>NH농협은행</option>
                                         <option value=7>카카오뱅크</option>
                                     </select>
-                                    <input type="text" name="bankAccountNum" id="bankAccNum" placeholder="123-1263-1225-11">
+                                    <input type="text" name="bankAccountNum" id="bankAccNum" > <br>
+                                    <label id="checkAcc"></label>
 
                                 </td>
                             </tr>
