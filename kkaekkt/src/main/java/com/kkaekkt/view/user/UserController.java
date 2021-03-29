@@ -296,6 +296,7 @@ public class UserController {
 		return "/jsp/mypageBizCoin/coinspec.jsp";
 	}
 
+	// 아이디찾기
 	@RequestMapping(value = "/findId.do", method = RequestMethod.POST)
 	public String findId(AccountVO vo, Model model) {
 		System.out.println("findID 진입");
@@ -303,6 +304,14 @@ public class UserController {
 		model.addAttribute("userId", userService.findId(vo));
 		return "/jsp/login/findIdConfirmed.jsp";
 	}
+
+	// 비밀번호찾기
+	@RequestMapping(value="/findPw.do", method=RequestMethod.POST)
+	public String findPw(AccountVO vo, Model model) {
+		System.out.println(vo);
+		model.addAttribute("userPw", userService.findPw(vo));
+ 		return "/jsp/join/findPwSendMail.jsp";
+ 	}
 	/* 이메일 인증 */
     @RequestMapping(value="/mailCheck.do", method=RequestMethod.GET)
     @ResponseBody

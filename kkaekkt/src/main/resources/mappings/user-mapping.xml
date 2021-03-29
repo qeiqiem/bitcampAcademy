@@ -122,8 +122,8 @@
 	</select>
 	<select id="getPersonBs" resultType="business">
 		SELECT ac.mno as mno,
-		bs.bno, id, password, bname, phone, address, email, bz.typenum, bkno,
-		acno
+		bs.bno, id, password, bname, phone, address, email, bz.typenum as bizType, bkno as bankNum,
+		acno as bankAccountNum
 		FROM account ac, business bs, biztype bz
 		WHERE ac.mno=bs.mno
 		AND bs.typeNum=bz.typenum
