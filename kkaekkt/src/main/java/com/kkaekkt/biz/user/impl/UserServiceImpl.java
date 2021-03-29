@@ -160,6 +160,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public AccountVO findId(AccountVO vo) {
+		System.out.println("findId 서비스");
 		return userDao.findId(vo);
 	}
 
@@ -178,5 +179,13 @@ public class UserServiceImpl implements UserService {
 	public String email(PersonVO vo) {
 		System.out.println("email 찾는 서비스 옴");
 		return userDao.email(vo);
-	}	
+	}
+
+	@Override
+	public AccountVO joinCfm(AccountVO vo) {
+		System.out.println("가입완료 서비스옴");
+		return userDao.joinCfm(vo);
+	}
+
+	
 }

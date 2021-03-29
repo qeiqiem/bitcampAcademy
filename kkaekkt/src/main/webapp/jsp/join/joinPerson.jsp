@@ -55,8 +55,7 @@
 					<div class="wrapper_joinCnt">
 						<div class="join_form">
 							<h3>개인 회원</h3>
-							<form action="joinPerson.jsp" method="POST" id="joinPerson" name="joinPerson"
-								onsubmit="return check()">
+							<form action="/joinPs.do" method="POST" id="joinPerson" name="joinPerson">
 								<div>
 									<p>아이디</p>
 									<input type="text" placeholder="아이디를 입력하세요." name="id" id="id" value=""
@@ -97,7 +96,8 @@
 									<p>이메일</p>
 									<!-- <input type="email" name="email" id="email" disabled> -->
 									<input name="email" type="email" value="" id="email" class="mail_input">
-									<button type="button" id="btn_checkemail" class="mail_check_button">인증번호
+									<button type="button" id="btn_checkemail" class="mail_check_button"
+										onclick="fn_emailchk()">인증번호
 										전송</button><label id="checkemail" value=""></label></br>
 									<input class="mail_check_input" id="mail_check_input_box_false" disabled="disabled">
 									<button type="button" id="mail_check">인증하기</button>
@@ -105,11 +105,11 @@
 								</div>
 								<div class="phoneBox">
 									<p>연락처</p>
-									<!-- <input type="tel" placeholder="010-1234-5678" name="phone" id="phone"> -->
-									<input id="phone1" type="text" maxlength='3' name="ph"> -
+									<input type="tel" placeholder="010-1234-5678" name="phone" id="phone">
+									<!-- <input id="phone1" type="text" maxlength='3' name="ph"> -
 									<input id="phone2" type="text" maxlength='4' name="ph"> -
 									<input id="phone3" type="text" maxlength='4' name="ph">
-									<input name="phone" type="tel" id="phone" value="" hidden>
+									<input name="phone" type="tel" id="phone" value="" hidden> -->
 									<br><label id="phone_label"></label>
 								</div>
 
@@ -144,7 +144,7 @@
 
 								<div class="join_btn">
 									<button type="reset" name="reset">다시입력</button>
-									<button type="submit" name="join" id="join_submit"
+									<button type="submit" name="join" id="join_submit" onclick="submit_check()"
 										style="background-color: var(- -key-color);">가입하기</button>
 									<!-- <input type="reset" name="reset" value="다시입력">
                         <input type="submit" name="join" value="가입하기"> -->

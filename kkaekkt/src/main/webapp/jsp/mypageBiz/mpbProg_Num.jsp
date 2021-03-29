@@ -75,6 +75,18 @@
 				</div>
 			</div>
 		</div>
+		<div id="modal_container">
+			<button id="modal_close">x</button>
+			<div id="modal_bodycont">
+					<div id="modal_foot">
+						<p style="text-align: center;"></p>
+						<div id="review_btn">
+							<button id="closeBtn">돌아가기</button>
+							<button id="ok"></button>
+						</div>                
+					</div>
+			</div>
+		</div>
 	</div>
 	<script src="https://kit.fontawesome.com/2fc57dd2db.js"
 		crossorigin="anonymous"></script>

@@ -84,8 +84,8 @@
 			SELECT #{mno},#{bno},#{content},#{depth},#{rsvNum},NOW(),IFNULL(MAX(orderNum)+1,1),0,#{eval} FROM comments;
 		</if>
 		<if test="depth==1">
-			INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum)
-			VALUES (#{mno},#{bno},#{content},#{depth},#{rsvNum},NOW(),#{orderNum});
+			INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum,grade)
+			VALUES (#{mno},#{bno},#{content},#{depth},#{rsvNum},NOW(),#{orderNum},#{eval});
 		</if>
 	</insert>
 	<insert id="likeOn">
@@ -97,25 +97,31 @@
 	<select id="checkLiked" resultType="_int">
 		SELECT COUNT(l.bno) FROM liked l,(SELECT mno,bno FROM reservation WHERE rno=#{rsvNum}) r WHERE l.mno=r.mno AND l.bno=r.bno;
 	</select>
-	<update id="cancel">
-		<if test="laundry!=null"> <!-- 품목 삭제일경우 -->
-			UPDATE rsv_laundry SET stno=4 WHERE rno=#{rsvNum}
-			AND lno=(SELECT lno FROM laundry_type WHERE lname=#{laundry});
-		</if>
-		<if test="laundry==null"> <!-- 예약번호 단위 삭제일 경우 -->
-			UPDATE reservation SET stno=4 WHERE rno=#{rsvNum};
+	<update id="cancelRsv"><!-- 예약번호 단위 주문취소 -->
+			UPDATE reservation SET stno=4,dDate=now() WHERE rno=#{rsvNum};
 			UPDATE rsv_laundry SET stno=4 WHERE rno=#{rsvNum};
-		</if>
+	</update><!-- 품목단위 취소 -->
+	<update id="cancelLaundry">
+			UPDATE rsv_laundry SET stno=4 WHERE rno=#{rsvNum}
+			AND lno=(SELECT lno FROM laundry_type WHERE lname=#{laundry});	
 	</update>
-	<update id="complete">
-		<if test="laundry!=null"> <!-- 품목 삭제일경우 -->
-			UPDATE rsv_laundry SET stno=3 WHERE rno=#{rsvNum}
-			AND lno=(SELECT lno FROM laundry_type WHERE lname=#{laundry});
-		</if>
-		<if test="laundry==null"> <!-- 예약번호 단위 삭제일 경우 -->
-			UPDATE reservation SET stno=3 WHERE rno=#{rsvNum};
-			UPDATE rsv_laundry SET stno=3 WHERE rno=#{rsvNum};
-		</if>
+	<select id="chkLaundryStateTotal" resultType="_int"><!-- 하나의 예약에 등록된 모든 빨래의 상태가 변경됐는지 체크-->
+		SELECT count(lno)>0 FROM rsv_laundry WHERE rno=#{rsvNum} AND stno=1;
+	</select><!-- 1 반환이면 처리되지 않은 항목이 존재, 0 반환이면 전체 처리된 상태 -->
+	<select id="chkLaundryStateComplete" resultType="_int"><!-- 1차 작업이 완료된 품목 중 하나라도 완료상태의 품목이 있는지 체크 -->
+		SELECT count(lno)>0 FROM rsv_laundry WHERE rno=#{rsvNum} AND stno=2;
+	</select><!-- 1반환이면 완료상태의 품목 존재, 0 반환이면 전체 취소된 상태 -->
+	<update id="completeRsv"><!-- 예약번호 단위 전달완료일 경우 -->
+			UPDATE reservation SET stno=3,dDate=now() WHERE rno=#{rsvNum};
+			UPDATE rsv_laundry SET stno=3,dDate=now() WHERE rno=#{rsvNum} AND stno=2;<!-- 품목 중 세탁완료인 품목들 상태변경 -->
+	</update>
+	<update id="rsvDone"><!-- 예약번호 단위 세탁완료일 경우 -->
+			UPDATE reservation SET stno=2 WHERE rno=#{rsvNum};
+			UPDATE rsv_laundry SET stno=2 WHERE rno=#{rsvNum} AND stno=1;<!-- 품목 중 세탁중 상태인 품목들 상태변경 -->
+	</update>
+	<update id="laundryDone"><!-- 품목단위 빨래 끝 -->
+			UPDATE rsv_laundry SET stno=2 WHERE rno=#{rsvNum}
+			AND lno=(SELECT lno FROM laundry_type WHERE lname=#{laundry});	
 	</update>
 	<select id="getRsvListPs" resultType="reservation"> <!-- 일반회원 예약리스트 출력 -->	
 		SELECT r.rno rsvNum,r.bno bno,date_format(rdate,'%c월 %d, %Y %r') rsvDate,bname,phone,

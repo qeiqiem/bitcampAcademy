@@ -30,7 +30,20 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 	@Override
 	public void cancel(LaundryVO vo) {
-		reservationDAO.cancel(vo);
+		if(vo.getLaundry()==null) {//예약번호단위 취소라면
+			reservationDAO.cancelRsv(vo);		
+		}else {
+			reservationDAO.cancelLaundry(vo);
+			int result=reservationDAO.chkState(vo);//모든 품목의 상태 체크
+			if(result==0) {//만약 모든 품목 상태가 세탁중이 아니라면
+				result=reservationDAO.chkStateComplete(vo);//품목 중 완료상태가 하나라도 있는지 체크
+				if(result==0) {//전체 취소된 상태라면
+					reservationDAO.cancelRsv(vo);
+				}else {//완료품목이 하나라도 존재한다면
+					reservationDAO.rsvDone(vo);//주문 전체상태 완료로 전환
+				}
+			}
+		}
 	}
 	@Override
 	public void complete(LaundryVO vo) {
@@ -44,7 +57,6 @@ public class ReservationServiceImpl implements ReservationService {
 			reservationDAO.likeOn(vo);
 		}
 	}
-
 	@Override
 	public ReservationListVO getRsvListPs(ReservationListVO vo) {
 		vo.setTotalPostCount(reservationDAO.countList(vo)); // 총 데이터행 입력
@@ -94,5 +106,17 @@ public class ReservationServiceImpl implements ReservationService {
 		vo.booleanSet();
 		vo.setCommList(reservationDAO.getCommListBs(vo));
 		return vo;
+	}
+	@Override
+	public void washingDone(LaundryVO vo) {
+		if(vo.getLaundry()==null) {//예약번호단위 완료일 경우
+			reservationDAO.rsvDone(vo);			
+		}else {
+			reservationDAO.laundryDone(vo);
+			int result=reservationDAO.chkState(vo);//모든 품목의 상태 체크
+			if(result==0) {//만약 모든 품목 상태가 세탁중이 아니라면
+				reservationDAO.rsvDone(vo);//주문 전체상태 완료로 전환
+			}
+		}
 	}
 }
