@@ -201,13 +201,9 @@ function inputInfo(){
     document.getElementsByName('bno')[0].innerHTML = pageObj["bno"];
     document.getElementsByName('mno')[0].value = pageObj["mno"];
     document.getElementById('bname').innerHTML = pageObj["bname"];
-<<<<<<< HEAD
     document.getElementById('likeNum').innerHTML = pageObj["eCount"];
     document.getElementById('bizname').innerHTML = pageObj["bname"];
     document.querySelector('select[id="bankNum"] option:checked').value=pageObj["bankNum"];
-=======
-    document.querySelector('select[id="bankNum"] option:checked').innerText=pageObj["bankNum"];
->>>>>>> 95111d05610021ea50a29f703c2a673f7812e9ca
     document.getElementById('bankAccNum').value = pageObj["bankAccNum"];
     document.getElementsByName('id')[0].value = pageObj["id"];
     var phoneSplit = pageObj["phone"].split('-');

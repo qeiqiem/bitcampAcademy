@@ -60,7 +60,6 @@ public class UserDAO {
 	public int countList(BusinessListVO vo) {
 		return mybatis.selectOne("UserDAO.countList", vo);
 	}
-	
 
 	// 일반 로그인
 		public PersonVO getUserPs(PersonVO vo) {
@@ -142,10 +141,11 @@ public class UserDAO {
 		return res;
 	}
 
+	public AccountVO joinCfm(AccountVO vo) {
+		return mybatis.selectOne("UserDAO.joinCfm",vo);
+	}
 	public int countListBs(BusinessVO vo) {
 		return  mybatis.selectOne("UserDAO.countListBs", vo);
 	}
-
-	
 
 }
