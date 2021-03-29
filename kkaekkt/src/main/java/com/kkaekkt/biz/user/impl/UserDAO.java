@@ -150,6 +150,9 @@ public class UserDAO {
 	public double avgGradeBs(BusinessVO vo) {
 		return  mybatis.selectOne("UserDAO.avgGradeBs", vo);
 	}
+    public AccountVO joinCfm(AccountVO vo) {
+        return mybatis.selectOne("UserDAO.joinCfm",vo);
+    }
 
 	
 

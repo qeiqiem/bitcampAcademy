@@ -103,4 +103,5 @@ public class ReservationDAO {
 	public void complete(LaundryVO vo) {
 		mybatis.update("reservationDAO.completeRsv",vo);
 	}
+	
 }
