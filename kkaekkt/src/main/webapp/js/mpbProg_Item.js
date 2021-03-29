@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	initSide();
 	initEvent();
+    initModal();
     ajax(pageObj); //처음 마이페이지 들어왔을 때, 진행중 주문 항목 출력
 });
 function initEvent() {
@@ -27,15 +28,15 @@ function initEvent() {
             ajax(pageObj);
         }
     });
-	$('.process').on('click','.cancelBtn',function() {
+	$('.process').on('click','.cancelBtn',function() {//리스트의 취소 버튼을 누를 때
 		rsvObj.laundry=$('.processList tr').eq($(this)[0].value).children().eq(3)[0].innerHTML;
 		rsvObj.rsvNum=JSON.parse($('.processList tr').eq($(this)[0].value).children().eq(1)[0].innerHTML);
-		cancel(rsvObj);
+        openModal('cancel');
 	});
-	$('.process').on('click','.completeBtn',function() {
+	$('.process').on('click','.completeBtn',function() {//리스트의 완료버튼을 누를 때
 		rsvObj.laundry=$('.processList tr').eq($(this)[0].value).children().eq(3)[0].innerHTML;
 		rsvObj.rsvNum=JSON.parse($('.processList tr').eq($(this)[0].value).children().eq(1)[0].innerHTML);
-		complete(rsvObj);
+		openModal('complete');
 	});
 }
 function cancel(rsvObj) {
@@ -44,15 +45,22 @@ function cancel(rsvObj) {
         data:rsvObj,
         success: function(data) {
 			ajax(pageObj);
+            alert('주문이 정상적으로 취소되었습니다.');
+            modalClose();
 		}
 	});
 }
+function modalClose() {
+    $('#modal_container').hide();
+}
 function complete(rsvObj) {
 	$.post({
-		url:"/complete.do",
+		url:"/washingDone.do",
 		data:rsvObj,
 		success: function(data) {
 			ajax(pageObj);
+            alert('작업이 완료되었습니다.');
+            modalClose();
 		}
 	});
 }
@@ -162,6 +170,36 @@ function ajax(pageObj) { //ajax로 리스트 받아오기
             console.log('ajax 완료');
         }
     });
+}
+function initModal() {
+    /* 모달 생성 */
+    $("#modal_close").click(function(){ //모달 X버튼 누를 때
+        modalClose();//모달 닫기
+    });
+    $("#closeBtn").click(function(event){ //모달 돌아가기 누를 때
+        event.preventDefault();
+        modalClose();//모달 닫기
+    });
+    $('#ok').click(function() {
+        operate();
+    });
+}
+function openModal(button) {
+    $('#modal_container').show();
+    if(button=='cancel'){//취소버튼이 눌려서 모달이 열렸다면
+        $('#modal_foot p')[0].innerHTML='정말 취소하시겠습니까?';
+        $('#ok')[0].innerHTML='취소하기';
+    }else{//완료버튼이 눌려서 모달이 열렸다면
+        $('#modal_foot p')[0].innerHTML='정말 완료하시겠습니까?';
+        $('#ok')[0].innerHTML='완료하기';
+    }
+}
+function operate() {
+    if($('#ok')[0].innerHTML=='취소하기'){//버튼이 취소하기라면,
+        cancel(rsvObj);
+    }else {//버튼이 완료하기라면
+        complete(rsvObj);
+    }
 }
 function toDay() {
     var date=new Date();

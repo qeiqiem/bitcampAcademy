@@ -54,7 +54,6 @@ function initEvent() {
             ajax(pageObj);
         }
     });
-
     $('.page_next').click(function() {
         if(!$(this).hasClass('no')) {
             pageObj.currentPageNum+=1;
@@ -114,7 +113,6 @@ function initEvent() {
             deleteComm(idx);
         }
     });
-    
 }
 function like(likeObj) {
     $.post({

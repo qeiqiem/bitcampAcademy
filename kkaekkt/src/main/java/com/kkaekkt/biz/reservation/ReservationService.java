@@ -1,7 +1,5 @@
 package com.kkaekkt.biz.reservation;
 
-import java.util.List;
-
 import com.kkaekkt.biz.comm.CommListVO;
 import com.kkaekkt.biz.comm.CommVO;
 import com.kkaekkt.biz.comm.LaundryVO;
@@ -18,4 +16,5 @@ public interface ReservationService {
 	public void deleteCommAb(CommVO vo);
 	public void deleteCommCh(CommVO vo);
 	public CommListVO getCommListBs(CommListVO vo);
+	public void washingDone(LaundryVO vo);
 }

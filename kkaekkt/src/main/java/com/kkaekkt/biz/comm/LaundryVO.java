@@ -1,7 +1,5 @@
 package com.kkaekkt.biz.comm;
 
-import java.sql.Date;
-
 public class LaundryVO {
 	private String rsvDate;
 	private int rsvNum;
