@@ -111,24 +111,24 @@
 	<delete id="deleteUser">
 		DELETE account WHERE mno=#{no}
 	</delete>
+   <!-- 로그인들 -->
+   <select id="loginchk" resultType="person">
+   		SELECT *
+   		FROM account
+   		WHERE id=#{id}
+   		AND password=#{password}
+   </select>
 	<select id="getPerson" resultType="person">
-		SELECT ac.mno as mno, id,
-		password, mname as name, phone, birth, address,
-		email
-		FROM account ac,
-		member mb
+		SELECT ac.mno as mno, id, password, mname as name, phone, birth, address, email
+		FROM account ac, member mb
 		WHERE ac.mno=mb.mno
 		AND id=#{id} AND password=#{password};
-	</select>
+	</select> 
+	
 	<select id="getPersonBs" resultType="business">
 		SELECT ac.mno as mno,
-<<<<<<< HEAD
 		bs.bno, id, password, bname, phone, address, email, bz.typenum as bizType, bkno as bankNum,
 		acno as bankAccountNum
-=======
-		bs.bno, id, password, bname, phone, address, email, bz.typenum, bkno,
-		acno
->>>>>>> 56772e435441518fedb420c950dd10a235dee8eb
 		FROM account ac, business bs, biztype bz
 		WHERE ac.mno=bs.mno
 		AND bs.typeNum=bz.typenum
