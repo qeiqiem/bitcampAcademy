@@ -298,7 +298,8 @@ td.replyCell:hover{
     background-color: white;
     border: 1px solid lightgray;
     border-radius: 10px;
-    box-shadow: 5px 12px 5px rgb(212, 212, 212);
+    /* box-shadow: 5px 12px 5px rgb(212, 212, 212); */
+    z-index: 1000;
 }
 #modal_close{
     float: right;

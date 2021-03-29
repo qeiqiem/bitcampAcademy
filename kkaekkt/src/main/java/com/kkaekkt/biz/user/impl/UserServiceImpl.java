@@ -188,9 +188,15 @@ public class UserServiceImpl implements UserService {
 		return userDao.email(vo);
 	}
 
+	@Override
+	public AccountVO joinCfm(AccountVO vo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
-
-
-
-	
+	@Override
+	public int getLikedBs(BusinessVO vo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

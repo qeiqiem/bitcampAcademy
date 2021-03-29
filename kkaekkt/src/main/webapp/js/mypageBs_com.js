@@ -52,6 +52,7 @@ function initEvent() {
 		rsvObj.rsvNum=JSON.parse($('.processList tr').eq($(this)[0].value).children().eq(1)[0].innerHTML);
 		openModal('complete');
 	});
+    $("#mask").on("click", function() {  $('#modal_container').hide(); $("#mask").hide();});
 }
 function enter() {
     if(window.event.keyCode==13) {
@@ -108,6 +109,7 @@ function initModal() {
     });
 }
 function openModal(button) {
+    $("#mask").show();
     $('#modal_container').show();
     if(button=='cancel'){//취소버튼이 눌려서 모달이 열렸다면
         $('#modal_foot p')[0].innerHTML='정말 취소하시겠습니까?';
@@ -139,6 +141,7 @@ function cancel(rsvObj) {
 }
 function modalClose() {
     $('#modal_container').hide();
+    $("#mask").hide();
 }
 function complete(rsvObj) {
 	$.post({
@@ -178,6 +181,32 @@ function ajax(pageObj) { //ajax로 리스트 받아오기
 
 function printlist(list) {//리팩토링 무조건 필요함 뇌빼고 작업한 부분(3.29-태연)
     var rsvType=true;
+    var processHeader ='<table class="processHeader">'+  //세탁완료 헤더
+                            '<tr>'+
+                                '<th>주문일</th>'+
+                                '<th>주문번호</th>'+
+                                '<th>주문자</th>'+
+                                '<th>상품명</th>'+
+                                '<th>개수</th>'+
+                                '<th>금액</th>'+
+                                '<th>처리상태</th>'+
+                                '<th>남은일자</th>'+
+                                '<th>상태변경</th>'+
+                            '</tr>'+
+                        '</table>';
+    var completeHeader ='<table class="processHeader">'+  //전달완료 헤더
+                            '<tr>'+
+                                '<th>주문일</th>'+
+                                '<th>주문번호</th>'+
+                                '<th>주문자</th>'+
+                                '<th>상품명</th>'+
+                                '<th>개수</th>'+
+                                '<th>금액</th>'+
+                                '<th>처리상태</th>'+
+                                '<th>완료날짜</th>'+
+                                '<th>주문전표</th>'+
+                            '</tr>'+
+                        '</table>';
     $('.process').children().remove();
     $.each(list, function(key,value) {
         var className=(value.state=='세탁 완료'?'processList':'completeList');
@@ -199,55 +228,15 @@ function printlist(list) {//리팩토링 무조건 필요함 뇌빼고 작업한
         });
         if(key==0&&value.state=='세탁 완료') {
             $('.process').prepend("<p>세탁 완료</p>");//세탁완료 라벨 출력
-            $('.process').append(//세탁완료 헤더 출력
-            '<table class="processHeader">'+
-                '<tr>'+
-                    '<th>주문일</th>'+
-                    '<th>주문번호</th>'+
-                    '<th>주문자</th>'+
-                    '<th>상품명</th>'+
-                    '<th>개수</th>'+
-                    '<th>금액</th>'+
-                    '<th>처리상황</th>'+
-                    '<th>남은일자</th>'+
-                    '<th>상태변경</th>'+
-                '</tr>'+
-            '</table>'
-            );
+            $('.process').append(processHeader);//세탁완료 헤더 출력
         }else if(key==0&&value.state=='전달 완료') {
             rsvType=false;
             $('.process').prepend("<p>전달 완료</p>");//전달완료 라벨 출력
-            $('.process').append(//전달완료 헤더 출력
-            '<table class="completeHeader">'+
-                '<tr>'+
-                    '<th>주문일</th>'+
-                    '<th>주문번호</th>'+
-                    '<th>주문자</th>'+
-                    '<th>상품명</th>'+
-                    '<th>개수</th>'+
-                    '<th>금액</th>'+
-                    '<th>완료날짜</th>'+
-                   ' <th>주문전표</th>'+
-                '</tr>'+
-            '</table>'
-            );
+            $('.process').append(completeHeader);//전달완료 헤더 출력
         }else if(rsvType&&value.state=='전달 완료') {
             rsvType=false;
             $('.process').append('<p>전달 완료</p>');//전달완료 라벨 출력
-            $('.process').append(//전달완료 헤더 출력
-            '<table class="completeHeader">'+
-                '<tr>'+
-                    '<th>주문일</th>'+
-                    '<th>주문번호</th>'+
-                    '<th>주문자</th>'+
-                    '<th>상품명</th>'+
-                    '<th>개수</th>'+
-                    '<th>금액</th>'+
-                    '<th>완료날짜</th>'+
-                   ' <th>주문전표</th>'+
-                '</tr>'+
-            '</table>'
-            );
+            $('.process').append(completeHeader);//전달완료 헤더 출력
         }
         $('.process').append(
             '<table class="'+className+'">' +
@@ -258,8 +247,8 @@ function printlist(list) {//리팩토링 무조건 필요함 뇌빼고 작업한
                     '<td>'+laundry+'</td>'+
                     '<td>'+count+'</td>'+
                     '<td>'+price+'</td>'+
-                    (value.state=='세탁 완료'?
                     '<td>'+state+'</td>'+
+                    (value.state=='세탁 완료'?
                     (value.dDay<0?
                     '<td style="color:red;">D+'+value.dDay*-1+'</td>'
                     :'<td>D'+value.dDay*-1+'</td>')+
