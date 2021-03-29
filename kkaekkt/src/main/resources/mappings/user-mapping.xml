@@ -211,15 +211,14 @@
 		SELECT id
 		FROM account ac
 		LEFT JOIN member mb on ac.mno=mb.mno
-		LEFT JOIN
-		business bs on ac.mno=bs.mno
-		WHERE (mname=#{name} AND
-		mb.email=#{email}) OR (bname=#{name} AND
-		bs.email=#{email});
+		LEFT JOIN business bs on ac.mno=bs.mno
+		WHERE (mname=#{name} AND mb.email=#{email}) 
+			   OR (bname=#{name} AND bs.email=#{email});
 	</select>
 	<select id="findPw" resultType="account">
-		SELECT b.email bmail, m.email
-		mmail, id
+		<!-- SELECT b.email bmail, m.email
+		mmail, id -->
+		SELECT b.email mmail, m.email bmail, id
 		FROM account ac
 		LEFT OUTER JOIN member m on ac.mno=m.mno
 		LEFT
@@ -233,7 +232,7 @@
 		id=#{id}
 	</select>
 	<select id="joinCfm" resultType="account">
-		SELECT id, mname, bname
+		SELECT id, mname as name, bname as name
 		FROM account a
 		LEFT JOIN member m on a.mno=m.mno
 		LEFT JOIN business b on b.mno=a.mno

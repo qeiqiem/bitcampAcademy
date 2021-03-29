@@ -156,6 +156,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public AccountVO findId(AccountVO vo) {
+		System.out.println("findId 서비스");
 		return userDao.findId(vo);
 	}
 

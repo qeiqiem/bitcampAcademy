@@ -307,7 +307,7 @@ public class UserController {
 	public String findPw(AccountVO vo, Model model) {
 		System.out.println(vo);
 		model.addAttribute("userPw", userService.findPw(vo));
- 		return "/jsp/join/findPwSendMail.jsp";
+ 		return "/jsp/login/findPwSendMail.jsp";
  	}
 	/* 이메일 인증 */
 	@RequestMapping(value = "/mailCheck.do", method = RequestMethod.GET)
