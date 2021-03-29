@@ -31,12 +31,12 @@
                     <h3>로그인</h3>
                     <hr>
                     <div>
-                        <input type="text" name="id" placeholder="아이디">
+                        <input type="text" name="id" placeholder="아이디"/>
                     </div>
                     <div>
-                        <input type="password" name="password" placeholder="비밀번호">
+                        <input type="password" name="password" placeholder="비밀번호"/>
                     </div>
-                    <input type="submit" value="로그인">
+                    <input type="submit" value="로그인"/>
                 </form>
                 <div>
                     <div>

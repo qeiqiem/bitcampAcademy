@@ -174,31 +174,26 @@ public class UserController {
 		
 	// 일반유저 로그인
 	@RequestMapping(value = "/loginPs.do", method = RequestMethod.POST)
-	public String Login(PersonVO vo, HttpSession session) throws Exception {
-		try {
+	public String Login(PersonVO vo, HttpSession session) {
+		
 			// 로그인 성공
 			System.out.println("로그인처리");
 
-			// vo = userService.getUser(vo);
+			vo = userService.getUser(vo);
 			PersonVO user = userService.getUser(vo);
 
 			System.out.println(vo); // 뭐가 담기는 지 보려했다
 
 			if (user.getMno() == 0) {
 				System.out.println("회원정보없음");
-				// session.setAttribute("person", null);
-				return "/jsp/join/joinNoPs.jsp";
-			} else if (user.getMno() != 0) {
+				return "/jsp/login/loginPs.jsp";
+			} else {
 				session.setAttribute("person", vo);
+				return "/jsp/indexPerson.jsp";
 			}
-			return "/jsp/indexPerson.jsp";
 
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("로그인 실패");
-			return "/jsp/join/joinNoPs.jsp";
-		}
-	}
+		} 
+	
 
 	// 업체유저 로그인
 	@RequestMapping(value = "/loginBs.do", method = RequestMethod.POST)
@@ -248,8 +243,6 @@ public class UserController {
 	               System.out.println("카카오 로그인 실패");
 	               return "/jsp/login/loginPs";
 	            }
-	   
-	            //return "/jsp/indexPerson.jsp";
 	      }
 	
 

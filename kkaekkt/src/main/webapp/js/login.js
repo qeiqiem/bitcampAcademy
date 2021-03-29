@@ -1,11 +1,10 @@
 // 중복확인
-function fn_idchk() {
+function login() {
   if ($("#id").val() == "") {
     alert("아이디를 입력하세요.");
     $("#id").focus();
     return false;
   }
-  
 
   $.ajax({
     url: "/idchk.do",
@@ -17,10 +16,16 @@ function fn_idchk() {
       console.log(data);
       var test = JSON.parse(data);
       console.log(test.state);
-      if (test.state == 1) {
-        alert("없는 아이디 입니다.");
-      } 
+      if (test.mno == 0) {
+        alert("아이디없음");
+        console.log($("#idchk").val());
+      }
     },
+    
+    // , failure: function (errMsg) {
+    // 	alert(errMsg);
+    // }
+
     error: function (request, status, error) {
       console.log(
         "code:" +
@@ -32,7 +37,6 @@ function fn_idchk() {
           "error:" +
           error
       );
-    }
+    },
   });
 }
-    
