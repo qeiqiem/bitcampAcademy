@@ -147,9 +147,11 @@ public class UserController {
 	public String Update(BusinessVO vo, HttpSession session) {
 		System.out.println(vo);
 		userService.updateUser(vo);
-		BusinessVO personBs = userService.getUser(vo);
-		System.out.println("컨트롤러" + personBs);	
-		session.setAttribute("personBs", personBs);
+		vo = userService.getUser(vo);
+		vo.setLikedNum(userService.countLikeBs(vo));	// 프로필편집에서 찜 인원 뽑아와야해서 추가
+		vo.setEval(userService.avgGradeBs(vo));	// 프로필편집에서 찜 인원 뽑아와야해서 추가
+		System.out.println("컨트롤러" + vo);	
+		session.setAttribute("personBs", vo);
 		System.out.println("세션에 수정한 정보 올리기 완료");
 
 		return "/jsp/mypageBiz/combio.jsp";
@@ -222,7 +224,8 @@ public class UserController {
 			System.out.println("로그인처리");
 
 			vo = userService.getUser(vo);
-			vo.seteCount(userService.getLikedBs(vo));	// 프로필편집에서 찜 인원 뽑아와야해서 추가
+			vo.setLikedNum(userService.countLikeBs(vo));	// 프로필편집에서 찜 인원 뽑아와야해서 추가
+			vo.setEval(userService.avgGradeBs(vo));	// 프로필편집에서 찜 인원 뽑아와야해서 추가
 
 			System.out.println(vo); // 뭐가 담기는 지 보려했다
 
