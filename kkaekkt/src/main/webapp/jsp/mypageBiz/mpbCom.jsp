@@ -32,18 +32,7 @@
 				</div>
 				<hr>
 				<div class="process">
-					<table class="processHeader">
-						<tr>
-							<th>주문일</th>
-							<th>주문번호</th>
-							<th>주문자</th>
-							<th>상품명</th>
-							<th>개수</th>
-							<th>금액</th>
-							<th>완료날짜</th>
-							<th>주문전표</th>
-						</tr>
-					</table>
+					
 				</div>
 				<div class="page_btn_container">
 					<ul class="page_btn">
@@ -61,9 +50,20 @@
 						<li class="page_nextBlock"><i class="fas fa-angle-double-right"></i></li>
 					</ul>
 				</div>
+		</div>
+		<div id="modal_container">
+			<button id="modal_close">x</button>
+			<div id="modal_bodycont">
+					<div id="modal_foot">
+						<p style="text-align: center;"></p>
+						<div id="review_btn">
+							<button id="closeBtn">돌아가기</button>
+							<button id="ok"></button>
+						</div>                
+					</div>
 			</div>
 		</div>
-	</div>
+	</div>	
 	<script src="https://kit.fontawesome.com/2fc57dd2db.js"
 		crossorigin="anonymous"></script>
 	<script>
@@ -72,6 +72,7 @@
 				currentPageNum:1,
 				listType:4
             };
+			var rsvObj={};
     </script>
 	<script src="/js/mypageBs_com.js"></script>
 </body>
