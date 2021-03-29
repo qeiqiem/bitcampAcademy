@@ -25,7 +25,7 @@
                             <span id="bname" readonly></span>님 반갑습니다.
                         </li>
                         <li id="title_right">
-                            찜 <span id="likeNum">140</span>명/ 내 평점 <span id="avglike">4.7</span>
+                            찜 <span id="likeNum"></span>명 / 내 평점 <span id="avglike">4.7</span>
                             <sapn id="starIcon"><i class="fas fa-star"></i></sapn>
                         </li>
                     </ul>
