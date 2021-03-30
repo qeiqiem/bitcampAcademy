@@ -125,9 +125,10 @@
                                             <td></td>
                                             <td>
                                                 <input class="mail_check_input" id="mail_check_input_box_false" disabled="disabled">
-                                                <button type="button" id="mail_check">확인</button></td>
-                                                <span id="reqinput"></span>
+                                                <button type="button" id="mail_check">확인</button><span id='timeout'></span></td><br>
+                                                <span id="reqinput"></span> 
                                             </td>
+                                            <td></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -163,20 +164,18 @@
         </div>
         <script>
             var pageObj={//세션에서 정보를 받아오는건 독립된 js파일에서 불가능, jsp 내에서만 가능하기 때문에 여기서 값을 받아준다.
-                bno:'${sessionScope.personBs.bno}',
-                mno:'${sessionScope.personBs.mno}',
-                likedNum:'${sessionScope.personBs.likedNum}',
-                eval:'${sessionScope.personBs.eval}',
-                bname:'${sessionScope.personBs.bname}',
-                bankNum:'${sessionScope.personBs.bankNum}',
-                bankAccNum:'${sessionScope.personBs.bankAccountNum}',
-                id:'${sessionScope.personBs.id}',
-                // id:'testbs',
-                password:'${sessionScope.personBs.password}',
-                // password:'test',
-                phone:'${sessionScope.personBs.phone}',
-                email:'${sessionScope.personBs.email}',                
-                address:'${sessionScope.personBs.address}'        
+                bno:'${sessionScope.person.bno}',
+                mno:'${sessionScope.person.mno}',
+                likedNum:'${sessionScope.person.likedNum}',
+                eval:'${sessionScope.person.eval}',
+                bname:'${sessionScope.person.bname}',
+                bankNum:'${sessionScope.person.bankNum}',
+                bankAccNum:'${sessionScope.person.bankAccountNum}',
+                id:'${sessionScope.person.id}',
+                password:'${sessionScope.person.password}',
+                phone:'${sessionScope.person.phone}',
+                email:'${sessionScope.person.email}',                
+                address:'${sessionScope.person.address}'        
 
             };
         	
