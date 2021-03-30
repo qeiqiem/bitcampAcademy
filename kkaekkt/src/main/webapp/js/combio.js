@@ -320,11 +320,11 @@ function checkemailNum(){
             $("#reqinput").attr("class", "correct");        
         } else if($('#timeout')[0].innerText=="0:00"){//시간이 다 됐는데 인증을 누른다면
             formatemailNum = 0;
-            $('#timeout')[0].innerText=="";
-            $(".mail_check_input").attr("disabled",true);
-            document.getElementById("mail_check").disabled = true;
-            $(".mail_check_input").attr("id", "mail_check_input_box_false");
             alert('인증번호가 만료되었습니다.');
+            $('#timeout').text="";
+            $(".mail_check_input").attr("disabled",false);
+            document.getElementById("mail_check").disabled = false;
+            $(".mail_check_input").attr("id", "mail_check_input_box_false");
         }else if($('#timeout')[0].innerText.length!=0){//시간이 남았는데 코드가 일치하지 않는다면
             formatemailNum = 0;
             alert('인증번호가 일치하지 않습니다.');
@@ -347,7 +347,7 @@ function checkemailNum(){
 
 }
 function timerStart() {
-    AuthTimer.comSecond = 10;
+    AuthTimer.comSecond = 5;
     AuthTimer.timer =  setInterval(function(){AuthTimer.fnTimer()},1000);
     AuthTimer.domId = document.getElementById("timeout");
 }
