@@ -31,7 +31,10 @@ let formatemail = 0;
 let formatidchk = 0;
 
 window.onload = function () {
-  // iput 아래 label 창 알림
+  initKeyEvent();
+};
+
+function initKeyEvent() {
   // id
   id.addEventListener("keyup", () => {
     formatidchk = 0;
@@ -115,81 +118,12 @@ window.onload = function () {
           "이메일을 양식에 맞춰 입력하세요.";
       }
     } else {
-      email.disabled = false;
+      formatemail = 1;
       document.getElementById("checkemail").innerText = "";
     }
   });
 
-  // 이메일 버튼 클릭시
-  $("btn_checkemail").on("click", function () {
-    //   $(".mail_check_button").click(function () {
-    //   if (!regEmail.test(email.value)) {
-    //   formatemail == 0
-    if (regEmail.test(email.value)) {
-      //이메일이 양식에 맞을 경우
-      // emailAjax(email.value);
-    } else {
-      alert("이메일을 정확하게 입력하세요.");
-      $("#email").focus();
-      return false;
-    }
-
-    if (email.value.length == 0) {
-      alert("이메일을 입력하세요.");
-      $("#email").focus();
-      return false;
-    }
-  });
-
-  /* 인증번호 이메일 전송 */
-  $(".mail_check_button").click(function () {
-    console.log("이메일인증 클릭");
-
-    var email = $(".mail_input").val(); // 입력한 이메일
-
-    $.ajax({
-      type: "GET",
-      url: "/mailCheck.do?email=" + email,
-      success: function (data) {
-        //console.log("data : " + data);
-        $(".mail_check_input").attr("disabled", false);
-        $(".mail_check_input").attr("id", "mail_check_input_box_true");
-        // $("#checkemail").text(" 인증번호를 전송했습니다.");
-        alert(" 인증번호를 전송했습니다.");
-        code = data;
-      },
-    });
-  });
-  /* 인증번호 비교 */
-  $("#mail_check").click(function () {
-    var inputCode = $(".mail_check_input").val(); // 입력코드
-
-    if (inputCode == code) {
-      $("#reqinput").text("");
-      alert(" 인증번호가 일치합니다.");
-      $("#reqinput").html(" 인증이 완료되었습니다.");
-      formatemail = 1;
-      //   $(".mail_check_input").attr("id", "mail_check_input_box_true");
-      $(".mail_check_input").attr("disabled", true);
-      $("#mail_check").attr("disabled", true);
-      console.log(formatemail);
-
-      $("#reqinput").attr("class", "correct");
-    } else {
-      // 일치하지 않을 경우
-      formatemail = 0;
-      $("#reqinput").text("");
-      alert(" 인증번호를 다시 확인해주세요.");
-      console.log(formatemail);
-
-      $("#reqinput").attr("class", "incorrect");
-    }
-  });
-};
-
-// 입력시 불가 문자 삭제
-// Jquery
-$(document).ready(function () {
+  // Jquery, 입력시 불가 문자 삭제
   //아이디 한글입력 안되게 처리 */
   $("input[name=id]").keyup(function (event) {
     if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
@@ -208,14 +142,8 @@ $(document).ready(function () {
       );
     }
   });
-  // 폰 넘버 숫자만
-  //   $("input[name=ph]").keyup(function (event) {
-  //     if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
-  //       var inputVal = $(this).val();
-  //       $(this).val(inputVal.replace(/[^0-9]/gi, ""));
-  //     }
-  //   });
-  // 폰넘버
+
+  // 폰넘버 숫자+하이픈
   $("input[name=phone]").keyup(function (event) {
     if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
       var inputVal = $(this).val();
@@ -243,7 +171,61 @@ $(document).ready(function () {
       );
     }
   });
+} // window onload
+
+/* 인증번호 비교 */
+$("#mail_check").click(function () {
+  var inputCode = $(".mail_check_input").val(); // 입력코드
+
+  if (inputCode == code) {
+    $("#reqinput").text("");
+    alert(" 인증번호가 일치합니다.");
+    $("#reqinput").html(" 인증이 완료되었습니다.");
+    formatemail = 1;
+    //   $(".mail_check_input").attr("id", "mail_check_input_box_true");
+    $(".mail_check_input").attr("disabled", true);
+    $("#mail_check").attr("disabled", true);
+    console.log(formatemail);
+
+    $("#reqinput").attr("class", "correct");
+  } else {
+    // 일치하지 않을 경우
+    formatemail = 0;
+    $("#reqinput").text("");
+    alert(" 인증번호를 다시 확인해주세요.");
+    console.log(formatemail);
+
+    $("#reqinput").attr("class", "incorrect");
+  }
 });
+
+function fn_emailchk() {
+  if (formatemail == 0 || email.value.length == 0) {
+    alert("이메일을 정확하게 입력하세요.");
+    $("#email").focus();
+    // return false;
+  } else {
+    /* 인증번호 이메일 전송 */
+    $(".mail_check_button").click(function () {
+      console.log("이메일인증 클릭");
+
+      var email = $(".mail_input").val(); // 입력한 이메일
+
+      $.ajax({
+        type: "GET",
+        url: "/mailCheck.do?email=" + email,
+        success: function (data) {
+          //console.log("data : " + data);
+          $(".mail_check_input").attr("disabled", false);
+          $(".mail_check_input").attr("id", "mail_check_input_box_true");
+          // $("#checkemail").text(" 인증번호를 전송했습니다.");
+          alert(" 인증번호를 전송했습니다.");
+          code = data;
+        },
+      });
+    });
+  }
+}
 
 // 중복확인
 function fn_idchk() {
@@ -303,17 +285,6 @@ function fn_idchk() {
 }
 
 function fn_combine() {
-  //   번호 합치기
-  //   let phone =
-  //     document.getElementById("phone1").value +
-  //     "-" +
-  //     document.getElementById("phone2").value +
-  //     "-" +
-  //     document.getElementById("phone3").value;
-  //   document.getElementById("phone").value = phone;
-  //   formatph = 1;
-  //   console.log(phone);
-  //   주소 합치기
   let address =
     document.getElementById("postcode").value +
     ", " +
@@ -330,88 +301,54 @@ function fn_combine() {
 }
 
 //submit check
-// function submit_check() {
-$("#join_submit").on("click", function () {
-  fn_combine();
-  //   //   번호 합치기
-  //   let phone =
-  //     document.getElementById("phone1").value +
-  //     "-" +
-  //     document.getElementById("phone2").value +
-  //     "-" +
-  //     document.getElementById("phone3").value;
-  //   document.getElementById("phone").value = phone;
-  //   formatph = 1;
-  //   console.log(phone);
-  //   //   주소 합치기
-  //   let address =
-  //     document.getElementById("postcode").value +
-  //     ", " +
-  //     document.getElementById("roadAddress").value +
-  //     ", " +
-  //     document.getElementById("detailAddress").value +
-  //     ", " +
-  //     document.getElementById("extraAddress").value;
-  //   console.log(address);
-  //   document.getElementById("address").value = address;
-  //   address.value = address;
-  //   formatad = 1;
-  //   console.log(address);
+function submit() {
+  $("#join_submit").on("click", function () {
+    //주소 합치기
+    fn_combine();
+    //
+    const idchkVal = $("#idchk").val();
+    if (formatidchk == 0) {
+      alert("아이디 중복확인을 해 주세요.");
+      $("#id").focus();
+      return false;
+    }
+    if ($("#pw").val() == "") {
+      alert("비밀번호를 입력하세요.");
+      $("#pw").focus();
+      return false;
+    }
+    if ($("#repw").val() == "" || formatpw != 1) {
+      alert("비밀번호를 재입력하세요.");
+      $("#repw").focus();
+      return false;
+    }
 
-  //
-  const idchkVal = $("#idchk").val();
-  if (formatidchk == 0) {
-    alert("아이디 중복확인을 해 주세요.");
-    $("#id").focus();
-    return false;
+    if ($("#name").val() == "") {
+      alert("이름을 입력하세요.");
+      $("#name").focus();
+      return false;
+    }
+    if ($("#birth").val() == "" || formatbirth != 1) {
+      alert("생년월일을 입력하세요.");
+      $("#birth").focus();
+      return false;
+    }
 
-    // if (formatidchk == 1) {
-    //   $("#joinPerson").submit();
-    //   alert("가입이 완료되었습니다.");
-  }
-  //
-  if ($("#pw").val() == "") {
-    alert("비밀번호를 입력하세요.");
-    $("#pw").focus();
-    return false;
-  }
-  if ($("#repw").val() == "" || formatpw != 1) {
-    alert("비밀번호를 재입력하세요.");
-    $("#repw").focus();
-    return false;
-  }
-  // if ($("#pw").val() != $("#repw").val()) {
-  //   alert("비밀번호가 일치하지 않습니다.");
-  //   $("#pw").focus();
-  //   return false;
-  // }
-  if ($("#name").val() == "") {
-    alert("이름을 입력하세요.");
-    $("#name").focus();
-    return false;
-  }
-  if ($("#birth").val() == "" || formatbirth != 1) {
-    alert("생년월일을 입력하세요.");
-    $("#birth").focus();
-    return false;
-  }
-
-  if ($("#phone").val() == "" || formatph != 1) {
-    alert("전화번호를 입력하세요.");
-    $("#phone").focus();
-    return false;
-  }
-  if ($("#postcode").val() == "" || formatad != 1) {
-    alert("주소를 입력하세요.");
-    $("#postcode").focus();
-    return false;
-  }
-  if ($("#email").val() == "" || formatemail != 1) {
-    alert("이메일을 인증하세요.");
-    $("#email").focus();
-    return false;
-  } else {
+    if ($("#phone").val() == "" || formatph != 1) {
+      alert("전화번호를 입력하세요.");
+      $("#phone").focus();
+      return false;
+    }
+    if ($("#postcode").val() == "" || formatad != 1) {
+      alert("주소를 입력하세요.");
+      $("#postcode").focus();
+      return false;
+    }
+    if ($("#email").val() == "" || formatemail != 1) {
+      alert("이메일을 인증하세요.");
+      $("#email").focus();
+      return false;
+    }
     $("form").submit();
-  }
-});
-// }
+  });
+}
