@@ -22,6 +22,7 @@ $(document).ready(function () {
 	   /* 모달 생성 */
 	   $("#modal_show").click(function () { $("#modal_container").show() })
 	   $("#modal_close").click(function () { $("#modal_container").hide() })
+	   $("#back").click(function () { $("#modal_container").hide() })
 	 })
 </script>
 
