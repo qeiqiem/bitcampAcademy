@@ -1,6 +1,7 @@
 package com.kkaekkt.util.socket;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,9 +37,10 @@ public class EchoHandler extends TextWebSocketHandler {
 //		for (WebSocketSession sess : sessions) {
 //			sess.sendMessage(new TextMessage(senderNickname + ": " +  message.getPayload()));
 //		}
-		
+		System.out.println("메시지 수신 접근완료");
 		//protocol : cmd , 댓글작성자, 게시글 작성자 , seq (reply , user2 , user1 , 12)
 		String msg = message.getPayload();
+		System.out.println(msg+"...메시지 수신완료");
 		if(!StringUtils.isNullOrEmpty(msg)) {
 			String[] strs = msg.split(",");
 			
@@ -53,10 +55,11 @@ public class EchoHandler extends TextWebSocketHandler {
 				WebSocketSession boardWriterSession = userSessionsMap.get(receiverEmail);
 				
 				if("reply".equals(cmd) && boardWriterSession != null) {//cmd가 "reply"이고 작성자가 세션에 있다면, 
+					System.out.println("reply접근");
 					TextMessage tmpMsg = new TextMessage(caller + "님이 " + 
 										"<a type='external' href='/mentor/menteeboard/menteeboardView?seq="+seq+"&pg=1'>" + seq + "</a> 번 게시글에 댓글을 남겼습니다.");
 					boardWriterSession.sendMessage(tmpMsg);// 메시지를 보낸다.
-				
+				System.out.println(tmpMsg+"...메시지 송신완료");
 					
 					//이하 다른 기능은 폐기예정 (과정을 이해하는데 참고하기 위한 기록)
 				}else if("follow".equals(cmd) && boardWriterSession != null) {//cmd가 "follow"이고, 작성자가 세션에 있다면,
@@ -72,21 +75,21 @@ public class EchoHandler extends TextWebSocketHandler {
 				}
 			}
 			// 모임 신청 했을때..이건 안쓸 예정
-			if(strs != null && strs.length == 5) {
-				String cmd = strs[0];
-				String mentee_name = strs[1];
-				String mentor_email = strs[2];
-				String meetingboard_seq = strs[3];
-				String participation_seq = strs[4];
-				
-				// 모임 작성한 멘토가 로그인 해있으면
-				WebSocketSession mentorSession = userSessionsMap.get(mentor_email);
-				if(cmd.equals("apply") && mentorSession != null) {
-					TextMessage tmpMsg = new TextMessage(
-							mentee_name + "님이 모임을 신청했습니다. " +"<a type='external' href='/mentor/participation/participationView?mseq="+ meetingboard_seq +"&pseq="+ participation_seq +"'>신청서 보기</a>");
-					mentorSession.sendMessage(tmpMsg);
-				}
-			}
+//			if(strs != null && strs.length == 5) {
+//				String cmd = strs[0];
+//				String mentee_name = strs[1];
+//				String mentor_email = strs[2];
+//				String meetingboard_seq = strs[3];
+//				String participation_seq = strs[4];
+//				
+//				// 모임 작성한 멘토가 로그인 해있으면
+//				WebSocketSession mentorSession = userSessionsMap.get(mentor_email);
+//				if(cmd.equals("apply") && mentorSession != null) {
+//					TextMessage tmpMsg = new TextMessage(
+//							mentee_name + "님이 모임을 신청했습니다. " +"<a type='external' href='/mentor/participation/participationView?mseq="+ meetingboard_seq +"&pseq="+ participation_seq +"'>신청서 보기</a>");
+//					mentorSession.sendMessage(tmpMsg);
+//				}
+//			}
 		}
 	}
 	
@@ -102,6 +105,8 @@ public class EchoHandler extends TextWebSocketHandler {
 	private String getEmail(WebSocketSession session) {
 		System.out.println("이메일정보 접근");
 		Map<String, Object> httpSession = session.getAttributes();
+		System.out.println(httpSession);
+		System.out.println(httpSession.toString());
 		AccountVO loginUser = (AccountVO)httpSession.get("person");
 		System.out.println(loginUser.getEmail());
 		if(loginUser == null) {

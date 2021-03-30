@@ -7,7 +7,7 @@ $(document).ready(function (){
 function connectWs(){
     sock = new WebSocket("ws://localhost:8080/echo.do");
     //sock = new SockJS('/replyEcho');
-    // socket = sock;
+    socket = sock;
 
     sock.onopen = function() {
         console.log('info: connection opened.');
