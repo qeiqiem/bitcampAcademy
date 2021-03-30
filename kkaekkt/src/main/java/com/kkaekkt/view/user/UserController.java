@@ -128,9 +128,9 @@ public class UserController {
 	public String UpdatePw(BusinessVO vo, HttpSession session) {
 		System.out.println(vo);
 		userService.updateUser(vo);
-		BusinessVO personBs = userService.getUser(vo);
-		System.out.println("컨트롤러" + personBs);
-		session.setAttribute("personBs", personBs);
+		BusinessVO person = userService.getUser(vo);
+		System.out.println("컨트롤러" + person);	
+		session.setAttribute("person", person);
 		System.out.println("세션에 수정한 정보 올리기 완료");
 		Gson gson = new Gson();
 		String password = gson.toJson(vo.getPassword());
@@ -146,16 +146,17 @@ public class UserController {
 		System.out.println(vo);
 		userService.updateUser(vo);
 		vo = userService.getUser(vo);
-		vo.setLikedNum(userService.countLikeBs(vo)); // 프로필편집에서 찜 인원 뽑아와야해서 추가
-		vo.setEval(userService.avgGradeBs(vo)); // 프로필편집에서 찜 인원 뽑아와야해서 추가
-		System.out.println("컨트롤러" + vo);
-		session.setAttribute("personBs", vo);
+		vo.setLikedNum(userService.countLikeBs(vo));	// 프로필편집에서 찜 인원 뽑아와야해서 추가
+		vo.setEval(userService.avgGradeBs(vo));	// 프로필편집에서 찜 인원 뽑아와야해서 추가
+		System.out.println("컨트롤러" + vo);	
+		session.setAttribute("person", vo);
+
 		System.out.println("세션에 수정한 정보 올리기 완료");
 
 		return "/jsp/mypageBiz/combio.jsp";
 	}
 
-	// 이메일 체크
+	// 이메일 체크 sns에서 로그인할때 디비에 있는지 확인하려고 만든 컨트롤러이다
 	@RequestMapping(value = "/findemail.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String email(PersonVO vo) {
@@ -171,6 +172,17 @@ public class UserController {
 		return gson.toJson(findEmail);
 	}
 
+    // 로그인할때 아이디나 비밀번호 있는지 체크하려고 만든 컨트롤러이다.
+        @RequestMapping(value = "/loginchk.do", method = RequestMethod.POST)
+        @ResponseBody
+        public String loginChk(AccountVO vo) {
+            System.out.println("컨트롤러 진입");
+            System.out.println(vo + "가 담김");
+            Gson gson = new Gson();
+            vo.setMno(userService.loginchk(vo));
+            return gson.toJson(vo);
+        }
+            
 	// 일반유저 로그인
 	@RequestMapping(value = "/loginPs.do", method = RequestMethod.POST)
 	public String Login(PersonVO vo, HttpSession session) throws Exception {
@@ -200,7 +212,6 @@ public class UserController {
 
 	// 업체유저 로그인
 	@RequestMapping(value = "/loginBs.do", method = RequestMethod.POST)
-	@ResponseBody
 	public String Login(BusinessVO vo, HttpSession session) throws Exception {
 		try {
 			// 로그인 성공
@@ -217,7 +228,7 @@ public class UserController {
 				// session.setAttribute("personBs", null);
 				return "/jsp/login/loginBs.jsp";
 			} else if (vo.getBno() != 0) {
-				session.setAttribute("personBs", vo);
+				session.setAttribute("person", vo);
 			}
 			return "/jsp/indexCompany.jsp";
 		} catch (Exception e) {
@@ -326,8 +337,13 @@ public class UserController {
 		String toMail = email; // 받는메일 테스트 이후 받아온 email변수로 변경
 
 		String title = "회원가입 인증 이메일 입니다.";
-		String content = "홈페이지를 방문해주셔서 감사합니다." + "<br><br>" + "인증 번호는 " + checkNum + "입니다." + "<br>"
-				+ "해당 인증번호를 인증번호 확인란에 기입하여 주세요.";
+		        String content = 
+                "홈페이지를 방문해주셔서 감사합니다." +
+                "<br><br>" + 
+                "인증 번호는 " + checkNum + "입니다." + 
+                "<br>" + 
+                "해당 인증번호를 인증번호 확인란에 기입하여 주세요.";
+				
 		try {
 
 			MimeMessage message = mailSender.createMimeMessage();

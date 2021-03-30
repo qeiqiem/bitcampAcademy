@@ -154,9 +154,8 @@ public class UserDAO {
 	public int countLikeBs(BusinessVO vo) {
 		return  mybatis.selectOne("UserDAO.countLikeBs", vo);
 	}
-// 업체 평균 평점
+	// 업체 평균 평점
 	public double avgGradeBs(BusinessVO vo) {
 		return  mybatis.selectOne("UserDAO.avgGradeBs", vo);
 	}
-
 }

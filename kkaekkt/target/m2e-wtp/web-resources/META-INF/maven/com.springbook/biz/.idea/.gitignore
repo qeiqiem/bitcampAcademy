@@ -1,0 +1,8 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Datasource local storage ignored files
+/../../../../../../../../../../../../../../:\BitCamp\프로젝트\main\Project\kkaekkt\target\m2e-wtp\web-resources\META-INF\maven\com.springbook\biz\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
