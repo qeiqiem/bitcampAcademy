@@ -200,7 +200,6 @@ public class UserController {
 
 	// 업체유저 로그인
 	@RequestMapping(value = "/loginBs.do", method = RequestMethod.POST)
-	@ResponseBody
 	public String Login(BusinessVO vo, HttpSession session) throws Exception {
 		try {
 			// 로그인 성공
@@ -217,7 +216,7 @@ public class UserController {
 				// session.setAttribute("personBs", null);
 				return "/jsp/login/loginBs.jsp";
 			} else if (vo.getBno() != 0) {
-				session.setAttribute("personBs", vo);
+				session.setAttribute("person", vo);
 			}
 			return "/jsp/indexCompany.jsp";
 		} catch (Exception e) {

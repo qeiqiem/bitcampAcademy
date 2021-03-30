@@ -41,15 +41,16 @@ function initEvent() {
     $("#mask").on("click", function() {  $("#modal_container").hide(); $("#mask").hide();});
 }
 function cancel(rsvObj) {
-	$.post({
-        url:"/cancel.do",
-        data:rsvObj,
-        success: function(data) {
-			ajax(pageObj);
-            alert('주문이 정상적으로 취소되었습니다.');
-            modalClose();
-		}
-	});
+    socket.send("reply,hty,고길동dong,test@naver.com,12");
+	// $.post({
+    //     url:"/cancel.do",
+    //     data:rsvObj,
+    //     success: function(data) {
+	// 		ajax(pageObj);
+    //         alert('주문이 정상적으로 취소되었습니다.');
+    //         modalClose();
+	// 	}
+	// });
 }
 function modalClose() {
     $('#modal_container').hide();
