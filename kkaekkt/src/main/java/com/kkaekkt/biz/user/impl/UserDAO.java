@@ -150,6 +150,7 @@ public class UserDAO {
 	public AccountVO joinCfm(AccountVO vo) {
 		return mybatis.selectOne("UserDAO.joinCfm",vo);
 	}
+	
 	// 업체 찜 당한 수
 	public int countLikeBs(BusinessVO vo) {
 		return  mybatis.selectOne("UserDAO.countLikeBs", vo);
@@ -158,4 +159,11 @@ public class UserDAO {
 	public double avgGradeBs(BusinessVO vo) {
 		return  mybatis.selectOne("UserDAO.avgGradeBs", vo);
 	}
+	// test
+
+
+	
+
+	
+
 }

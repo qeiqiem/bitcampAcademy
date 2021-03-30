@@ -131,6 +131,7 @@ public class UserController {
 		BusinessVO person = userService.getUser(vo);
 		System.out.println("컨트롤러" + person);	
 		session.setAttribute("person", person);
+
 		System.out.println("세션에 수정한 정보 올리기 완료");
 		Gson gson = new Gson();
 		String password = gson.toJson(vo.getPassword());

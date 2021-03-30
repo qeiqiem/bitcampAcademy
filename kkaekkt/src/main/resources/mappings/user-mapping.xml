@@ -159,7 +159,7 @@
 	</select>
 	
 	<!-- 업체프로필편집 자신의 매장을 찜한 회원의 수 -->
-	<select id="countListBs" resultType="_int">
+	<select id="countLikeBs" resultType="_int">
 		SELECT count(mno) FROM liked
 		WHERE bno=#{bno};
 	</select>
