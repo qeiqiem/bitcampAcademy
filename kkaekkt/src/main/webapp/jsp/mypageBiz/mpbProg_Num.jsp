@@ -93,7 +93,7 @@
 		crossorigin="anonymous"></script>
 	<script>
 		var pageObj={//세션에서 정보를 받아오는건 독립된 js파일에서 불가능, jsp 내에서만 가능하기 때문에 여기서 값을 받아준다.
-                bno:1,//더미번호 (추후 세션에서 받아올 예정)
+                bno:${sessionScope.person.bno},//더미번호 (추후 세션에서 받아올 예정)
 				currentPageNum:1,//현재 페이지 1
 				listType:3,//처리중-주문번호별
 				order:1 //주문번호 순

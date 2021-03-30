@@ -57,9 +57,11 @@ public class UserController {
 	@RequestMapping(value = "/idchk.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String idchk(PersonVO vo) {
+		System.out.println("vo 값 담겼음");
 		System.out.println(vo);
 		Gson gson = new Gson();
 		vo.setState(userService.idchk(vo));
+		System.out.println("서비스에서 값 담겨 넘어옴");
 		return gson.toJson(vo);
 	}
 
@@ -68,26 +70,9 @@ public class UserController {
 	public String Join(PersonVO vo) {
 		System.out.println("메서드 진입");
 		userService.insertUser(vo);
-//		int res = userService.idchk(vo);
-//		try {
-//			if (res == 1) {
-//				// 아이디 존재 -> 회원가입 페이지로 돌아가기
-//				System.out.println("아이디 존재");
-//				return "/joinPs.do";
-//			} else if (res == 0) {
-//				userService.insertUser(vo);
-//			}
-//		} catch (Exception e) {
-//			throw new RuntimeException();
-//		}
-		System.out.println("vo객체 넘어감");
-		return "/jsp/join/joinConfirmed.jsp";
+//		return "/jsp/join/joinConfirmed.jsp";
+		return "/joinCfm.do";
 	}
-// 	@RequestMapping(value="/joinPs.do", method=RequestMethod.POST)
-// 	public String Join(PersonVO vo) {
-// 		userService.insertUser(vo);
-// 		return "index.jsp";
-// 	}
 
 	// 회원가입-업체
 	@RequestMapping(value = "/joinBs.do", method = RequestMethod.POST)
@@ -96,6 +81,16 @@ public class UserController {
 		userService.insertUser(vo);
 		return "index.jsp";
 	}
+
+	// 가입완료
+	@RequestMapping(value = "/joinCfm.do", method = RequestMethod.POST)
+	public String joinCfm(AccountVO vo, Model model) {
+		System.out.println("가입완료 진입");
+		System.out.println(vo);
+		model.addAttribute("joinCfm", userService.joinCfm(vo));
+		return "/jsp/join/joinConfirmed.jsp";
+	}
+
 	// 개인 프로필 편집 (비밀번호 변경)
 	@RequestMapping(value="/updatePspwd.do", method=RequestMethod.POST)
 	@ResponseBody
@@ -113,6 +108,7 @@ public class UserController {
 		return password;
 		
 	}
+
 	// 개인 프로필 편집 - 세션
 	@RequestMapping(value="/updatePs.do", method=RequestMethod.POST)
 	public String Update(PersonVO vo, HttpSession session) {
@@ -131,9 +127,9 @@ public class UserController {
 	public String UpdatePw(BusinessVO vo, HttpSession session) {
 		System.out.println(vo);
 		userService.updateUser(vo);
-		BusinessVO personBs = userService.getUser(vo);
-		System.out.println("컨트롤러" + personBs);	
-		session.setAttribute("person", personBs);
+		BusinessVO person = userService.getUser(vo);
+		System.out.println("컨트롤러" + person);	
+		session.setAttribute("person", person);
 		System.out.println("세션에 수정한 정보 올리기 완료");
 		Gson gson=new Gson();
 		String password=gson.toJson(vo.getPassword());
@@ -324,8 +320,9 @@ public class UserController {
 	public String findPw(AccountVO vo, Model model) {
 		System.out.println(vo);
 		model.addAttribute("userPw", userService.findPw(vo));
- 		return "/jsp/join/findPwSendMail.jsp";
- 	}
+		return "/jsp/login/findPwSendMail.jsp";
+	}
+
 	/* 이메일 인증 */
     @RequestMapping(value="/mailCheck.do", method=RequestMethod.GET)
     @ResponseBody

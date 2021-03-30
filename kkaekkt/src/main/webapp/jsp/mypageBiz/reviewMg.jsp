@@ -39,9 +39,9 @@
 					<div class="order">
 						<p>전체 리뷰</p>
 						<div class="selectbox">
-							<label class="select">ㅤ등록순ㅤ</label>
+							<label class="select">ㅤ최신순ㅤ</label>
 							<select>
-								<option value=1>ㅤ등록순ㅤ</option>
+								<option value=1>ㅤ최신순ㅤ</option>
 								<option value=2>평점높은순</option>
 								<option value=3>평점낮은순</option>
 							</select>
@@ -92,7 +92,7 @@
 	</div>
 	<script>
 		var pageObj = {
-			bno:1,
+			bno:${sessionScope.person.bno},
 			depth:1,
 			order:1
 		}
