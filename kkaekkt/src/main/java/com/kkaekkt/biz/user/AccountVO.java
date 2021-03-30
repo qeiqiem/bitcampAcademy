@@ -38,6 +38,12 @@ public class AccountVO {
     public void setName(String name) {
         this.name = name;
     }
+//    public void seMname(String mname) {
+//    	this.name = mname;
+//    }
+//    public void setBname(String bname) {
+//    	this.name = bname;
+//    }
     public String getPhone() {
         return phone;
     }

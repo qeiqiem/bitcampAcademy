@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="UserDAO">
-	<insert id="insertPs">
+
+	<insert id="insertPs" parameterType="person">
 		INSERT INTO account (id,password) VALUES
 		(#{id},#{password});
 		INSERT INTO member VALUES ((SELECT MAX(mno) FROM
@@ -96,13 +97,13 @@
 	<update id="updateBs">
 		<choose>
 			<when test="email == null">
-				UPDATE account SET password=#{password} WHERE mno=#{mno};
+				UPDATE account SET password=#{password} WHERE bno=#{bno};
 			</when>
 			<otherwise>
 				<!-- UPDATE account SET password=#{password} WHERE mno=#{mno}; -->
 				UPDATE business SET
-				phone=#{phone},bkno=#{bankNum},acno=#{bankAccountNum}, address=#{address},email=#{email}
-				WHERE mno=#{mno};
+				phone=#{phone},birth=#{birth},bkno=#{bankNum},acno=#{bankAccountNum} address=#{address},email=#{email}
+				WHERE bno=#{bno};
 			</otherwise>
 		</choose>
 
@@ -122,8 +123,7 @@
 		FROM account ac, member mb
 		WHERE ac.mno=mb.mno
 		AND id=#{id} AND password=#{password};
-	</select> 
-	
+	</select>
 	<select id="getPersonBs" resultType="business">
 		SELECT ac.mno as mno,
 		bs.bno, id, password, bname, phone, address, email, bz.typenum as bizType, bkno as bankNum,
@@ -159,7 +159,7 @@
 	</select>
 	
 	<!-- 업체프로필편집 자신의 매장을 찜한 회원의 수 -->
-	<select id="countLikeBs" resultType="_int">
+	<select id="countListBs" resultType="_int">
 		SELECT count(mno) FROM liked
 		WHERE bno=#{bno};
 	</select>
@@ -225,7 +225,7 @@
 		id=#{id}
 	</select>
 	<select id="joinCfm" resultType="account">
-		SELECT id, mname as name, bname as name
+		SELECT id, mname, bname
 		FROM account a
 		LEFT JOIN member m on a.mno=m.mno
 		LEFT JOIN business b on b.mno=a.mno

@@ -11,7 +11,6 @@
 
 	<context:component-scan
 		base-package="com.kkaekkt.biz" />
-
 	<!-- AOP 어노테이션 자동 인식 설정 -->
 	<aop:aspectj-autoproxy/>
 	
@@ -65,8 +64,6 @@
 	<bean class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSession"></constructor-arg>
 	</bean>
-	
-
 	<!--  이메일인증-->
 
 	<!-- navermail설정 -->
@@ -87,9 +84,6 @@
       </props>
      </property>
     </bean> 
-
-
-
 </beans>
 
 

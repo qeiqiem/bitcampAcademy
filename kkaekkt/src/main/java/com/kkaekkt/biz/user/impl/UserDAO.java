@@ -156,6 +156,7 @@ public class UserDAO {
 			return  mybatis.selectOne("UserDAO.avgGradeBs", vo);
 		}
 
+
 	
 
 	

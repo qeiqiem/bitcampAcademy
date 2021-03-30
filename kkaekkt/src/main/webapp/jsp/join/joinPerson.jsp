@@ -144,7 +144,7 @@
 
 								<div class="join_btn">
 									<button type="reset" name="reset">다시입력</button>
-									<button type="submit" name="join" id="join_submit" onclick="submit_check()"
+									<button type="submit" name="join" id="join_submit" onclick="submit()"
 										style="background-color: var(- -key-color);">가입하기</button>
 									<!-- <input type="reset" name="reset" value="다시입력">
                         <input type="submit" name="join" value="가입하기"> -->

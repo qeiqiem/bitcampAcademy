@@ -133,7 +133,7 @@ public class UserController {
 		userService.updateUser(vo);
 		BusinessVO personBs = userService.getUser(vo);
 		System.out.println("컨트롤러" + personBs);	
-		session.setAttribute("personBs", personBs);
+		session.setAttribute("person", personBs);
 		System.out.println("세션에 수정한 정보 올리기 완료");
 		Gson gson=new Gson();
 		String password=gson.toJson(vo.getPassword());
@@ -151,7 +151,7 @@ public class UserController {
 		vo.setLikedNum(userService.countLikeBs(vo));	// 프로필편집에서 찜 인원 뽑아와야해서 추가
 		vo.setEval(userService.avgGradeBs(vo));	// 프로필편집에서 찜 인원 뽑아와야해서 추가
 		System.out.println("컨트롤러" + vo);	
-		session.setAttribute("personBs", vo);
+		session.setAttribute("person", vo);
 		System.out.println("세션에 수정한 정보 올리기 완료");
 
 		return "/jsp/mypageBiz/combio.jsp";
@@ -217,7 +217,6 @@ public class UserController {
 
 	// 업체유저 로그인
 	@RequestMapping(value = "/loginBs.do", method = RequestMethod.POST)
-	@ResponseBody
 	public String Login(BusinessVO vo, HttpSession session) throws Exception {
 		try {
 			// 로그인 성공
@@ -234,7 +233,7 @@ public class UserController {
 				//session.setAttribute("personBs", null);
 				return "/jsp/login/loginBs.jsp";
 			} else if (vo.getBno() != 0) {
-				session.setAttribute("personBs", vo);
+				session.setAttribute("person", vo);
 			}
 			return "/jsp/indexCompany.jsp";
 		} catch (Exception e) {

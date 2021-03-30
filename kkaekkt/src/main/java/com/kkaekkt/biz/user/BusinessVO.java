@@ -9,15 +9,15 @@ import com.kkaekkt.biz.comm.LaundryVO;
 import com.kkaekkt.biz.comm.ScheduleVO;
 
 @SuppressWarnings("serial")
-public class BusinessVO{
+public class BusinessVO extends AccountVO{
 	private int bno;
-	private int mno;
-	private String id;
-	private String password;
+//	private int mno;
+//	private String id;
+//	private String password;
 	private String bname;
-	private String address;
-	private String phone;
-	private String email;
+//	private String address;
+//	private String phone;
+//	private String email;
 	private String comment;
 	private int bizType; //1. 일반 세탁소, 2. 코인 세탁소
 	private int bankNum;
@@ -78,47 +78,11 @@ public class BusinessVO{
 	public void setBno(int bno) {
 		this.bno = bno;
 	}
-	public int getMno() {
-		return mno;
-	}
-	public void setMno(int mno) {
-		this.mno = mno;
-	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
 	public String getBname() {
 		return bname;
 	}
 	public void setBname(String bname) {
 		this.bname = bname;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	public String getPhone() {
-		return phone;
-	}
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
 	}
 	public String getComment() {
 		return comment;
@@ -139,6 +103,12 @@ public class BusinessVO{
 	public void setBankAccountNum(String bankAccountNum) {
 		this.bankAccountNum = bankAccountNum;
 	}
+	public List<ScheduleVO> getScheduleList() {
+		return scheduleList;
+	}
+	public void setScheduleList(List<ScheduleVO> scheduleList) {
+		this.scheduleList = scheduleList;
+	}
 	public List<EquipmentVO> getEquipmentList() {
 		return equipmentList;
 	}
@@ -151,19 +121,12 @@ public class BusinessVO{
 	public void setLaundryList(List<LaundryVO> laundryList) {
 		this.laundryList = laundryList;
 	}
-	public List<ScheduleVO> getScheduleList() {
-		return scheduleList;
-	}
-	public void setScheduleList(List<ScheduleVO> scheduleList) {
-		this.scheduleList = scheduleList;
-	}
 	public String getSchedule() {
 		return schedule;
 	}
 	public void setSchedule(String schedule) {
 		this.schedule = schedule;
 	}
-
 	public String getEtc() {
 		return etc;
 	}
@@ -196,12 +159,14 @@ public class BusinessVO{
 	}
 	@Override
 	public String toString() {
-		return "BusinessVO [bno=" + bno + ", mno=" + mno + ", id=" + id + ", password=" + password + ", bname=" + bname
-				+ ", address=" + address + ", phone=" + phone + ", email=" + email + ", comment=" + comment + ", eCount=" +eCount
-				+ ", bizType=" + bizType + ", bankNum=" + bankNum + ", bankAccountNum=" + bankAccountNum + ", likedNum=" +likedNum + ", eval=" +eval
-				+ ", scheduleList=" + scheduleList + ", equipmentList=" + equipmentList  + ", etcList=" + etcList+", laundryList=" + laundryList
-				+ ", equipment=" + equipment + ", laundry=" + laundry + ", schedule=" + schedule + "]";
+		return "BusinessVO [bno=" + bno + ", bname=" + bname + ", comment=" + comment + ", bizType=" + bizType
+				+ ", bankNum=" + bankNum + ", bankAccountNum=" + bankAccountNum + ", scheduleList=" + scheduleList
+				+ ", equipmentList=" + equipmentList + ", laundryList=" + laundryList + ", etcList=" + etcList
+				+ ", commList=" + commList + ", equipment=" + equipment + ", laundry=" + laundry + ", schedule="
+				+ schedule + ", etc=" + etc + ", eval=" + eval + ", eCount=" + eCount + ", commCount=" + commCount
+				+ "]";
 	}
+	
 
 
 }
