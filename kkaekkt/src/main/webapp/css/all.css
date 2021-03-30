@@ -20,7 +20,7 @@ body {
 }
 
 .body_container {
-  /* position : relative�빐�빞 Footer 諛묒쑝濡� �궡�젮媛� */
+  /* position : relative해야 Footer 밑으로 내려감 */
   position: relative;
   top: 11vh;
   width: 100vw;
@@ -58,5 +58,4 @@ ul {
     opacity: 86%;
     z-index: 999;
     position: absolute;
-}
 }
