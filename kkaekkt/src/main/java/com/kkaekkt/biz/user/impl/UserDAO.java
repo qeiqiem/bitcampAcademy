@@ -151,13 +151,13 @@ public class UserDAO {
 		return mybatis.selectOne("UserDAO.joinCfm",vo);
 	}
 	// 업체 찜 당한 수
-		public int countLikeBs(BusinessVO vo) {
-			return  mybatis.selectOne("UserDAO.countLikeBs", vo);
-		}
+	public int countLikeBs(BusinessVO vo) {
+		return  mybatis.selectOne("UserDAO.countLikeBs", vo);
+	}
 	// 업체 평균 평점
-		public double avgGradeBs(BusinessVO vo) {
-			return  mybatis.selectOne("UserDAO.avgGradeBs", vo);
-		}
+	public double avgGradeBs(BusinessVO vo) {
+		return  mybatis.selectOne("UserDAO.avgGradeBs", vo);
+	}
 
 
 	
