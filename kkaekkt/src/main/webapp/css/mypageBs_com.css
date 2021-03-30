@@ -1,3 +1,6 @@
+button,select{
+    cursor: pointer;
+}
 .content {
     float:left;
     width: 75vw;
@@ -115,15 +118,6 @@ p{
     width: 100%;
     font-size: 14px;
 }
-.completeHeader{
-    width: 100%;
-    border:1px solid var(--gray-color);
-}
-.completeHeader tr th{
-    width: 12.5%;
-    border: none;
-    padding: 10px 0;
-}
 .completeList {
     width: 100%;
     border: 1px solid var(--gray-color);
@@ -136,13 +130,13 @@ p{
 }
 .completeList tr td{
     padding: 10px 0;
-    width: 12.5%;
+    width: 11%;
     border: none;
 }
-.completeList tr td:nth-child(8){
+.completeList tr td:nth-child(9){
     position: relative;
 }
-.completeList tr td:nth-child(8) button {
+.completeList tr td:nth-child(9) button {
     position: absolute;
     margin: auto;
     top:0;
@@ -169,7 +163,8 @@ p{
     background-color: white;
     border: 1px solid lightgray;
     border-radius: 10px;
-    box-shadow: 5px 12px 5px rgb(212, 212, 212);
+    /* box-shadow: 5px 12px 5px rgb(212, 212, 212); */
+    z-index: 1000;
 }
 #modal_close{
     float: right;
@@ -190,6 +185,17 @@ p{
 #modal_foot p{
     font-size: 20px;
     font-weight: bold;
+}
+#review_btn button{
+    margin: 15px 20px;
+    border: none;
+    width: 96px;
+    height: 34px;
+    border-radius: 18px;
+    cursor: pointer;
+}
+#review_btn button:hover{
+    background: rgba(143, 188, 255, 0.48);
 }
 .page_btn button {
   width: 30px;

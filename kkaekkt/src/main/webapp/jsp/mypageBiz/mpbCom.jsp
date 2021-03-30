@@ -15,10 +15,11 @@
 </head>
 
 <body>
+	<div id="mask"></div>
 	<jsp:include page="/jsp/header2.jsp"></jsp:include>
 	<div class="body_container">
 			<jsp:include page="sidebar_bs.jsp"></jsp:include>
-		<div class="content">
+			<div class="content">
 				<div class="content_header">
 					<p>전체 개수 <span></span>개</p>
 					<div class="searchBox">
@@ -32,7 +33,6 @@
 				</div>
 				<hr>
 				<div class="process">
-					
 				</div>
 				<div class="page_btn_container">
 					<ul class="page_btn">
@@ -50,20 +50,20 @@
 						<li class="page_nextBlock"><i class="fas fa-angle-double-right"></i></li>
 					</ul>
 				</div>
-		</div>
-		<div id="modal_container">
-			<button id="modal_close">x</button>
-			<div id="modal_bodycont">
-					<div id="modal_foot">
-						<p style="text-align: center;"></p>
-						<div id="review_btn">
-							<button id="closeBtn">돌아가기</button>
-							<button id="ok"></button>
-						</div>                
-					</div>
 			</div>
-		</div>
-	</div>	
+			<div id="modal_container">
+				<button id="modal_close">x</button>
+				<div id="modal_bodycont">
+						<div id="modal_foot">
+							<p style="text-align: center;"></p>
+							<div id="review_btn">
+								<button id="closeBtn">돌아가기</button>
+								<button id="ok"></button>
+							</div>                
+						</div>
+				</div>
+			</div>
+		</div>	
 	<script src="https://kit.fontawesome.com/2fc57dd2db.js"
 		crossorigin="anonymous"></script>
 	<script>

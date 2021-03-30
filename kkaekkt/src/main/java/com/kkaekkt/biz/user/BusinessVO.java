@@ -201,6 +201,7 @@ public class BusinessVO{
 				+ ", bizType=" + bizType + ", bankNum=" + bankNum + ", bankAccountNum=" + bankAccountNum + ", likedNum=" +likedNum + ", eval=" +eval
 				+ ", scheduleList=" + scheduleList + ", equipmentList=" + equipmentList  + ", etcList=" + etcList+", laundryList=" + laundryList
 				+ ", equipment=" + equipment + ", laundry=" + laundry + ", schedule=" + schedule + "]";
-	}	
+	}
+
 
 }

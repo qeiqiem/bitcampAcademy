@@ -17,6 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
+	<div id="mask"></div>
     <jsp:include page="/jsp/header2.jsp" ></jsp:include>
     <div class="body_container">
         <jsp:include page="sidebar_bs.jsp"></jsp:include>

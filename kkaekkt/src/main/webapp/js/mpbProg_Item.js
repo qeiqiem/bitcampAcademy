@@ -38,6 +38,7 @@ function initEvent() {
 		rsvObj.rsvNum=JSON.parse($('.processList tr').eq($(this)[0].value).children().eq(1)[0].innerHTML);
 		openModal('complete');
 	});
+    $("#mask").on("click", function() {  $("#modal_container").hide(); $("#mask").hide();});
 }
 function cancel(rsvObj) {
 	$.post({
@@ -52,6 +53,7 @@ function cancel(rsvObj) {
 }
 function modalClose() {
     $('#modal_container').hide();
+    $("#mask").hide();
 }
 function complete(rsvObj) {
 	$.post({
@@ -185,6 +187,7 @@ function initModal() {
     });
 }
 function openModal(button) {
+    $("#mask").show();
     $('#modal_container').show();
     if(button=='cancel'){//취소버튼이 눌려서 모달이 열렸다면
         $('#modal_foot p')[0].innerHTML='정말 취소하시겠습니까?';

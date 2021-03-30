@@ -1,14 +1,37 @@
 let fomatpw = 0;
-let formatemail = 1; 
+let formatemail = 1;
+let formatemailNum = 1;
+let formatAccNum = 1; 
 
 const regPw = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
 const regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
+const regAccount=/^[0-9,\-]{3,6}\-[0-9,\-]{2,6}\-[0-9,\-]{3,6}(\-[0-9]{1,3})?$/;
 
 const content = document.getElementsByClassName("content")[0];
 const bizMemberInfo = document.getElementsByClassName("bizMemberInfo")[0];
 let inputli = content.getElementsByTagName('input');
 let buttonli = bizMemberInfo.getElementsByTagName('button');
 let selectli = content.getElementsByTagName('select');
+
+//타이머 전역변수 지정
+function $ComTimer() {}
+$ComTimer.prototype = {
+    comSecond : ""
+    , timer : ""
+    , domId : ""
+    , fnTimer : function(){
+        var min = Math.floor(this.comSecond/60);
+        var sec = this.comSecond%60;
+        this.domId.innerText = `${min}:${sec<10?`0${sec}`:sec}`;
+        this.comSecond--;					// 1초씩 감소
+        if (this.comSecond < 0) {			// 시간이 종료 되었으면..
+            clearInterval(this.timer);		// 타이머 해제
+            alert("인증시간이 초과하였습니다. 다시 인증해주시기 바랍니다.");
+            mailCode=null;//인증코드 초기화
+        }
+    }
+}
+var AuthTimer = new $ComTimer();
 
 window.onload = function () {
     initSide();
@@ -153,9 +176,28 @@ window.onload = function () {
         }
 
     });
+    document.getElementById("bankAccNum").addEventListener('keyup', () => {
+        formatAccNum = 0;
+        let inputAcc = document.getElementById("bankAccNum");
+       if (!regAccount.test(inputAcc.value)) {
+            if (inputAcc.value.length == 0) {
+                document.getElementById("checkAcc").innerText
+                    = "";
+            } else {
+                document.getElementById("checkAcc").innerText
+                    = " 양식과 맞지 않습니다. >> 하이픈(-)을 포함하여 입력해주세요";
+            }
+        } else {
+            formatAccNum = 1;
+            document.getElementById("checkAcc").innerText
+                = "";
+
+        }
+    });
     // 이메일 입력형식 확인
     document.getElementById("email").addEventListener('keyup', () => {
         formatemail = 0;
+        formatemailNum = 0;
         let inputemail = document.getElementById("email");
        if (!regEmail.test(inputemail.value)) {
             if (inputemail.value.length == 0) {
@@ -265,7 +307,7 @@ function checkemailNum(){
     var inputCode = $(".mail_check_input").val();        // 입력코드    
 
     if(inputCode == code){
-        formatemail = 1;
+        formatemailNum = 1;
         $("#reqinput").text("");
         alert(" 인증번호가 일치합니다.");
         $(".mail_input").attr("disabled",true);
@@ -274,7 +316,7 @@ function checkemailNum(){
    
         $("#reqinput").attr("class", "correct");        
     } else {                                            // 일치하지 않을 경우
-        formatemail = 0;
+        formatemailNum = 0;
         $("#reqinput").text("");
         alert(" 인증번호를 다시 확인해주세요.");
         console.log(formatemail);
@@ -311,7 +353,7 @@ function submitCombio() {
         alert("연락처를 확인하세요.");
         return false;
     }
-    if ($("input[name='email']").val() == "" || formatemail != 1) {
+    if ($("input[name='email']").val() == "" || formatemail != 1 || formatemailNum !=1) {
         alert("이메일을 확인하세요.");
         $("input[name='email']").focus();
         console.log(formatemail);

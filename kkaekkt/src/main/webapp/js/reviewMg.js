@@ -163,9 +163,11 @@ function initEvent() {
         idx=$(this).val();
         delReply(idx);
     });   
+    $("#mask").on("click", function() {  $("#modal_container").hide(); $("#mask").hide();});
 }
 function modalClose() {
     $('#modal_container').hide();
+    $("#mask").hide();
 }
 function initModal() {
     /* 모달 생성 */
@@ -181,6 +183,7 @@ function initModal() {
     });
 }
 function openModal(button) {
+    $("#mask").show();
     $('#modal_container').show();
     if(button=='edit'){//취소버튼이 눌려서 모달이 열렸다면
         $('#modal_foot p')[0].innerHTML='정말 수정하시겠습니까?';
