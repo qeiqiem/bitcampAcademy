@@ -235,7 +235,7 @@ public class UserController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("로그인 실패");
-			return "/jsp/join/joinSelect.jsp"; // 추후 업체로그인 부분으로 변경예정
+			return "/jsp/login/loginBs.jsp"; // 추후 업체로그인 부분으로 변경예정
 		}
 	}
 

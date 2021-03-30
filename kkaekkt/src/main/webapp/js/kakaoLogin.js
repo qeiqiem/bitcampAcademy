@@ -33,8 +33,9 @@ $.ajax({
 		console.log(data);
 		var info = JSON.parse(data);
 		
-	if(info.email == null){
+	if(info.state == 0){
 		alert("회원정보 없음");
+		$('#email').val();
 	} //else {
 		//console.log(location.href);
 		//console.log(window.location.protocol + "/" + window.location.host + "/" + data);
