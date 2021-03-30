@@ -14,7 +14,7 @@
 <title>Document</title>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<link rel="stylesheet" href="/css/login.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/login.css">
 </head>
 <script>
 $(document).ready(function () {
@@ -40,7 +40,7 @@ $(document).ready(function () {
 			</button>
 
 			<div class="login">
-				<form action="/" method="post">
+				<form action="/loginPs.do" method="post">
 					<h3>로그인</h3>
 					<hr>
 					<div>
@@ -114,5 +114,5 @@ $(document).ready(function () {
 </body>
 <script src="/js/kakaoLogin.js"></script>
 <script src="/js/TestfacebookLogin.js"></script>
-<script src="/js/Test_login.js"></script>
+<!--  <script src="/js/Test_login.js"></script>-->
 </html>

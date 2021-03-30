@@ -215,7 +215,7 @@ public class UserController {
 
 	// 업체유저 로그인
 	@RequestMapping(value = "/loginBs.do", method = RequestMethod.POST)
-	@ResponseBody
+	//@ResponseBody
 	public String Login(BusinessVO vo, HttpSession session) throws Exception {
 		try {
 			// 로그인 성공
