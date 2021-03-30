@@ -23,8 +23,25 @@
 
 		<div class="head_right">
 			<input name="name" id="name" value="${person.bname } 님" readonly /> 
-			<a href=""><i class="fas fa-bell"></i></a> 
-			<a href=""><i class="fas fa-comments"></i></a> 
+			<div id="bellBox">
+				<i class="fas fa-bell"></i>
+				<span>●</span>
+				<div id="noticeBox">
+					<ul>
+						<li>[완료]⠀⠀주문번호22의<br> 세탁이 완료되었습니다.<i class="fas fa-times"></i></li>
+						<li>[완료] ⠀주문번호22의<br> 배송이 완료되었습니다.<i class="fas fa-times"></i></li>
+						<li>[결제] ⠀주문번호22의<br> 결제가 완료되었습니다.<i class="fas fa-times"></i></li>
+						<li>[취소] ⠀주문번호22가<br> 취소되었습니다.<i class="fas fa-times"></i></li>
+						<li>[답글] ⠀주문번호22의<br> 리뷰에 답글이 등록되었습니다.<i class="fas fa-times"></i></li>
+						<li>[답글] ⠀주문번호22의<br> 리뷰에 답글이 등록되었습니다.<i class="fas fa-times"></i></li>
+					</ul>
+					<button>내 알림 전체보기</button>
+				</div>
+			</div>
+			<div id="chatBox">
+				<i class="fas fa-comments"></i>
+				<span>●</span>
+			</div>
 			<a href="/logout.do">로그아웃</a> 
 			<a href="/jsp/faq.jsp">FAQ</a>
 		</div>
