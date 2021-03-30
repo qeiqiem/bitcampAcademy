@@ -159,4 +159,5 @@ public class UserDAO {
 	public double avgGradeBs(BusinessVO vo) {
 		return  mybatis.selectOne("UserDAO.avgGradeBs", vo);
 	}
+	
 }
