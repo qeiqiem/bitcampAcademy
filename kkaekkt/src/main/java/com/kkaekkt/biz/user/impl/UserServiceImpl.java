@@ -194,5 +194,15 @@ public class UserServiceImpl implements UserService {
 		return null;
 	}
 
+	@Override
+	public int getLikedBs(BusinessVO vo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
+
+
+
+
+	
 }
