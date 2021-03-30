@@ -347,7 +347,7 @@ function checkemailNum(){
 
 }
 function timerStart() {
-    AuthTimer.comSecond = 180;
+    AuthTimer.comSecond = 10;
     AuthTimer.timer =  setInterval(function(){AuthTimer.fnTimer()},1000);
     AuthTimer.domId = document.getElementById("timeout");
 }
