@@ -359,8 +359,6 @@ public class UserController {
 		}
 
 		String num = Integer.toString(checkNum);
-
 		return num;
-
 	}
 }

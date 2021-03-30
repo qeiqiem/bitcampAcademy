@@ -195,5 +195,4 @@ public class UserServiceImpl implements UserService {
 		return userDao.joinCfm(vo);
 	}
 
-	
 }

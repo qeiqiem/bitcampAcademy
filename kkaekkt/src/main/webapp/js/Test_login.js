@@ -1,30 +1,25 @@
-
-
-$(document).ready(function () {
-	$("#btn_login").on('click', function() {
-		loginChk();
-	})
-});
+function login(){
+	var Id = $("#id").val();
+	var Pw = $("#password").val();
 	
-function loginChk() {
-    $.ajax({
-        url: "/loginchk.do",
-        type: "POST",
-        data: {
-        	id:$("#id").val(),
-        	pw:$("#password").val()
-        },
-        success: function(data){
-        var user = JSON.parse(data);
-          console.log(user);
-          
-          if(data.state != 0){
-          	alert("환영!");
-          	
-          } 
-        },
-        error: function(){
-            alert("err");
-        }
-  	});
+	$.ajax({
+		type: "POST",
+		url: "/idchk.do",
+		data: {
+			Id: Id,
+			Pw: Pw
+		},
+		success: function(data){
+			console.log(data);
+			var test = JSON.parse(data);
+			if(data){
+				data = data.trim();
+			}
+				if(test.state == 0){
+					alert("아이디나 비밀번호를 다시 확인해주세요.");
+					$("#id").val();
+					$("#password").val();
+				}
+		}
+	});
 }
