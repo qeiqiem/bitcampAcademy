@@ -142,8 +142,7 @@ function initEvent() {
                 timeStop();
                 alert('메일 인증이 완료되었습니다.');
                 formatArray[3]=true;
-                console.log(formatArray[3]+": 이메일 3번 확인 완료");
-                $('#timeout').innerText="";
+                $('#timeout')[0].innerText="";
             }else if($('#timeout')[0].innerText=="0:00"){//시간이 다 됐는데 인증을 누른다면
                 alert('인증번호가 만료되었습니다.');
             }else if($('#timeout')[0].innerText.length!=0){//시간이 남았는데 코드가 일치하지 않는다면
@@ -334,7 +333,7 @@ function clicked() {
             for(var i=0; i<chkBox.size();i++) {
                 if(chkBox[i].checked) {//체크가 되어 있다면
                     if(!regPrice.test(priceBox[i].value)){//유효성에 맞지 않다면
-                        alert('금액엔 숫자만 입력해주세요.');
+                        alert('금액엔 숫자를 입력해주세요.');
                         priceBox[i].focus();
                         return;
                     }
@@ -355,7 +354,7 @@ function clicked() {
             for(var i=0; i<chkBox.size();i++) {
                 if(chkBox[i].checked) {
                     if(!regPrice.test(priceBox[i].value)){//유효성에 맞지 않다면
-                        alert('금액엔 숫자만 입력해주세요.');
+                        alert('금액엔 숫자를 입력해주세요.');
                         priceBox[i].focus();
                         return;
                     }

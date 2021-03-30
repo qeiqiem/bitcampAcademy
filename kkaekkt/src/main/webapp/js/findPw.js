@@ -1,6 +1,7 @@
 /* 인증번호 이메일 전송 */
 $(".mail_check_button").click(function () {
   console.log("이메일인증 클릭");
+
   var email = $(".mail_input").val(); // 입력한 이메일
 
   $.ajax({
@@ -9,8 +10,8 @@ $(".mail_check_button").click(function () {
     success: function (data) {
       //console.log("data : " + data);
       $(".mail_check_input").attr("disabled", false);
-      buttonli[6].disabled = false;
       $(".mail_check_input").attr("id", "mail_check_input_box_true");
+      // $("#checkemail").text(" 인증번호를 전송했습니다.");
       alert(" 인증번호를 전송했습니다.");
       code = data;
     },
@@ -21,12 +22,13 @@ $("#mail_check").click(function () {
   var inputCode = $(".mail_check_input").val(); // 입력코드
 
   if (inputCode == code) {
-    formatemail = 1;
     $("#reqinput").text("");
     alert(" 인증번호가 일치합니다.");
-    $(".mail_input").attr("disabled", true);
+    $("#reqinput").html(" 인증이 완료되었습니다.");
+    formatemail = 1;
+    //   $(".mail_check_input").attr("id", "mail_check_input_box_true");
     $(".mail_check_input").attr("disabled", true);
-    buttonli[6].disabled = true;
+    $("#mail_check").attr("disabled", true);
     console.log(formatemail);
 
     $("#reqinput").attr("class", "correct");

@@ -5,6 +5,7 @@ $(document).ready(function() {
 function init() {
     initEvent();
     initSide();
+    initModal();
 }
 function initEvent() {
     $('.page_next').click(function() {
@@ -43,6 +44,15 @@ function initEvent() {
         pageObj.currentPageNum=1;
         ajax(pageObj);
     });
+    $('.process').on('click','.cancelBtn',function() {//리스트의 취소 버튼을 누를 때
+		rsvObj.rsvNum=JSON.parse($('.processList tr').eq($(this)[0].value).children().eq(1)[0].innerHTML);
+        openModal('cancel');
+	});
+	$('.process').on('click','.completeBtn',function() {//리스트의 완료버튼을 누를 때
+		rsvObj.rsvNum=JSON.parse($('.processList tr').eq($(this)[0].value).children().eq(1)[0].innerHTML);
+		openModal('complete');
+	});
+    $("#mask").on("click", function() {  $('#modal_container').hide(); $("#mask").hide();});
 }
 function enter() {
     if(window.event.keyCode==13) {
@@ -84,6 +94,66 @@ function initPageBtn() {
         }
     }
 }
+function initModal() {
+    /* 모달 생성 */
+    $("#modal_close").click(function(){ //모달 X버튼 누를 때
+        modalClose();//모달 닫기
+    });
+    $("#closeBtn").click(function(event){ //모달 돌아가기 누를 때
+        event.preventDefault();
+        modalClose();//모달 닫기
+    });
+    $('#ok').click(function() {
+        console.log('허허');
+        operate();
+    });
+}
+function openModal(button) {
+    $("#mask").show();
+    $('#modal_container').show();
+    if(button=='cancel'){//취소버튼이 눌려서 모달이 열렸다면
+        $('#modal_foot p')[0].innerHTML='정말 취소하시겠습니까?';
+        $('#ok')[0].innerHTML='취소하기';
+    }else{//완료버튼이 눌려서 모달이 열렸다면
+        $('#modal_foot p')[0].innerHTML='정말 완료하시겠습니까?';
+        $('#ok')[0].innerHTML='완료하기';
+    }
+}
+function operate() {
+    if($('#ok')[0].innerHTML=='취소하기'){//버튼이 취소하기라면,
+        console.log('취소버튼누름');
+        cancel(rsvObj);
+    }else {//버튼이 완료하기라면
+        console.log('완료버튼누름');
+        complete(rsvObj);
+    }
+}
+function cancel(rsvObj) {
+	$.post({
+        url:"/cancel.do",
+        data:rsvObj,
+        success: function() {
+			ajax(pageObj);
+            alert('주문이 정상적으로 취소되었습니다.');
+            modalClose();
+		}
+	});
+}
+function modalClose() {
+    $('#modal_container').hide();
+    $("#mask").hide();
+}
+function complete(rsvObj) {
+	$.post({
+		url:"/complete.do",
+		data:rsvObj,
+		success: function() {
+			ajax(pageObj);
+            alert('작업이 완료되었습니다.');
+            modalClose();
+		}
+	});
+}
 function initPageObj(data) {
     pageObj.blockLastPageNum=data.blockLastPageNum;
     pageObj.blockFirstPageNum=data.blockFirstPageNum;
@@ -109,35 +179,67 @@ function ajax(pageObj) { //ajax로 리스트 받아오기
     });
 }
 
-function printlist(list) {
+function printlist(list) {//리팩토링 무조건 필요함 뇌빼고 작업한 부분(3.29-태연)
     var rsvType=true;
-    $('.process p').remove();
-    $('.processList').remove();
+    var processHeader ='<table class="processHeader">'+  //세탁완료 헤더
+                            '<tr>'+
+                                '<th>주문일</th>'+
+                                '<th>주문번호</th>'+
+                                '<th>주문자</th>'+
+                                '<th>상품명</th>'+
+                                '<th>개수</th>'+
+                                '<th>금액</th>'+
+                                '<th>처리상태</th>'+
+                                '<th>남은일자</th>'+
+                                '<th>상태변경</th>'+
+                            '</tr>'+
+                        '</table>';
+    var completeHeader ='<table class="processHeader">'+  //전달완료 헤더
+                            '<tr>'+
+                                '<th>주문일</th>'+
+                                '<th>주문번호</th>'+
+                                '<th>주문자</th>'+
+                                '<th>상품명</th>'+
+                                '<th>개수</th>'+
+                                '<th>금액</th>'+
+                                '<th>처리상태</th>'+
+                                '<th>완료날짜</th>'+
+                                '<th>주문전표</th>'+
+                            '</tr>'+
+                        '</table>';
+    $('.process').children().remove();
     $.each(list, function(key,value) {
+        var className=(value.state=='세탁 완료'?'processList':'completeList');
         var laundry="";
         var count="";
         var price="";
+        var state="";
         $.each(value.laundryList,function(idx,val) {
             laundry+=val.laundry;
             count+=val.count;
             price+=val.price;
+            state+=val.state;
             if(value.laundryList.length!=idx+1) { //마지막이 아니라면 <br>붙이기
                 laundry+='<br>';
                 count+='<br>';
                 price+='<br>';
+                state+='<br>';
             }
         });
         if(key==0&&value.state=='세탁 완료') {
-            $('.process').prepend("<p>세탁 완료</p>");
+            $('.process').prepend("<p>세탁 완료</p>");//세탁완료 라벨 출력
+            $('.process').append(processHeader);//세탁완료 헤더 출력
         }else if(key==0&&value.state=='전달 완료') {
             rsvType=false;
-            $('.process').prepend("<p>전달 완료</p>");
+            $('.process').prepend("<p>전달 완료</p>");//전달완료 라벨 출력
+            $('.process').append(completeHeader);//전달완료 헤더 출력
         }else if(rsvType&&value.state=='전달 완료') {
             rsvType=false;
-            $('.process').append('<p>전달 완료</p>');
+            $('.process').append('<p>전달 완료</p>');//전달완료 라벨 출력
+            $('.process').append(completeHeader);//전달완료 헤더 출력
         }
         $('.process').append(
-            '<table class="processList">' +
+            '<table class="'+className+'">' +
                 '<tr>' +
                     '<td>'+value.rsvDate+'</td>'+
                     '<td>'+value.rsvNum+'</td>'+
@@ -145,8 +247,15 @@ function printlist(list) {
                     '<td>'+laundry+'</td>'+
                     '<td>'+count+'</td>'+
                     '<td>'+price+'</td>'+
-                    '<td>'+value.dDate+'</td>'+
-                    '<td><button>출력하기</button></td>'+
+                    '<td>'+state+'</td>'+
+                    (value.state=='세탁 완료'?
+                    (value.dDay<0?
+                    '<td style="color:red;">D+'+value.dDay*-1+'</td>'
+                    :'<td>D'+value.dDay*-1+'</td>')+
+                    '<td><div><button class="cancelBtn" value='+key+'>취소하기</button>'+
+					'<button class="completeBtn" value='+key+'>작업완료</button></div></td>'
+                    :'<td>'+value.dDate+'</td>'+
+                    '<td><button>출력하기</button></td>')+
                 '</tr>'+
             '</table>'
         );

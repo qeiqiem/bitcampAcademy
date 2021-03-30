@@ -54,6 +54,11 @@ public class ReservationController {
 	public void cancelRsv(LaundryVO vo) {		
 		reservationService.cancel(vo);
 	}
+	@RequestMapping(value="/washingDone.do", method=RequestMethod.POST)
+	@ResponseBody
+	public void washingDone(LaundryVO vo) {
+		reservationService.washingDone(vo);
+	}
 	@RequestMapping(value="/complete.do", method=RequestMethod.POST)
 	@ResponseBody
 	public void completeRsv(LaundryVO vo) {

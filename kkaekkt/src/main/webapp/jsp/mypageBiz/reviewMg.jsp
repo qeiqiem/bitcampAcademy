@@ -17,6 +17,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
+	<div id="mask"></div>
     <jsp:include page="/jsp/header2.jsp" ></jsp:include>
     <div class="body_container">
         <jsp:include page="sidebar_bs.jsp"></jsp:include>
@@ -76,7 +77,19 @@
 					</ul>
 				</div>
             </div>
-        </div>
+			<div id="modal_container">
+				<button id="modal_close">x</button>
+				<div id="modal_bodycont">
+						<div id="modal_foot">
+							<p style="text-align: center;"></p>
+							<div id="review_btn">
+								<button id="closeBtn">돌아가기</button>
+								<button id="ok"></button>
+							</div>                
+						</div>
+				</div>
+			</div>
+	</div>
 	<script>
 		var pageObj = {
 			bno:1,

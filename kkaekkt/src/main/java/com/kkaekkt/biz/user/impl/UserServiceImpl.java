@@ -47,8 +47,12 @@ public class UserServiceImpl implements UserService {
 		return vo;
 	}
 	@Override
-	public int getLikedBs(BusinessVO vo) {
-		return userDao.countListBs(vo);
+	public int countLikeBs(BusinessVO vo) {
+		return userDao.countLikeBs(vo);
+	}
+	@Override
+	public double avgGradeBs(BusinessVO vo) {
+		return userDao.avgGradeBs(vo);
 	}
 
 	@Override
@@ -87,6 +91,14 @@ public class UserServiceImpl implements UserService {
 	public void deleteUser(BusinessVO vo) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	// 로그인 들
+	
+	@Override
+	public int loginchk(AccountVO vo) {
+		System.out.println("로그인 전 체크하는 service 옴");
+		return userDao.loginchk(vo);
 	}
 
 	@Override

@@ -60,6 +60,12 @@ public class UserDAO {
 	public int countList(BusinessListVO vo) {
 		return mybatis.selectOne("UserDAO.countList", vo);
 	}
+	
+	// 로그인 전 체크
+	public int loginchk(AccountVO vo) {
+		System.out.println("mybatis로 기능처리 아이디나 비밀번호 화인");
+		return mybatis.selectOne("UserDAO.loginchk", vo);
+	}
 
 	// 일반 로그인
 		public PersonVO getUserPs(PersonVO vo) {
@@ -144,8 +150,13 @@ public class UserDAO {
 	public AccountVO joinCfm(AccountVO vo) {
 		return mybatis.selectOne("UserDAO.joinCfm",vo);
 	}
-	public int countListBs(BusinessVO vo) {
-		return  mybatis.selectOne("UserDAO.countListBs", vo);
+	// 업체 찜 당한 수
+	public int countLikeBs(BusinessVO vo) {
+		return  mybatis.selectOne("UserDAO.countLikeBs", vo);
+	}
+// 업체 평균 평점
+	public double avgGradeBs(BusinessVO vo) {
+		return  mybatis.selectOne("UserDAO.avgGradeBs", vo);
 	}
 
 }

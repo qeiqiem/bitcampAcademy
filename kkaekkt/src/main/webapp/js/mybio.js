@@ -282,20 +282,7 @@ $("#mail_check").click(function(){
 
 }
 
-function updateajax() {
-    $.ajax({
-        url: '/updatePs.do',
-        type: 'post',
-        dataType: 'json',
-        data: {
-            mno: $('#mno').val(),
-            password: $('#newpwd').val(),
-        },
-        success: function (data) {
-            alert("변경완료");
-        }
-    });
-}
+
 function initSide() {
     $('.side button').eq(2).addClass("side_select");
 }

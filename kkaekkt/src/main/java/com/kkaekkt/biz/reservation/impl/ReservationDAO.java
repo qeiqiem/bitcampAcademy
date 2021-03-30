@@ -20,11 +20,11 @@ public class ReservationDAO {
 	public void insertRsv(ReservationVO vo) {
 
 	}
-	public void cancel(LaundryVO vo) {
-		mybatis.update("reservationDAO.cancel",vo);
+	public void cancelRsv(LaundryVO vo) {
+		mybatis.update("reservationDAO.cancelRsv",vo);
 	}
-	public void complete(LaundryVO vo) {
-		mybatis.update("reservationDAO.complete",vo);
+	public void doneLaundry(LaundryVO vo) {
+		mybatis.update("reservationDAO.doneLaundry",vo);
 	}
 	public void likeOn(ReservationVO vo) {
 		mybatis.insert("reservationDAO.likeOn",vo);
@@ -84,4 +84,24 @@ public class ReservationDAO {
 	public int getOrderNum(CommVO vo) {
 		return mybatis.selectOne("reservationDAO.getOrderNum",vo);
 	}
+	public int chkState(LaundryVO vo) {
+		return mybatis.selectOne("reservationDAO.chkLaundryStateTotal",vo);
+	}
+	public int chkStateComplete(LaundryVO vo) {
+		return mybatis.selectOne("reservationDAO.chkLaundryStateComplete",vo);
+	}
+	public void cancelLaundry(LaundryVO vo) {
+		mybatis.update("reservationDAO.cancelLaundry",vo);
+	}
+	public void laundryDone(LaundryVO vo) {
+		mybatis.update("reservationDAO.laundryDone",vo);
+	}
+	public void rsvDone(LaundryVO vo) {
+		mybatis.update("reservationDAO.rsvDone",vo);
+		
+	}
+	public void complete(LaundryVO vo) {
+		mybatis.update("reservationDAO.completeRsv",vo);
+	}
+	
 }

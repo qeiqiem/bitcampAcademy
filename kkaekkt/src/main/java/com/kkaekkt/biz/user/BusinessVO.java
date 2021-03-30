@@ -34,6 +34,44 @@ public class BusinessVO extends AccountVO{
 	private double eval; //평가
 	private int eCount; //평가 개수
 	private int commCount; //댓글 개수
+	private int likedNum;		// 찜당한 수
+	
+	public int getMcount() {
+		return eCount;
+	}
+	public void setMcount(int mcount) {
+		this.eCount = mcount;
+	}
+	public List<CommVO> getCommList() {
+		return commList;
+	}
+	public void setCommList(List<CommVO> commList) {
+		this.commList = commList;
+	}
+	public List<EtcVO> getEtcList() {
+		return etcList;
+	}
+	public void setEtcList(List<EtcVO> etcList) {
+		this.etcList = etcList;
+	}
+	public String getLaundry() {
+		return laundry;
+	}
+	public void setLaundry(String laundry) {
+		this.laundry = laundry;
+	}
+	public int getBankNum() {
+		return bankNum;
+	}
+	public void setBankNum(int bankNum) {
+		this.bankNum = bankNum;
+	}
+	public String getEquipment() {
+		return equipment;
+	}
+	public void setEquipment(String equipment) {
+		this.equipment = equipment;
+	}
 	public int getBno() {
 		return bno;
 	}
@@ -58,12 +96,7 @@ public class BusinessVO extends AccountVO{
 	public void setBizType(int bizType) {
 		this.bizType = bizType;
 	}
-	public int getBankNum() {
-		return bankNum;
-	}
-	public void setBankNum(int bankNum) {
-		this.bankNum = bankNum;
-	}
+
 	public String getBankAccountNum() {
 		return bankAccountNum;
 	}
@@ -87,30 +120,6 @@ public class BusinessVO extends AccountVO{
 	}
 	public void setLaundryList(List<LaundryVO> laundryList) {
 		this.laundryList = laundryList;
-	}
-	public List<EtcVO> getEtcList() {
-		return etcList;
-	}
-	public void setEtcList(List<EtcVO> etcList) {
-		this.etcList = etcList;
-	}
-	public List<CommVO> getCommList() {
-		return commList;
-	}
-	public void setCommList(List<CommVO> commList) {
-		this.commList = commList;
-	}
-	public String getEquipment() {
-		return equipment;
-	}
-	public void setEquipment(String equipment) {
-		this.equipment = equipment;
-	}
-	public String getLaundry() {
-		return laundry;
-	}
-	public void setLaundry(String laundry) {
-		this.laundry = laundry;
 	}
 	public String getSchedule() {
 		return schedule;
@@ -141,6 +150,12 @@ public class BusinessVO extends AccountVO{
 	}
 	public void setCommCount(int commCount) {
 		this.commCount = commCount;
+	}
+	public int getLikedNum() {
+		return likedNum;
+	}
+	public void setLikedNum(int likedNum) {
+		this.likedNum = likedNum;
 	}
 	@Override
 	public String toString() {

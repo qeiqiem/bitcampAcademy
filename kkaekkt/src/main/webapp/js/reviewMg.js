@@ -1,6 +1,7 @@
 $(document).ready(function() {
     initSide();
     initEvent();
+    initModal();
     ajax(pageObj);
 });
 function ajax(pageObj) {
@@ -18,7 +19,7 @@ function ajax(pageObj) {
         }
     });
 }
-function printList(list) {//기본틀! 백엔드 작업 후 수정예정
+function printList(list) {//리뷰 리스트 출력
     $('.reviewList').remove();
     $('.replyList').remove();
     $.each(list,function(key,value) {
@@ -59,8 +60,9 @@ function editAjax(pageObj) {
         url:'/updateComm.do',
         data:pageObj,
         success:function() {
-            console.log('편집완료');
+            $('#comments').remove();
             ajax(pageObj);
+            alert('답글이 수정되었습니다.');
         }
     });
 }
@@ -70,8 +72,9 @@ function insertAjax(pageObj) {
         url:'/regitComm.do',
         data:pageObj,
         success:function() {
-            console.log('등록완료');
+            $('#comments').remove();
             ajax(pageObj);
+            alert('답글이 등록되었습니다.');
         }
     });
 }
@@ -81,8 +84,8 @@ function delAjax(pageObj) {
         url:'/deleteCommAb.do',
         data:pageObj,
         success:function() {
-            console.log('삭제완료');
             ajax(pageObj);//리스트 재출력
+            alert('답글이 삭제되었습니다.');
         }
     });
 }
@@ -160,6 +163,44 @@ function initEvent() {
         idx=$(this).val();
         delReply(idx);
     });   
+    $("#mask").on("click", function() {  $("#modal_container").hide(); $("#mask").hide();});
+}
+function modalClose() {
+    $('#modal_container').hide();
+    $("#mask").hide();
+}
+function initModal() {
+    /* 모달 생성 */
+    $("#modal_close").click(function(){ //모달 X버튼 누를 때
+        modalClose();//모달 닫기
+    });
+    $("#closeBtn").click(function(event){ //모달 돌아가기 누를 때
+        event.preventDefault();
+        modalClose();//모달 닫기
+    });
+    $('#ok').click(function() {
+        operate();
+    });
+}
+function openModal(button) {
+    $("#mask").show();
+    $('#modal_container').show();
+    if(button=='edit'){//취소버튼이 눌려서 모달이 열렸다면
+        $('#modal_foot p')[0].innerHTML='정말 수정하시겠습니까?';
+        $('#ok')[0].innerHTML='수정하기';
+    }else{//삭제버튼이 눌려서 모달이 열렸다면
+        $('#modal_foot p')[0].innerHTML='정말 삭제하시겠습니까?';
+        $('#ok')[0].innerHTML='삭제하기';
+    }
+}
+function operate() {
+    if($('#ok')[0].innerHTML=='수정하기'){//버튼이 수정하기라면,   
+        modalClose();
+        editAjax(pageObj);
+    }else {//버튼이 삭제하기라면
+        modalClose();
+        delAjax(pageObj);
+    }
 }
 function enter() {
     if(window.event.keyCode==13) {
@@ -243,6 +284,7 @@ function initPageObj(data) {
 function printTotalPost(totalPostCount) {
     $('.content_header span')[0].innerHTML=totalPostCount;
 }
+
 function toDay() {//오늘 날짜 출력
     var date=new Date();
     var mm=date.getMonth()+1;
@@ -250,15 +292,14 @@ function toDay() {//오늘 날짜 출력
     var today=mm+'월 '+dd+', '+date.getFullYear();
     return today;
 }
-function delReply(idx) {//답글 삭제 (리팩토링 완료 - 03.25)
+function delReply(idx) {//답글 삭제 (리팩토링 완료 - 03.25 / 모달 추가 완료 - 03.29)
     pageObj.rsvNum=JSON.parse($('#reply'+idx+' .cell5')[0].innerHTML);//주문번호 담기
-    delAjax(pageObj);
+    openModal('delete');
 }
 function editReply(idx) {//답글 수정 메서드
     pageObj.rsvNum=JSON.parse($('#reply'+idx+' .cell5')[0].innerHTML);//주문번호 담기
     pageObj.content=$('#commentBox'+idx).val();//답글 내용 담기
-    editAjax(pageObj);
-    $('#comments'+idx).remove();
+    openModal('edit');
 }
 function editFormPrint(idx) {//답글 수정폼 출력
     var content=$('#reply'+idx+' .replyCell')[0].innerHTML.replace("답글:",'');
@@ -267,23 +308,27 @@ function editFormPrint(idx) {//답글 수정폼 출력
 }
 function submitReply(idx) {//답글 등록
     pageObj.rsvNum=JSON.parse($('#review'+idx+' .cell5')[0].innerHTML);//주문번호 담기
+    pageObj.eval=JSON.parse($('#review'+idx+' .cell3')[0].innerHTML.charAt(0));//평점 담기
     pageObj.content=$('#commentBox'+idx).val();//답글 내용 담기
     insertAjax(pageObj);
-    $('#comments'+idx).remove();
+    $('#comments').remove();
 }
-function cancelReply(idx) {//답글 취소(등록폼과 수정폼 둘로 나뉜다.)
-    $('#comments'+idx).remove();//답글폼을 지운다
-    $('#reply'+idx).show();//답글행 보이기(없음 말구)
-    if(idx!=0) {//첫번째 행이 아닐 때 버튼 수정
-        if($('#reply'+idx)[0]==undefined) {//수정이 아닌, 등록일 때
-            btnChange(idx,'답글',false);//답글버튼 활성화
-        }else {//수정일 때
-            btnChange(idx-1,'답글완료',true);//답글완료 전환
-        }
+function cancelReply() {
+    var type = $('#comments button').eq(1).attr('class');//폼의 타입을 체크한다.(1. 등록 / 2. 수정)
+    var idx= JSON.parse($('#comments button')[1].value);//폼의 인덱스를 추출한다.
+    if(type=='submit'){//등록 폼의 경우
+        btnChange(idx,'답글',false);//리뷰의 버튼을 답글버튼으로 전환한다.
+    }else {//수정 폼의 경우
+        btnChange(idx-1,'답글완료',true);//리뷰의 버튼을 답글완료로 전환한다.
+        $('#reply'+idx).show();//숨겼던 기존의 답글을 다시 띄운다.
     }
+    $('#comments').remove();//폼을 없앤다
 }
 function printReplyForm(idx,content,type){//답글 폼 출력 (인덱스,텍스트내용,등록타입-INSERT,UPDATE)
     console.log('답글 폼 출력');
+    if($('#comments').length==1){//답글 폼이 기존에 존재하는 경우 취소버튼을 누르는 것과 동일하게 진행한다.
+        cancelReply();
+    }
     //수정일 때와 등록일 때는 다르다. 수정일 때는 본인의 주문번호를 끌어다 쓰고,
     //등록일 때는 리뷰의 주문번호를 끌어다 써야 한다.
     //수정과 등록의 구분은 type으로 한다.
@@ -296,7 +341,7 @@ function printReplyForm(idx,content,type){//답글 폼 출력 (인덱스,텍스�
         var id='#reply'+idx;
         btnChange(idx-1,'작성중',true);
     }
-    $('<div class="comments" id="comments'+idx+'">'+
+    $('<div class="comments" id="comments">'+
         '<div class="comments_header">'+
             '<p><span id="rsvno">'+rsvno+'</span>번 주문리뷰에 대한 답글</p>'+
             '<button class="cancel" value='+idx+'>취소</button>'+

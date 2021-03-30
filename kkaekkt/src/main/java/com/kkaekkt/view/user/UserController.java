@@ -73,7 +73,6 @@ public class UserController {
 //		return "/jsp/join/joinConfirmed.jsp";
 		return "/joinCfm.do";
 	}
-	
 
 	// 회원가입-업체
 	@RequestMapping(value = "/joinBs.do", method = RequestMethod.POST)
@@ -92,9 +91,8 @@ public class UserController {
 		return "/jsp/join/joinConfirmed.jsp";
 	}
 
-
 	// 개인 프로필 편집 (비밀번호 변경)
-	@RequestMapping(value="/updatePspwd.do", method=RequestMethod.POST)
+	@RequestMapping(value = "/updatePspwd.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String UpdatePw(PersonVO vo, HttpSession session) {
 		System.out.println(vo);
@@ -110,6 +108,7 @@ public class UserController {
 		return password;
 
 	}
+
 	// 개인 프로필 편집 - 세션
 	@RequestMapping(value = "/updatePs.do", method = RequestMethod.POST)
 	public String Update(PersonVO vo, HttpSession session) {
@@ -122,8 +121,9 @@ public class UserController {
 
 		return "/jsp/mypageUser/mybio.jsp";
 	}
-	// 업체  프로필 편집 (비밀번호 변경)
-	@RequestMapping(value="/updateBspwd.do", method=RequestMethod.POST)
+
+	// 업체 프로필 편집 (비밀번호 변경)
+	@RequestMapping(value = "/updateBspwd.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String UpdatePw(BusinessVO vo, HttpSession session) {
 		System.out.println(vo);
@@ -145,9 +145,11 @@ public class UserController {
 	public String Update(BusinessVO vo, HttpSession session) {
 		System.out.println(vo);
 		userService.updateUser(vo);
-		BusinessVO personBs = userService.getUser(vo);
-		System.out.println("컨트롤러" + personBs);
-		session.setAttribute("personBs", personBs);
+		vo = userService.getUser(vo);
+		vo.setLikedNum(userService.countLikeBs(vo)); // 프로필편집에서 찜 인원 뽑아와야해서 추가
+		vo.setEval(userService.avgGradeBs(vo)); // 프로필편집에서 찜 인원 뽑아와야해서 추가
+		System.out.println("컨트롤러" + vo);
+		session.setAttribute("personBs", vo);
 		System.out.println("세션에 수정한 정보 올리기 완료");
 
 		return "/jsp/mypageBiz/combio.jsp";
@@ -176,15 +178,14 @@ public class UserController {
 			// 로그인 성공
 			System.out.println("로그인처리");
 
-			// vo = userService.getUser(vo);
+			vo = userService.getUser(vo);
 			PersonVO user = userService.getUser(vo);
 
 			System.out.println(vo); // 뭐가 담기는 지 보려했다
 
 			if (user.getMno() == 0) {
 				System.out.println("회원정보없음");
-				// session.setAttribute("person", null);
-				return "/jsp/join/joinNoPs.jsp";
+				return "/jsp/login/loginPs.jsp";
 			} else if (user.getMno() != 0) {
 				session.setAttribute("person", vo);
 			}
@@ -193,19 +194,21 @@ public class UserController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("로그인 실패");
-			return "/jsp/join/joinNoPs.jsp";
+			return "/jsp/login/loginPs.jsp";
 		}
 	}
 
 	// 업체유저 로그인
 	@RequestMapping(value = "/loginBs.do", method = RequestMethod.POST)
+	@ResponseBody
 	public String Login(BusinessVO vo, HttpSession session) throws Exception {
 		try {
 			// 로그인 성공
 			System.out.println("로그인처리");
 
 			vo = userService.getUser(vo);
-			vo.seteCount(userService.getLikedBs(vo));	// 프로필편집에서 찜 인원 뽑아와야해서 추가
+			vo.setLikedNum(userService.countLikeBs(vo)); // 프로필편집에서 찜 인원 뽑아와야해서 추가
+			vo.setEval(userService.avgGradeBs(vo)); // 프로필편집에서 찜 인원 뽑아와야해서 추가
 
 			System.out.println(vo); // 뭐가 담기는 지 보려했다
 
@@ -224,31 +227,27 @@ public class UserController {
 		}
 	}
 
-
 	// 소셜로그인
-	   @RequestMapping(value = "/loginSNS.do", method = RequestMethod.POST)
-	      public @ResponseBody String kakaologin(PersonVO vo, HttpSession session, HttpServletResponse response){
-	         System.out.println("카카오 로그인 컨트롤러 접속");
-	            // 로그인 성공했을 때
-	            vo = userService.method(vo);
-	            
-	            PersonVO user = vo;
-	            System.out.println(vo + "vo카카오"); // 카카오 로그인시 vo 확인
-	            System.out.println("user카카2" + user);
+	@RequestMapping(value = "/loginSNS.do", method = RequestMethod.POST)
+	public @ResponseBody String kakaologin(PersonVO vo, HttpSession session, HttpServletResponse response) {
+		System.out.println("카카오 로그인 컨트롤러 접속");
+		// 로그인 성공했을 때
+		vo = userService.method(vo);
 
-	            if (user.getMno() != 0) {
-	               session.setAttribute("person", user);
-	               System.out.println("user정보 " + user);
-	               System.out.println("vo정보" + vo);
-	               return "/jsp/indexPerson.jsp";
-	            }else {
-	               System.out.println("카카오 로그인 실패");
-	               return "/jsp/login/loginPs";
-	            }
-	   
-	            //return "/jsp/indexPerson.jsp";
-	      }
-	
+		PersonVO user = vo;
+		System.out.println(vo + "vo카카오"); // 카카오 로그인시 vo 확인
+		System.out.println("user카카2" + user);
+
+		if (user.getMno() != 0) {
+			session.setAttribute("person", user);
+			System.out.println("user정보 " + user);
+			System.out.println("vo정보" + vo);
+			return "/jsp/indexPerson.jsp";
+		} else {
+			System.out.println("카카오 로그인 실패");
+			return "/jsp/login/loginPs";
+		}
+	}
 
 	// 로그아웃
 	@RequestMapping("/logout.do")
@@ -292,7 +291,7 @@ public class UserController {
 		}
 		return "/jsp/mypageBizCoin/coinspec.jsp";
 	}
-	
+
 	// 아이디찾기
 	@RequestMapping(value = "/findId.do", method = RequestMethod.POST)
 	public String findId(AccountVO vo, Model model) {
@@ -303,12 +302,13 @@ public class UserController {
 	}
 
 	// 비밀번호찾기
-	@RequestMapping(value="/findPw.do", method=RequestMethod.POST)
+	@RequestMapping(value = "/findPw.do", method = RequestMethod.POST)
 	public String findPw(AccountVO vo, Model model) {
 		System.out.println(vo);
 		model.addAttribute("userPw", userService.findPw(vo));
- 		return "/jsp/login/findPwSendMail.jsp";
- 	}
+		return "/jsp/login/findPwSendMail.jsp";
+	}
+
 	/* 이메일 인증 */
 	@RequestMapping(value = "/mailCheck.do", method = RequestMethod.GET)
 	@ResponseBody

@@ -25,13 +25,13 @@
                             <span id="bname" readonly></span>님 반갑습니다.
                         </li>
                         <li id="title_right">
-                            찜 <span id="likeNum">140</span>명/ 내 평점 <span id="avglike">4.7</span>
-                            <sapn id="starIcon"><i class="fas fa-star"></i></sapn>
+                            찜 <span id="likeNum"></span>명 / 내 평점 <span id="avglike"></span>
+                            <label id="starIcon"></label>
                         </li>
                     </ul>
                 </div>
                 <hr>
-                <form action="" method="POST" name="mybio" onsubmit="return submitCombio();">
+                <form action="/updateBs.do" method="POST">
                     <div id="bizform">
                     <div class="bizinfo">
                         업체정보
@@ -46,8 +46,8 @@
                                 <td id="bizname"></td>
                                 <td name="bno"></td>
                                 <td>
-                                    <select id="bankNum">
-                                        <option value=0>선택</option>
+                                    <select name="bankNum" id="bankNum">
+                                        <option value=0></option>
                                         <option value=1>국민</option>
                                         <option value=2>신한</option>
                                         <option value=3>하나</option>
@@ -56,7 +56,8 @@
                                         <option value=6>NH농협은행</option>
                                         <option value=7>카카오뱅크</option>
                                     </select>
-                                    <input type="text" id="bankAccNum" placeholder="123-1263-1225-11">
+                                    <input type="text" name="bankAccountNum" id="bankAccNum" > <br>
+                                    <label id="checkAcc"></label>
 
                                 </td>
                             </tr>
@@ -145,7 +146,7 @@
                                     <script src="/js/adress.js"></script>
                                 </div>
                     </div>
-                    </div>
+                </div>
                             <br>
                             <div id="btn_update">
                                 <button type="button" onclick="" id="updateBio">수정하기</button>
@@ -164,7 +165,8 @@
             var pageObj={//세션에서 정보를 받아오는건 독립된 js파일에서 불가능, jsp 내에서만 가능하기 때문에 여기서 값을 받아준다.
                 bno:'${sessionScope.personBs.bno}',
                 mno:'${sessionScope.personBs.mno}',
-                eCount:'${sessionScope.personBs.eCount}',
+                likedNum:'${sessionScope.personBs.likedNum}',
+                eval:'${sessionScope.personBs.eval}',
                 bname:'${sessionScope.personBs.bname}',
                 bankNum:'${sessionScope.personBs.bankNum}',
                 bankAccNum:'${sessionScope.personBs.bankAccountNum}',
