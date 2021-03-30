@@ -6,6 +6,7 @@ let formatAccNum = 1;
 const regPw = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
 const regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
 const regAccount=/^[0-9,\-]{3,6}\-[0-9,\-]{2,6}\-[0-9,\-]{3,6}(\-[0-9]{1,3})?$/;
+const regMailCode =/^[0-9]{6}$/;
 
 const content = document.getElementsByClassName("content")[0];
 const bizMemberInfo = document.getElementsByClassName("bizMemberInfo")[0];
@@ -22,7 +23,7 @@ $ComTimer.prototype = {
     , fnTimer : function(){
         var min = Math.floor(this.comSecond/60);
         var sec = this.comSecond%60;
-        this.domId.innerText = `${min}:${sec<10?`0${sec}`:sec}`;
+        this.domId.innerText = ` ${min}:${sec<10?`0${sec}`:sec}`;
         this.comSecond--;					// 1초씩 감소
         if (this.comSecond < 0) {			// 시간이 종료 되었으면..
             clearInterval(this.timer);		// 타이머 해제
@@ -293,9 +294,10 @@ function emailApi(){
             success:function(data){
                 //console.log("data : " + data);
                 $(".mail_check_input").attr("disabled",false);
-                document.getElementById("btn_checkemail").disabled = false;
+                document.getElementById("mail_check").disabled = false;
                 $(".mail_check_input").attr("id", "mail_check_input_box_true");
                 alert(" 인증번호를 전송했습니다.");
+                timerStart();
                 code = data;
             }
                     
@@ -305,27 +307,54 @@ function emailApi(){
     
 function checkemailNum(){
     var inputCode = $(".mail_check_input").val();        // 입력코드    
-
-    if(inputCode == code){
-        formatemailNum = 1;
-        $("#reqinput").text("");
-        alert(" 인증번호가 일치합니다.");
-        $(".mail_input").attr("disabled",true);
-        $(".mail_check_input").attr("disabled",true);
-        doncument.getElementById("btn_checkemail").disabled = true;
-   
-        $("#reqinput").attr("class", "correct");        
-    } else {                                            // 일치하지 않을 경우
+    if(regMailCode.test(inputCode)){
+        if(inputCode == code){
+            timeStop();
+            formatemailNum = 1;
+            alert('메일 인증이 완료되었습니다.');
+            $("#reqinput").text("");
+            $(".mail_input").attr("disabled",true);
+            $(".mail_check_input").attr("disabled",true);
+            doncument.getElementById("btn_checkemail").disabled = true;
+       
+            $("#reqinput").attr("class", "correct");        
+        } else if($('#timeout')[0].innerText=="0:00"){//시간이 다 됐는데 인증을 누른다면
+            formatemailNum = 0;
+            $('#timeout')[0].innerText=="";
+            $(".mail_check_input").attr("disabled",true);
+            document.getElementById("mail_check").disabled = true;
+            $(".mail_check_input").attr("id", "mail_check_input_box_false");
+            alert('인증번호가 만료되었습니다.');
+        }else if($('#timeout')[0].innerText.length!=0){//시간이 남았는데 코드가 일치하지 않는다면
+            formatemailNum = 0;
+            alert('인증번호가 일치하지 않습니다.');
+        }else if(formatArray[3]==false){//타이머가 공백인데 인증이 되지 않았다면
+            formatemailNum = 0;
+            alert('이메일 인증을 먼저 진행해주세요.');
+        }else {// 그 외에 경우는 어떻게 정의할 지 잘 모르겠음
+            formatemailNum = 0;
+        }
+    } else {//코드가 숫자 6자리가 아니라면
         formatemailNum = 0;
-        $("#reqinput").text("");
-        alert(" 인증번호를 다시 확인해주세요.");
-        console.log(formatemail);
-
-        $("#reqinput").attr("class", "incorrect");
-    } 
+            $("#reqinput").text("");
+            alert(" 인증번호를 다시 확인해주세요.");
+            console.log(formatemail);
+    
+            $("#reqinput").attr("class", "incorrect");
+        
+    }
+    
 
 }
-    
+function timerStart() {
+    AuthTimer.comSecond = 10;
+    AuthTimer.timer =  setInterval(function(){AuthTimer.fnTimer()},1000);
+    AuthTimer.domId = document.getElementById("timeout");
+}
+function timeStop() {
+    clearInterval(AuthTimer.timer);
+}
+  
 // 핸드폰 번호 입력값 합치기 
 // 주소 도로명+상세주소 값 합치기
 // 전체 폼 보낼때 null값 + 유효성 검사 통과 확인 후 submit

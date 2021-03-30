@@ -31,7 +31,7 @@ $(document).ready(function () {
 	<jsp:include page="/jsp/header0.jsp"></jsp:include>
 
 	<div class="body_container">
-		<a href="http://developers.kakao.com/logout">노간지 로그아웃</a>
+		
 		<div class="content">
 			<button id="log">
 				<a href="#">일반로그인</a>
@@ -42,15 +42,15 @@ $(document).ready(function () {
 
 			<div class="login">
 				<form action="/loginPs.do" method="post">
-					<h3>로그인</h3>
+					<h3><a href="http://developers.kakao.com/logout">로그인</a></h3>
 					<hr>
 					<div>
 						<input type="text" name="id" id="id" placeholder="아이디" />
 					</div>
 					<div>
-						<input type="password" name="password" id="password"  placeholder="비밀번호" />
+						<input type="password" name="password" id="password" placeholder="비밀번호" />
 					</div>
-					<input type="submit" value="로그인" id="btn_login" />
+					<input type="submit" value="로그인" onclick="login()" />
 				</form>
 				<div>
 					<div>
@@ -58,6 +58,7 @@ $(document).ready(function () {
 					</div>
 					<hr>
 					<div>
+					
 						<p>다른 계정으로 로그인</p>
 
 						<!--api끌어오는거에 따라 가지수는 줄 수 있습니다...-->
@@ -115,5 +116,5 @@ $(document).ready(function () {
 </body>
 <script src="/js/kakaoLogin.js"></script>
 <script src="/js/TestfacebookLogin.js"></script>
-<!--  <script src="/js/Test_login.js"></script>-->
+<script src="/js/Test_login.js"></script>
 </html>
