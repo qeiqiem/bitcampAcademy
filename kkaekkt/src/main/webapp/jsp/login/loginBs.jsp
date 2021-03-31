@@ -9,14 +9,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <link rel="stylesheet" href="/css/loginBs.css">
 </head>
 
 <body>
     <jsp:include page="/jsp/header0.jsp"></jsp:include>
-    <a href="http://developers.kakao.com/logout">로그아웃링크?</a>
-
+    
     <div class="body_container">
+    
         <div class="content">
             <button id="log">
                 <a href="/jsp/login/loginPs.jsp">일반로그인</a>
@@ -30,12 +31,12 @@
                     <h2>로그인</h2>
                     <hr>
                     <div>
-                        <input type="text" name="id" placeholder="아이디"/>
+                        <input type="text" name="id" id="id" placeholder="아이디"/>
                     </div>
                     <div>
-                        <input type="password" name="password" placeholder="비밀번호"/>
+                        <input type="password" name="password" id="password" placeholder="비밀번호"/>
                     </div>
-                    <input type="submit" name="btn_login" value="로그인"/>
+                   <input type="submit" value="로그인" onclick="loginBs()" />
                 </form>
                 <div>
                     <div>
@@ -48,4 +49,5 @@
     </div>
     <!-- 바디콘테이너 -->
 </body>
+    <script src="/js/Test_loginBs.js"></script>
 </html>

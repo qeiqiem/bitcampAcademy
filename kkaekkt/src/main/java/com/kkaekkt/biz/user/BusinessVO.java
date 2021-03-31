@@ -11,8 +11,9 @@ import com.kkaekkt.biz.comm.ScheduleVO;
 @SuppressWarnings("serial")
 public class BusinessVO extends AccountVO{
 	private int bno;
-//	private int mno;
-//	private String id;
+	private int mno;
+
+	//	private String id;
 //	private String password;
 	private String bname;
 //	private String address;
@@ -36,6 +37,22 @@ public class BusinessVO extends AccountVO{
 	private int commCount; //댓글 개수
 	private int likedNum;		// 찜당한 수
 	
+	private int state=1; // 테스트
+	
+	
+	public int getMno() {
+		return mno;
+	}
+	public void setMno(int mno) {
+		this.mno = mno;
+	}
+	
+	public int getState() {
+		return state;
+	}
+	public void setState(int state) {
+		this.state = state;
+	}
 	public int getMcount() {
 		return eCount;
 	}
@@ -159,12 +176,12 @@ public class BusinessVO extends AccountVO{
 	}
 	@Override
 	public String toString() {
-		return "BusinessVO [bno=" + bno + ", bname=" + bname + ", comment=" + comment + ", bizType=" + bizType
-				+ ", bankNum=" + bankNum + ", bankAccountNum=" + bankAccountNum + ", scheduleList=" + scheduleList
-				+ ", equipmentList=" + equipmentList + ", laundryList=" + laundryList + ", etcList=" + etcList
-				+ ", commList=" + commList + ", equipment=" + equipment + ", laundry=" + laundry + ", schedule="
-				+ schedule + ", etc=" + etc + ", eval=" + eval + ", eCount=" + eCount + ", commCount=" + commCount
-				+ "]";
+		return "BusinessVO [bno=" + bno + ", mno=" + mno + ", bname=" + bname + ", comment=" + comment + ", bizType="
+				+ bizType + ", bankNum=" + bankNum + ", bankAccountNum=" + bankAccountNum + ", scheduleList="
+				+ scheduleList + ", equipmentList=" + equipmentList + ", laundryList=" + laundryList + ", etcList="
+				+ etcList + ", commList=" + commList + ", equipment=" + equipment + ", laundry=" + laundry
+				+ ", schedule=" + schedule + ", etc=" + etc + ", eval=" + eval + ", eCount=" + eCount + ", commCount="
+				+ commCount + ", likedNum=" + likedNum + ", state=" + state + "]";
 	}
 	
 

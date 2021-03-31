@@ -18,22 +18,20 @@ function kakaoLogin(){
                     
                     
                     var userdata = {
-                    	nick: userNick,
                     	email: userEmail
                     }
                     
 $.ajax({
-	url: '/findemail.do',
 	type: 'POST',
+	url: '/findemail.do',
 	data: {
-		email: $('#email').val(),
+		email: email
 	},
 	success: function(data){		
 		console.log("보냄");
 		console.log(data);
 		var info = JSON.parse(data);
-		
-	if(info.state == 0){
+	if(info.email == null){
 		alert("회원정보 없음");
 		$('#email').val();
 	} //else {

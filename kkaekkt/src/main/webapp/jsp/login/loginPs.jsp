@@ -16,16 +16,6 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/login.css">
 </head>
-<script>
-$(document).ready(function () {
-	   /* button click event */
-	   /* 모달 생성 */
-	   $("#modal_show").click(function () { $("#modal_container").show() })
-	   $("#modal_close").click(function () { $("#modal_container").hide() })
-	   $("#back").click(function () { $("#modal_container").hide() })
-	 })
-</script>
-
 
 <body>
 	<jsp:include page="/jsp/header0.jsp"></jsp:include>
@@ -71,48 +61,9 @@ $(document).ready(function () {
 			</div>
 		</div>
 
-		 <div class="word">
-                <button id="modal_show"> 모달 띄우기</button>
-
-                <div id="modal_container">
-                    <button id="modal_close">x</button>
-                    <div id="modal_bodycont">
-                        <form>
-                            <div id="modal_head">
-                                <h2>회원정보가 없습니다!</h2>
-                            </div>
-                            <hr style="width: 80%; margin-top: 20px; border: 1px solid #E5E5E5;">
-                            <div id="modal_foot">
-                                <p style="text-align: center;">아이디나 비밀번호를 다시 한 번 확인해주세요!</p>
-
-                                <p style="text-align: center;">가입을 하지 않았다면 회원가입을 이용해주세요.</p>
-                                <div class="btn">
-                                    <button id="back" type="button">돌아가기</button>
-                                    <button id="join" type="submit"><a href="/jsp/join/joinSelect.jsp">회원가입</a></button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
+	
 	</div>
 	<!-- 바디콘테이너 -->
-
-	<%--       <%
-        String clientId = "h_yaNKHsI9qSzo9ZPDD8";//애플리케이션 클라이언트 아이디값";
-        String redirectURI = URLEncoder.encode("http://localhost:8080/loginSNS.do", "UTF-8");
-        SecureRandom random = new SecureRandom();
-        String state = new BigInteger(130, random).toString();
-        String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
-        apiURL += "&client_id=" + clientId;
-        apiURL += "&redirect_uri=" + redirectURI;
-        apiURL += "&state=" + state;
-        session.setAttribute("state", state);
-        System.out.println(state);
-        System.out.println("네이버 로그인 성공?");
-        System.out.println(clientId);
-     %> --%>
 </body>
 <script src="/js/kakaoLogin.js"></script>
 <script src="/js/TestfacebookLogin.js"></script>

@@ -7,10 +7,16 @@ public class PersonVO extends AccountVO {
 	private int state=1; //기본값 (작업전)
 //	private String phone;
 //	private String address;
-//	private String email;
+	private String email;
 //	private String id;
 //	private String password;
 
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public String getMname() {
 		return mname;
 	}
@@ -29,10 +35,15 @@ public class PersonVO extends AccountVO {
 	public void setState(int state) {
 		this.state = state;
 	}
+//	@Override
+//	public String toString() {
+//		return "PersonVO [mname=" + mname + ", birth=" + birth + ", state=" + state + "]";
+//	}
 	@Override
 	public String toString() {
-		return "PersonVO [mname=" + mname + ", birth=" + birth + ", state=" + state + "]";
+		return "PersonVO [mname=" + mname + ", birth=" + birth + ", state=" + state + ", email=" + email + "]";
 	}
+	
 	
 	
 }

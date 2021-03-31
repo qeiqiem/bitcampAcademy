@@ -166,7 +166,6 @@ public class UserController {
 		// vo = userService.email(vo);
 
 		vo.setEmail(userService.email(vo));
-		System.out.println("vo" + vo);
 		PersonVO findEmail = vo;
 		System.out.println("findEmail" + findEmail);
 
@@ -175,15 +174,27 @@ public class UserController {
 	}
 
     // 로그인할때 아이디나 비밀번호 있는지 체크하려고 만든 컨트롤러이다.
-        @RequestMapping(value = "/loginchk.do", method = RequestMethod.POST)
-        @ResponseBody
-        public String loginChk(AccountVO vo) {
-            System.out.println("컨트롤러 진입");
-            System.out.println(vo + "가 담김");
-            Gson gson = new Gson();
-            vo.setMno(userService.loginchk(vo));
-            return gson.toJson(vo);
-        }
+//        @RequestMapping(value = "/loginchk.do", method = RequestMethod.POST)
+//        @ResponseBody
+//        public String loginChk(AccountVO vo) {
+//            System.out.println("컨트롤러 진입");
+//            System.out.println(vo + "가 담김");
+//            Gson gson = new Gson();
+//            vo.setMno(userService.loginchk(vo));
+//            return gson.toJson(vo);
+//        }
+	
+	// 아이디 중복체크 업체........
+	@RequestMapping(value = "/idchkBs.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String idchkBs(BusinessVO vo) {
+		System.out.println("vo 값 담겼음");
+		System.out.println(vo);
+		Gson gson = new Gson();
+		vo.setState(userService.idchkBs(vo));
+		System.out.println("서비스에서 값 담겨 넘어옴");
+		return gson.toJson(vo);
+	}
             
 	// 일반유저 로그인
 	@RequestMapping(value = "/loginPs.do", method = RequestMethod.POST)
@@ -220,6 +231,7 @@ public class UserController {
 			System.out.println("로그인처리");
 
 			vo = userService.getUser(vo);
+			//BusinessVO user = userService.getUser(vo);
 			vo.setLikedNum(userService.countLikeBs(vo)); // 프로필편집에서 찜 인원 뽑아와야해서 추가
 			vo.setEval(userService.avgGradeBs(vo)); // 프로필편집에서 찜 인원 뽑아와야해서 추가
 
@@ -227,16 +239,16 @@ public class UserController {
 
 			if (vo.getBno() == 0) {
 				System.out.println("회원정보없음");
-				// session.setAttribute("personBs", null);
 				return "/jsp/login/loginBs.jsp";
 			} else if (vo.getBno() != 0) {
 				session.setAttribute("person", vo);
 			}
 			return "/jsp/indexCompany.jsp";
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("로그인 실패");
-			return "/jsp/login/loginBs.jsp"; // 추후 업체로그인 부분으로 변경예정
+			return "/jsp/login/loginBs.jsp"; 
 		}
 	}
 
