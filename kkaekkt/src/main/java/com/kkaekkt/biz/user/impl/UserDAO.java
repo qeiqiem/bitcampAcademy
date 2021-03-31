@@ -96,11 +96,11 @@ public class UserDAO {
 		
 		
 		// 이메일 확인
-		public String email(PersonVO vo) {
+		public String email(AccountVO vo) {
 			System.out.println("mybatis로 기능처리 -- 이메일 찾기");
-			System.out.println(vo);
+			System.out.println(vo);	
 			
-			return mybatis.selectOne("UserDAO.getPersonSNS", vo);
+			return mybatis.selectOne("UserDAO.getEmail", vo);
 		}
 
 	// laundry

@@ -125,7 +125,7 @@
 		AND id=#{id} AND password=#{password};
 	</select>
 	<select id="getPersonBs" resultType="business">
-		SELECT ac.mno as mno,bs.mno as mno,
+		SELECT ac.mno as mno,
 		bs.bno, id, password, bname, phone, address, email, bz.typenum as bizType, bkno as bankNum,
 		acno as bankAccountNum
 		FROM account ac, business bs, biztype bz
@@ -144,10 +144,10 @@
 		AND email=#{email};
 	</select>
 
-	<select id="getEmail" resultType="person">
-		SELECT *
+	<select id="getEmail" resultType="String">
+		SELECT email
 		FROM member
-		WHERE email=#{email);
+		WHERE email=#{email};
 	</select>
 	<select id="getLikedBs" resultType="business"><!-- 찜한 업체 목록 조회(뷰테이블 사용예정) -->
 		
