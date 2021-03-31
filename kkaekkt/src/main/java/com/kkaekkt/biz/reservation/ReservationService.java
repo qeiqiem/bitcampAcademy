@@ -22,4 +22,5 @@ public interface ReservationService {
 	public String washingDone(LaundryVO vo);
 	public void regitAlert(AlertVO vo);
 	public List<AlertVO> getAlertList(AlertVO vo);
+	public void delAlert(int ano);
 }

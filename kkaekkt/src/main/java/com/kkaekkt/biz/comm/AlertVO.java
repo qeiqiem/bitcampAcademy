@@ -1,14 +1,28 @@
 package com.kkaekkt.biz.comm;
 
 public class AlertVO {
-	private int sender;
-	private String senderName;
-	private int addressee;
+	private int ano;//알림번호
+	private int sender;//보내는 이 회원번호
+	private String senderName;//보낸 이
+	private int addressee;//받는 이 회원번호
 	private String msg;
-	private int typenum;
-	private String typename;
-	private String date;
+	private int typenum;//유형번호
+	private String typename;//유형명
+	private String date;//보낸 날짜
+	private int state;//읽음상태
 	
+	public int getAno() {
+		return ano;
+	}
+	public void setAno(int ano) {
+		this.ano = ano;
+	}
+	public int getState() {
+		return state;
+	}
+	public void setState(int state) {
+		this.state = state;
+	}
 	public void setMname(String mname) {
 		this.senderName=mname;
 	}
@@ -56,12 +70,6 @@ public class AlertVO {
 	}
 	public void setMsg(String msg) {
 		this.msg = msg;
-	}
-	public int gettypenum() {
-		return typenum;
-	}
-	public void settypenum(int typenum) {
-		this.typenum = typenum;
 	}
 	@Override
 	public String toString() {

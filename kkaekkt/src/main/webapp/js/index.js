@@ -3,6 +3,7 @@ var socket = null;
  
 $(document).ready(function (){
     connectWs();
+    initAlertList();
 });
 function connectWs(){
     socket = new WebSocket("ws://localhost:8080/echo.do");
@@ -17,32 +18,33 @@ function connectWs(){
     };
     socket.onclose = function() {
         console.log('connect close');
-        /* setTimeout(function(){conntectWs();} , 1000); */
     };
     socket.onerror = function (err) {console.log('Errors : ' , err);};
 }
 function initAlertList() {
+    console.log('alert초기화 진입');
     $.post({
         url:'/getAlertList.do',
         data:alertObj,
         success:function(data) {
             var list = JSON.parse(data);
+            console.log(list);
             printAlertList(list);
         }
     });
 }
 function printAlertList(list) {
-    var link="";
     $.each(list, function(key,value) {
-        $('.noticeBox ul').append('<li>'+
-                                    '<div class="msgTop">'+
-                                        '<a href="/jsp/mypageUser/mypagePs.jsp">'+value.typename+'⠀'+alertObj.msg+'</a>'+
+        console.log(key+"...번째 출력");
+        $('#noticeBox ul').append('<li id="'+value.ano+'">'+
+                                    '<div class="msgTop '+(value.state==1?'read':'')+'">'+
+                                        '<a href="/jsp/mypageUser/mypagePs.jsp">'+value.typename+'⠀'+value.msg+'</a>'+
                                     '</div>'+
-                                    '<div class="msgBottom">'+
+                                    '<div class="msgBottom '+(value.state==1?'read':'')+'">'+
                                         '<span class="date">'+value.date+'</span>'+
-                                        '<span class="byBs">by '+value.sender+'</span>'+
+                                        '<span class="byBs">by '+value.senderName+'</span>'+
                                     '</div>'+
-                                    '<i class="fas fa-times"></i>'+
+                                    '<i id="'+value.ano+'" class="fas fa-times"></i>'+
                                 '</li>'
         );
     });

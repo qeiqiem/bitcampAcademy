@@ -5,9 +5,9 @@
 <script src="https://kit.fontawesome.com/2fc57dd2db.js"
 	crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 	rel="stylesheet">
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="/js/header.js"></script>
 <header class="head_container">
 	<nav class="head">
@@ -28,12 +28,7 @@
 				<span class="redDot">●</span>
 				<div id="noticeBox">
 					<ul>
-						<li><div class="msgTop"><a>[완료]⠀주문번호22의 세탁이 완료되었습니다.</a></div><div class="msgBottom"><span class="date">2021.04.01</span><span class="byBs">by 테스트업체 </span></div><i class="fas fa-times"></i></li>
-						<li><div class="msgTop">[완료]⠀주문번호22의 배송이 완료되었습니다.</div><div class="msgBottom"><span class="date">2021.04.01</span><span class="byBs">by 테스트업체 </span></div><i class="fas fa-times"></i></li>
-						<li><div class="msgTop">[결제]⠀주문번호22의 결제가 완료되었습니다.</div><div class="msgBottom"><span class="date">2021.04.01</span><span class="byBs">by 테스트업체 </span></div><i class="fas fa-times"></i></li>
-						<li><div class="msgTop read">[취소]⠀주문번호22가 취소되었습니다.</div><div class="msgBottom read"><span class="date">2021.04.01</span><span class="byBs">by 테스트업체 </span></div><i class="fas fa-times"></i></li>
-						<li><div class="msgTop read">[답글]⠀주문번호22의 리뷰에 답글이 등록되었습니다.</div><div class="msgBottom read"><span class="date">2021.04.01</span><span class="byBs">by 테스트업체 </span></div><i class="fas fa-times"></i></li>
-						<li><div class="msgTop read">[답글]⠀주문번호22의 리뷰에 답글이 등록되었습니다.</div><div class="msgBottom read"><span class="date">2021.04.01</span><span class="byBs">by 테스트업체 </span></div><i class="fas fa-times"></i></li>
+						
 					</ul>
 					<button>내 알림 전체보기</button>
 				</div>
