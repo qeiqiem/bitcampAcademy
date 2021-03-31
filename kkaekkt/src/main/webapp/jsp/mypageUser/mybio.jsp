@@ -16,12 +16,12 @@
 	  <div class="body_container">
         <jsp:include page="sidebar_ps.jsp"></jsp:include>
 	  	<div class="content">
-        <form action="/updatePs.do" method="POST" name="mybio" onsubmit="return submitMybio();" >
+        <form action="/updatePs.do" method="POST" name="mybio" >
         <h3 id="mybio_title">내 정보</h3>
         <button type="button" id="btn_mybio">수정하기</button>
         <div id="btn_mybioClick">
-            <button type="submit" id="btn_mybiofin">수정완료</button>
-            <button type="reset" id="btn_back">돌아가기</button>
+            <button type="button" id="btn_mybiofin">수정완료</button>
+            <button type="button" id="btn_back">돌아가기</button>
         </div>
         <hr>
             <div id="mybio_info">
@@ -72,8 +72,10 @@
                     이메일<br>
                     <input name="email" type="email" value="" id="email" class="mail_input"> 
                     <button type="button" id="btn_checkemail" class="mail_check_button">이메일인증</button><label id="checkemail" value=""></label></br>
-                    <input class="mail_check_input" id="mail_check_input_box_false" disabled="disabled">
-                    <button type="button" id="mail_check">확인</button><span id="reqinput"></span>
+                    <div id="mailChkDiv">
+                        <input class="mail_check_input" id="mail_check_input_box_false" disabled="disabled"><span id='timeout'></span>
+                        <button type="button" id="mail_check">확인</button></td><br>
+                    </div>
                 </div>
                 <div id="mybioAddress">
                    주소<br>
