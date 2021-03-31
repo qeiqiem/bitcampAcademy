@@ -103,4 +103,12 @@ public class ReservationController {
 	public void regitAlert(AlertVO vo) {
 		reservationService.regitAlert(vo);
 	}
+	@RequestMapping(value="/getAlertList.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
+	@ResponseBody//알림 리스트 조회
+	public String getAlertList(AlertVO vo) {
+		Gson gson=new Gson();
+		return gson.toJson(reservationService.getAlertList(vo));
+		
+	}
+	
 }
