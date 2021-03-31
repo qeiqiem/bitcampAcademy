@@ -86,15 +86,19 @@
 		crossorigin="anonymous"></script>
 	<script>
             var pageObj={//세션에서 정보를 받아오는건 독립된 js파일에서 불가능, jsp 내에서만 가능하기 때문에 여기서 값을 받아준다.
-                mno:{sessionScope.person.mno},
-				mname:{sessionScope.person.mname},
+                mno:${sessionScope.person.mno},
+				mname:`${sessionScope.person.name}`,
 				currentPageNum:1,
 				listType:1,
-                state:1
+                state:1,
             };
 			var likeObj={};
 			var commObj={};
+			var alertObj={
+				sender:${sessionScope.person.mno}
+			};
     </script>
+    <script src="/js/index.js"></script>
     <script src="/js/mypagePs.js"></script>
 </body>
 </html>

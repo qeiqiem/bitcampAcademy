@@ -13,7 +13,6 @@
 <link rel="stylesheet" href="/css/loginBs.css">
 </head>
 
-
 <body>
     <jsp:include page="/jsp/header0.jsp"></jsp:include>
     

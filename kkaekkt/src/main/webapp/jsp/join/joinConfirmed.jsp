@@ -64,7 +64,7 @@
 					<img src="/img/logo-nowater.png" alt="" style="width: 100px;">
 					과 함께 깨끗하고 간편하게 삶을 변화시킬 준비가 된 <br>
 					<!-- controller setAttribute -->
-					<span>${joinCfm.mname}${joinCfm.bname}</span>고객님, 회원가입이 완료되었습니다. <br>
+					<span>${joinCfm.name}</span>고객님, 회원가입이 완료되었습니다. <br>
 					가입하신 아이디 <span>${joinCfm.id}</span>로 로그인 후 이용해 주세요.
 				</p>
 			</div>

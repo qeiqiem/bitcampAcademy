@@ -88,6 +88,7 @@ public class UserController {
 		System.out.println("가입완료 진입");
 		System.out.println(vo);
 		model.addAttribute("joinCfm", userService.joinCfm(vo));
+		System.out.println("요기까지 완료");
 		return "/jsp/join/joinConfirmed.jsp";
 	}
 
