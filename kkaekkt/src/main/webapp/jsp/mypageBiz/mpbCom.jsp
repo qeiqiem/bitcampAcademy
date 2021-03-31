@@ -11,7 +11,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
 <link rel="stylesheet" href="/css/mypageBs_com.css">
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 </head>
 
 <body>
@@ -73,7 +72,13 @@
 				listType:4
             };
 			var rsvObj={};
+			var alertObj={
+				sender:${sessionScope.person.mno}
+			};
+			var username=`${sessionScope.person.bname}`;
     </script>
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script src="/js/index.js"></script>
 	<script src="/js/mypageBs_com.js"></script>
 </body>
 </html>

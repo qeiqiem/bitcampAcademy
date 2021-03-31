@@ -12,7 +12,6 @@
 <link rel="stylesheet" href="/css/loginBs.css">
 </head>
 
-
 <body>
     <jsp:include page="/jsp/header0.jsp"></jsp:include>
     <a href="http://developers.kakao.com/logout">로그아웃링크?</a>

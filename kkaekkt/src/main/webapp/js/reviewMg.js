@@ -30,7 +30,8 @@ function printList(list) {//리뷰 리스트 출력
                         '<td class="cell1">'+value.cno+'</td>'+
                         '<td class="cell2 close">'+value.content+'</td>'+
                         '<td class="cell3">'+value.eval+'/5</td>'+
-                        '<td class="cell4" id="customer'+key+'">'+value.mname+'</td>'+
+                        // '<td class="cell4" id="customer'+key+'">'+value.mname+'</td>'+
+                        '<td class="cell4" id="'+value.mno+'">'+value.mname+'</td>'+
                         '<td class="cell5">'+value.rsvNum+'</td>'+
                         '<td class="cell6">'+value.rdate+'</td>'+
                         '<td class="cell7"><button class="replyBtn" value='+key+
@@ -72,6 +73,7 @@ function insertAjax(pageObj) {
         url:'/regitComm.do',
         data:pageObj,
         success:function() {
+            sendMsg();
             $('#comments').remove();
             ajax(pageObj);
             alert('답글이 등록되었습니다.');
@@ -209,6 +211,38 @@ function enter() {
         ajax(pageObj);
     }
 }
+function msgSet() {
+    alertObj.rsvNum=pageObj.rsvNum;
+    alertObj.msg='주문번호'+pageObj.rsvNum+'의 리뷰에 답글이 등록되었습니다.';
+    alertObj.typeNum=4;
+}
+function sendMsg() {
+    console.log('샌드진입');
+    msgSet();
+    $.post({
+        url:'/regitAlert.do',
+        data:alertObj,
+        success:function() {
+            console.log('success');
+            if(socket){
+                console.log('진입');
+                var receiver=alertObj.addressee;
+                console.log(receiver);
+                var msg='<li>'+
+                            '<div class="msgTop">'+
+                                '<a href="/jsp/mypageUser/mypagePs.jsp">[답글]⠀'+alertObj.msg+'</a>'+
+                            '</div>'+
+                            '<div class="msgBottom">'+
+                                '<span class="date">'+today()+'</span>'+
+                                '<span class="byBs">by '+username+'</span>'+
+                            '</div>'+
+                            '<i class="fas fa-times"></i>'+
+                        '</li>'
+                socket.send(receiver+','+msg);//메시지 보냄
+            }
+        }
+    });
+}
 function initPageEvent() {
     $('.page_next').click(function() {
         if(!$(this).hasClass('no')) {
@@ -285,11 +319,11 @@ function printTotalPost(totalPostCount) {
     $('.content_header span')[0].innerHTML=totalPostCount;
 }
 
-function toDay() {//오늘 날짜 출력
+function today() {
     var date=new Date();
     var mm=date.getMonth()+1;
     var dd=date.getDate();
-    var today=mm+'월 '+dd+', '+date.getFullYear();
+    var today=date.getFullYear()+'.'+(mm<10?'0'+mm:mm)+'.'+dd;
     return today;
 }
 function delReply(idx) {//답글 삭제 (리팩토링 완료 - 03.25 / 모달 추가 완료 - 03.29)
@@ -309,6 +343,7 @@ function editFormPrint(idx) {//답글 수정폼 출력
 function submitReply(idx) {//답글 등록
     pageObj.rsvNum=JSON.parse($('#review'+idx+' .cell5')[0].innerHTML);//주문번호 담기
     pageObj.eval=JSON.parse($('#review'+idx+' .cell3')[0].innerHTML.charAt(0));//평점 담기
+    alertObj.addressee=$('#review'+idx+' .cell4')[0].id;//알림 수신자 회원번호
     pageObj.content=$('#commentBox'+idx).val();//답글 내용 담기
     insertAjax(pageObj);
     $('#comments').remove();
