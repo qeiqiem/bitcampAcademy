@@ -131,7 +131,28 @@ CREATE TABLE `bsn_etc` (
 	`bno` INTEGER NOT NULL comment '사업자번호',
 	`price` INTEGER NOT NULL comment '이용금액'
 );
+CREATE TABLE `alert` (
+	`ano`	INTEGER	NULL,
+	`sender`	VARCHAR(30)	NULL,
+	`addressee`	VARCHAR(30)	NULL,
+	`content`	VARCHAR(255)	NULL,
+	`time`	DATETIME	NULL,
+	`state`	INTEGER	NULL,
+	`typenum`	INTEGER	NOT NULL
+);
 
+CREATE TABLE `alertType` (
+	`typenum`	INTEGER	NOT NULL,
+	`typename`	VARCHAR(10)	NULL
+);
+ALTER TABLE `alert` ADD CONSTRAINT `PK_ALERT` PRIMARY KEY (
+	`ano`
+);
+ALTER TABLE `alert` MODIFY COLUMN ano INTEGER NOT NULL AUTO_INCREMENT;
+ALTER TABLE `alertType` ADD CONSTRAINT `PK_ALERTTYPE` PRIMARY KEY (
+	`typenum`
+);
+ALTER TABLE `alertType` MODIFY COLUMN typenum INTEGER NOT NULL AUTO_INCREMENT;
 ALTER TABLE `account` ADD CONSTRAINT `PK_ACCOUNT` PRIMARY KEY (
 	`mno`
 );
@@ -353,6 +374,12 @@ REFERENCES `business` (
 	`bno`
 ) ON DELETE CASCADE;
 
+ALTER TABLE `alert` ADD CONSTRAINT `FK_alertType_TO_alert_1` FOREIGN KEY (
+	`typenum`
+)
+REFERENCES `alertType` (
+	`typenum`
+);
 -- 설비
 INSERT INTO equipment (ename) VALUES ("세탁기(중형)");
 INSERT INTO equipment (ename) VALUES ("세탁기(대형)");
@@ -411,6 +438,13 @@ INSERT INTO schedule (wkname) values("일");
 INSERT INTO schedule (wkname) values("매일");
 INSERT INTO schedule (wkname) values("평일");
 INSERT INTO schedule (wkname) values("주말");
+
+-- 알림 유형
+INSERT INTO alertType (typename) values("[주문]");
+INSERT INTO alertType (typename) values("[결제]");
+INSERT INTO alertType (typename) values("[완료]");
+INSERT INTO alertType (typename) values("[답글]");
+INSERT INTO alertType (typename) values("[취소]");
 
 -- 더미 데이터
 INSERT INTO account (id,password,mtype) VALUES ('testps','test',1);
