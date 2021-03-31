@@ -1,4 +1,4 @@
-function login(){ // onclick 할 function 이름
+function loginBs(){ // onclick 할 function 이름
 	// 입력한 값을 저장
 	console.log("탐");
 	var Id = $("#id").val();
@@ -7,7 +7,7 @@ function login(){ // onclick 할 function 이름
 	// ajax 시작
 	$.ajax({
 		type: "POST",
-		url: "/idchk.do", // 내가 정보를 보낼 컨트롤러 value controller에는 @ResponseBody가 있어야함
+		url: "/idchkBs.do", // 내가 정보를 보낼 컨트롤러 value controller에는 @ResponseBody가 있어야함
 		data: {
 			Id: Id, // 키 : 값
 			Pw: Pw
@@ -22,9 +22,9 @@ function login(){ // onclick 할 function 이름
 					alert("아이디나 비밀번호를 다시 확인해주세요.");
 					$("#id").val();
 					$("#password").val();
-				}else {
-					location.href = "/jsp/indexPerson.jsp";
+				} else {
+					location.href = "/jsp/indexCompany.jsp";
 				}
-		} // 이 뒤에 false, 해도 됨
+		} 
 	});
 }
