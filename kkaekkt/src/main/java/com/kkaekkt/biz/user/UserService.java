@@ -30,7 +30,6 @@ public interface UserService {
 	public AccountVO joinCfm(AccountVO vo);
 	public double avgGradeBs(BusinessVO vo);
 	public int countLikeBs(BusinessVO vo);	
-	public int loginchk(AccountVO vo);
 	public int idchkBs(BusinessVO vo);
 
 
