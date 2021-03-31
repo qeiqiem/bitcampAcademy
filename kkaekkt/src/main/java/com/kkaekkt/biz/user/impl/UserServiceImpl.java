@@ -190,7 +190,7 @@ public class UserServiceImpl implements UserService {
 		return userDao.idchk(vo);
 	}
 	@Override
-	public String email(PersonVO vo) {
+	public String email(AccountVO vo) {
 		System.out.println("email 찾는 서비스 옴");
 		return userDao.email(vo);
 	}

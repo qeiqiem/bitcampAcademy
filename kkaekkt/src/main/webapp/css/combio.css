@@ -134,6 +134,20 @@ select::-ms-expand { /* for IE 11 */
     width: 80px;
     padding-left: 10px;
 }
+#mailChkDiv {
+    position: relative;
+}
+#timeout{
+    position: absolute;
+    bottom: 7px;
+    left: 150px;
+    top: 17px;
+    font-size: 12px;
+    color: red;
+}
+.mail_check_input{
+    width: 200px;
+}
 #combioAddress{
     margin-left: 10px;
 }

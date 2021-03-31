@@ -125,3 +125,17 @@ font-size: 14px;
 .incorrect{
     color : red;
 }
+#mailChkDiv {
+    position: relative;
+}
+#timeout{
+    position: absolute;
+    bottom: 7px;
+    left: 170px;
+    top: 36px;
+    font-size: 12px;
+    color: red;
+}
+.mail_check_input{
+    width: 200px;
+}

@@ -11,10 +11,9 @@ import com.kkaekkt.biz.comm.ScheduleVO;
 @SuppressWarnings("serial")
 public class BusinessVO extends AccountVO{
 	private int bno;
-	private int mno;
-
-	//	private String id;
-//	private String password;
+	//private int mno;
+	//private String id;
+	//private String password;
 	private String bname;
 //	private String address;
 //	private String phone;
@@ -40,13 +39,27 @@ public class BusinessVO extends AccountVO{
 	private int state=1; // 테스트
 	
 	
-	public int getMno() {
-		return mno;
-	}
-	public void setMno(int mno) {
-		this.mno = mno;
-	}
 	
+	
+//	public String getId() {
+//		return id;
+//	}
+//	public void setId(String id) {
+//		this.id = id;
+//	}
+//	public String getPassword() {
+//		return password;
+//	}
+//	public void setPassword(String password) {
+//		this.password = password;
+//	}
+//	public int getMno() {
+//		return mno;
+//	}
+//	public void setMno(int mno) {
+//		this.mno = mno;
+//	}
+//	
 	public int getState() {
 		return state;
 	}
@@ -176,12 +189,12 @@ public class BusinessVO extends AccountVO{
 	}
 	@Override
 	public String toString() {
-		return "BusinessVO [bno=" + bno + ", mno=" + mno + ", bname=" + bname + ", comment=" + comment + ", bizType="
-				+ bizType + ", bankNum=" + bankNum + ", bankAccountNum=" + bankAccountNum + ", scheduleList="
-				+ scheduleList + ", equipmentList=" + equipmentList + ", laundryList=" + laundryList + ", etcList="
-				+ etcList + ", commList=" + commList + ", equipment=" + equipment + ", laundry=" + laundry
-				+ ", schedule=" + schedule + ", etc=" + etc + ", eval=" + eval + ", eCount=" + eCount + ", commCount="
-				+ commCount + ", likedNum=" + likedNum + ", state=" + state + "]";
+		return "BusinessVO [bno=" + bno + ", bname=" + bname + ", comment=" + comment + ", bizType=" + bizType
+				+ ", bankNum=" + bankNum + ", bankAccountNum=" + bankAccountNum + ", scheduleList=" + scheduleList
+				+ ", equipmentList=" + equipmentList + ", laundryList=" + laundryList + ", etcList=" + etcList
+				+ ", commList=" + commList + ", equipment=" + equipment + ", laundry=" + laundry + ", schedule="
+				+ schedule + ", etc=" + etc + ", eval=" + eval + ", eCount=" + eCount + ", commCount=" + commCount
+				+ ", likedNum=" + likedNum + ", state=" + state + "]";
 	}
 	
 
