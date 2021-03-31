@@ -82,6 +82,11 @@ select,button {
     font-size: 20px;
     font-weight: bold;
 }
+.processTitle{
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 10px;
+}
 .processHeader{
     width: 100%;
     border:1px solid var(--gray-color);

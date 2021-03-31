@@ -91,7 +91,7 @@ CREATE TABLE `comments` (
 	`orderNum`	INTEGER	NULL comment '순서',
 	`depth`	INTEGER	NULL comment '깊이',
 	`groupNum`	INTEGER	NULL comment '소속',
-	`rdate` 	DATETIME NULL comment '등록일자',
+	`rdate` 	DATETIME NULL DEFAULT CURRENT_TIMESTAMP comment '등록일자',
 	`grade`	INTEGER	NOT NULL comment '점수',
 	`replytf` TINYINT(1) NULL COMMENT '답글 유무'
 );
@@ -131,7 +131,28 @@ CREATE TABLE `bsn_etc` (
 	`bno` INTEGER NOT NULL comment '사업자번호',
 	`price` INTEGER NOT NULL comment '이용금액'
 );
+CREATE TABLE `alert` (
+	`ano`	INTEGER	NULL comment '알림번호',
+	`sender`	INTEGER	NULL comment '보낸이',
+	`addressee`	INTEGER	NULL comment '받는이',
+	`msg`	VARCHAR(255)	NULL comment '알림메시지',
+	`time`	DATETIME NULL DEFAULT current_timestamp comment '알림시간',
+	`state`	INTEGER	NULL DEFAULT 0 comment '읽음상태',
+	`typenum`	INTEGER	NOT NULL comment '알림유형'
+);
 
+CREATE TABLE `alerttype` (
+	`typenum`	INTEGER	NOT NULL,
+	`typename`	VARCHAR(10)	NULL
+);
+ALTER TABLE `alert` ADD CONSTRAINT `PK_ALERT` PRIMARY KEY (
+	`ano`
+);
+ALTER TABLE `alert` MODIFY COLUMN ano INTEGER NOT NULL AUTO_INCREMENT;
+ALTER TABLE `alerttype` ADD CONSTRAINT `PK_ALERTTYPE` PRIMARY KEY (
+	`typenum`
+);
+ALTER TABLE `alerttype` MODIFY COLUMN typenum INTEGER NOT NULL AUTO_INCREMENT;
 ALTER TABLE `account` ADD CONSTRAINT `PK_ACCOUNT` PRIMARY KEY (
 	`mno`
 );
@@ -353,6 +374,12 @@ REFERENCES `business` (
 	`bno`
 ) ON DELETE CASCADE;
 
+ALTER TABLE `alert` ADD CONSTRAINT `FK_alertType_TO_alert_1` FOREIGN KEY (
+	`typenum`
+)
+REFERENCES `alertType` (
+	`typenum`
+);
 -- 설비
 INSERT INTO equipment (ename) VALUES ("세탁기(중형)");
 INSERT INTO equipment (ename) VALUES ("세탁기(대형)");
@@ -411,6 +438,13 @@ INSERT INTO schedule (wkname) values("일");
 INSERT INTO schedule (wkname) values("매일");
 INSERT INTO schedule (wkname) values("평일");
 INSERT INTO schedule (wkname) values("주말");
+
+-- 알림 유형
+INSERT INTO alertType (typename) values("[주문]");
+INSERT INTO alertType (typename) values("[결제]");
+INSERT INTO alertType (typename) values("[완료]");
+INSERT INTO alertType (typename) values("[답글]");
+INSERT INTO alertType (typename) values("[취소]");
 
 -- 더미 데이터
 INSERT INTO account (id,password,mtype) VALUES ('testps','test',1);

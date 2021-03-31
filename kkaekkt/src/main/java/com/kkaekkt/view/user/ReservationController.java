@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.kkaekkt.biz.comm.AlertVO;
 import com.kkaekkt.biz.comm.CommListVO;
 import com.kkaekkt.biz.comm.CommVO;
 import com.kkaekkt.biz.comm.LaundryVO;
@@ -51,13 +52,13 @@ public class ReservationController {
 	}
 	@RequestMapping(value="/cancel.do", method=RequestMethod.POST)
 	@ResponseBody
-	public void cancelRsv(LaundryVO vo) {		
-		reservationService.cancel(vo);
+	public String cancel(LaundryVO vo) {//주문단위 취소 처리되면 cancel 반환, 주문단위 완료 처리되면 complete 반환
+		return reservationService.cancel(vo);
 	}
 	@RequestMapping(value="/washingDone.do", method=RequestMethod.POST)
 	@ResponseBody
-	public void washingDone(LaundryVO vo) {
-		reservationService.washingDone(vo);
+	public String washingDone(LaundryVO vo) {//주문단위 완료처리되면 complete반환
+		return reservationService.washingDone(vo);
 	}
 	@RequestMapping(value="/complete.do", method=RequestMethod.POST)
 	@ResponseBody
@@ -97,5 +98,9 @@ public class ReservationController {
 		String result=gson.toJson(reservationService.getCommListBs(vo));
 		return result;
 	}
-	
+	@RequestMapping(value="/regitAlert.do",method=RequestMethod.POST)
+	@ResponseBody
+	public void regitAlert(AlertVO vo) {
+		reservationService.regitAlert(vo);
+	}
 }

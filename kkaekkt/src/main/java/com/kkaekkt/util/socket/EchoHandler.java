@@ -1,7 +1,6 @@
 package com.kkaekkt.util.socket;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,74 +24,33 @@ public class EchoHandler extends TextWebSocketHandler {
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		System.out.println("서버에 접속 성공했을 때 접근");
 		sessions.add(session);
-		String senderEmail = getEmail(session);
-		userSessionsMap.put(senderEmail , session);
+		String mno = getMno(session);
+		userSessionsMap.put(mno, session);
 	}
 	
 	//소켓에 메세지를 보냈을때
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-//		String senderEmail = getEmail(session);
-		//모든 유저에게 보낸다 - 브로드 캐스팅
-//		for (WebSocketSession sess : sessions) {
-//			sess.sendMessage(new TextMessage(senderNickname + ": " +  message.getPayload()));
-//		}
-		System.out.println("메시지 수신 접근완료");
-		//protocol : cmd , 댓글작성자, 게시글 작성자 , seq (reply , user2 , user1 , 12)
+		System.out.println("메시지 수신");
+		//protocol : mno , 내용
 		String msg = message.getPayload();
-		System.out.println(msg+"...메시지 수신완료");
+		System.out.println(msg);
 		if(!StringUtils.isNullOrEmpty(msg)) {
 			String[] strs = msg.split(",");
-			
-			if(strs != null && strs.length == 5) {
-				String cmd = strs[0]; //cmd?
-				String caller = strs[1]; // 발송인
-				String receiver = strs[2]; // 수신인
-				String receiverEmail = strs[3]; //수신이메일
-				String seq = strs[4]; //시퀀스?
+			if(strs != null && strs.length == 2) {
+				String mno = strs[0];
+				String content = strs[1];
 				
 				//작성자가 로그인 해서 있다면
-				WebSocketSession boardWriterSession = userSessionsMap.get(receiverEmail);
+				WebSocketSession boardWriterSession = userSessionsMap.get(mno);
 				
-				if("reply".equals(cmd) && boardWriterSession != null) {//cmd가 "reply"이고 작성자가 세션에 있다면, 
-					System.out.println("reply접근");
-					TextMessage tmpMsg = new TextMessage(caller + "님이 " + 
-										"<a type='external' href='/mentor/menteeboard/menteeboardView?seq="+seq+"&pg=1'>" + seq + "</a> 번 게시글에 댓글을 남겼습니다.");
+				if(boardWriterSession != null) {//작성자가 세션에 있다면, 
+					TextMessage tmpMsg = new TextMessage(content);
 					boardWriterSession.sendMessage(tmpMsg);// 메시지를 보낸다.
-				System.out.println(tmpMsg+"...메시지 송신완료");
-					
-					//이하 다른 기능은 폐기예정 (과정을 이해하는데 참고하기 위한 기록)
-				}else if("follow".equals(cmd) && boardWriterSession != null) {//cmd가 "follow"이고, 작성자가 세션에 있다면,
-					TextMessage tmpMsg = new TextMessage(caller + "님이 " + receiver +
-							 "님을 팔로우를 시작했습니다.");
-					boardWriterSession.sendMessage(tmpMsg);
-					
-				}else if("scrap".equals(cmd) && boardWriterSession != null) {//cmd가 "scrap"이고, 작성자가 세션에 있다면,
-					TextMessage tmpMsg = new TextMessage(caller + "님이 " +
-										//변수를 하나더 보낼수 없어서 receiver 변수에 member_seq를 넣어서 썼다.
-										"<a type='external' href='/mentor/essayboard/essayboardView?pg=1&seq="+seq+"&mentors="+ receiver +"'>" + seq + "</a>번 에세이를 스크랩 했습니다.");
-					boardWriterSession.sendMessage(tmpMsg);
 				}
 			}
-			// 모임 신청 했을때..이건 안쓸 예정
-//			if(strs != null && strs.length == 5) {
-//				String cmd = strs[0];
-//				String mentee_name = strs[1];
-//				String mentor_email = strs[2];
-//				String meetingboard_seq = strs[3];
-//				String participation_seq = strs[4];
-//				
-//				// 모임 작성한 멘토가 로그인 해있으면
-//				WebSocketSession mentorSession = userSessionsMap.get(mentor_email);
-//				if(cmd.equals("apply") && mentorSession != null) {
-//					TextMessage tmpMsg = new TextMessage(
-//							mentee_name + "님이 모임을 신청했습니다. " +"<a type='external' href='/mentor/participation/participationView?mseq="+ meetingboard_seq +"&pseq="+ participation_seq +"'>신청서 보기</a>");
-//					mentorSession.sendMessage(tmpMsg);
-//				}
-//			}
 		}
 	}
-	
 	//연결 해제될때
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
@@ -102,17 +60,14 @@ public class EchoHandler extends TextWebSocketHandler {
 	}
 	
 	//웹소켓 email 가져오기
-	private String getEmail(WebSocketSession session) {
-		System.out.println("이메일정보 접근");
+	private String getMno(WebSocketSession session) {
 		Map<String, Object> httpSession = session.getAttributes();
-		System.out.println(httpSession);
-		System.out.println(httpSession.toString());
 		AccountVO loginUser = (AccountVO)httpSession.get("person");
-		System.out.println(loginUser.getEmail());
-		if(loginUser == null) {
+		System.out.println(loginUser.getMno()+":회원번호 출력 체크");
+		if(loginUser != null) {
+			return loginUser.getMno()+"";//mno를 String으로 형변환해서 전달
+		}else {//로그인 정보를 찾지 못했으면 sessionId를 반환
 			return session.getId();
-		} else {
-			return loginUser.getEmail();
 		}
 	}
 }

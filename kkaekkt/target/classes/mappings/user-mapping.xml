@@ -144,10 +144,10 @@
 		AND email=#{email};
 	</select>
 
-	<select id="getEmail" resultType="person">
-		SELECT *
+	<select id="getEmail" resultType="String">
+		SELECT email
 		FROM member
-		WHERE email=#{email);
+		WHERE email=#{email};
 	</select>
 	<select id="getLikedBs" resultType="business"><!-- 찜한 업체 목록 조회(뷰테이블 사용예정) -->
 		
@@ -221,8 +221,7 @@
 	<select id="idchk" resultType="int">
 		SELECT count(*)
 		FROM account
-		WHERE
-		id=#{id}
+		WHERE id=#{id};
 	</select>
 	<select id="joinCfm" resultType="account">
 		SELECT id, mname, bname

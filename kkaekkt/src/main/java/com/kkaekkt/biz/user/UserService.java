@@ -26,11 +26,12 @@ public interface UserService {
 	public AccountVO findPw(AccountVO vo);
 	public int idchk(PersonVO vo);
 	public PersonVO method(PersonVO vo);
-	public String email(PersonVO vo);
+	public String email(AccountVO vo);
 	public AccountVO joinCfm(AccountVO vo);
 	public double avgGradeBs(BusinessVO vo);
 	public int countLikeBs(BusinessVO vo);	
 	public int loginchk(AccountVO vo);
+	public int idchkBs(BusinessVO vo);
 
 
 

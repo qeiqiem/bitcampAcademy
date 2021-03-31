@@ -67,6 +67,15 @@ public class UserDAO {
 		return mybatis.selectOne("UserDAO.loginchk", vo);
 	}
 
+	// 아이디 중복확인
+	public int idchkBs(BusinessVO vo) {
+		System.out.println(vo);
+		int res = mybatis.selectOne("UserDAO.idchk", vo);
+		System.out.println("dao와서 마이바티스 카운트값 가져옴");
+		System.out.println(res);
+		return res;
+	}
+	
 	// 일반 로그인
 		public PersonVO getUserPs(PersonVO vo) {
 			System.out.println("mybatis로 기능처리 일반유저");
@@ -87,11 +96,11 @@ public class UserDAO {
 		
 		
 		// 이메일 확인
-		public String email(PersonVO vo) {
+		public String email(AccountVO vo) {
 			System.out.println("mybatis로 기능처리 -- 이메일 찾기");
-			System.out.println(vo);
+			System.out.println(vo);	
 			
-			return mybatis.selectOne("UserDAO.getPersonSNS", vo);
+			return mybatis.selectOne("UserDAO.getEmail", vo);
 		}
 
 	// laundry

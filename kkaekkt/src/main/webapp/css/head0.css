@@ -34,7 +34,12 @@
 .head_right a {
   margin: 0 10px;
 }
-
+.head_right input{
+	margin-right: 10px;
+    text-align: right;
+    border: none;
+    font-size:15px
+}
 .logo img {
   width: 200px;
   padding: 10px;
@@ -58,7 +63,92 @@ a:hover {
 }
 
 .head_right {
+  display: flex;
   margin: auto 0;
   bottom: 0;
   font-size: 0.9em;
+}
+#bellBox,#chatBox {
+  margin: 0 10px;
+  position: relative;
+}
+.head_right .fas{
+  font-size: 23px;
+  cursor: pointer;
+}
+#bellBox .redDot{/*종 레드 닷*/
+  position: absolute;
+  display: none;
+  font-size: 1px;
+  left: 15px;
+  top: -8px;
+  color: red;
+}
+#chatBox .redDot{/*챗 레드 닷*/
+  position: absolute;
+  display: none;
+  font-size: 1px;
+  left: 18px;
+  top: -8px;
+  color: red;
+}
+#noticeBox{
+  display: none;
+  position: absolute;
+  width: 235px;
+  right: 25px;
+  border: 1px solid var(--gray-color);
+  box-shadow: 7px 10px 12px 0px rgba(196, 196, 196, 0.5);
+  background-color: white;
+}
+#noticeBox a{
+  color: black;
+  margin: 0;
+}
+#noticeBox ul{
+  margin: 0;
+}
+#noticeBox li{
+  border-bottom: 1px solid var(--gray-color);
+  padding: 11px 17px;
+  margin-bottom: -1px;  
+  position: relative;
+  font-size: 12px;
+  cursor: pointer;
+}
+#noticeBox li:hover{
+  background-color: var(--key-color);
+}
+.msgTop{
+  width: 190px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+#noticeBox button{
+  width: 100%;
+  border: none;
+  height: 40px;
+  font-size: 14px;
+  background: rgb(249 249 249);
+}
+#noticeBox button:hover{
+  cursor: pointer;
+  background-color: var(--key-color);
+}
+#noticeBox li .fas{
+  position: absolute;
+  top: 23px;
+  right: 15px;
+  font-size: 10px;
+  color: var(--text-gray);
+}
+.msgBottom{
+  width: 185px;
+  display: flex;
+  justify-content: space-between;
+  color: gray;
+}
+.read{
+  color: rgb(116 116 116 / 50%);
 }

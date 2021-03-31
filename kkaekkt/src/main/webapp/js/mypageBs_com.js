@@ -46,10 +46,12 @@ function initEvent() {
     });
     $('.process').on('click','.cancelBtn',function() {//리스트의 취소 버튼을 누를 때
 		rsvObj.rsvNum=JSON.parse($('.processList tr').eq($(this)[0].value).children().eq(1)[0].innerHTML);
+        alertObj.addressee=$('.processList tr').eq($(this)[0].value).children()[2].id; //회원번호
         openModal('cancel');
 	});
 	$('.process').on('click','.completeBtn',function() {//리스트의 완료버튼을 누를 때
 		rsvObj.rsvNum=JSON.parse($('.processList tr').eq($(this)[0].value).children().eq(1)[0].innerHTML);
+        alertObj.addressee=$('.processList tr').eq($(this)[0].value).children()[2].id; //회원번호
 		openModal('complete');
 	});
     $("#mask").on("click", function() {  $('#modal_container').hide(); $("#mask").hide();});
@@ -128,11 +130,57 @@ function operate() {
         complete(rsvObj);
     }
 }
+function today() {
+    var date=new Date();
+    var mm=date.getMonth()+1;
+    var dd=date.getDate();
+    var today=date.getFullYear()+'.'+(mm<10?'0'+mm:mm)+'.'+dd;
+    return today;
+}
+function msgSet(result) {
+    if(result=='cancel'){//주문이 취소되었다면
+        alertObj.rsvNum=rsvObj.rsvNum;
+        alertObj.msg='주문번호'+rsvObj.rsvNum+' 가 취소되었습니다.';
+        alertObj.typeNum=5;
+    }else if(result=='complete'){//주문이 완료되었다면
+        alertObj.rsvNum=rsvObj.rsvNum;
+        alertObj.msg='주문번호'+rsvObj.rsvNum+'의 세탁이 완료되었습니다.';
+        alertObj.typeNum=3;
+    }else {
+        console.log('알림메시지 처리 에러');
+    }
+}
+function sendMsg() {
+    $.post({
+        url:'/regitAlert.do',
+        data:alertObj,
+        success:function() {
+            if(socket){
+                var receiver=alertObj.addressee;
+                var msg='<li>'+
+                            '<div class="msgTop">'+
+                                '<a href="/jsp/mypageUser/mypagePs.jsp">['+(alertObj.typeNum==3?'완료':'취소')+']⠀'+alertObj.msg+'</a>'+
+                            '</div>'+
+                            '<div class="msgBottom">'+
+                                '<span class="date">'+today()+'</span>'+
+                                '<span class="byBs">by '+username+'</span>'+
+                            '</div>'+
+                            '<i class="fas fa-times"></i>'+
+                        '</li>'
+                socket.send(receiver+','+msg);//메시지 보냄
+            }
+        }
+    });
+}
 function cancel(rsvObj) {
 	$.post({
         url:"/cancel.do",
         data:rsvObj,
-        success: function() {
+        success: function(result) {
+            if(result!=''){//JAVA에서 null 반환시 공백으로 전달
+                msgSet(result);
+                sendMsg();
+            }
 			ajax(pageObj);
             alert('주문이 정상적으로 취소되었습니다.');
             modalClose();
@@ -147,7 +195,11 @@ function complete(rsvObj) {
 	$.post({
 		url:"/complete.do",
 		data:rsvObj,
-		success: function() {
+		success: function(result) {
+            if(result!=''){
+                msgSet(result);
+                sendMsg();
+            }
 			ajax(pageObj);
             alert('작업이 완료되었습니다.');
             modalClose();
@@ -243,7 +295,7 @@ function printlist(list) {//리팩토링 무조건 필요함 뇌빼고 작업한
                 '<tr>' +
                     '<td>'+value.rsvDate+'</td>'+
                     '<td>'+value.rsvNum+'</td>'+
-                    '<td>'+value.mname+'</td>'+
+                    '<td id="'+value.mno+'">'+value.mname+'</td>'+
                     '<td>'+laundry+'</td>'+
                     '<td>'+count+'</td>'+
                     '<td>'+price+'</td>'+

@@ -16,6 +16,7 @@
 		<typeAlias alias="comment" type="com.kkaekkt.biz.comm.CommVO"/>
 		<typeAlias alias="maplist" type="com.kkaekkt.biz.map.MapListVO"/>
 		<typeAlias alias="single" type="com.kkaekkt.biz.map.SingleListVO"/>
+		<typeAlias alias="alert" type="com.kkaekkt.biz.comm.AlertVO"/>
 	</typeAliases>
 			
 	<!-- Sql Mapper 설정 -->

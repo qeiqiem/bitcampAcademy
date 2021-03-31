@@ -8,11 +8,10 @@ public class AccountVO {
     private String phone;
     private String address;
     private String email;
-//    private String bmail;
-//    private String mmail;
+    private String bmail;
+    private String mmail;
     private int mtype;
     private int idchk;
-    
     
 	public int getMno() {
 		return mno;
@@ -38,12 +37,12 @@ public class AccountVO {
     public void setName(String name) {
         this.name = name;
     }
-//    public void seMname(String mname) {
-//    	this.name = mname;
-//    }
-//    public void setBname(String bname) {
-//    	this.name = bname;
-//    }
+    public void setMname(String mname) {
+    	this.name = mname;
+    }
+    public void setBname(String bname) {
+    	this.name = bname;
+    }
     public String getPhone() {
         return phone;
     }

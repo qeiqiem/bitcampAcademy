@@ -96,6 +96,12 @@ public class UserServiceImpl implements UserService {
 	// 로그인 들
 	
 	@Override
+	public int idchkBs(BusinessVO vo) {
+		System.out.println("아이디 찾는 서비스 옴 -- 업체");
+		return userDao.idchkBs(vo);
+	}
+	
+	@Override
 	public int loginchk(AccountVO vo) {
 		System.out.println("로그인 전 체크하는 service 옴");
 		return userDao.loginchk(vo);
@@ -184,7 +190,7 @@ public class UserServiceImpl implements UserService {
 		return userDao.idchk(vo);
 	}
 	@Override
-	public String email(PersonVO vo) {
+	public String email(AccountVO vo) {
 		System.out.println("email 찾는 서비스 옴");
 		return userDao.email(vo);
 	}
@@ -194,5 +200,7 @@ public class UserServiceImpl implements UserService {
 		System.out.println("가입완료 서비스옴");
 		return userDao.joinCfm(vo);
 	}
+
+
 
 }

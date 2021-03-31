@@ -1,9 +1,11 @@
 package com.kkaekkt.biz.comm;
 
+
 public class LaundryVO {
 	private String rsvDate;
 	private int rsvNum;
 	private String mname;
+	private int mno;
 	private int dDay;
 	private int lno;
 	private String laundry;
@@ -11,6 +13,12 @@ public class LaundryVO {
 	private String state;
 	private int price;
 	
+	public int getMno() {
+		return mno;
+	}
+	public void setMno(int mno) {
+		this.mno = mno;
+	}
 	public int getLno() {
 		return lno;
 	}
@@ -73,8 +81,8 @@ public class LaundryVO {
 	}
 	@Override
 	public String toString() {
-		return "LaundryVO [rsvDate=" + rsvDate + ", rsvNum=" + rsvNum + ", mname=" + mname + ", dDay=" + dDay
-				+ ", laundry=" + laundry + ", count=" + count + ", state=" + state + ", price=" + price + "]";
+		return "LaundryVO [rsvDate=" + rsvDate + ", rsvNum=" + rsvNum + ", mname=" + mname + ", dDay=" + dDay + ", lno="
+				+ lno + ", laundry=" + laundry + ", count=" + count + ", state=" + state + ", price=" + price + "]";
 	}
 	
 }

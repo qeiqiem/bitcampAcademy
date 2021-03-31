@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kkaekkt.biz.comm.AlertVO;
 import com.kkaekkt.biz.comm.CommListVO;
 import com.kkaekkt.biz.comm.CommVO;
 import com.kkaekkt.biz.comm.LaundryVO;
@@ -102,6 +103,9 @@ public class ReservationDAO {
 	}
 	public void complete(LaundryVO vo) {
 		mybatis.update("reservationDAO.completeRsv",vo);
+	}
+	public void regitAlert(AlertVO vo) {
+		mybatis.insert("reservationDAO.regitAlert",vo);		
 	}
 	
 }
