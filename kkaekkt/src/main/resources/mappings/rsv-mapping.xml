@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="reservationDAO">
+	<update id="updateAlert">
+		UPDATE alert SET state=2 WHERE ano=#{ano};
+	</update>
 	<delete id="delAlert">
 		DELETE FROM alert
 		<where>
@@ -286,7 +289,7 @@
 		</where>
 	</select>
 	<select id="getRsvMdetail" resultType="reservation"> 
-		SELECT DISTINCT r.rno rsvNum, r.rdate  rsvDate, m.mname mname, m.phone phone, m. address address 
+		SELECT DISTINCT r.rno rsvNum, r.rdate  rsvDate, m.mname mname, m.phone phone, m.address address 
 		FROM reservation r
 		JOIN rsv_laundry rl ON r.rno = rl.rno 
 		JOIN `member` m ON m.mno = r.mno

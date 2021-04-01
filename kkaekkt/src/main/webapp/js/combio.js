@@ -5,6 +5,10 @@ let formatemail = 1;
 let formatemailNum = 1;
 let formatAccNum = 1; 
 
+let formatphone1 = 1;
+let formatphone2 = 1;
+let formatphone3 = 1;
+
 const regPw = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
 const regPhone = /^[0-9]{3}\-[0-9]{3,4}\-[0-9]{4}$/;
 const regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;

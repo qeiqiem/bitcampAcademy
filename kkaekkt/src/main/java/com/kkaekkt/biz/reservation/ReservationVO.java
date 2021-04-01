@@ -22,7 +22,7 @@ public class ReservationVO {
 	private int count; // ex. 일반의류 외 count 개
 	private List<LaundryVO> laundryList; // 품목리스트
 	private List<CommVO> commList; //리뷰 리스트
-	private String address;
+	private String address; 
 	
 	public int getMno() {
 		return mno;
@@ -143,6 +143,7 @@ public class ReservationVO {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	
 	@Override
 	public String toString() {
 		return "ReservationVO [rsvNum=" + rsvNum + ", bno=" + bno + ", mno=" + mno + ", mname=" + mname + ", bname="

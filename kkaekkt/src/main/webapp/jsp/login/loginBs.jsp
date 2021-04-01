@@ -15,9 +15,7 @@
 
 <body>
     <jsp:include page="/jsp/header0.jsp"></jsp:include>
-    
     <div class="body_container">
-    
         <div class="content">
             <button id="log">
                 <a href="/jsp/login/loginPs.jsp">일반로그인</a>
