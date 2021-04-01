@@ -1,10 +1,11 @@
 $(document).ready(function() {
     initSide();
-    initEvent();
+    initBodyEvent();
     ajax();
 });
 function ajax() {
 	console.log('ajax진입');
+    alertObj.datediff=14;
     $.post({
         url:'/getAlertList.do',
         data:alertObj,
@@ -21,15 +22,13 @@ function initSide() {
 }
 function printAlertList(list) {
     $('#alertListBox .date').remove();
-	
     $.each(list, function(key,value) {
-        console.log(key+'...출력중');
         if($('#alertListBox .date').last().attr('id')==value.date){//날짜가 같다면 리스트만 출력
             $('#alertListBox .date ul').last().append(
-                '<li id="'+value.ano+'"><div'+(value.state==1?'read':'')+'>'+
+                '<li id="'+value.ano+'"><div'+(value.state==2?' class="read"':'')+'>'+
                         '<span class="msgHeader">'+value.typename+'</span>⠀'+value.msg+
                     '</div>'+
-                    '<div'+(value.state==1?'read':'')+'>'+
+                    '<div'+(value.state==2?' class="read"':'')+'>'+
                         '<span class="byBs">by '+value.senderName+' </span><span>⠀|⠀</span>'+
                         '<span class="alertDate">'+value.date+'</span>'+
                     '</div>'+
@@ -42,10 +41,10 @@ function printAlertList(list) {
                     '<i class="far fa-clock"></i>'+
                     '<h2>'+value.date+'</h2>'+
                     '<ul>'+
-                        '<li id="'+value.ano+'"><div'+(value.state==2?'read':'')+'>'+
+                        '<li id="'+value.ano+'"><div'+(value.state==2?' class="read"':'')+'>'+
                                 '<span class="msgHeader">'+value.typename+'</span>⠀'+value.msg+
                             '</div>'+
-                            '<div'+(value.state==2?'read':'')+'>'+
+                            '<div'+(value.state==2?' class="read"':'')+'>'+
                                 '<span class="byBs">by '+value.senderName+' </span><span>⠀|⠀</span>'+
                                 '<span class="alertDate">'+value.date+'</span>'+
                             '</div>'+
@@ -56,17 +55,17 @@ function printAlertList(list) {
         }
     });
 }
-function initEvent() {
+function initBodyEvent() {
     $('#alertListBox').on('click','i.fa-times',function() {//삭제버튼이 눌렸을 때
         alertObj.ano=JSON.parse($(this).attr('id'));
-        delAlert();
+        delPageAlert();
     });
     $('#readDelBtn').click(function() {//읽은 알림 삭제버튼이 눌렸을 때
         alertObj.state=2;//읽음 상태인 알림만 삭제
-        delAlert();
+        delPageAlert();
     });
     $('#totalDelBtn').click(function() {//모두 삭제 버튼이 눌렸을 때
-        delAlert();
+        delPageAlert();
     });
     $('#refresh').click(function() {//새로고침 버튼이 눌렸을 때
         ajax();//리스트 초기화
@@ -100,8 +99,12 @@ function initEvent() {
         alertObj.typenum=5;
         ajax();
     });
+    $('#alertListBox').on('click','li',function() {
+        alertObj.ano=Number($(this).attr('id'));
+        readAlert();//헤더 js에 저장된 메서드
+    });
 }
-function delAlert() {//알림 삭제 메서드
+function delPageAlert() {//알림 삭제 메서드
     $.post({
         url:'/delAlert.do',
         data:alertObj,
@@ -113,12 +116,7 @@ function delAlert() {//알림 삭제 메서드
             }else {//전체 삭제라면
                 $('#alertListBox .date').remove();
             }
-            initAlertObj();
+            initAlertObj();//헤더 js에 저장된 공용 메서드 -> 객체 초기화
         }
     });
-}
-function initAlertObj() {//객체 초기화
-    delete alertObj.state;
-    delete alertObj.typenum;
-    delete alertObj.ano;
 }
