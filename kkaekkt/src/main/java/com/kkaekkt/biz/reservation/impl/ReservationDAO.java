@@ -108,4 +108,8 @@ public class ReservationDAO {
 		mybatis.insert("reservationDAO.regitAlert",vo);		
 	}
 	
+	public ReservationVO getRsvMdetail(ReservationVO vo) {
+		return mybatis.selectOne("reservationDAO.getRsvMdetail",vo);
+	}
+	
 }

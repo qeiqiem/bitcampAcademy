@@ -131,4 +131,12 @@ public class ReservationServiceImpl implements ReservationService {
 	public void regitAlert(AlertVO vo) {
 		reservationDAO.regitAlert(vo);		
 	}
+	
+	@Override
+	public ReservationVO getRsvDetail(ReservationVO vo) {
+		vo = reservationDAO.getRsvMdetail(vo);
+		vo.setLaundryList(reservationDAO.getLaundryList(vo));
+		
+		return vo;
+	}
 }

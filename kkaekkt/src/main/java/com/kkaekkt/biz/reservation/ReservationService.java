@@ -19,4 +19,5 @@ public interface ReservationService {
 	public CommListVO getCommListBs(CommListVO vo);
 	public String washingDone(LaundryVO vo);
 	public void regitAlert(AlertVO vo);
+	public ReservationVO getRsvDetail(ReservationVO vo);
 }
