@@ -22,11 +22,13 @@
             <form action="/updatePs.do" method="POST" name="mybio" onsubmit="return submitMybio();">
                 <h3 id="mybio_title">내 정보</h3>
                 <button type="button" id="btn_mybio">수정하기</button>
-                <button type="button" id="btn_delete">회원탈퇴</button>
                 <div id="btn_mybioClick">
                     <button type="submit" id="btn_mybiofin">수정완료</button>
                     <button type="reset" id="btn_back">돌아가기</button>
                 </div>
+                <form action="/deletePs.do" method="POST" name="deletePs">
+                    <button type="button" id="btn_delete">회원탈퇴</button>
+                </form>
                 <hr>
                 <div id="mybio_info">
                     <table>
@@ -121,7 +123,7 @@
 
 
     </script>
-   
+
 
 
 

@@ -358,4 +358,11 @@ public class UserController {
 		String num = Integer.toString(checkNum);
 		return num;
 	}
+	
+	// 회원탈퇴
+	@RequestMapping(value = "/deletePs.do", method = RequestMethod.POST)
+	public void deleteUser(PersonVO vo) {
+		return ;
+		
+	}
 }
