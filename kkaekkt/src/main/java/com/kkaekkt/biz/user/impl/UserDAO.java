@@ -60,12 +60,6 @@ public class UserDAO {
 	public int countList(BusinessListVO vo) {
 		return mybatis.selectOne("UserDAO.countList", vo);
 	}
-	
-	// 로그인 전 체크
-	public int loginchk(AccountVO vo) {
-		System.out.println("mybatis로 기능처리 아이디나 비밀번호 화인");
-		return mybatis.selectOne("UserDAO.loginchk", vo);
-	}
 
 	// 아이디 중복확인
 	public int idchkBs(BusinessVO vo) {
@@ -168,6 +162,8 @@ public class UserDAO {
 	public double avgGradeBs(BusinessVO vo) {
 		return  mybatis.selectOne("UserDAO.avgGradeBs", vo);
 	}
+
+
 
 
 

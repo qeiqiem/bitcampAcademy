@@ -14,14 +14,14 @@
 <title>Document</title>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/css/login.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/login.css">
 </head>
 
 <body>
 	<jsp:include page="/jsp/header0.jsp"></jsp:include>
 
 	<div class="body_container">
+		
 
 		<div class="content">
 			<button id="log">
@@ -32,9 +32,7 @@
 			</button>
 			<div class="login">
 				<form action="/loginPs.do" method="post">
-					<h3>
-						<a href="http://developers.kakao.com/logout">로그인</a>
-					</h3>
+					<a href="http://developers.kakao.com/logout"><h3 class="loginTitle">로그인</h3></a>
 					<hr>
 					<div>
 						<input type="text" name="id" id="id" placeholder="아이디" />
