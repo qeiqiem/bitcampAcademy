@@ -102,8 +102,8 @@
 			<otherwise>
 				<!-- UPDATE account SET password=#{password} WHERE mno=#{mno}; -->
 				UPDATE business SET
-				phone=#{phone},birth=#{birth},bkno=#{bankNum},acno=#{bankAccountNum} address=#{address},email=#{email}
-				WHERE bno=#{bno};
+				phone=#{phone},bkno=#{bankNum},acno=#{bankAccountNum}, address=#{address},email=#{email}
+				WHERE mno=#{mno};
 			</otherwise>
 		</choose>
 
@@ -112,12 +112,6 @@
 		DELETE account WHERE mno=#{no}
 	</delete>
    <!-- 로그인들 -->
-   <select id="loginchk" resultType="person">
-   		SELECT *
-   		FROM account
-   		WHERE id=#{id}
-   		AND password=#{password}
-   </select>
 	<select id="getPerson" resultType="person">
 		SELECT ac.mno as mno, id, password, mname as name, phone, birth, address, email
 		FROM account ac, member mb
@@ -214,15 +208,13 @@
 		SELECT b.email mmail, m.email bmail, id
 		FROM account ac
 		LEFT OUTER JOIN member m on ac.mno=m.mno
-		LEFT
-		OUTER JOIN business b on ac.mno=b.mno
+		LEFT OUTER JOIN business b on ac.mno=b.mno
 		WHERE ac.id=#{id};
 	</select>
 	<select id="idchk" resultType="int">
 		SELECT count(*)
 		FROM account
-		WHERE
-		id=#{id}
+		WHERE id=#{id};
 	</select>
 	<select id="joinCfm" resultType="account">
 		SELECT id, mname, bname

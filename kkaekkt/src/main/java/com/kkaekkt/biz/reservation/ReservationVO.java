@@ -8,6 +8,7 @@ import com.kkaekkt.biz.comm.LaundryVO;
 public class ReservationVO {
 	private int rsvNum; // 예약번호
 	private int bno;
+	private int mno;
 	private String mname; // 회원명
 	private String bname; // 업체명
 	private String rsvDate; // 예약일자
@@ -21,7 +22,14 @@ public class ReservationVO {
 	private int count; // ex. 일반의류 외 count 개
 	private List<LaundryVO> laundryList; // 품목리스트
 	private List<CommVO> commList; //리뷰 리스트
+	private String address;
 	
+	public int getMno() {
+		return mno;
+	}
+	public void setMno(int mno) {
+		this.mno = mno;
+	}
 	public List<CommVO> getCommList() {
 		return commList;
 	}
@@ -128,4 +136,20 @@ public class ReservationVO {
 	public int getCount() {
 		return count;
 	}
+	
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	@Override
+	public String toString() {
+		return "ReservationVO [rsvNum=" + rsvNum + ", bno=" + bno + ", mno=" + mno + ", mname=" + mname + ", bname="
+				+ bname + ", rsvDate=" + rsvDate + ", phone=" + phone + ", dDate=" + dDate + ", dDay=" + dDay
+				+ ", state=" + state + ", like=" + like + ", timeOut=" + timeOut + ", totalPrice=" + totalPrice
+				+ ", count=" + count + ", laundryList=" + laundryList + ", commList=" + commList + "]";
+	}
+	
+	
 }

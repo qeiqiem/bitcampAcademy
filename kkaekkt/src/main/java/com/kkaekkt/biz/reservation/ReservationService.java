@@ -1,12 +1,15 @@
 package com.kkaekkt.biz.reservation;
 
+import java.util.List;
+
+import com.kkaekkt.biz.comm.AlertVO;
 import com.kkaekkt.biz.comm.CommListVO;
 import com.kkaekkt.biz.comm.CommVO;
 import com.kkaekkt.biz.comm.LaundryVO;
 
 public interface ReservationService {
 	public void insertRsv(ReservationVO vo);
-	public void cancel(LaundryVO vo);
+	public String cancel(LaundryVO vo);
 	public void complete(LaundryVO vo);
 	public void like(ReservationVO vo);
 	public ReservationListVO getRsvListPs(ReservationListVO vo);
@@ -16,5 +19,9 @@ public interface ReservationService {
 	public void deleteCommAb(CommVO vo);
 	public void deleteCommCh(CommVO vo);
 	public CommListVO getCommListBs(CommListVO vo);
-	public void washingDone(LaundryVO vo);
+	public String washingDone(LaundryVO vo);
+	public void regitAlert(AlertVO vo);
+	public ReservationVO getRsvDetail(ReservationVO vo);
+	public List<AlertVO> getAlertList(AlertVO vo);
+	public void delAlert(AlertVO vo);
 }

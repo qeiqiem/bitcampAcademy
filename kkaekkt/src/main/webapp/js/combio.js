@@ -1,9 +1,12 @@
+let code = "";                //이메일전송 인증번호 저장위한 코드
+
 let fomatpw = 0;
 let formatemail = 1;
 let formatemailNum = 1;
 let formatAccNum = 1; 
 
 const regPw = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+const regPhone = /^[0-9]{3}\-[0-9]{3,4}\-[0-9]{4}$/;
 const regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
 const regAccount=/^[0-9,\-]{3,6}\-[0-9,\-]{2,6}\-[0-9,\-]{3,6}(\-[0-9]{1,3})?$/;
 const regMailCode =/^[0-9]{6}$/;
@@ -23,12 +26,15 @@ $ComTimer.prototype = {
     , fnTimer : function(){
         var min = Math.floor(this.comSecond/60);
         var sec = this.comSecond%60;
-        this.domId.innerText = ` ${min}:${sec<10?`0${sec}`:sec}`;
+        this.domId.innerText = `${min}:${sec<10?`0${sec}`:sec}`;
         this.comSecond--;					// 1초씩 감소
         if (this.comSecond < 0) {			// 시간이 종료 되었으면..
             clearInterval(this.timer);		// 타이머 해제
             alert("인증시간이 초과하였습니다. 다시 인증해주시기 바랍니다.");
-            mailCode=null;//인증코드 초기화
+            $('#timeout').hide();
+            $(".mail_check_input").attr("disabled",true);
+            $("#mail_check").attr("disabled",true);
+            $(".mail_check_input").attr("id", "mail_check_input_box_false");
         }
     }
 }
@@ -72,13 +78,18 @@ window.onload = function () {
         document.getElementById("btn_change").style.display = "none";
         document.getElementById("updateBio").style.display = "block";
 
+        inputInfo();
         defaultDisable();
+        let labelli = document.getElementsByTagName("label");
+        for(let i=0; i< labelli.length; i++){
+            labelli[i].innerText="";
+        }
     }
 
     // 비밀번호 입력 후 수정버튼(비밀번호 변경시) 새 비밀번호, 확인버튼 활성화
     document.getElementById("btn_checkpwd").onclick = function checkPwd() {
         // 로그인된 회원의 비밀번호와 일치하는지 확인
-        const curpwd = document.getElementById("curpwd");
+        let curpwd = document.getElementById("curpwd");
 
         // 일치
         if (curpwd.value == pageObj["password"]) {
@@ -171,12 +182,12 @@ window.onload = function () {
              $("#pnewpwdwd").val("");
         }
         if ($('#pwd').val != $('#newpwd').val) {
-            document.getElementById("match").innerText
-                = " 새 비밀번호와 일치하지 않습니다.";
+            document.getElementById("match").innerText = " 새 비밀번호와 일치하지 않습니다.";
             $("#pnewpwdwd").val("");
         }
 
     });
+    // 계좌번호 입력형식 확인
     document.getElementById("bankAccNum").addEventListener('keyup', () => {
         formatAccNum = 0;
         let inputAcc = document.getElementById("bankAccNum");
@@ -195,6 +206,35 @@ window.onload = function () {
 
         }
     });
+    // 연락처 입력형식 확인
+    document.getElementById("phone1").addEventListener('keyup', () => {
+        formatphone1 = 0;
+        let inputphone =  document.getElementById("phone1");
+        if (!regPhone.test(inputphone.value)) {
+           formatphone1 = 0;
+        } else {
+            formatphone1 = 1;
+        }
+    })
+    document.getElementById("phone2").addEventListener('keyup', () => {
+        formatphone2 = 0;
+        let inputphone =  document.getElementById("phone2");
+        if (!regPhone.test(inputphone.value)) {
+           formatphone2 = 0;
+        } else {
+            formatphone2 = 1;
+        }
+    })
+    document.getElementById("phone3").addEventListener('keyup', () => {
+        formatphone3 = 0;
+        let inputphone =  document.getElementById("phone3");
+        if (!regPhone.test(inputphone.value)) {
+           formatphone3 = 0;
+        } else {
+            formatphone3 = 1;
+        }
+    })
+
     // 이메일 입력형식 확인
     document.getElementById("email").addEventListener('keyup', () => {
         formatemail = 0;
@@ -312,42 +352,28 @@ function checkemailNum(){
             timeStop();
             formatemailNum = 1;
             alert('메일 인증이 완료되었습니다.');
-            $("#reqinput").text("");
-            $(".mail_input").attr("disabled",true);
+            $('#timeout').hide();
+            $(".mail_check_input").val("");
+            $("#mail_check").attr("disabled",true);
             $(".mail_check_input").attr("disabled",true);
-            doncument.getElementById("btn_checkemail").disabled = true;
-       
-            $("#reqinput").attr("class", "correct");        
-        } else if($('#timeout')[0].innerText=="0:00"){//시간이 다 됐는데 인증을 누른다면
-            formatemailNum = 0;
-            alert('인증번호가 만료되었습니다.');
-            $('#timeout').text="";
-            $(".mail_check_input").attr("disabled",false);
-            document.getElementById("mail_check").disabled = false;
             $(".mail_check_input").attr("id", "mail_check_input_box_false");
-        }else if($('#timeout')[0].innerText.length!=0){//시간이 남았는데 코드가 일치하지 않는다면
+            doncument.getElementById("btn_checkemail").disabled = true;
+            $("#checkemail").val("인증되었습니다.");
+       
+        } else if($('#timeout').text() != "0:00"){//시간이 남았는데 코드가 일치하지 않는다면
             formatemailNum = 0;
             alert('인증번호가 일치하지 않습니다.');
-        }else if(formatArray[3]==false){//타이머가 공백인데 인증이 되지 않았다면
-            formatemailNum = 0;
-            alert('이메일 인증을 먼저 진행해주세요.');
-        }else {// 그 외에 경우는 어떻게 정의할 지 잘 모르겠음
-            formatemailNum = 0;
         }
     } else {//코드가 숫자 6자리가 아니라면
         formatemailNum = 0;
-            $("#reqinput").text("");
-            alert(" 인증번호를 다시 확인해주세요.");
-            console.log(formatemail);
-    
-            $("#reqinput").attr("class", "incorrect");
-        
+        alert(" 인증번호를 다시 확인해주세요.");
+        $("#reqinput").attr("class", "incorrect");   
     }
     
 
 }
 function timerStart() {
-    AuthTimer.comSecond = 5;
+    AuthTimer.comSecond = 180;
     AuthTimer.timer =  setInterval(function(){AuthTimer.fnTimer()},1000);
     AuthTimer.domId = document.getElementById("timeout");
 }
@@ -378,8 +404,13 @@ function submitCombio() {
         $("#curpwd").focus();
         return false;
     }
-    if ($("#phone1").val() == "" || $("#phone2").val() == "" || $("#phone3").val() == "") {
+    if ($("#phone1").val() == "" || $("#phone2").val() == "" || $("#phone3").val() == ""
+        || formatphone1 != 1 || formatphone2 != 1 || formatphone3 != 1 ) {
         alert("연락처를 확인하세요.");
+        return false;
+    }
+    if ($("#bankAccNum").val() == "" ||  formatAccNum != 1) {
+        alert("계좌번호를 확인하세요.");
         return false;
     }
     if ($("input[name='email']").val() == "" || formatemail != 1 || formatemailNum !=1) {

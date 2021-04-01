@@ -1,5 +1,5 @@
 .body_container {
-	padding-top: 60px;
+	padding-top: 70px;
 }
 
 .content {
@@ -65,52 +65,3 @@ a {
 	text-decoration: none
 }
 
-/* 모달창 영역 */
-#modal{
-    display: none;
-    position: relative;
-    width: 100%;
-    height: 100%;
-    z-index: 9999;
-}
-#modal h2{
-    margin: 20px 0;
-}
-
-#modal .modal_content{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 550px;
-    height: 550px;
-    background: #fff;
-    border: 2px solid #000;
-    z-index: 9999;
-}
-.modal_content ul{
-    text-align: center;
-    padding: 30px 30px;
-    margin: 20px 0;
-}
-.modal_content label div {
-    position: fixed;
-    top: 50;
-    left: 50;
-    width: 100%;
-    height: 100%;
-    z-index: 100;
-}
-.modal_content img{
-    margin-bottom: 20px;
-}
-
-#modal .modal_layer{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    z-index: 3;
-}

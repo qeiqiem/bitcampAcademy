@@ -146,9 +146,9 @@ public class UserController {
 		System.out.println(vo);
 		userService.updateUser(vo);
 		vo = userService.getUser(vo);
-		vo.setLikedNum(userService.countLikeBs(vo));	// 프로필편집에서 찜 인원 뽑아와야해서 추가
-		vo.setEval(userService.avgGradeBs(vo));	// 프로필편집에서 찜 인원 뽑아와야해서 추가
-		System.out.println("컨트롤러" + vo);	
+		vo.setLikedNum(userService.countLikeBs(vo)); // 프로필편집에서 찜 인원 뽑아와야해서 추가
+		vo.setEval(userService.avgGradeBs(vo)); // 프로필편집에서 찜 인원 뽑아와야해서 추가
+		System.out.println("컨트롤러" + vo);
 		session.setAttribute("person", vo);
 
 		System.out.println("세션에 수정한 정보 올리기 완료");
@@ -159,30 +159,31 @@ public class UserController {
 	// 이메일 체크 sns에서 로그인할때 디비에 있는지 확인하려고 만든 컨트롤러이다
 	@RequestMapping(value = "/findemail.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String email(PersonVO vo) {
+	public String email(AccountVO vo) {
 		System.out.println("controller에서 이메일 찾음");
 		// vo = userService.email(vo);
 
-		vo.setEmail(userService.email(vo));
-		System.out.println("vo" + vo);
-		PersonVO findEmail = vo;
-		System.out.println("findEmail" + findEmail);
-
-		Gson gson = new Gson();
-		return gson.toJson(findEmail);
+//		AccountVO findEmail = vo;
+//		vo.setEmail();
+//		System.out.println("findEmail" + vo);
+//
+//		Gson gson = new Gson();
+		return userService.email(vo);
 	}
 
-    // 로그인할때 아이디나 비밀번호 있는지 체크하려고 만든 컨트롤러이다.
-        @RequestMapping(value = "/loginchk.do", method = RequestMethod.POST)
-        @ResponseBody
-        public String loginChk(AccountVO vo) {
-            System.out.println("컨트롤러 진입");
-            System.out.println(vo + "가 담김");
-            Gson gson = new Gson();
-            vo.setMno(userService.loginchk(vo));
-            return gson.toJson(vo);
-        }
-            
+
+	// 아이디 중복체크 업체........
+	@RequestMapping(value = "/idchkBs.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String idchkBs(BusinessVO vo) {
+		System.out.println("vo 값 담겼음");
+		System.out.println(vo);
+		Gson gson = new Gson();
+		vo.setState(userService.idchkBs(vo));
+		System.out.println("서비스에서 값 담겨 넘어옴");
+		return gson.toJson(vo);
+	}
+
 	// 일반유저 로그인
 	@RequestMapping(value = "/loginPs.do", method = RequestMethod.POST)
 	public String Login(PersonVO vo, HttpSession session) throws Exception {
@@ -225,7 +226,6 @@ public class UserController {
 
 			if (vo.getBno() == 0) {
 				System.out.println("회원정보없음");
-				// session.setAttribute("personBs", null);
 				return "/jsp/login/loginBs.jsp";
 			} else if (vo.getBno() != 0) {
 				session.setAttribute("person", vo);
@@ -238,27 +238,25 @@ public class UserController {
 		}
 	}
 
-	// 소셜로그인
-	@RequestMapping(value = "/loginSNS.do", method = RequestMethod.POST)
-	public @ResponseBody String kakaologin(PersonVO vo, HttpSession session, HttpServletResponse response) {
-		System.out.println("카카오 로그인 컨트롤러 접속");
-		// 로그인 성공했을 때
-		vo = userService.method(vo);
+	// 소셜로그인 
+		@RequestMapping(value = "/loginSNS.do", method = RequestMethod.POST)
+		public String kakaologin(PersonVO vo, HttpSession session, HttpServletResponse response) {
+			System.out.println("카카오 로그인 컨트롤러 접속");
+			// 로그인 성공했을 때
+			vo = userService.method(vo);
 
-		PersonVO user = vo;
-		System.out.println(vo + "vo카카오"); // 카카오 로그인시 vo 확인
-		System.out.println("user카카2" + user);
+			PersonVO user = vo;
+			System.out.println(user); // 카카오 로그인시 vo 확인
 
-		if (user.getMno() != 0) {
-			session.setAttribute("person", user);
-			System.out.println("user정보 " + user);
-			System.out.println("vo정보" + vo);
-			return "/jsp/indexPerson.jsp";
-		} else {
-			System.out.println("카카오 로그인 실패");
-			return "/jsp/login/loginPs";
+			if (user.getState() != 0) {
+				session.setAttribute("person", user);
+				System.out.println("user정보 " + user);
+				return "/jsp/indexPerson.jsp";
+			} else {
+				System.out.println("로그인 실패");
+				return "/jsp/login/loginPs";
+			}
 		}
-	}
 
 	// 로그아웃
 	@RequestMapping("/logout.do")

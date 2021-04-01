@@ -4,11 +4,14 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.kkaekkt.biz.comm.AlertVO;
 import com.kkaekkt.biz.comm.CommListVO;
 import com.kkaekkt.biz.comm.CommVO;
 import com.kkaekkt.biz.comm.LaundryVO;
@@ -51,13 +54,13 @@ public class ReservationController {
 	}
 	@RequestMapping(value="/cancel.do", method=RequestMethod.POST)
 	@ResponseBody
-	public void cancelRsv(LaundryVO vo) {		
-		reservationService.cancel(vo);
+	public String cancel(LaundryVO vo) {//주문단위 취소 처리되면 cancel 반환, 주문단위 완료 처리되면 complete 반환
+		return reservationService.cancel(vo);
 	}
 	@RequestMapping(value="/washingDone.do", method=RequestMethod.POST)
 	@ResponseBody
-	public void washingDone(LaundryVO vo) {
-		reservationService.washingDone(vo);
+	public String washingDone(LaundryVO vo) {//주문단위 완료처리되면 complete반환
+		return reservationService.washingDone(vo);
 	}
 	@RequestMapping(value="/complete.do", method=RequestMethod.POST)
 	@ResponseBody
@@ -96,6 +99,31 @@ public class ReservationController {
 		Gson gson=new Gson();
 		String result=gson.toJson(reservationService.getCommListBs(vo));
 		return result;
+	}
+	@RequestMapping(value="/regitAlert.do",method=RequestMethod.POST)
+	@ResponseBody
+	public void regitAlert(AlertVO vo) {
+		reservationService.regitAlert(vo);
+	}
+	
+	// 주문전표인쇄 창
+	@RequestMapping(value="/openPopup.do",method=RequestMethod.GET)
+	public String openPopup(ReservationVO vo, Model model) {
+		System.out.println(reservationService.getRsvDetail(vo));
+		model.addAttribute("rsv", reservationService.getRsvDetail(vo) );
+		return "/jsp/mypageBiz/orderPopup.jsp";
+	}
+
+	@RequestMapping(value="/getAlertList.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
+	@ResponseBody//알림 리스트 조회
+	public String getAlertList(AlertVO vo) {
+		Gson gson=new Gson();
+		return gson.toJson(reservationService.getAlertList(vo));
+	}
+	@RequestMapping(value="/delAlert.do",method=RequestMethod.POST)
+	@ResponseBody
+	public void delAlert(AlertVO vo) {
+		reservationService.delAlert(vo);
 	}
 	
 }

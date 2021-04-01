@@ -59,10 +59,12 @@ function initEvent() {
     });
 	$('.process').on('click','.cancelBtn',function() {//리스트의 취소 버튼을 누를 때
 		rsvObj.rsvNum=JSON.parse($('.processList tr').eq($(this)[0].value).children().eq(1)[0].innerHTML);
+        alertObj.addressee=$('.processList tr').eq($(this)[0].value).children()[2].id; //회원번호
         openModal('cancel');
 	});
 	$('.process').on('click','.completeBtn',function() {//리스트의 완료버튼을 누를 때
 		rsvObj.rsvNum=JSON.parse($('.processList tr').eq($(this)[0].value).children().eq(1)[0].innerHTML);
+        alertObj.addressee=$('.processList tr').eq($(this)[0].value).children()[2].id; //회원번호
 		openModal('complete');
 	});
     $("#mask").on("click", function() {  $("#modal_container").hide(); $("#mask").hide();});
@@ -102,12 +104,38 @@ function cancel(rsvObj) {
 	$.post({
         url:"/cancel.do",
         data:rsvObj,
-        success: function() {
+        success: function(result) {
+            if(result!=''){//JAVA에서 null 반환시 공백으로 전달
+                msgSet(result);
+                sendMsg();
+            }
 			ajax(pageObj);
             alert('주문이 정상적으로 취소되었습니다.');
             modalClose();
 		}
 	});
+}
+function sendMsg() {
+    $.post({
+        url:'/regitAlert.do',
+        data:alertObj,
+        success:function() {
+            if(socket){
+                var receiver=alertObj.addressee;
+                var msg='<li>'+
+                            '<div class="msgTop">'+
+                                '<a href="/jsp/mypageUser/mypagePs.jsp">['+(alertObj.typenum==3?'완료':'취소')+']⠀'+alertObj.msg+'</a>'+
+                            '</div>'+
+                            '<div class="msgBottom">'+
+                                '<span class="date">'+today()+'</span>'+
+                                '<span class="byBs">by '+username+'</span>'+
+                            '</div>'+
+                            '<i class="fas fa-times"></i>'+
+                        '</li>'
+                socket.send(receiver+','+msg);//메시지 보냄
+            }
+        }
+    });
 }
 function modalClose() {
     $('#modal_container').hide();
@@ -117,7 +145,11 @@ function complete(rsvObj) {
 	$.post({
 		url:"/washingDone.do",
 		data:rsvObj,
-		success: function() {
+		success: function(result) {
+            if(result!=''){//JAVA에서 null 반환시 공백으로 전달
+                msgSet(result);
+                sendMsg();
+            }
 			ajax(pageObj);
             alert('작업이 완료되었습니다.');
             modalClose();
@@ -193,22 +225,36 @@ function ajax(pageObj) { //ajax로 리스트 받아오기
         }
     });
 }
-function toDay() {
+function msgSet(result) {
+    console.log('메시지 송신 진입');
+    if(result=='cancel'){//주문이 취소되었다면
+        alertObj.rsvNum=rsvObj.rsvNum;
+        alertObj.msg='주문번호'+rsvObj.rsvNum+' 가 취소되었습니다.';
+        alertObj.typenum=5;
+    }else if(result=='complete'){//주문이 완료되었다면
+        alertObj.rsvNum=rsvObj.rsvNum;
+        alertObj.msg='주문번호'+rsvObj.rsvNum+'의 세탁이 완료되었습니다.';
+        alertObj.typenum=3;
+    }else {
+        console.log('알림메시지 처리 에러');
+    }
+}
+function today() {
     var date=new Date();
     var mm=date.getMonth()+1;
     var dd=date.getDate();
-    var today=mm+'월 '+dd+', '+date.getFullYear();
+    var today=date.getFullYear()+'.'+(mm<10?'0'+mm:mm)+'.'+dd;
     return today;
 }
 function printHeader(key,value) {
     if($('.selectbox select')[0].value==1) { //정렬이 주문번호 순이라면,
-        if(key==0&&value.rsvDate==toDay()){
+        if(key==0&&value.rsvDate.substr(0,10)==today()){
             $('.process p')[0].innerHTML="오늘 주문";
         }else if(key==0) {
             $('.process p')[0].innerHTML="지난 주문";
         }else if($('.process p')[0].innerHTML=='오늘 주문'&&//첫 번째 라벨이 오늘 주문이라면
                 $('.process p')[1]==undefined&&//두 번째 라벨이 없다면
-                value.rsvDate!=toDay()) {//날짜가 오늘날짜가 아니라면
+                value.rsvDate.substr(0,10)!=today()) {//날짜가 오늘날짜가 아니라면
             $('.process').append('<p class="processTitle">지난 주문</p>');
         }
     }else { //정렬이 남은일자 순이라면
@@ -267,7 +313,7 @@ function printlist(list) {
                 '<tr>' +
                     '<td>'+value.rsvDate+'</td>'+
                     '<td>'+value.rsvNum+'</td>'+
-                    '<td>'+value.mname+'</td>'+
+                    '<td id="'+value.mno+'">'+value.mname+'</td>'+
                     '<td>'+laundry+'</td>'+
                     '<td>'+count+'</td>'+
                     '<td>'+price+'</td>'+
