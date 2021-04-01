@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
@@ -103,4 +104,16 @@ public class ReservationController {
 	public void regitAlert(AlertVO vo) {
 		reservationService.regitAlert(vo);
 	}
+	@RequestMapping(value="/getAlertList.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
+	@ResponseBody//알림 리스트 조회
+	public String getAlertList(AlertVO vo) {
+		Gson gson=new Gson();
+		return gson.toJson(reservationService.getAlertList(vo));
+	}
+	@RequestMapping(value="/delAlert.do",method=RequestMethod.POST)
+	@ResponseBody
+	public void delAlert(int ano) {
+		reservationService.delAlert(ano);
+	}
+	
 }

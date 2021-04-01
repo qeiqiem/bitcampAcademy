@@ -28,7 +28,6 @@
                <websocket:handshake-interceptors>
                        <beans:bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
                </websocket:handshake-interceptors>
-               <!-- <websocket:sockjs /> -->
         </websocket:handlers>
         <beans:bean id="echoHandler" class="com.kkaekkt.util.socket.EchoHandler" />
 </beans:beans>

@@ -26,7 +26,7 @@
                         </li>
                         <li id="title_right">
                             찜 <span id="likeNum"></span>명 / 내 평점 <span id="avglike"></span>
-                            <label id="starIcon"></label>
+                            <span id="starIcon"></span>
                         </li>
                     </ul>
                 </div>
@@ -105,9 +105,9 @@
                                         <tr>
                                             <td>연락처</td>
                                             <td>
-                                                <input id="phone1" type='text' pattern="[0-9]+" maxlength='3'> - 
-                                                <input id="phone2" type="text" pattern="[0-9]+" maxlength='4'> -
-                                                <input id="phone3" type="text" pattern="[0-9]+" maxlength='4'>
+                                                <input id="phone1" type='text' maxlength='3'> - 
+                                                <input id="phone2" type="text" maxlength='4'> -
+                                                <input id="phone3" type="text" maxlength='4'>
                                                 <input name="phone" type="tel" id="phone" value="" hidden>
                                             </td>
                                         </tr>
@@ -124,11 +124,13 @@
                                         <tr>
                                             <td></td>
                                             <td>
-                                                <input class="mail_check_input" id="mail_check_input_box_false" disabled="disabled">
-                                                <button type="button" id="mail_check">확인</button><span id='timeout'></span></td><br>
-                                                <span id="reqinput"></span> 
+                                                <div id="mailChkDiv">
+                                                <input class="mail_check_input" id="mail_check_input_box_false" disabled="disabled"><span id='timeout'></span>
+                                                <button type="button" id="mail_check">확인</button></td><br>
+                                                </div>
+
                                             </td>
-                                            <td></td>
+                                           
                                         </tr>
                                     </table>
                                 </div>
@@ -152,7 +154,7 @@
                             <div id="btn_update">
                                 <button type="button" onclick="" id="updateBio">수정하기</button>
                                 <div id="btn_change">
-                                    <button type="reset" onclick="" id="resetBio">돌아가기</button>
+                                    <button type="button" onclick="" id="resetBio">돌아가기</button>
                                     <button type="button" onclick="" id="submitBio">수정완료</button>
                                 </div>
                             </div>

@@ -1,18 +1,301 @@
 
-var code = "";                //이메일전송 인증번호 저장위한 코드
+let code = "";                //이메일전송 인증번호 저장위한 코드
 
-let formatbirth = 1;			// 1일때가 유효성 통과했을때
-let formatemail = 0;
+let fomatpw = 0;
+let formatnewpw = 0;            // 비밀번호 변경 시 사용
+let formatbirth = 1;
+let formatphone1 = 1;
+let formatphone2 = 1;
+let formatphone3 = 1;
+let formatemail = 1;
+let formatemailNum = 1;
+let formatAccNum = 1; 
+
+const regPw = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+const regPhone1 = /^[0-9]{3}$/;
+const regPhone = /^[0-9]+$/;
+const regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
+const regAccount=/^[0-9,\-]{3,6}\-[0-9,\-]{2,6}\-[0-9,\-]{3,6}(\-[0-9]{1,3})?$/;
+const regMailCode =/^[0-9]{6}$/;
+
+const content = document.getElementsByClassName("content")[0];
+const mybio_info = document.getElementById("mybio_info");
+let inputli = mybio_info.getElementsByTagName('input');
+let buttonli = mybio_info.getElementsByTagName('button');
+let selectli = mybio_info.getElementsByTagName('select');
+
+//타이머 전역변수 지정
+function $ComTimer() {}
+$ComTimer.prototype = {
+    comSecond : ""
+    , timer : ""
+    , domId : ""
+    , fnTimer : function(){
+        var min = Math.floor(this.comSecond/60);
+        var sec = this.comSecond%60;
+        this.domId.innerText = `${min}:${sec<10?`0${sec}`:sec}`;
+        this.comSecond--;					// 1초씩 감소
+        if (this.comSecond < 0) {			// 시간이 종료 되었으면..
+            clearInterval(this.timer);		// 타이머 해제
+            alert("인증시간이 초과하였습니다. 다시 인증해주시기 바랍니다.");
+            $('#timeout').hide();
+            $(".mail_check_input").attr("disabled",true);
+            $("#mail_check").attr("disabled",true);
+            $(".mail_check_input").attr("id", "mail_check_input_box_false");
+        }
+    }
+}
+var AuthTimer = new $ComTimer();
 
 window.onload = function () {
-    console.log("window onload");
-    var formatpw = 0;
-    var formatnewpw = 0;
-    var content = document.getElementsByClassName("content");
     initSide();
+    defaultDisable();
+    inputInfo();
 
-    //값 넣어주기
 
+    //수정하기 버튼 클릭시 수정완료 돌아가기 버튼 활성화, 인풋창 활성화
+    document.getElementById("btn_mybio").onclick = function btnChange() {
+        //수정완료 돌아가기 버튼 활성화, 인풋창 활성화
+        document.getElementById("btn_mybio").style.display = "none";
+        document.getElementById("btn_mybioClick").style.display = "block";
+        console.log(inputli);
+        console.log(buttonli);
+        //인풋창 활성화
+        for (let i = 0; i < inputli.length; i++) {
+            if (i != 3 && i != 4 && i != 12 && i != 13 && i != 14 && i != 16) {
+                inputli[i].disabled = false;
+            }
+        }
+        //수정, 우편번호 찾기 버튼 활성화
+        for (let i = 0; i < buttonli.length; i++) {
+            if ( i != 1 && i != 3) {
+                buttonli[i].disabled = false;
+            }
+        }
+
+    }
+
+    //돌아가기버튼 클릭시 수정하기 버튼 활성화, 인풋창 비활성화
+    document.getElementById("btn_back").onclick = function btnChange() {
+
+        document.getElementById("btn_mybio").style.display = "block";
+        document.getElementById("btn_mybioClick").style.display = "none";
+
+        inputInfo();
+        defaultDisable();
+        // 유효성 안내 문구 지우기
+        let labelli = document.getElementsByTagName("label");
+        for(let i=0; i< labelli.length; i++){
+            labelli[i].innerText="";
+        }
+        
+    }
+
+    // 비밀번호 입력 후 수정버튼(비밀번호 변경시) 새 비밀번호, 확인버튼 활성화
+    document.getElementById("btn_checkpwd").onclick = function checkPwd() {
+        // 로그인된 회원의 비밀번호와 일치하는지 확인
+          let curpwd = document.getElementById("curpwd");
+
+        // 일치
+        if (curpwd.value == pageObj["password"]) {
+            formatpw = 1;
+            document.getElementById("checkpwd").innerText = " 아래 새 비밀번호를 입력하세요";
+            document.getElementById("checkpwd").style.color = "rgb(116, 116, 116)";
+
+            // 기존 비밀번호창 비활성화
+            curpwd.value = null;
+            document.getElementById("curpwd").disabled = true;
+
+            // 새비밀번호 인풋창 활성화
+            document.getElementById("pwd").disabled = false;
+            document.getElementById("newpwd").disabled = false;
+
+            // 변경하기 버튼 활성화
+            document.getElementById("btn_checkpwd").disabled = true;
+            document.getElementById("btn_updatepwd").disabled = false;
+
+
+        } else {
+            formatpw = 0;
+            document.getElementById("checkpwd").innerText = " 입력하신 비밀번호가 일치하지 않습니다.";
+        }
+    }
+    // 새 비밀번호 유효성 검사
+    document.getElementById("pwd").addEventListener('keyup', () => {
+        let inputNpwd = document.getElementById("pwd");
+        if (!regPw.test(inputNpwd.value)) {
+            if (inputNpwd.value.length == 0) {
+                document.getElementById("checkval").innerText = "";
+            } else {
+                document.getElementById("checkval").innerText
+                = " 비밀번호 양식과 맞지 않습니다. (특수문자,문자,숫자 포함 8~15자리이내)";
+            }
+            formatnewpw = 0;
+        } else {
+            formatnewpw = 1;
+            document.getElementById("checkval").innerText
+                = "";
+
+        }
+    })
+    // 새 비밀번호, 새 비밀번호 확인 인풋 값 같은지 비교 => 비밀법호 업데이트 
+    $("#btn_updatepwd").click(function undatePwd() {
+        if ($('#pwd').val == $('#newpwd').val && formatnewpw == 1) {
+            console.log($('#pwd').val + $('#newpwd') + formatnewpw);
+            $.ajax({
+                url: '/updatePspwd.do',
+                type: 'post',
+                data: {
+                    mno: $('#mno').val(),
+                    id: $("input[name='id']").val(),
+                    password: $('#newpwd').val()
+                }, success: function(data){
+                    let password = JSON.parse(data);
+                    console.log("ajax성공 "+password);
+                    pageObj["password"] = password;
+                    
+                }, error: function() {
+                    alert("비밀번호 변경에 예상치 못한 오류가 생겼습니다. 다시 시도해주세요");
+                }   
+    
+            });
+
+            // 비밀번호 변경관련 비활성화
+            $("#pwd").val("");
+            $("#pwd").attr("disabled", true);
+            $("#newpwd").val("");
+            $("#newpwd").attr("disabled", true);
+
+            $("#btn_updatepwd").attr("disabled", true);
+
+            $("#curpwd").attr("disabled", false);
+            $("#btn_checkpwd").attr("disabled", false);
+
+            document.getElementById("checkpwd").innerText
+                = "";
+            document.getElementById("match").innerText
+                = " 변경이 완료되었습니다, 이후 프로필 수정시, 변경된 비밀번호로 입력해주세요.";
+            document.getElementById("match").style.color = "rgba(254, 54, 54, 0.55)";
+
+        }
+        else {
+            console.log($("if문탈출"+'#pwd').val + $('#newpwd') + formatnewpw);
+        }
+        if (formatnewpw == 0) {
+            document.getElementById("match").innerText = "입력형식을 확인하세요";
+            $("#pwd").val("");
+            $("#pnewpwdwd").val("");
+        }
+        if ($('#pwd').val != $('#newpwd').val) {
+            document.getElementById("match").innerText = " 새 비밀번호와 일치하지 않습니다.";
+            $("#pnewpwdwd").val("");
+        }
+
+    });
+    // 연락처 입력형식 확인
+    document.getElementById("phone1").addEventListener('keyup', () => {
+        formatphone1 = 0;
+        let inputphone =  document.getElementById("phone1");
+        if (!regPhone.test(inputphone.value)) {
+           formatphone1 = 0;
+        } else {
+            formatphone1 = 1;
+        }
+    })
+    document.getElementById("phone2").addEventListener('keyup', () => {
+        formatphone2 = 0;
+        let inputphone =  document.getElementById("phone2");
+        if (!regPhone.test(inputphone.value)) {
+           formatphone2 = 0;
+        } else {
+            formatphone2 = 1;
+        }
+    })
+    document.getElementById("phone3").addEventListener('keyup', () => {
+        formatphone3 = 0;
+        let inputphone =  document.getElementById("phone3");
+        if (!regPhone.test(inputphone.value)) {
+           formatphone3 = 0;
+        } else {
+            formatphone3 = 1;
+        }
+    })
+
+    // 생년월일 입력형식 확인
+    document.getElementsByName("birth")[0].addEventListener('keyup', () => {
+        //20210101
+        var regex = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
+        let inputBirth = document.getElementsByName("birth")[0];
+        if (!regex.test(inputBirth.value)) {
+            if (inputBirth.value.length == 0) {
+                document.getElementById("checkbirth").innerText = "";
+            } else {
+                document.getElementById("checkbirth").innerText = " 양식과 맞지 않습니다. ex) 20210101";
+            }
+            formatbirth = 0;
+        } else {
+            formatbirth = 1;
+            document.getElementById("checkbirth").innerText = "";
+
+        }
+    })
+
+    // 이메일 입력형식 확인
+    document.getElementById("email").addEventListener('keyup', () => {
+        formatemail = 0;
+        formatemailNum = 0;
+        let inputemail = document.getElementById("email");
+       if (!regEmail.test(inputemail.value)) {
+            if (inputemail.value.length == 0) {
+                document.getElementById("checkemail").innerText
+                    = "";
+            } else {
+                document.getElementById("checkemail").innerText
+                    = " 양식과 맞지 않습니다.";
+            }
+        } else {
+            formatemail = 1;
+            document.getElementById("checkemail").innerText
+                = "";
+
+        }
+    })
+    document.getElementById("btn_checkemail").onclick = function(){
+        console.log(formatemail);
+        if(formatemail == 1){
+            emailApi();
+        } else {
+            alert("형식에 맞게 입력")
+        }
+    };
+    /* 인증번호 비교 */
+    document.getElementById("mail_check").onclick = function(){
+        checkemailNum();
+    };
+    document.getElementById("btn_mybiofin").onclick = function(){
+        submitMybio();
+    };
+
+
+} // end onload
+
+
+function initSide() {
+    $('.side button').eq(2).addClass("side_select");
+}
+ // input button 초기값 비활성화  
+ function defaultDisable(){
+    document.getElementsByClassName("side_sub")[0].style.display = "none"
+    for (var i = 0; i < inputli.length; i++) {
+        inputli[i].disabled = true;
+    }
+    for (var i = 0; i < buttonli.length; i++) {
+        buttonli[i].disabled = true;
+    }
+}	
+
+//값 넣어주기
+function inputInfo(){
     document.getElementsByName('mno')[0].value = pageObj["mno"];
     document.getElementsByName('id')[0].value = pageObj["id"];
     document.getElementsByName('mname')[0].value = pageObj["name"];
@@ -28,263 +311,66 @@ window.onload = function () {
     document.getElementById('roadAddress').value = addressSplit[1];
     document.getElementById('detailAddress').value = addressSplit[2];
     document.getElementById('extraAddress').value = addressSplit[3];
-
-
-    // input button 초기값 비활성화  	
-    document.getElementsByClassName("side_sub")[0].style.display = "none"
-    var inputli = content[0].getElementsByTagName('input');
-    for (var i = 2; i < inputli.length; i++) {
-        inputli[i].disabled = true;
-    }
-
-    var buttonli = content[0].getElementsByTagName('button');
-    for (var i = 3; i < buttonli.length; i++) {
-        buttonli[i].disabled = true;
-    }
-
-
-    //수정하기 버튼 클릭시 수정완료 돌아가기 버튼 활성화, 인풋창 활성화
-    document.getElementById("btn_mybio").onclick = function btnChange() {
-        //수정완료 돌아가기 버튼 활성화, 인풋창 활성화
-        document.getElementById("btn_mybio").style.display = "none";
-        document.getElementById("btn_mybioClick").style.display = "block";
-        //인풋창 활성화
-        for (var i = 2; i < inputli.length; i++) {
-            if (i != 3 && i != 4 && i != 12 && i != 13 && i != 15) {
-                inputli[i].disabled = false;
-            }
-        }
-        //수정, 이메일인증, 우편번호 찾기 버튼 활성화
-
-        for (var i = 3; i < buttonli.length; i++) {
-            if (i != 4 || i !=5 || i!=6) {
-                buttonli[i].disabled = false;
-            }
-        }
-
-    }
-
-    //돌아가기버튼 클릭시 수정하기 버튼 활성화, 인풋창 비활성화
-    document.getElementById("btn_back").onclick = function btnChange() {
-        document.getElementById("btn_mybio").style.display = "block";
-        document.getElementById("btn_mybioClick").style.display = "none";
-        document.getElementsByTagName('input').disabled = true;
-        //인풋창 비활성화, 입력값 초기화(기존에 받아온 값으로 바껴야하느데..)
-        for (var i = 3; i < inputli.length; i++) {
-            inputli[i].disabled = true;
-
-        }
-        //본인인증, 우편번호 찾기 버튼 비활성화
-        for (var i = 3; i < buttonli.length; i++) {
-            if (i != 4) {
-                buttonli[i].disabled = true;
-            }
-        }
-    }
-
-    // 비밀번호 입력 후 수정버튼(비밀번호 변경시) 새 비밀번호, 확인버튼 활성화
-    document.getElementById("btn_checkpwd").onclick = function checkPwd() {
-        // 로그인된 회원의 비밀번호와 일치하는지 확인
-        var pwd = inputli[2].value
-        // 일치
-        if (pwd == pageObj["password"]) {
-            formatpw = 1;
-            document.getElementById("checkpwd").innerText
-                = " 아래 새 비밀번호를 입력하세요";
-            document.getElementById("checkpwd").style.color = "rgb(116, 116, 116)";
-
-            // 기존 비밀번호창 비활성화
-            inputli[2].disabled = true;
-            inputli[2].value = null;
-
-            // 새비밀번호 인풋창 활성화
-            inputli[3].disabled = false;
-            inputli[4].disabled = false;
-
-            // 변경하기 버튼 활성화
-            buttonli[3].disabled = true;
-            buttonli[4].disabled = false;
-
-        } else {
-            formatpw = 0;
-            document.getElementById("checkpwd").innerText
-                = " 입력하신 비밀번호가 일치하지 않습니다.";
-        }
-    }
-    // 새 비밀번호 유효성 검사
-    inputli[3].addEventListener('keyup', () => {
-        //특수문자 / 문자 / 숫자 포함 형태의 8~15자리 이내의 암호 정규식
-        var regex = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
-        if (!regex.test(inputli[3].value)) {
-            if (inputli[3].value.length == 0) {
-                document.getElementById("checkval").innerText
-                    = "";
-            } else {
-                document.getElementById("checkval").innerText
-                    = " 비밀번호 양식과 맞지 않습니다. (특수문자,문자,숫자 포함 8~15자리이내)";
-            }
-            formatnewpw = 0;
-        } else {
-            formatnewpw = 1;
-            document.getElementById("checkval").innerText
-                = "";
-
-        }
-    })
-    // 새 비밀번호, 새 비밀번호 확인 인풋 값 같은지 비교 => 비밀법호 업데이트 
-    $("#btn_updatepwd").click(function undatePwd() {
-        var content = document.getElementsByClassName("content");
-        var inputli = content[0].getElementsByTagName('input');
-        if ($('#pwd').val == $('#newpwd').val && formatnewpw == 1) {
-            console.log($('#pwd').val + $('#newpwd') + formatnewpw);
-            $.ajax({
-                url: '/updatePspwd.do',
-                type: 'post',
-                data: {
-                    mno: $('#mno').val(),
-                    id: $("input[name='id']").val(),
-                    password: $('#newpwd').val()
-                }, success: function(data){
-                    var password = JSON.parse(data);
-                    console.log("ajax성공 "+password);
-                    pageObj["password"] = password;
-                    
-                }, error: function() {
-                   alert("error");
-                }   
-    
-            });
-            console.log(pageObj["password"]);
-
-            for (var i = 0; i < inputli.length; i++) {
-                if (i == 2) {
-                    inputli[i].disabled = false;
-                }
-                if (i == 3 || i == 4) {
-                    inputli[i].value = null;
-                    inputli[i].disabled = true;
-                }
-            }
-            document.getElementById("checkpwd").innerText
-                = "";
-            document.getElementById("match").innerText
-                = " 변경이 완료되었습니다, 이후 프로필 수정시, 변경된 비밀번호로 입력해주세요.";
-            document.getElementById("match").style.color = "rgba(254, 54, 54, 0.55)";
-
-        }
-        else {
-            console.log($("if문탈출"+'#pwd').val + $('#newpwd') + formatnewpw);
-        }
-        if (formatnewpw == 0) {
-            document.getElementById("match").innerText
-                = "입력형식을 확인하세요";
-            inputli[3].value = null;
-            inputli[4].value = null;
-        }
-        if ($('#pwd').val != $('#newpwd').val) {
-            document.getElementById("match").innerText
-                = " 새 비밀번호와 일치하지 않습니다.";
-            inputli[4].value = null;
-        }
-
-    });
-
-    // 생년월일 입력형식 확인
-    inputli[10].addEventListener('keyup', () => {
-        //20210101
-        var regex = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
-        if (!regex.test(inputli[10].value)) {
-            if (inputli[10].value.length == 0) {
-                document.getElementById("checkbirth").innerText
-                    = "";
-            } else {
-                document.getElementById("checkbirth").innerText
-                    = " 양식과 맞지 않습니다. ex) 20210101";
-            }
-            formatbirth = 0;
-        } else {
-            formatbirth = 1;
-            document.getElementById("checkbirth").innerText
-                = "";
-
-        }
-    })
-
-    // 이메일 입력형식 확인
-    inputli[11].addEventListener('keyup', () => {
-        //20210101
-        var regex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
-        if (!regex.test(inputli[11].value)) {
-            if (inputli[11].value.length == 0) {
-                document.getElementById("checkemail").innerText
-                    = "";
-            } else {
-                document.getElementById("checkemail").innerText
-                    = " 양식과 맞지 않습니다.";
-            }
-        } else {
-            inputli[4].disabled = false;
-            document.getElementById("checkemail").innerText
-                = "";
-
-        }
-    })
-
-
-    /* 인증번호 이메일 전송 */
-    $(".mail_check_button").click(function(){
-        console.log("이메일인증 클릭");
-        var email = $(".mail_input").val();        // 입력한 이메일
-        
-        $.ajax({
-            
-            type:"GET",
-            url:"/mailCheck.do?email=" + email,
-            success:function(data){
-                //console.log("data : " + data);
-                $(".mail_check_input").attr("disabled",false);
-                buttonli[6].disabled = false;
-                $(".mail_check_input").attr("id", "mail_check_input_box_true");
-                alert(" 인증번호를 전송했습니다.");
-                code = data;
-            }
-                    
-        });
-        
-    });
-    /* 인증번호 비교 */
-$("#mail_check").click(function(){
-    var inputCode = $(".mail_check_input").val();        // 입력코드    
- 
-
-    if(inputCode == code){
-        formatemail = 1;
-        $("#reqinput").text("");
-        alert(" 인증번호가 일치합니다.");
-        $(".mail_input").attr("disabled",true);
-        $(".mail_check_input").attr("disabled",true);
-        buttonli[6].disabled = true;
-        console.log(formatemail);
-
-        $("#reqinput").attr("class", "correct");        
-    } else {                                            // 일치하지 않을 경우
-        formatemail = 0;
-        $("#reqinput").text("");
-        alert(" 인증번호를 다시 확인해주세요.");
-        console.log(formatemail);
-
-        $("#reqinput").attr("class", "incorrect");
-    } 
-
-    
-});
-
-
 }
 
+function emailApi(){
+    /* 인증번호 이메일 전송 */
+    
+       console.log("이메일인증 클릭");
+       var email = $(".mail_input").val();        // 입력한 이메일
+       
+       $.ajax({
+           
+           type:"GET",
+           url:"/mailCheck.do?email=" + email,
+           success:function(data){
+               //console.log("data : " + data);
+               $(".mail_check_input").attr("disabled",false);
+               document.getElementById("mail_check").disabled = false;
+               $(".mail_check_input").attr("id", "mail_check_input_box_true");
+               alert(" 인증번호를 전송했습니다.");
+               timerStart();
+               code = data;
+           }
+                   
+       });
+       
+}    
+   
+function checkemailNum(){
+   var inputCode = $(".mail_check_input").val();        // 입력코드    
+   if(regMailCode.test(inputCode)){
+       if(inputCode == code){
+           timeStop();
+           formatemailNum = 1;
+           alert('메일 인증이 완료되었습니다.');
+           $('#timeout').hide();
+           $(".mail_check_input").val("");
+           $("#mail_check").attr("disabled",true);
+           $(".mail_check_input").attr("disabled",true);
+           $(".mail_check_input").attr("id", "mail_check_input_box_false");
+           doncument.getElementById("btn_checkemail").disabled = true;
+           $("#checkemail").val("인증되었습니다.");
+      
+       } else if($('#timeout').text() != "0:00"){//시간이 남았는데 코드가 일치하지 않는다면
+           formatemailNum = 0;
+           alert('인증번호가 일치하지 않습니다.');
+       }
+   } else {//코드가 숫자 6자리가 아니라면
+       formatemailNum = 0;
+       alert(" 인증번호를 다시 확인해주세요.");
+       $("#reqinput").attr("class", "incorrect");   
+   }
+   
 
-function initSide() {
-    $('.side button').eq(2).addClass("side_select");
+}
+function timerStart() {
+   AuthTimer.comSecond = 180;
+   AuthTimer.timer =  setInterval(function(){AuthTimer.fnTimer()},1000);
+   AuthTimer.domId = document.getElementById("timeout");
+}
+function timeStop() {
+   clearInterval(AuthTimer.timer);
 }
 
 // 핸드폰 번호 입력값 합치기 
@@ -310,7 +396,8 @@ function submitMybio() {
         $("#curpwd").focus();
         return false;
     }
-    if ($("#phone1").val() == "" || $("#phone2").val() == "" || $("#phone3").val() == "") {
+    if ($("#phone1").val() == "" || $("#phone2").val() == "" || $("#phone3").val() == ""
+        || formatphone1 != 1 || formatphone2 != 1 || formatphone3 != 1 ) {
         alert("연락처를 확인하세요.");
         return false;
     }
@@ -319,13 +406,15 @@ function submitMybio() {
         $("input[name='birth']").focus();
         return false;
     }
-    if ($("input[name='email']").val() == "" || formatemail != 1) {
+    if ($("input[name='email']").val() == "" || formatemail != 1 || formatemailNum !=1) {
         alert("이메일을 확인하세요.");
         $("input[name='email']").focus();
         console.log(formatemail);
         return false;
     }
 
+    $("input").attr("disabled", false);
+    $("form").submit();
 
 
 }

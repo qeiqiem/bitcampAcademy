@@ -107,5 +107,12 @@ public class ReservationDAO {
 	public void regitAlert(AlertVO vo) {
 		mybatis.insert("reservationDAO.regitAlert",vo);		
 	}
+	public List<AlertVO> getAlertList(AlertVO vo) {
+		return mybatis.selectList("reservationDAO.getAlertList",vo);
+		 
+	}
+	public void delAlert(int ano) {
+		mybatis.delete("reservationDAO.delAlert",ano);		
+	}
 	
 }

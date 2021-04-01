@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="reservationDAO">
+	<delete id="delAlert">
+		DELETE FROM alert WHERE ano=#{ano}
+	</delete>
+	<select id="getAlertList" resultType="alert"><!-- 개인&업체 관계없이 이름을 불러오기 위한 쿼리문.. 필요시 분기할 예정 -->
+		SELECT ano,mname,bname,msg,a.typenum typenum,typename,date_format(time,"%Y.%m.%d") date 
+		FROM alert a,alerttype at, (SELECT mname,bname,ac.mno mno 
+									FROM account ac LEFT JOIN member m on ac.mno=m.mno 
+                                    LEFT JOIN business b on b.mno=ac.mno) n
+		WHERE a.typenum=at.typenum
+        AND a.sender=n.mno
+        AND addressee=#{sender};
+	</select>
 	<insert id="regitAlert"><!-- 알림 데이터 삽입 -->
-		INSERT INTO alert (sender,addressee,msg,typenum) VALUES (#{sender},#{addressee},#{msg},#{typeNum});	
+		INSERT INTO alert (sender,addressee,msg,typenum) VALUES (#{sender},#{addressee},#{msg},#{typenum});	
 	</insert>
 	<update id="insertUpdateOrderNum">
 		UPDATE comments SET orderNum=orderNum+1 WHERE <![CDATA[orderNum>=#{orderNum}]]>;
