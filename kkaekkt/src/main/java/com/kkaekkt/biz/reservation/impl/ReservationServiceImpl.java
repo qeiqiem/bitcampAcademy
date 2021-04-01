@@ -138,7 +138,7 @@ public class ReservationServiceImpl implements ReservationService {
 		return reservationDAO.getAlertList(vo);		
 	}
 	@Override
-	public void delAlert(int ano) {
-		reservationDAO.delAlert(ano);
+	public void delAlert(AlertVO vo) {
+		reservationDAO.delAlert(vo);
 	}
 }

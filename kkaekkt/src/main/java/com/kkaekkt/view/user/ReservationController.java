@@ -112,8 +112,8 @@ public class ReservationController {
 	}
 	@RequestMapping(value="/delAlert.do",method=RequestMethod.POST)
 	@ResponseBody
-	public void delAlert(int ano) {
-		reservationService.delAlert(ano);
+	public void delAlert(AlertVO vo) {
+		reservationService.delAlert(vo);
 	}
 	
 }

@@ -4,6 +4,7 @@
 	<div class="side">
 		<button onclick='location.href="/jsp/mypageUser/mypagePs.jsp"'>주문내역</button>
 		<button onclick='location.href="/jsp/mypageUser/mymark.jsp"'>내가 찜한 세탁소</button>
+		<button onclick='location.href="/jsp/mypageUser/myalertPs.jsp"'>알림</button>
 		<button onclick='location.href="/jsp/mypageUser/mybio.jsp"'>프로필편집</button>
 	</div>
 	<div class="side_sub">

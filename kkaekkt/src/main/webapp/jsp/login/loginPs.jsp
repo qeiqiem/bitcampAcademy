@@ -30,7 +30,6 @@
 			<button id="log">
 				<a href="/jsp/login/loginBs.jsp">업체로그인</a>
 			</button>
-
 			<div class="login">
 				<form action="/loginPs.do" method="post">
 					<h3>

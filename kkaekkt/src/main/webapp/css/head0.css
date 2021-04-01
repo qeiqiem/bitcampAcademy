@@ -107,6 +107,8 @@ a:hover {
 }
 #noticeBox ul{
   margin: 0;
+  max-height: 394px;
+  overflow: scroll;
 }
 #noticeBox li{
   border-bottom: 1px solid var(--gray-color);

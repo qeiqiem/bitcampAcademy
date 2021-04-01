@@ -111,8 +111,8 @@ public class ReservationDAO {
 		return mybatis.selectList("reservationDAO.getAlertList",vo);
 		 
 	}
-	public void delAlert(int ano) {
-		mybatis.delete("reservationDAO.delAlert",ano);		
+	public void delAlert(AlertVO vo) {
+		mybatis.delete("reservationDAO.delAlert",vo);		
 	}
 	
 }
