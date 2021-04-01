@@ -107,12 +107,12 @@ public class ReservationController {
 	}
 	
 	// 주문전표인쇄 창
-	@RequestMapping(value="/openPopup.do",method=RequestMethod.GET)
-	public String openPopup(ReservationVO vo, Model model) {
-		System.out.println(reservationService.getRsvDetail(vo));
-		model.addAttribute("rsv", reservationService.getRsvDetail(vo) );
-		return "/jsp/mypageBiz/orderPopup.jsp";
-	}
+		@RequestMapping(value="/openPopup.do",method=RequestMethod.GET)
+		public String openPopup(ReservationVO vo, Model model) {
+			System.out.println(reservationService.getRsvDetail(vo));
+			model.addAttribute("rsv", reservationService.getRsvDetail(vo) );
+			return "/jsp/mypageBiz/orderPopup.jsp";
+		}
 
 	@RequestMapping(value="/getAlertList.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
 	@ResponseBody//알림 리스트 조회
