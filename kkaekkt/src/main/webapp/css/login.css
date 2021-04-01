@@ -5,10 +5,7 @@
 	width: 100%;
 	padding-top: 80px;
 }
-.bodycontainertopadding{
-	width:100%;
-	height:70px;
-}
+
 .content {
 	width: 530px;
 	text-align: center;
@@ -74,4 +71,6 @@ a {
 .loginTitle{
 	text-align: center;
 }
-
+.loginTitle a{
+	text-align: center;
+}
