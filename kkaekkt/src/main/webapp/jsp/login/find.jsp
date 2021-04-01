@@ -11,7 +11,7 @@
         <script src="https://kit.fontawesome.com/2fc57dd2db.js" crossorigin="anonymous"></script>
         <script src="/js/find.js"></script>
     </head>
-    
+
 
     <body>
         <jsp:include page="/jsp/header0.jsp"></jsp:include>
@@ -56,6 +56,7 @@
             </form>
 
             <form action="/findPw.do" method="POST" onsubmit="">
+                <!-- <form action="/findPw.do" method="POST" onsubmit="return check()"> -->
                 <div id="findPW">
                     <p>아이디와 비밀번호를 찾기 위해서는 이름, 회원정보에 등록된 이메일을 통해 본인인증을 받아야 합니다.</p>
 
