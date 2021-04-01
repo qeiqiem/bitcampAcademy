@@ -236,7 +236,7 @@
 			ORDER BY orderNum DESC;
 	</select>
 	<select id="getLaundry" resultType="laundry"> <!-- 상태가 표시된 품목 리스트 출력 -->
-			SELECT lname laundry, cnt count, cnt*price price,stname state 
+			SELECT lname laundry, cnt count, price price,stname state 
 			FROM reservation r, rsv_laundry r_l, business b, bsn_laundry b_l, laundry_type lt,state s
 			WHERE r.rno=r_l.rno AND r.bno=b.bno AND b.bno=b_l.bno 
 			AND lt.lno=r_l.lno AND b_l.lno=r_l.lno AND r_l.stno=s.stno
@@ -284,5 +284,12 @@
 				AND r.stno=1
 			</if>
 		</where>
+	</select>
+	<select id="getRsvMdetail" resultType="reservation"> 
+		SELECT DISTINCT r.rno rsvNum, r.rdate  rsvDate, m.mname mname, m.phone phone, m. address address 
+		FROM reservation r
+		JOIN rsv_laundry rl ON r.rno = rl.rno 
+		JOIN `member` m ON m.mno = r.mno
+		WHERE r.rno=#{rsvNum};
 	</select>
 </mapper>

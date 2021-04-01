@@ -115,4 +115,9 @@ public class ReservationDAO {
 		mybatis.delete("reservationDAO.delAlert",vo);		
 	}
 	
+	public ReservationVO getRsvMdetail(ReservationVO vo) {
+		return mybatis.selectOne("reservationDAO.getRsvMdetail",vo);
+	}
+	
+	
 }
