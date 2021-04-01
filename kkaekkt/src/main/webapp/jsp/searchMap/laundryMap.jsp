@@ -8,12 +8,18 @@
     
     <!-- map 에서 필요한 참조 -->
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    
+    <!-- 아임포트 -->
+  	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+  	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+  	
     <script src="/js/map.js"></script>
 	<link rel="stylesheet" href="/css/laundryMap.css">
 	
 	</head>
 	<body>
 		<jsp:include page="/jsp/header0.jsp"></jsp:include>
+		<div id="mask"></div>
 	        <div class="body_container">
 	            <div class="map_container">
 	                <!-- 예약창 로딩중 -->
@@ -117,12 +123,10 @@
 	                            <table id="resShortOpt"></table>
 	                        </div>
 	                        <div class="userInfo">
-	                            <p>예약자정보 &nbsp;</p>
-	                            <p>연락처 &nbsp;</p>
-	                            <p>이메일 &nbsp;</p>
+
 	                        </div>
 	                        <div class="sellerInfo">
-	                            <p>판매자정보 &nbsp;</p>
+	                           <p>판매자정보 &nbsp;</p>	
 	                            <p>개인정보 수집, 제공 &nbsp;</p>
 	                            <input placeholder="개인정보 수집 동의">
 	                            <input placeholder="개인정보 제공 동의">

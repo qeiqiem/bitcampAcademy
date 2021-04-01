@@ -137,7 +137,7 @@ CREATE TABLE `alert` (
 	`addressee`	INTEGER	NULL comment '받는이',
 	`msg`	VARCHAR(255)	NULL comment '알림메시지',
 	`time`	DATETIME NULL DEFAULT current_timestamp comment '알림시간',
-	`state`	INTEGER	NULL DEFAULT 0 comment '읽음상태',
+	`state`	INTEGER	NULL DEFAULT 1 comment '읽음상태-1.안읽음 2.읽음',
 	`typenum`	INTEGER	NOT NULL comment '알림유형'
 );
 
@@ -374,10 +374,10 @@ REFERENCES `business` (
 	`bno`
 ) ON DELETE CASCADE;
 
-ALTER TABLE `alert` ADD CONSTRAINT `FK_alertType_TO_alert_1` FOREIGN KEY (
+ALTER TABLE `alert` ADD CONSTRAINT `FK_ALERTTYPE_TO_ALERT_1` FOREIGN KEY (
 	`typenum`
 )
-REFERENCES `alertType` (
+REFERENCES `alerttype` (
 	`typenum`
 );
 -- 설비
@@ -440,11 +440,11 @@ INSERT INTO schedule (wkname) values("평일");
 INSERT INTO schedule (wkname) values("주말");
 
 -- 알림 유형
-INSERT INTO alertType (typename) values("[주문]");
-INSERT INTO alertType (typename) values("[결제]");
-INSERT INTO alertType (typename) values("[완료]");
-INSERT INTO alertType (typename) values("[답글]");
-INSERT INTO alertType (typename) values("[취소]");
+INSERT INTO alerttype (typename) values("[주문]");
+INSERT INTO alerttype (typename) values("[결제]");
+INSERT INTO alerttype (typename) values("[완료]");
+INSERT INTO alerttype (typename) values("[답글]");
+INSERT INTO alerttype (typename) values("[취소]");
 
 -- 더미 데이터
 INSERT INTO account (id,password,mtype) VALUES ('testps','test',1);

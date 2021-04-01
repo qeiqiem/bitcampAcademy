@@ -173,16 +173,6 @@ public class UserController {
 		return userService.email(vo);
 	}
 
-	// 로그인할때 아이디나 비밀번호 있는지 체크하려고 만든 컨트롤러이다.
-//        @RequestMapping(value = "/loginchk.do", method = RequestMethod.POST)
-//        @ResponseBody
-//        public String loginChk(AccountVO vo) {
-//            System.out.println("컨트롤러 진입");
-//            System.out.println(vo + "가 담김");
-//            Gson gson = new Gson();
-//            vo.setMno(userService.loginchk(vo));
-//            return gson.toJson(vo);
-//        }
 
 	// 아이디 중복체크 업체........
 	@RequestMapping(value = "/idchkBs.do", method = RequestMethod.POST)

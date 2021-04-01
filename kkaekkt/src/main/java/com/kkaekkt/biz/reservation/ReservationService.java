@@ -1,5 +1,7 @@
 package com.kkaekkt.biz.reservation;
 
+import java.util.List;
+
 import com.kkaekkt.biz.comm.AlertVO;
 import com.kkaekkt.biz.comm.CommListVO;
 import com.kkaekkt.biz.comm.CommVO;
@@ -20,4 +22,7 @@ public interface ReservationService {
 	public String washingDone(LaundryVO vo);
 	public void regitAlert(AlertVO vo);
 	public ReservationVO getRsvDetail(ReservationVO vo);
+
+	public List<AlertVO> getAlertList(AlertVO vo);
+	public void delAlert(AlertVO vo);
 }

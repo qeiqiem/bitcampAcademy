@@ -1,5 +1,9 @@
+*{
+	box-sizing:border-box;
+}
 .body_container {
-	padding-top: 60px;
+	width: 100%;
+	padding-top: 80px;
 }
 
 .content {
@@ -62,101 +66,11 @@ input {
 }
 
 a {
-	text-decoration: none
+	text-decoration: none;
 }
-
-/* 모달창 영역 */
-textarea {
-	resize: none;
-	height: 12em;
-	/* height 안먹는데 이유를 모름.. */
-}
-
-.word {
-	width: 100vw;
-	height: 100vh;
-	position: absolute;
-}
-
-/* 모달 container 입니다 기본은 none 상태로 두셔야합니다.
-            본인 화면에서 사용할때, position을 정해주셔야 합니다. */
-#modal_container {
-	display: none;
-	position: relative;
-	margin: auto;
-	width: 550px;
-	height: 550px;
-	background-color: white;
-	border: 1px solid lightgray;
-	box-shadow: 5px 12px 5px rgb(212, 212, 212);
-}
-
-#starVal {
-	float: left;
-	margin-left: 21px;
-	font-size: 36px;
-	width: 28px;
-	height: 44px;
-	border: 0px;
-	background: none;
+.loginTitle{
 	text-align: center;
-	color: rgba(97, 97, 97, 1);
-	font-family: Noto Sans KR;
-	font-style: normal;
-	font-weight: bold;
 }
-
-#modal_close {
-	float: right;
-	width: 36px;
-	height: 36px;
-	border: 1px solid;
-	background: white;
-	margin: 18px 20px 0 0;
-	font-size: 24px;
-	border: 1px solid lightgray;
-}
-
-#modal_bodycont {
-	margin-top: 28px;
-	height: 80%;
-	padding-block: 14px;
-}
-
-#modal_head {
-	width: 80%;
-	height: 80px;
+.loginTitle a{
 	text-align: center;
-	margin: 0 auto;
-}
-
-#modal_foot {
-	margin: 20px auto;
-	width: 80%;
-	height: 315px;
-}
-
-#join {
-	background: rgba(143, 188, 255, 0.48);
-	border-radius: 30px;
-	border: 0px;
-	width: 120px;
-	height: 40px;
-	/* margin: 28px 89px; */
-}
-
-#back {
-	float: left;
-	background: rgba(143, 188, 255, 0.48);
-	border-radius: 30px;
-	border: 0px;
-	width: 120px;
-	height: 40px;
-	/* margin: 28px 89px; */
-}
-
-.btn {
-	text-align: center;
-	margin-top: 150px;
-	margin-left: 65px;
 }

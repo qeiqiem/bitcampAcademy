@@ -214,7 +214,7 @@ function enter() {
 function msgSet() {
     alertObj.rsvNum=pageObj.rsvNum;
     alertObj.msg='주문번호'+pageObj.rsvNum+'의 리뷰에 답글이 등록되었습니다.';
-    alertObj.typeNum=4;
+    alertObj.typenum=4;
 }
 function sendMsg() {
     console.log('샌드진입');

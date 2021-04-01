@@ -1,5 +1,7 @@
 package com.kkaekkt.biz.reservation.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -138,5 +140,13 @@ public class ReservationServiceImpl implements ReservationService {
 		vo.setLaundryList(reservationDAO.getLaundryList(vo));
 		
 		return vo;
+
+	@Override
+	public List<AlertVO> getAlertList(AlertVO vo) {
+		return reservationDAO.getAlertList(vo);		
+	}
+	@Override
+	public void delAlert(AlertVO vo) {
+		reservationDAO.delAlert(vo);
 	}
 }

@@ -124,7 +124,7 @@ function sendMsg() {
                 var receiver=alertObj.addressee;
                 var msg='<li>'+
                             '<div class="msgTop">'+
-                                '<a href="/jsp/mypageUser/mypagePs.jsp">['+(alertObj.typeNum==3?'완료':'취소')+']⠀'+alertObj.msg+'</a>'+
+                                '<a href="/jsp/mypageUser/mypagePs.jsp">['+(alertObj.typenum==3?'완료':'취소')+']⠀'+alertObj.msg+'</a>'+
                             '</div>'+
                             '<div class="msgBottom">'+
                                 '<span class="date">'+today()+'</span>'+
@@ -230,11 +230,11 @@ function msgSet(result) {
     if(result=='cancel'){//주문이 취소되었다면
         alertObj.rsvNum=rsvObj.rsvNum;
         alertObj.msg='주문번호'+rsvObj.rsvNum+' 가 취소되었습니다.';
-        alertObj.typeNum=5;
+        alertObj.typenum=5;
     }else if(result=='complete'){//주문이 완료되었다면
         alertObj.rsvNum=rsvObj.rsvNum;
         alertObj.msg='주문번호'+rsvObj.rsvNum+'의 세탁이 완료되었습니다.';
-        alertObj.typeNum=3;
+        alertObj.typenum=3;
     }else {
         console.log('알림메시지 처리 에러');
     }

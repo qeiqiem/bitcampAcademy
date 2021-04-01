@@ -112,12 +112,6 @@
 		DELETE account WHERE mno=#{no}
 	</delete>
    <!-- 로그인들 -->
-   <select id="loginchk" resultType="person">
-   		SELECT *
-   		FROM account
-   		WHERE id=#{id}
-   		AND password=#{password}
-   </select>
 	<select id="getPerson" resultType="person">
 		SELECT ac.mno as mno, id, password, mname as name, phone, birth, address, email
 		FROM account ac, member mb
@@ -214,8 +208,7 @@
 		SELECT b.email mmail, m.email bmail, id
 		FROM account ac
 		LEFT OUTER JOIN member m on ac.mno=m.mno
-		LEFT
-		OUTER JOIN business b on ac.mno=b.mno
+		LEFT OUTER JOIN business b on ac.mno=b.mno
 		WHERE ac.id=#{id};
 	</select>
 	<select id="idchk" resultType="int">
