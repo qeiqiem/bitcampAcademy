@@ -30,7 +30,6 @@
 			<button id="log">
 				<a href="/jsp/login/loginBs.jsp">업체로그인</a>
 			</button>
-
 			<div class="login">
 				<form action="/loginPs.do" method="post">
 					<a href="http://developers.kakao.com/logout"><h3 class="loginTitle">로그인</h3></a>

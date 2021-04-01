@@ -305,11 +305,19 @@ function printlist(list) {//리팩토링 무조건 필요함 뇌빼고 작업한
                     '<td style="color:red;">D+'+value.dDay*-1+'</td>'
                     :'<td>D'+value.dDay*-1+'</td>')+
                     '<td><div><button class="cancelBtn" value='+key+'>취소하기</button>'+
-					'<button class="completeBtn" value='+key+'>작업완료</button></div></td>'
+					'<button class="completeBtn" value='+key+'>전달완료</button></div></td>'
                     :'<td>'+value.dDate+'</td>'+
-                    '<td><button>출력하기</button></td>')+
+                    '<td><button onclick="openPopup('+value.rsvNum+')">출력하기</button></a>' +
+                    '</td>')+
                 '</tr>'+
             '</table>'
         );
     });
+}
+function openPopup(rno){
+    var options = 'width=500, height=750, top=30, left=30, resizable=no, scrollbars=no, location=no';
+
+    window.open("/openPopup.do?rsvNum="+rno, "printOrder", options);
+
+
 }

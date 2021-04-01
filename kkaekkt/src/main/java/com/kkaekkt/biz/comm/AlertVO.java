@@ -10,7 +10,14 @@ public class AlertVO {
 	private String typename;//유형명
 	private String date;//보낸 날짜
 	private int state;//읽음상태
+	private int datediff;//보낸 지 며칠이 지났는 지를 한정하는 수
 	
+	public int getDatediff() {
+		return datediff;
+	}
+	public void setDatediff(int datediff) {
+		this.datediff = datediff;
+	}
 	public int getAno() {
 		return ano;
 	}

@@ -23,13 +23,13 @@
 		</div>
 
 		<div class="head_right">
-			<input name="name" id="name" value="${person.bname } 님" readonly /> 
+			<input name="name" id="name" value="${person.bname} 님" readonly /> 
 			<div id="bellBox">
 				<i class="fas fa-bell"></i>
 				<span class="redDot">●</span>
 				<div id="noticeBox">
 					<ul>
-						
+							
 					</ul>
 					<button>내 알림 전체보기</button>
 				</div>

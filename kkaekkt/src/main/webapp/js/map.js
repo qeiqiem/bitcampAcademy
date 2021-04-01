@@ -8,6 +8,9 @@ $(document).ready(function() {
 	var adrress = "서울 용산"
 	var random = Math.floor(Math.random() * 10) + "," + "000"
 	var bno = ""
+	var allPrice = 0
+	
+	IMP.init("imp27421713");
 	selectNum()
 
 	// [Click 이벤트]----------------------------------------------------------------------
@@ -38,19 +41,52 @@ $(document).ready(function() {
 	$('#infoReview').click(function() { $('.cardinfo').hide(); $('.cominfo').show();})
 
 	// 3. 예약슬라이드 (2depth) show
-	$('#res').click(function() { resItemList(bno); $('.slide_res').show()})
+	$('#res').click(function() { resItemList(bno); $('.slide_res').show(); })
 	$('.input_searchBtn').on("click", function() { var item = $(".input_search").val(); viewSearch(item)})
+	
 	//예약항목 옵션 클릭시 감지
 	$("#resShortOpt").on("click", 'input:checkbox', function() {
-	      var ckVal = $(this).val()
+	      var idx = $(this).val()
 	      var ckTf = $(this).is(":checked")
-	      ckRes(ckVal,ckTf)
+		changeListener(idx,ckTf);
     })
-
-		       
+	function changeListener(idx,ckTf){
+		if(ckTf) {//활성화라면,
+			$('.chkBox').eq(idx).addClass('chked');
+			$("select.resOpc").eq(idx).attr("disabled",false); //셀렉트 항목 활성화
+			totalPriceSet();
+		}else {
+			$('.chkBox').eq(idx).removeClass('chked');
+			$('select.resOpc').eq(idx).val("1").trigger('change');
+			$("select.resOpc").eq(idx).attr("disabled",true); //셀렉트 항목 비활성화
+		}
+	}
+	$('#resShortOpt').on('change','select.resOpc',function() {//셀렉트 변환 시 가격반영
+		var idx=Number($(this).attr('id').charAt(4));//idx 추출
+		var cnt=$(this).val();	
+		var price=Number($('p.res_price').eq(idx).attr('value'));
+		$('p.res_price').eq(idx).text(cnt*price);
+		totalPriceSet();
+	});
+	function totalPriceSet() {
+		var totalPrice=0;
+		var chkedList = $('.chked');
+		var idx;
+		for(var i=0;i<chkedList.length;i++){
+			idx=$('.chked').eq(i).attr('id').charAt(3);
+			totalPrice+=Number($('#price'+idx)[0].innerHTML);
+		}
+		$(".totalAll").text(totalPrice);
+	}
 	//4. 결제 api 대기 팝업
-	$('.comBtn').on("click", function() { $(".res_loading").show(); showpricepop()});
-	$('.res_loading button').click(function() { $(".res_loading").hide()})	
+	$('.comBtn').on("click", function() {  $("#mask").show(); 
+	/*$(".res_loading").show()*/
+	requestPay()	
+	})
+	
+	
+	$('.res_loading button').click(function() { $(".res_loading").hide(); $("#mask").hide(); })	
+	$("#mask").on("click", function() {  $(".res_loading").hide(); $("#mask").hide();});
 	
 	//[기  능] -------------------------------------------------------------------------------
 	function navSearch(item) {
@@ -78,7 +114,7 @@ $(document).ready(function() {
 	    var phone = s_title[4].innerHTML
 	    if(star != null)
         	$("#memberlog").html('<input class="tag_kkaekkt" value="kkarkkt 가맹점 입니다">')
-        	
+        
         	
         $("#s_title").html(name)
         $("#s_star").html(star)
@@ -181,10 +217,10 @@ $(document).ready(function() {
 	// [예약하기] : selectbox 옵션 부여-----------------
 	function selectNum() {
 		$(".resOpc").append(
-				'<option value="" selected disabled hidden>1</option>')
+				'<option value="" selected disabled hidden selected>1</option>')
 		for (var i = 1; i < 11; i++) {
 			$(".resOpc").append(
-					'<option value="' + i + '">' + i + '</option');
+					'<option value="' + i + '">' + i + '</option')
 		}
 		
 		
@@ -192,14 +228,23 @@ $(document).ready(function() {
 	
 	//예약가능 품목 불러오기
 	function resItemList(bno) {
+		
+		//하단 정보
+		var htmlfoot = ''	        	
+			htmlfoot +='<p>예약자정보 &nbsp; 나애교</p>'
+			htmlfoot +='<p>연락처 &nbsp;010-9871-6512</p>'
+			htmlfoot +='<p>이메일 &nbsp;testNa@kkaekkt.com</p>'			
+		$(".userInfo").append(htmlfoot)
+		
 		$.ajax({
 	        url:'/singleOption.do'
 	        , method : 'POST'
 	        , data: { bno : bno }
 	        , dataType: 'json'
 	        , success: function(data){ //성공후 처리는 추후 진행.         	        			       	        				      	        				
-	        				if(data==null)console.log("data 가 조회되지 않았습니다.")   
-	        				var html = ''
+	        				if(data==null)console.log("data 가 조회되지 않았습니다.") 
+	        				$("#resShortOpt").empty()
+	        				var html = ''	        	
 	        					html +='<tr>'
 	        					html +='<td class="htdres res_title">1~3일 소요</td>'
     	        				html +='<td class="htdres res_num">개</td>'
@@ -209,9 +254,9 @@ $(document).ready(function() {
 	        	      		        		var item = data[j].product        		
 	        	      		        		var price = data[j].price
 	        	      		        		html +='<tr>'
-	        	      		        		html += '<td><input type="checkbox" value="'+j+'">'+item+'</td>'
-	        	      		        		html += '<td><select class="resOpc" disabled></select></td>'
-	        	      		        		html += '<td><p class="res_price" value="'+price+'">'+price+'</p></td>'
+	        	      		        		html += '<td><input class="chkBox" id="chk'+j+'" type="checkbox" value="'+j+'">'+item+'</td>'
+	        	      		        		html += '<td><select id="selc'+j+'" class="resOpc" disabled></select></td>'
+	        	      		        		html += '<td><p class="res_price" id="price'+j+'" value="'+price+'">'+price+'</p></td>'
 	        	      		        		html +='</tr>'
 	        	      					 }
     	        				html += '<tr><td class="option_title">4~7일 소요</td>'
@@ -220,17 +265,13 @@ $(document).ready(function() {
 	        	      		        		var longitem = data[j].product        		
 	        	      		        		var longprice = data[j].price
 	        	      		        		html +='<tr>'
-	        	      		        		html += '<td><input type="checkbox" value="'+j+'">'+longitem+'</td>'
-	        	      		        		html += '<td><select class="resOpc" disabled></select></td>'
-	        	      		        		html += '<td><p class="res_price" value="'+longprice+'">'+longprice+'</p></td>'
+	        	      		        		html += '<td><input class="chkBox" id="chk'+j+'" type="checkbox"  value="'+j+'">'+longitem+'</td>'
+	        	      		        		html += '<td><select id="selc'+j+'" class="resOpc" disabled></select></td>'
+	        	      		        		html += '<td><p class="res_price" id="price'+j+'" value="'+longprice+'">'+longprice+'</p></td>'
 	        	      		        		html +='</tr>'
 	        	      					 }
     	        				
-    	        				
-    	        				/*html +='<tr><td>결제상세</td></tr>'
-    	        				html +='<tr><td>주문금액</td><td class="total"></td></tr>'*/
-    	        				html +='<tr><td>결제예상금액</td><td class="totalAll"></td></tr>'
-    	        					
+    	        				html +='<tr><td>결제예상금액</td><td class="totalAll"></td></tr>'    	        					
 	        				$("#resShortOpt").append(html)
 	        				selectNum()
 					   } 
@@ -242,39 +283,90 @@ $(document).ready(function() {
         $('.single').show()
 	}
 
-	function ckRes(ckVal,ckTf) {
-		 console.log( ckVal + "번줄 / " + ckTf + " 체크박스가 클릭되었습니다.<br/>")
-		 if(ckTf == true)	{	
-			   //체크박스 활성화시에 disable해제
-		       $("select.resOpc").eq(ckVal).attr("disabled",false)		
-		       //셀렉트 박스의 값이 변한다면 금액도 변경
-		       $("select.resOpc").eq(ckVal).change(function(){
-		    	   //select 박스 선택 값
-		    	   var option = this.value
-		    	   //변경시킬 해당 row의 price정보
-		    	   var chVal = $("p.res_price").eq(ckVal).attr("value")	
-		    	   var total = option*chVal
-		    	   $("p.res_price").eq(ckVal).text(total)
-		       })
-		 }else if(ckTf == false){
-			 $("select.resOpc").eq(ckVal).attr("disabled",true)	
-			  $("p.res_price").text(chVal)
-		}
+	function ckRes(idx,ckTf) {
+		//  console.log( idx + "번줄 / " + ckTf + " 체크박스가 클릭되었습니다.<br/>")
+		//  if(ckTf == true)	{	
+		// 	   //체크박스 활성화시에 disable해제
+		//        $("select.resOpc").eq(idx).attr("disabled",false)	
+		       
+		//        //해제시 기본값 부여
+		//        allPrice = allPrice+=Number($("p.res_price").eq(idx).text())
+		//        $(".totalAll").text(allPrice)
+
+		// 	    	 //셀렉트 박스의 값이 변한다면 금액도 변경
+		// 		       $("select.resOpc").eq(idx).change(function(){
+		// 		    	   if(ckTf == true){
+		// 					   console.log(ckTf+'...포인트1')
+		// 			    	   //select 박스 선택 값
+		// 			    	   var option = this.value
+		// 			    	   //변경시킬 해당 row의 price정보
+		// 			    	   var passTotal = Number($("p.res_price").eq(idx).text())
+		// 			    	   var chVal = $("p.res_price").eq(idx).attr("value")	
+		// 			    	   var total = option*chVal
+		// 			    	   $("p.res_price").eq(idx).text(total)
+					    	   
+		// 			    	   if(allPrice == 0){
+		// 			    		   allPrice = allPrice+=total
+		// 			    	   }else {
+		// 			    		   if(passTotal != total)
+		// 					    		  allPrice = (allPrice-passTotal)+total
+		// 					    	   else if(passTotal == total)
+		// 					    		   allPrice = allPrice+=total
+		// 			    	   }
+		// 		    	   $(".totalAll").text(allPrice)
+		// 		    	   }
+		// 		       })
+		//      //체크박스 해제시 select 박스 비활성화	및 금액 초기화
+		//      }else if(ckTf == false){
+		// 	 //체크박스 해제시 기존 반영된 금액을 가져온다.	
+		//      var subPrice = Number($("p.res_price").eq(idx).text())	
+		//      //disable된 tr의 price정보를 빼준다.
+		//      allPrice = allPrice-subPrice
+
+		// 	 //기존 금액으로 둔다.
+		// 	 $("p.res_price").eq(idx).text()
+		// 	 //선택상태로 변경
+		// 	 console.log(ckTf+'...포인트1')
+		// 	 $('select.resOpc').eq(idx).val("1").trigger('change');
+		// 	 console.log(ckTf+'...포인트2')
+		//      $(".totalAll").text(allPrice)
+		// 	 console.log(ckTf+'...포인트3')
+		//      $("select.resOpc").eq(idx).attr("disabled",true)
+		     
+
+		// }
 	}
 
-	
-	//결제 진행시 팝업 생성
-	function showpricepop() {
-		plusHeart(100);
-		openLoading($(".res_loading"), 2000);
-		clearInterval(moveTimer);
-		clearInterval(eventTimer);
-
-		setTimeout(function() {
-			openCommercial();
-		}, 3000);
+			
+	function requestPay() {
+		//결제관련 api 기능
+		 IMP.request_pay({
+		       pg : 'kakao', // 결제방식
+		       pay_method : 'card',	// 결제 수단
+		       merchant_uid : 'merchant_' + new Date().getTime(),
+		       name : '주문명: 결제 테스트',	// order 테이블에 들어갈 주문명 혹은 주문 번호
+		       amount : allPrice,	// 결제 금액
+		       buyer_email : 'test',	// 구매자 email
+		       buyer_name :  'test',	// 구매자 이름
+		       buyer_tel :  'test',	// 구매자 전화번호
+		       buyer_addr :  'test',	// 구매자 주소
+		       buyer_postcode :  'test',	// 구매자 우편번호
+		       m_redirect_url : '/khx/payEnd.action'	// 결제 완료 후 보낼 컨트롤러의 메소드명
+		   }, function(rsp) {
+			if ( rsp.success ) { // 성공시
+				
+				var msg = '결제가 완료되었습니다.'
+				msg += '고유ID : ' + rsp.imp_uid
+				msg += '상점 거래ID : ' + rsp.merchant_uid
+				msg += '결제 금액 : ' + rsp.paid_amount
+				msg += '메일 : ' + rsp.buyer_email
+				msg += '이름 : ' + rsp.buyer_name
+				msg += '우편번호 : ' + rsp.buyer_postcode
+				alert(msg)
+			} else { // 실패시
+				var msg = '결제에 실패하였습니다.';
+				msg += '에러내용 : ' + rsp.error_msg;
+			}
+		})
 	}
-			
-			
-			
-})
+});

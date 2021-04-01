@@ -2,16 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="reservationDAO">
 	<delete id="delAlert">
-		DELETE FROM alert WHERE ano=#{ano}
+		DELETE FROM alert
+		<where>
+			addressee=#{sender} <!-- 본인이 수신자인 메시지만 삭제 -->
+			<if test="ano!=0"><!-- 입력값이 있다면 특정 알림만 삭제 -->
+				AND ano=#{ano}
+			</if>
+			<if test="state!=0"><!-- 읽음 상태값을 입력했다면 읽은 알림만 삭제-->
+				AND state=#{state}
+			</if>
+		</where>
 	</delete>
 	<select id="getAlertList" resultType="alert"><!-- 개인&업체 관계없이 이름을 불러오기 위한 쿼리문.. 필요시 분기할 예정 -->
-		SELECT ano,mname,bname,msg,a.typenum typenum,typename,date_format(time,"%Y.%m.%d") date 
+		SELECT ano,mname,bname,msg,a.typenum,typename,date_format(time,"%Y.%m.%d") date,state
 		FROM alert a,alerttype at, (SELECT mname,bname,ac.mno mno 
 									FROM account ac LEFT JOIN member m on ac.mno=m.mno 
                                     LEFT JOIN business b on b.mno=ac.mno) n
 		WHERE a.typenum=at.typenum
         AND a.sender=n.mno
-        AND addressee=#{sender};
+        AND addressee=#{sender}
+        AND <![CDATA[TIMESTAMPDIFF(DAY,time,now())<#{datediff}]]>
+        <if test="typenum!=0"><!-- 유형을 지정했다면 -->
+        	AND a.typenum=#{typenum}
+        </if>
+        ORDER BY ano DESC;
 	</select>
 	<insert id="regitAlert"><!-- 알림 데이터 삽입 -->
 		INSERT INTO alert (sender,addressee,msg,typenum) VALUES (#{sender},#{addressee},#{msg},#{typenum});	
@@ -222,7 +236,7 @@
 			ORDER BY orderNum DESC;
 	</select>
 	<select id="getLaundry" resultType="laundry"> <!-- 상태가 표시된 품목 리스트 출력 -->
-			SELECT lname laundry, cnt count, cnt*price price,stname state 
+			SELECT lname laundry, cnt count, price price,stname state 
 			FROM reservation r, rsv_laundry r_l, business b, bsn_laundry b_l, laundry_type lt,state s
 			WHERE r.rno=r_l.rno AND r.bno=b.bno AND b.bno=b_l.bno 
 			AND lt.lno=r_l.lno AND b_l.lno=r_l.lno AND r_l.stno=s.stno
@@ -270,5 +284,12 @@
 				AND r.stno=1
 			</if>
 		</where>
+	</select>
+	<select id="getRsvMdetail" resultType="reservation"> 
+		SELECT DISTINCT r.rno rsvNum, r.rdate  rsvDate, m.mname mname, m.phone phone, m. address address 
+		FROM reservation r
+		JOIN rsv_laundry rl ON r.rno = rl.rno 
+		JOIN `member` m ON m.mno = r.mno
+		WHERE r.rno=#{rsvNum};
 	</select>
 </mapper>

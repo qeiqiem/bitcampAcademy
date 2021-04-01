@@ -8,11 +8,10 @@ public class AccountVO {
     private String phone;
     private String address;
     private String email;
-    private String bmail;
-    private String mmail;
+//    private String bmail;
+//    private String mmail;
     private int mtype;
     private int idchk;
-    
 	public int getMno() {
 		return mno;
 	}
@@ -84,8 +83,5 @@ public class AccountVO {
 		return "AccountVO [mno=" + mno + ", id=" + id + ", password=" + password + ", name=" + name + ", phone=" + phone
 				+ ", address=" + address + ", email=" + email + ", mtype=" + mtype + ", idchk=" + idchk + "]";
 	}
-
-
-
-    
+	
 }

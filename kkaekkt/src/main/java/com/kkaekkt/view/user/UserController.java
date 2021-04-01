@@ -88,7 +88,6 @@ public class UserController {
 		System.out.println("가입완료 진입");
 		System.out.println(vo);
 		model.addAttribute("joinCfm", userService.joinCfm(vo));
-		System.out.println("요기까지 완료");
 		return "/jsp/join/joinConfirmed.jsp";
 	}
 
@@ -130,9 +129,8 @@ public class UserController {
 		System.out.println(vo);
 		userService.updateUser(vo);
 		BusinessVO person = userService.getUser(vo);
-		System.out.println("컨트롤러" + person);
+		System.out.println("컨트롤러" + person);	
 		session.setAttribute("person", person);
-
 		System.out.println("세션에 수정한 정보 올리기 완료");
 		Gson gson = new Gson();
 		String password = gson.toJson(vo.getPassword());
@@ -159,7 +157,7 @@ public class UserController {
 	}
 
 	// 이메일 체크 sns에서 로그인할때 디비에 있는지 확인하려고 만든 컨트롤러이다
-	@RequestMapping(value = "/findemail.do", method = RequestMethod.POST, produces = "application/text;charset=utf-8")
+	@RequestMapping(value = "/findemail.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String email(AccountVO vo) {
 		System.out.println("controller에서 이메일 찾음");
@@ -233,11 +231,10 @@ public class UserController {
 				session.setAttribute("person", vo);
 			}
 			return "/jsp/indexCompany.jsp";
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("로그인 실패");
-			return "/jsp/login/loginBs.jsp";
+			return "/jsp/login/loginBs.jsp"; // 추후 업체로그인 부분으로 변경예정
 		}
 	}
 
@@ -338,9 +335,13 @@ public class UserController {
 		String toMail = email; // 받는메일 테스트 이후 받아온 email변수로 변경
 
 		String title = "회원가입 인증 이메일 입니다.";
-		String content = "홈페이지를 방문해주셔서 감사합니다." + "<br><br>" + "인증 번호는 " + checkNum + "입니다." + "<br>"
-				+ "해당 인증번호를 인증번호 확인란에 기입하여 주세요.";
-
+		        String content = 
+                "홈페이지를 방문해주셔서 감사합니다." +
+                "<br><br>" + 
+                "인증 번호는 " + checkNum + "입니다." + 
+                "<br>" + 
+                "해당 인증번호를 인증번호 확인란에 기입하여 주세요.";
+				
 		try {
 
 			MimeMessage message = mailSender.createMimeMessage();

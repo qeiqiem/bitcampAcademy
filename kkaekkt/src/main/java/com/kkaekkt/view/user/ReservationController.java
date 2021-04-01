@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -104,6 +105,15 @@ public class ReservationController {
 	public void regitAlert(AlertVO vo) {
 		reservationService.regitAlert(vo);
 	}
+	
+	// 주문전표인쇄 창
+	@RequestMapping(value="/openPopup.do",method=RequestMethod.GET)
+	public String openPopup(ReservationVO vo, Model model) {
+		System.out.println(reservationService.getRsvDetail(vo));
+		model.addAttribute("rsv", reservationService.getRsvDetail(vo) );
+		return "/jsp/mypageBiz/orderPopup.jsp";
+	}
+
 	@RequestMapping(value="/getAlertList.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
 	@ResponseBody//알림 리스트 조회
 	public String getAlertList(AlertVO vo) {
@@ -112,8 +122,8 @@ public class ReservationController {
 	}
 	@RequestMapping(value="/delAlert.do",method=RequestMethod.POST)
 	@ResponseBody
-	public void delAlert(int ano) {
-		reservationService.delAlert(ano);
+	public void delAlert(AlertVO vo) {
+		reservationService.delAlert(vo);
 	}
 	
 }

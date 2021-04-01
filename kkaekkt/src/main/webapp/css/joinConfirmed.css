@@ -1,26 +1,37 @@
 .confirmBox {
-  /* padding-top: 30px; */
+  padding-top: 100px;
+  height: 500px;
 }
 
 .confirmBox img {
   position: relative;
-  z-index: 1;
+  /* z-index: 1; */
   width: 500px;
 }
 
-.confirmBox i {
+/* .confirmBox i {
   position: relative;
   top: -200px;
   left: -200px;
   z-index: 2;
   color: rgb(63, 62, 62);
-}
+} */
 
 .imgBox {
   text-align: center;
-  height: 500px;
+  height: 300px;
+  position: relative;
 }
 
+.textBox {
+  /* position: absolute; */
+  position: relative;
+  top: -220px;
+  z-index: 1000;
+}
+.textBox h1 {
+  margin-bottom: 195px;
+}
 .confirmBox p span {
   font-size: larger;
   /* font-weight: bolder; */
