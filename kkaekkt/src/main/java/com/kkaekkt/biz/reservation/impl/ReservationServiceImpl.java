@@ -140,7 +140,7 @@ public class ReservationServiceImpl implements ReservationService {
 		vo.setLaundryList(reservationDAO.getLaundryList(vo));
 		
 		return vo;
-
+	}
 	@Override
 	public List<AlertVO> getAlertList(AlertVO vo) {
 		return reservationDAO.getAlertList(vo);		
