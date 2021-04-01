@@ -4,6 +4,7 @@ $(document).ready(function() {
     ajax();
 });
 function ajax() {
+	console.log('ajax진입');
     $.post({
         url:'/getAlertList.do',
         data:alertObj,
@@ -20,13 +21,13 @@ function initSide() {
 }
 function printAlertList(list) {
     $('#alertListBox .date').remove();
+	
     $.each(list, function(key,value) {
         console.log(key+'...출력중');
         if($('#alertListBox .date').last().attr('id')==value.date){//날짜가 같다면 리스트만 출력
             $('#alertListBox .date ul').last().append(
                 '<li id="'+value.ano+'"><div'+(value.state==1?'read':'')+'>'+
-                        '<a href="/jsp/mypageUser/mypagePs.jsp">'+
-                        '<span class="msgHeader">'+value.typename+'</span>⠀'+value.msg+'</a>'+
+                        '<span class="msgHeader">'+value.typename+'</span>⠀'+value.msg+
                     '</div>'+
                     '<div'+(value.state==1?'read':'')+'>'+
                         '<span class="byBs">by '+value.senderName+' </span><span>⠀|⠀</span>'+
@@ -42,8 +43,7 @@ function printAlertList(list) {
                     '<h2>'+value.date+'</h2>'+
                     '<ul>'+
                         '<li id="'+value.ano+'"><div'+(value.state==2?'read':'')+'>'+
-                                '<a href="/jsp/mypageUser/mypagePs.jsp">'+
-                                '<span class="msgHeader">'+value.typename+'</span>⠀'+value.msg+'</a>'+
+                                '<span class="msgHeader">'+value.typename+'</span>⠀'+value.msg+
                             '</div>'+
                             '<div'+(value.state==2?'read':'')+'>'+
                                 '<span class="byBs">by '+value.senderName+' </span><span>⠀|⠀</span>'+

@@ -4,6 +4,7 @@ var socket = null;
 $(document).ready(function (){
     connectWs();
     initAlertList();
+	initEvent();
 });
 function connectWs(){
     socket = new WebSocket("ws://localhost:8080/echo.do");
@@ -27,17 +28,17 @@ function initAlertList() {
     $.post({
         url:'/getAlertList.do',
         data:alertObj,
-        success:function(data) {
+        success:function(data) {			
             var list = JSON.parse(data);
-            printAlertList(list);
+            printHeaderList(list);
         }
     });
 }
-function printAlertList(list) {
+function printHeaderList(list) {    
     $.each(list, function(key,value) {
         $('#noticeBox ul').append('<li id="'+value.ano+'">'+
                                     '<div class="msgTop '+(value.state==2?'read':'')+'">'+
-                                        '<a href="/jsp/mypageUser/mypagePs.jsp">'+value.typename+'⠀'+value.msg+'</a>'+
+                                        '<span>'+value.typename+'</span>⠀'+value.msg+
                                     '</div>'+
                                     '<div class="msgBottom '+(value.state==2?'read':'')+'">'+
                                         '<span class="date">'+value.date+'</span>'+
@@ -46,5 +47,10 @@ function printAlertList(list) {
                                     '<i id="'+value.ano+'" class="fas fa-times"></i>'+
                                 '</li>'
         );
+    });
+}
+function initEvent() {
+    $('#noticeBox ul').on('click','li',function() {
+        console.log($(this).attr('id'));
     });
 }
