@@ -92,6 +92,19 @@
 									<p>이름</p>
 									<input type="text" name="name" id="name" value="" minlength="2">
 								</div>
+								<!-- <div>
+									<p>이메일</p>
+									<input name="email" type="email" value="" id="email" class="mail_input">
+									<button type="button" id="btn_checkemail" class="mail_check_button"
+										onclick="fn_emailchk()">인증번호
+										전송</button><label id="checkemail" value=""></label></br>
+									<input class="mail_code_input" id="mail_code" disabled="disabled">
+									<span id='timeout'></span>
+									<button type="button" id="mail_check">인증하기</button>
+									<br><label id="reqinput"></label>
+								</div> -->
+
+
 								<div>
 									<p>이메일</p>
 									<!-- <input type="email" name="email" id="email" disabled> -->
@@ -99,10 +112,15 @@
 									<button type="button" id="btn_checkemail" class="mail_check_button"
 										onclick="fn_emailchk()">인증번호
 										전송</button><label id="checkemail" value=""></label></br>
-									<input class="mail_check_input" id="mail_check_input_box_false" disabled="disabled">
-									<button type="button" id="mail_check">인증하기</button>
-									<br><label id="reqinput"></label>
+									<div id="mailChkDiv">
+										<input class="mail_check_input" id="mail_check_input_box_false"
+											disabled="disabled">
+										<button type="button" id="mail_check">인증하기</button>
+										<span id='timeout'></span>
+									</div>
+									<br><label id="reqinput" style="color: var(--key-color);"></label>
 								</div>
+
 								<div class="phoneBox">
 									<p>연락처</p>
 									<input type="tel" placeholder="010-1234-5678" name="phone" id="phone">
@@ -120,7 +138,6 @@
 									<br><label id="birth_label"></label>
 								</div>
 
-								<!-- <div class="adBox"> -->
 								<div>
 									<p>주소</p>
 									<!-- <input type="text" name="address" id="ad"> -->
@@ -144,7 +161,7 @@
 
 								<div class="join_btn">
 									<button type="reset" name="reset">다시입력</button>
-									<button type="submit" name="join" id="join_submit" onclick="submit()"
+									<button type="button" name="join" id="join_submit"
 										style="background-color: var(- -key-color);">가입하기</button>
 									<!-- <input type="reset" name="reset" value="다시입력">
                         <input type="submit" name="join" value="가입하기"> -->

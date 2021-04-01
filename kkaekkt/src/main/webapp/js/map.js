@@ -46,12 +46,38 @@ $(document).ready(function() {
 	
 	//예약항목 옵션 클릭시 감지
 	$("#resShortOpt").on("click", 'input:checkbox', function() {
-	      var ckVal = $(this).val()
+	      var idx = $(this).val()
 	      var ckTf = $(this).is(":checked")
-	      ckRes(ckVal,ckTf)
+		changeListener(idx,ckTf);
     })
-
-		       
+	function changeListener(idx,ckTf){
+		if(ckTf) {//활성화라면,
+			$('.chkBox').eq(idx).addClass('chked');
+			$("select.resOpc").eq(idx).attr("disabled",false); //셀렉트 항목 활성화
+			totalPriceSet();
+		}else {
+			$('.chkBox').eq(idx).removeClass('chked');
+			$('select.resOpc').eq(idx).val("1").trigger('change');
+			$("select.resOpc").eq(idx).attr("disabled",true); //셀렉트 항목 비활성화
+		}
+	}
+	$('#resShortOpt').on('change','select.resOpc',function() {//셀렉트 변환 시 가격반영
+		var idx=Number($(this).attr('id').charAt(4));//idx 추출
+		var cnt=$(this).val();	
+		var price=Number($('p.res_price').eq(idx).attr('value'));
+		$('p.res_price').eq(idx).text(cnt*price);
+		totalPriceSet();
+	});
+	function totalPriceSet() {
+		var totalPrice=0;
+		var chkedList = $('.chked');
+		var idx;
+		for(var i=0;i<chkedList.length;i++){
+			idx=$('.chked').eq(i).attr('id').charAt(3);
+			totalPrice+=Number($('#price'+idx)[0].innerHTML);
+		}
+		$(".totalAll").text(totalPrice);
+	}
 	//4. 결제 api 대기 팝업
 	$('.comBtn').on("click", function() {  $("#mask").show(); 
 	/*$(".res_loading").show()*/
@@ -228,9 +254,9 @@ $(document).ready(function() {
 	        	      		        		var item = data[j].product        		
 	        	      		        		var price = data[j].price
 	        	      		        		html +='<tr>'
-	        	      		        		html += '<td><input type="checkbox" value="'+j+'">'+item+'</td>'
-	        	      		        		html += '<td><select class="resOpc" disabled></select></td>'
-	        	      		        		html += '<td><p class="res_price" value="'+price+'">'+price+'</p></td>'
+	        	      		        		html += '<td><input class="chkBox" id="chk'+j+'" type="checkbox" value="'+j+'">'+item+'</td>'
+	        	      		        		html += '<td><select id="selc'+j+'" class="resOpc" disabled></select></td>'
+	        	      		        		html += '<td><p class="res_price" id="price'+j+'" value="'+price+'">'+price+'</p></td>'
 	        	      		        		html +='</tr>'
 	        	      					 }
     	        				html += '<tr><td class="option_title">4~7일 소요</td>'
@@ -239,9 +265,9 @@ $(document).ready(function() {
 	        	      		        		var longitem = data[j].product        		
 	        	      		        		var longprice = data[j].price
 	        	      		        		html +='<tr>'
-	        	      		        		html += '<td><input type="checkbox" value="'+j+'">'+longitem+'</td>'
-	        	      		        		html += '<td><select class="resOpc" disabled></select></td>'
-	        	      		        		html += '<td><p class="res_price" value="'+longprice+'">'+longprice+'</p></td>'
+	        	      		        		html += '<td><input class="chkBox" id="chk'+j+'" type="checkbox"  value="'+j+'">'+longitem+'</td>'
+	        	      		        		html += '<td><select id="selc'+j+'" class="resOpc" disabled></select></td>'
+	        	      		        		html += '<td><p class="res_price" id="price'+j+'" value="'+longprice+'">'+longprice+'</p></td>'
 	        	      		        		html +='</tr>'
 	        	      					 }
     	        				
@@ -257,54 +283,58 @@ $(document).ready(function() {
         $('.single').show()
 	}
 
-	function ckRes(ckVal,ckTf) {
-		 console.log( ckVal + "번줄 / " + ckTf + " 체크박스가 클릭되었습니다.<br/>")
-		 if(ckTf == true)	{	
-			   //체크박스 활성화시에 disable해제
-		       $("select.resOpc").eq(ckVal).attr("disabled",false)	
+	function ckRes(idx,ckTf) {
+		//  console.log( idx + "번줄 / " + ckTf + " 체크박스가 클릭되었습니다.<br/>")
+		//  if(ckTf == true)	{	
+		// 	   //체크박스 활성화시에 disable해제
+		//        $("select.resOpc").eq(idx).attr("disabled",false)	
 		       
-		       //해제시 기본값 부여
-		       allPrice = allPrice+=Number($("p.res_price").eq(ckVal).text())
-		       $(".totalAll").text(allPrice)
+		//        //해제시 기본값 부여
+		//        allPrice = allPrice+=Number($("p.res_price").eq(idx).text())
+		//        $(".totalAll").text(allPrice)
 
-			    	 //셀렉트 박스의 값이 변한다면 금액도 변경
-				       $("select.resOpc").eq(ckVal).change(function(){
-				    	   if(ckTf == true){
-					    	   //select 박스 선택 값
-					    	   var option = this.value
-					    	   //변경시킬 해당 row의 price정보
-					    	   var passTotal = Number($("p.res_price").eq(ckVal).text())
-					    	   var chVal = $("p.res_price").eq(ckVal).attr("value")	
-					    	   var total = option*chVal
-					    	   $("p.res_price").eq(ckVal).text(total)
+		// 	    	 //셀렉트 박스의 값이 변한다면 금액도 변경
+		// 		       $("select.resOpc").eq(idx).change(function(){
+		// 		    	   if(ckTf == true){
+		// 					   console.log(ckTf+'...포인트1')
+		// 			    	   //select 박스 선택 값
+		// 			    	   var option = this.value
+		// 			    	   //변경시킬 해당 row의 price정보
+		// 			    	   var passTotal = Number($("p.res_price").eq(idx).text())
+		// 			    	   var chVal = $("p.res_price").eq(idx).attr("value")	
+		// 			    	   var total = option*chVal
+		// 			    	   $("p.res_price").eq(idx).text(total)
 					    	   
-					    	   if(allPrice == 0){
-					    		   allPrice = allPrice+=total
-					    	   }else {
-					    		   if(passTotal != total)
-							    		  allPrice = (allPrice-passTotal)+total
-							    	   else if(passTotal == total)
-							    		   allPrice = allPrice+=total
-					    	   }
-				    	   $(".totalAll").text(allPrice)
-				    	   }
-				       })
-		     //체크박스 해제시 select 박스 비활성화	및 금액 초기화
-		     }else if(ckTf == false){
-			 //체크박스 해제시 기존 반영된 금액을 가져온다.	
-		     var subPrice = Number($("p.res_price").eq(ckVal).text())	
-		     //disable된 tr의 price정보를 빼준다.
-		     allPrice = allPrice-subPrice
+		// 			    	   if(allPrice == 0){
+		// 			    		   allPrice = allPrice+=total
+		// 			    	   }else {
+		// 			    		   if(passTotal != total)
+		// 					    		  allPrice = (allPrice-passTotal)+total
+		// 					    	   else if(passTotal == total)
+		// 					    		   allPrice = allPrice+=total
+		// 			    	   }
+		// 		    	   $(".totalAll").text(allPrice)
+		// 		    	   }
+		// 		       })
+		//      //체크박스 해제시 select 박스 비활성화	및 금액 초기화
+		//      }else if(ckTf == false){
+		// 	 //체크박스 해제시 기존 반영된 금액을 가져온다.	
+		//      var subPrice = Number($("p.res_price").eq(idx).text())	
+		//      //disable된 tr의 price정보를 빼준다.
+		//      allPrice = allPrice-subPrice
 
-			 //기존 금액으로 둔다.
-			 $("p.res_price").eq(ckVal).text()
-			 //선택상태로 변경
-			 $('select.resOpc').val("1").trigger('change');
-		     $(".totalAll").text(allPrice)   
-		     $("select.resOpc").eq(ckVal).attr("disabled",true)	
+		// 	 //기존 금액으로 둔다.
+		// 	 $("p.res_price").eq(idx).text()
+		// 	 //선택상태로 변경
+		// 	 console.log(ckTf+'...포인트1')
+		// 	 $('select.resOpc').eq(idx).val("1").trigger('change');
+		// 	 console.log(ckTf+'...포인트2')
+		//      $(".totalAll").text(allPrice)
+		// 	 console.log(ckTf+'...포인트3')
+		//      $("select.resOpc").eq(idx).attr("disabled",true)
 		     
 
-		}
+		// }
 	}
 
 			
@@ -339,7 +369,4 @@ $(document).ready(function() {
 			}
 		})
 	}
-	
-	
-			
-})
+});

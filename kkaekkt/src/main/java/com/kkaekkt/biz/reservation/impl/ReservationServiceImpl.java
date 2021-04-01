@@ -148,4 +148,8 @@ public class ReservationServiceImpl implements ReservationService {
 	public void delAlert(AlertVO vo) {
 		reservationDAO.delAlert(vo);
 	}
+	@Override
+	public void updateAlert(AlertVO vo) {
+		reservationDAO.updateAlert(vo);
+	}
 }

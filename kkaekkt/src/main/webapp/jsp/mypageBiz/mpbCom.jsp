@@ -62,7 +62,7 @@
 						</div>
 				</div>
 			</div>
-		</div>	
+		</div>
 	<script src="https://kit.fontawesome.com/2fc57dd2db.js"
 		crossorigin="anonymous"></script>
 	<script>
@@ -72,13 +72,8 @@
 				listType:4
             };
 			var rsvObj={};
-			var alertObj={
-				sender:${sessionScope.person.mno}
-			};
 			var username=`${sessionScope.person.bname}`;
     </script>
-	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-	<script src="/js/index.js"></script>
 	<script src="/js/mypageBs_com.js"></script>
 </body>
 </html>

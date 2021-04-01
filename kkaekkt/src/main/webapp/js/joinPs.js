@@ -7,13 +7,11 @@ const regEng = /^[a-zA-Z]+$/; //영어만
 const regId = /(?=.*\d{0,})(?=.*[a-z]{1,}).{6,15}/;
 const regPw = /^.*(?=^.{8,16}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
 const regName = /^[가-힝a-zA-Z]{2,}$/;
-// const regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
 const regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 const regBth = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
-// 전화번호 형태 : 전화번호 형태 000-0000-0000 만 받는다.
-const regPh = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$/;
+const regPh = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$/; // 전화번호 형태 : 전화번호 형태 000-0000-0000 만 받는다.
+const regMailCode = /^[0-9]{6}$/;
 
-//event.preventDefault();
 const id = document.getElementById("id");
 const pw = document.getElementById("pw");
 const repw = document.getElementById("repw");
@@ -21,15 +19,117 @@ const name = document.getElementById("name");
 const phone = document.getElementById("phone");
 const address = document.getElementById("address");
 const email = document.getElementById("email");
-
 // submit
 let formatpw = 0;
 let formatbirth = 0;
 let formatad = 0;
 let formatph = 0;
 let formatemail = 0;
+let formatemailNum = 0;
 let formatidchk = 0;
 
+let mailCode;
+
+//타이머 전역변수 지정
+function $ComTimer() {}
+$ComTimer.prototype = {
+  comSecond: "",
+  timer: "",
+  domId: "",
+  fnTimer: function () {
+    var min = Math.floor(this.comSecond / 60);
+    var sec = this.comSecond % 60;
+    this.domId.innerText = `${min}:${sec < 10 ? `0${sec}` : sec}`;
+    this.comSecond--; // 1초씩 감소
+    if (this.comSecond < 0) {
+      // 시간이 종료 되었으면..
+      clearInterval(this.timer); // 타이머 해제
+      alert("인증시간이 초과하였습니다. 다시 이메일 인증을 해 주세요.");
+      $("#timeout").hide();
+      $(".mail_check_input").attr("disabled", true);
+      $("#mail_check").attr("disabled", true);
+      $(".mail_check_input").attr("id", "mail_check_input_box_false");
+    }
+  },
+};
+var AuthTimer = new $ComTimer();
+
+// 이메일 입력형식 확인
+document.getElementById("btn_checkemail").onclick = function () {
+  console.log(formatemail);
+  if (formatemail == 1) {
+    emailApi(); //ajax 실행
+  } else {
+    alert("이메일을 정확하게 입력하세요.");
+  }
+};
+// 인증번호 이메일 전송
+function emailApi() {
+  console.log("이메일인증 클릭");
+  var email = $(".mail_input").val(); // 입력한 이메일
+
+  $.ajax({
+    type: "GET",
+    url: "/mailCheck.do?email=" + email,
+    success: function (data) {
+      //console.log("data : " + data);
+      $(".mail_check_input").attr("disabled", false);
+      document.getElementById("mail_check").disabled = false;
+      $(".mail_check_input").attr("id", "mail_check_input_box_true");
+      alert(" 인증번호를 전송했습니다.");
+      timerStart();
+      code = data;
+    },
+  });
+}
+
+function timerStart() {
+  AuthTimer.comSecond = 180;
+  AuthTimer.timer = setInterval(function () {
+    AuthTimer.fnTimer();
+  }, 1000);
+  AuthTimer.domId = document.getElementById("timeout");
+}
+function timeStop() {
+  clearInterval(AuthTimer.timer);
+}
+
+/* 인증번호 비교 */
+document.getElementById("mail_check").onclick = function () {
+  checkemailNum();
+};
+
+// 인증코드 맞는지 확인 (인증하기 버튼 클릭시 실행)
+function checkemailNum() {
+  var inputCode = $(".mail_check_input").val(); // 입력코드
+  if (regMailCode.test(inputCode)) {
+    if (inputCode == code) {
+      timeStop();
+      formatemailNum = 1;
+      alert("이메일 인증이 완료되었습니다.");
+      $("#timeout").hide();
+      $(".mail_check_input").val("");
+      $("#mail_check").attr("disabled", true);
+      $(".mail_check_input").attr("disabled", true);
+      // $(".mail_check_input").attr("id", "mail_check_input_box_false");
+      // 적용안되는중
+      $("#btn_checkemail").attr("disabled", true);
+      // doncument.getElementById("btn_checkemail").disabled = true;
+      $(".mail_check_input").val("인증이 완료되었습니다.");
+    } else if ($("#timeout").text() != "0:00") {
+      //시간이 남았는데 코드가 일치하지 않는다면
+      formatemailNum = 0;
+      alert("인증번호가 일치하지 않습니다.");
+    }
+  } else {
+    //코드가 숫자 6자리가 아니라면
+    formatemailNum = 0;
+    alert(" 인증번호를 다시 확인해주세요.");
+    $("#reqinput").attr("class", "incorrect");
+  }
+}
+
+// 온로드
 window.onload = function () {
   initKeyEvent();
 };
@@ -173,60 +273,6 @@ function initKeyEvent() {
   });
 } // window onload
 
-/* 인증번호 비교 */
-$("#mail_check").click(function () {
-  var inputCode = $(".mail_check_input").val(); // 입력코드
-
-  if (inputCode == code) {
-    $("#reqinput").text("");
-    alert(" 인증번호가 일치합니다.");
-    $("#reqinput").html(" 인증이 완료되었습니다.");
-    formatemail = 1;
-    //   $(".mail_check_input").attr("id", "mail_check_input_box_true");
-    $(".mail_check_input").attr("disabled", true);
-    $("#mail_check").attr("disabled", true);
-    console.log(formatemail);
-
-    $("#reqinput").attr("class", "correct");
-  } else {
-    // 일치하지 않을 경우
-    formatemail = 0;
-    $("#reqinput").text("");
-    alert(" 인증번호를 다시 확인해주세요.");
-    console.log(formatemail);
-
-    $("#reqinput").attr("class", "incorrect");
-  }
-});
-
-function fn_emailchk() {
-  if (formatemail == 0 || email.value.length == 0) {
-    alert("이메일을 정확하게 입력하세요.");
-    $("#email").focus();
-    // return false;
-  } else {
-    /* 인증번호 이메일 전송 */
-    $(".mail_check_button").click(function () {
-      console.log("이메일인증 클릭");
-
-      var email = $(".mail_input").val(); // 입력한 이메일
-
-      $.ajax({
-        type: "GET",
-        url: "/mailCheck.do?email=" + email,
-        success: function (data) {
-          //console.log("data : " + data);
-          $(".mail_check_input").attr("disabled", false);
-          $(".mail_check_input").attr("id", "mail_check_input_box_true");
-          // $("#checkemail").text(" 인증번호를 전송했습니다.");
-          alert(" 인증번호를 전송했습니다.");
-          code = data;
-        },
-      });
-    });
-  }
-}
-
 // 중복확인
 function fn_idchk() {
   if ($("#id").val() == "") {
@@ -285,7 +331,7 @@ function fn_idchk() {
 }
 
 function fn_combine() {
-  let address =
+  let ad =
     document.getElementById("postcode").value +
     ", " +
     document.getElementById("roadAddress").value +
@@ -293,62 +339,62 @@ function fn_combine() {
     document.getElementById("detailAddress").value +
     ", " +
     document.getElementById("extraAddress").value;
-  console.log(address);
-  document.getElementById("address").value = address;
-  address.value = address;
+  console.log(ad);
+  // document.getElementById("address").value = address;
+  address.value = ad;
   formatad = 1;
   console.log(address);
 }
 
 //submit check
-function submit() {
-  $("#join_submit").on("click", function () {
-    //주소 합치기
-    fn_combine();
-    //
-    const idchkVal = $("#idchk").val();
-    if (formatidchk == 0) {
-      alert("아이디 중복확인을 해 주세요.");
-      $("#id").focus();
-      return false;
-    }
-    if ($("#pw").val() == "") {
-      alert("비밀번호를 입력하세요.");
-      $("#pw").focus();
-      return false;
-    }
-    if ($("#repw").val() == "" || formatpw != 1) {
-      alert("비밀번호를 재입력하세요.");
-      $("#repw").focus();
-      return false;
-    }
+// function submit() {
+$("#join_submit").on("click", function () {
+  //주소 합치기
+  fn_combine();
+  //
+  const idchkVal = $("#idchk").val();
+  if (formatidchk == 0) {
+    alert("아이디 중복확인을 해 주세요.");
+    $("#id").focus();
+    return false;
+  }
+  if ($("#pw").val() == "") {
+    alert("비밀번호를 입력하세요.");
+    $("#pw").focus();
+    return false;
+  }
+  if ($("#repw").val() == "" || formatpw != 1) {
+    alert("비밀번호를 재입력하세요.");
+    $("#repw").focus();
+    return false;
+  }
 
-    if ($("#name").val() == "") {
-      alert("이름을 입력하세요.");
-      $("#name").focus();
-      return false;
-    }
-    if ($("#birth").val() == "" || formatbirth != 1) {
-      alert("생년월일을 입력하세요.");
-      $("#birth").focus();
-      return false;
-    }
+  if ($("#name").val() == "") {
+    alert("이름을 입력하세요.");
+    $("#name").focus();
+    return false;
+  }
+  if ($("#birth").val() == "" || formatbirth != 1) {
+    alert("생년월일을 입력하세요.");
+    $("#birth").focus();
+    return false;
+  }
 
-    if ($("#phone").val() == "" || formatph != 1) {
-      alert("전화번호를 입력하세요.");
-      $("#phone").focus();
-      return false;
-    }
-    if ($("#postcode").val() == "" || formatad != 1) {
-      alert("주소를 입력하세요.");
-      $("#postcode").focus();
-      return false;
-    }
-    if ($("#email").val() == "" || formatemail != 1) {
-      alert("이메일을 인증하세요.");
-      $("#email").focus();
-      return false;
-    }
-    $("form").submit();
-  });
-}
+  if ($("#phone").val() == "" || formatph != 1) {
+    alert("전화번호를 입력하세요.");
+    $("#phone").focus();
+    return false;
+  }
+  if ($("#postcode").val() == "" || formatad != 1) {
+    alert("주소를 입력하세요.");
+    $("#postcode").focus();
+    return false;
+  }
+  if ($("#email").val() == "" || formatemailNum != 1) {
+    alert("이메일을 인증하세요.");
+    $("#email").focus();
+    return false;
+  }
+  $("form").submit();
+});
+// }
