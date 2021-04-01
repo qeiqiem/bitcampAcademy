@@ -136,6 +136,7 @@ public class ReservationServiceImpl implements ReservationService {
 	
 	@Override
 	public ReservationVO getRsvDetail(ReservationVO vo) {
+		vo = reservationDAO.getRsvMdetail(vo);
 		vo.setLaundryList(reservationDAO.getLaundryList(vo));
 		
 		return vo;
