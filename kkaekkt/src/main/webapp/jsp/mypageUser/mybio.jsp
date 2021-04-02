@@ -59,9 +59,9 @@
                     <div id="mybioPhone">
                         연락처<br>
                        
-                     <input id="phone1" type='text' pattern="[0-9]+" maxlength='3'> - 
-                        <input id="phone2" type="text" pattern="[0-9]+" maxlength='4'> -
-                        <input id="phone3" type="text" pattern="[0-9]+" maxlength='4'>
+                     <input id="phone1" type='text'  maxlength='3'> - 
+                        <input id="phone2" type="text" maxlength='4'> -
+                        <input id="phone3" type="text" maxlength='4'>
                         <input name="phone" type="tel" id="phone" value="" hidden>
                     </div>
                 <div id="mybioBirth">
