@@ -23,10 +23,6 @@ public class SingleListVO {
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="YYYY.MM.DD")
 	Date rdate;
 	
-	
-	
-
-		
 	public String getContent() {
 		return content;
 	}
