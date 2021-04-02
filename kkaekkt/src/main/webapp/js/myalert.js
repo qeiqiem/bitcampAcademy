@@ -21,14 +21,16 @@ function initSide() {
     $('.side').css({'position':'fixed'});
 }
 function printAlertList(list) {
+    var read;
     $('#alertListBox .date').remove();
     $.each(list, function(key,value) {
+        read=(value.state==2?' class="read"':'');
         if($('#alertListBox .date').last().attr('id')==value.date){//날짜가 같다면 리스트만 출력
             $('#alertListBox .date ul').last().append(
-                '<li class="alertLi'+value.ano+'"><div'+(value.state==2?' class="read"':'')+'>'+
+                '<li class="alertLi'+value.ano+'"><div'+read+'>'+
                         '<span class="msgHeader">'+value.typename+'</span>⠀<span class="msgBody" id="msg'+value.ano+'">'+value.msg+'</span>'+
                     '</div>'+
-                    '<div'+(value.state==2?' class="read"':'')+'>'+
+                    '<div'+read+'>'+
                         '<span class="byBs">by '+value.senderName+' </span><span>⠀|⠀</span>'+
                         '<span class="alertDate">'+value.date+'</span>'+
                     '</div>'+
@@ -41,10 +43,10 @@ function printAlertList(list) {
                     '<i class="far fa-clock"></i>'+
                     '<h2>'+value.date+'</h2>'+
                     '<ul>'+
-                        '<li class="alertLi'+value.ano+'"><div'+(value.state==2?' class="read"':'')+'>'+
+                        '<li class="alertLi'+value.ano+'"><div'+read+'>'+
                                 '<span class="msgHeader">'+value.typename+'</span>⠀<span class="msgBody" id="msg'+value.ano+'">'+value.msg+'</span>'+
                             '</div>'+
-                            '<div'+(value.state==2?' class="read"':'')+'>'+
+                            '<div'+read+'>'+
                                 '<span class="byBs">by '+value.senderName+' </span><span>⠀|⠀</span>'+
                                 '<span class="alertDate">'+value.date+'</span>'+
                             '</div>'+
@@ -73,6 +75,12 @@ function initBodyEvent() {
     $('#total').click(function() {//전체보기
         $(this).siblings().removeClass('selected');
         $(this).addClass('selected');
+        ajax();
+    });
+    $('#order').click(function() {//주문항목보기
+        $(this).siblings().removeClass('selected');
+        $(this).addClass('selected');
+        alertObj.typenum=1;
         ajax();
     });
     $('#check').click(function() {//결제항목보기
@@ -113,6 +121,7 @@ function delPageAlert() {//알림 삭제 메서드
                 $('.alertLi'+alertObj.ano).remove();
             }else if(alertObj.state!=undefined){//읽은 알림 삭제라면
                 ajax();//읽은 알림만 삭제하려 했지만, div단위를 삭제해야할 경우 난감하므로 그냥 리스트 초기화
+                $('#noticeBox .read').remove();//헤더의 읽은 알림 삭제
             }else {//전체 삭제라면
                 $('#alertListBox .date').remove();
             }

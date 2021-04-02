@@ -3,8 +3,8 @@ $(document).ready(function() {
     headerAlertAjax();
 });
 function initHeaderEvent() {
-    $('#noticeBox ul').on('click','li',function() {
-        alertObj.ano=Number($(this).attr('id'));
+    $('#noticeBox ul').on('click','.msgBody',function() {
+        alertObj.ano=Number($(this).attr('id').substr(3));
         readAlert();
     });
     $('.fa-bell').click(function() {
@@ -18,14 +18,15 @@ function initHeaderEvent() {
         delHeaderAlert();
     });
 }
-function readAlert() {//알림 탭 페이지 공용메서드
-    $.post({
-        url:'/updateAlert.do',
-        data:alertObj,
-        success:function() {
-            location.href="/jsp/mypageUser/mypagePs.jsp";
-        }
-    });
+function readAlert(type) {//알림 탭 페이지 공용메서드 -> 당분간 장사안해
+
+    // $.post({
+    //     url:'/updateAlert.do',
+    //     data:alertObj,
+    //     success:function() {
+    //         location.href="/jsp/mypageUser/mypage"+type+".jsp";
+    //     }
+    // });
 }
 function delHeaderAlert() {//알림 삭제 메서드
     $.post({
@@ -51,14 +52,14 @@ function headerAlertAjax() {
     });
 }
 function printHeaderList(list) {
-console.log(list);
+    var read;
     $.each(list, function(key,value) {
-    	console.log(key);
-        $('#noticeBox ul').append('<li class="alertLi'+value.ano+'">'+
-                                    '<div class="msgTop '+(value.state==2?'read':'')+'">'+
-                                        '<span>'+value.typename+'</span>⠀'+value.msg+
+        read=(value.state==2?' read':'');
+        $('#noticeBox ul').append('<li class="alertLi'+value.ano+read+'">'+
+                                    '<div class="msgTop'+read+'">'+
+                                        '<span>'+value.typename+'</span>⠀<span id="msg'+value.ano+'">'+value.msg+'</span>'+
                                     '</div>'+
-                                    '<div class="msgBottom '+(value.state==2?'read':'')+'">'+
+                                    '<div class="msgBottom'+read+'">'+
                                         '<span class="date">'+value.date+'</span>'+
                                         '<span class="byBs">by '+value.senderName+'</span>'+
                                     '</div>'+

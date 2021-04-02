@@ -148,12 +148,18 @@ a:hover {
   font-size: 10px;
   color: var(--text-gray);
 }
+.msgBody:hover{
+  text-decoration: underline;
+}
 .msgBottom{
   width: 185px;
   display: flex;
   justify-content: space-between;
   color: gray;
 }
+.msgHeader {
+  color:var(--key-color);
+}
 .read{
-  color: rgb(116 116 116 / 50%);
+  color: rgb(116 116 116 / 50%) !important;
 }

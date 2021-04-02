@@ -96,7 +96,7 @@ function initSide() {
     '<button>전체 리뷰</button>'+
     '<button>노답 리뷰</button>';
     $('.side_sub').css('display','unset');
-    $('.side button').eq(4).addClass("side_select");
+    $('.side button').eq(5).addClass("side_select");
     $('.side_sub button').eq(0).addClass("side_sub_select");
     $('.side_sub button').click(function() {
         $(this).siblings().removeClass('side_sub_select');

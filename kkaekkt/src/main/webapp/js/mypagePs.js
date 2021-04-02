@@ -15,12 +15,17 @@ function initEvent() {
         $('.detail').eq(idx).toggleClass('none');
     });
     $('.rsvList').on("click",".commentBtn",function() {
-        commObj.rsvNum=JSON.parse($('#rsvNum'+$(this).val())[0].innerHTML);
+        commObj.rsvNum=Number($('#rsvNum'+$(this).val())[0].innerHTML);
         commObj.bno=Number($(this).val());
         $("#modal_container").show();
     });
+    $('.rsvList').on("click",".cancelBtn",function() {        
+        var rsvNum=Number($('#rsvNum'+$(this).val())[0].innerHTML);
+        alertObj.addressee=Number($('.mno').eq($(this).val()).attr('id').substr(3));
+        cancelRsv(rsvNum);
+    });
     $('.rsvList').on("keyup",".commentBox",function() {
-		idx=JSON.parse($(this).attr("id").substr(2,3));
+		idx=Number($(this).attr("id").substr(2,3));
         if($(this).val().length>=300) {
             alert("300자 까지 입력할 수 있습니다.");
             $(this)[0].value=$(this).val().substr(0,300);
@@ -30,7 +35,7 @@ function initEvent() {
     $(".rsvList").on("click",".comments_bottom button",function(){ 
         idx=$(this).val();
         commObj.content=$('.commentBox').eq(0).val();
-        var rno=JSON.parse($('#rsvNum'+idx)[0].innerHTML);
+        var rno=Number($('#rsvNum'+idx)[0].innerHTML);
         commObj.rsvNum=rno;
         edit(idx);
     });
@@ -109,6 +114,52 @@ function initEvent() {
             editBtn(idx);
         }else {
             deleteComm(idx);
+        }
+    });
+}
+function cancelRsv(rsvNum) {
+    $.post({
+        url:"/cancel.do",
+        data:{rsvNum:rsvNum},
+        success:function(result) {
+            if(result!=''){//JAVA에서 null 반환시 공백으로 전달
+                msgSet(rsvNum);
+                sendMsg();
+            }
+            ajax(pageObj);//초기화
+        }
+    });
+}
+function today() {
+    var date=new Date();
+    var mm=date.getMonth()+1;
+    var dd=date.getDate();
+    var today=date.getFullYear()+'.'+(mm<10?'0'+mm:mm)+'.'+dd;
+    return today;
+}
+function msgSet(rsvNum) {
+    alertObj.rsvNum=rsvNum;
+    alertObj.typenum=5;
+    alertObj.msg='주문번호'+rsvNum+' 가 취소되었습니다.'
+}
+function sendMsg() {
+    $.post({
+        url:'/regitAlert.do',
+        data:alertObj,
+        success:function(ano) {
+            if(socket){
+                var receiver=alertObj.addressee;
+                var msg='<li class="alertLi'+ano+'"><div>'+
+                                '<span class="msgHeader">[취소]</span>⠀<span class="msgBody" id="msg'+ano+'">'+alertObj.msg+'</span>'+
+                            '</div>'+
+                            '<div>'+
+                                '<span class="byBs">by '+username+' </span><span>⠀|⠀</span>'+
+                                '<span class="alertDate">'+today()+'</span>'+
+                            '</div>'+
+                            '<i id="del'+ano+'"class="fas fa-times"></i>'+
+                        '</li>'
+                socket.send(receiver+','+msg);//메시지 보냄
+            }
         }
     });
 }
@@ -365,10 +416,10 @@ function printlist(list) {
             btnClass='commentBtn';
         }
         $('.rsvList').append(
-            '<div class="rsvBox">' +
+            '<div class="rsvBox" id=rsvBox"'+value.rsvNum+'">' +
                 '<table class="rsvTable">'+
                     '<tr>'+
-                    '<th colspan="2" id="bno'+value.bno+'">'+value.bname+'</th>'+
+                    '<th colspan="2" class="mno" id="mno'+value.mno+'">'+value.bname+'</th>'+
                         '<td><i class="'+(value.like==1?'fas':'far')+' fa-heart like" value='+value.bno+'></i></td>'+
                     '</tr>'+
                     '<tr>' +
@@ -392,7 +443,7 @@ function printlist(list) {
                     '<button>채팅상담</button>'+
                     '<button class="detailBtn" value="'+key+'">상세보기</button>'+
                     (btnText!='리뷰보기'?(value.timeOut==0?'<button disabled>':'<button class="'+btnClass+'" value='+key+'>')// if 리뷰가 없으면 -> 7일이 지났으면 비활성화 아니면 활성화
-                    :(comm[0].content=='삭제된 리뷰입니다.'?'<button disabled>':'<button class="'+btnClass+'" value='+value.bno+'>')// else 삭제된 ~ 이면 비활성화 아니면 활성화
+                    :(comm[0].content=='삭제된 리뷰입니다.'?'<button disabled>':'<button class="'+btnClass+'" value='+key+'>')// else 삭제된 ~ 이면 비활성화 아니면 활성화
                     )+btnText+'</button>'+
                 '</div>'+
                 '<div class="detail none" id="detail'+key+'">'+

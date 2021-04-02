@@ -8,7 +8,7 @@ import com.kkaekkt.biz.comm.LaundryVO;
 public class ReservationVO {
 	private int rsvNum; // 예약번호
 	private int bno;
-	private int mno;
+	private int mno;//개인회원 번호가 담길수도, 업체회원 번호가 담길수도 있음
 	private String mname; // 회원명
 	private String bname; // 업체명
 	private String rsvDate; // 예약일자

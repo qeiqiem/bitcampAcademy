@@ -190,6 +190,6 @@ function ajax(pageObj) { //ajax로 리스트 받아오기
 
 
 function initSide() {
-    $('.side button').eq(3).addClass("side_select");
+    $('.side button').eq(4).addClass("side_select");
 }
 

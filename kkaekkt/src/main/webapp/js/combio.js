@@ -281,7 +281,7 @@ window.onload = function () {
 
 
 function initSide() {
-    $('.side button').eq(5).addClass("side_select");
+    $('.side button').eq(6).addClass("side_select");
 }
 // 디폴트
 function defaultDisable(){

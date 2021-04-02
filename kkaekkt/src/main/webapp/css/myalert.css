@@ -89,12 +89,3 @@ button{
     font-size: 20px;
     cursor: pointer;
 }
-.msgHeader {
-    color:var(--key-color);
-}
-.msgBody:hover{
-    text-decoration: underline;
-}
-.read{
-    color: rgb(116 116 116 / 50%);
-}

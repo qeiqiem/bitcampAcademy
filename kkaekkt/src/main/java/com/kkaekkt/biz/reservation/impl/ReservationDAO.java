@@ -116,6 +116,7 @@ public class ReservationDAO {
 	public void updateAlert(AlertVO vo) {
 		mybatis.update("reservationDAO.updateAlert",vo);		
 	}
-	
-	
+	public int getAno(AlertVO vo) {
+		return mybatis.selectOne("reservationDAO.getAno",vo);
+	}	
 }

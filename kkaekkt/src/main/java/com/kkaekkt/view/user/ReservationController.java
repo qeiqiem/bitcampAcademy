@@ -82,9 +82,8 @@ public class ReservationController {
 	}
 	@RequestMapping(value="/regitAlert.do",method=RequestMethod.POST)
 	@ResponseBody
-	public void regitAlert(AlertVO vo) {
-		System.out.println(vo);
-		reservationService.regitAlert(vo);
+	public int regitAlert(AlertVO vo) {
+		return reservationService.regitAlert(vo);
 	}
 	
 	// 주문전표인쇄 창
@@ -94,7 +93,6 @@ public class ReservationController {
 			model.addAttribute("rsv", reservationService.getRsvDetail(vo) );
 			return "/jsp/mypageBiz/orderPopup.jsp";
 		}
-
 	@RequestMapping(value="/getAlertList.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
 	@ResponseBody//알림 리스트 조회
 	public String getAlertList(AlertVO vo) {
@@ -111,5 +109,4 @@ public class ReservationController {
 	public void updateAlert(AlertVO vo) {
 		reservationService.updateAlert(vo);
 	}
-	
 }

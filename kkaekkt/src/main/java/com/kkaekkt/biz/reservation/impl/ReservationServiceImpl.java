@@ -123,8 +123,9 @@ public class ReservationServiceImpl implements ReservationService {
 		return null;
 	}
 	@Override
-	public void regitAlert(AlertVO vo) {
-		reservationDAO.regitAlert(vo);		
+	public int regitAlert(AlertVO vo) {
+		reservationDAO.regitAlert(vo);
+		return reservationDAO.getAno(vo);
 	}
 	
 	@Override
