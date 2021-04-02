@@ -76,7 +76,7 @@
                             <div id="review_btn">
                                 <button id="closeBtn">돌아가기</button>
                                 <button id="regit">등록하기</button>
-                            </div>                
+                            </div>
 						</div>
 				</div>
 			</div>
@@ -89,10 +89,11 @@
 				mname:`${sessionScope.person.name}`,
 				currentPageNum:1,
 				listType:1,
-                state:1,
+                state:1
             };
-			var likeObj={};
+			var likeObj={mno:${sessionScope.person.mno}};
 			var commObj={};
+			var username=`${sessionScope.person.mname}`;
     </script>
     <script src="/js/mypagePs.js"></script>
 </body>
