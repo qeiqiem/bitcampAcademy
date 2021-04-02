@@ -91,10 +91,9 @@ public class UserDAO {
 		
 		
 		// 이메일 확인
-		public String email(AccountVO vo) {
-			System.out.println("mybatis로 기능처리 -- 이메일 찾기");
+		public int emailchk(AccountVO vo) {
+			System.out.println("mybatis로 기능처리 <<메일 찾기>>");
 			System.out.println(vo);	
-			
 			return mybatis.selectOne("UserDAO.getEmail", vo);
 		}
 

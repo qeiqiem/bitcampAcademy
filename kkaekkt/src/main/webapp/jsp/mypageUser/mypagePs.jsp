@@ -11,7 +11,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
 <link rel="stylesheet" href="/css/mypagePs.css">
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 </head>
 <body>
 	<jsp:include page="/jsp/header1.jsp" ></jsp:include>
@@ -94,11 +93,7 @@
             };
 			var likeObj={};
 			var commObj={};
-			var alertObj={
-				sender:${sessionScope.person.mno}
-			};
     </script>
-    <script src="/js/index.js"></script>
     <script src="/js/mypagePs.js"></script>
 </body>
 </html>

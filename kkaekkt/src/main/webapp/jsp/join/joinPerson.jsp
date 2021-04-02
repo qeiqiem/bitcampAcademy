@@ -115,7 +115,7 @@
 									<div id="mailChkDiv">
 										<input class="mail_check_input" id="mail_check_input_box_false"
 											disabled="disabled">
-										<button type="button" id="mail_check">인증하기</button>
+										<button type="button" id="mail_check">확인하기</button>
 										<span id='timeout'></span>
 									</div>
 									<br><label id="reqinput" style="color: var(--key-color);"></label>

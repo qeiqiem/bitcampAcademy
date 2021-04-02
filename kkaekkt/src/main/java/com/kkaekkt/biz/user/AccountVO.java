@@ -8,6 +8,7 @@ public class AccountVO {
     private String phone;
     private String address;
     private String email;
+    private int emailchk;
 //    private String bmail;
 //    private String mmail;
     private int mtype;
@@ -66,6 +67,12 @@ public class AccountVO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public int getEmailchk() {
+		return emailchk;
+	}
+	public void setEmailchk(int emailchk) {
+		this.emailchk = emailchk;
+	}
 	public void setBmail(String bmail) {
 		this.email = bmail;
 	}
@@ -81,7 +88,8 @@ public class AccountVO {
 	@Override
 	public String toString() {
 		return "AccountVO [mno=" + mno + ", id=" + id + ", password=" + password + ", name=" + name + ", phone=" + phone
-				+ ", address=" + address + ", email=" + email + ", mtype=" + mtype + ", idchk=" + idchk + "]";
+				+ ", address=" + address + ", email=" + email + ", emailchk=" + emailchk + ", mtype=" + mtype
+				+ ", idchk=" + idchk + "]";
 	}
 	
 }

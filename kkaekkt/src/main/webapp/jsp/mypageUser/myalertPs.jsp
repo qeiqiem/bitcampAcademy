@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
 <link rel="stylesheet" href="/css/myalertPs.css">
 <link rel="stylesheet" href="/css/all.css">
 <link rel="stylesheet" href="/css/head0.css">
@@ -45,13 +45,6 @@
             </div>
         </div>
     </div>
-    <script>
-        var alertObj={
-            sender:${sessionScope.person.mno},
-            datediff:14
-        };
-    </script>
-    <script src="/js/index.js"></script>
     <script src="/js/myalertPs.js"></script>
 </body>
 </html>

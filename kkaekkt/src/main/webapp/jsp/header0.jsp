@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="/css/head0.css">
 <script src="https://kit.fontawesome.com/2fc57dd2db.js"
 	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
