@@ -16,7 +16,7 @@ function initEvent() {
     });
     $('.rsvList').on("click",".commentBtn",function() {
         commObj.rsvNum=JSON.parse($('#rsvNum'+$(this).val())[0].innerHTML);
-        commObj.bno=JSON.parse($('#bno'+$(this).val())[0].innerHTML.replace('#',''));
+        commObj.bno=Number($(this).val());
         $("#modal_container").show();
     });
     $('.rsvList').on("keyup",".commentBox",function() {
@@ -85,18 +85,16 @@ function initEvent() {
         }
     });
     $('.rsvList').on('click','i.fa-heart',function() {
-        var rno=JSON.parse($('.rsvTable tr:nth-child(3) td:nth-child(2)')[$(this).attr("value")].innerHTML);
-        likeObj.rsvNum=rno;
+        likeObj.bno=Number($(this).attr('value'));
+        console.log(likeObj.bno+'..업체번호');
         if($(this).hasClass('fas')) {
             $(this).removeClass('fas');
             $(this).addClass('far');
-            likeObj.like=0;
-            like(likeObj);
+            likeOff(likeObj);
         }else {
             $(this).addClass('fas');
             $(this).removeClass('far');
-            likeObj.like=1;
-            like(likeObj);
+            likeOn(likeObj);
         }
     });
     $('.rsvList').on("click",".dotBtn",function() {
@@ -114,12 +112,23 @@ function initEvent() {
         }
     });
 }
-function like(likeObj) {
+function likeOff() {
     $.post({
-        url:"/like.do",
+        url:"/likeOff.do",
         data:likeObj,
         success:function() {
         	ajax(pageObj);
+            delete likeObj.bno;//초기화
+        }
+    });
+}
+function likeOn() {
+    $.post({
+        url:"/likeOn.do",
+        data:likeObj,
+        success:function() {
+        	ajax(pageObj);
+            delete likeObj.bno;//초기화
         }
     });
 }
@@ -333,6 +342,8 @@ function printReply(name,no,content,date) {
             '</div>'
 }
 function printlist(list) {
+    var price;
+    var totalPrice=0;
     var btnText;
     var btnClass;
     if(list[0].state=='세탁 중') {
@@ -357,8 +368,8 @@ function printlist(list) {
             '<div class="rsvBox">' +
                 '<table class="rsvTable">'+
                     '<tr>'+
-                    '<th colspan="2">'+value.bname+'<span id="bno'+key+'">#'+value.bno+'</span></th>'+
-                        '<td><i class="'+(value.like==1?'fas':'far')+' fa-heart like" value='+key+'></i></td>'+
+                    '<th colspan="2" id="bno'+value.bno+'">'+value.bname+'</th>'+
+                        '<td><i class="'+(value.like==1?'fas':'far')+' fa-heart like" value='+value.bno+'></i></td>'+
                     '</tr>'+
                     '<tr>' +
                         '<td class="column">주문일시</td>' +
@@ -374,14 +385,14 @@ function printlist(list) {
                     '</tr>'+
                     '<tr>'+
                         '<td class="column">주문항목</td>'+
-                        '<td><span>'+value.laundryList[0].laundry+'</span> 외 <span>'+value.count+'</span>개</td>'+
+                        '<td><span>'+value.laundryList[0].laundry+'</span> 외 <span>'+(value.laundryList.length-1)+'</span>개</td>'+
                     '</tr>'+
                 '</table>'+
                 '<div class="btnDiv">'+
                     '<button>채팅상담</button>'+
                     '<button class="detailBtn" value="'+key+'">상세보기</button>'+
                     (btnText!='리뷰보기'?(value.timeOut==0?'<button disabled>':'<button class="'+btnClass+'" value='+key+'>')// if 리뷰가 없으면 -> 7일이 지났으면 비활성화 아니면 활성화
-                    :(comm[0].content=='삭제된 리뷰입니다.'?'<button disabled>':'<button class="'+btnClass+'" value='+key+'>')// else 삭제된 ~ 이면 비활성화 아니면 활성화
+                    :(comm[0].content=='삭제된 리뷰입니다.'?'<button disabled>':'<button class="'+btnClass+'" value='+value.bno+'>')// else 삭제된 ~ 이면 비활성화 아니면 활성화
                     )+btnText+'</button>'+
                 '</div>'+
                 '<div class="detail none" id="detail'+key+'">'+
@@ -398,7 +409,7 @@ function printlist(list) {
                         '<table class="result">'+
                             '<th>결제금액</th>'+
                             '<td>&nbsp;&nbsp;</td>'+
-                            '<td><span>'+value.totalPrice+'</span> 원</td>'+
+                            '<td><span id="totalPrice'+key+'"></span> 원</td>'+
                         '</table>'+
                     '</div1-1>'+
                 '</div>'+
@@ -410,16 +421,20 @@ function printlist(list) {
                 '</div>'+
             '</div>')+
         '</div>'
-        });
+    });
     for(var i=0;i<list.length;i++) {//각 주문 별 상세 물품 목록 붙이기
-        $.each(list[i].laundryList,function(key,value) {
+        totalPrice=0;//초기화
+        $.each(list[i].laundryList,function(idx,value) {
+            price=value.count*value.price;
+            totalPrice+=price;
             $('#receipt'+i).append(
                 '<tr>'+
                     '<td class="laundry">'+value.laundry+'</td>'+
                     '<td class="count">'+value.count+'개</td>'+
-                    '<td class="price">'+value.price+'</td>'+
+                    '<td class="price">'+price+'</td>'+
                 '</tr>'
             );
         });
+        $('#totalPrice'+i)[0].innerHTML=totalPrice;
     }
 }

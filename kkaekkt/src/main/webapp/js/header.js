@@ -32,7 +32,7 @@ function delHeaderAlert() {//알림 삭제 메서드
         url:'/delAlert.do',
         data:alertObj,
         success:function() {
-            $('#noticeBox li#'+alertObj.ano).remove();
+            $('.alertLi'+alertObj.ano).remove();
             initAlertObj();
         }
     });
@@ -54,7 +54,7 @@ function printHeaderList(list) {
 console.log(list);
     $.each(list, function(key,value) {
     	console.log(key);
-        $('#noticeBox ul').append('<li id="'+value.ano+'">'+
+        $('#noticeBox ul').append('<li class="alertLi'+value.ano+'">'+
                                     '<div class="msgTop '+(value.state==2?'read':'')+'">'+
                                         '<span>'+value.typename+'</span>⠀'+value.msg+
                                     '</div>'+

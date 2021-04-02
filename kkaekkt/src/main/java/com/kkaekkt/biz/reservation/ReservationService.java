@@ -11,7 +11,6 @@ public interface ReservationService {
 	public void insertRsv(ReservationVO vo);
 	public String cancel(LaundryVO vo);
 	public void complete(LaundryVO vo);
-	public void like(ReservationVO vo);
 	public ReservationListVO getRsvListPs(ReservationListVO vo);
 	public ReservationListVO getRsvListBs(ReservationListVO vo);
 	public void regitComm(CommVO vo);

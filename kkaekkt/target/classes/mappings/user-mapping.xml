@@ -13,6 +13,9 @@
 	<delete id="likeOff">
 		DELETE FROM liked WHERE mno=#{mno} AND bno=#{bno};
 	</delete>
+	<insert id="likeOn">
+		INSERT INTO liked (bno,mno) VALUES(#{bno},#{mno});
+	</insert>
 	<insert id="insertBs" parameterType="business">
 		INSERT INTO account (id,password) VALUES (#{id},#{password});
 		INSERT
@@ -61,7 +64,15 @@
 			</otherwise>
 		</choose>
 	</update>
-
+    <select id="countLikeBs" resultType="_int">
+        SELECT count(mno) FROM liked
+        WHERE bno=#{bno};
+    </select>
+    <select id="avgGradeBs" resultType="_double">
+	   SELECT round(AVG(grade),1)
+	   FROM comments
+	   WHERE bno=#{bno};
+    </select>
 	<update id="updateSpec">
 		<choose>
 			<when test="bizType==1"> <!-- 일반세탁소라면 -->
@@ -170,27 +181,14 @@
 		LEFT JOIN business b on m.mno = b.mno
 		WHERE m.email=#{email} OR b.email=#{email};
 	</select>
-	<select id="getLikedBs" resultType="business"><!-- 찜한 업체 목록 조회(뷰테이블 사용예정) -->
-
+	<select id="getLikedBs" resultType="business"><!-- 찜한 업체 목록 조회 -->
+		SELECT IFNULL(comm,0) count,l.bno,bname,IFNULL(ROUND(eval,1),0) eval,address,phone
+		FROM business b ,liked l 
+		LEFT OUTER JOIN (SELECT count(mno) comm,AVG(grade) eval, bno FROM comments WHERE depth=0 GROUP BY bno) c ON c.bno=l.bno
+		WHERE l.bno=b.bno
+		AND l.mno=#{mno}
+		GROUP BY b.bno;
 	</select>
-	<select id="countList" resultType="_int">
-		SELECT count(bno) FROM liked
-		WHERE mno=#{mno};
-
-	</select>
-
-	<!-- 업체프로필편집 자신의 매장을 찜한 회원의 수 -->
-	<select id="countLikeBs" resultType="_int">
-		SELECT count(mno) FROM liked
-		WHERE bno=#{bno};
-	</select>
-	<!-- 업체프로필편집 자신의 매장 평균평점 -->
-	<select id="avgGradeBs" resultType="_double">
-		SELECT round(AVG(grade),1)
-		FROM comments
-		WHERE bno=#{bno};
-	</select>
-
 	<!-- 관리자 페이지 기능이기 때문에 일단 대기.. -->
 	<select id="getUserList">
 
@@ -215,8 +213,7 @@
 		SELECT bs.schno, time
 		FROM bsn_schedule bs, schedule sc
 		WHERE bs.schno = sc.schno
-		AND
-		bno=#{bno};
+		AND bno=#{bno};
 	</select>
 	<select id="findId" resultType="account">
 

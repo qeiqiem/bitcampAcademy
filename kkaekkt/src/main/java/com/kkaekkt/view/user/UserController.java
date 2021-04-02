@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.kkaekkt.biz.user.AccountVO;
-import com.kkaekkt.biz.user.BusinessListVO;
 import com.kkaekkt.biz.user.BusinessVO;
 import com.kkaekkt.biz.user.PersonVO;
 import com.kkaekkt.biz.user.UserService;
@@ -45,12 +44,17 @@ public class UserController {
 	public void likeOff(BusinessVO vo) {
 		userService.likeOff(vo);
 	}
-
+	@RequestMapping(value = "/likeOn.do", method = RequestMethod.POST)
+	@ResponseBody
+	public void likeOn(BusinessVO vo) {
+		userService.likeOn(vo);
+	}
 	@RequestMapping(value = "/getLikedBs.do", method = RequestMethod.POST, produces = "application/text;charset=utf-8")
 	@ResponseBody
-	public String getLikedBs(BusinessListVO vo) {
+	public String getLikedBs(int mno) {//개인 마이페이지 > 좋아요한 업체 목록 조회
+		System.out.println("좋아요업체조회 접근");
 		Gson gson = new Gson();
-		return gson.toJson(userService.getLikedBs(vo));
+		return gson.toJson(userService.getLikedBs(mno));
 	}
 
 	// 아이디 중복체크

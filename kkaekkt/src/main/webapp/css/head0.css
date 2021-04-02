@@ -110,6 +110,9 @@ a:hover {
   max-height: 394px;
   overflow: scroll;
 }
+#noticeBox ul::-webkit-scrollbar{
+  display: none;
+}
 #noticeBox li{
   border-bottom: 1px solid var(--gray-color);
   padding: 11px 17px;

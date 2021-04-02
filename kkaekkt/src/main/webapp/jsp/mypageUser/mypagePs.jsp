@@ -91,7 +91,7 @@
 				listType:1,
                 state:1,
             };
-			var likeObj={};
+			var likeObj={mno:${sessionScope.person.mno}};
 			var commObj={};
     </script>
     <script src="/js/mypagePs.js"></script>

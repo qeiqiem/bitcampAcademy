@@ -13,12 +13,11 @@ table tr {
     padding-bottom: 5px;
 }
 .content {
-float:left;
 width: 75vw;
-height: 100vh;
 padding: 10px 0px 30px 70px;
 font-size: 16px;
 color: var(--text-gray);
+margin: 0 auto;
 }
 .content .card {
     position: relative;

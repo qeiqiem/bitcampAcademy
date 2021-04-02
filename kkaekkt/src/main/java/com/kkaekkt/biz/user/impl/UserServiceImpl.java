@@ -2,10 +2,6 @@ package com.kkaekkt.biz.user.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +11,6 @@ import com.kkaekkt.biz.comm.EtcVO;
 import com.kkaekkt.biz.comm.LaundryVO;
 import com.kkaekkt.biz.comm.ScheduleVO;
 import com.kkaekkt.biz.user.AccountVO;
-import com.kkaekkt.biz.user.BusinessListVO;
 import com.kkaekkt.biz.user.BusinessVO;
 import com.kkaekkt.biz.user.PersonVO;
 import com.kkaekkt.biz.user.UserService;
@@ -29,22 +24,21 @@ public class UserServiceImpl implements UserService {
 	public void insertUser(PersonVO vo) {
 		userDao.insertUser(vo);
 	}
-
 	@Override
 	public void likeOff(BusinessVO vo) {
 		userDao.likeOff(vo);
 	}
-
 	@Override
-	public BusinessListVO getLikedBs(BusinessListVO vo) {
-		vo.setTotalPostCount(userDao.countList(vo)); // 총 데이터행 입력
-		System.out.println(vo.getTotalPostCount() + ":개 행 출력");
-		vo.booleanSet(); // 페이징 정보 입력
-		vo.setBsList(userDao.getLikedBs(vo));
-		for (BusinessVO bvo : vo.getBsList()) {
-			System.out.println(bvo);
+	public void likeOn(BusinessVO vo) {
+		userDao.likeOn(vo);
+	}
+	@Override
+	public List<BusinessVO> getLikedBs(int mno) {
+		List<BusinessVO> list = userDao.getLikedBs(mno);
+		for (BusinessVO vo : list) {
+			vo.setScheduleList(userDao.getSchedule(vo));
 		}
-		return vo;
+		return list;
 	}
 	@Override
 	public int countLikeBs(BusinessVO vo) {
@@ -194,6 +188,8 @@ public class UserServiceImpl implements UserService {
 		System.out.println("가입완료 서비스옴");
 		return userDao.joinCfm(vo);
 	}
+
+
 
 
 

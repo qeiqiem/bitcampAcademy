@@ -25,14 +25,14 @@ function printAlertList(list) {
     $.each(list, function(key,value) {
         if($('#alertListBox .date').last().attr('id')==value.date){//날짜가 같다면 리스트만 출력
             $('#alertListBox .date ul').last().append(
-                '<li id="'+value.ano+'"><div'+(value.state==2?' class="read"':'')+'>'+
-                        '<span class="msgHeader">'+value.typename+'</span>⠀'+value.msg+
+                '<li class="alertLi'+value.ano+'"><div'+(value.state==2?' class="read"':'')+'>'+
+                        '<span class="msgHeader">'+value.typename+'</span>⠀<span class="msgBody" id="msg'+value.ano+'">'+value.msg+'</span>'+
                     '</div>'+
                     '<div'+(value.state==2?' class="read"':'')+'>'+
                         '<span class="byBs">by '+value.senderName+' </span><span>⠀|⠀</span>'+
                         '<span class="alertDate">'+value.date+'</span>'+
                     '</div>'+
-                    '<i id="'+value.ano+'"class="fas fa-times"></i>'+
+                    '<i id="del'+value.ano+'"class="fas fa-times"></i>'+
                 '</li>'
             );
         }else {
@@ -41,14 +41,14 @@ function printAlertList(list) {
                     '<i class="far fa-clock"></i>'+
                     '<h2>'+value.date+'</h2>'+
                     '<ul>'+
-                        '<li id="'+value.ano+'"><div'+(value.state==2?' class="read"':'')+'>'+
-                                '<span class="msgHeader">'+value.typename+'</span>⠀'+value.msg+
+                        '<li class="alertLi'+value.ano+'"><div'+(value.state==2?' class="read"':'')+'>'+
+                                '<span class="msgHeader">'+value.typename+'</span>⠀<span class="msgBody" id="msg'+value.ano+'">'+value.msg+'</span>'+
                             '</div>'+
                             '<div'+(value.state==2?' class="read"':'')+'>'+
                                 '<span class="byBs">by '+value.senderName+' </span><span>⠀|⠀</span>'+
                                 '<span class="alertDate">'+value.date+'</span>'+
                             '</div>'+
-                            '<i id="'+value.ano+'"class="fas fa-times"></i>'+
+                            '<i id="del'+value.ano+'"class="fas fa-times"></i>'+
                         '</li>'+
                     '</ul>'+
                 '</div>');
@@ -57,7 +57,7 @@ function printAlertList(list) {
 }
 function initBodyEvent() {
     $('#alertListBox').on('click','i.fa-times',function() {//삭제버튼이 눌렸을 때
-        alertObj.ano=JSON.parse($(this).attr('id'));
+        alertObj.ano=Number($(this).attr('id').substr(3));
         delPageAlert();
     });
     $('#readDelBtn').click(function() {//읽은 알림 삭제버튼이 눌렸을 때
@@ -99,8 +99,8 @@ function initBodyEvent() {
         alertObj.typenum=5;
         ajax();
     });
-    $('#alertListBox').on('click','li',function() {
-        alertObj.ano=Number($(this).attr('id'));
+    $('#alertListBox').on('click','.msgBody',function() {
+        alertObj.ano=Number($(this).attr('id').substr(3));
         readAlert();//헤더 js에 저장된 메서드
     });
 }
@@ -110,7 +110,7 @@ function delPageAlert() {//알림 삭제 메서드
         data:alertObj,
         success:function() {
             if(alertObj.ano!=undefined){//부분삭제라면
-                $('#alertListBox li#'+alertObj.ano).remove();
+                $('.alertLi'+alertObj.ano).remove();
             }else if(alertObj.state!=undefined){//읽은 알림 삭제라면
                 ajax();//읽은 알림만 삭제하려 했지만, div단위를 삭제해야할 경우 난감하므로 그냥 리스트 초기화
             }else {//전체 삭제라면

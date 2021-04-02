@@ -80,6 +80,7 @@ button{
     border: 1px solid var(--gray-color);
     border-radius: 15px;
     position: relative;
+    cursor: pointer;
 }
 .date ul li i{
     position: absolute;
@@ -90,6 +91,9 @@ button{
 }
 .msgHeader {
     color:var(--key-color);
+}
+.msgBody:hover{
+    text-decoration: underline;
 }
 .read{
     color: rgb(116 116 116 / 50%);
