@@ -19,3 +19,8 @@ function delAlert(ano) {//알림 삭제 메서드
         }
     });
 }
+
+function loadMap() {
+	var mapkey = $("#searchBar").val()
+	location.href = '/jsp/searchMap/laundryMap.jsp?'+mapkey
+}

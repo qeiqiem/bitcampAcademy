@@ -48,4 +48,9 @@ function printAlertList(list) {
                                 '</li>'
         );
     });
+    
+  
 }
+
+
+

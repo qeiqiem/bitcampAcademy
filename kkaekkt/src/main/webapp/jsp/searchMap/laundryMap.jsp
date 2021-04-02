@@ -8,12 +8,18 @@
     
     <!-- map 에서 필요한 참조 -->
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    
+    <!-- 아임포트 -->
+  	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+  	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+  	
     <script src="/js/map.js"></script>
 	<link rel="stylesheet" href="/css/laundryMap.css">
 	
 	</head>
 	<body>
 		<jsp:include page="/jsp/header0.jsp"></jsp:include>
+		<div id="mask"></div>
 	        <div class="body_container">
 	            <div class="map_container">
 	                <!-- 예약창 로딩중 -->
@@ -110,30 +116,30 @@
 	                        </div>
 	                    </div><!-- slide -->
 	                    <div class="slide_res">     
-	                        <p id="res_p">예약하기</p>
-	                        <hr>
+	                        <p id="res_p">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<i class="far fa-edit"></i>&nbsp&nbsp예약하기</p>
 	                        <div class="rescont">
-	                            <p>주문신청</p>
+	                            <p style="width: 94%; height: 35px; padding-block-start: 20px; border-bottom: 1px solid lightgray;">주문신청</p>
 	                            <table id="resShortOpt"></table>
 	                        </div>
 	                        <div class="userInfo">
-	                            <p>예약자정보 &nbsp;</p>
-	                            <p>연락처 &nbsp;</p>
-	                            <p>이메일 &nbsp;</p>
+	                        	<p>예약자 &nbsp;나애교</p>
+	                       		<p>연락처 &nbsp;010-9871-6512</p>
+								<p>이메일 &nbsp;testNa@kkaekkt.com</p>
 	                        </div>
 	                        <div class="sellerInfo">
-	                            <p>판매자정보 &nbsp;</p>
+	                           <p id="selname">판매자정보 &nbsp;</p>	
 	                            <p>개인정보 수집, 제공 &nbsp;</p>
 	                            <input placeholder="개인정보 수집 동의">
 	                            <input placeholder="개인정보 제공 동의">
-	                            <p>취소/환불 규정 &nbsp;</p>
 	                            <ul>
-	                                <li>주문 1시간이내</li>
-	                                <li>취소가능</li>
+	                                <li>취소/환불 규정 &nbsp;</li>
+	                                <li>주문 1시간이내 취소가능</li>
 	                            </ul>
 	                            <p>예약 서비스 이용을 위한 개인정보 수집 및 제3자 제공, 취소/환불 규정을 확인하였으며 이에동의합니다.</p>
 	                        </div>
-	                        <button class="comBtn">결제하기</button>
+	                        <div class="comBtnDiv">
+	                         <button class="comBtn">결제하기</button>
+	                        </div>	                       
 	                    </div><!-- res_slide --> 
 	                    <div class="contBtn">
 	                        <button class="foldBtn">&lt;</button>
