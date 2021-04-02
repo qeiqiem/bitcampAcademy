@@ -44,5 +44,9 @@
 			WHERE bno = #{bno}
 			ORDER BY rdate DESC;
 	</select>
+	
+	<insert id="respay" parameterType="respay">
+		
+	</insert>
 </mapper>
 
