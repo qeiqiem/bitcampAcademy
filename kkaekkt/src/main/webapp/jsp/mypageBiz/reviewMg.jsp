@@ -96,13 +96,8 @@
 			depth:1,
 			order:1
 		};
-		var alertObj = {
-			sender:${sessionScope.person.mno}
-		};
 		var username=`${sessionScope.person.bname}`;
 	</script>
-	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-	<script src="/js/index.js"></script>
 	<script src="/js/reviewMg.js"></script>
 </body>
 </html>

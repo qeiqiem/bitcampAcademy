@@ -118,6 +118,9 @@ public class ReservationDAO {
 	public ReservationVO getRsvMdetail(ReservationVO vo) {
 		return mybatis.selectOne("reservationDAO.getRsvMdetail",vo);
 	}
+	public void updateAlert(AlertVO vo) {
+		mybatis.update("reservationDAO.updateAlert",vo);		
+	}
 	
 	
 }

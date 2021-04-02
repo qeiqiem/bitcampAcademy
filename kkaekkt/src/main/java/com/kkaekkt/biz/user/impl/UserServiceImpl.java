@@ -83,13 +83,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void deleteUser(PersonVO vo) {
-		// TODO Auto-generated method stub
+		userDao.deleteUser(vo);
 
 	}
 
 	@Override
 	public void deleteUser(BusinessVO vo) {
-		// TODO Auto-generated method stub
+		userDao.deleteUser(vo);
 
 	}
 	
@@ -184,9 +184,9 @@ public class UserServiceImpl implements UserService {
 		return userDao.idchk(vo);
 	}
 	@Override
-	public String email(AccountVO vo) {
+	public int emailchk(AccountVO vo) {
 		System.out.println("email 찾는 서비스 옴");
-		return userDao.email(vo);
+		return userDao.emailchk(vo);
 	}
 
 	@Override
@@ -194,6 +194,8 @@ public class UserServiceImpl implements UserService {
 		System.out.println("가입완료 서비스옴");
 		return userDao.joinCfm(vo);
 	}
+
+
 
 
 
