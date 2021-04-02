@@ -1,13 +1,10 @@
 package com.kkaekkt.view.user;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
@@ -18,24 +15,12 @@ import com.kkaekkt.biz.comm.LaundryVO;
 import com.kkaekkt.biz.reservation.ReservationListVO;
 import com.kkaekkt.biz.reservation.ReservationService;
 import com.kkaekkt.biz.reservation.ReservationVO;
-import com.kkaekkt.biz.user.BusinessVO;
-import com.kkaekkt.biz.user.PersonVO;
 
 @Controller
 public class ReservationController {
 	@Autowired
 	ReservationService reservationService;
-	
-	@RequestMapping(value="/mypagePs.do", method=RequestMethod.POST)
-	public String myPagePs(PersonVO vo, HttpSession session) {
-		session.setAttribute("member", vo); //세션 테스트용
-		return "/jsp/mypageUser/mypagePs.jsp";
-	}
-	@RequestMapping(value="/mypageBs.do", method=RequestMethod.POST)
-	public String getRsvListBs(BusinessVO vo, HttpSession session) {
-		session.setAttribute("business",vo);
-		return "mypageBs.jsp";
-	}
+
 	@RequestMapping(value="/getRsvListPs.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
 	@ResponseBody
 	public String getRsvListPs(ReservationListVO vo) {
@@ -67,11 +52,6 @@ public class ReservationController {
 	public void completeRsv(LaundryVO vo) {
 		reservationService.complete(vo);
 	}
-	@RequestMapping(value="/like.do", method=RequestMethod.POST)
-	@ResponseBody
-	public void like(ReservationVO vo) {
-		reservationService.like(vo);
-	}
 	@RequestMapping(value="/regitComm.do", method=RequestMethod.POST)
 	@ResponseBody
 	public void regitComm(CommVO vo) {
@@ -102,8 +82,8 @@ public class ReservationController {
 	}
 	@RequestMapping(value="/regitAlert.do",method=RequestMethod.POST)
 	@ResponseBody
-	public void regitAlert(AlertVO vo) {
-		reservationService.regitAlert(vo);
+	public int regitAlert(AlertVO vo) {
+		return reservationService.regitAlert(vo);
 	}
 	
 	// 주문전표인쇄 창
@@ -113,7 +93,6 @@ public class ReservationController {
 			model.addAttribute("rsv", reservationService.getRsvDetail(vo) );
 			return "/jsp/mypageBiz/orderPopup.jsp";
 		}
-
 	@RequestMapping(value="/getAlertList.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
 	@ResponseBody//알림 리스트 조회
 	public String getAlertList(AlertVO vo) {
@@ -130,5 +109,4 @@ public class ReservationController {
 	public void updateAlert(AlertVO vo) {
 		reservationService.updateAlert(vo);
 	}
-	
 }

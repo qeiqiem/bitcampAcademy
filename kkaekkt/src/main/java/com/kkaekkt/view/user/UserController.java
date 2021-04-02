@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.kkaekkt.biz.user.AccountVO;
-import com.kkaekkt.biz.user.BusinessListVO;
 import com.kkaekkt.biz.user.BusinessVO;
 import com.kkaekkt.biz.user.PersonVO;
 import com.kkaekkt.biz.user.UserService;
@@ -45,12 +44,17 @@ public class UserController {
 	public void likeOff(BusinessVO vo) {
 		userService.likeOff(vo);
 	}
-
+	@RequestMapping(value = "/likeOn.do", method = RequestMethod.POST)
+	@ResponseBody
+	public void likeOn(BusinessVO vo) {
+		userService.likeOn(vo);
+	}
 	@RequestMapping(value = "/getLikedBs.do", method = RequestMethod.POST, produces = "application/text;charset=utf-8")
 	@ResponseBody
-	public String getLikedBs(BusinessListVO vo) {
+	public String getLikedBs(int mno) {//개인 마이페이지 > 좋아요한 업체 목록 조회
+		System.out.println("좋아요업체조회 접근");
 		Gson gson = new Gson();
-		return gson.toJson(userService.getLikedBs(vo));
+		return gson.toJson(userService.getLikedBs(mno));
 	}
 
 	// 아이디 중복체크
@@ -97,7 +101,7 @@ public class UserController {
 	public String UpdatePw(PersonVO vo, HttpSession session) {
 		System.out.println(vo);
 		userService.updateUser(vo);
-		PersonVO person = userService.getUser(vo);
+		AccountVO person = userService.getUser(vo);
 		System.out.println("컨트롤러" + person);
 		session.setAttribute("person", person);
 		System.out.println("세션에 수정한 정보 올리기");
@@ -114,7 +118,7 @@ public class UserController {
 	public String Update(PersonVO vo, HttpSession session) {
 		System.out.println(vo);
 		userService.updateUser(vo);
-		PersonVO person = userService.getUser(vo);
+		AccountVO person = userService.getUser(vo);
 		System.out.println("컨트롤러" + person);
 		session.setAttribute("person", person);
 		System.out.println("세션에 수정한 정보 올리기");
@@ -198,56 +202,44 @@ public class UserController {
 
 	// 일반유저 로그인
 	@RequestMapping(value = "/loginPs.do", method = RequestMethod.POST)
-	public String Login(PersonVO vo, HttpSession session) throws Exception {
-		try {
+	public String Login(AccountVO vo, HttpSession session) {
 			// 로그인 성공
 			System.out.println("로그인처리");
 
 			vo = userService.getUser(vo);
-			PersonVO user = userService.getUser(vo);
+			//PersonVO user = userService.getUser(vo);
 
 			System.out.println(vo); // 뭐가 담기는 지 보려했다
-
-			if (user.getMno() == 0) {
+			
+			if (vo == null) {
 				System.out.println("회원정보없음");
 				return "/jsp/login/loginPs.jsp";
-			} else if (user.getMno() != 0) {
+			} else  {
 				session.setAttribute("person", vo);
+				return "/jsp/indexPerson.jsp";
 			}
-			return "/jsp/indexPerson.jsp";
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("로그인 실패");
-			return "/jsp/login/loginPs.jsp";
-		}
 	}
 
-	// 업체유저 로그인
+		// 업체유저 로그인
 		@RequestMapping(value = "/loginBs.do", method = RequestMethod.POST)
 		public String Login(BusinessVO vo, HttpSession session) throws Exception {
-			try {
 				// 로그인 성공
 				System.out.println("로그인처리");
 
 				vo = userService.getUser(vo);
-				vo.setLikedNum(userService.countLikeBs(vo)); // 프로필편집에서 찜 인원 뽑아와야해서 추가
-				vo.setEval(userService.avgGradeBs(vo)); // 프로필편집에서 찜 인원 뽑아와야해서 추가
 
 				System.out.println(vo); // 뭐가 담기는 지 보려했다
 
-				if (vo.getBno() == 0) {
+				if (vo == null) {
 					System.out.println("회원정보없음");
 					return "/jsp/login/loginBs.jsp";
-				} else if (vo.getBno() != 0) {
+				} else {
+					vo.setLikedNum(userService.countLikeBs(vo)); // 프로필편집에서 찜 인원 뽑아와야해서 추가
+					vo.setEval(userService.avgGradeBs(vo)); // 프로필편집에서 찜 인원 뽑아와야해서 추가
+					System.out.println(vo);
 					session.setAttribute("person", vo);
+					return "/jsp/indexCompany.jsp";
 				}
-				return "/jsp/indexCompany.jsp";
-			} catch (Exception e) {
-				e.printStackTrace();
-				System.out.println("로그인 실패");
-				return "/jsp/login/loginBs.jsp"; // 추후 업체로그인 부분으로 변경예정
-			}
 		}	
 
 	// 소셜로그인

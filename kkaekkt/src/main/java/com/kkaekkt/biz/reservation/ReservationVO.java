@@ -8,7 +8,7 @@ import com.kkaekkt.biz.comm.LaundryVO;
 public class ReservationVO {
 	private int rsvNum; // 예약번호
 	private int bno;
-	private int mno;
+	private int mno;//개인회원 번호가 담길수도, 업체회원 번호가 담길수도 있음
 	private String mname; // 회원명
 	private String bname; // 업체명
 	private String rsvDate; // 예약일자
@@ -18,8 +18,6 @@ public class ReservationVO {
 	private String state; // 상태명
 	private int like; // 0.좋아요X 1.좋아요O
 	private int timeOut; //0.취소불가 1.취소가능
-	private int totalPrice; // 총 금액
-	private int count; // ex. 일반의류 외 count 개
 	private List<LaundryVO> laundryList; // 품목리스트
 	private List<CommVO> commList; //리뷰 리스트
 	private String address; 
@@ -78,12 +76,6 @@ public class ReservationVO {
 	public void setBname(String bname) {
 		this.bname = bname;
 	}
-//	public Date getRsvDate() {
-//		return rsvDate;
-//	}
-//	public void setRsvDate(Date rsvDate) {
-//		this.rsvDate = rsvDate;
-//	}
 	public String getPhone() {
 		return phone;
 	}
@@ -96,13 +88,6 @@ public class ReservationVO {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
-//	public Timestamp getdDate() {
-//		return dDate;
-//	}
-//	public void setdDate(Timestamp dDate) {
-//		this.dDate = dDate;
-//	}
 	
 	public String getState() {
 		return state;
@@ -120,23 +105,8 @@ public class ReservationVO {
 		return laundryList;
 	}
 	public void setLaundryList(List<LaundryVO> laundryList) {
-		this.totalPrice=0;
 		this.laundryList = laundryList;
-		this.count=laundryList.size()-1;
-		for(LaundryVO lv : laundryList) {
-			totalPrice+=lv.getPrice();
-		};
 	}
-	public int getTotalPrice() {
-		return totalPrice;
-	}
-	public void setTotalPrice(int totalPrice) {
-		this.totalPrice = totalPrice;
-	}
-	public int getCount() {
-		return count;
-	}
-	
 	public String getAddress() {
 		return address;
 	}
@@ -148,8 +118,8 @@ public class ReservationVO {
 	public String toString() {
 		return "ReservationVO [rsvNum=" + rsvNum + ", bno=" + bno + ", mno=" + mno + ", mname=" + mname + ", bname="
 				+ bname + ", rsvDate=" + rsvDate + ", phone=" + phone + ", dDate=" + dDate + ", dDay=" + dDay
-				+ ", state=" + state + ", like=" + like + ", timeOut=" + timeOut + ", totalPrice=" + totalPrice
-				+ ", count=" + count + ", laundryList=" + laundryList + ", commList=" + commList + "]";
+				+ ", state=" + state + ", like=" + like + ", timeOut=" + timeOut
+				+ ", laundryList=" + laundryList + ", commList=" + commList + "]";
 	}
 	
 	

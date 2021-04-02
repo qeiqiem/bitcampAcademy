@@ -107,6 +107,7 @@ function cancel(rsvObj) {
         success: function(result) {
             if(result!=''){//JAVA에서 null 반환시 공백으로 전달
                 msgSet(result);
+                console.log(alertObj+":..알림객체 js 체크");
                 sendMsg();
             }
 			ajax(pageObj);

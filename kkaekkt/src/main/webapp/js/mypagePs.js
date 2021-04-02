@@ -15,12 +15,17 @@ function initEvent() {
         $('.detail').eq(idx).toggleClass('none');
     });
     $('.rsvList').on("click",".commentBtn",function() {
-        commObj.rsvNum=JSON.parse($('#rsvNum'+$(this).val())[0].innerHTML);
-        commObj.bno=JSON.parse($('#bno'+$(this).val())[0].innerHTML.replace('#',''));
+        commObj.rsvNum=Number($('#rsvNum'+$(this).val())[0].innerHTML);
+        commObj.bno=Number($(this).val());
         $("#modal_container").show();
     });
+    $('.rsvList').on("click",".cancelBtn",function() {        
+        var rsvNum=Number($('#rsvNum'+$(this).val())[0].innerHTML);
+        alertObj.addressee=Number($('.mno').eq($(this).val()).attr('id').substr(3));
+        cancelRsv(rsvNum);
+    });
     $('.rsvList').on("keyup",".commentBox",function() {
-		idx=JSON.parse($(this).attr("id").substr(2,3));
+		idx=Number($(this).attr("id").substr(2,3));
         if($(this).val().length>=300) {
             alert("300자 까지 입력할 수 있습니다.");
             $(this)[0].value=$(this).val().substr(0,300);
@@ -30,7 +35,7 @@ function initEvent() {
     $(".rsvList").on("click",".comments_bottom button",function(){ 
         idx=$(this).val();
         commObj.content=$('.commentBox').eq(0).val();
-        var rno=JSON.parse($('#rsvNum'+idx)[0].innerHTML);
+        var rno=Number($('#rsvNum'+idx)[0].innerHTML);
         commObj.rsvNum=rno;
         edit(idx);
     });
@@ -85,18 +90,16 @@ function initEvent() {
         }
     });
     $('.rsvList').on('click','i.fa-heart',function() {
-        var rno=JSON.parse($('.rsvTable tr:nth-child(3) td:nth-child(2)')[$(this).attr("value")].innerHTML);
-        likeObj.rsvNum=rno;
+        likeObj.bno=Number($(this).attr('value'));
+        console.log(likeObj.bno+'..업체번호');
         if($(this).hasClass('fas')) {
             $(this).removeClass('fas');
             $(this).addClass('far');
-            likeObj.like=0;
-            like(likeObj);
+            likeOff(likeObj);
         }else {
             $(this).addClass('fas');
             $(this).removeClass('far');
-            likeObj.like=1;
-            like(likeObj);
+            likeOn(likeObj);
         }
     });
     $('.rsvList').on("click",".dotBtn",function() {
@@ -114,12 +117,69 @@ function initEvent() {
         }
     });
 }
-function like(likeObj) {
+function cancelRsv(rsvNum) {
     $.post({
-        url:"/like.do",
+        url:"/cancel.do",
+        data:{rsvNum:rsvNum},
+        success:function(result) {
+            if(result!=''){//JAVA에서 null 반환시 공백으로 전달
+                msgSet(rsvNum);
+                sendMsg();
+            }
+            ajax(pageObj);//초기화
+        }
+    });
+}
+function today() {
+    var date=new Date();
+    var mm=date.getMonth()+1;
+    var dd=date.getDate();
+    var today=date.getFullYear()+'.'+(mm<10?'0'+mm:mm)+'.'+dd;
+    return today;
+}
+function msgSet(rsvNum) {
+    alertObj.rsvNum=rsvNum;
+    alertObj.typenum=5;
+    alertObj.msg='주문번호'+rsvNum+' 가 취소되었습니다.'
+}
+function sendMsg() {
+    $.post({
+        url:'/regitAlert.do',
+        data:alertObj,
+        success:function(ano) {
+            if(socket){
+                var receiver=alertObj.addressee;
+                var msg='<li class="alertLi'+ano+'"><div>'+
+                                '<span class="msgHeader">[취소]</span>⠀<span class="msgBody" id="msg'+ano+'">'+alertObj.msg+'</span>'+
+                            '</div>'+
+                            '<div>'+
+                                '<span class="byBs">by '+username+' </span><span>⠀|⠀</span>'+
+                                '<span class="alertDate">'+today()+'</span>'+
+                            '</div>'+
+                            '<i id="del'+ano+'"class="fas fa-times"></i>'+
+                        '</li>'
+                socket.send(receiver+','+msg);//메시지 보냄
+            }
+        }
+    });
+}
+function likeOff() {
+    $.post({
+        url:"/likeOff.do",
         data:likeObj,
         success:function() {
         	ajax(pageObj);
+            delete likeObj.bno;//초기화
+        }
+    });
+}
+function likeOn() {
+    $.post({
+        url:"/likeOn.do",
+        data:likeObj,
+        success:function() {
+        	ajax(pageObj);
+            delete likeObj.bno;//초기화
         }
     });
 }
@@ -333,6 +393,8 @@ function printReply(name,no,content,date) {
             '</div>'
 }
 function printlist(list) {
+    var price;
+    var totalPrice=0;
     var btnText;
     var btnClass;
     if(list[0].state=='세탁 중') {
@@ -354,11 +416,11 @@ function printlist(list) {
             btnClass='commentBtn';
         }
         $('.rsvList').append(
-            '<div class="rsvBox">' +
+            '<div class="rsvBox" id=rsvBox"'+value.rsvNum+'">' +
                 '<table class="rsvTable">'+
                     '<tr>'+
-                    '<th colspan="2">'+value.bname+'<span id="bno'+key+'">#'+value.bno+'</span></th>'+
-                        '<td><i class="'+(value.like==1?'fas':'far')+' fa-heart like" value='+key+'></i></td>'+
+                    '<th colspan="2" class="mno" id="mno'+value.mno+'">'+value.bname+'</th>'+
+                        '<td><i class="'+(value.like==1?'fas':'far')+' fa-heart like" value='+value.bno+'></i></td>'+
                     '</tr>'+
                     '<tr>' +
                         '<td class="column">주문일시</td>' +
@@ -374,7 +436,7 @@ function printlist(list) {
                     '</tr>'+
                     '<tr>'+
                         '<td class="column">주문항목</td>'+
-                        '<td><span>'+value.laundryList[0].laundry+'</span> 외 <span>'+value.count+'</span>개</td>'+
+                        '<td><span>'+value.laundryList[0].laundry+'</span> 외 <span>'+(value.laundryList.length-1)+'</span>개</td>'+
                     '</tr>'+
                 '</table>'+
                 '<div class="btnDiv">'+
@@ -398,7 +460,7 @@ function printlist(list) {
                         '<table class="result">'+
                             '<th>결제금액</th>'+
                             '<td>&nbsp;&nbsp;</td>'+
-                            '<td><span>'+value.totalPrice+'</span> 원</td>'+
+                            '<td><span id="totalPrice'+key+'"></span> 원</td>'+
                         '</table>'+
                     '</div1-1>'+
                 '</div>'+
@@ -410,16 +472,20 @@ function printlist(list) {
                 '</div>'+
             '</div>')+
         '</div>'
-        });
+    });
     for(var i=0;i<list.length;i++) {//각 주문 별 상세 물품 목록 붙이기
-        $.each(list[i].laundryList,function(key,value) {
+        totalPrice=0;//초기화
+        $.each(list[i].laundryList,function(idx,value) {
+            price=value.count*value.price;
+            totalPrice+=price;
             $('#receipt'+i).append(
                 '<tr>'+
                     '<td class="laundry">'+value.laundry+'</td>'+
                     '<td class="count">'+value.count+'개</td>'+
-                    '<td class="price">'+value.price+'</td>'+
+                    '<td class="price">'+price+'</td>'+
                 '</tr>'
             );
         });
+        $('#totalPrice'+i)[0].innerHTML=totalPrice;
     }
 }
