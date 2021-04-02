@@ -6,7 +6,7 @@ import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 
-public class SingleListVO {
+public class ResPayVO {
 	
 	//laundryinfo-------------------------
 	int no;

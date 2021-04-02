@@ -3,6 +3,7 @@ var socket = null;
  
 $(document).ready(function (){
     connectWs();
+    initAlertList();
 });
 function connectWs(){
     socket = new WebSocket("ws://localhost:8080/echo.do");
@@ -20,3 +21,36 @@ function connectWs(){
     };
     socket.onerror = function (err) {console.log('Errors : ' , err);};
 }
+function initAlertList() {
+    console.log('alert초기화 진입');
+    $.post({
+        url:'/getAlertList.do',
+        data:alertObj,
+        success:function(data) {
+            var list = JSON.parse(data);
+            console.log(list);
+            printAlertList(list);
+        }
+    });
+}
+function printAlertList(list) {
+    $.each(list, function(key,value) {
+        console.log(key+"...번째 출력");
+        $('#noticeBox ul').append('<li id="'+value.ano+'">'+
+                                    '<div class="msgTop '+(value.state==1?'read':'')+'">'+
+                                        '<a href="/jsp/mypageUser/mypagePs.jsp">'+value.typename+'⠀'+value.msg+'</a>'+
+                                    '</div>'+
+                                    '<div class="msgBottom '+(value.state==1?'read':'')+'">'+
+                                        '<span class="date">'+value.date+'</span>'+
+                                        '<span class="byBs">by '+value.senderName+'</span>'+
+                                    '</div>'+
+                                    '<i id="'+value.ano+'" class="fas fa-times"></i>'+
+                                '</li>'
+        );
+    });
+    
+  
+}
+
+
+
