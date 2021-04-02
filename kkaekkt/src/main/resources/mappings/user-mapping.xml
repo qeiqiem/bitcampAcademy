@@ -239,7 +239,7 @@
 		SELECT count(*)
 		FROM account
 		WHERE
-		id=#{id};
+		id=#{id} AND password=#{password};
 	</select>
 	<select id="joinCfm" resultType="account">
 		SELECT id, mname, bname
