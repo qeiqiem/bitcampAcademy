@@ -363,7 +363,8 @@ public class UserController {
 	// 회원탈퇴
 	@RequestMapping(value = "/deletePs.do", method = RequestMethod.POST)
 	public void deleteUser(PersonVO vo) {
-		return ;
+		System.out.println("회원탈퇴 controller옴");
+		userService.deleteUser(vo);
 		
 	}
 }

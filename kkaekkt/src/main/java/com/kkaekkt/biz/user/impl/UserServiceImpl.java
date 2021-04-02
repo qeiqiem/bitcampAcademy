@@ -83,6 +83,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void deleteUser(PersonVO vo) {
+		System.out.println("회원탈퇴 서비스 옴");
 		userDao.deleteUser(vo);
 
 	}

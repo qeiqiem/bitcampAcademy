@@ -22,7 +22,7 @@
 		</div>
 
 		<div class="head_right">
-			<input name="name" id="name" value="${person.name} 님" readonly /> 
+			<input name="name" id="name" value="${person.mname} 님" readonly /> 
 			<div id="bellBox">
 				<i class="fas fa-bell"></i>
 				<span class="redDot">●</span>
@@ -37,7 +37,8 @@
 				<i class="fas fa-comments"></i>
 				<span class="redDot">●</span>
 			</div>
-			<a href="/jsp/mypageUser/mypagePs.jsp">마이페이지</a> 
+			<!-- <a href="/jsp/mypageUser/mypagePs.jsp">마이페이지</a>  -->
+			<a href="/jsp/mypageUser/Tset_userDelete.html">마이페이지</a>
 			<a href="/logout.do">로그아웃</a> 
 			<a href="/jsp/faq.jsp">FAQ</a>
 		</div>
