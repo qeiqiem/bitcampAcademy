@@ -31,8 +31,12 @@ hr{
     margin-left: 30px;
 }
 #laundryList td {
-    width: 110px;
+    width: 90px;
     text-align: center;
+}
+#item{
+    width: 110px;
+    padding-right: 35px;
 }
 #priceBox{
     width: 500px;
@@ -84,6 +88,12 @@ hr{
         window.print(); 
        
     }
+    window.onload = function(){
+        let address = document.getElementById("address").innerText.replace(',', " ");
+        console.log(address[0]);
+       
+    }
+
 
     
 </script>
@@ -96,7 +106,7 @@ hr{
     
     <table id="laundryList">
         <tr>
-            <th>품 목</th>
+            <th id="item">품 목</th>
             <th>단 가</th>
             <th>수 량</th>
             <th>금 액</th>
@@ -104,7 +114,7 @@ hr{
       <c:set var="price" value="0" />
       <c:forEach var="laundryitem" items="${rsv.laundryList}">
         <tr>
-            <td>${laundryitem.laundry}</td>
+            <td id="item">${laundryitem.laundry}</td>
             <td id="itemPrice">${laundryitem.price}</td>
             <td id="cnt">${laundryitem.count}</td>
             <td id="price">${laundryitem.price*laundryitem.count}</td>
@@ -127,23 +137,23 @@ hr{
     <table id="rsvInfo">
         <tr>
             <th>주문일시</th>
-            <td>: ${rsv.rsvDate}</td>
+            <td>${rsv.rsvDate}</td>
         </tr>
         <tr>
             <th>예약번호</th>
-            <td>: ${rsv.rsvNum}</td>
+            <td>${rsv.rsvNum}</td>
         </tr>
         <tr>
             <th>예약자명</th>
-            <td>: ${rsv.mname}</td>
+            <td>${rsv.mname}</td>
         </tr>
         <tr>
             <th>전화번호</th>
-            <td>: ${rsv.phone}</td>
+            <td>${rsv.phone}</td>
         </tr>
         <tr>
             <th>주소</th>
-            <td>: ${rsv.address}</td>
+            <td id="address">${rsv.address}</td>
         </tr>
     </table>
             <button id="closePopup" onclick="window.close()">확인</button>

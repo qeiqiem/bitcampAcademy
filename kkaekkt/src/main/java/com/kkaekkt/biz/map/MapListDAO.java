@@ -32,6 +32,10 @@ public class MapListDAO {
 	public List<SingleListVO> reviewList(int bno) {
 		return mybatis.selectList("MapListDAO.reviewList",bno); 
 	}
+
+	public void respay(ResPayVO vo) {
+		mybatis.insert("MapListDAO.respay",vo);		
+	}
 	 
 
 }

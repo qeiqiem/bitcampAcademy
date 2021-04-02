@@ -228,31 +228,31 @@ public class UserController {
 	}
 
 	// 업체유저 로그인
-	@RequestMapping(value = "/loginBs.do", method = RequestMethod.POST)
-	public String Login(BusinessVO vo, HttpSession session) throws Exception {
-		try {
-			// 로그인 성공
-			System.out.println("로그인처리");
+		@RequestMapping(value = "/loginBs.do", method = RequestMethod.POST)
+		public String Login(BusinessVO vo, HttpSession session) throws Exception {
+			try {
+				// 로그인 성공
+				System.out.println("로그인처리");
 
-			vo = userService.getUser(vo);
-			vo.setLikedNum(userService.countLikeBs(vo)); // 프로필편집에서 찜 인원 뽑아와야해서 추가
-			vo.setEval(userService.avgGradeBs(vo)); // 프로필편집에서 찜 인원 뽑아와야해서 추가
+				vo = userService.getUser(vo);
+				vo.setLikedNum(userService.countLikeBs(vo)); // 프로필편집에서 찜 인원 뽑아와야해서 추가
+				vo.setEval(userService.avgGradeBs(vo)); // 프로필편집에서 찜 인원 뽑아와야해서 추가
 
-			System.out.println(vo); // 뭐가 담기는 지 보려했다
+				System.out.println(vo); // 뭐가 담기는 지 보려했다
 
-			if (vo.getBno() == 0) {
-				System.out.println("회원정보없음");
-				return "/jsp/login/loginBs.jsp";
-			} else if (vo.getBno() != 0) {
-				session.setAttribute("person", vo);
+				if (vo.getBno() == 0) {
+					System.out.println("회원정보없음");
+					return "/jsp/login/loginBs.jsp";
+				} else if (vo.getBno() != 0) {
+					session.setAttribute("person", vo);
+				}
+				return "/jsp/indexCompany.jsp";
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("로그인 실패");
+				return "/jsp/login/loginBs.jsp"; // 추후 업체로그인 부분으로 변경예정
 			}
-			return "/jsp/indexCompany.jsp";
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("로그인 실패");
-			return "/jsp/login/loginBs.jsp"; // 추후 업체로그인 부분으로 변경예정
-		}
-	}
+		}	
 
 	// 소셜로그인
 	@RequestMapping(value = "/loginSNS.do", method = RequestMethod.POST)
@@ -375,7 +375,8 @@ public class UserController {
 	// 회원탈퇴
 	@RequestMapping(value = "/deletePs.do", method = RequestMethod.POST)
 	public void deleteUser(PersonVO vo) {
-		return ;
+		System.out.println("회원탈퇴 controller옴");
+		userService.deleteUser(vo);
 		
 	}
 }

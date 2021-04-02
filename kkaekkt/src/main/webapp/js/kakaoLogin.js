@@ -33,7 +33,7 @@ $.ajax({
 		console.log(data);
 		var info = JSON.parse(data);
 		
-	if(info.state == 0){
+	if(info.emailchk != 0){
 		alert("회원정보 없음");
 		$('#email').val();
 	} //else {
