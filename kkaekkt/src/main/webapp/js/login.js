@@ -13,7 +13,7 @@ function login() {
       var user = JSON.parse(data);
       console.log(user);
       
-      if (user.mno == 0) {
+      if (user.idchk != 0) {
         alert("아이디없음"); // 이부분 모달나오게 하고싶다
         console.log($("#idchk").val());
       } else {

@@ -97,7 +97,7 @@ public class UserController {
 	public String UpdatePw(PersonVO vo, HttpSession session) {
 		System.out.println(vo);
 		userService.updateUser(vo);
-		PersonVO person = userService.getUser(vo);
+		AccountVO person = userService.getUser(vo);
 		System.out.println("컨트롤러" + person);
 		session.setAttribute("person", person);
 		System.out.println("세션에 수정한 정보 올리기");
@@ -114,7 +114,7 @@ public class UserController {
 	public String Update(PersonVO vo, HttpSession session) {
 		System.out.println(vo);
 		userService.updateUser(vo);
-		PersonVO person = userService.getUser(vo);
+		AccountVO person = userService.getUser(vo);
 		System.out.println("컨트롤러" + person);
 		session.setAttribute("person", person);
 		System.out.println("세션에 수정한 정보 올리기");
@@ -198,29 +198,25 @@ public class UserController {
 
 	// 일반유저 로그인
 	@RequestMapping(value = "/loginPs.do", method = RequestMethod.POST)
-	public String Login(PersonVO vo, HttpSession session) throws Exception {
-		try {
+	@ResponseBody
+	public String Login(AccountVO vo, HttpSession session) {
 			// 로그인 성공
 			System.out.println("로그인처리");
 
 			vo = userService.getUser(vo);
-			PersonVO user = userService.getUser(vo);
+			//PersonVO user = userService.getUser(vo);
 
 			System.out.println(vo); // 뭐가 담기는 지 보려했다
 
-			if (user.getMno() == 0) {
+			if (vo == null) {
 				System.out.println("회원정보없음");
 				return "/jsp/login/loginPs.jsp";
-			} else if (user.getMno() != 0) {
+			} else  {
 				session.setAttribute("person", vo);
+				return "/jsp/indexPerson.jsp";
 			}
-			return "/jsp/indexPerson.jsp";
 
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("로그인 실패");
-			return "/jsp/login/loginPs.jsp";
-		}
+		
 	}
 
 	// 업체유저 로그인

@@ -103,7 +103,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public PersonVO getUser(PersonVO vo) {
+	public AccountVO getUser(AccountVO vo) {
 		System.out.println("유저로그인 servie옴");		
 		return userDao.getUserPs(vo);
 	}

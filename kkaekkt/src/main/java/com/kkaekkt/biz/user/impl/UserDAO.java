@@ -72,7 +72,7 @@ public class UserDAO {
 	}
 	
 	// 일반 로그인
-		public PersonVO getUserPs(PersonVO vo) {
+		public AccountVO getUserPs(AccountVO vo) {
 			System.out.println("mybatis로 기능처리 일반유저");
 			return mybatis.selectOne("UserDAO.getPerson", vo);
 		}

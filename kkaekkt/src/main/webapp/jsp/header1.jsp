@@ -43,8 +43,8 @@
 				<i class="fas fa-comments"></i>
 				<span class="redDot">●</span>
 			</div>
-			<!-- <a href="/jsp/mypageUser/mypagePs.jsp">마이페이지</a>  -->
-			<a href="/jsp/mypageUser/Tset_userDelete.html">마이페이지</a>
+			<!--<a href="/jsp/mypageUser/mypagePs.jsp">마이페이지</a>  -->
+			 <a href="/jsp/mypageUser/Tset_userDelete.html">마이페이지</a>
 			<a href="/logout.do">로그아웃</a> 
 			<a href="/jsp/faq.jsp">FAQ</a>
 		</div>

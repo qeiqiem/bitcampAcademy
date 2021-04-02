@@ -16,7 +16,7 @@ public interface UserService {
 	public void deleteUser(PersonVO vo);
 	public void deleteUser(BusinessVO vo);
 	public void likeOff(BusinessVO vo);
-	public PersonVO getUser(PersonVO vo);
+	public AccountVO getUser(AccountVO vo);
 	public BusinessVO getUser(BusinessVO vo);
 	public BusinessListVO getLikedBs(BusinessListVO vo);
 	public BusinessVO getComspec(BusinessVO vo);

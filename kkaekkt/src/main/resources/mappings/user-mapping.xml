@@ -124,8 +124,8 @@
 	</delete>
 	<!-- 로그인들 -->
 	<select id="getPerson" resultType="person">
-		SELECT ac.mno as mno, id,
-		password, mname, phone, birth, address, email
+		SELECT ifnull(ac.mno,0) as mno, id,
+		password, mname, phone, birth, address, email, mtype
 		FROM account ac,
 		member mb
 		WHERE ac.mno=mb.mno
@@ -135,7 +135,7 @@
 		SELECT ac.mno as mno,
 		bs.bno, id, password, bname, phone, address, email, bz.typenum as
 		bizType, bkno as bankNum,
-		acno as bankAccountNum
+		acno as bankAccountNum, mtype
 		FROM account ac,
 		business bs, biztype bz
 		WHERE ac.mno=bs.mno
