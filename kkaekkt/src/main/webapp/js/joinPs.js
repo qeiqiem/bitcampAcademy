@@ -58,7 +58,8 @@ var AuthTimer = new $ComTimer();
 document.getElementById("btn_checkemail").onclick = function () {
   console.log(formatemail);
   if (formatemail == 1) {
-    emailApi(); //ajax 실행
+    // emailApi(); //ajax 실행
+    emailDuplChk();
   } else {
     alert("이메일을 정확하게 입력하세요.");
   }
@@ -80,6 +81,40 @@ function emailApi() {
       timerStart();
       code = data;
     },
+  });
+}
+// 인증번호 이메일 전송
+function emailDuplChk() {
+  var email = $(".mail_input").val(); // 입력한 이메일
+
+  $.ajax({
+    url: "/findemail.do",
+    type: "POST",
+    data: {
+      email: $("#email").val(),
+    },
+    success: function (data) {
+      console.log(data);
+      var key = JSON.parse(data);
+      if (key.emailchk != 0) {
+        alert("해당 이메일로 가입된 아이디가 존재합니다.");
+        return false;
+      } else if (key.emailchk == 0) {
+        emailApi();
+      }
+    },
+    // error: function (request, status, error) {
+    //   console.log(
+    //     "code:" +
+    //       request.status +
+    //       "\n" +
+    //       "message:" +
+    //       request.responseText +
+    //       "\n" +
+    //       "error:" +
+    //       error
+    //   );
+    // },
   });
 }
 

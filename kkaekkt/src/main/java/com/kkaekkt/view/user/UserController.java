@@ -129,7 +129,7 @@ public class UserController {
 		System.out.println(vo);
 		userService.updateUser(vo);
 		BusinessVO person = userService.getUser(vo);
-		System.out.println("컨트롤러" + person);	
+		System.out.println("컨트롤러" + person);
 		session.setAttribute("person", person);
 		System.out.println("세션에 수정한 정보 올리기 완료");
 		Gson gson = new Gson();
@@ -159,7 +159,7 @@ public class UserController {
 	// 이메일 체크 sns에서 로그인할때 디비에 있는지 확인하려고 만든 컨트롤러이다
 	@RequestMapping(value = "/findemail.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String email(AccountVO vo) {
+	public String emailchk(AccountVO vo) {
 		System.out.println("controller에서 이메일 찾음");
 		// vo = userService.email(vo);
 
@@ -168,9 +168,21 @@ public class UserController {
 //		System.out.println("findEmail" + vo);
 //
 //		Gson gson = new Gson();
-		return userService.email(vo);
-	}
+//		return userService.email(vo);
 
+		////////////////////////////// 위까지 소정 코드
+		Gson gson = new Gson();
+		vo.setEmailchk(userService.emailchk(vo));
+		System.out.println("값 담겨");
+		System.out.println(vo);
+
+		return gson.toJson(vo);
+
+//		Gson gson = new Gson();
+//		vo.setState(userService.idchk(vo));
+//		System.out.println("서비스에서 값 담겨 넘어옴");
+//		return gson.toJson(vo)
+	}
 
 	// 아이디 중복체크 업체........
 	@RequestMapping(value = "/idchkBs.do", method = RequestMethod.POST)
@@ -238,25 +250,25 @@ public class UserController {
 		}
 	}
 
-	// 소셜로그인 
-		@RequestMapping(value = "/loginSNS.do", method = RequestMethod.POST)
-		public String kakaologin(PersonVO vo, HttpSession session, HttpServletResponse response) {
-			System.out.println("카카오 로그인 컨트롤러 접속");
-			// 로그인 성공했을 때
-			vo = userService.method(vo);
+	// 소셜로그인
+	@RequestMapping(value = "/loginSNS.do", method = RequestMethod.POST)
+	public String kakaologin(PersonVO vo, HttpSession session, HttpServletResponse response) {
+		System.out.println("카카오 로그인 컨트롤러 접속");
+		// 로그인 성공했을 때
+		vo = userService.method(vo);
 
-			PersonVO user = vo;
-			System.out.println(user); // 카카오 로그인시 vo 확인
+		PersonVO user = vo;
+		System.out.println(user); // 카카오 로그인시 vo 확인
 
-			if (user.getState() != 0) {
-				session.setAttribute("person", user);
-				System.out.println("user정보 " + user);
-				return "/jsp/indexPerson.jsp";
-			} else {
-				System.out.println("로그인 실패");
-				return "/jsp/login/loginPs";
-			}
+		if (user.getState() != 0) {
+			session.setAttribute("person", user);
+			System.out.println("user정보 " + user);
+			return "/jsp/indexPerson.jsp";
+		} else {
+			System.out.println("로그인 실패");
+			return "/jsp/login/loginPs";
 		}
+	}
 
 	// 로그아웃
 	@RequestMapping("/logout.do")
@@ -335,13 +347,9 @@ public class UserController {
 		String toMail = email; // 받는메일 테스트 이후 받아온 email변수로 변경
 
 		String title = "회원가입 인증 이메일 입니다.";
-		        String content = 
-                "홈페이지를 방문해주셔서 감사합니다." +
-                "<br><br>" + 
-                "인증 번호는 " + checkNum + "입니다." + 
-                "<br>" + 
-                "해당 인증번호를 인증번호 확인란에 기입하여 주세요.";
-				
+		String content = "홈페이지를 방문해주셔서 감사합니다." + "<br><br>" + "인증 번호는 " + checkNum + "입니다." + "<br>"
+				+ "해당 인증번호를 인증번호 확인란에 기입하여 주세요.";
+
 		try {
 
 			MimeMessage message = mailSender.createMimeMessage();

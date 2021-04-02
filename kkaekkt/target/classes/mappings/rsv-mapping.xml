@@ -289,7 +289,7 @@
 		</where>
 	</select>
 	<select id="getRsvMdetail" resultType="reservation"> 
-		SELECT DISTINCT r.rno rsvNum, r.rdate  rsvDate, m.mname mname, m.phone phone, m. address address 
+		SELECT DISTINCT r.rno rsvNum, r.rdate  rsvDate, m.mname mname, m.phone phone, m.address address 
 		FROM reservation r
 		JOIN rsv_laundry rl ON r.rno = rl.rno 
 		JOIN `member` m ON m.mno = r.mno

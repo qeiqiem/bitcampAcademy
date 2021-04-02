@@ -159,11 +159,16 @@
 		AND email=#{email};
 	</select>
 
-	<select id="getEmail" resultType="String">
-		SELECT email
+	<select id="getEmail" resultType="int">
+	<!-- 	SELECT *
 		FROM member
 		WHERE
-		email=#{email};
+		email=#{email); -->
+
+		SELECT count(*)
+		FROM member m
+		LEFT JOIN business b on m.mno = b.mno
+		WHERE m.email=#{email} OR b.email=#{email};
 	</select>
 	<select id="getLikedBs" resultType="business"><!-- 찜한 업체 목록 조회(뷰테이블 사용예정) -->
 
