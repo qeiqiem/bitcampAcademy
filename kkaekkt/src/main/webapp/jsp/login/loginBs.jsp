@@ -34,7 +34,8 @@
                     <div>
                         <input type="password" name="password" id="password" placeholder="비밀번호"/>
                     </div>
-                   <input type="submit" value="로그인" onclick="loginBs()" />
+                   <!-- <input type="submit" value="로그인" onclick="loginBs()" /> -->
+                   <input type="submit" value="로그인"/>
                 </form>
                 <div>
                     <div>
