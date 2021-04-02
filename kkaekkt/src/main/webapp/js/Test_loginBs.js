@@ -14,14 +14,17 @@ function loginBs(){ // onclick 할 function 이름
 		},
 		success: function(data){
 			console.log(data);
+			console.log("보냄");
 			var test = JSON.parse(data);
 			if(data){
 				data = data.trim();
 			}
-				if(test.state == 0){
+				if(test.bno == 0){
 					alert("아이디나 비밀번호를 다시 확인해주세요.");
 					$("#id").val();
 					$("#password").val();
+					
+					location.href = "/jsp/login/loginBs.jsp";
 				} else {
 					location.href = "/jsp/indexCompany.jsp";
 				}

@@ -46,6 +46,7 @@ public class UserDAO {
 	}
 
 	public void deleteUser(PersonVO vo) {
+		System.out.println("mybatis로 기능처리 - 회원탈퇴");
 		mybatis.delete("UserDAO.deletePs", vo);
 	}
 

@@ -114,24 +114,18 @@
 	</update>
 	<!-- 회원탈퇴 -->
 	<delete id="deleteUser">
-		SELECT rno, ac.mno, id, password, stno
-		FROM member mb, reservation res,
-		account ac
-		WHERE mb.mno = res.mno AND ac.mno=mb.mno
-		AND id=#{id} AND
-		
-		password=#{password};
-		
-		<if test="stno == 3 and stno == 4">
-			DELETE FROM account
-			WHERE id=#{id} AND
-			password=#{password};
+		DELETE ac, mb, res
+		FROM account ac
+		left outer join member mb on ac.mno=mb.mno
+		left outer join reservation res on mb.mno=res.mno
+		<if test="stno == 3 or stno == 4">
+			AND id=#{id} AND password=#{password};
 		</if>
 	</delete>
 	<!-- 로그인들 -->
 	<select id="getPerson" resultType="person">
 		SELECT ac.mno as mno, id,
-		password, mname as name, phone, birth, address, email
+		password, mname, phone, birth, address, email
 		FROM account ac,
 		member mb
 		WHERE ac.mno=mb.mno
@@ -151,7 +145,7 @@
 	</select>
 	<select id="getPersonSNS" resultType="person">
 		SELECT ac.mno as mno, id,
-		password, mname as name, phone, birth, address,
+		password, mname, phone, birth, address,
 		email
 		FROM account ac,
 		member mb
@@ -245,7 +239,7 @@
 		SELECT count(*)
 		FROM account
 		WHERE
-		id=#{id};
+		id=#{id} AND password=#{password};
 	</select>
 	<select id="joinCfm" resultType="account">
 		SELECT id, mname, bname
