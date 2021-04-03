@@ -1,7 +1,5 @@
 package com.kkaekkt.view.user;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
@@ -103,10 +101,9 @@ public class UserController {
 	public String UpdatePw(PersonVO vo, HttpSession session) {
 		System.out.println(vo);
 		userService.updateUser(vo);
-		AccountVO person = userService.getUser(vo);
-		System.out.println("컨트롤러" + person);
-		session.setAttribute("person", person);
-		System.out.println("세션에 수정한 정보 올리기");
+		AccountVO result = userService.getUser(vo);
+		session.setAttribute("user", result);
+		System.out.println("세션에 수정한 비밀번호 올리기");
 		Gson gson = new Gson();
 		String password = gson.toJson(vo.getPassword());
 		System.out.println(password);
@@ -134,9 +131,9 @@ public class UserController {
 	public String UpdatePw(BusinessVO vo, HttpSession session) {
 		System.out.println(vo);
 		userService.updateUser(vo);
-		BusinessVO person = userService.getUser(vo);
-		System.out.println("컨트롤러" + person);
-		session.setAttribute("person", person);
+		//BusinessVO person = userService.getUser(vo);
+		//System.out.println("컨트롤러" + person);
+		//session.setAttribute("person", person);
 		System.out.println("세션에 수정한 정보 올리기 완료");
 		Gson gson = new Gson();
 		String password = gson.toJson(vo.getPassword());
@@ -151,7 +148,7 @@ public class UserController {
 	public String Update(BusinessVO vo, HttpSession session) {
 		System.out.println(vo);
 		userService.updateUser(vo);
-		vo = userService.getUser(vo);
+		//vo = userService.getUser(vo);
 		vo.setLikedNum(userService.countLikeBs(vo)); // 프로필편집에서 찜 인원 뽑아와야해서 추가
 		vo.setEval(userService.avgGradeBs(vo)); // 프로필편집에서 찜 인원 뽑아와야해서 추가
 		System.out.println("컨트롤러" + vo);
@@ -167,7 +164,6 @@ public class UserController {
 	@ResponseBody
 	public String emailchk(AccountVO vo) {
 		System.out.println("controller에서 이메일 찾음");
-		System.out.println(vo);
 		// vo = userService.email(vo);
 
 //		AccountVO findEmail = vo;
@@ -204,74 +200,35 @@ public class UserController {
 	}
 
 	// 일반유저 로그인
-	@RequestMapping(value = "/loginPs.do", method = RequestMethod.POST)
-	public String Login(AccountVO vo, HttpSession session, HttpServletResponse response) throws IOException {
-			// 로그인 성공
-			System.out.println("로그인처리");
-
-			vo = userService.getUser(vo);
-			//PersonVO user = userService.getUser(vo);
-
-			System.out.println(vo); // 뭐가 담기는 지 보려했다
-			
-			if (vo == null) {
-				System.out.println("회원정보없음");
-				response.setContentType("text/html; charset=UTF-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>alert('아이디나 비밀번호를 확인해주세요.'); history.go(-1);</script>");
-				out.flush();
-				return null;
-			} else  {
-				session.setAttribute("user", vo);
-				return "/jsp/indexPerson.jsp";
+	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String Login(AccountVO vo, HttpSession session) {
+			AccountVO result = userService.getUser(vo);
+			if (result == null) {
+				return "fail";
+			} else {
+				session.setAttribute("user", result);
+				return result.getMtype()+"";					
 			}
 	}
 
-		// 업체유저 로그인
-		@RequestMapping(value = "/loginBs.do", method = RequestMethod.POST)
-		public String Login(BusinessVO vo, HttpSession session, HttpServletResponse response) throws Exception {
-				// 로그인 성공
-				System.out.println("로그인처리");
-
-				vo = userService.getUser(vo);
-
-				System.out.println(vo); // 뭐가 담기는 지 보려했다
-
-				if (vo == null) {
-					System.out.println("회원정보없음");
-					
-					response.setContentType("text/html; charset=UTF-8");
-					PrintWriter out = response.getWriter();
-					out.println("<script>alert('아이디나 비밀번호를 확인해주세요.'); history.go(-1);</script>");
-					out.flush();
-					return "/jsp/login/loginBs.jsp";
-				} else {
-					vo.setLikedNum(userService.countLikeBs(vo)); // 프로필편집에서 찜 인원 뽑아와야해서 추가
-					vo.setEval(userService.avgGradeBs(vo)); // 프로필편집에서 찜 인원 뽑아와야해서 추가
-					System.out.println(vo);
-					session.setAttribute("user", vo);
-					return "/jsp/mypageBiz/mpbProg_Num.jsp";
-				}
-		}	
-
 	// 소셜로그인
 	@RequestMapping(value = "/loginSNS.do", method = RequestMethod.POST)
-	@ResponseBody
-	public String kakaologin(AccountVO vo, HttpSession session, HttpServletResponse response) {
+	public String kakaologin(PersonVO vo, HttpSession session, HttpServletResponse response) {
 		System.out.println("카카오 로그인 컨트롤러 접속");
 		// 로그인 성공했을 때
 		vo = userService.method(vo);
 
-		//AccountVO user = vo;
-		//System.out.println(user); // 카카오 로그인시 vo 확인
+		PersonVO user = vo;
+		System.out.println(user); // 카카오 로그인시 vo 확인
 
-		if (vo != null) {
-			session.setAttribute("user", vo);
-			System.out.println("user정보 " + vo);
-			return "success";
+		if (user.getState() != 0) {
+			session.setAttribute("person", user);
+			System.out.println("user정보 " + user);
+			return "/jsp/indexPerson.jsp";
 		} else {
 			System.out.println("로그인 실패");
-			return "fail";
+			return "/jsp/login/loginPs";
 		}
 	}
 
@@ -380,4 +337,26 @@ public class UserController {
 		userService.deleteUser(vo);
 		
 	}
+	// 개인 프로필 정보 get
+	@RequestMapping(value = "/mybio.do", method = RequestMethod.GET)
+	public String getPerson(PersonVO vo, HttpSession session, Model model) {
+		System.out.println("개인프로필편집");
+		AccountVO account = (AccountVO) session.getAttribute("user");
+		vo.setMno(account.getMno());
+		model.addAttribute("person", userService.getPerson(vo));
+		return "/jsp/mypageUser/mybio.jsp";
+	}
+	// 업체 프로필 정보 get
+		@RequestMapping(value = "/bsBio.do", method = RequestMethod.GET)
+		public String getBusiness(BusinessVO vo, HttpSession session, Model model) {
+			System.out.println("개인프로필편집");
+			AccountVO account = (AccountVO) session.getAttribute("user");
+			vo.setMno(account.getMno());
+			model.addAttribute("bs", userService.getBusiness(vo));
+			if(vo.getBizType() == 1) {
+				return "/jsp/mypageBizCoin/combio.jsp";			
+			} else {
+				return "/jsp/mypageBizCoin/coinbio.jsp";							
+			}
+		}
 }

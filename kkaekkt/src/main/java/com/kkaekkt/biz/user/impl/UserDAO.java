@@ -66,19 +66,6 @@ public class UserDAO {
 		System.out.println(res);
 		return res;
 	}
-	
-	// 일반 로그인
-		public AccountVO getUserPs(AccountVO vo) {
-			System.out.println("mybatis로 기능처리 일반유저");
-			return mybatis.selectOne("UserDAO.getPerson", vo);
-		}
-
-		// 업체 로그인
-		public BusinessVO getUserBs(BusinessVO vo) {
-			System.out.println("mybatis로 기능처리 업체유저");
-			return mybatis.selectOne("UserDAO.getPersonBs", vo);
-		}
-
 		// 소셜 로그인
 		public AccountVO getUserSNS(AccountVO vo) {
 			System.out.println("mybatis로 기능처리 소셜유저");
@@ -155,6 +142,15 @@ public class UserDAO {
 	// 업체 평균 평점
 	public double avgGradeBs(BusinessVO vo) {
 		return  mybatis.selectOne("UserDAO.avgGradeBs", vo);
+	}
+	public AccountVO getUser(AccountVO vo) {
+		return mybatis.selectOne("UserDAO.getAccount",vo);
+	}
+	public PersonVO getPerson(PersonVO vo) {
+		return mybatis.selectOne("UserDAO.getPerson",vo);
+	}
+	public BusinessVO getBusiness(BusinessVO vo) {
+		return mybatis.selectOne("UserDAO.getBusiness",vo);
 	}
 
 

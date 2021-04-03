@@ -1,40 +1,24 @@
-var id = document.getElementById("id");
-
-// 중복확인
-function login() {
-
-  $.ajax({
-    url: "/idchk.do",
-    type: "POST",
-    data: {
-      id: $("#id").val(),
-    },
-    success: function (data) {
-      var user = JSON.parse(data);
-      console.log(user);
-      
-      if (user.idchk != 0) {
-        alert("아이디없음"); // 이부분 모달나오게 하고싶다
-        console.log($("#idchk").val());
-      } else {
-      	alert($("#name")+"님 환영한다");
-      }
-    },
-    // , failure: function (errMsg) {
-    // 	alert(errMsg);
-    // }
-
-    error: function (request, status, error) {
-      console.log(
-        "code:" +
-          request.status +
-          "\n" +
-          "message:" +
-          request.responseText +
-          "\n" +
-          "error:" +
-          error
-      );
-    },
+$(document).ready(function() {
+  $('#login').click(function(){ 
+    login();
   });
+});
+function login() {
+  var userData={
+    id:$('#id').val(),
+    password:$('#password').val()
+  }
+  $.post({
+    url:"/login.do",
+    data:userData,
+    success:function(result) {
+      if(result=='fail'){
+        alert('id 혹은 password가 일치하지 않습니다.')
+      }else if(result=='1'){
+        location.href="/jsp/indexPerson.jsp";
+      }else {
+        location.href='/jsp/mypageBiz/mpbProg_Num.jsp';
+      }
+    }
+  })
 }

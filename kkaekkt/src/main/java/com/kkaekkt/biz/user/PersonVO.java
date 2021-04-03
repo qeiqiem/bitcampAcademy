@@ -35,7 +35,9 @@ public class PersonVO extends AccountVO {
 
 	@Override
 	public String toString() {
-		return "PersonVO [mname=" + mname + ", birth=" + birth + ", state=" + state + "]";
+		return "PersonVO [mname=" + mname + ", birth=" + birth + ", state=" + state + ", getId()=" + getId()
+				+ ", getPassword()=" + getPassword() + ", getName()=" + getName() + ", getPhone()=" + getPhone()
+				+ ", getAddress()=" + getAddress() + ", getEmail()=" + getEmail() + "]";
 	}
 
 	

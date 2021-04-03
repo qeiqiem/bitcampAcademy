@@ -13,25 +13,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/css/login.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/login.css">
 </head>
 
 <body>
 	<jsp:include page="/jsp/header0.jsp"></jsp:include>
 
 	<div class="body_container">
-
+		
 
 		<div class="content">
-
+			<button id="log">
+				<a href="#">일반로그인</a>
+			</button>
+			<button id="log">
+				<a href="/jsp/login/loginBs.jsp">업체로그인</a>
+			</button>
 			<div class="login">
-				<form action="/loginPs.do" method="post">
-					<a href="http://developers.kakao.com/logout">
-						<h2 class="loginTitle">로그인</h2>
-					</a>
+				<form action="/login.do" method="post">
+					<a href="http://developers.kakao.com/logout"><h3 class="loginTitle">로그인</h3></a>
 					<hr>
 					<div>
 						<input type="text" name="id" id="id" placeholder="아이디" />
@@ -41,32 +42,32 @@
 							placeholder="비밀번호" />
 					</div>
 					<!-- <input type="submit" value="로그인" onclick="login()" />-->
-					<input type="submit" value="로그인" />
+					<input type="button" id="login" value="로그인"/> 
 				</form>
 				<div>
 					<div>
-						<a href="/jsp/login/find.jsp">아이디/비밀번호 찾기</a>
+						<a href="">아이디/비밀번호 찾기</a>
 					</div>
 					<hr>
 					<div>
-
 						<p>다른 계정으로 로그인</p>
-						<a onclick="naverLogin()"><img src="/img/naver.png"></a> 
-						<a type="button" id="facebook"> <img src="/img/facebook.png"></a> 
-						<a href="#"><img src="/img/google.png"></a> 
-						<a onclick="kakaoLogin()"><img src="/img/kakao.png"></a>						​
+						<form id="snsForm" action="/loginSNS.do" method="POST">
+							<!--api끌어오는거에 따라 가지수는 줄 수 있습니다...-->
+							<input type="hidden" id="snsMail" name="email">
+							<a href="#"><img src="/img/naver.png"></a>
+							<a onclick="facebookLogin()"> <img src="/img/facebook.png"></a>
+							<a href="#"><img src="/img/google.png"></a>
+							<a onclick="kakaoLogin()"><img src="/img/kakao.png"></a>
+						</form>
 					</div>
 				</div>
 			</div>
 		</div>
-
-
 	</div>
-	< !--바디콘테이너 -->
+	<!-- 바디콘테이너 -->
 </body>
 <script src="/js/kakaoLogin.js"></script>
 <script src="/js/TestfacebookLogin.js"></script>
-<!--  <script src="/js/Test_login.js"></script>-->
-<script src="/js/naver.js"></script>
-
+<!-- <script src="/js/Test_login.js"></script> -->
+<script src="/js/login.js"></script>
 </html>

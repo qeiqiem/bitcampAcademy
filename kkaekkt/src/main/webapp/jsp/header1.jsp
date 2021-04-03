@@ -10,7 +10,9 @@
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<script>
 			var alertObj={
-				sender:${sessionScope.user.mno}
+				sender:${sessionScope.user.mno},
+				senderName:`${sessionScope.user.name}`,
+				mtype:${sessionScope.user.mtype}
 			};
 	</script>
 	<script src="/js/header.js"></script>
@@ -28,7 +30,7 @@
 		</div>
 
 		<div class="head_right">
-			<input name="name" id="name" value="${user.name} 님" readonly /> 
+			<input name="name" id="name" value="${sessionScope.user.name} 님" readonly /> 
 			<div id="bellBox">
 				<i class="fas fa-bell"></i>
 				<span class="redDot">●</span>
@@ -43,8 +45,8 @@
 				<i class="fas fa-comments"></i>
 				<span class="redDot">●</span>
 			</div>
-			<a href="/jsp/mypageUser/mypagePs.jsp">마이페이지</a> 
-			 <!-- <a href="/jsp/mypageUser/Tset_userDelete.html">마이페이지</a> -->
+			<!--<a href="/jsp/mypageUser/mypagePs.jsp">마이페이지</a>  -->
+			 <a href="/jsp/mypageUser/mypagePs.jsp">마이페이지</a>
 			<a href="/logout.do">로그아웃</a> 
 			<a href="/jsp/faq.jsp">FAQ</a>
 		</div>

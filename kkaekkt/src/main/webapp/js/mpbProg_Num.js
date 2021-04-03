@@ -2,51 +2,51 @@ $(document).ready(function() {
 	initSide();
 	initEvent();
     initModal();
-    ajax(pageObj); //처음 마이페이지 들어왔을 때, 진행중 주문 항목 출력
+    ajax(); //처음 마이페이지 들어왔을 때, 진행중 주문 항목 출력
 });
 function initEvent() {
 	$('.page_next').click(function() {
         if(!$(this).hasClass('no')) {
             pageObj.currentPageNum+=1;
-            ajax(pageObj);
+            ajax();
         }
     });
     $('.page_prev').click(function() {
         if(!$(this).hasClass('no')) {
             pageObj.currentPageNum-=1;
-            ajax(pageObj);
+            ajax();
         }
     });
     $('.page_prevBlock').click(function() {
         if(!$(this).hasClass('no')) {
             pageObj.currentPageNum=pageObj.blockFirstPageNum-1;
-            ajax(pageObj);
+            ajax();
         }
     });
     $('.page_nextBlock').click(function() {
         if(!$(this).hasClass('no')) {
             pageObj.currentPageNum=pageObj.blockLastPageNum+1;
-            ajax(pageObj);
+            ajax();
         }
     });
     $('.page_btn').on("click",".page_list",function() {
         if(pageObj.currentPageNum!=JSON.parse($(this).html())) {
             pageObj.currentPageNum=JSON.parse($(this).html());
-            ajax(pageObj);
+            ajax();
         }
     });
     $('.searchBox i.fas').click(function() { //검색 실행시
 	    pageObj.search=$('.search')[0].value;
         pageObj.searchOption=$('.searchBox select')[0].value;
         pageObj.currentPageNum=1;
-        ajax(pageObj);
+        ajax();
     });
     $('.selectbox select').change(function(){
             var select_name = $(this).children('option:selected').text();
             $(this).siblings('label').text(select_name);
             pageObj.order=$('.selectbox select')[0].value;
             pageObj.currentPageNum=1;
-            ajax(pageObj);
+            ajax();
     });
     $('.laundry_nav li').click(function() {
         if(!$(this).hasClass('selected')) {
@@ -54,7 +54,7 @@ function initEvent() {
             pageObj.laundryType=$(this)[0].value;
             $(this).siblings().removeClass('selected');
             $(this).addClass('selected');
-            ajax(pageObj);
+            ajax();
         }
     });
 	$('.process').on('click','.cancelBtn',function() {//리스트의 취소 버튼을 누를 때
@@ -95,12 +95,12 @@ function openModal(button) {
 }
 function operate() {
     if($('#ok')[0].innerHTML=='취소하기'){//버튼이 취소하기라면,
-        cancel(rsvObj);
+        cancel();
     }else {//버튼이 완료하기라면
-        complete(rsvObj);
+        complete();
     }
 }
-function cancel(rsvObj) {
+function cancel() {
 	$.post({
         url:"/cancel.do",
         data:rsvObj,
@@ -110,7 +110,7 @@ function cancel(rsvObj) {
                 console.log(alertObj+":..알림객체 js 체크");
                 sendMsg();
             }
-			ajax(pageObj);
+			ajax();
             alert('주문이 정상적으로 취소되었습니다.');
             modalClose();
 		}
@@ -129,7 +129,7 @@ function sendMsg() {
                             '</div>'+
                             '<div class="msgBottom">'+
                                 '<span class="date">'+today()+'</span>'+
-                                '<span class="byBs">by '+username+'</span>'+
+                                '<span class="byBs">by '+alertObj.senderName+'</span>'+
                             '</div>'+
                             '<i class="fas fa-times"></i>'+
                         '</li>'
@@ -142,7 +142,7 @@ function modalClose() {
     $('#modal_container').hide();
     $("#mask").hide();
 }
-function complete(rsvObj) {
+function complete() {
 	$.post({
 		url:"/washingDone.do",
 		data:rsvObj,
@@ -151,7 +151,7 @@ function complete(rsvObj) {
                 msgSet(result);
                 sendMsg();
             }
-			ajax(pageObj);
+			ajax();
             alert('작업이 완료되었습니다.');
             modalClose();
 		}
@@ -161,7 +161,7 @@ function enter() {
     if(window.event.keyCode==13) {
         pageObj.search=$('.search')[0].value;
         pageObj.searchOption=$('.searchBox select')[0].value;
-        ajax(pageObj);
+        ajax();
     }
 }
 function initSide() {
@@ -210,7 +210,7 @@ function initPageObj(data) {
     pageObj.isPrevBlockExist=data.isPrevBlockExist;
     pageObj.isPrevExist=data.isPrevExist;
 }
-function ajax(pageObj) { //ajax로 리스트 받아오기
+function ajax() { //ajax로 리스트 받아오기
     console.log('ajax 함수 진입');
     $.post({
         url:"/getRsvListBs.do",
@@ -244,11 +244,13 @@ function today() {
     var date=new Date();
     var mm=date.getMonth()+1;
     var dd=date.getDate();
-    var today=date.getFullYear()+'.'+(mm<10?'0'+mm:mm)+'.'+dd;
+    var today=date.getFullYear()+'.'+(mm<10?'0'+mm:mm)+'.'+(dd<10?'0'+dd:dd);
     return today;
 }
 function printHeader(key,value) {
     if($('.selectbox select')[0].value==1) { //정렬이 주문번호 순이라면,
+        console.log(value.rsvDate.substr(0,10)+'...날짜를 함 보자!');
+        console.log(today()+'...날짜를 또 보자!');
         if(key==0&&value.rsvDate.substr(0,10)==today()){
             $('.process p')[0].innerHTML="오늘 주문";
         }else if(key==0) {

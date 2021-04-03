@@ -106,7 +106,18 @@
 			</otherwise>
 		</choose>
 	</update>
-
+	<select id="getPerson" resultType="person">
+		SELECT ac.mno as mno, id, password, mname, phone, birth, address, email
+		FROM account ac, member mb
+		WHERE ac.mno=mb.mno AND ac.mno=#{mno};
+	</select>
+	<select id="getBusiness" resultType="business">
+		SELECT ac.mno as mno, bs.bno, id, password, bname, phone, address, email, bz.typenum as bizType, bkno as bankNum, acno as bankAccountNum
+		FROM account ac, business bs, biztype bz
+		WHERE ac.mno=bs.mno
+		AND bs.typeNum=bz.typenum
+		AND mno=#{mno};
+	</select>
 	<update id="updateBs">
 		<choose>
 			<when test="email == null">
@@ -131,33 +142,22 @@
 		left outer join reservation res on mb.mno=res.mno
 		<if test="stno == 3 or stno == 4">
 			AND id=#{id} AND password=#{password};
-		</if>
+		</if> 
 	</delete>
 	<!-- 로그인들 -->
-	<select id="getPerson" resultType="account">
-		SELECT ifnull(ac.mno,0) as mno, id,
-		password, mname, email, mtype
-		FROM account ac,
-		member mb
-		WHERE ac.mno=mb.mno
-		AND id=#{id} AND password=#{password};
+	<select id="getAccount" resultType="account">
+		SELECT ac.mno,bno,mname,b.bname,mtype
+		FROM (SELECT mno,mtype FROM account WHERE id=#{id} AND password=#{password}) ac
+		LEFT JOIN member m ON m.mno=ac.mno
+		LEFT JOIN business b ON b.mno=ac.mno;
 	</select>
-	<select id="getPersonBs" resultType="account">
-		SELECT ac.mno as mno,
-		bs.bno, id, password, bname, email, mtype
-		FROM account ac, business bs
-		WHERE ac.mno=bs.mno
-		AND id=#{id} AND
-		password=#{password};
-	</select>
-	<select id="getPersonSNS" resultType="account">
+	<select id="getPersonSNS" resultType="person">
 		SELECT ac.mno as mno, id,
 		password, mname, email
 		FROM account ac, member mb
 		WHERE ac.mno=mb.mno
 		AND email=#{email};
 	</select>
-
 	<select id="getEmail" resultType="int">
 	<!-- 	SELECT *
 		FROM member

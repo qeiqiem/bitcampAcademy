@@ -12,7 +12,6 @@ public interface UserService {
 	public void likeOn(BusinessVO vo);
 	public void likeOff(BusinessVO vo);
 	public AccountVO getUser(AccountVO vo);
-	public BusinessVO getUser(BusinessVO vo);
 	public List<BusinessVO> getLikedBs(int mno);
 	public BusinessVO getComspec(BusinessVO vo);
 	public BusinessVO getCoinspec(BusinessVO vo);
@@ -26,5 +25,7 @@ public interface UserService {
 	public double avgGradeBs(BusinessVO vo);
 	public int countLikeBs(BusinessVO vo);	
 	public int idchkBs(BusinessVO vo);
+	public PersonVO getPerson(PersonVO vo);
+	public BusinessVO getBusiness(BusinessVO vo);
 
 }
