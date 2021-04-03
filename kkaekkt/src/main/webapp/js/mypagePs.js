@@ -152,7 +152,7 @@ function sendMsg() {
                                 '<span class="msgHeader">[취소]</span>⠀<span class="msgBody" id="msg'+ano+'">'+alertObj.msg+'</span>'+
                             '</div>'+
                             '<div>'+
-                                '<span class="byBs">by '+username+' </span><span>⠀|⠀</span>'+
+                                '<span class="byBs">by '+alertObj.senderName+' </span><span>⠀|⠀</span>'+
                                 '<span class="alertDate">'+today()+'</span>'+
                             '</div>'+
                             '<i id="del'+ano+'"class="fas fa-times"></i>'+

@@ -129,7 +129,7 @@ function sendMsg() {
                             '</div>'+
                             '<div class="msgBottom">'+
                                 '<span class="date">'+today()+'</span>'+
-                                '<span class="byBs">by '+username+'</span>'+
+                                '<span class="byBs">by '+alertObj.senderName+'</span>'+
                             '</div>'+
                             '<i class="fas fa-times"></i>'+
                         '</li>'

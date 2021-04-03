@@ -18,15 +18,15 @@ function initHeaderEvent() {
         delHeaderAlert();
     });
 }
-function readAlert(type) {//알림 탭 페이지 공용메서드 -> 당분간 장사안해
-
-    // $.post({
-    //     url:'/updateAlert.do',
-    //     data:alertObj,
-    //     success:function() {
-    //         location.href="/jsp/mypageUser/mypage"+type+".jsp";
-    //     }
-    // });
+function readAlert() {//알림 탭 페이지 공용메서드
+    var type=(alertObj.mtype==1?"Ps":"Bs");
+    $.post({
+        url:'/updateAlert.do',
+        data:alertObj,
+        success:function() {
+            location.href="/jsp/mypageUser/mypage"+type+".jsp";
+        }
+    });
 }
 function delHeaderAlert() {//알림 삭제 메서드
     $.post({

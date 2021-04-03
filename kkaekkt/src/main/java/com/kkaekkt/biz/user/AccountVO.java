@@ -2,6 +2,7 @@ package com.kkaekkt.biz.user;
 
 public class AccountVO {
 	private int mno;
+	private int bno;
     private String id;
     private String password;
     private String name;
@@ -9,10 +10,14 @@ public class AccountVO {
     private String address;
     private String email;
     private int emailchk;
-//    private String bmail;
-//    private String mmail;
     private int mtype;
     private int idchk;
+	public int getBno() {
+		return bno;
+	}
+	public void setBno(int bno) {
+		this.bno = bno;
+	}
 	public int getMno() {
 		return mno;
 	}
