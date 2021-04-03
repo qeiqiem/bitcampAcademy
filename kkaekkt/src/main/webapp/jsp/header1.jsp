@@ -28,7 +28,7 @@
 		</div>
 
 		<div class="head_right">
-			<input name="name" id="name" value="${user.mname} 님" readonly /> 
+			<input name="name" id="name" value="${user.name} 님" readonly /> 
 			<div id="bellBox">
 				<i class="fas fa-bell"></i>
 				<span class="redDot">●</span>

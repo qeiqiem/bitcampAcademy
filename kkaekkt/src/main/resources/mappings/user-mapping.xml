@@ -134,7 +134,7 @@
 		</if>
 	</delete>
 	<!-- 로그인들 -->
-	<select id="getPerson" resultType="person">
+	<select id="getPerson" resultType="account">
 		SELECT ifnull(ac.mno,0) as mno, id,
 		password, mname, email, mtype
 		FROM account ac,
@@ -142,7 +142,7 @@
 		WHERE ac.mno=mb.mno
 		AND id=#{id} AND password=#{password};
 	</select>
-	<select id="getPersonBs" resultType="business">
+	<select id="getPersonBs" resultType="account">
 		SELECT ac.mno as mno,
 		bs.bno, id, password, bname, email, mtype
 		FROM account ac, business bs
@@ -150,7 +150,7 @@
 		AND id=#{id} AND
 		password=#{password};
 	</select>
-	<select id="getPersonSNS" resultType="person">
+	<select id="getPersonSNS" resultType="account">
 		SELECT ac.mno as mno, id,
 		password, mname, email
 		FROM account ac, member mb

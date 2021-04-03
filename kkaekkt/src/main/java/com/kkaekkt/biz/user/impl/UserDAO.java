@@ -80,7 +80,7 @@ public class UserDAO {
 		}
 
 		// 소셜 로그인
-		public PersonVO getUserSNS(PersonVO vo) {
+		public AccountVO getUserSNS(AccountVO vo) {
 			System.out.println("mybatis로 기능처리 소셜유저");
 			return mybatis.selectOne("UserDAO.getPersonSNS", vo);
 		}

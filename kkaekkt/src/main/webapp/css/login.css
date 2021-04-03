@@ -57,20 +57,11 @@ input {
 	top: -50px;
 }
 
-#log {
-	/* position:absolute; */
-	width: 100px;
-	height: 50px;
-	background-color: #8FBCFF;
-	color: #515151;
-}
-
 a {
 	text-decoration: none;
+	color: #000;
 }
-.loginTitle{
+.loginTitle {
 	text-align: center;
-}
-.loginTitle a{
-	text-align: center;
+	margin-bottom: 60px;
 }

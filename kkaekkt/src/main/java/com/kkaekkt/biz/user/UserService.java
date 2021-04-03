@@ -21,7 +21,7 @@ public interface UserService {
 	public AccountVO findPw(AccountVO vo);
 	public int idchk(PersonVO vo);
 	public int emailchk(AccountVO vo);
-	public PersonVO method(PersonVO vo);
+	public AccountVO method(AccountVO vo);
 	public AccountVO joinCfm(AccountVO vo);
 	public double avgGradeBs(BusinessVO vo);
 	public int countLikeBs(BusinessVO vo);	

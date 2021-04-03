@@ -167,6 +167,7 @@ public class UserController {
 	@ResponseBody
 	public String emailchk(AccountVO vo) {
 		System.out.println("controller에서 이메일 찾음");
+		System.out.println(vo);
 		// vo = userService.email(vo);
 
 //		AccountVO findEmail = vo;
@@ -219,7 +220,7 @@ public class UserController {
 				PrintWriter out = response.getWriter();
 				out.println("<script>alert('아이디나 비밀번호를 확인해주세요.'); history.go(-1);</script>");
 				out.flush();
-				return "/jsp/login/loginPs.jsp";
+				return null;
 			} else  {
 				session.setAttribute("user", vo);
 				return "/jsp/indexPerson.jsp";
@@ -238,6 +239,7 @@ public class UserController {
 
 				if (vo == null) {
 					System.out.println("회원정보없음");
+					
 					response.setContentType("text/html; charset=UTF-8");
 					PrintWriter out = response.getWriter();
 					out.println("<script>alert('아이디나 비밀번호를 확인해주세요.'); history.go(-1);</script>");
@@ -255,21 +257,21 @@ public class UserController {
 	// 소셜로그인
 	@RequestMapping(value = "/loginSNS.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String kakaologin(PersonVO vo, HttpSession session, HttpServletResponse response) {
+	public String kakaologin(AccountVO vo, HttpSession session, HttpServletResponse response) {
 		System.out.println("카카오 로그인 컨트롤러 접속");
 		// 로그인 성공했을 때
 		vo = userService.method(vo);
 
-		PersonVO user = vo;
-		System.out.println(user); // 카카오 로그인시 vo 확인
+		//AccountVO user = vo;
+		//System.out.println(user); // 카카오 로그인시 vo 확인
 
-		if (user.getState() != 0) {
-			session.setAttribute("user", user);
-			System.out.println("user정보 " + user);
-			return "/jsp/indexPerson.jsp";
+		if (vo != null) {
+			session.setAttribute("user", vo);
+			System.out.println("user정보 " + vo);
+			return "success";
 		} else {
 			System.out.println("로그인 실패");
-			return "/jsp/login/loginPs";
+			return "fail";
 		}
 	}
 

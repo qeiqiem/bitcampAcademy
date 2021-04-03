@@ -102,7 +102,7 @@ public class UserServiceImpl implements UserService {
 		return userDao.getUserPs(vo);
 	}
 	
-	public PersonVO method(PersonVO vo) {
+	public AccountVO method(AccountVO vo) {
 		System.out.println("소셜유저로그인 servie옴");		
 		return userDao.getUserSNS(vo);
 	}
