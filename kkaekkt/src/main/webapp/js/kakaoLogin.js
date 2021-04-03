@@ -32,8 +32,9 @@ $.ajax({
 		console.log("보냄");
 		console.log(data);
 		var info = JSON.parse(data);
+		console.log(info);
 		
-	if(info.emailchk != 0){
+	if(info.emailchk == 0){
 		alert("회원정보 없음");
 		$('#email').val();
 	} //else {

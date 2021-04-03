@@ -72,6 +72,7 @@ public class BusinessVO extends AccountVO{
 	public void setEquipment(String equipment) {
 		this.equipment = equipment;
 	}
+
 	public String getBname() {
 		return bname;
 	}
@@ -141,12 +142,11 @@ public class BusinessVO extends AccountVO{
 	}
 	@Override
 	public String toString() {
-		return "BusinessVO [bname=" + bname + ", comment=" + comment + ", bizType=" + bizType
-				+ ", bankNum=" + bankNum + ", bankAccountNum=" + bankAccountNum + ", scheduleList=" + scheduleList
-				+ ", equipmentList=" + equipmentList + ", laundryList=" + laundryList + ", etcList=" + etcList
-				+ ", commList=" + commList + ", equipment=" + equipment + ", laundry=" + laundry + ", schedule="
-				+ schedule + ", etc=" + etc + ", eval=" + eval
-				+ ", likedNum=" + likedNum + ", state=" + state + "]";
+		return "BusinessVO [bname=" + bname + ", comment=" + comment + ", bizType=" + bizType + ", bankNum=" + bankNum
+				+ ", bankAccountNum=" + bankAccountNum + ", scheduleList=" + scheduleList + ", equipmentList="
+				+ equipmentList + ", laundryList=" + laundryList + ", etcList=" + etcList + ", commList=" + commList
+				+ ", equipment=" + equipment + ", laundry=" + laundry + ", schedule=" + schedule + ", etc=" + etc
+				+ ", eval=" + eval + ", count=" + count + ", likedNum=" + likedNum + ", state=" + state + "]";
 	}
 	
 
