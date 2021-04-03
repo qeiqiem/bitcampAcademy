@@ -146,6 +146,12 @@ public class UserDAO {
 	public AccountVO getUser(AccountVO vo) {
 		return mybatis.selectOne("UserDAO.getAccount",vo);
 	}
+	public PersonVO getPerson(PersonVO vo) {
+		return mybatis.selectOne("UserDAO.getPerson",vo);
+	}
+	public BusinessVO getBusiness(BusinessVO vo) {
+		return mybatis.selectOne("UserDAO.getBusiness",vo);
+	}
 
 
 	

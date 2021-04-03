@@ -101,10 +101,9 @@ public class UserController {
 	public String UpdatePw(PersonVO vo, HttpSession session) {
 		System.out.println(vo);
 		userService.updateUser(vo);
-		AccountVO person = userService.getUser(vo);
-		System.out.println("컨트롤러" + person);
-		session.setAttribute("person", person);
-		System.out.println("세션에 수정한 정보 올리기");
+		AccountVO result = userService.getUser(vo);
+		session.setAttribute("user", result);
+		System.out.println("세션에 수정한 비밀번호 올리기");
 		Gson gson = new Gson();
 		String password = gson.toJson(vo.getPassword());
 		System.out.println(password);
@@ -132,9 +131,9 @@ public class UserController {
 	public String UpdatePw(BusinessVO vo, HttpSession session) {
 		System.out.println(vo);
 		userService.updateUser(vo);
-		BusinessVO person = userService.getUser(vo);
-		System.out.println("컨트롤러" + person);
-		session.setAttribute("person", person);
+		//BusinessVO person = userService.getUser(vo);
+		//System.out.println("컨트롤러" + person);
+		//session.setAttribute("person", person);
 		System.out.println("세션에 수정한 정보 올리기 완료");
 		Gson gson = new Gson();
 		String password = gson.toJson(vo.getPassword());
@@ -149,7 +148,7 @@ public class UserController {
 	public String Update(BusinessVO vo, HttpSession session) {
 		System.out.println(vo);
 		userService.updateUser(vo);
-		vo = userService.getUser(vo);
+		//vo = userService.getUser(vo);
 		vo.setLikedNum(userService.countLikeBs(vo)); // 프로필편집에서 찜 인원 뽑아와야해서 추가
 		vo.setEval(userService.avgGradeBs(vo)); // 프로필편집에서 찜 인원 뽑아와야해서 추가
 		System.out.println("컨트롤러" + vo);
@@ -338,4 +337,26 @@ public class UserController {
 		userService.deleteUser(vo);
 		
 	}
+	// 개인 프로필 정보 get
+	@RequestMapping(value = "/mybio.do", method = RequestMethod.GET)
+	public String getPerson(PersonVO vo, HttpSession session, Model model) {
+		System.out.println("개인프로필편집");
+		AccountVO account = (AccountVO) session.getAttribute("user");
+		vo.setMno(account.getMno());
+		model.addAttribute("person", userService.getPerson(vo));
+		return "/jsp/mypageUser/mybio.jsp";
+	}
+	// 업체 프로필 정보 get
+		@RequestMapping(value = "/bsBio.do", method = RequestMethod.GET)
+		public String getBusiness(BusinessVO vo, HttpSession session, Model model) {
+			System.out.println("개인프로필편집");
+			AccountVO account = (AccountVO) session.getAttribute("user");
+			vo.setMno(account.getMno());
+			model.addAttribute("bs", userService.getBusiness(vo));
+			if(vo.getBizType() == 1) {
+				return "/jsp/mypageBizCoin/combio.jsp";			
+			} else {
+				return "/jsp/mypageBizCoin/coinbio.jsp";							
+			}
+		}
 }

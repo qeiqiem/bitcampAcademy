@@ -150,8 +150,8 @@ window.onload = function () {
                 url: '/updatePspwd.do',
                 type: 'post',
                 data: {
-                    mno: $('#mno').val(),
-                    id: $("input[name='id']").val(),
+                    mno: pageObj["mno"],
+                    id: pageObj["id"],
                     password: $('#newpwd').val()
                 }, success: function(data){
                     let password = JSON.parse(data);
