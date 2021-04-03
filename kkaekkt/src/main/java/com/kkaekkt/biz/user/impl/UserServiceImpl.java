@@ -98,20 +98,12 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public AccountVO getUser(AccountVO vo) {
-		System.out.println("유저로그인 servie옴");		
-		return userDao.getUserPs(vo);
+		return userDao.getUser(vo);
 	}
 	
 	public PersonVO method(PersonVO vo) {
 		System.out.println("소셜유저로그인 servie옴");		
 		return userDao.getUserSNS(vo);
-	}
-		
-
-	@Override
-	public BusinessVO getUser(BusinessVO vo) {
-		System.out.println("업체로그인 servie옴");
-		return userDao.getUserBs(vo);
 	}
 
 	public <T> List<T> convertToObj(String json, Class<T> type) {

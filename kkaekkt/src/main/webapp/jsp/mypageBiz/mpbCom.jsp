@@ -67,12 +67,11 @@
 		crossorigin="anonymous"></script>
 	<script>
             var pageObj={//세션에서 정보를 받아오는건 독립된 js파일에서 불가능, jsp 내에서만 가능하기 때문에 여기서 값을 받아준다.
-                bno:${sessionScope.person.bno},
+                bno:${sessionScope.user.bno},
 				currentPageNum:1,
 				listType:4
             };
 			var rsvObj={};
-			var username=`${sessionScope.person.bname}`;
     </script>
 	<script src="/js/mypageBs_com.js"></script>
 </body>

@@ -2,17 +2,23 @@ package com.kkaekkt.biz.user;
 
 public class AccountVO {
 	private int mno;
+	private int bno;
     private String id;
-    private String password;
+	private String password;
     private String name;
     private String phone;
     private String address;
     private String email;
     private int emailchk;
-//    private String bmail;
-//    private String mmail;
     private int mtype;
     private int idchk;
+    
+    public int getBno() {
+		return bno;
+	}
+	public void setBno(int bno) {
+		this.bno = bno;
+	}
 	public int getMno() {
 		return mno;
 	}
@@ -87,9 +93,9 @@ public class AccountVO {
 	}
 	@Override
 	public String toString() {
-		return "AccountVO [mno=" + mno + ", id=" + id + ", password=" + password + ", name=" + name + ", phone=" + phone
-				+ ", address=" + address + ", email=" + email + ", emailchk=" + emailchk + ", mtype=" + mtype
-				+ ", idchk=" + idchk + "]";
+		return "AccountVO [mno=" + mno + ", bno=" + bno + ", id=" + id + ", password=" + password + ", name=" + name
+				+ ", phone=" + phone + ", address=" + address + ", email=" + email + ", emailchk=" + emailchk
+				+ ", mtype=" + mtype + ", idchk=" + idchk + "]";
 	}
 	
 }

@@ -201,46 +201,17 @@ public class UserController {
 	}
 
 	// 일반유저 로그인
-	@RequestMapping(value = "/loginPs.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
+	@ResponseBody
 	public String Login(AccountVO vo, HttpSession session) {
-			// 로그인 성공
-			System.out.println("로그인처리");
-
-			vo = userService.getUser(vo);
-			//PersonVO user = userService.getUser(vo);
-
-			System.out.println(vo); // 뭐가 담기는 지 보려했다
-			
-			if (vo == null) {
-				System.out.println("회원정보없음");
-				return "/jsp/login/loginPs.jsp";
-			} else  {
-				session.setAttribute("person", vo);
-				return "/jsp/indexPerson.jsp";
+			AccountVO result = userService.getUser(vo);
+			if (result == null) {
+				return "fail";
+			} else {
+				session.setAttribute("user", result);
+				return result.getMtype()+"";					
 			}
 	}
-
-		// 업체유저 로그인
-		@RequestMapping(value = "/loginBs.do", method = RequestMethod.POST)
-		public String Login(BusinessVO vo, HttpSession session) throws Exception {
-				// 로그인 성공
-				System.out.println("로그인처리");
-
-				vo = userService.getUser(vo);
-
-				System.out.println(vo); // 뭐가 담기는 지 보려했다
-
-				if (vo == null) {
-					System.out.println("회원정보없음");
-					return "/jsp/login/loginBs.jsp";
-				} else {
-					vo.setLikedNum(userService.countLikeBs(vo)); // 프로필편집에서 찜 인원 뽑아와야해서 추가
-					vo.setEval(userService.avgGradeBs(vo)); // 프로필편집에서 찜 인원 뽑아와야해서 추가
-					System.out.println(vo);
-					session.setAttribute("person", vo);
-					return "/jsp/indexCompany.jsp";
-				}
-		}	
 
 	// 소셜로그인
 	@RequestMapping(value = "/loginSNS.do", method = RequestMethod.POST)

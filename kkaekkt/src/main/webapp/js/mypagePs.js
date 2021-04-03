@@ -6,26 +6,26 @@ $(document).ready(function() {
     ajax(pageObj); //처음 마이페이지 들어왔을 때, 진행중 주문 항목 출력
 });
 function initEvent() {
-	var idx;
+	var rsvNum;
     $('.rsvList').on("click",".detailBtn",function() { // 버블링으로 생성된 주문에 클릭 이벤트 활성화
-		idx=$(this).val();
-        if(!$('.comments').eq(idx).hasClass('none')){ //만약, 상세보기가 열려있다면
-            $('.comments').eq(idx).addClass('none');
+		rsvNum=$(this).attr('id').substr(9);
+        if(!$('.comments').eq(0).hasClass('none')){ //만약, 리뷰 보기가 열려있다면
+            $('.comments').eq(0).addClass('none');
         }
-        $('.detail').eq(idx).toggleClass('none');
+        $('#detail'+rsvNum).toggleClass('none');
     });
     $('.rsvList').on("click",".commentBtn",function() {
-        commObj.rsvNum=Number($('#rsvNum'+$(this).val())[0].innerHTML);
-        commObj.bno=Number($(this).val());
+        rsvNum=$(this).attr('id').substr(10);
+        commObj.rsvNum=Number($('#rsvNum'+rsvNum)[0].innerHTML);
+        commObj.bno=Number($('#rsvBox'+rsvNum+' .like').eq(0).val());
         $("#modal_container").show();
     });
-    $('.rsvList').on("click",".cancelBtn",function() {        
-        var rsvNum=Number($('#rsvNum'+$(this).val())[0].innerHTML);
-        alertObj.addressee=Number($('.mno').eq($(this).val()).attr('id').substr(3));
+    $('.rsvList').on("click",".cancelBtn",function() {
+        rsvNum=Number($(this).attr('id').substr(9));
+        alertObj.addressee=Number($('#rsvBox'+rsvNum+' .mno').eq(0).attr('id').substr(3));
         cancelRsv(rsvNum);
     });
     $('.rsvList').on("keyup",".commentBox",function() {
-		idx=Number($(this).attr("id").substr(2,3));
         if($(this).val().length>=300) {
             alert("300자 까지 입력할 수 있습니다.");
             $(this)[0].value=$(this).val().substr(0,300);
@@ -33,20 +33,19 @@ function initEvent() {
         $('.comments_bottom span')[0].innerHTML=$(this).val().length+' / 300';
     });
     $(".rsvList").on("click",".comments_bottom button",function(){ 
-        idx=$(this).val();
         commObj.content=$('.commentBox').eq(0).val();
-        var rno=Number($('#rsvNum'+idx)[0].innerHTML);
-        commObj.rsvNum=rno;
-        edit(idx);
+        commObj.rsvNum=$(this).val();
+        edit();
     });
     $('.rsvList').on("click",".reviewBtn",function() {
-        idx=$(this).val();
-        $('.commBox').eq(idx).toggleClass('none');
+        rsvNum=$(this).attr('id').substr(9);
+        $('#commBox'+rsvNum).eq(0).toggleClass('none');
     });
     $('.rsvList').on("click",".cancel",function() {
-        idx=$(this).val();
+        rsvNum=$(this).val();
+        console.log(rsvNum+'..취소버튼값..46번줄입니다.');
         $('.comments').remove();
-        $('.comments_view').eq(idx).removeClass('none');
+        $('#comments_view'+rsvNum).removeClass('none');
     });
     $('.side_sub button').click(function() { // 완료된 주문 출력
         if($(this).index()==0){ //진행중인 주문
@@ -91,7 +90,7 @@ function initEvent() {
     });
     $('.rsvList').on('click','i.fa-heart',function() {
         likeObj.bno=Number($(this).attr('value'));
-        console.log(likeObj.bno+'..업체번호');
+        console.log(likeObj.bno+'..업체번호..93번줄');
         if($(this).hasClass('fas')) {
             $(this).removeClass('fas');
             $(this).addClass('far');
@@ -106,14 +105,14 @@ function initEvent() {
         $(this).siblings().eq(1).toggleClass('none');
     });
     $('.rsvList').on("click",".popMenu button",function() {
-        var idx=$(this).val();
-        $('.popMenu').addClass('none');
-            commObj.rsvNum=JSON.parse($('#rsvNum'+$(this).val())[0].innerHTML);
-        if($(this).index()==0) {
-            commObj.content=$('.comments_content')[idx].innerHTML;
-            editBtn(idx);
-        }else {
-            deleteComm(idx);
+        rsvNum=$(this).attr('id').substr(3);
+        $('#popMenu'+rsvNum).addClass('none');
+            commObj.rsvNum=rsvNum;
+        if($(this).index()==0) {//수정버튼이 눌렸을 경우
+            commObj.content=$('#comments_content'+rsvNum)[0].innerHTML;
+            editBtn(rsvNum);
+        }else {//삭제버튼이 눌렸을 경우
+            deleteComm(rsvNum);
         }
     });
 }
@@ -153,7 +152,7 @@ function sendMsg() {
                                 '<span class="msgHeader">[취소]</span>⠀<span class="msgBody" id="msg'+ano+'">'+alertObj.msg+'</span>'+
                             '</div>'+
                             '<div>'+
-                                '<span class="byBs">by '+username+' </span><span>⠀|⠀</span>'+
+                                '<span class="byBs">by '+alertObj.senderName+' </span><span>⠀|⠀</span>'+
                                 '<span class="alertDate">'+today()+'</span>'+
                             '</div>'+
                             '<i id="del'+ano+'"class="fas fa-times"></i>'+
@@ -290,65 +289,62 @@ function regit() {
         }
     });
 }
-function printDate() {
+function today() {
     let today = new Date();   
     let year = today.getFullYear(); // 년도
     let month = today.getMonth() + 1;  // 월
     let date = today.getDate();  // 날짜
-    return month+'월 '+date+', '+year;
+    return year+'.'+month+'.'+date;
 }
-function viewChange() {
-    var reviewBtn=$('.btnDiv button:nth-child(3)');
-    for(var i=0;i<$('.rsvBox').length;i++) {
-        if(JSON.parse($('#rsvNum'+i)[0].innerHTML)==commObj.rsvNum) {
-            reviewBtn.eq(i).removeClass('commentBtn');
-            reviewBtn.eq(i).addClass('reviewBtn');
-            reviewBtn[i].innerHTML='리뷰보기';
-            $('.commBox')[i].innerHTML=printComment(commObj.mname,commObj.mno,commObj.content,printDate(),i);
-        }
-    }
+function viewChange() {//리뷰를 쓴 예약의 버튼을 바꾸고 리뷰박스를 집어넣음
+    var reviewBtn=$('#btnDiv'+commObj.rsvNum+' button:nth-child(3)');
+    reviewBtn.removeClass('commentBtn');
+    reviewBtn.addClass('reviewBtn');
+    reviewBtn[0].innerHTML='리뷰보기';
+    $('#commBox'+commObj.rsvNum)[0].innerHTML=printComment(commObj.mname,commObj.content,today(),commObj.rsvNum);
 }
-function printEditBox(idx) {
+
+function printEditBox(rsvNum) {
     return '<div class="comments">'+
                 '<div class="comments_header">'+
-                    '<button class="cancel" value='+idx+'>취소</button>'+
+                    '<button class="cancel" value='+rsvNum+'>취소</button>'+
                 '</div>'+
-                '<textarea class="commentBox" id="ta'+idx+'" cols="30" rows="3">'+commObj.content+'</textarea>'+
+                '<textarea class="commentBox" cols="30" rows="3">'+commObj.content+'</textarea>'+
                 '<label class="writer">'+commObj.mname+'</label>  '+
                 '<div class="comments_bottom">'+
                     '<span>0 / 300</span>'+
-                    '<button value='+idx+'>등록</button>'+
+                    '<button value='+rsvNum+'>등록</button>'+
                 '</div>'+
             '</div>'
 }
-function editBtn(idx) {
-    $('.comments_view').eq(idx).addClass('none');
-    $('.commBox').eq(idx).prepend(printEditBox(idx));
+function editBtn(rsvNum) {
+    $('#comments_view'+rsvNum).addClass('none');
+    $('#commBox'+rsvNum).prepend(printEditBox(rsvNum));
 }
-function edit(idx) {
+function edit() {
     $.post({
         url:'/updateComm.do',
         data:commObj,
         success:function() {
             alert('수정이 완료되었습니다.');
             $('.comments').remove();
-            $('.comments_content')[idx].innerHTML=commObj.content;
-            $('.comments_view').eq(idx).removeClass('none');
+            $('#comments_content'+commObj.rsvNum)[0].innerHTML=commObj.content;
+            $('#comments_view'+commObj.rsvNum).eq(0).removeClass('none');
         }
     });
 }
-function deleteComm(idx) {
-    if($('.commBox').eq(idx).children()[1]==undefined){//답글이 없을 때
+function deleteComm(rsvNum) {
+    if($('#commBox'+rsvNum).children()[1]==undefined){//답글이 없을 때
         $.post({
             url:'/deleteCommAb.do',
             data:commObj,
             success:function() {
-                commBtn=$('.btnDiv button:nth-child(3)');
+                commBtn=$('#btnDiv'+rsvNum+' button:nth-child(3)');
                 alert('삭제가 완료되었습니다.');
-                $('.commBox').eq(idx).children().remove();
-                commBtn.eq(idx).addClass('commentBtn');
-                commBtn.eq(idx).removeClass('reviewBtn');
-                commBtn[idx].innerHTML='리뷰쓰기';
+                $('#commBox'+rsvNum).children().remove();
+                commBtn.addClass('commentBtn');
+                commBtn.removeClass('reviewBtn');
+                commBtn[0].innerHTML='리뷰쓰기';
             }
         });
     }else {//답글이 있을 때
@@ -359,33 +355,33 @@ function deleteComm(idx) {
             data:commObj,
             success:function() {
                 alert('삭제가 완료되었습니다.');
-                $('.commBox').eq(idx).children().remove();
-                $('.reviewBtn').eq(idx).attr("disabled",true);
+                $('#commBox'+rsvNum).children().remove();
+                $('#reviewBtn'+rsvNum).attr("disabled",true);
                 initCommObj();
             }
         });
     }
 }
-function printComment(name,no,content,date,idx) {
-    return '<div class="comments_view">'+
+function printComment(name,content,date,rsvNum) {
+    return '<div id="comments_view'+rsvNum+'" class="comments_view">'+
                     '<div class="comments_writer">'+
-                        '<p class="mname">'+name+'<span class="userNum">#'+no+'</span></p>'+
+                        '<p class="mname">'+name+'</p>'+
                         '<div class="dotBtn"></div>'+
-                        '<div class="popMenu none">'+
-                            '<button value='+idx+'>수정</button>'+
-                            '<button value='+idx+'>삭제</button>'+
+                        '<div id="popMenu'+rsvNum+'"class="popMenu none">'+
+                            '<button id="edt'+rsvNum+'">수정</button>'+
+                            '<button id="del'+rsvNum+'">삭제</button>'+
                         '</div>'+
                     '</div>'+
-                    '<div class="comments_content">'+content+'</div>'+
+                    '<div id="comments_content'+rsvNum+'" class="comments_content">'+content+'</div>'+
                     '<div class="commRdate">'+date+'</div>'+
                 '</div>'
 }
-function printReply(name,no,content,date) {
+function printReply(name,content,date) {
     return '<div class="comments_reply">'+
             '<span>┗</span>'+
                 '<div class="comments_reply_inner">'+
                     '<div class="comments_reply_writer">'+
-                        '<p>'+name+'<span class="userNum">#'+no+'</span></p>'+
+                        '<p>'+name+'</p>'+
                     '</div>'+
                     '<div class="comments_reply_content">'+content+'</div>'+
                     '<div class="commRdate">'+date+'</div>'+
@@ -416,7 +412,7 @@ function printlist(list) {
             btnClass='commentBtn';
         }
         $('.rsvList').append(
-            '<div class="rsvBox" id=rsvBox"'+value.rsvNum+'">' +
+            '<div class="rsvBox" id="rsvBox'+value.rsvNum+'">' +
                 '<table class="rsvTable">'+
                     '<tr>'+
                     '<th colspan="2" class="mno" id="mno'+value.mno+'">'+value.bname+'</th>'+
@@ -428,7 +424,7 @@ function printlist(list) {
                     '</tr>'+
                     '<tr>'+
                         '<td class="column">예약번호</td>'+
-                        '<td id="rsvNum'+key+'">'+value.rsvNum+'</td>'+
+                        '<td id="rsvNum'+value.rsvNum+'">'+value.rsvNum+'</td>'+
                     '</tr>'+
                     '<tr>'+
                         '<td class="column">전화번호</td>'+
@@ -439,17 +435,17 @@ function printlist(list) {
                         '<td><span>'+value.laundryList[0].laundry+'</span> 외 <span>'+(value.laundryList.length-1)+'</span>개</td>'+
                     '</tr>'+
                 '</table>'+
-                '<div class="btnDiv">'+
+                '<div id="btnDiv'+value.rsvNum+'" class="btnDiv">'+
                     '<button>채팅상담</button>'+
-                    '<button class="detailBtn" value="'+key+'">상세보기</button>'+
-                    (btnText!='리뷰보기'?(value.timeOut==0?'<button disabled>':'<button class="'+btnClass+'" value='+key+'>')// if 리뷰가 없으면 -> 7일이 지났으면 비활성화 아니면 활성화
-                    :(comm[0].content=='삭제된 리뷰입니다.'?'<button disabled>':'<button class="'+btnClass+'" value='+key+'>')// else 삭제된 ~ 이면 비활성화 아니면 활성화
+                    '<button id="detailBtn'+value.rsvNum+'"class="detailBtn">상세보기</button>'+
+                    (btnText!='리뷰보기'?(value.timeOut==0?'<button disabled>':'<button id="'+btnClass+value.rsvNum+'" class="'+btnClass+'">')// if 리뷰가 없으면 -> 7일이 지났으면 비활성화 아니면 활성화
+                    :(comm[0].content=='삭제된 리뷰입니다.'?'<button disabled>':'<button id="'+btnClass+value.rsvNum+'" class="'+btnClass+'">')// else 삭제된 ~ 이면 비활성화 아니면 활성화
                     )+btnText+'</button>'+
                 '</div>'+
-                '<div class="detail none" id="detail'+key+'">'+
+                '<div class="detail none" id="detail'+value.rsvNum+'">'+
                     '<hr>'+
                     '<div1-1>'+
-                        '<table class="receipt" id="receipt'+key+'">'+
+                        '<table class="receipt">'+
                             '<tr class="column">'+
                                 '<th class="laundry">품목</th>'+
                                 '<th class="count">개수</th>'+
@@ -460,15 +456,15 @@ function printlist(list) {
                         '<table class="result">'+
                             '<th>결제금액</th>'+
                             '<td>&nbsp;&nbsp;</td>'+
-                            '<td><span id="totalPrice'+key+'"></span> 원</td>'+
+                            '<td><span class="totalPrice"></span> 원</td>'+
                         '</table>'+
                     '</div1-1>'+
                 '</div>'+
-                '<div class="commBox none">'+
+                '<div id="commBox'+value.rsvNum+'" class="commBox none">'+
                     (value.commList.length==0?''://댓글이 없다면 공백, 아니라면 댓글 추가
-                    printComment(comm[0].mname,comm[0].mno,comm[0].content,comm[0].rdate,key))+
+                    printComment(comm[0].mname,comm[0].content,comm[0].rdate,value.rsvNum))+
                     (value.commList.length<2?'':
-                    printReply(comm[1].bname,comm[1].bno,comm[1].content,comm[1].rdate))+
+                    printReply(comm[1].bname,comm[1].content,comm[1].rdate))+
                 '</div>'+
             '</div>')+
         '</div>'
@@ -478,7 +474,7 @@ function printlist(list) {
         $.each(list[i].laundryList,function(idx,value) {
             price=value.count*value.price;
             totalPrice+=price;
-            $('#receipt'+i).append(
+            $('.receipt').eq(i).append(
                 '<tr>'+
                     '<td class="laundry">'+value.laundry+'</td>'+
                     '<td class="count">'+value.count+'개</td>'+
@@ -486,6 +482,6 @@ function printlist(list) {
                 '</tr>'
             );
         });
-        $('#totalPrice'+i)[0].innerHTML=totalPrice;
+        $('.totalPrice')[i].innerHTML=totalPrice;
     }
 }

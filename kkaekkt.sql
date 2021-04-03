@@ -62,7 +62,8 @@ CREATE TABLE `reservation` (
 	`bno`	INTEGER	NULL comment '사업자번호',
 	`rdate`	DATETIME	NULL comment '등록일자',
 	`ddate`	DATETIME	NULL comment '마감일자',
-	`stno`	INTEGER	NULL comment '상태번호'
+	`stno`	INTEGER	NULL DEFAULT 1 comment  '상태번호',
+    `payment` VARCHAR(10) NULL comment '결제수단'
 );
 
 CREATE TABLE `rsv_laundry` (
@@ -70,12 +71,6 @@ CREATE TABLE `rsv_laundry` (
 	`lno`	INTEGER	NULL comment '품목번호',
 	`cnt`	INTEGER	NULL comment '개수',
 	`stno`	INTEGER	NULL comment '상태번호'
-);
-
-CREATE TABLE `rsv_payment` (
-    `rno`    INTEGER    NOT NULL comment '예약번호',
-    `price`    INTEGER    NULL comment '결제금액',
-    `payment` VARCHAR(10) NULL comment '결제수단'
 );
 
 CREATE TABLE `state` (
@@ -233,13 +228,6 @@ ALTER TABLE `business` ADD CONSTRAINT `FK_BANK_TO_BUSINESS_1` FOREIGN KEY (
 REFERENCES `bank` (
 	`bkno`
 ) ON DELETE SET NULL;
-
-ALTER TABLE `rsv_payment` ADD CONSTRAINT `FK_RESERVATION_TO_RSV_PAYMENT_1` FOREIGN KEY (
-    `rno`
-)
-REFERENCES `reservation` (
-    `rno`
-) ON DELETE CASCADE;
 
 ALTER TABLE `bsn_laundry` ADD CONSTRAINT `FK_BUSINESS_TO_BSN_LAUNDRY_1` FOREIGN KEY (
 	`bno`
@@ -478,163 +466,136 @@ INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 1,2,1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 2,1,1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 3,3,1);
 
-INSERT INTO rsv_payment VALUES ((SELECT MAX(rno) FROM reservation), 9300, '카드');
 INSERT INTO reservation (mno, bno, rdate,ddate,stno) VALUES (1,1,now(),date_add(now(),INTERVAL 5 day),1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 1,2,1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 2,1,1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 3,3,1);
 
-INSERT INTO rsv_payment VALUES ((SELECT MAX(rno) FROM reservation), 9300, '카드');
 INSERT INTO reservation (mno, bno, rdate,ddate,stno) VALUES (1,1,now(),date_add(now(),INTERVAL 5 day),1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 1,2,1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 2,1,1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 3,3,1);
 
-INSERT INTO rsv_payment VALUES ((SELECT MAX(rno) FROM reservation), 9300, '카드');
 INSERT INTO reservation (mno, bno, rdate,ddate,stno) VALUES (1,1,now(),date_add(now(),INTERVAL 5 day),1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 1,2,1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 2,1,1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 3,3,1);
 
-INSERT INTO rsv_payment VALUES ((SELECT MAX(rno) FROM reservation), 9300, '카드');
 INSERT INTO reservation (mno, bno, rdate,ddate,stno) VALUES (1,1,now(),date_add(now(),INTERVAL 5 day),1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 1,2,1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 2,1,1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 3,3,1);
 
-INSERT INTO rsv_payment VALUES ((SELECT MAX(rno) FROM reservation), 9300, '카드');
 INSERT INTO reservation (mno, bno, rdate,ddate,stno) VALUES (1,1,now(),date_add(now(),INTERVAL 5 day),1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 1,2,1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 2,1,1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 3,3,1);
 
-INSERT INTO rsv_payment VALUES ((SELECT MAX(rno) FROM reservation), 9300, '카드');
 INSERT INTO reservation (mno, bno, rdate,ddate,stno) VALUES (1,1,now(),date_add(now(),INTERVAL 5 day),1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 1,2,1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 2,1,1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 3,3,1);
 
-INSERT INTO rsv_payment VALUES ((SELECT MAX(rno) FROM reservation), 9300, '카드');
 INSERT INTO reservation (mno, bno, rdate,ddate,stno) VALUES (1,1,now(),date_add(now(),INTERVAL 5 day),1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 1,2,1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 2,1,1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 3,3,1);
 
-INSERT INTO rsv_payment VALUES ((SELECT MAX(rno) FROM reservation), 9300, '카드');
 INSERT INTO reservation (mno, bno, rdate,ddate,stno) VALUES (1,1,now(),date_add(now(),INTERVAL 5 day),1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 1,2,1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 2,1,1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 3,3,1);
 
-INSERT INTO rsv_payment VALUES ((SELECT MAX(rno) FROM reservation), 9300, '카드');
 INSERT INTO reservation (mno, bno, rdate,ddate,stno) VALUES (1,1,now(),date_add(now(),INTERVAL 5 day),1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 1,2,1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 2,1,1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 3,3,1);
 
-INSERT INTO rsv_payment VALUES ((SELECT MAX(rno) FROM reservation), 9300, '카드');
 INSERT INTO reservation (mno, bno, rdate,ddate,stno) VALUES (1,1,now(),date_add(now(),INTERVAL 5 day),1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 1,2,1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 2,1,1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 3,3,1);
 
-INSERT INTO rsv_payment VALUES ((SELECT MAX(rno) FROM reservation), 9300, '카드');
 INSERT INTO reservation (mno, bno, rdate,ddate,stno) VALUES (1,1,now(),date_add(now(),INTERVAL 5 day),1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 1,2,1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 2,1,1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 3,3,1);
 
-INSERT INTO rsv_payment VALUES ((SELECT MAX(rno) FROM reservation), 9300, '카드');
 INSERT INTO reservation (mno, bno, rdate,ddate,stno) VALUES (1,1,now(),date_add(now(),INTERVAL 5 day),1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 1,2,1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 2,1,1);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 3,3,1);
 
-INSERT INTO rsv_payment VALUES ((SELECT MAX(rno) FROM reservation), 9300, '카드');
 INSERT INTO reservation (mno, bno, rdate,ddate,stno) VALUES (1,1,now(),date_add(now(),INTERVAL 5 day),3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 1,2,3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 2,1,3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 3,3,3);
 
-INSERT INTO rsv_payment VALUES ((SELECT MAX(rno) FROM reservation), 9300, '카드');
 INSERT INTO reservation (mno, bno, rdate,ddate,stno) VALUES (1,1,now(),date_add(now(),INTERVAL 5 day),3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 1,2,3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 2,1,3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 3,3,3);
 
-INSERT INTO rsv_payment VALUES ((SELECT MAX(rno) FROM reservation), 9300, '카드');
 INSERT INTO reservation (mno, bno, rdate,ddate,stno) VALUES (1,1,now(),date_add(now(),INTERVAL 5 day),3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 1,2,3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 2,1,3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 3,3,3);
 
-INSERT INTO rsv_payment VALUES ((SELECT MAX(rno) FROM reservation), 9300, '카드');
 INSERT INTO reservation (mno, bno, rdate,ddate,stno) VALUES (1,1,now(),date_add(now(),INTERVAL 5 day),3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 1,2,3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 2,1,3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 3,3,3);
 
-INSERT INTO rsv_payment VALUES ((SELECT MAX(rno) FROM reservation), 9300, '카드');
 INSERT INTO reservation (mno, bno, rdate,ddate,stno) VALUES (1,1,now(),date_add(now(),INTERVAL 5 day),3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 1,2,3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 2,1,3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 3,3,3);
 
-INSERT INTO rsv_payment VALUES ((SELECT MAX(rno) FROM reservation), 9300, '카드');
 INSERT INTO reservation (mno, bno, rdate,ddate,stno) VALUES (1,1,now(),date_add(now(),INTERVAL 5 day),3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 1,2,3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 2,1,3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 3,3,3);
 
-INSERT INTO rsv_payment VALUES ((SELECT MAX(rno) FROM reservation), 9300, '카드');
 INSERT INTO reservation (mno, bno, rdate,ddate,stno) VALUES (1,1,now(),date_add(now(),INTERVAL 5 day),3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 1,2,3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 2,1,3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 3,3,3);
 
-INSERT INTO rsv_payment VALUES ((SELECT MAX(rno) FROM reservation), 9300, '카드');
 INSERT INTO reservation (mno, bno, rdate,ddate,stno) VALUES (1,1,now(),date_add(now(),INTERVAL 5 day),3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 1,2,3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 2,1,3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 3,3,3);
 
-INSERT INTO rsv_payment VALUES ((SELECT MAX(rno) FROM reservation), 9300, '카드');
 INSERT INTO reservation (mno, bno, rdate,ddate,stno) VALUES (1,1,now(),date_add(now(),INTERVAL 5 day),3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 1,2,3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 2,1,3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 3,3,3);
 
-INSERT INTO rsv_payment VALUES ((SELECT MAX(rno) FROM reservation), 9300, '카드');
 INSERT INTO reservation (mno, bno, rdate,ddate,stno) VALUES (1,1,now(),date_add(now(),INTERVAL 5 day),3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 1,2,3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 2,1,3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 3,3,3);
 
-INSERT INTO rsv_payment VALUES ((SELECT MAX(rno) FROM reservation), 9300, '카드');
 INSERT INTO reservation (mno, bno, rdate,ddate,stno) VALUES (1,1,now(),date_add(now(),INTERVAL 5 day),3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 1,2,3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 2,1,3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 3,3,3);
 
-INSERT INTO rsv_payment VALUES ((SELECT MAX(rno) FROM reservation), 9300, '카드');
 INSERT INTO reservation (mno, bno, rdate,ddate,stno) VALUES (1,1,now(),date_add(now(),INTERVAL 5 day),3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 1,2,3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 2,1,3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 3,3,3);
 
-INSERT INTO rsv_payment VALUES ((SELECT MAX(rno) FROM reservation), 9300, '카드');
 INSERT INTO reservation (mno, bno, rdate,ddate,stno) VALUES (1,1,now(),date_add(now(),INTERVAL 5 day),3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 1,2,3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 2,1,3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 3,3,3);
 
-INSERT INTO rsv_payment VALUES ((SELECT MAX(rno) FROM reservation), 9300, '카드');
 INSERT INTO reservation (mno, bno, rdate,ddate,stno) VALUES (1,1,now(),date_add(now(),INTERVAL 5 day),3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 1,2,3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 2,1,3);
 INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) FROM reservation), 3,3,3);
 
-INSERT INTO rsv_payment VALUES ((SELECT MAX(rno) FROM reservation), 9300, '카드');
 
 -- 리뷰 추가
 INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum,grade)

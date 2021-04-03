@@ -9,7 +9,6 @@ import com.kkaekkt.biz.comm.LaundryVO;
 import com.kkaekkt.biz.comm.ScheduleVO;
 
 public class BusinessVO extends AccountVO{
-	private int bno;
 	private String bname;
 	private String comment;
 	private int bizType; //1. 일반 세탁소, 2. 코인 세탁소
@@ -73,12 +72,7 @@ public class BusinessVO extends AccountVO{
 	public void setEquipment(String equipment) {
 		this.equipment = equipment;
 	}
-	public int getBno() {
-		return bno;
-	}
-	public void setBno(int bno) {
-		this.bno = bno;
-	}
+
 	public String getBname() {
 		return bname;
 	}
@@ -148,12 +142,11 @@ public class BusinessVO extends AccountVO{
 	}
 	@Override
 	public String toString() {
-		return "BusinessVO [bno=" + bno + ", bname=" + bname + ", comment=" + comment + ", bizType=" + bizType
-				+ ", bankNum=" + bankNum + ", bankAccountNum=" + bankAccountNum + ", scheduleList=" + scheduleList
-				+ ", equipmentList=" + equipmentList + ", laundryList=" + laundryList + ", etcList=" + etcList
-				+ ", commList=" + commList + ", equipment=" + equipment + ", laundry=" + laundry + ", schedule="
-				+ schedule + ", etc=" + etc + ", eval=" + eval
-				+ ", likedNum=" + likedNum + ", state=" + state + "]";
+		return "BusinessVO [bname=" + bname + ", comment=" + comment + ", bizType=" + bizType + ", bankNum=" + bankNum
+				+ ", bankAccountNum=" + bankAccountNum + ", scheduleList=" + scheduleList + ", equipmentList="
+				+ equipmentList + ", laundryList=" + laundryList + ", etcList=" + etcList + ", commList=" + commList
+				+ ", equipment=" + equipment + ", laundry=" + laundry + ", schedule=" + schedule + ", etc=" + etc
+				+ ", eval=" + eval + ", count=" + count + ", likedNum=" + likedNum + ", state=" + state + "]";
 	}
 	
 
