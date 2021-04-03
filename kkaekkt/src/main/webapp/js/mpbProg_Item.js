@@ -211,7 +211,7 @@ function ajax() { //ajax로 리스트 받아오기
         success: function(data) {
             var result=JSON.parse(data);
             $('.content_header p:nth-child(1) span').html(result.totalPostCount);
-            var list=rsv.rsvListLno;
+            var list=result.rsvListLno;
             printlist(list);
             initPageObj(result);
             initPageBtn();

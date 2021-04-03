@@ -134,21 +134,11 @@
 		</if>
 	</delete>
 	<!-- 로그인들 -->
-	<select id="getPerson" resultType="person">
-		SELECT ifnull(ac.mno,0) as mno, id,
-		password, mname, email, mtype
-		FROM account ac,
-		member mb
-		WHERE ac.mno=mb.mno
-		AND id=#{id} AND password=#{password};
-	</select>
-	<select id="getPersonBs" resultType="business">
-		SELECT ac.mno as mno,
-		bs.bno, id, password, bname, email, mtype
-		FROM account ac, business bs
-		WHERE ac.mno=bs.mno
-		AND id=#{id} AND
-		password=#{password};
+	<select id="getAccount" resultType="account">
+		SELECT ac.mno,bno,mname,b.bname,mtype
+		FROM (SELECT mno,mtype FROM account WHERE id=#{id} AND password=#{password}) ac
+		LEFT JOIN member m ON m.mno=ac.mno
+		LEFT JOIN business b ON b.mno=ac.mno;
 	</select>
 	<select id="getPersonSNS" resultType="person">
 		SELECT ac.mno as mno, id,
@@ -157,7 +147,6 @@
 		WHERE ac.mno=mb.mno
 		AND email=#{email};
 	</select>
-
 	<select id="getEmail" resultType="int">
 	<!-- 	SELECT *
 		FROM member

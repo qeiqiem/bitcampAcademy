@@ -7,7 +7,7 @@ function ajax() { //ajax로 리스트 받아오기
     console.log('ajax 함수 진입');
     $.post({
         url:"/getLikedBs.do",
-        data:{mno:mno},
+        data:{mno:alertObj.sender},
         success: function(data) {
             var list=JSON.parse(data);
             printList(list);

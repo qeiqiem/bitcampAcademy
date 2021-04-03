@@ -21,12 +21,11 @@ function kakaoLogin(){
                     	nick: userNick,
                     	email: userEmail
                     }
-                    
 $.ajax({
 	url: '/findemail.do',
 	type: 'POST',
 	data: {
-		email: $('#email').val(),
+		email:userEmail
 	},
 	success: function(data){		
 		console.log("보냄");

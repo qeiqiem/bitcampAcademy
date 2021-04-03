@@ -62,7 +62,7 @@ public class EchoHandler extends TextWebSocketHandler {
 	//웹소켓 email 가져오기
 	private String getMno(WebSocketSession session) {
 		Map<String, Object> httpSession = session.getAttributes();
-		AccountVO loginUser = (AccountVO)httpSession.get("person");
+		AccountVO loginUser = (AccountVO)httpSession.get("user");
 		System.out.println(loginUser.getMno()+":회원번호 출력 체크");
 		if(loginUser != null) {
 			return loginUser.getMno()+"";//mno를 String으로 형변환해서 전달

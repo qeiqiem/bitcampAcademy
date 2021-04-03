@@ -1,7 +1,5 @@
 package com.kkaekkt.view.user;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
@@ -203,58 +201,20 @@ public class UserController {
 	}
 
 	// 일반유저 로그인
-	@RequestMapping(value = "/loginPs.do", method = RequestMethod.POST)
-	public String Login(AccountVO vo, HttpSession session, HttpServletResponse response) throws IOException {
-			// 로그인 성공
-			System.out.println("로그인처리");
-
-			vo = userService.getUser(vo);
-			//PersonVO user = userService.getUser(vo);
-
-			System.out.println(vo); // 뭐가 담기는 지 보려했다
-			
-			if (vo == null) {
-				System.out.println("회원정보없음");
-				response.setContentType("text/html; charset=UTF-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>alert('아이디나 비밀번호를 확인해주세요.'); history.go(-1);</script>");
-				out.flush();
-				return "/jsp/login/loginPs.jsp";
-			} else  {
-				session.setAttribute("user", vo);
-				return "/jsp/indexPerson.jsp";
+	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String Login(AccountVO vo, HttpSession session) {
+			AccountVO result = userService.getUser(vo);
+			if (result == null) {
+				return "fail";
+			} else {
+				session.setAttribute("user", result);
+				return result.getMtype()+"";					
 			}
 	}
 
-		// 업체유저 로그인
-		@RequestMapping(value = "/loginBs.do", method = RequestMethod.POST)
-		public String Login(BusinessVO vo, HttpSession session, HttpServletResponse response) throws Exception {
-				// 로그인 성공
-				System.out.println("로그인처리");
-
-				vo = userService.getUser(vo);
-
-				System.out.println(vo); // 뭐가 담기는 지 보려했다
-
-				if (vo == null) {
-					System.out.println("회원정보없음");
-					response.setContentType("text/html; charset=UTF-8");
-					PrintWriter out = response.getWriter();
-					out.println("<script>alert('아이디나 비밀번호를 확인해주세요.'); history.go(-1);</script>");
-					out.flush();
-					return "/jsp/login/loginBs.jsp";
-				} else {
-					vo.setLikedNum(userService.countLikeBs(vo)); // 프로필편집에서 찜 인원 뽑아와야해서 추가
-					vo.setEval(userService.avgGradeBs(vo)); // 프로필편집에서 찜 인원 뽑아와야해서 추가
-					System.out.println(vo);
-					session.setAttribute("user", vo);
-					return "/jsp/mypageBiz/mpbProg_Num.jsp";
-				}
-		}	
-
 	// 소셜로그인
 	@RequestMapping(value = "/loginSNS.do", method = RequestMethod.POST)
-	@ResponseBody
 	public String kakaologin(PersonVO vo, HttpSession session, HttpServletResponse response) {
 		System.out.println("카카오 로그인 컨트롤러 접속");
 		// 로그인 성공했을 때
@@ -264,7 +224,7 @@ public class UserController {
 		System.out.println(user); // 카카오 로그인시 vo 확인
 
 		if (user.getState() != 0) {
-			session.setAttribute("user", user);
+			session.setAttribute("person", user);
 			System.out.println("user정보 " + user);
 			return "/jsp/indexPerson.jsp";
 		} else {

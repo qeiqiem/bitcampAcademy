@@ -1,6 +1,6 @@
 $(document).ready(function() {
     init();
-    ajax(pageObj); //처음 마이페이지 들어왔을 때, 진행중 주문 항목 출력
+    ajax(); //처음 마이페이지 들어왔을 때, 진행중 주문 항목 출력
 });
 function init() {
     initEvent();
@@ -11,38 +11,38 @@ function initEvent() {
     $('.page_next').click(function() {
         if(!$(this).hasClass('no')) {
             pageObj.currentPageNum+=1;
-            ajax(pageObj);
+            ajax();
         }
     });
     $('.page_prev').click(function() {
         if(!$(this).hasClass('no')) {
             pageObj.currentPageNum-=1;
-            ajax(pageObj);
+            ajax();
         }
     });
     $('.page_prevBlock').click(function() {
         if(!$(this).hasClass('no')) {
             pageObj.currentPageNum=pageObj.blockFirstPageNum-1;
-            ajax(pageObj);
+            ajax();
         }
     });
     $('.page_nextBlock').click(function() {
         if(!$(this).hasClass('no')) {
             pageObj.currentPageNum=pageObj.blockLastPageNum+1;
-            ajax(pageObj);
+            ajax();
         }
     });
     $('.page_btn').on("click",".page_list",function() {
         if(pageObj.currentPageNum!=JSON.parse($(this).html())) {
             pageObj.currentPageNum=JSON.parse($(this).html());
-            ajax(pageObj);
+            ajax();
         }
     });
     $('.searchBox i.fas').click(function() {
 	    pageObj.search=$('.search')[0].value;
         pageObj.searchOption=$('.searchBox select')[0].value;
         pageObj.currentPageNum=1;
-        ajax(pageObj);
+        ajax();
     });
     $('.process').on('click','.cancelBtn',function() {//리스트의 취소 버튼을 누를 때
 		rsvObj.rsvNum=JSON.parse($('.processList tr').eq($(this)[0].value).children().eq(1)[0].innerHTML);
@@ -60,7 +60,7 @@ function enter() {
     if(window.event.keyCode==13) {
         pageObj.search=$('.search')[0].value;
         pageObj.searchOption=$('.searchBox select')[0].value;
-        ajax(pageObj);
+        ajax();
     }
 }
 function initSide() {
@@ -122,9 +122,9 @@ function openModal(button) {
 }
 function operate() {
     if($('#ok')[0].innerHTML=='취소하기'){//버튼이 취소하기라면,
-        cancel(rsvObj);
+        cancel();
     }else {//버튼이 완료하기라면
-        complete(rsvObj);
+        complete();
     }
 }
 function today() {
@@ -160,7 +160,7 @@ function sendMsg() {
                             '</div>'+
                             '<div class="msgBottom">'+
                                 '<span class="date">'+today()+'</span>'+
-                                '<span class="byBs">by '+username+'</span>'+
+                                '<span class="byBs">by '+alertObj.senderName+'</span>'+
                             '</div>'+
                             '<i class="fas fa-times"></i>'+
                         '</li>'
@@ -169,7 +169,7 @@ function sendMsg() {
         }
     });
 }
-function cancel(rsvObj) {
+function cancel() {
 	$.post({
         url:"/cancel.do",
         data:rsvObj,
@@ -178,7 +178,7 @@ function cancel(rsvObj) {
                 msgSet(result);
                 sendMsg();
             }
-			ajax(pageObj);
+			ajax();
             alert('주문이 정상적으로 취소되었습니다.');
             modalClose();
 		}
@@ -188,7 +188,7 @@ function modalClose() {
     $('#modal_container').hide();
     $("#mask").hide();
 }
-function complete(rsvObj) {
+function complete() {
 	$.post({
 		url:"/complete.do",
 		data:rsvObj,
@@ -197,7 +197,7 @@ function complete(rsvObj) {
                 msgSet(result);
                 sendMsg();
             }
-			ajax(pageObj);
+			ajax();
             alert('작업이 완료되었습니다.');
             modalClose();
 		}
@@ -211,7 +211,7 @@ function initPageObj(data) {
     pageObj.isPrevBlockExist=data.isPrevBlockExist;
     pageObj.isPrevExist=data.isPrevExist;
 }
-function ajax(pageObj) { //ajax로 리스트 받아오기
+function ajax() { //ajax로 리스트 받아오기
     console.log('ajax 함수 진입');
     $.post({
         url:"/getRsvListBs.do",

@@ -17,9 +17,8 @@
         </div>
     </div>
     <script>
-        var mno=${sessionScope.person.mno}
         var likeObj={
-            mno:mno
+            mno:alertObj.sender
         }
     </script>
     <script src="/js/mymark.js"></script>

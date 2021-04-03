@@ -19,12 +19,18 @@ function initHeaderEvent() {
     });
 }
 function readAlert() {//알림 탭 페이지 공용메서드
-    var type=(alertObj.mtype==1?"Ps":"Bs");
+    console.log('읽기 진입');
+    var url;
+    if(alertObj.mtype==1){
+        url="/jsp/mypageUser/mypagePs.jsp";
+    }else{
+        url="/jsp/mypageBiz/mpbProg_Num.jsp";
+    }
     $.post({
         url:'/updateAlert.do',
         data:alertObj,
         success:function() {
-            location.href="/jsp/mypageUser/mypage"+type+".jsp";
+            location.href=url;
         }
     });
 }
@@ -57,7 +63,7 @@ function printHeaderList(list) {
         read=(value.state==2?' read':'');
         $('#noticeBox ul').append('<li class="alertLi'+value.ano+read+'">'+
                                     '<div class="msgTop'+read+'">'+
-                                        '<span>'+value.typename+'</span>⠀<span id="msg'+value.ano+'">'+value.msg+'</span>'+
+                                        '<span>'+value.typename+'</span>⠀<span id="msg'+value.ano+'" class="msgBody">'+value.msg+'</span>'+
                                     '</div>'+
                                     '<div class="msgBottom'+read+'">'+
                                         '<span class="date">'+value.date+'</span>'+

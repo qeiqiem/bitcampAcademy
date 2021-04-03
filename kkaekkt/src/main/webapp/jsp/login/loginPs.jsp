@@ -31,7 +31,7 @@
 				<a href="/jsp/login/loginBs.jsp">업체로그인</a>
 			</button>
 			<div class="login">
-				<form action="/loginPs.do" method="post">
+				<form action="/login.do" method="post">
 					<a href="http://developers.kakao.com/logout"><h3 class="loginTitle">로그인</h3></a>
 					<hr>
 					<div>
@@ -42,7 +42,7 @@
 							placeholder="비밀번호" />
 					</div>
 					<!-- <input type="submit" value="로그인" onclick="login()" />-->
-					<input type="submit" value="로그인" /> 
+					<input type="button" id="login" value="로그인"/> 
 				</form>
 				<div>
 					<div>
@@ -50,7 +50,6 @@
 					</div>
 					<hr>
 					<div>
-
 						<p>다른 계정으로 로그인</p>
 						<form id="snsForm" action="/loginSNS.do" method="POST">
 							<!--api끌어오는거에 따라 가지수는 줄 수 있습니다...-->
@@ -64,12 +63,11 @@
 				</div>
 			</div>
 		</div>
-
-
 	</div>
 	<!-- 바디콘테이너 -->
 </body>
 <script src="/js/kakaoLogin.js"></script>
 <script src="/js/TestfacebookLogin.js"></script>
-<script src="/js/Test_login.js"></script>
+<!-- <script src="/js/Test_login.js"></script> -->
+<script src="/js/login.js"></script>
 </html>
