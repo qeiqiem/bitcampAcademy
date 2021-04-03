@@ -3,7 +3,6 @@ $(document).ready(function() {
 	initEvent();
 	ajax(pageObj);
     initSide();
-    
 		
 });
 function initEvent(){

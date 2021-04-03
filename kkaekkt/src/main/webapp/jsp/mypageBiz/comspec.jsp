@@ -118,9 +118,9 @@
 								<button type="button" id="5">금</button>
 								<button type="button" id="6">토</button>
 								<button type="button" id="7">일</button>
-								<button type="button" id="8">매일</button>
-								<button type="button" id="9">평일</button>
-								<button type="button" id="10">주말</button>
+								<button type="button" id="8" class="two">매일</button>
+								<button type="button" id="9" class="two">평일</button>
+								<button type="button" id="10" class="two">주말</button>
 							</div>
 
 							<div id="weekBox">
