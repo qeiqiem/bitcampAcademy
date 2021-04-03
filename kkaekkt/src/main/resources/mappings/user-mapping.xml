@@ -136,7 +136,7 @@
 	<!-- 로그인들 -->
 	<select id="getPerson" resultType="person">
 		SELECT ifnull(ac.mno,0) as mno, id,
-		password, mname, phone, birth, address, email, mtype
+		password, mname, email, mtype
 		FROM account ac,
 		member mb
 		WHERE ac.mno=mb.mno
@@ -144,22 +144,16 @@
 	</select>
 	<select id="getPersonBs" resultType="business">
 		SELECT ac.mno as mno,
-		bs.bno, id, password, bname, phone, address, email, bz.typenum as
-		bizType, bkno as bankNum,
-		acno as bankAccountNum, mtype
-		FROM account ac,
-		business bs, biztype bz
+		bs.bno, id, password, bname, email, mtype
+		FROM account ac, business bs
 		WHERE ac.mno=bs.mno
-		AND bs.typeNum=bz.typenum
 		AND id=#{id} AND
 		password=#{password};
 	</select>
 	<select id="getPersonSNS" resultType="person">
 		SELECT ac.mno as mno, id,
-		password, mname, phone, birth, address,
-		email
-		FROM account ac,
-		member mb
+		password, mname, email
+		FROM account ac, member mb
 		WHERE ac.mno=mb.mno
 		AND email=#{email};
 	</select>

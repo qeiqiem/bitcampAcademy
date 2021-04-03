@@ -18,13 +18,11 @@ function login(){ // onclick 할 function 이름
 			if(data){
 				data = data.trim();
 			}
+			console.log(test);
 				if(test.mno == 0){
 					alert("아이디나 비밀번호를 다시 확인해주세요.");
 					$("#id").val();
 					$("#password").val();
-					location.href = "/jsp/login/loginPs.jsp";
-				}else {
-					location.href = "/jsp/indexPerson.jsp";
 				}
 		} // 이 뒤에 false, 해도 됨
 	});
