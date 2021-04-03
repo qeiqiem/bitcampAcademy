@@ -166,24 +166,24 @@
         </div>
         <script>
             var pageObj={//세션에서 정보를 받아오는건 독립된 js파일에서 불가능, jsp 내에서만 가능하기 때문에 여기서 값을 받아준다.
-                bno:'${sessionScope.person.bno}',
-                mno:'${sessionScope.person.mno}',
-                likedNum:'${sessionScope.person.likedNum}',
-                eval:'${sessionScope.person.eval}',
-                bname:'${sessionScope.person.bname}',
-                bankNum:'${sessionScope.person.bankNum}',
-                bankAccNum:'${sessionScope.person.bankAccountNum}',
-                id:'${sessionScope.person.id}',
-                password:'${sessionScope.person.password}',
-                phone:'${sessionScope.person.phone}',
-                email:'${sessionScope.person.email}',                
-                address:'${sessionScope.person.address}'        
+            		bno:'${bs.bno}',
+                    mno:'${bs.mno}',
+                    likedNum:'${bs.likedNum}',
+                    eval:'${bs.eval}',
+                    bname:'${bs.bname}',
+                    bankNum:'${bs.bankNum}',
+                    bankAccNum:'${bs.bankAccountNum}',
+                    id:'${bs.id}',
+                    password:'${bs.password}',
+                    phone:'${bs.phone}',
+                    email:'${bs.email}',                
+                    address:'${bs.address}'         
 
             };
         	
            
 </script>
-        <script src="/js/coinbio.js"></script>
+        <script src="/js/combio.js"></script>
 
     </body>
 

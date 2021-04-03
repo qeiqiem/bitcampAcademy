@@ -1,16 +1,16 @@
 let code = "";                //이메일전송 인증번호 저장위한 코드
 
 let fomatpw = 0;
+let formatnewpw = 0;            // 비밀번호 변경 시 사용
+let formatphone1 = 1;
+let formatphone2 = 1;
+let formatphone3 = 1;
 let formatemail = 1;
 let formatemailNum = 1;
 let formatAccNum = 1; 
 
-let formatphone1 = 1;
-let formatphone2 = 1;
-let formatphone3 = 1;
-
 const regPw = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
-const regPhone = /^[0-9]{3}\-[0-9]{3,4}\-[0-9]{4}$/;
+const regPhone = /^[0-9]+$/;
 const regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
 const regAccount=/^[0-9,\-]{3,6}\-[0-9,\-]{2,6}\-[0-9,\-]{3,6}(\-[0-9]{1,3})?$/;
 const regMailCode =/^[0-9]{6}$/;
@@ -84,10 +84,15 @@ window.onload = function () {
 
         inputInfo();
         defaultDisable();
+        // 유효성 안내 문구 지우기
         let labelli = document.getElementsByTagName("label");
         for(let i=0; i< labelli.length; i++){
             labelli[i].innerText="";
         }
+        timeStop();
+        $('#timeout').hide();
+        $(".mail_check_input").val("");
+        $(".mail_check_input").attr("id", "mail_check_input_box_false");
     }
 
     // 비밀번호 입력 후 수정버튼(비밀번호 변경시) 새 비밀번호, 확인버튼 활성화
@@ -139,14 +144,14 @@ window.onload = function () {
     })
     // 새 비밀번호, 새 비밀번호 확인 인풋 값 같은지 비교 => 비밀법호 업데이트 
     $("#btn_updatepwd").click(function undatePwd() {
-        if ($('#pwd').val == $('#newpwd').val && formatnewpw == 1) {
+        if ($('#pwd').val() == $('#newpwd').val() && formatnewpw == 1) {
             console.log($('#pwd').val + $('#newpwd') + formatnewpw);
             $.ajax({
                 url: '/updateBspwd.do',
                 type: 'post',
                 data: {
                     mno: pageObj["mno"],
-                    id: $("input[name='id']").val(),
+                    id: pageObj["id"],
                     password: $('#newpwd').val()
                 }, success: function(data){
                     let password = JSON.parse(data);
@@ -178,16 +183,16 @@ window.onload = function () {
 
         }
         else {
-            console.log($("if문탈출"+'#pwd').val + $('#newpwd') + formatnewpw);
-        }
-        if (formatnewpw == 0) {
-            document.getElementById("match").innerText = "입력형식을 확인하세요";
-             $("#pwd").val("");
-             $("#pnewpwdwd").val("");
-        }
-        if ($('#pwd').val != $('#newpwd').val) {
-            document.getElementById("match").innerText = " 새 비밀번호와 일치하지 않습니다.";
-            $("#pnewpwdwd").val("");
+            console.log("if문탈출" + $('#pwd').val() + $('#newpwd').val() + formatnewpw);
+            
+            if (formatnewpw == 0) {
+                document.getElementById("match").innerText = "입력형식을 확인하세요";
+                $("#pwd").val("");
+                $("#newpwd").val("");
+            } else if ($('#pwd').val() != $('#newpwd').val()) {
+                document.getElementById("match").innerText = " 새 비밀번호와 일치하지 않습니다.";
+                $("#newpwd").val("");
+            }
         }
 
     });
@@ -262,9 +267,14 @@ window.onload = function () {
     document.getElementById("btn_checkemail").onclick = function(){
         console.log(formatemail);
         if(formatemail == 1){
-            emailApi();
+            //emailApi();
+            if(document.getElementById("email").value != pageObj["email"]){
+                emailDuplChk();
+            } else{
+                alert("기존이메일과 동일합니다.");
+            }
         } else {
-            alert("형식에 맞게 입력")
+            alert("양식과 맞지 않습니다.")
         }
     };
     /* 인증번호 비교 */
@@ -325,6 +335,28 @@ function inputInfo(){
     document.getElementById('extraAddress').value = addressSplit[3];
 }
 
+function emailDuplChk() {
+    var email = $(".mail_input").val(); // 입력한 이메일
+  
+    $.ajax({
+      url: "/findemail.do",
+      type: "POST",
+      data: {
+        email: $("#email").val(),
+      },
+      success: function (data) {
+        console.log(data);
+        var key = JSON.parse(data);
+        if (key.emailchk != 0) {
+          alert("해당 이메일로 가입된 아이디가 존재합니다.");
+          return false;
+        } else if (key.emailchk == 0) {
+          emailApi();
+        } 
+      }
+    });
+  }
+
 function emailApi(){
      /* 인증번호 이메일 전송 */
      
@@ -357,8 +389,8 @@ function checkemailNum(){
             formatemailNum = 1;
             alert('메일 인증이 완료되었습니다.');
             $('#timeout').hide();
-            $(".mail_check_input").val("");
             $("#mail_check").attr("disabled",true);
+            $(".mail_check_input").val("인증이 완료되었습니다.");
             $(".mail_check_input").attr("disabled",true);
             $(".mail_check_input").attr("id", "mail_check_input_box_false");
             doncument.getElementById("btn_checkemail").disabled = true;

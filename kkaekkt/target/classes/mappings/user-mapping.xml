@@ -116,7 +116,7 @@
 		FROM account ac, business bs, biztype bz
 		WHERE ac.mno=bs.mno
 		AND bs.typeNum=bz.typenum
-		AND mno=#{mno};
+		AND ac.mno=#{mno};
 	</select>
 	<update id="updateBs">
 		<choose>

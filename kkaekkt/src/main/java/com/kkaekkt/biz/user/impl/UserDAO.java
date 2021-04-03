@@ -153,6 +153,5 @@ public class UserDAO {
 		return mybatis.selectOne("UserDAO.getBusiness",vo);
 	}
 
-
 	
 }
