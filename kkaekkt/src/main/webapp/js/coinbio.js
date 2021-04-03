@@ -141,7 +141,7 @@ window.onload = function () {
                 type: 'post',
                 data: {
                     mno: pageObj["mno"],
-                    id: $("input[name='id']").val(),
+                    id:  pageObj["id"],
                     password: $('#newpwd').val()
                 }, success: function(data){
                     let password = JSON.parse(data);

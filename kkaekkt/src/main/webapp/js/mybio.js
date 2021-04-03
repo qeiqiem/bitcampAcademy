@@ -12,7 +12,6 @@ let formatemailNum = 1;
 let formatAccNum = 1; 
 
 const regPw = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
-const regPhone1 = /^[0-9]{3}$/;
 const regPhone = /^[0-9]+$/;
 const regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
 const regAccount=/^[0-9,\-]{3,6}\-[0-9,\-]{2,6}\-[0-9,\-]{3,6}(\-[0-9]{1,3})?$/;
@@ -58,8 +57,6 @@ window.onload = function () {
         //수정완료 돌아가기 버튼 활성화, 인풋창 활성화
         document.getElementById("btn_mybio").style.display = "none";
         document.getElementById("btn_mybioClick").style.display = "block";
-        console.log(inputli);
-        console.log(buttonli);
         //인풋창 활성화
         for (let i = 0; i < inputli.length; i++) {
             if (i != 3 && i != 4 && i != 12 && i != 13 && i != 14 && i != 16) {
@@ -150,8 +147,8 @@ window.onload = function () {
                 url: '/updatePspwd.do',
                 type: 'post',
                 data: {
-                    mno: $('#mno').val(),
-                    id: $("input[name='id']").val(),
+                    mno: pageObj["mno"],
+                    id: pageObj["id"],
                     password: $('#newpwd').val()
                 }, success: function(data){
                     let password = JSON.parse(data);
@@ -190,7 +187,7 @@ window.onload = function () {
                 $("#newpwd").val("");
             } else if ($('#pwd').val() != $('#newpwd').val()) {
                 document.getElementById("match").innerText = " 새 비밀번호와 일치하지 않습니다.";
-                $("#pnewpwdwd").val("");
+                $("#newpwd").val("");
             }
         }
     });

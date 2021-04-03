@@ -178,6 +178,14 @@ public class UserServiceImpl implements UserService {
 		return userDao.joinCfm(vo);
 	}
 
+	@Override
+	public PersonVO getPerson(PersonVO vo) {
+		return userDao.getPerson(vo);
+	}
+	@Override
+	public BusinessVO getBusiness(BusinessVO vo) {
+		return userDao.getBusiness(vo);
+	}
 
 
 

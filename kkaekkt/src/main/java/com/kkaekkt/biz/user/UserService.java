@@ -25,5 +25,7 @@ public interface UserService {
 	public double avgGradeBs(BusinessVO vo);
 	public int countLikeBs(BusinessVO vo);	
 	public int idchkBs(BusinessVO vo);
+	public PersonVO getPerson(PersonVO vo);
+	public BusinessVO getBusiness(BusinessVO vo);
 
 }
