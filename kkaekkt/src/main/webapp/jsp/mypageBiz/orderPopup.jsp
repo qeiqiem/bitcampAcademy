@@ -89,9 +89,9 @@ hr{
        
     }
     window.onload = function(){
-        let address = document.getElementById("address").innerText.replace(',', " ");
-        console.log(address[0]);
-       
+        let address = document.getElementById("address").innerText.replaceAll(',', " ");
+        console.log(address);
+        document.getElementById("address").innerText = address;
     }
 
 
