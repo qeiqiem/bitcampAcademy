@@ -212,7 +212,7 @@
 				LIMIT #{rowStartNum},#{POSTS_PER_PAGE};
 		</if>
 		<if test="listType==4"> <!-- 업체회원 완료목록 출력 -->
-			SELECT r.rno rsvNum,r.mno,date_format(rdate,'%Y.%m.%d, %T') rsvdate,mname,dDate,stname state,DATEDIFF(ddate,NOW()) dDay 
+			SELECT r.rno rsvNum,r.mno,date_format(rdate,'%Y.%m.%d, %T') rsvdate,mname,date_format(dDate,'%Y.%m.%d, %T')dDate,stname state,DATEDIFF(ddate,NOW()) dDay 
 			FROM member m,reservation r,state s 
 			<where> 
 			r.mno=m.mno AND s.stno=r.stno AND bno=#{bno} 

@@ -254,7 +254,7 @@ function today() {
     var date=new Date();
     var mm=date.getMonth()+1;
     var dd=date.getDate();
-    var today=date.getFullYear()+'.'+(mm<10?'0'+mm:mm)+'.'+dd;
+    var today=date.getFullYear()+'.'+(mm<10?'0'+mm:mm)+'.'+(dd<10?'0'+dd:dd);
     return today;
 }
 function printHeader(key,value) {
