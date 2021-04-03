@@ -46,20 +46,24 @@ function printList(list) {
                 '<p class="bsname" id="bno'+value.bno+'">'+value.bname+'</p>'+
                 '<table>'+
                     '<tr>'+
-                        '<td><span>'+value.eval+'<i class="fas fa-star"></i></span>'+ ' | 리뷰 '+value.count+'</td>'+
+                        '<td><i class="fas fa-star"></i><span> '+value.eval+'</span> | 리뷰 '+value.count+'</td>'+
                     '</tr>'+
                     '<tr>'+
                         '<td class="bsaddress">'+value.address+'</td>'+
                     '</tr>'+
                     '<tr>'+
-                        '<td><span class="bsschedule">영업시간</span><span>대표스케쥴</span></td>'+
+                        '<td class="bsphone"><i class="fas fa-phone-square-alt"></i>'+value.phone+'</td>'+
                     '</tr>'+
                     '<tr>'+
-                        '<td class="bsphone">'+value.phone+'<button class="btn_detail">상세보기</button></td>'+
+                        '<td><i class="far fa-heart"></i> 세탁소 찜 <span>123</span></td>'+
+                    '</tr>'+
+                    '<tr>'+
+                        '<td id="kkaekktTag">kkaekkt 가맹점 입니다.</td>'+
                     '</tr>'+
                 '</table>'+
             '</div>'+
             '<button class="btn_mark"><i class="fas fa-heart" value='+value.bno+'></i></button>'+
+            '<button id="rsvBtn">예약하기</button>'+
         '</div>');
     });
 }

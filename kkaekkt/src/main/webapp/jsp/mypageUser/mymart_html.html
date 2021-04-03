@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../../css/mymark.css">
+<!-- <link rel="stylesheet" href="../../css/all.css"> -->
+<script src="https://kit.fontawesome.com/2fc57dd2db.js"
+	crossorigin="anonymous"></script>
+</head>
+<body>
+	<jsp:include page="/jsp/header1.jsp"></jsp:include>
+	  <div class="body_container">
+        <jsp:include page="sidebar_ps.jsp"></jsp:include>
+        <div class="content">
+            <p id="mymark_title">내가찜한세탁소</p>
+            <hr>
+            <div class="card" id="card'+value.bno+'">
+                <div id="temp1">
+                    <div id="temp3">
+                        <div id="temp4">
+                            <i class="fas fa-heart" value='+value.bno+'></i>
+                        </div>
+                        <p>테스트업체</p>
+                    </div>
+                    <div id="temp5"> 
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>서울시 벚꽃동 꽃보고싶다로 이시국 20-1호</span>
+                    </div>
+                    <div id="temp6">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>010-4759-2323</span>
+                    </div>
+                </div>
+                <div id="temp2">
+                    <div id="temp7">
+                        <i class="fas fa-star"></i>
+                        리뷰<span> 7 </span> |
+                        <i class="fas fa-heart"></i>
+                        찜 <span>123</span>
+                    </div>
+                    <button>예약하기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

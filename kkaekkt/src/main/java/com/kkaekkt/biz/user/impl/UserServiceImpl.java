@@ -34,11 +34,7 @@ public class UserServiceImpl implements UserService {
 	}
 	@Override
 	public List<BusinessVO> getLikedBs(int mno) {
-		List<BusinessVO> list = userDao.getLikedBs(mno);
-		for (BusinessVO vo : list) {
-			vo.setScheduleList(userDao.getSchedule(vo));
-		}
-		return list;
+		return userDao.getLikedBs(mno);
 	}
 	@Override
 	public int countLikeBs(BusinessVO vo) {

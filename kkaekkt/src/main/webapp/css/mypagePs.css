@@ -76,6 +76,7 @@ font-size:14px;
     height: 30px;
     padding: 5px 0;
     border: 1px solid var(--gray-color);
+    cursor: pointer;
 }
 .none {
     display: none !important;

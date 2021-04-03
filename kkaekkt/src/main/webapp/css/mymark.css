@@ -1,6 +1,9 @@
 *:focus {
     outline: none;
 }
+p{
+    margin: 0;
+}
 hr {
 height: 1px;
 border: none;
@@ -24,10 +27,77 @@ margin: 0 auto;
     margin: 10px auto;
     border: 1px solid var(--gray-color);
     width: 90%;
-    height: 200px;
-    padding-bottom: 15px;
+    height: 110px;
+    /* padding-bottom: 15px; */
+    background-color: burlywood;
 }
-.content > .card > .info {
+#temp1{
+    display: inline-block;
+    width: 77%;
+    height: 100%;
+    /* background-color: chartreuse; */
+    float: left;
+    box-sizing: border-box;
+    border: 1px solid black;
+}
+#temp1>div{
+    padding-left: 30px;
+}
+#temp2{
+    display: inline-block;
+    width: 23%;
+    height: 100%;
+    background-color: chocolate;
+    float: left;
+    text-align: center;
+}
+#temp2 button{
+    margin-top: 10px;
+    width: 90px;
+    height: 40px;
+    background-color: skyblue;
+    border: none;
+    border-radius: 10px;
+}
+#temp3{
+    padding-top: 20px;
+    /* background-color: coral; */
+    margin-bottom: 5px;
+    font-size: 18px;
+    font-weight: bold;
+}
+#temp4 {
+    position: relative;
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    border: 1px solid black;
+    /* background-color: cornflowerblue; */
+}
+#temp4 i{
+    display: inline-block;
+    padding: 3.5px;
+}
+#temp3 p{
+    display: inline-block;
+}
+#temp5 {
+    margin-left: 7px;
+    font-size: 14px;
+    color: var(--text-gray);
+    /* background-color: crimson; */
+}
+#temp6 {
+    margin-left: 7px;
+    font-size: 14px;
+    /* background-color: darkkhaki; */
+}
+#temp7{
+    font-size: 12px;
+    padding-top: 25px;
+    background-color: darkolivegreen;
+}
+/* .content > .card > .info {
     width: 35vw;
     float: left;
     padding-left: 40px;
@@ -67,11 +137,6 @@ margin: 0 auto;
 .bsaddress{
     color: var(--black-color);
 }
-.bsschedule{
-    border: 0.2px solid var(--gray-color);
-    margin-right: 5px;
-    font-size: 12px;
-}
 .bsphone{
     color: darkolivegreen;
 }
@@ -80,6 +145,19 @@ margin: 0 auto;
     background: none;
     color: steelblue;
 }
+.info p{
+    margin-bottom: 10px;
+}
+#rsvBtn{
+    position: absolute;
+    right: 25px;
+    bottom: 20px;
+    background: var(--key-color);
+    border: none;
+    width: 75px;
+    height: 35px;
+    border-radius: 7px;
+} */
 .page_btn button {
     width: 30px;
     margin: -2px;
