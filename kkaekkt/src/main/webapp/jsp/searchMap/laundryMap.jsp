@@ -127,7 +127,7 @@
 								<p>이메일 &nbsp;testNa@kkaekkt.com</p>
 	                        </div>
 	                        <div class="sellerInfo">
-	                           <p id="selname">판매자정보 &nbsp;</p>	
+	                           <p id="selname">판매자정보 &nbsp;</p>
 	                            <p>개인정보 수집, 제공 &nbsp;</p>
 	                            <input placeholder="개인정보 수집 동의">
 	                            <input placeholder="개인정보 제공 동의">

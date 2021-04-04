@@ -332,6 +332,14 @@ public class UserController {
 		userService.deleteUser(vo);
 		
 	}
+	@RequestMapping(value = "/mymark.do", method = RequestMethod.POST)
+	public String getUserDetail(HttpSession session,Model model) {
+		Gson gson = new Gson();
+		AccountVO account = (AccountVO) session.getAttribute("user");
+		model.addAttribute("userDetail", gson.toJson(userService.getPerson(account.getMno())))
+			 .addAttribute("likedBsList",gson.toJson(userService.getLikedBs(account.getMno())));
+		return "/jsp/mypageUser/mymark.jsp";
+	}
 	// 개인 프로필 정보 get
 	@RequestMapping(value = "/myBio.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String getPerson(HttpSession session, Model model) {

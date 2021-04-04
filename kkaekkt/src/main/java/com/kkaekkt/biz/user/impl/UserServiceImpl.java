@@ -179,8 +179,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public PersonVO getPerson(PersonVO vo) {
-		return userDao.getPerson(vo);
+	public PersonVO getPerson(int mno) {
+		return userDao.getPerson(mno);
 	}
 	@Override
 	public BusinessVO getBusiness(BusinessVO vo) {
