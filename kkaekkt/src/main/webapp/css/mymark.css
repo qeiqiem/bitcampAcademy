@@ -19,84 +19,171 @@ table tr {
 width: 75vw;
 padding: 10px 0px 30px 70px;
 font-size: 16px;
-color: var(--text-gray);
 margin: 0 auto;
+}
+#mymark_title {
+    font-size: 25px;
+    font-weight: bold;
+    margin-left: 10px;
+    margin-top: 35px;
 }
 .content .card {
     position: relative;
     margin: 10px auto;
     border: 1px solid var(--gray-color);
-    width: 90%;
-    height: 110px;
-    /* padding-bottom: 15px; */
-    background-color: burlywood;
+    width: 80%;
+    height: 140px;
+    border-radius: 5px;
 }
-#temp1{
+.bsTagLeft{
     display: inline-block;
     width: 77%;
     height: 100%;
-    /* background-color: chartreuse; */
     float: left;
+    padding-left: 50px;
     box-sizing: border-box;
-    border: 1px solid black;
 }
-#temp1>div{
-    padding-left: 30px;
-}
-#temp2{
-    display: inline-block;
-    width: 23%;
-    height: 100%;
-    background-color: chocolate;
-    float: left;
-    text-align: center;
-}
-#temp2 button{
-    margin-top: 10px;
-    width: 90px;
-    height: 40px;
-    background-color: skyblue;
-    border: none;
-    border-radius: 10px;
-}
-#temp3{
-    padding-top: 20px;
-    /* background-color: coral; */
+.tagTop{
+    padding-top: 35px;
     margin-bottom: 5px;
     font-size: 18px;
     font-weight: bold;
 }
-#temp4 {
+.like {
     position: relative;
     display: inline-block;
-    width: 25px;
-    height: 25px;
-    border: 1px solid black;
-    /* background-color: cornflowerblue; */
+    width: 34px;
+    height: 32px;
+    border: 1px solid var(--gray-color);
+    box-sizing: border-box;
+    top: -2px;
 }
-#temp4 i{
+.like i{
     display: inline-block;
-    padding: 3.5px;
+    padding: 5.5px 5.5px;
+    font-size: 20px;
 }
-#temp3 p{
+.tagTop p{
+    font-size: 25px;
     display: inline-block;
+    margin-left: 10px;
 }
-#temp5 {
+.tagBottom {
+    margin-left: 7px;
+    font-size: 13px;
+    color:var(--text-gray);
+}
+.tagBottom i{
+    margin:0 4px;
+}
+.tagBottom span{
+    margin: 0 5px;
+}
+.bsTagRight{
+    display: inline-block;
+    width: 23%;
+    height: 100%;
+    float: left;
+    text-align: right;
+    padding: 35px 70px;
+    box-sizing: border-box;
+}
+.fa-star{
+    color: yellow;
+}
+.fa-heart{
+    color: red;
+}
+.bsTagRight button{
+    margin-top: 10px;
+    width: 125px;
+    height: 45px;
+    background-color: var(--key-color);
+    border: none;
+    font-size: 14px;
+    border-radius: 10px;
+    letter-spacing: 2px;
+    margin-left: 3px;
+}
+/* .bsTagLeft{
+    display: inline-block;
+    width: 77%;
+    height: 100%;
+    float: left;
+    padding-left: 50px;
+    box-sizing: border-box;
+}
+.bsTagLeft span{
+    margin-left: 10px;
+}
+.bsTagRight{
+    display: inline-block;
+    width: 23%;
+    height: 100%;
+    float: left;
+    text-align: right;
+    padding-right: 70px;
+    box-sizing: border-box;
+}
+.bsTagRight button{
+    margin-top: 10px;
+    width: 125px;
+    height: 45px;
+    background-color: var(--key-color);
+    border: none;
+    font-size: 14px;
+    border-radius: 10px;
+    letter-spacing: 2px;
+    margin-left: 3px;
+}
+.tagTop{
+    padding-top: 35px;
+    margin-bottom: 5px;
+    font-size: 18px;
+    font-weight: bold;
+}
+.like {
+    position: relative;
+    display: inline-block;
+    width: 34px;
+    height: 32px;
+    border: 1px solid var(--gray-color);
+    box-sizing: border-box;
+    top: -2px;
+}
+.like i{
+    display: inline-block;
+    padding: 5.5px 5.5px;
+    font-size: 20px;
+}
+.tagTop p{
+    font-size: 25px;
+    display: inline-block;
+    margin-left: 10px;
+}
+.tagBody {
     margin-left: 7px;
     font-size: 14px;
     color: var(--text-gray);
-    /* background-color: crimson; */
+    margin-bottom: 3px;
+    margin-left: 11px;
 }
-#temp6 {
+.tagBottom {
     margin-left: 7px;
+    font-size: 13px;
+    margin-left: 10px;
+    color:var(--text-gray);
+}
+.bsData{
     font-size: 14px;
-    /* background-color: darkkhaki; */
+    padding-top: 35px;
 }
-#temp7{
-    font-size: 12px;
-    padding-top: 25px;
-    background-color: darkolivegreen;
+.fa-star{
+    color: yellow;
 }
+.fa-heart{
+    color: red;
+} */
 /* .content > .card > .info {
     width: 35vw;
     float: left;
@@ -158,7 +245,7 @@ margin: 0 auto;
     height: 35px;
     border-radius: 7px;
 } */
-.page_btn button {
+/* .page_btn button {
     width: 30px;
     margin: -2px;
   }
@@ -180,7 +267,7 @@ margin: 0 auto;
     list-style: none;
     float: left;
     /* width: 40px; */
-    padding: 5px 10px;
+    /* padding: 5px 10px;
     text-align: center;
     font-size: 13px;
     margin-left: -1px;
@@ -196,4 +283,4 @@ margin: 0 auto;
   .page_nextBlock {
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
-  }
+  } */ 
