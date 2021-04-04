@@ -334,11 +334,10 @@ public class UserController {
 	}
 	// 개인 프로필 정보 get
 	@RequestMapping(value = "/myBio.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public String getPerson(PersonVO vo, HttpSession session, Model model) {
+	public String getPerson(HttpSession session, Model model) {
 		System.out.println("개인프로필편집");
 		AccountVO account = (AccountVO) session.getAttribute("user");
-		vo.setMno(account.getMno());
-		model.addAttribute("person", userService.getPerson(vo));
+		model.addAttribute("person", userService.getPerson(account.getMno()));
 		return "/jsp/mypageUser/mybio.jsp";
 	}
 
