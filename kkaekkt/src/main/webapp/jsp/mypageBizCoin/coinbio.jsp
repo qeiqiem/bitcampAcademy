@@ -47,8 +47,7 @@
                                 <td name="bno"></td>
                                 <td>
                                     <select name="bankNum" id="bankNum">
-                                        <option value=0></option>
-                                        <option value=1>국민</option>
+                                       <option value=1>국민</option>
                                         <option value=2>신한</option>
                                         <option value=3>하나</option>
                                         <option value=4>우리</option>

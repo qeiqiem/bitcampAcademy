@@ -151,7 +151,7 @@ public class UserDAO {
 	}
 	public BusinessVO getBusiness(BusinessVO vo) {
 		return mybatis.selectOne("UserDAO.getBusiness",vo);
-	}
+	}	
 
 	
 }

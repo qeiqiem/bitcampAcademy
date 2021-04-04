@@ -7,6 +7,7 @@ let formatphone2 = 1;
 let formatphone3 = 1;
 let formatemail = 1;
 let formatemailNum = 1;
+let formatbank = 1;
 let formatAccNum = 1; 
 
 const regPw = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
@@ -184,7 +185,7 @@ window.onload = function () {
         }
         else {
             console.log("if문탈출" + $('#pwd').val() + $('#newpwd').val() + formatnewpw);
-            
+
             if (formatnewpw == 0) {
                 document.getElementById("match").innerText = "입력형식을 확인하세요";
                 $("#pwd").val("");
@@ -214,6 +215,7 @@ window.onload = function () {
                 = "";
 
         }
+        
     });
     // 연락처 입력형식 확인
     document.getElementById("phone1").addEventListener('keyup', () => {
@@ -447,6 +449,10 @@ function submitCombio() {
     }
     if ($("#bankAccNum").val() == "" ||  formatAccNum != 1) {
         alert("계좌번호를 확인하세요.");
+        return false;
+    }
+    if ($("#bankNum").val() == 0) {
+        alert("은행명를 확인하세요.");
         return false;
     }
     if ($("input[name='email']").val() == "" || formatemail != 1 || formatemailNum !=1) {
