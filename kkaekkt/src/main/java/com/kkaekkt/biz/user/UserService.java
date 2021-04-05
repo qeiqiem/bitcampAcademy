@@ -10,7 +10,7 @@ public interface UserService {
 	public void insertUser(BusinessVO vo);
 	public void updateUser(PersonVO vo);
 	public void updateUser(BusinessVO vo);
-	public void deleteUser(PersonVO vo);
+	public void deleteUser(AccountVO vo);
 	public void deleteUser(BusinessVO vo);
 	public void likeOn(BusinessVO vo);
 	public void likeOff(BusinessVO vo);
@@ -27,7 +27,7 @@ public interface UserService {
 	public AccountVO joinCfm(AccountVO vo);
 	public double avgGradeBs(BusinessVO vo);
 	public int countLikeBs(BusinessVO vo);	
-	public int idchkBs(BusinessVO vo);
+//	public int idchkBs(BusinessVO vo);
 	public PersonVO getPerson(int mno);
 	public BusinessVO getBusiness(BusinessVO vo);
 	public List<LaundryVO> getLaundryList(int bno);

@@ -181,22 +181,23 @@ public class UserController {
 	}
 
 	// 아이디 중복체크 업체........
-	@RequestMapping(value = "/idchkBs.do", method = RequestMethod.POST)
-	@ResponseBody
-	public String idchkBs(BusinessVO vo) {
-		System.out.println("vo 값 담겼음");
-		System.out.println(vo);
-		Gson gson = new Gson();
-		vo.setState(userService.idchkBs(vo));
-		System.out.println("서비스에서 값 담겨 넘어옴");
-		return gson.toJson(vo);
-	}
+//	@RequestMapping(value = "/idchkBs.do", method = RequestMethod.POST)
+//	@ResponseBody
+//	public String idchkBs(BusinessVO vo) {
+//		System.out.println("vo 값 담겼음");
+//		System.out.println(vo);
+//		Gson gson = new Gson();
+//		vo.setState(userService.idchkBs(vo));
+//		System.out.println("서비스에서 값 담겨 넘어옴");
+//		return gson.toJson(vo);
+//	}
 
 	// 일반유저 로그인
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String Login(AccountVO vo, HttpSession session) {
 			AccountVO result = userService.getUser(vo);
+			System.out.println(result);
 			if (result == null) {
 				return "fail";
 			} else {
@@ -207,17 +208,17 @@ public class UserController {
 
 	// 소셜로그인
 	@RequestMapping(value = "/loginSNS.do", method = RequestMethod.POST)
-	public String kakaologin(PersonVO vo, HttpSession session, HttpServletResponse response) {
+	public String kakaologin(AccountVO vo, HttpSession session, HttpServletResponse response) {
 		System.out.println("카카오 로그인 컨트롤러 접속");
 		// 로그인 성공했을 때
 		vo = userService.method(vo);
 
-		PersonVO user = vo;
-		System.out.println(user); // 카카오 로그인시 vo 확인
+		//AccountVO user = vo;
+		System.out.println(vo); // 카카오 로그인시 vo 확인
 
-		if (user.getState() != 0) {
-			session.setAttribute("person", user);
-			System.out.println("user정보 " + user);
+		if (vo.getMno() != 0) {
+			session.setAttribute("person", vo);
+			System.out.println("user정보 " + vo);
 			return "/jsp/indexPerson.jsp";
 		} else {
 			System.out.println("로그인 실패");
@@ -323,10 +324,19 @@ public class UserController {
 	}
 	
 	// 회원탈퇴
-	@RequestMapping(value = "/deletePs.do", method = RequestMethod.POST)
-	public void deleteUser(PersonVO vo) {
+	@RequestMapping(value = "/deletePs.do", method = RequestMethod.GET)
+	@ResponseBody
+	public String deleteUser(AccountVO vo) {
 		System.out.println("회원탈퇴 controller옴");
 		userService.deleteUser(vo);
+		System.out.println(vo);
+		
+		if(vo == null) {
+			return "fail";
+		} else {
+			return "/jsp/index.jsp";			
+		}
+		
 	}
 	@RequestMapping(value = "/mymark.do", method = RequestMethod.GET)
 	public String getUserDetail(HttpSession session,Model model) {

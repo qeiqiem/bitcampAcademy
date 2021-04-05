@@ -50,6 +50,20 @@
 			</otherwise>
 		</choose>
 	</insert>
+	<update id="updatePs">
+		<choose>
+			<when test="email == null">
+				UPDATE account SET password=#{password} WHERE
+				mno=#{mno};
+			</when>
+			<otherwise>
+				<!-- UPDATE account SET password=#{password} WHERE mno=#{mno}; -->
+				UPDATE member SET
+				phone=#{phone},birth=#{birth},address=#{address},email=#{email}
+				WHERE mno=#{mno};
+			</otherwise>
+		</choose>
+	</update>
     <select id="countLikeBs" resultType="_int">
         SELECT count(mno) FROM liked
         WHERE bno=#{bno};
@@ -104,28 +118,34 @@
 		AND bs.typeNum=bz.typenum
 		AND ac.mno=#{mno};
 	</select>
-	<update id="updatePs">
-			UPDATE member SET phone=#{phone},birth=#{birth},address=#{address},email=#{email}
-			WHERE mno=#{mno};
-	</update>
 	<update id="updateBs">
-				UPDATE business SET phone=#{phone},bkno=#{bankNum},acno=#{bankAccountNum},address=#{address},email=#{email}
+		<choose>
+			<when test="email == null">
+				UPDATE account SET password=#{password} WHERE
+				mno=#{mno};
+			</when>
+			<otherwise>
+				<!-- UPDATE account SET password=#{password} WHERE mno=#{mno}; -->
+				UPDATE business SET
+				phone=#{phone},bkno=#{bankNum},acno=#{bankAccountNum},
+				address=#{address},email=#{email}
 				WHERE mno=#{mno};
+			</otherwise>
+		</choose>
+
 	</update>
 	<!-- 회원탈퇴 -->
 	<delete id="deleteUser">
-		DELETE ac, mb, res
-		FROM account ac
+		DELETE ac, mb, res 
+		FROM account ac 
 		left outer join member mb on ac.mno=mb.mno
-		left outer join reservation res on mb.mno=res.mno
-		<if test="stno == 3 or stno == 4">
-			AND id=#{id} AND password=#{password};
-		</if> 
+		left outer join reservation res on mb.mno=res.mno 
+		WHERE stno='3' and id=#{id} AND password=#{password}; 
 	</delete>
 	<!-- 로그인들 -->
 	<select id="getAccount" resultType="account">
-		SELECT ac.mno,bno,mname,b.bname,mtype
-		FROM (SELECT mno,mtype FROM account WHERE id=#{id} AND password=#{password}) ac
+		SELECT ac.mno,bno,mname,b.bname,mtype,ac.id,ac.password
+		FROM (SELECT mno,mtype,id,password FROM account WHERE id=#{id} AND password=#{password}) ac
 		LEFT JOIN member m ON m.mno=ac.mno
 		LEFT JOIN business b ON b.mno=ac.mno;
 	</select>
@@ -204,14 +224,6 @@
 		LEFT OUTER JOIN business b on ac.mno=b.mno
 		WHERE ac.id=#{id};
 	</select>
-	
-	<update id="updatePw">
-		UPDATE account 
-		SET password=#{password} 
-		WHERE id=#{id};
-	</update>
-	
-	
 	<select id="idchk" resultType="int">
 		SELECT count(*)
 		FROM account
@@ -226,14 +238,6 @@
 		LEFT JOIN business b on
 		b.mno=a.mno
 		WHERE id=#{id};
-	</select>
-	<!-- 매출관리-->
-	<select id="getSalse" resultType="laundry">
-		SELECT date_format(rdate, '%Y-%m-%d') rsvDate, sum(price) price  
-		FROM reservation r, rsv_payment rs 
-		WHERE r.rno=rs.rno 
-		AND bno=#{bno} 
-		group by rsvDate;
 	</select>
 </mapper>
 

@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <link rel="stylesheet" href="/css/mybio.css">
+<link rel="stylesheet" href="/css/delete.css">
 
 </head>
 
@@ -22,13 +23,6 @@
 				<div id="btn_mybioClick">
 					<button type="button" id="btn_mybiofin">수정완료</button>
 					<button type="button" id="btn_back">돌아가기</button>
-				</div>
-
-				<!-- 회원탈퇴 -->
-				<div class="delete">
-					<form action="/deletePs.do" method="POST" name="userDel">
-						<input type="submit" id="userDel" value="회우너탈퇴"/>
-					</form>
 				</div>
 				<hr>
 				<div id="mybio_info">
@@ -109,6 +103,31 @@
 				</div>
 
 			</form>
+			<!-- 모달부분 -->
+			<div class="word">
+				<input type="button" id="modal_show" value="회원탈퇴" />
+
+				<div id="modal_container">
+					<button id="modal_close">x</button>
+					<div id="modal_bodycont">
+						<form action="/deletePs.do" name=form method="GET">
+							<div id="modal_head">
+								<p><input name="name" id="name" value="${sessionScope.user.name} 님 탈퇴 하시겠어요?" readonly /></p>
+								<hr style="width: 80%; margin-top: 40px; border: 1px solid #E5E5E5;">
+								
+								<p>탈퇴하면 모든 정보가 지워집니다. 정말 탈퇴하시겠어요?</p>
+								<p><input id="id" name="id" value="${sessionScope.user.id}" readonly/></p>
+								<input type="password" name="password" id="pwd">								
+							</div>
+							<br>
+							<div id="modal_foot">
+								<input id="yes" type="submit" value="예" />
+								<input id="nope" type="button" value="아니오" />
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<script>
@@ -126,6 +145,7 @@
 		};
 	</script>
 	<script src="/js/mybio.js"></script>
+	<script src="/js/delete.js"></script>
 
 
 

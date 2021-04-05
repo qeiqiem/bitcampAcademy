@@ -72,7 +72,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void deleteUser(PersonVO vo) {
+	public void deleteUser(AccountVO vo) {
 		System.out.println("회원탈퇴 서비스 옴");
 		userDao.deleteUser(vo);
 
@@ -86,11 +86,11 @@ public class UserServiceImpl implements UserService {
 	
 	// 로그인 들
 	
-	@Override
-	public int idchkBs(BusinessVO vo) {
-		System.out.println("아이디 찾는 서비스 옴 -- 업체");
-		return userDao.idchkBs(vo);
-	}
+//	@Override
+//	public int idchkBs(BusinessVO vo) {
+//		System.out.println("아이디 찾는 서비스 옴 -- 업체");
+//		return userDao.idchkBs(vo);
+//	}
 
 	@Override
 	public AccountVO getUser(AccountVO vo) {

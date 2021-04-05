@@ -136,18 +136,16 @@
 	</update>
 	<!-- 회원탈퇴 -->
 	<delete id="deleteUser">
-		DELETE ac, mb, res
-		FROM account ac
+		DELETE ac, mb, res 
+		FROM account ac 
 		left outer join member mb on ac.mno=mb.mno
-		left outer join reservation res on mb.mno=res.mno
-		<if test="stno == 3 or stno == 4">
-			AND id=#{id} AND password=#{password};
-		</if> 
+		left outer join reservation res on mb.mno=res.mno 
+		WHERE stno='3' and id=#{id} AND password=#{password}; 
 	</delete>
 	<!-- 로그인들 -->
 	<select id="getAccount" resultType="account">
-		SELECT ac.mno,bno,mname,b.bname,mtype
-		FROM (SELECT mno,mtype FROM account WHERE id=#{id} AND password=#{password}) ac
+		SELECT ac.mno,bno,mname,b.bname,mtype,ac.id,ac.password
+		FROM (SELECT mno,mtype,id,password FROM account WHERE id=#{id} AND password=#{password}) ac
 		LEFT JOIN member m ON m.mno=ac.mno
 		LEFT JOIN business b ON b.mno=ac.mno;
 	</select>
