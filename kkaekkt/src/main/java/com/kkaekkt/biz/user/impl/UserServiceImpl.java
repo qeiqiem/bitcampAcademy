@@ -120,17 +120,17 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public BusinessVO getComspec(BusinessVO vo) {
 		// System.out.println("servie옴");
-		vo.setLaundryList(userDao.getLaundry(vo));
-		vo.setScheduleList(userDao.getSchedule(vo));
+		vo.setLaundryList(userDao.getLaundry(vo.getBno()));
+		vo.setScheduleList(userDao.getSchedule(vo.getBno()));
 		return vo;
 	}
 
 	@Override
 	public BusinessVO getCoinspec(BusinessVO vo) {
 		// System.out.println("servie옴");
-		vo.setEquipmentList(userDao.getEquipment(vo));
-		vo.setEtcList(userDao.getEtc(vo));
-		vo.setScheduleList(userDao.getSchedule(vo));
+		vo.setEquipmentList(userDao.getEquipment(vo.getBno()));
+		vo.setEtcList(userDao.getEtc(vo.getBno()));
+		vo.setScheduleList(userDao.getSchedule(vo.getBno()));
 		return vo;
 	}
 
@@ -185,6 +185,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public BusinessVO getBusiness(BusinessVO vo) {
 		return userDao.getBusiness(vo);
+	}
+	@Override
+	public List<LaundryVO> getLaundryList(int bno) {
+		return userDao.getLaundry(bno);
 	}
 
 

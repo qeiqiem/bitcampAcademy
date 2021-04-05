@@ -81,25 +81,23 @@ public class UserDAO {
 		}
 
 	// laundry
-	public List<LaundryVO> getLaundry(BusinessVO vo) {
-		// System.out.println("dao : " + mybatis.selectList("UserDAO.getcomspecList",vo)
-		// );
-		return mybatis.selectList("UserDAO.getLaundryList", vo);
+	public List<LaundryVO> getLaundry(int bno) {
+		return mybatis.selectList("UserDAO.getLaundryList", bno);
 	}
 
 	// equipment
-	public List<EquipmentVO> getEquipment(BusinessVO vo) {
-		return mybatis.selectList("UserDAO.getEquipmentList", vo);
+	public List<EquipmentVO> getEquipment(int bno) {
+		return mybatis.selectList("UserDAO.getEquipmentList", bno);
 	}
 
 	// etc
-	public List<EtcVO> getEtc(BusinessVO vo) {
-		return mybatis.selectList("UserDAO.getEtc", vo);
+	public List<EtcVO> getEtc(int bno) {
+		return mybatis.selectList("UserDAO.getEtc", bno);
 	}
 
 	// schedule
-	public List<ScheduleVO> getSchedule(BusinessVO vo) {
-		return mybatis.selectList("UserDAO.getScheduleList", vo);
+	public List<ScheduleVO> getSchedule(int bno) {
+		return mybatis.selectList("UserDAO.getScheduleList", bno);
 	}
 
 	public void updateSpec(BusinessVO vo) {

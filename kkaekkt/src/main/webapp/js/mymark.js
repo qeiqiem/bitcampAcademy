@@ -1,34 +1,130 @@
+//결제 API 전역변수
+IMP.init("imp27421713");
+
 $(document).ready(function() {
     initBodyEvent();
     initSide();
-    initDataSet();
-    // ajax();
+    printList();
 });
-function initDataSet() {
-    console.log('데이터 셋');
-    var userData=JSON.parse(userDetail);
-    var likedBs=JSON.parse(likedBsList);
-    console.log(userData.phone);
-    console.log(likedBs[0].bname);
-}
-function ajax() { //ajax로 리스트 받아오기
+function modalAjax(bno) { //ajax로 리스트 받아오기
     console.log('ajax 함수 진입');
     $.post({
-        url:"/getLikedBs.do",
-        data:{mno:alertObj.sender},
+        url:"/getLaundryList.do",
+        data:{bno:bno},
         success: function(data) {
             var list=JSON.parse(data);
-            printList(list);
+            modalprint(list);
+            openModal();
             console.log('ajax 완료');
         }
     });
 }
+function modalprint(list) {
+    var period;
+    var table=$('#single_option');
+    table.children().remove();//초기화
+    $.each(list,function(idx,value) {
+        
+        if(value.price!=0){//미취급 품목이 아니라면 진입
+            if($('#firstHead')[0]==undefined){//첫 번째 헤드가 없다면
+                if(value.lno<5){ //1~4번 품목이라면
+                    period='1~3일 소요';
+                }else {
+                    period='4~7일 소요'
+                }
+                table.append(
+                    '<tr id="firstHead">'+
+                        '<th>'+period+'</th>'+
+                        '<th>수 량</th>'+
+                        '<th>금 액</th>'+
+                    '</tr>'
+                );
+            }else if($('#firstHead th')[0].innerHTML=='1~3일 소요'&&value.lno>4){//첫 번째 헤드와 마감기한이 일치하지 않은 품목이라면
+                if($('#secondHead')[0]==undefined){//두 번째 헤드가 없다면
+                    period='4~7일 소요';
+                    table.append(
+                    '<tr id="secondHead">'+
+                        '<th>'+period+'</th>'+
+                        '<th>수 량</th>'+
+                        '<th>금 액</th>'+
+                    '</tr>'
+                    );
+                }
+            }
+            table.append(
+            '<tr>'+
+                '<td><input class="chkBox" id="chk'+idx+'" type="checkbox" value="'+idx+'">'+value.laundry+'</td>'+
+                '<td>'+
+                    '<select id="selc'+idx+'" class="resOpc" disabled>'+
+                    '</select>'+
+                '</td>'+
+                '<td>'+
+                    '<p class="res_price" id="price'+idx+'" value="'+value.price+'">'+value.price+'</p>'+
+                '</td>'+
+            '</tr>'
+           );
+        }
+        if(list.length==idx+1){//마지막이라면 총 금액 행 삽입,
+            table.append(
+            '<tr id="totalRow">'+
+                '<td id="totalLabel">결제예상금액</td>'+
+                '<td colspan="2" class="totalAll">0</td>'+
+            '</tr>'
+            );
+        }
+    });
+    for(var i=1;i<11;i++){ //셀렉트 옵션 삽입
+        $('.resOpc').append(
+            '<option value='+i+'>'+i+'개</option>'
+        );
+    }
+    $('#bname')[0].innerHTML=list[0].bname;//업체명 삽입
+}
 function initBodyEvent() {
+    initModal();//모달 이벤트 관리fn
+    var table=$('#single_option');
     $('.content').on('click','.like i.fa-heart',function() {
         var bno=Number($(this).attr("value"));
         likeObj.bno=bno;
         likeOff(likeObj);
-    })
+    });
+    $('.content').on("click",'button',function() {
+        var bno=$(this).attr('id').substr(6);
+        modalAjax(bno);
+    });
+    table.on("click",'input:checkbox',function() {
+        var idx=$(this).val();
+        var ckTf=$(this).is(":checked");
+        changeListener(idx,ckTf);
+    });
+    table.on("change",'select.resOpc',function(){
+        var idx=Number($(this).attr('id').charAt(4));//id(selc)의 idx 추출
+        var cnt=$(this).val();
+        var price=Number($('p.res_price').eq(idx).attr('value'));
+        $('p.res_price').eq(idx).text(cnt*price);//개수*기존가격 반영
+        totalPriceSet();
+    });
+}
+function totalPriceSet() {
+    totalPrice=0;
+    var chkedList = $('.chked');
+    var idx;
+    for(var i=0;i<chkedList.length;i++){
+       idx=$('.chked').eq(i).attr('id').charAt(3);//id(chk)의 idx 추출
+       totalPrice+=Number($('#price'+idx)[0].innerHTML);
+    }
+    $(".totalAll").text(totalPrice);
+}
+function changeListener(idx,ckTf){
+    if(ckTf) {//활성화라면,
+        $('.chkBox').eq(idx).addClass('chked');
+        $("select.resOpc").eq(idx).attr("disabled",false); //셀렉트 항목 활성화
+        totalPriceSet();
+    }else {
+        $('.chkBox').eq(idx).removeClass('chked');
+        $('select.resOpc').eq(idx).val("1").trigger('change');
+        $("select.resOpc").eq(idx).attr("disabled",true); //셀렉트 항목 비활성화
+    }
 }
 function likeOff(likeObj) {
     $.post({
@@ -38,16 +134,16 @@ function likeOff(likeObj) {
             $('#card'+likeObj.bno).remove();
             delete likeObj.bno;//초기화
         }
-    })
+    });
 }
 function initSide() {
     $('.side button').eq(1).addClass("side_select");
     $('.side').css({'position':'fixed','float':'none'});
 }
-function printList(list) {
+function printList() {
     $('.card').remove();
-    $.each(list,function(key,value){
-    $('.content').append(
+    $.each(likedBsList,function(key,value){
+        $('.content').append(
                 '<div class="card" id="card'+value.bno+'">'+
                 '<div class="bsTagLeft">'+
                     '<div class="tagTop">'+
@@ -70,43 +166,72 @@ function printList(list) {
                     '</div>'+
                 '</div>'+
                 '<div class="bsTagRight">'+
-                    '<button>예약하기</button>'+
+                    '<button id="rsvBtn'+value.bno+'">예약하기</button>'+
                 '</div>'+
             '</div>');
     });
 }
-function initModal() {
-    /* 모달 생성 */
-    $("#modal_close").click(function(){ //모달 X버튼 누를 때
-        modalClose();//모달 닫기
+function initModal() {//모달 이벤트 관리
+    $("#modal_close").click(function(){//모달 닫기
+        modalClose();
     });
-    $("#closeBtn").click(function(event){ //모달 돌아가기 누를 때
-        event.preventDefault();
-        modalClose();//모달 닫기
+    $("#closeBtn").click(function() {//모달 닫기
+        modalClose();
     });
-    $('#ok').click(function() {
-        operate();
+    $('#comBtn').click(function() {//결제 버튼이 눌렸다면
+        var totalPrice=Number($('.totalAll')[0].innerHTML);
+        if(totalPrice == 0){
+            alert("지불할 금액이없습니다. 옵션을 선택해주세요.")
+        }else {
+            requestPay(totalPrice);
+        }
+    });
+    $("#mask").click(function(){//마스크 쪽이 눌렸다면
+        modalClose();
     });
 }
-function openModal(button) {
+function openModal() {
     $("#mask").show();
     $('#modal_container').show();
-    if(button=='cancel'){//취소버튼이 눌려서 모달이 열렸다면
-        $('#modal_foot p')[0].innerHTML='정말 취소하시겠습니까?';
-        $('#ok')[0].innerHTML='취소하기';
-    }else{//완료버튼이 눌려서 모달이 열렸다면
-        $('#modal_foot p')[0].innerHTML='정말 완료하시겠습니까?';
-        $('#ok')[0].innerHTML='완료하기';
-    }
 }
-function operate() {
-    if($('#ok')[0].innerHTML=='취소하기'){//버튼이 취소하기라면,
-        cancel();
-    }else {//버튼이 완료하기라면
-        complete();
-    }
+function requestPay() {
+    console.log('결제api');
+    //결제 api 연동한 fn 입력할 예정
 }
 function modalClose() {
     $('#modal_container').hide();
     $("#mask").hide();
 }
+function requestPay(totalPrice) {
+    //결제관련 api 기능
+     IMP.request_pay({
+           pg : 'kakao', // 결제방식
+           pay_method : 'card',   // 결제 수단
+           merchant_uid : 'merchant_' + new Date().getTime(),
+           name : '주문명: 결제 테스트',   // order 테이블에 들어갈 주문명 혹은 주문 번호
+           amount : totalPrice,   // 결제 금액
+           buyer_email : 'test',   // 구매자 email
+           buyer_name :  'test',   // 구매자 이름
+           buyer_tel :  'test',   // 구매자 전화번호
+           buyer_addr :  'test',   // 구매자 주소
+           buyer_postcode :  'test',   // 구매자 우편번호
+           m_redirect_url : '/khx/payEnd.action'   // 결제 완료 후 보낼 컨트롤러의 메소드명
+       }, function(rsp) {
+       if ( rsp.success ) { // 성공시
+          
+          var msg = '결제가 완료되었습니다.'
+          msg += '고유ID : ' + rsp.imp_uid
+          msg += '상점 거래ID : ' + rsp.merchant_uid
+          msg += '결제 금액 : ' + rsp.paid_amount
+          msg += '메일 : ' + rsp.buyer_email
+          msg += '이름 : ' + rsp.buyer_name
+          msg += '우편번호 : ' + rsp.buyer_postcode
+          alert(msg)
+          modalClose();
+          //알림과 insert 들어갈 예정
+       } else { // 실패시
+          var msg = '결제에 실패하였습니다.';
+          msg += '에러내용 : ' + rsp.error_msg;
+       }
+    })
+ }
