@@ -171,7 +171,12 @@ public class UserServiceImpl implements UserService {
 		System.out.println("가입완료 서비스옴");
 		return userDao.joinCfm(vo);
 	}
-
+    // PW 변경
+    @Override
+    public void updatePw(AccountVO vo) {
+        System.out.println("pw변경 서비스옴");
+        userDao.updatePw(vo);
+    }
 	@Override
 	public PersonVO getPerson(int mno) {
 		return userDao.getPerson(mno);

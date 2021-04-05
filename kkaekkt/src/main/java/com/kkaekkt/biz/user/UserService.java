@@ -31,4 +31,5 @@ public interface UserService {
 	public PersonVO getPerson(int mno);
 	public BusinessVO getBusiness(BusinessVO vo);
 	public List<LaundryVO> getLaundryList(int bno);
+    public void updatePw(AccountVO vo);
 }

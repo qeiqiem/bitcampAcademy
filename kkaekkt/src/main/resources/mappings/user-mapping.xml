@@ -204,6 +204,11 @@
 		LEFT OUTER JOIN business b on ac.mno=b.mno
 		WHERE ac.id=#{id};
 	</select>
+	    <update id="updatePw">
+        UPDATE account 
+        SET password=#{password} 
+        WHERE id=#{id};
+    </update>
 	<select id="idchk" resultType="int">
 		SELECT count(*)
 		FROM account
