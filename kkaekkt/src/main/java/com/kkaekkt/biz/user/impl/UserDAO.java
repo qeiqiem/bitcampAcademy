@@ -46,9 +46,13 @@ public class UserDAO {
 		mybatis.update("UserDAO.updateBs", vo);
 	}
 
-	public void deleteUser(AccountVO vo) {
+	public void deleteUser(PersonVO vo) {
 		System.out.println("mybatis로 기능처리 - 회원탈퇴");
-		mybatis.delete("UserDAO.deleteUser", vo);
+		mybatis.delete("UserDAO.deletePs", vo);
+	}
+
+	public void deleteUser(BusinessVO vo) {
+		mybatis.delete("UserDAO.deleteBs", vo);
 	}
 
 	public List<BusinessVO> getLikedBs(int mno) {
@@ -77,25 +81,23 @@ public class UserDAO {
 		}
 
 	// laundry
-	public List<LaundryVO> getLaundry(BusinessVO vo) {
-		// System.out.println("dao : " + mybatis.selectList("UserDAO.getcomspecList",vo)
-		// );
-		return mybatis.selectList("UserDAO.getLaundryList", vo);
+	public List<LaundryVO> getLaundry(int bno) {
+		return mybatis.selectList("UserDAO.getLaundryList", bno);
 	}
 
 	// equipment
-	public List<EquipmentVO> getEquipment(BusinessVO vo) {
-		return mybatis.selectList("UserDAO.getEquipmentList", vo);
+	public List<EquipmentVO> getEquipment(int bno) {
+		return mybatis.selectList("UserDAO.getEquipmentList", bno);
 	}
 
 	// etc
-	public List<EtcVO> getEtc(BusinessVO vo) {
-		return mybatis.selectList("UserDAO.getEtc", vo);
+	public List<EtcVO> getEtc(int bno) {
+		return mybatis.selectList("UserDAO.getEtc", bno);
 	}
 
 	// schedule
-	public List<ScheduleVO> getSchedule(BusinessVO vo) {
-		return mybatis.selectList("UserDAO.getScheduleList", vo);
+	public List<ScheduleVO> getSchedule(int bno) {
+		return mybatis.selectList("UserDAO.getScheduleList", bno);
 	}
 
 	public void updateSpec(BusinessVO vo) {
@@ -139,16 +141,25 @@ public class UserDAO {
 	public double avgGradeBs(BusinessVO vo) {
 		return  mybatis.selectOne("UserDAO.avgGradeBs", vo);
 	}
+	public void updatePw(AccountVO vo) {
+		System.out.println("pw update");
+		mybatis.update("UserDAO.updatePw", vo);
+		System.out.println("pw 변경완료");
+	}
+
 	public AccountVO getUser(AccountVO vo) {
 		return mybatis.selectOne("UserDAO.getAccount",vo);
 	}
-	public PersonVO getPerson(PersonVO vo) {
-		return mybatis.selectOne("UserDAO.getPerson",vo);
+	public PersonVO getPerson(int mno) {
+		return mybatis.selectOne("UserDAO.getPerson",mno);
 	}
 	public BusinessVO getBusiness(BusinessVO vo) {
 		return mybatis.selectOne("UserDAO.getBusiness",vo);
 	}
-
+	// 매출관리
+	public List<LaundryVO> getSalse(int bno) {
+		return mybatis.selectList("UserDAO.getSalse", bno);
+	}	
 
 	
 }

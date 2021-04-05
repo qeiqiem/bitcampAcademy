@@ -9,7 +9,7 @@
         <title>Document</title>
         <link rel="stylesheet" href="/css/find.css">
         <script src="https://kit.fontawesome.com/2fc57dd2db.js" crossorigin="anonymous"></script>
-        <script src="/js/find.js"></script>
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     </head>
 
 
@@ -17,65 +17,64 @@
         <jsp:include page="/jsp/header0.jsp"></jsp:include>
 
         <div class="body_container">
-            <nav class="find_nav">
-                <!-- <ul>
-                <li id="id">아이디 찾기</li>
-                <li id="pw">비밀번호 찾기</li>
-            </ul> -->
+            <div class="wrapper_find">
+                <nav class="find_nav">
+                    <div id="nav_id" onclick="showID()">아이디 찾기</div>
+                    <div id="nav_pw" class="unselect" onclick="showPW()">비밀번호 찾기</div>
+                </nav>
 
-                <div class="id" onclick="showID()">아이디 찾기</div>
-                <div class="pw" onclick="showPW()">비밀번호 찾기</div>
+                <form action="/findId.do" method="POST">
+                    <div id="findID">
+                        <p>아이디와 비밀번호를 찾기 위해서는 이름, 회원정보에 등록된 이메일을 통해 본인인증을 받아야 합니다.</p>
+                        <div class="veri_btn id_box">
+                            <!-- <div class="veri_btn idBox" onclick="check()"> -->
+                            <!-- <i class="far fa-envelope"></i> -->
+                            <!-- <i class="fas fa-envelope"></i> -->
+                            <!-- 내 정보에 저장된 이메일로 찾기 -->
+                            <!-- <input type="button" id="veri" value="" /> -->
+                            <ul>
+                                <li>
+                                    <input id="name" type="text" name="name" placeholder="이름을 입력하세요."> <br>
+                                </li>
+                                <li>
+                                    <input id="email" type="text" name="email" placeholder="가입 시 등록한 이메일을 입력하세요."> <br>
+                                </li>
+                            </ul>
 
-            </nav>
-            <form action="/findId.do" method="POST" onsubmit="return check()">
-                <div id="findID">
-                    <p>아이디와 비밀번호를 찾기 위해서는 이름, 회원정보에 등록된 이메일을 통해 본인인증을 받아야 합니다.</p>
-                    <div class="veri_btn idBox">
-                        <!-- <div class="veri_btn idBox" onclick="check()"> -->
-                        <!-- <i class="far fa-envelope"></i> -->
-                        <!-- <i class="fas fa-envelope"></i> -->
-                        <!-- 내 정보에 저장된 이메일로 찾기 -->
-                        <!-- <input type="button" id="veri" value="" /> -->
-                        <ul>
-                            <li>
-                                <input id="inName" type="text" name="name" placeholder="이름을 입력하세요."> <br>
-                            </li>
-                            <li>
-                                <input id="inMail" type="text" name="email" placeholder="가입 시 등록한 이메일을 입력하세요."> <br>
-                            </li>
-                        </ul>
+                            <button type="submit" onclick="check();">다음</button>
+                        </div>
 
-                        <button type="submit">다음</button>
+
+                        <div class="mail">
+                            아이디 찾기 시 문제가 있나요? <a href="mailto:info@kkaekkt.com">고객센터</a>
+                        </div>
+                    </div>
+                </form>
+
+                <form action="/findPw.do" method="POST">
+                    <!-- <form action="/findPw.do" method="POST" onsubmit="return check()"> -->
+                    <div id="findPW" style="display: none;">
+                        <p>아이디와 비밀번호를 찾기 위해서는 이름, 회원정보에 등록된 이메일을 통해 본인인증을 받아야 합니다.
+                            <br>아이디가 기억나지 않는다면 아이디를 먼저 찾아주세요.
+                        </p>
+
+
+                        <!-- <form action=""> -->
+                        <div class="veri_btn pw_box">
+                            <input type="text" name="id" placeholder="비밀번호를 찾을 아이디를 입력하세요."> <br>
+                            <button type="submit">다음</button>
+                        </div>
+
+                        <!-- </form> -->
+                        <div class="mail">
+                            <br> 비밀번호 찾기 시 문제가 있나요? <a href="mailto:info@kkaekkt.com">고객센터</a>
+                        </div>
                     </div>
 
-
-                    <div class="mail">
-                        아이디 찾기 시 문제가 있나요? <a href="mailto:info@kkaekkt.com">고객센터</a>
-                    </div>
-                </div>
-            </form>
-
-            <form action="/findPw.do" method="POST" onsubmit="">
-                <!-- <form action="/findPw.do" method="POST" onsubmit="return check()"> -->
-                <div id="findPW">
-                    <p>아이디와 비밀번호를 찾기 위해서는 이름, 회원정보에 등록된 이메일을 통해 본인인증을 받아야 합니다.</p>
-
-
-                    <!-- <form action=""> -->
-                    <div class="veri_btn" style="text-align: center;">
-                        <input type="text" name="id" placeholder="비밀번호를 찾을 아이디를 입력하세요."> <br>
-                        <button type="submit">다음</button>
-                    </div>
-
-                    <!-- </form> -->
-                    <div class="mail">
-                        아이디가 기억나지 않는다면 아이디를 먼저 찾아주세요. <br> 비밀번호 찾기 시 문제가 있나요? <a href="mailto:info@kkaekkt.com">고객센터</a>
-                    </div>
-                </div>
-
-            </form>
+                </form>
+            </div>
         </div>
-
+        <script src="/js/find.js"></script>
     </body>
 
     </html>

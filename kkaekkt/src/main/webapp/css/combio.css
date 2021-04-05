@@ -10,10 +10,13 @@ hr {
     margin-top: 10px;
 }
 input {
+    box-sizing: border-box;
+    padding: 15px;
     width: 200px;
     height: 30px;
     margin-top: 10px;
     border: 1px solid var(--gray-color);
+    border-radius: 10px;
 }
 .content {
     float:left;
@@ -76,12 +79,14 @@ select::-ms-expand { /* for IE 11 */
     color: var(--text-gray);
 }
 .content button {
-    height: 35px;
-    width: 100px;
+    height: 30px;
+    width: 120px;
+    margin-left: 5px;
     background: var(--text-gray);
     border: none;
     color: #ffffff;
     padding: 5px;
+    border-radius: 10px;
 }
 .bizMemberInfo  table{
     padding-top: 0;

@@ -13,18 +13,7 @@ public class AccountVO {
     private int mtype;
     private int idchk;
     
-    // 테스트용
-    private int stno;
-    
-    
-    
-    public int getStno() {
-		return stno;
-	}
-	public void setStno(int stno) {
-		this.stno = stno;
-	}
-	public int getBno() {
+    public int getBno() {
 		return bno;
 	}
 	public void setBno(int bno) {
@@ -106,8 +95,7 @@ public class AccountVO {
 	public String toString() {
 		return "AccountVO [mno=" + mno + ", bno=" + bno + ", id=" + id + ", password=" + password + ", name=" + name
 				+ ", phone=" + phone + ", address=" + address + ", email=" + email + ", emailchk=" + emailchk
-				+ ", mtype=" + mtype + ", idchk=" + idchk + ", stno=" + stno + "]";
+				+ ", mtype=" + mtype + ", idchk=" + idchk + "]";
 	}
-
 	
 }

@@ -27,29 +27,32 @@ font-size: 14px;
 color: var(--text-gray);
 }
 #salesManage_title {
-    display: inline-block;
-    color: var(--black-color)
+    font-size:17px;
+    font-weight: bold;
+    color: var(--text-gray);
 }
 </style>
 
-<script>
-$(document).ready(function() {
-    $(".side_sub").hide();
-    $('.side button').eq(3).addClass("side_select");
-});
-</script>
+
 </head>
 <body>
-	<jsp:include page="/jsp/header0.jsp"></jsp:include>
+	<jsp:include page="/jsp/header2.jsp"></jsp:include>
 	<div class="body_container">
 		<jsp:include page="sidebar_bs.jsp"></jsp:include>
 		<div class="content">
-			<p id="salesManage_title">매출관리</p>
             <hr>
 			<jsp:include page="daygrid-views.html"></jsp:include>
 
 		</div>
 	</div>
-	
+	<script>
+		$(document).ready(function () {
+			$(".side_sub").hide();
+			$('.side button').eq(3).addClass("side_select");
+		});
+		var pageObj={//세션에서 정보를 받아오는건 독립된 js파일에서 불가능, jsp 내에서만 가능하기 때문에 여기서 값을 받아준다.
+                bno:'${sessionScope.user.bno}'//더미번호 (추후 세션에서 받아올 예정)
+            };
+	</script>
 </body>
 </html>
