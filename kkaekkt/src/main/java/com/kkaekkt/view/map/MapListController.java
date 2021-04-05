@@ -88,7 +88,7 @@ public class MapListController {
 	  @RequestMapping(value="/respay.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
 	  public String respay(ResPayVO vo) {
 			System.out.println("예약관련정보 : "+vo); 
-			return "/jsp/searchMap/laundryMap.jsp";
+			return "/jsp/searchMap/map.jsp";
 		}
 		
 	 
