@@ -190,8 +190,8 @@ public class UserServiceImpl implements UserService {
 		return userDao.getLaundry(bno);
 	}
     @Override
-    public List<LaundryVO> getSalse(int bno) {        // 하루 매출 
-        return userDao.getSalse(bno);
+    public List<LaundryVO> getSales(int bno) {        // 하루 매출 
+        return userDao.getSales(bno);
     }
 
 

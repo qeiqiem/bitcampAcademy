@@ -153,9 +153,8 @@ public class UserDAO {
 		return mybatis.selectOne("UserDAO.getBusiness",vo);
 	}
 	// 매출관리
-	public List<LaundryVO> getSalse(int bno) {
-		return mybatis.selectList("UserDAO.getSalse", bno);
-	}	
-
+	public List<LaundryVO> getSales(int bno) {
+		return mybatis.selectList("UserDAO.getSales", bno);
+	}
 	
 }

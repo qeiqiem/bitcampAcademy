@@ -373,11 +373,11 @@ public class UserController {
 	}
 	
     // 매출관리
-    @RequestMapping(value = "/selectSalse.do", method = RequestMethod.POST, produces = "application/text;charset=utf-8")
+	@RequestMapping(value = "/selectSalse.do", method = RequestMethod.POST, produces = "application/text;charset=utf-8")
     @ResponseBody
     public String selectSalse(int bno) {
         Gson gson = new Gson();
-        String sales = gson.toJson(userService.getSalse(bno));
+        String sales = gson.toJson(userService.getSales(bno));
         System.out.println("test:" + sales);
 
         return sales;

@@ -225,12 +225,8 @@
 		WHERE id=#{id};
 	</select>
 	<!-- 매출관리-->
-    <select id="getSalse" resultType="laundry">
-        SELECT date_format(rdate, '%Y-%m-%d') rsvDate, sum(price) price  
-        FROM reservation r, rsv_payment rs 
-        WHERE r.rno=rs.rno 
-        AND bno=#{bno} 
-        group by rsvDate;
+    <select id="getSales" resultType="laundry">
+        
     </select>
 </mapper>
 
