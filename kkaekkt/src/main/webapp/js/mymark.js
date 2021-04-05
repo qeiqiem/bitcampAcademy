@@ -1,57 +1,31 @@
 $(document).ready(function() {
-    initEvent();
+    initBodyEvent();
     initSide();
-    ajax(pageObj);
+    initDataSet();
+    // ajax();
 });
-function ajax(pageObj) { //ajax로 리스트 받아오기
+function initDataSet() {
+    console.log('데이터 셋');
+    var userData=JSON.parse(userDetail);
+    var likedBs=JSON.parse(likedBsList);
+    console.log(userData.phone);
+    console.log(likedBs[0].bname);
+}
+function ajax() { //ajax로 리스트 받아오기
     console.log('ajax 함수 진입');
     $.post({
         url:"/getLikedBs.do",
-        data:pageObj,
+        data:{mno:alertObj.sender},
         success: function(data) {
-        	console.log(data);
-            var liked=JSON.parse(data);
-            var list=liked.bsList;
+            var list=JSON.parse(data);
             printList(list);
-            initPageObj(liked);
-            initPageBtn();
             console.log('ajax 완료');
         }
     });
 }
-function initEvent() {
-	$('.page_next').click(function() {
-        if(!$(this).hasClass('no')) {
-            pageObj.currentPageNum+=1;
-            ajax(pageObj);
-        }
-    });
-    $('.page_prev').click(function() {
-        if(!$(this).hasClass('no')) {
-            pageObj.currentPageNum-=1;
-            ajax(pageObj);
-        }
-    });
-    $('.page_prevBlock').click(function() {
-        if(!$(this).hasClass('no')) {
-            pageObj.currentPageNum=pageObj.blockFirstPageNum-1;
-            ajax(pageObj);
-        }
-    });
-    $('.page_nextBlock').click(function() {
-        if(!$(this).hasClass('no')) {
-            pageObj.currentPageNum=pageObj.blockLastPageNum+1;
-            ajax(pageObj);
-        }
-    });
-    $('.page_btn').on("click",".page_list",function() {
-        if(pageObj.currentPageNum!=JSON.parse($(this).html())) {
-            pageObj.currentPageNum=JSON.parse($(this).html());
-            ajax(pageObj);
-        }
-    });
-    $('.content').on('click','i.fa-heart',function() {
-        var bno=JSON.parse($('.bsname span')[$(this).attr("value")].innerHTML.replace('#',''));
+function initBodyEvent() {
+    $('.content').on('click','.like i.fa-heart',function() {
+        var bno=Number($(this).attr("value"));
         likeObj.bno=bno;
         likeOff(likeObj);
     })
@@ -61,78 +35,78 @@ function likeOff(likeObj) {
         url:"/likeOff.do",
         data:likeObj,
         success:function() {
-            console.log("삭제 성공?")
-            ajax(pageObj);
+            $('#card'+likeObj.bno).remove();
+            delete likeObj.bno;//초기화
         }
     })
 }
 function initSide() {
     $('.side button').eq(1).addClass("side_select");
-}
-function initPageBtn() {
-    if(pageObj.isNextExist) {
-        $('.page_next').removeClass('no');
-    }else {
-        $('.page_next').addClass('no');
-    }
-    if(pageObj.isNextBlockExist) {
-        $('.page_nextBlock').removeClass('no');
-    }else {
-        $('.page_nextBlock').addClass('no');
-    }
-    if(pageObj.isPrevExist) {
-        $('.page_prev').removeClass('no');
-    }else {
-        $('.page_prev').addClass('no');
-    }
-    if(pageObj.isPrevBlockExist) {
-        $('.page_prevBlock').removeClass('no');
-    }else {
-        $('.page_prevBlock').addClass('no');
-    }
-    $('.page_btn .page_list').remove(); //페이지 리스트 초기화
-    for(var i=pageObj.blockLastPageNum;i>=pageObj.blockFirstPageNum;i--) {
-        if(i==pageObj.currentPageNum) {
-            $("<li class='page_list curPage'>"+i+"</li>").insertAfter($('.page_prev')).trigger("create");
-        } else {
-            $("<li class='page_list'>"+i+"</li>").insertAfter($('.page_prev'));
-        }
-    }
-}
-function initPageObj(data) {
-    pageObj.blockLastPageNum=data.blockLastPageNum;
-    pageObj.blockFirstPageNum=data.blockFirstPageNum;
-    pageObj.isNextBlockExist=data.isNextBlockExist;
-    pageObj.isNextExist=data.isNextExist;
-    pageObj.isPrevBlockExist=data.isPrevBlockExist;
-    pageObj.isPrevExist=data.isPrevExist;
+    $('.side').css({'position':'fixed','float':'none'});
 }
 function printList(list) {
     $('.card').remove();
     $.each(list,function(key,value){
-    $('.page_btn_container').before(
-        '<div class="card">'+
-            '<div class="info">'+
-                '<p class="bsname">'+value.bname+'<span style="font-size:14px">#'+value.bno+'</span></p>'+
-                '<table>'+
-                    '<tr>'+
-                        '<td><span>'+value.eval+'<i class="fas fa-star"></i> </span>'+value.eCount+'건 | 리뷰 '+value.commCount+'</td>'+
-                    '</tr>'+
-                    '<tr>'+
-                        '<td class="bsaddress">'+value.address+'</td>'+
-                    '</tr>'+
-                    // '<tr>'+
-                    //     '<td>(지번)<span>대흥로 330-2</span></td>'+
-                    // '</tr>'+
-                    '<tr>'+
-                        '<td><span class="bsschedule">영업시간</span><span>대표스케쥴</span></td>'+
-                    '</tr>'+
-                    '<tr>'+
-                        '<td class="bsphone">'+value.phone+'<button class="btn_detail">상세보기</button></td>'+
-                    '</tr>'+
-                '</table>'+
-            '</div>'+
-            '<button class="btn_mark"><i class="fas fa-heart" value='+key+'></i></button>'+
-        '</div>');
+    $('.content').append(
+                '<div class="card" id="card'+value.bno+'">'+
+                '<div class="bsTagLeft">'+
+                    '<div class="tagTop">'+
+                        '<div class="like">'+
+                            '<i class="fas fa-heart like" value='+value.bno+'></i>'+
+                        '</div>'+
+                        '<p>'+value.bname+'</p>'+
+                    '</div>'+
+                    '<div class="tagBottom">'+
+                        '<i class="fas fa-map-marker-alt"></i>'+
+                        '<span class="address">'+value.address+'</span>'+
+                        '<i class="fas fa-phone-alt"></i>'+
+                        '<span class="phone">'+value.phone+'</span>'+
+                        '<i class="fas fa-star"></i>'+
+                        '평점<span class="eval">'+value.eval+'</span>'+
+                        '<i class="fas fa-user-edit"></i>'+
+                        '리뷰<span class="reviewCount">'+value.count+'</span>'+
+                        '<i class="fas fa-heart"></i>'+
+                        '좋아요<span class="likeCount">'+value.likedNum+'</span>'+
+                    '</div>'+
+                '</div>'+
+                '<div class="bsTagRight">'+
+                    '<button>예약하기</button>'+
+                '</div>'+
+            '</div>');
     });
+}
+function initModal() {
+    /* 모달 생성 */
+    $("#modal_close").click(function(){ //모달 X버튼 누를 때
+        modalClose();//모달 닫기
+    });
+    $("#closeBtn").click(function(event){ //모달 돌아가기 누를 때
+        event.preventDefault();
+        modalClose();//모달 닫기
+    });
+    $('#ok').click(function() {
+        operate();
+    });
+}
+function openModal(button) {
+    $("#mask").show();
+    $('#modal_container').show();
+    if(button=='cancel'){//취소버튼이 눌려서 모달이 열렸다면
+        $('#modal_foot p')[0].innerHTML='정말 취소하시겠습니까?';
+        $('#ok')[0].innerHTML='취소하기';
+    }else{//완료버튼이 눌려서 모달이 열렸다면
+        $('#modal_foot p')[0].innerHTML='정말 완료하시겠습니까?';
+        $('#ok')[0].innerHTML='완료하기';
+    }
+}
+function operate() {
+    if($('#ok')[0].innerHTML=='취소하기'){//버튼이 취소하기라면,
+        cancel();
+    }else {//버튼이 완료하기라면
+        complete();
+    }
+}
+function modalClose() {
+    $('#modal_container').hide();
+    $("#mask").hide();
 }

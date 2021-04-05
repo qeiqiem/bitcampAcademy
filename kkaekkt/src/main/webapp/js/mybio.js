@@ -12,7 +12,6 @@ let formatemailNum = 1;
 let formatAccNum = 1; 
 
 const regPw = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
-const regPhone1 = /^[0-9]{3}$/;
 const regPhone = /^[0-9]+$/;
 const regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
 const regAccount=/^[0-9,\-]{3,6}\-[0-9,\-]{2,6}\-[0-9,\-]{3,6}(\-[0-9]{1,3})?$/;
@@ -58,8 +57,6 @@ window.onload = function () {
         //수정완료 돌아가기 버튼 활성화, 인풋창 활성화
         document.getElementById("btn_mybio").style.display = "none";
         document.getElementById("btn_mybioClick").style.display = "block";
-        console.log(inputli);
-        console.log(buttonli);
         //인풋창 활성화
         for (let i = 0; i < inputli.length; i++) {
             if (i != 3 && i != 4 && i != 12 && i != 13 && i != 14 && i != 16) {
@@ -88,6 +85,10 @@ window.onload = function () {
         for(let i=0; i< labelli.length; i++){
             labelli[i].innerText="";
         }
+        timeStop();
+        $('#timeout').hide();
+        $(".mail_check_input").val("");
+        $(".mail_check_input").attr("id", "mail_check_input_box_false");
         
     }
 
@@ -140,14 +141,14 @@ window.onload = function () {
     })
     // 새 비밀번호, 새 비밀번호 확인 인풋 값 같은지 비교 => 비밀법호 업데이트 
     $("#btn_updatepwd").click(function undatePwd() {
-        if ($('#pwd').val == $('#newpwd').val && formatnewpw == 1) {
-            console.log($('#pwd').val + $('#newpwd') + formatnewpw);
+        if ($('#pwd').val() == $('#newpwd').val() && formatnewpw == 1) {
+            console.log($('#pwd').val() + $('#newpwd').val() + formatnewpw);
             $.ajax({
                 url: '/updatePspwd.do',
                 type: 'post',
                 data: {
-                    mno: $('#mno').val(),
-                    id: $("input[name='id']").val(),
+                    mno: pageObj["mno"],
+                    id: pageObj["id"],
                     password: $('#newpwd').val()
                 }, success: function(data){
                     let password = JSON.parse(data);
@@ -177,20 +178,18 @@ window.onload = function () {
                 = " 변경이 완료되었습니다, 이후 프로필 수정시, 변경된 비밀번호로 입력해주세요.";
             document.getElementById("match").style.color = "rgba(254, 54, 54, 0.55)";
 
-        }
-        else {
-            console.log($("if문탈출"+'#pwd').val + $('#newpwd') + formatnewpw);
-        }
-        if (formatnewpw == 0) {
-            document.getElementById("match").innerText = "입력형식을 확인하세요";
-            $("#pwd").val("");
-            $("#pnewpwdwd").val("");
-        }
-        if ($('#pwd').val != $('#newpwd').val) {
-            document.getElementById("match").innerText = " 새 비밀번호와 일치하지 않습니다.";
-            $("#pnewpwdwd").val("");
-        }
+        } else {
+            console.log("if문탈출" + $('#pwd').val() + $('#newpwd').val() + formatnewpw);
 
+            if (formatnewpw == 0) {
+                document.getElementById("match").innerText = "입력형식을 확인하세요";
+                $("#pwd").val("");
+                $("#newpwd").val("");
+            } else if ($('#pwd').val() != $('#newpwd').val()) {
+                document.getElementById("match").innerText = " 새 비밀번호와 일치하지 않습니다.";
+                $("#newpwd").val("");
+            }
+        }
     });
     // 연락처 입력형식 확인
     document.getElementById("phone1").addEventListener('keyup', () => {
@@ -263,9 +262,14 @@ window.onload = function () {
     document.getElementById("btn_checkemail").onclick = function(){
         console.log(formatemail);
         if(formatemail == 1){
-            emailApi();
+            //emailApi();
+            if(document.getElementById("email").value != pageObj["email"]){
+                emailDuplChk();
+            } else{
+                alert("기존이메일과 동일합니다.");
+            }
         } else {
-            alert("형식에 맞게 입력")
+            alert("양식과 맞지 않습니다.")
         }
     };
     /* 인증번호 비교 */
@@ -281,7 +285,7 @@ window.onload = function () {
 
 
 function initSide() {
-    $('.side button').eq(2).addClass("side_select");
+    $('.side button').eq(3).addClass("side_select");
 }
  // input button 초기값 비활성화  
  function defaultDisable(){
@@ -312,10 +316,31 @@ function inputInfo(){
     document.getElementById('detailAddress').value = addressSplit[2];
     document.getElementById('extraAddress').value = addressSplit[3];
 }
+// 인증번호 이메일 전송
+function emailDuplChk() {
+    var email = $(".mail_input").val(); // 입력한 이메일
+  
+    $.ajax({
+      url: "/findemail.do",
+      type: "POST",
+      data: {
+        email: $("#email").val(),
+      },
+      success: function (data) {
+        console.log(data);
+        var key = JSON.parse(data);
+        if (key.emailchk != 0) {
+          alert("해당 이메일로 가입된 아이디가 존재합니다.");
+          return false;
+        } else if (key.emailchk == 0) {
+          emailApi();
+        } 
+      }
+    });
+  }
 
+// 인증번호 이메일 전송 
 function emailApi(){
-    /* 인증번호 이메일 전송 */
-    
        console.log("이메일인증 클릭");
        var email = $(".mail_input").val();        // 입력한 이메일
        
@@ -336,7 +361,7 @@ function emailApi(){
        });
        
 }    
-   
+ // 인증코드 맞는지 확인 (인증하기 버튼 클릭시 실행)  
 function checkemailNum(){
    var inputCode = $(".mail_check_input").val();        // 입력코드    
    if(regMailCode.test(inputCode)){
@@ -345,13 +370,11 @@ function checkemailNum(){
            formatemailNum = 1;
            alert('메일 인증이 완료되었습니다.');
            $('#timeout').hide();
-           $(".mail_check_input").val("");
            $("#mail_check").attr("disabled",true);
+           $(".mail_check_input").val("인증이 완료되었습니다.");
            $(".mail_check_input").attr("disabled",true);
            $(".mail_check_input").attr("id", "mail_check_input_box_false");
            doncument.getElementById("btn_checkemail").disabled = true;
-           $("#checkemail").val("인증되었습니다.");
-      
        } else if($('#timeout').text() != "0:00"){//시간이 남았는데 코드가 일치하지 않는다면
            formatemailNum = 0;
            alert('인증번호가 일치하지 않습니다.');
@@ -407,7 +430,11 @@ function submitMybio() {
         return false;
     }
     if ($("input[name='email']").val() == "" || formatemail != 1 || formatemailNum !=1) {
-        alert("이메일을 확인하세요.");
+        if(formatemailNum !=1){
+            alert("이메일인증은 필수입니다.")
+        } else{
+            alert("이메일을 확인하세요.");
+        }
         $("input[name='email']").focus();
         console.log(formatemail);
         return false;

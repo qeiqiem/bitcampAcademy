@@ -1,12 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/css/mymark.css">
+<link rel="stylesheet" href="../../css/mymark.css">
 </head>
 <body>
 	<jsp:include page="/jsp/header1.jsp"></jsp:include>
@@ -19,7 +16,9 @@
     </div>
     <div id="modal_container">
         <button id="modal_close">x</button>
-            <p class="modal_Header">예약 하기</p>
+            <div id="modal_Header">
+                <p>예약하기</p>
+            </div>
             <!-- <p>취급품목</p> -->
 	        <hr>
 	        <table id="single_option">
@@ -142,38 +141,30 @@
                     <td colspan="2" class="totalAll">2000</td>
                 </tr>
             </table>
-            <div id="modal_footer">
-                <p class="modal_Header">결제 정보</p>
-                <hr>
-                <div class="userInfo">
-                    <p>예약자: <span id="mname">나애교</span></p>
-                    <p>연락처: <span id="phone">010-9871-6512</span></p>
-                    <p>주소: <span id="address">서울시 용산구 두텁바위로 38가길</span></p>
-                </div>
-                <div class="bsInfo">
-                    <p id="bname">예약 업체: <span>테스트클리닝</span></p>
-                    <p id="dDay">마감 예정일자: <span>2021.04.09</span></p>
-                </div>
-                <div class="termsInfo">
-                    <p id="terms">개인정보 수집, 제공 &nbsp;</p>
-                    <input placeholder="개인정보 수집 동의">
-                    <input placeholder="개인정보 제공 동의">
-                    <p id="cancelTerms">취소/환불 규정</p>
-                    <p id="warning">(주문취소는 1시간 이내에 한하여 자동처리되며, 그 외 업체에 문의 후 처리될 수 있습니다.)</p>
-                    <p id="cancelInfo">예약 서비스 이용을 위한 개인정보 수집 및 제3자 제공, 취소/환불 규정을 확인하였으며 이에동의합니다.</p>
-                </div>
-                <div class="comBtnDiv">
-                    <button class="comBtn">결제하기</button>
-                </div>	
+            <p>결제 정보</p>
+            <hr>
+            <div class="userInfo">
+                <p>예약자 : <span>나애교</span></p>
+                   <p>연락처 : <span>010-9871-6512</span></p>
+                <p>이메일 : <span>testNa@kkaekkt.com</span></p>
             </div>
+            <div class="sellerInfo">
+               <p id="seller">판매자정보 &nbsp;</p>	
+                <p id="terms">개인정보 수집, 제공 &nbsp;</p>
+                <input placeholder="개인정보 수집 동의">
+                <input placeholder="개인정보 제공 동의">
+                <p id="cancelTerms">취소/환불 규정 <span>주문 1시간이내 취소가능</span></p>
+                <p>예약 서비스 이용을 위한 개인정보 수집 및 제3자 제공, 취소/환불 규정을 확인하였으며 이에동의합니다.</p>
+            </div>
+            <div class="comBtnDiv">
+             <button class="comBtn">결제하기</button>
+            </div>	
     </div>
-    <script>
-        var userDetail=`${userDetail}`;
-        var likedBsList=`${likedBs}`;
+    <!-- <script>
         var likeObj={
             mno:alertObj.sender
         }
-    </script>
-    <script src="/js/mymark.js"></script>
+    </script> -->
+    <!-- <script src="/js/mymark.js"></script> -->
 </body>
 </html>

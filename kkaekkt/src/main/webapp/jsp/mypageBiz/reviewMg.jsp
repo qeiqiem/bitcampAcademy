@@ -92,11 +92,10 @@
 	</div>
 	<script>
 		var pageObj = {
-			bno:${sessionScope.person.bno},
+			bno:${sessionScope.user.bno},
 			depth:1,
 			order:1
 		};
-		var username=`${sessionScope.person.bname}`;
 	</script>
 	<script src="/js/reviewMg.js"></script>
 </body>

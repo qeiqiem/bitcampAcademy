@@ -106,13 +106,14 @@ $ComTimer.prototype = {
 };
 var AuthTimer = new $ComTimer();
 
-// 이메일 입력형식 확인
+// 이메일 확인
 document.getElementById("btn_checkemail").onclick = function () {
-  console.log(formatemail);
-  if (formatemail == 1) {
+  if (email.value != "") {
+    // email 받아온 값이 없으면
     emailApi(); //ajax 실행
   } else {
-    alert("이메일을 정확하게 입력하세요.");
+    alert("앗! 오류가 발생했습니다. 처음부터 다시 시도해 주세요.");
+    return false;
   }
 };
 // 인증번호 이메일 전송
@@ -179,28 +180,7 @@ function checkemailNum() {
   }
 }
 
-function showID() {
-  document.getElementById("findID").style.display = "block";
-  document.getElementById("findPW").style.display = "none";
-}
-
-function showPW() {
-  document.getElementById("findID").style.display = "none";
-  document.getElementById("findPW").style.display = "block";
-}
-
-function check() {
-  const inName = document.getElementById("inName");
-  const inMail = document.getElementById("inMail");
-
-  if (inName.value == "" && inMail.value == "") {
-    alert("이름과 이메일을 모두 입력하세요.");
-    id.focus();
-    return false;
-  }
-}
-
-function submit() {
+function pw_submit() {
   $("#submit").on("click", function () {
     if ($("#pw").val() == "") {
       alert("비밀번호를 입력하세요.");

@@ -8,16 +8,8 @@ import com.kkaekkt.biz.comm.EtcVO;
 import com.kkaekkt.biz.comm.LaundryVO;
 import com.kkaekkt.biz.comm.ScheduleVO;
 
-@SuppressWarnings("serial")
 public class BusinessVO extends AccountVO{
-	private int bno;
-	//private int mno;
-	//private String id;
-	//private String password;
 	private String bname;
-//	private String address;
-//	private String phone;
-//	private String email;
 	private String comment;
 	private int bizType; //1. 일반 세탁소, 2. 코인 세탁소
 	private int bankNum;
@@ -32,45 +24,23 @@ public class BusinessVO extends AccountVO{
 	private String schedule;
 	private String etc; //부가서비스
 	private double eval; //평가
-	private int eCount; //평가 개수
-	private int commCount; //댓글 개수
-	private int likedNum;		// 찜당한 수
-	
+	private int count; //댓글 개수
+	private int likedNum; // 찜당한 수
+
 	private int state=1; // 테스트
 	
-	
-	
-	
-//	public String getId() {
-//		return id;
-//	}
-//	public void setId(String id) {
-//		this.id = id;
-//	}
-//	public String getPassword() {
-//		return password;
-//	}
-//	public void setPassword(String password) {
-//		this.password = password;
-//	}
-//	public int getMno() {
-//		return mno;
-//	}
-//	public void setMno(int mno) {
-//		this.mno = mno;
-//	}
-//	
 	public int getState() {
 		return state;
 	}
 	public void setState(int state) {
 		this.state = state;
 	}
-	public int getMcount() {
-		return eCount;
+	
+	public int getCount() {
+		return count;
 	}
-	public void setMcount(int mcount) {
-		this.eCount = mcount;
+	public void setCount(int count) {
+		this.count = count;
 	}
 	public List<CommVO> getCommList() {
 		return commList;
@@ -102,12 +72,7 @@ public class BusinessVO extends AccountVO{
 	public void setEquipment(String equipment) {
 		this.equipment = equipment;
 	}
-	public int getBno() {
-		return bno;
-	}
-	public void setBno(int bno) {
-		this.bno = bno;
-	}
+
 	public String getBname() {
 		return bname;
 	}
@@ -169,18 +134,6 @@ public class BusinessVO extends AccountVO{
 	public void setEval(double eval) {
 		this.eval = eval;
 	}
-	public int geteCount() {
-		return eCount;
-	}
-	public void seteCount(int eCount) {
-		this.eCount = eCount;
-	}
-	public int getCommCount() {
-		return commCount;
-	}
-	public void setCommCount(int commCount) {
-		this.commCount = commCount;
-	}
 	public int getLikedNum() {
 		return likedNum;
 	}
@@ -189,12 +142,11 @@ public class BusinessVO extends AccountVO{
 	}
 	@Override
 	public String toString() {
-		return "BusinessVO [bno=" + bno + ", bname=" + bname + ", comment=" + comment + ", bizType=" + bizType
-				+ ", bankNum=" + bankNum + ", bankAccountNum=" + bankAccountNum + ", scheduleList=" + scheduleList
-				+ ", equipmentList=" + equipmentList + ", laundryList=" + laundryList + ", etcList=" + etcList
-				+ ", commList=" + commList + ", equipment=" + equipment + ", laundry=" + laundry + ", schedule="
-				+ schedule + ", etc=" + etc + ", eval=" + eval + ", eCount=" + eCount + ", commCount=" + commCount
-				+ ", likedNum=" + likedNum + ", state=" + state + "]";
+		return "BusinessVO [bname=" + bname + ", comment=" + comment + ", bizType=" + bizType + ", bankNum=" + bankNum
+				+ ", bankAccountNum=" + bankAccountNum + ", scheduleList=" + scheduleList + ", equipmentList="
+				+ equipmentList + ", laundryList=" + laundryList + ", etcList=" + etcList + ", commList=" + commList
+				+ ", equipment=" + equipment + ", laundry=" + laundry + ", schedule=" + schedule + ", etc=" + etc
+				+ ", eval=" + eval + ", count=" + count + ", likedNum=" + likedNum + ", state=" + state + "]";
 	}
 	
 

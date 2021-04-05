@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="reservationDAO">
+	<select id="getAno" resultType="_int"><!-- 등록한 알림의 번호 가져오기 -->
+		SELECT MAX(ano) FROM alert WHERE sender=#{sender};
+	</select>
 	<update id="updateAlert">
 		UPDATE alert SET state=2 WHERE ano=#{ano};
 	</update>
@@ -120,13 +123,7 @@
 			VALUES (#{mno},#{bno},#{content},#{depth},#{rsvNum},NOW(),#{orderNum},#{eval});
 		</if>
 	</insert>
-	<insert id="likeOn">
-		INSERT INTO liked VALUES ((SELECT bno FROM reservation WHERE rno=#{rsvNum}),(SELECT mno FROM reservation WHERE rno=#{rsvNum}));	
-	</insert>
-	<delete id="likeOff">
-		DELETE FROM liked WHERE bno=(SELECT bno FROM reservation WHERE rno=#{rsvNum}) AND mno=(SELECT mno FROM reservation WHERE rno=#{rsvNum});
-	</delete>
-	<select id="checkLiked" resultType="_int">
+	<select id="checkLiked" resultType="_int"><!-- 좋아요 개수가 1이면 체크된 것, 0이면 되지 않은 것 -->
 		SELECT COUNT(l.bno) FROM liked l,(SELECT mno,bno FROM reservation WHERE rno=#{rsvNum}) r WHERE l.mno=r.mno AND l.bno=r.bno;
 	</select>
 	<update id="cancelRsv"><!-- 예약번호 단위 주문취소 -->
@@ -156,7 +153,7 @@
 			AND lno=(SELECT lno FROM laundry_type WHERE lname=#{laundry});	
 	</update>
 	<select id="getRsvListPs" resultType="reservation"> <!-- 일반회원 예약리스트 출력 -->	
-		SELECT r.rno rsvNum,r.bno,date_format(rdate,'%Y.%m.%d, %r') rsvDate,bname,phone,
+		SELECT r.rno rsvNum,b.mno,r.bno,date_format(rdate,'%Y.%m.%d, %r') rsvDate,bname,phone,
 		<if test="state==1">
 		<![CDATA[	TIMESTAMPDIFF(HOUR,rdate,NOW())<1 timeOut]]>
 		</if>
@@ -215,7 +212,7 @@
 				LIMIT #{rowStartNum},#{POSTS_PER_PAGE};
 		</if>
 		<if test="listType==4"> <!-- 업체회원 완료목록 출력 -->
-			SELECT r.rno rsvNum,r.mno,date_format(rdate,'%Y.%m.%d, %T') rsvdate,mname,dDate,stname state,DATEDIFF(ddate,NOW()) dDay 
+			SELECT r.rno rsvNum,r.mno,date_format(rdate,'%Y.%m.%d, %T') rsvdate,mname,date_format(dDate,'%Y.%m.%d, %T')dDate,stname state,DATEDIFF(ddate,NOW()) dDay 
 			FROM member m,reservation r,state s 
 			<where> 
 			r.mno=m.mno AND s.stno=r.stno AND bno=#{bno} 
@@ -239,7 +236,7 @@
 			ORDER BY orderNum DESC;
 	</select>
 	<select id="getLaundry" resultType="laundry"> <!-- 상태가 표시된 품목 리스트 출력 -->
-			SELECT lname laundry, cnt count, price price,stname state 
+			SELECT lname laundry, cnt count, price,stname state 
 			FROM reservation r, rsv_laundry r_l, business b, bsn_laundry b_l, laundry_type lt,state s
 			WHERE r.rno=r_l.rno AND r.bno=b.bno AND b.bno=b_l.bno 
 			AND lt.lno=r_l.lno AND b_l.lno=r_l.lno AND r_l.stno=s.stno

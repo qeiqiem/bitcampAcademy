@@ -1,7 +1,14 @@
 .body_container {
-  padding: 200px;
+  /* padding: 200px; */
+  width: 100%;
+  margin: auto;
+}
+.wrapper_find {
+  margin-left: 400px;
+  margin-top: 150px;
 }
 
+/* 아이디 찾기, 비번찾기 */
 .find_nav div {
   display: inline-block;
   border-bottom: 4px solid;
@@ -9,16 +16,17 @@
   margin-left: -5px;
   font-size: 20px;
   font-weight: bolder;
+  /* color: var(--gray-color); */
 }
 
 input {
-  width: 200px;
-  padding: 10px;
+  width: 250px;
+  padding: 12px;
   border: 0;
   border: 1px solid var(--gray-color);
   border-bottom: 1px solid var(--gray-color);
   border-radius: 5px;
-  margin: 0 0 25px;
+  margin: 0 0 20px;
 }
 
 button {
@@ -54,9 +62,14 @@ i {
   text-align: center;
 }
 
-.idBox {
+.id_box {
   height: 260px;
-  padding: 30px;
+  padding: 22px;
+}
+.pw_box {
+  height: 260px;
+  padding: 74px;
+  text-align: center;
 }
 
 .mail {
@@ -70,10 +83,37 @@ i {
   text-underline-position: under;
 }
 
-.pw {
+/* .pw {
   color: var(--gray-color);
-}
-
+} */
+/* 
 #findPW {
   display: none;
+} */
+
+label {
+  font-size: smaller;
+  color: var(--text-red);
+  margin-left: 10px;
+}
+
+#mailChkDiv {
+  position: relative;
+}
+#timeout {
+  font-size: smaller;
+  position: absolute;
+  bottom: 7px;
+  right: 137px;
+  top: 25px;
+  color: var(--text-red);
+}
+
+#mail_check_input_box_false {
+  background-color: var(--gray-color);
+}
+.unselect {
+  color: var(--gray-color) !important;
+  /* color: black; */
+  /* border: black; */
 }

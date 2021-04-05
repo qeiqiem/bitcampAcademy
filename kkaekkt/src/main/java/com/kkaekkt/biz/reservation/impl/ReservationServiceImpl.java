@@ -12,6 +12,7 @@ import com.kkaekkt.biz.comm.LaundryVO;
 import com.kkaekkt.biz.reservation.ReservationListVO;
 import com.kkaekkt.biz.reservation.ReservationService;
 import com.kkaekkt.biz.reservation.ReservationVO;
+import com.kkaekkt.biz.user.BusinessVO;
 
 @Service("ReservationService")
 public class ReservationServiceImpl implements ReservationService {
@@ -55,14 +56,6 @@ public class ReservationServiceImpl implements ReservationService {
 	@Override
 	public void complete(LaundryVO vo) {
 		reservationDAO.complete(vo);
-	}
-	@Override
-	public void like(ReservationVO vo) {
-		if(vo.getLike()==0) {//0이면 좋아요 삭제
-			reservationDAO.likeOff(vo);
-		}else {
-			reservationDAO.likeOn(vo);
-		}
 	}
 	@Override
 	public ReservationListVO getRsvListPs(ReservationListVO vo) {
@@ -130,8 +123,9 @@ public class ReservationServiceImpl implements ReservationService {
 		return null;
 	}
 	@Override
-	public void regitAlert(AlertVO vo) {
-		reservationDAO.regitAlert(vo);		
+	public int regitAlert(AlertVO vo) {
+		reservationDAO.regitAlert(vo);
+		return reservationDAO.getAno(vo);
 	}
 	
 	@Override

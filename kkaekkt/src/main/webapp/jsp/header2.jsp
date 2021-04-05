@@ -7,7 +7,9 @@
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script>
 		var alertObj={
-			sender:${sessionScope.person.mno}
+			sender:${sessionScope.user.mno},
+			senderName:`${sessionScope.user.name}`,
+			mtype:${sessionScope.user.mtype}
 		};
 </script>
 <script src="/js/header.js"></script>
@@ -29,7 +31,7 @@
 		</div>
 
 		<div class="head_right">
-			<input name="name" id="name" value="${person.bname} 님" readonly /> 
+			<input name="name" id="name" value="${sessionScope.user.name} 님" readonly /> 
 			<div id="bellBox">
 				<i class="fas fa-bell"></i>
 				<span class="redDot">●</span>

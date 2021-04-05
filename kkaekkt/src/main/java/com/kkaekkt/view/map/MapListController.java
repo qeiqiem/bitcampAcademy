@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.kkaekkt.biz.map.MapListVO;
 import com.kkaekkt.biz.map.MapService;
+import com.kkaekkt.biz.map.ResPayVO;
 import com.kkaekkt.biz.map.SingleListVO;
+import com.kkaekkt.biz.user.BusinessVO;
+import com.kkaekkt.biz.user.PersonVO;
 
 
 
@@ -23,12 +26,22 @@ public class MapListController {
 	@Autowired
 	MapService mapserv;
 	
+		@RequestMapping(value="/showMap.do", method=RequestMethod.GET)
+		public String loginView(BusinessVO bvo, PersonVO pvo) {
+			int bmvo = bvo.getBno();
+			int pmvo = pvo.getMno();
+			
+			System.out.println(bmvo);
+			System.out.println(pmvo);
+			return "/jsp/searchMap/laundryMap.jsp";
+		}
+	
 	
 	  @RequestMapping(value="/maplist.do", method=RequestMethod.POST,produces="application/text;charset=utf-8")   
 	  public @ResponseBody String maplist(String keyaddr) {
 	      String keyword = keyaddr;
 	      System.out.println("ajax 요청 도착!"+keyword);    
-	       
+	      
 	      List<MapListVO> modelList = mapserv.selectlandry(keyword);
 	      Gson gson=new Gson();
 	      String keylist=gson.toJson(modelList);
@@ -68,6 +81,14 @@ public class MapListController {
 			String singleList = gson.toJson(single); 
 			System.out.println("select 데이터 확인  : "+singleList); 
 			return singleList; 
+		}
+	  
+	  
+	  //회원업체 리뷰 조회
+	  @RequestMapping(value="/respay.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
+	  public String respay(ResPayVO vo) {
+			System.out.println("예약관련정보 : "+vo); 
+			return "/jsp/searchMap/laundryMap.jsp";
 		}
 		
 	 

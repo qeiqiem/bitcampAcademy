@@ -2,9 +2,9 @@ $(document).ready(function() {
     initSide();
     initEvent();
     initModal();
-    ajax(pageObj);
+    ajax();
 });
-function ajax(pageObj) {
+function ajax() {
     console.log('ajax진입');
     $.post({
         url:'/getCommListBs.do',
@@ -55,19 +55,19 @@ function printList(list) {//리뷰 리스트 출력
         }
     });
 }
-function editAjax(pageObj) {
+function editAjax() {
     console.log('편집');
     $.post({
         url:'/updateComm.do',
         data:pageObj,
         success:function() {
             $('#comments').remove();
-            ajax(pageObj);
+            ajax();
             alert('답글이 수정되었습니다.');
         }
     });
 }
-function insertAjax(pageObj) {
+function insertAjax() {
     console.log('등록');
     $.post({
         url:'/regitComm.do',
@@ -75,18 +75,18 @@ function insertAjax(pageObj) {
         success:function() {
             sendMsg();
             $('#comments').remove();
-            ajax(pageObj);
+            ajax();
             alert('답글이 등록되었습니다.');
         }
     });
 }
-function delAjax(pageObj) {
+function delAjax() {
     console.log('삭제');
     $.post({
         url:'/deleteCommAb.do',
         data:pageObj,
         success:function() {
-            ajax(pageObj);//리스트 재출력
+            ajax();//리스트 재출력
             alert('답글이 삭제되었습니다.');
         }
     });
@@ -96,7 +96,7 @@ function initSide() {
     '<button>전체 리뷰</button>'+
     '<button>노답 리뷰</button>';
     $('.side_sub').css('display','unset');
-    $('.side button').eq(4).addClass("side_select");
+    $('.side button').eq(5).addClass("side_select");
     $('.side_sub button').eq(0).addClass("side_sub_select");
     $('.side_sub button').click(function() {
         $(this).siblings().removeClass('side_sub_select');
@@ -105,12 +105,12 @@ function initSide() {
             pageObj.replytf=0;
             pageObj.currentPageNum=1;
             resetSearch();
-            ajax(pageObj);
+            ajax();
         }else {
             pageObj.replytf=1;
             pageObj.currentPageNum=1;
             resetSearch();
-            ajax(pageObj);
+            ajax();
         }
     });
 }
@@ -122,13 +122,13 @@ function initEvent() {
         $(this).siblings('label').text(select_name);
         pageObj.order=$('.selectbox select')[0].value;
         pageObj.currentPageNum=1;
-        ajax(pageObj);
+        ajax();
     });
     $('.searchBox i.fas').click(function() {
 	    pageObj.search=$('.search')[0].value;
         pageObj.searchOption=$('.searchBox select')[0].value;
         pageObj.currentPageNum=1;
-        ajax(pageObj);
+        ajax();
     });
     $('.process').on("click","td.cell2",function() {//리뷰내용 누를경우 전체내용 출력
         $(this).toggleClass('open');
@@ -198,17 +198,17 @@ function openModal(button) {
 function operate() {
     if($('#ok')[0].innerHTML=='수정하기'){//버튼이 수정하기라면,   
         modalClose();
-        editAjax(pageObj);
+        editAjax();
     }else {//버튼이 삭제하기라면
         modalClose();
-        delAjax(pageObj);
+        delAjax();
     }
 }
 function enter() {
     if(window.event.keyCode==13) {
         pageObj.search=$('.search')[0].value;
         pageObj.searchOption=$('.searchBox select')[0].value;
-        ajax(pageObj);
+        ajax();
     }
 }
 function msgSet() {
@@ -234,7 +234,7 @@ function sendMsg() {
                             '</div>'+
                             '<div class="msgBottom">'+
                                 '<span class="date">'+today()+'</span>'+
-                                '<span class="byBs">by '+username+'</span>'+
+                                '<span class="byBs">by '+alertObj.sernderName+'</span>'+
                             '</div>'+
                             '<i class="fas fa-times"></i>'+
                         '</li>'
@@ -247,31 +247,31 @@ function initPageEvent() {
     $('.page_next').click(function() {
         if(!$(this).hasClass('no')) {
             pageObj.currentPageNum+=1;
-            ajax(pageObj);
+            ajax();
         }
     });
     $('.page_prev').click(function() {
         if(!$(this).hasClass('no')) {
             pageObj.currentPageNum-=1;
-            ajax(pageObj);
+            ajax();
         }
     });
     $('.page_prevBlock').click(function() {
         if(!$(this).hasClass('no')) {
             pageObj.currentPageNum=pageObj.blockFirstPageNum-1;
-            ajax(pageObj);
+            ajax();
         }
     });
     $('.page_nextBlock').click(function() {
         if(!$(this).hasClass('no')) {
             pageObj.currentPageNum=pageObj.blockLastPageNum+1;
-            ajax(pageObj);
+            ajax();
         }
     });
     $('.page_btn').on("click",".page_list",function() {
         if(pageObj.currentPageNum!=JSON.parse($(this).html())) {
             pageObj.currentPageNum=JSON.parse($(this).html());
-            ajax(pageObj);
+            ajax();
         }
     });
 }
@@ -345,7 +345,7 @@ function submitReply(idx) {//답글 등록
     pageObj.eval=JSON.parse($('#review'+idx+' .cell3')[0].innerHTML.charAt(0));//평점 담기
     alertObj.addressee=$('#review'+idx+' .cell4')[0].id;//알림 수신자 회원번호
     pageObj.content=$('#commentBox'+idx).val();//답글 내용 담기
-    insertAjax(pageObj);
+    insertAjax();
     $('#comments').remove();
 }
 function cancelReply() {

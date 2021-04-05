@@ -14,14 +14,9 @@ public interface MapService {
 	public List<SingleListVO> selectSingle(int bno);
 	public List<SingleListVO> singleOption(int bno);
 	public List<SingleListVO> reviewList(int bno);
+	public void respay(ResPayVO vo);
 	
 	
-	
-	/* 일반세탁 관련기능
-	 * 1. 리스트 조회시 데이터 바인딩.
-	 * 2. 상세내역 조회시 viewtable 사용
-	 * 
-	 *  
-	*/
+
 	
 }

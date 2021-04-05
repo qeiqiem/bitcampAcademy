@@ -18,16 +18,14 @@
 </head>
 
 <body>
-    <jsp:include page="/jsp/header1.jsp"></jsp:include>
+    <jsp:include page="/jsp/header2.jsp"></jsp:include>
     <div class="body_container">
-        <jsp:include page="sidebar_ps.jsp"></jsp:include>
+        <jsp:include page="sidebar_bs.jsp"></jsp:include>
         <div class="content">
             <div id="alertHeader">
                 <div id="headerLeft">
                     <button id="total" class="selected">전체</button>
-                    <button id="check">결제</button>
-                    <button id="complete">완료</button>
-                    <button id="reply">답글</button>
+                    <button id="order">주문</button>
                     <button id="cancel">취소</button>
                 </div>
                 <div id="headerRight">

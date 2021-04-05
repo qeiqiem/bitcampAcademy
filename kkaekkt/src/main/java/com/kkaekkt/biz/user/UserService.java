@@ -1,12 +1,6 @@
 package com.kkaekkt.biz.user;
 
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
-import com.google.gson.JsonElement;
-import com.kkaekkt.biz.comm.LaundryVO;
 
 public interface UserService {
 	public void insertUser(PersonVO vo);
@@ -15,10 +9,10 @@ public interface UserService {
 	public void updateUser(BusinessVO vo);
 	public void deleteUser(PersonVO vo);
 	public void deleteUser(BusinessVO vo);
+	public void likeOn(BusinessVO vo);
 	public void likeOff(BusinessVO vo);
-	public PersonVO getUser(PersonVO vo);
-	public BusinessVO getUser(BusinessVO vo);
-	public BusinessListVO getLikedBs(BusinessListVO vo);
+	public AccountVO getUser(AccountVO vo);
+	public List<BusinessVO> getLikedBs(int mno);
 	public BusinessVO getComspec(BusinessVO vo);
 	public BusinessVO getCoinspec(BusinessVO vo);
 	public void updateSpec(BusinessVO vo);
@@ -32,5 +26,8 @@ public interface UserService {
 	public double avgGradeBs(BusinessVO vo);
 	public int countLikeBs(BusinessVO vo);	
 	public int idchkBs(BusinessVO vo);
+	public void updatePw(AccountVO vo);
+	public PersonVO getPerson(int mno);
+	public BusinessVO getBusiness(BusinessVO vo);
 
 }

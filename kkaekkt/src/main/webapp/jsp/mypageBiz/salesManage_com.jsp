@@ -35,7 +35,7 @@ color: var(--text-gray);
 <script>
 $(document).ready(function() {
     $(".side_sub").hide();
-    $('.side button').eq(2).addClass("side_select");
+    $('.side button').eq(3).addClass("side_select");
 });
 </script>
 </head>

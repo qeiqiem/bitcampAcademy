@@ -4,12 +4,6 @@ public class PersonVO extends AccountVO {
 	private String mname;
 	private int birth;
 	private int state=1; //기본값 (작업전)
-//	private String phone;
-//	private String address;
-//	private String email;
-//	private String id;
-//	private String password;
-	
 
 	public int getBirth() {
 		return birth;
@@ -35,7 +29,9 @@ public class PersonVO extends AccountVO {
 
 	@Override
 	public String toString() {
-		return "PersonVO [mname=" + mname + ", birth=" + birth + ", state=" + state + "]";
+		return "PersonVO [mname=" + mname + ", birth=" + birth + ", state=" + state + ", getId()=" + getId()
+				+ ", getPassword()=" + getPassword() + ", getName()=" + getName() + ", getPhone()=" + getPhone()
+				+ ", getAddress()=" + getAddress() + ", getEmail()=" + getEmail() + "]";
 	}
 
 	

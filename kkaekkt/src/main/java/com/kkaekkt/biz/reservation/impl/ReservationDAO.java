@@ -12,6 +12,7 @@ import com.kkaekkt.biz.comm.CommVO;
 import com.kkaekkt.biz.comm.LaundryVO;
 import com.kkaekkt.biz.reservation.ReservationListVO;
 import com.kkaekkt.biz.reservation.ReservationVO;
+import com.kkaekkt.biz.user.BusinessVO;
 @Repository
 public class ReservationDAO {	
 	
@@ -26,12 +27,6 @@ public class ReservationDAO {
 	}
 	public void doneLaundry(LaundryVO vo) {
 		mybatis.update("reservationDAO.doneLaundry",vo);
-	}
-	public void likeOn(ReservationVO vo) {
-		mybatis.insert("reservationDAO.likeOn",vo);
-	}
-	public void likeOff(ReservationVO vo) {
-		mybatis.delete("reservationDAO.likeOff",vo);
 	}
 	public int getLiked(ReservationVO vo) {
 		return mybatis.selectOne("reservationDAO.checkLiked",vo);
@@ -121,6 +116,7 @@ public class ReservationDAO {
 	public void updateAlert(AlertVO vo) {
 		mybatis.update("reservationDAO.updateAlert",vo);		
 	}
-	
-	
+	public int getAno(AlertVO vo) {
+		return mybatis.selectOne("reservationDAO.getAno",vo);
+	}	
 }

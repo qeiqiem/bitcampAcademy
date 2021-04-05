@@ -2,10 +2,6 @@ package com.kkaekkt.biz.user.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +11,6 @@ import com.kkaekkt.biz.comm.EtcVO;
 import com.kkaekkt.biz.comm.LaundryVO;
 import com.kkaekkt.biz.comm.ScheduleVO;
 import com.kkaekkt.biz.user.AccountVO;
-import com.kkaekkt.biz.user.BusinessListVO;
 import com.kkaekkt.biz.user.BusinessVO;
 import com.kkaekkt.biz.user.PersonVO;
 import com.kkaekkt.biz.user.UserService;
@@ -29,22 +24,17 @@ public class UserServiceImpl implements UserService {
 	public void insertUser(PersonVO vo) {
 		userDao.insertUser(vo);
 	}
-
 	@Override
 	public void likeOff(BusinessVO vo) {
 		userDao.likeOff(vo);
 	}
-
 	@Override
-	public BusinessListVO getLikedBs(BusinessListVO vo) {
-		vo.setTotalPostCount(userDao.countList(vo)); // 총 데이터행 입력
-		System.out.println(vo.getTotalPostCount() + ":개 행 출력");
-		vo.booleanSet(); // 페이징 정보 입력
-		vo.setBsList(userDao.getLikedBs(vo));
-		for (BusinessVO bvo : vo.getBsList()) {
-			System.out.println(bvo);
-		}
-		return vo;
+	public void likeOn(BusinessVO vo) {
+		userDao.likeOn(vo);
+	}
+	@Override
+	public List<BusinessVO> getLikedBs(int mno) {
+		return userDao.getLikedBs(mno);
 	}
 	@Override
 	public int countLikeBs(BusinessVO vo) {
@@ -83,6 +73,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void deleteUser(PersonVO vo) {
+		System.out.println("회원탈퇴 서비스 옴");
 		userDao.deleteUser(vo);
 
 	}
@@ -102,21 +93,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public PersonVO getUser(PersonVO vo) {
-		System.out.println("유저로그인 servie옴");		
-		return userDao.getUserPs(vo);
+	public AccountVO getUser(AccountVO vo) {
+		return userDao.getUser(vo);
 	}
 	
 	public PersonVO method(PersonVO vo) {
 		System.out.println("소셜유저로그인 servie옴");		
 		return userDao.getUserSNS(vo);
-	}
-		
-
-	@Override
-	public BusinessVO getUser(BusinessVO vo) {
-		System.out.println("업체로그인 servie옴");
-		return userDao.getUserBs(vo);
 	}
 
 	public <T> List<T> convertToObj(String json, Class<T> type) {
@@ -195,6 +178,21 @@ public class UserServiceImpl implements UserService {
 		return userDao.joinCfm(vo);
 	}
 
+	// PW 변경
+	@Override
+	public void updatePw(AccountVO vo) {
+		System.out.println("pw변경 서비스옴");
+		userDao.updatePw(vo);
+	}
+	//logoin?
+	@Override
+	public PersonVO getPerson(int mno) {
+		return userDao.getPerson(mno);
+	}
+	@Override
+	public BusinessVO getBusiness(BusinessVO vo) {
+		return userDao.getBusiness(vo);
+	}
 
 
 

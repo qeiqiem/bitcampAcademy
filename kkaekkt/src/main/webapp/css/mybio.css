@@ -9,11 +9,15 @@ background-color: var(--gray-color);
 width: 85%;
 margin: 10px 0 20px 0;
 }
+
 input {
+    box-sizing: border-box;
+    padding: 15px;
     width: 200px;
     height: 30px;
     margin-top: 10px;
     border: 1px solid var(--gray-color);
+    border-radius: 10px;
 }
 .content {
 float:left;
@@ -23,7 +27,7 @@ padding: 10px 0px 30px 250px;
 font-size: 14px;
 }
 .content div {
-    padding-top: 20px;
+    padding-top: 15px;
 }
 
 .content #mybio_info {
@@ -32,12 +36,14 @@ font-size: 14px;
 }
 
 .content #mybio_info button {
-    height: 35px;
-    width: 100px;
+    height: 30px;
+    width: 120px;
+    margin-left: 5px;
     background: var(--text-gray);
     border: none;
     color: #ffffff;
     padding: 5px;
+    border-radius: 10px;
 }
 
 .content table th {

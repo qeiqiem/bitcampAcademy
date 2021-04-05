@@ -271,7 +271,7 @@ function initKeyEvent() {
     if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
       var inputVal = $(this).val();
       $(this).val(
-        inputVal.replace(/^[0-9]+$|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"\\]/g, "")
+        inputVal.replace(/^[0-9]+$|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"\\]/gi, "")
         // 이름 한글만 입력 가능
         // inputVal.replace(/[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"\\]/g, "")
       );

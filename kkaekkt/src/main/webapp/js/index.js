@@ -20,3 +20,5 @@ function connectWs(){
     };
     socket.onerror = function (err) {console.log('Errors : ' , err);};
 }
+
+

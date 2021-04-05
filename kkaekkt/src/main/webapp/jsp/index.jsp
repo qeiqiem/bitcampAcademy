@@ -11,14 +11,12 @@
     <!-- <script src="js/header.js"></script> -->
     <script src="https://kit.fontawesome.com/2fc57dd2db.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/css/index.css">
-
 </head>
 
 <body>
 
 <jsp:include page="header0.jsp"></jsp:include>
-   
-    <div class="body_container">
+	 <div class="body_container">
         <h2>깨끗하게 간편하게 끝.</h2>
 
         <div class="search_btn">

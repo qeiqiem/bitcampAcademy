@@ -11,7 +11,6 @@ import com.kkaekkt.biz.comm.EtcVO;
 import com.kkaekkt.biz.comm.LaundryVO;
 import com.kkaekkt.biz.comm.ScheduleVO;
 import com.kkaekkt.biz.user.AccountVO;
-import com.kkaekkt.biz.user.BusinessListVO;
 import com.kkaekkt.biz.user.BusinessVO;
 import com.kkaekkt.biz.user.PersonVO;
 
@@ -23,7 +22,9 @@ public class UserDAO {
 	public void likeOff(BusinessVO vo) {
 		mybatis.delete("UserDAO.likeOff", vo);
 	}
-
+	public void likeOn(BusinessVO vo) {
+		mybatis.insert("UserDAO.likeOn",vo);
+	}
 	public void insertUser(PersonVO vo) {
 		System.out.println("마이바티스 insert");
 		mybatis.insert("UserDAO.insertPs", vo);
@@ -46,6 +47,7 @@ public class UserDAO {
 	}
 
 	public void deleteUser(PersonVO vo) {
+		System.out.println("mybatis로 기능처리 - 회원탈퇴");
 		mybatis.delete("UserDAO.deletePs", vo);
 	}
 
@@ -53,14 +55,10 @@ public class UserDAO {
 		mybatis.delete("UserDAO.deleteBs", vo);
 	}
 
-	public List<BusinessVO> getLikedBs(BusinessListVO vo) {
-		return mybatis.selectList("UserDAO.getLikedBs", vo);
+	public List<BusinessVO> getLikedBs(int mno) {
+		return mybatis.selectList("UserDAO.getLikedBs", mno);
 	}
-
-	public int countList(BusinessListVO vo) {
-		return mybatis.selectOne("UserDAO.countList", vo);
-	}
-
+	
 	// 아이디 중복확인
 	public int idchkBs(BusinessVO vo) {
 		System.out.println(vo);
@@ -69,19 +67,6 @@ public class UserDAO {
 		System.out.println(res);
 		return res;
 	}
-	
-	// 일반 로그인
-		public PersonVO getUserPs(PersonVO vo) {
-			System.out.println("mybatis로 기능처리 일반유저");
-			return mybatis.selectOne("UserDAO.getPerson", vo);
-		}
-
-		// 업체 로그인
-		public BusinessVO getUserBs(BusinessVO vo) {
-			System.out.println("mybatis로 기능처리 업체유저");
-			return mybatis.selectOne("UserDAO.getPersonBs", vo);
-		}
-
 		// 소셜 로그인
 		public PersonVO getUserSNS(PersonVO vo) {
 			System.out.println("mybatis로 기능처리 소셜유저");
@@ -115,8 +100,6 @@ public class UserDAO {
 
 	// schedule
 	public List<ScheduleVO> getSchedule(BusinessVO vo) {
-		// System.out.println("dao : " +
-		// mybatis.selectList("UserDAO.getcomscheduleList",vo) );
 		return mybatis.selectList("UserDAO.getScheduleList", vo);
 	}
 
@@ -161,5 +144,21 @@ public class UserDAO {
 	public double avgGradeBs(BusinessVO vo) {
 		return  mybatis.selectOne("UserDAO.avgGradeBs", vo);
 	}
+
+	public void updatePw(AccountVO vo) {
+		System.out.println("pw update");
+		mybatis.update("UserDAO.updatePw", vo);
+		System.out.println("pw 변경완료");
+	}
+	public AccountVO getUser(AccountVO vo) {
+		return mybatis.selectOne("UserDAO.getAccount",vo);
+	}
+	public PersonVO getPerson(int mno) {
+		return mybatis.selectOne("UserDAO.getPerson",mno);
+	}
+	public BusinessVO getBusiness(BusinessVO vo) {
+		return mybatis.selectOne("UserDAO.getBusiness",vo);
+	}	
+
 	
 }
