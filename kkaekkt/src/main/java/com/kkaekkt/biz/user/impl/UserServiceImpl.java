@@ -72,14 +72,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void deleteUser(PersonVO vo) {
+	public void deleteUser(AccountVO vo) {
 		System.out.println("회원탈퇴 서비스 옴");
-		userDao.deleteUser(vo);
-
-	}
-
-	@Override
-	public void deleteUser(BusinessVO vo) {
 		userDao.deleteUser(vo);
 
 	}
@@ -97,7 +91,7 @@ public class UserServiceImpl implements UserService {
 		return userDao.getUser(vo);
 	}
 	
-	public PersonVO method(PersonVO vo) {
+	public AccountVO method(AccountVO vo) {
 		System.out.println("소셜유저로그인 servie옴");		
 		return userDao.getUserSNS(vo);
 	}
@@ -113,6 +107,7 @@ public class UserServiceImpl implements UserService {
 			}
 			list.add(gson.fromJson(temp2[i], type));
 		}
+		System.out.println(list + json);
 		return list;
 	}
 
@@ -176,7 +171,12 @@ public class UserServiceImpl implements UserService {
 		System.out.println("가입완료 서비스옴");
 		return userDao.joinCfm(vo);
 	}
-
+    // PW 변경
+    @Override
+    public void updatePw(AccountVO vo) {
+        System.out.println("pw변경 서비스옴");
+        userDao.updatePw(vo);
+    }
 	@Override
 	public PersonVO getPerson(int mno) {
 		return userDao.getPerson(mno);
@@ -189,10 +189,10 @@ public class UserServiceImpl implements UserService {
 	public List<LaundryVO> getLaundryList(int bno) {
 		return userDao.getLaundry(bno);
 	}
-
-
-
-
+    @Override
+    public List<LaundryVO> getSales(int bno) {        // 하루 매출 
+        return userDao.getSales(bno);
+    }
 
 
 }

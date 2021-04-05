@@ -13,7 +13,18 @@ public class AccountVO {
     private int mtype;
     private int idchk;
     
-    public int getBno() {
+    // 테스트용
+    private int stno;
+    
+    
+    
+    public int getStno() {
+		return stno;
+	}
+	public void setStno(int stno) {
+		this.stno = stno;
+	}
+	public int getBno() {
 		return bno;
 	}
 	public void setBno(int bno) {
