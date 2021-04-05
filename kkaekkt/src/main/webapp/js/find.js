@@ -20,55 +20,52 @@ function idSubmit() {
   const name = document.getElementById("name");
   const email = document.getElementById("email");
 
-  // const info = "${userPw.id}";
-  // console.log(info);
-
   if (name.value == "" || email.value == "") {
     alert("이름과 이메일을 모두 입력하세요.");
     name.focus();
-    return false;
   } else {
     nameEmail();
   }
 }
 
-// function nameEmail() {
-//   $.ajax({
-//     url: "/findIdAjax.do",
-//     type: "POST",
-//     data: {
-//       name: $("#name").val(),
-//       email: $("#email").val(),
-//     },
-//     success: function (data) {
-//       console.log(data);
-//       var info = JSON.parse(data);
-//       console.log(info);
-//       console.log(info.id);
-//       if (info.id != null) {
-//         document.findID.submit();
-//       } else if (info.id == null) {
-//         alert("해당 정보로 가입된 내역이 없습니다.");
-//         return false;
-//       }
-//     },
-//     error: function (request, status, error) {
-//       console.log(
-//         "code:" +
-//           request.status +
-//           "\n" +
-//           "message:" +
-//           request.responseText +
-//           "\n" +
-//           "error:" +
-//           error
-//       );
-//     },
-//   });
-// }
+function nameEmail() {
+  $.ajax({
+    url: "/findId.do",
+    type: "POST",
+    data: {
+      name: $("#name").val(),
+      email: $("#email").val(),
+    },
+    success: function (data) {
+      console.log(data);
+      var info = JSON.parse(data);
+      console.log(info);
+      console.log(info.id);
+      if (info.id != null) {
+        document.findID.submit();
+      } else if (info.id == null) {
+        alert("해당 정보로 가입된 내역이 없습니다.");
+        return false;
+      }
+    },
+    error: function (request, status, error) {
+      console.log(
+        "code:" +
+          request.status +
+          "\n" +
+          "message:" +
+          request.responseText +
+          "\n" +
+          "error:" +
+          error
+      );
+    },
+  });
+}
 
 // 아이디 유무 확인
 function pwSubmit() {
+  
   $.ajax({
     url: "/idchk.do",
     type: "POST",
@@ -76,18 +73,15 @@ function pwSubmit() {
       id: $("#id").val(),
     },
     success: function (data) {
-      console.log(data);
-      var test = JSON.parse(data);
-      console.log(test.state);
-      if ($("#id").val() == "") {
-        alert("아이디를 입력하세요.");
-        id.focus();
-        return false;
-      } else if (test.state == 0) {
+      // if (data == "") {
+        // alert("아이디를 입력하세요.");
+        // id.focus();
+        // return false;
+      // } else 
+      if (data == 0) {
         alert("해당 정보로 가입된 내역이 없습니다.");
-        return false;
-      } else if (test.state == 1) {
-        document.findPW.submit();
+      } else if (data == 1) {
+        $('#findPwForm').submit();
       }
     },
 
