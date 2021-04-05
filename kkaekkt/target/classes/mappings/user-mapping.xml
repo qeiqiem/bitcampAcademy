@@ -50,6 +50,7 @@
 			</otherwise>
 		</choose>
 	</insert>
+	
 	<update id="updatePs">
 		<choose>
 			<when test="email == null">
@@ -226,6 +227,14 @@
 		LEFT OUTER JOIN business b on ac.mno=b.mno
 		WHERE ac.id=#{id};
 	</select>
+	
+	<update id="updatePw">
+		UPDATE account 
+		SET password=#{password} 
+		WHERE id=#{id};
+	</update>
+	
+	
 	<select id="idchk" resultType="int">
 		SELECT count(*)
 		FROM account
@@ -240,6 +249,14 @@
 		LEFT JOIN business b on
 		b.mno=a.mno
 		WHERE id=#{id};
+	</select>
+	<!-- 매출관리-->
+	<select id="getSalse" resultType="laundry">
+		SELECT date_format(rdate, '%Y-%m-%d') rsvDate, sum(price) price  
+		FROM reservation r, rsv_payment rs 
+		WHERE r.rno=rs.rno 
+		AND bno=#{bno} 
+		group by rsvDate;
 	</select>
 </mapper>
 

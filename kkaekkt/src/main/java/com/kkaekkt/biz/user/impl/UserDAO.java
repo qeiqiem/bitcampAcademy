@@ -141,6 +141,12 @@ public class UserDAO {
 	public double avgGradeBs(BusinessVO vo) {
 		return  mybatis.selectOne("UserDAO.avgGradeBs", vo);
 	}
+	public void updatePw(AccountVO vo) {
+		System.out.println("pw update");
+		mybatis.update("UserDAO.updatePw", vo);
+		System.out.println("pw 변경완료");
+	}
+
 	public AccountVO getUser(AccountVO vo) {
 		return mybatis.selectOne("UserDAO.getAccount",vo);
 	}
@@ -149,6 +155,10 @@ public class UserDAO {
 	}
 	public BusinessVO getBusiness(BusinessVO vo) {
 		return mybatis.selectOne("UserDAO.getBusiness",vo);
+	}
+	// 매출관리
+	public List<LaundryVO> getSalse(int bno) {
+		return mybatis.selectList("UserDAO.getSalse", bno);
 	}	
 
 	
