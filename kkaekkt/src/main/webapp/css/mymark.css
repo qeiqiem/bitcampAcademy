@@ -124,7 +124,7 @@ margin: 0 auto;
     /* box-shadow: 5px 12px 5px rgb(212 212 212); */
     overflow-y: scroll;
     padding: 40px;
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
     z-index: 1000;
 }
 #modal_close{
