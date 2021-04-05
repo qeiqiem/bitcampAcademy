@@ -77,12 +77,6 @@ public class UserServiceImpl implements UserService {
 		userDao.deleteUser(vo);
 
 	}
-
-	@Override
-	public void deleteUser(BusinessVO vo) {
-		userDao.deleteUser(vo);
-
-	}
 	
 	// 로그인 들
 	
@@ -177,7 +171,12 @@ public class UserServiceImpl implements UserService {
 		System.out.println("가입완료 서비스옴");
 		return userDao.joinCfm(vo);
 	}
-
+    // PW 변경
+    @Override
+    public void updatePw(AccountVO vo) {
+        System.out.println("pw변경 서비스옴");
+        userDao.updatePw(vo);
+    }
 	@Override
 	public PersonVO getPerson(int mno) {
 		return userDao.getPerson(mno);
@@ -190,10 +189,10 @@ public class UserServiceImpl implements UserService {
 	public List<LaundryVO> getLaundryList(int bno) {
 		return userDao.getLaundry(bno);
 	}
-
-
-
-
+    @Override
+    public List<LaundryVO> getSales(int bno) {        // 하루 매출 
+        return userDao.getSales(bno);
+    }
 
 
 }
