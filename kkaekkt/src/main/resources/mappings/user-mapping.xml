@@ -104,6 +104,7 @@
 		AND bs.typeNum=bz.typenum
 		AND ac.mno=#{mno};
 	</select>
+	
 	<update id="updatePs">
 			UPDATE member SET phone=#{phone},birth=#{birth},address=#{address},email=#{email}
 			WHERE mno=#{mno};
