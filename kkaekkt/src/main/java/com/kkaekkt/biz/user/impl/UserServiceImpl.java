@@ -113,7 +113,6 @@ public class UserServiceImpl implements UserService {
 			}
 			list.add(gson.fromJson(temp2[i], type));
 		}
-		System.out.println(list + json);
 		return list;
 	}
 

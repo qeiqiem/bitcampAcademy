@@ -90,7 +90,6 @@ function initEvent() {
     });
     $('.rsvList').on('click','i.fa-heart',function() {
         likeObj.bno=Number($(this).attr('value'));
-        console.log(likeObj.bno+'..업체번호..93번줄');
         if($(this).hasClass('fas')) {
             $(this).removeClass('fas');
             $(this).addClass('far');
@@ -300,6 +299,7 @@ function viewChange() {//리뷰를 쓴 예약의 버튼을 바꾸고 리뷰박�
     var reviewBtn=$('#btnDiv'+commObj.rsvNum+' button:nth-child(3)');
     reviewBtn.removeClass('commentBtn');
     reviewBtn.addClass('reviewBtn');
+    reviewBtn.attr('id','reviewBtn'+commObj.rsvNum);
     reviewBtn[0].innerHTML='리뷰보기';
     $('#commBox'+commObj.rsvNum)[0].innerHTML=printComment(commObj.mname,commObj.content,today(),commObj.rsvNum);
 }

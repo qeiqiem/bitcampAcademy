@@ -25,7 +25,6 @@ import com.kkaekkt.biz.user.UserService;
 public class UserController {
 	@Autowired
 	UserService userService;
-
 	@Autowired
 	private JavaMailSender mailSender;
 
@@ -137,7 +136,6 @@ public class UserController {
 		System.out.println(password);
 
 		return password;
-
 	}
 
 	// 업체 프로필편집 - 세션
