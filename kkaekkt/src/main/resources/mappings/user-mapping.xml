@@ -6,7 +6,7 @@
 		INSERT INTO account
 		(id,password) VALUES
 		(#{id},#{password});
-		INSERT INTO member VALUES
+		INSERT INTO `member` VALUES
 		((SELECT MAX(mno) FROM
 		account),#{name},#{phone},#{birth},#{address},#{email});
 	</insert>
@@ -94,7 +94,7 @@
 	</update>
 	<select id="getPerson" resultType="person">
 		SELECT ac.mno as mno, id, password, mname, phone, birth, address, email
-		FROM account ac, member mb
+		FROM account ac, `member` mb
 		WHERE ac.mno=mb.mno AND ac.mno=#{mno};
 	</select>
 	<select id="getBusiness" resultType="business">
@@ -109,14 +109,14 @@
 			WHERE mno=#{mno};
 	</update>
 	<update id="updateBs">
-				UPDATE business SET phone=#{phone},bkno=#{bankNum},acno=#{bankAccountNum},address=#{address},email=#{email}
-				WHERE mno=#{mno};
+			UPDATE business SET phone=#{phone},bkno=#{bankNum},acno=#{bankAccountNum},address=#{address},email=#{email}
+			WHERE mno=#{mno};
 	</update>
 	<!-- 회원탈퇴 -->
 	<delete id="deleteUser">
 		DELETE ac, mb, res
 		FROM account ac
-		left outer join member mb on ac.mno=mb.mno
+		left outer join `member` mb on ac.mno=mb.mno
 		left outer join reservation res on mb.mno=res.mno
 		<if test="stno == 3 or stno == 4">
 			AND id=#{id} AND password=#{password};
@@ -126,13 +126,13 @@
 	<select id="getAccount" resultType="account">
 		SELECT ac.mno,bno,mname,b.bname,mtype
 		FROM (SELECT mno,mtype FROM account WHERE id=#{id} AND password=#{password}) ac
-		LEFT JOIN member m ON m.mno=ac.mno
+		LEFT JOIN `member` m ON m.mno=ac.mno
 		LEFT JOIN business b ON b.mno=ac.mno;
 	</select>
 	<select id="getPersonSNS" resultType="person">
 		SELECT ac.mno as mno, id,
 		password, mname, email
-		FROM account ac, member mb
+		FROM account ac, `member` mb
 		WHERE ac.mno=mb.mno
 		AND email=#{email};
 	</select>
@@ -143,7 +143,7 @@
 		email=#{email); -->
 
 		SELECT count(*)
-		FROM member m
+		FROM `member` m
 		LEFT JOIN business b on m.mno = b.mno
 		WHERE m.email=#{email} OR b.email=#{email};
 	</select>
@@ -189,7 +189,7 @@
 			OR (bname='테스트업체' AND bs.email='test@naver.com'); -->
 		SELECT id
 		FROM account ac
-		LEFT JOIN member mb on ac.mno=mb.mno
+		LEFT JOIN `member` mb on ac.mno=mb.mno
 		LEFT JOIN
 		business bs on ac.mno=bs.mno
 		WHERE (mname=#{name} AND
@@ -201,7 +201,7 @@
 		SELECT b.email mmail, m.email bmail, id
 		FROM account ac
 		LEFT OUTER JOIN
-		member m on ac.mno=m.mno
+		`member` m on ac.mno=m.mno
 		LEFT OUTER JOIN business b on ac.mno=b.mno
 		WHERE ac.id=#{id};
 	</select>
@@ -212,18 +212,17 @@
 		WHERE id=#{id};
 	</update>
 	
-	
 	<select id="idchk" resultType="int">
 		SELECT count(*)
 		FROM account
 		WHERE
-		id=#{id} AND password=#{password};
+		id=#{id};
 	</select>
 	<select id="joinCfm" resultType="account">
 		SELECT id, mname, bname
 		FROM
 		account a
-		LEFT JOIN member m on a.mno=m.mno
+		LEFT JOIN `member` m on a.mno=m.mno
 		LEFT JOIN business b on
 		b.mno=a.mno
 		WHERE id=#{id};
