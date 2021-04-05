@@ -292,4 +292,11 @@
 		JOIN `member` m ON m.mno = r.mno
 		WHERE r.rno=#{rsvNum};
 	</select>
+	<!-- 매출관리-->
+    <select id="getSales" resultType="laundry">
+        	SELECT 	date_format(r.rdate, '%Y-%m-%d') rsvDate, sum(cnt*price) price
+			FROM reservation r, rsv_laundry r_l, business b, bsn_laundry b_l
+			WHERE r.rno=r_l.rno AND r.bno=b.bno AND b.bno=b_l.bno AND b_l.lno=r_l.lno
+            group by rsvDate;
+    </select>
 </mapper>

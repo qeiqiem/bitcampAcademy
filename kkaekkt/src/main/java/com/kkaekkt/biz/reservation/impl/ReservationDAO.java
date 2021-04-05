@@ -118,5 +118,10 @@ public class ReservationDAO {
 	}
 	public int getAno(AlertVO vo) {
 		return mybatis.selectOne("reservationDAO.getAno",vo);
-	}	
+	}
+
+	// 매출관리
+	public List<LaundryVO> getSales(int bno) {
+		return mybatis.selectList("reservationDAO.getSales", bno);
+	}
 }

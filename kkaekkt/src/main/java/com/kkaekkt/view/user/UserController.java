@@ -1,5 +1,7 @@
 package com.kkaekkt.view.user;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
@@ -60,13 +62,13 @@ public class UserController {
 	// 아이디 중복체크
 	@RequestMapping(value = "/idchk.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String idchk(PersonVO vo) {
-		System.out.println("vo 값 담겼음");
-		System.out.println(vo);
-		Gson gson = new Gson();
-		vo.setState(userService.idchk(vo));
-		System.out.println("서비스에서 값 담겨 넘어옴");
-		return gson.toJson(vo);
+	public int idchk(PersonVO vo) {
+//		System.out.println("vo 값 담겼음");
+//		System.out.println(vo);
+//		Gson gson = new Gson();
+//		vo.setState(userService.idchk(vo));
+//		System.out.println("서비스에서 값 담겨 넘어옴");
+		return userService.idchk(vo);
 	}
 
 	// 회원개입-개인
@@ -270,11 +272,21 @@ public class UserController {
 
 	// 아이디찾기
 	@RequestMapping(value = "/findId.do", method = RequestMethod.POST)
-	public String findId(AccountVO vo, Model model) {
+	public String findId(AccountVO vo, Model model,HttpServletResponse response) throws IOException {
+	   
 		System.out.println("findID 진입");
 		System.out.println(vo);
-		model.addAttribute("userId", userService.findId(vo));
-		return "/jsp/login/findIdConfirmed.jsp";
+		vo=userService.findId(vo);
+		if(vo!=null) {
+			model.addAttribute("userId", vo);
+			return "/jsp/login/findIdConfirmed.jsp";			
+		}else {
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>alert('해당 정보로 가입된 내역이 없습니다.'); history.go(-1);</script>");
+            out.flush();
+            return "/jsp/login/find.jsp";
+		}
 	}
 
 	// 비밀번호찾기
@@ -378,4 +390,6 @@ public class UserController {
 		Gson gson = new Gson();
 		return gson.toJson(userService.getLaundryList(bno));
 	}
+	
+  
 }
