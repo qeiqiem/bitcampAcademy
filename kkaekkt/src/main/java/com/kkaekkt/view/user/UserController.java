@@ -100,13 +100,12 @@ public class UserController {
 	@ResponseBody
 	public String UpdatePw(PersonVO vo, HttpSession session) {
 		System.out.println(vo);
-		userService.updateUser(vo);
+		userService.updatePw(vo);
 		AccountVO result = userService.getUser(vo);
 		session.setAttribute("user", result);
 		System.out.println("세션에 수정한 비밀번호 올리기");
 		Gson gson = new Gson();
 		String password = gson.toJson(vo.getPassword());
-		System.out.println(password);
 
 		return password;
 
@@ -129,11 +128,10 @@ public class UserController {
 	@ResponseBody
 	public String UpdatePw(BusinessVO vo, HttpSession session) {
 		System.out.println(vo);
-		userService.updateUser(vo);
-		//BusinessVO person = userService.getUser(vo);
-		//System.out.println("컨트롤러" + person);
-		//session.setAttribute("person", person);
-		System.out.println("세션에 수정한 정보 올리기 완료");
+		userService.updatePw(vo);
+		AccountVO result = userService.getUser(vo);
+		session.setAttribute("user", result);
+		System.out.println("세션에 수정한 비밀번호 올리기");
 		Gson gson = new Gson();
 		String password = gson.toJson(vo.getPassword());
 		System.out.println(password);
