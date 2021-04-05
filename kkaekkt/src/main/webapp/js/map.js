@@ -4,13 +4,20 @@
 $(document).ready(function() {
 
    // 화면 생성시 기본호출
+   // url에서 로그인 정보 가져오기
+	var url = document.location.href
+	console.log(link)
+	url = url.split("?")
+
+	
    // method/var-----------------------------------------------------------------------
    var adrress = "서울 용산"
    var random = Math.floor(Math.random() * 10) + "," + "000"
    var bno = ""
-	var totalPrice = 0
+   var totalPrice = 0
    IMP.init("imp27421713");
    selectNum()
+   
 
    // [Click 이벤트]----------------------------------------------------------------------
 
@@ -45,7 +52,7 @@ $(document).ready(function() {
    
    //예약항목 옵션 클릭시 감지
    $("#resShortOpt").on("click", 'input:checkbox', function() {
-	   //체크란 row의 값
+      //체크란 row의 값
          var idx = $(this).val()
        //체크 상태에 대한 값
          var ckTf = $(this).is(":checked")
@@ -82,12 +89,11 @@ $(document).ready(function() {
    }
    //4. 결제 api 대기 팝업
    $('.comBtn').on("click", function() {  
-	   if(totalPrice == 0 && totalPrice == "" ){
-		   alert("지불할 금액이없습니다. 옵션을 선택해주세요.")
-	   }else {
-		   $("#mask").show()
-		   requestPay()   
-	   }     
+      if(totalPrice == 0 && totalPrice == "" ){
+         alert("지불할 금액이없습니다. 옵션을 선택해주세요.")
+      }else {
+    	  insertResList() 
+      }     
    })
    
    
@@ -220,10 +226,10 @@ $(document).ready(function() {
    }
    
 
-   // [예약하기] : selectbox 옵션 부여-----------------
+   // selectbox 옵션
    function selectNum() {
       $(".resOpc").append(
-            '<option value="" selected disabled hidden selected>1</option>')
+            '<option value="" selected disabled hidden selected>선택</option>')
       for (var i = 1; i < 11; i++) {
          $(".resOpc").append(
                '<option value="' + i + '">' + i + '</option')
@@ -231,14 +237,7 @@ $(document).ready(function() {
    }
    
    //예약가능 품목 불러오기
-   function resItemList(bno) {
-      
-      //하단 정보
-/*      var htmlfoot = ''              
-         htmlfoot +=''
-         htmlfoot +=''
-         htmlfoot +=''         
-      $(".userInfo").append(htmlfoot)*/
+   function resItemList(bno) { 
       
       $.ajax({
            url:'/singleOption.do'
@@ -264,7 +263,7 @@ $(document).ready(function() {
                                         html +='</tr>'
                                     }
                            html += '<tr><td class="htdres option_title">4~7일 소요</td>'
-                    	   html +='<td class="htdres res_num">개</td>'
+                          html +='<td class="htdres res_num">개</td>'
                            html +='<td class="htdres ores_price">예상비용</td></tr>'
                               for ( j; j <data.length; j++) {
                                         var longitem = data[j].product              
@@ -289,35 +288,82 @@ $(document).ready(function() {
         $('.single').show()
    }
            
-   function requestPay() {
+   function requestPay(arrayRes) {
+	   var arrayRe = arrayRes
       //결제관련 api 기능
-       IMP.request_pay({
-             pg : 'kakao', // 결제방식
-             pay_method : 'card',   // 결제 수단
-             merchant_uid : 'merchant_' + new Date().getTime(),
-             name : '주문명: 결제 테스트',   // order 테이블에 들어갈 주문명 혹은 주문 번호
-             amount : totalPrice,   // 결제 금액
-             buyer_email : 'test',   // 구매자 email
-             buyer_name :  'test',   // 구매자 이름
-             buyer_tel :  'test',   // 구매자 전화번호
-             buyer_addr :  'test',   // 구매자 주소
-             buyer_postcode :  'test',   // 구매자 우편번호
-             m_redirect_url : '/khx/payEnd.action'   // 결제 완료 후 보낼 컨트롤러의 메소드명
-         }, function(rsp) {
-         if ( rsp.success ) { // 성공시
-            
-            var msg = '결제가 완료되었습니다.'
-            msg += '고유ID : ' + rsp.imp_uid
-            msg += '상점 거래ID : ' + rsp.merchant_uid
-            msg += '결제 금액 : ' + rsp.paid_amount
-            msg += '메일 : ' + rsp.buyer_email
-            msg += '이름 : ' + rsp.buyer_name
-            msg += '우편번호 : ' + rsp.buyer_postcode
-            alert(msg)
-         } else { // 실패시
-            var msg = '결제에 실패하였습니다.';
-            msg += '에러내용 : ' + rsp.error_msg;
-         }
-      })
+	   
+       mapRes(arrayRe)
+       $("#mask").hide()	
+	   
+//       IMP.request_pay({
+//           pg : 'kakao', // 결제방식
+//           pay_method : 'card',   // 결제 수단
+//           merchant_uid : 'merchant_' + new Date().getTime(),
+//           name : '주문명: 결제 테스트',   // order 테이블에 들어갈 주문명 혹은 주문 번호
+//           amount : totalPrice,   // 결제 금액
+//           buyer_email : 'test',   // 구매자 email
+//           buyer_name :  'test',   // 구매자 이름
+//           buyer_tel :  'test',   // 구매자 전화번호
+//           buyer_addr :  'test',   // 구매자 주소
+//           buyer_postcode :  'test',   // 구매자 우편번호
+//           m_redirect_url : '/khx/payEnd.action'   // 결제 완료 후 보낼 컨트롤러의 메소드명
+// 
+//         }, function(rsp) {
+//         if ( rsp.success ) { // 성공시
+//            
+//            var msg = '결제가 완료되었습니다.'
+//            msg += '고유ID : ' + rsp.imp_uid
+//            msg += '상점 거래ID : ' + rsp.merchant_uid
+//            msg += '결제 금액 : ' + rsp.paid_amount
+//            msg += '메일 : ' + rsp.buyer_email
+//            msg += '이름 : ' + rsp.buyer_name
+//            msg += '우편번호 : ' + rsp.buyer_postcode
+//            alert(msg)
+//            mapRes(arrayRe)
+//            $("#mask").hide()	
+//         } else { // 실패시
+//            var msg = '결제에 실패하였습니다.';
+//            msg += '에러내용 : ' + rsp.error_msg;
+//         }
+//      })
    }
-});
+   
+   
+   //화면단에있는 목록 가져오기
+   function insertResList() {
+		 //뿌려져있는 row
+		  var cntChk = $('.chked')
+		   var arrayRes = new Array();
+		     for (var i = 0; i < cntChk.length ; i++) {
+		    	 
+		    	//lno 발최
+		    	var idx = $('.chked').eq(i).attr('id').charAt(3)
+		        //개수
+		        var selc = $('#selc'+idx).val()
+		        //단일금액
+		        var pri = $('#price'+idx)[0].innerHTML		        
+		        arrayRes[i] = Array(idx, selc, pri)
+		    	
+		     }
+
+		   $("#mask").show()		  
+		   requestPay(arrayRes)
+	   }
+   
+ //리스트 컨트롤러로 보내기
+   function mapRes(arrayRe) {
+	   var arrayTos = arrayRe
+	   console.log(arrayRe)
+	   
+	   $.ajax({
+           url:'/respay.do'
+           , method : 'POST'
+           , data: { 'arrayRe' : JSON.stringify(arrayRe) }
+           , dataType: 'json'
+           , success:function(data){
+        	   
+           }
+	   })
+   }
+  
+})

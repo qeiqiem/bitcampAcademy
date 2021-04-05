@@ -37,18 +37,18 @@ table td {
 }
 
 select {
-    width: 50px;
-    height: 30px;
+    width: 100px;
+    height: 35px;
     padding: 0em .5em;
     background:
         url(https://farm1.staticflickr.com/379/19928272501_4ef877c265_t.jpg)
         no-repeat 95% 50%;
-    background-size: 40%;
+    background-size: 25%;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     border: 1px solid var(--gray-color);
-    border-radius: 0px;
+    border-radius: 10px;
     color: var(--text-gray);
 }
 
@@ -59,15 +59,17 @@ select::-ms-expand { /* for IE 11 */
 input{
     border: 1px solid var(--gray-color);
     padding-left: 5px;
+    border-radius: 10px;
+    margin: 3px;
 }
 .content {
     float:left;
     width: 75vw;
     height: 100vh;
-    padding: 30px 0px 30px 150px;
+    padding: 30px 0px 30px 180px;
 }
 .coinLaundry {
-    padding: 20px 20px 20px 140px;
+    padding: 10px 20px 20px 70px;
     width: 60vw;
     height: 100vh;
 }
@@ -79,7 +81,7 @@ input{
 #coinspec_left {
     height: 450px;
     float: left;
-    padding: 20px 30px 20px 0;
+    padding: 20px 80px 20px 0;
 }
 
 #coinspec_right {
@@ -112,7 +114,7 @@ input{
 }
 
 #card {
-    padding-bottom: 50px;
+    padding-bottom: 60px;
     font-size: 14px;
     color: var(--text-gray);
 }
@@ -128,7 +130,15 @@ input{
 #weekBox {
     height: 200px;
 }
-
+#weekBox {
+    width: 99%;
+    height: 290px;
+    margin: 15px 0 30px 0;
+    /* border: 1px solid black; */
+    background-color: white;
+    border-radius: 20px;
+    overflow: scroll;
+}
 #btn_update {
     padding-top: 100px;
 }
@@ -142,7 +152,7 @@ input{
     color: var(--black-color);
 }
 #btn_change {
-    margin-left: 19vw;
+    margin-left: 22vw;
 }
 
 #resetSpec, #submitSpec {
@@ -151,7 +161,7 @@ input{
 }
 
 #updateSpec {
-    margin-left: 22vw;
+    margin-left: 25vw;
     width: 100px;
     height: 30px;
 }
@@ -166,6 +176,8 @@ input{
     padding: .5em;
     width: 42px;
     color: var(--text-gray);
+    border-radius: 10px;
+    margin-right: 5px;
 }
 
 #weekBox span {
@@ -176,6 +188,7 @@ input{
     font-size: 14px;
     border: 1px solid var(--gray-color);
     background: var(--key-color);
+    border-radius: 10px;
 }
 
 #weekBox  li {
@@ -185,7 +198,7 @@ input{
 }
 
 #weekBox select {
-    width: 120px;
+    width: 140px;
     height: 30px;
     padding: 0em .8em;
     background:
@@ -196,7 +209,8 @@ input{
     -moz-appearance: none;
     appearance: none;
     border: 1px solid var(--gray-color);
-    border-radius: 0px;
+    border-radius: 10px;
+    margin-left: 5px;
 }
 #week .selected{
 	background-color: var(--key-color);

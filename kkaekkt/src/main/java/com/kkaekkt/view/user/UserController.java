@@ -100,7 +100,35 @@ public class UserController {
 	@ResponseBody
 	public String UpdatePw(PersonVO vo, HttpSession session) {
 		System.out.println(vo);
+		userService.updatePw(vo);
+		AccountVO result = userService.getUser(vo);
+		session.setAttribute("user", result);
+		System.out.println("세션에 수정한 비밀번호 올리기");
+		Gson gson = new Gson();
+		String password = gson.toJson(vo.getPassword());
+
+		return password;
+
+	}
+
+	// 개인 프로필 편집 - 세션
+	@RequestMapping(value = "/updatePs.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String Update(PersonVO vo, HttpSession session) {
+		System.out.println(vo);
 		userService.updateUser(vo);
+		AccountVO result = userService.getUser(vo);
+		session.setAttribute("user", result);
+		System.out.println("세션에 수정한 정보 올리기");
+
+		return "/myBio.do";
+	}
+
+	// 업체 프로필 편집 (비밀번호 변경)
+	@RequestMapping(value = "/updateBspwd.do", method = {RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public String UpdatePw(BusinessVO vo, HttpSession session) {
+		System.out.println(vo);
+		userService.updatePw(vo);
 		AccountVO result = userService.getUser(vo);
 		session.setAttribute("user", result);
 		System.out.println("세션에 수정한 비밀번호 올리기");
@@ -112,55 +140,20 @@ public class UserController {
 
 	}
 
-	// 개인 프로필 편집 - 세션
-	@RequestMapping(value = "/updatePs.do", method = RequestMethod.POST)
-	public String Update(PersonVO vo, HttpSession session) {
-		System.out.println(vo);
-		userService.updateUser(vo);
-		AccountVO person = userService.getUser(vo);
-		System.out.println("컨트롤러" + person);
-		session.setAttribute("person", person);
-		System.out.println("세션에 수정한 정보 올리기");
-
-		return "/jsp/mypageUser/mybio.jsp";
-	}
-
-	// 업체 프로필 편집 (비밀번호 변경)
-	@RequestMapping(value = "/updateBspwd.do", method = RequestMethod.POST)
-	@ResponseBody
-	public String UpdatePw(BusinessVO vo, HttpSession session) {
-		System.out.println(vo);
-		userService.updateUser(vo);
-		//BusinessVO person = userService.getUser(vo);
-		//System.out.println("컨트롤러" + person);
-		//session.setAttribute("person", person);
-		System.out.println("세션에 수정한 정보 올리기 완료");
-		Gson gson = new Gson();
-		String password = gson.toJson(vo.getPassword());
-		System.out.println(password);
-
-		return password;
-
-	}
-
 	// 업체 프로필편집 - 세션
-	@RequestMapping(value = "/updateBs.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/updateBs.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String Update(BusinessVO vo, HttpSession session) {
 		System.out.println(vo);
 		userService.updateUser(vo);
-		//vo = userService.getUser(vo);
-		vo.setLikedNum(userService.countLikeBs(vo)); // 프로필편집에서 찜 인원 뽑아와야해서 추가
-		vo.setEval(userService.avgGradeBs(vo)); // 프로필편집에서 찜 인원 뽑아와야해서 추가
-		System.out.println("컨트롤러" + vo);
-		session.setAttribute("person", vo);
+		AccountVO result = userService.getUser(vo);
+		session.setAttribute("user", result);
+		System.out.println("세션에 수정한 정보 올리기");
 
-		System.out.println("세션에 수정한 정보 올리기 완료");
-
-		return "/jsp/mypageBiz/combio.jsp";
+		return "/bsBio.do";
 	}
 
 	// 이메일 체크 sns에서 로그인할때 디비에 있는지 확인하려고 만든 컨트롤러이다
-	@RequestMapping(value = "/findemail.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/findemail.do", method = {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public String emailchk(AccountVO vo) {
 		System.out.println("controller에서 이메일 찾음");
@@ -254,14 +247,13 @@ public class UserController {
 	// 일반설비관리
 	@RequestMapping(value = "/selectCoinspec.do", method = RequestMethod.POST, produces = "application/text;charset=utf-8")
 	@ResponseBody
-	public String SelcetCoinspec(BusinessVO vo) {
+	public String SelcetCoinspec(BusinessVO vo) {//여기도 bno 하나만 전달해서 처리가능함 
 		System.out.println(vo);
 		Gson gson = new Gson();
 		String coinspec = gson.toJson(userService.getCoinspec(vo));
 		System.out.println("test:" + coinspec);
 
 		return coinspec;
-
 	}
 
 	// 일반(사양,설비)관리 update
@@ -337,29 +329,46 @@ public class UserController {
 		AccountVO userDel = (AccountVO) session.getAttribute("user");
 		System.out.println(userDel);
 		userService.deleteUser(vo);
-		
+	}
+	@RequestMapping(value = "/mymark.do", method = RequestMethod.GET)
+	public String getUserDetail(HttpSession session,Model model) {
+		Gson gson = new Gson();
+		AccountVO account = (AccountVO) session.getAttribute("user");
+		model.addAttribute("userDetail", userService.getPerson(account.getMno()))
+			 .addAttribute("likedBsList",gson.toJson(userService.getLikedBs(account.getMno())));
+		return "/jsp/mypageUser/mymark.jsp";
 	}
 	// 개인 프로필 정보 get
-	@RequestMapping(value = "/mybio.do", method = RequestMethod.GET)
-	public String getPerson(PersonVO vo, HttpSession session, Model model) {
+	@RequestMapping(value = "/myBio.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String getPerson(HttpSession session, Model model) {
 		System.out.println("개인프로필편집");
 		AccountVO account = (AccountVO) session.getAttribute("user");
-		vo.setMno(account.getMno());
-		model.addAttribute("person", userService.getPerson(vo));
+		model.addAttribute("person", userService.getPerson(account.getMno()));
 		return "/jsp/mypageUser/mybio.jsp";
 //		return "/jsp/mypageUser/Test_mybio.jsp";
 	}
 	// 업체 프로필 정보 get
-		@RequestMapping(value = "/bsBio.do", method = RequestMethod.GET)
-		public String getBusiness(BusinessVO vo, HttpSession session, Model model) {
-			System.out.println("개인프로필편집");
-			AccountVO account = (AccountVO) session.getAttribute("user");
-			vo.setMno(account.getMno());
-			model.addAttribute("bs", userService.getBusiness(vo));
-			if(vo.getBizType() == 1) {
-				return "/jsp/mypageBizCoin/combio.jsp";			
-			} else {
-				return "/jsp/mypageBizCoin/coinbio.jsp";							
-			}
+	@RequestMapping(value = "/bsBio.do", method = {RequestMethod.GET, RequestMethod.POST})
+	public String getBusiness(BusinessVO vo, HttpSession session, Model model) {
+		System.out.println("업체프로필편집");
+		AccountVO account = (AccountVO) session.getAttribute("user");
+		vo.setMno(account.getMno());
+		vo.setBno(account.getBno());
+		vo = userService.getBusiness(vo);
+		vo.setLikedNum(userService.countLikeBs(vo)); // 프로필편집에서 찜 인원 뽑아와야해서 추가
+		vo.setEval(userService.avgGradeBs(vo)); // 프로필편집에서 찜 인원 뽑아와야해서 추가
+		System.out.println(vo);
+		model.addAttribute("bs", vo);
+		if (vo.getBizType() == 1) {
+			return "/jsp/mypageBiz/combio.jsp";
+		} else {
+			return "/jsp/mypageBizCoin/coinbio.jsp";
 		}
+	}
+	@RequestMapping(value="/getLaundryList.do", method = RequestMethod.POST, produces = "application/text;charset=utf-8")
+	@ResponseBody
+	public String getLaundryList(int bno) {
+		Gson gson = new Gson();
+		return gson.toJson(userService.getLaundryList(bno));
+	}
 }
