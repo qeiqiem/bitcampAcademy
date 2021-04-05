@@ -16,20 +16,19 @@
     </div>
     <div id="modal_container">
         <button id="modal_close">x</button>
-        <div id="modal_leftBody">
-            <div id="modal_leftHeader">
-                <p class="more_title"><span id="bname">테스트클리닝</span> 취급 품목</p>
+            <div id="modal_Header">
+                <p>예약하기</p>
             </div>
             <!-- <p>취급품목</p> -->
 	        <hr>
 	        <table id="single_option">
                 <tr>
                     <th>1~3일 소요</th>
-                    <th>개</th>
-                    <th>예상비용</th>
+                    <th>수 량</th>
+                    <th>금 액</th>
                 </tr> 
                 <tr>
-                     <td><input class="chkBox" id="chk'+j+'" type="checkbox" value="'+j+'">세탁물</td>
+                     <td><input class="chkBox" id="chk'+j+'" type="checkbox" value="'+j+'">일반세탁</td>
                      <td>
                          <select id="selc'+j+'" class="resOpc" disabled>
                          <option value="1">1</option>
@@ -42,7 +41,7 @@
                     </td>
                 </tr>
                 <tr>
-                     <td><input class="chkBox" id="chk'+j+'" type="checkbox" value="'+j+'">세탁물</td>
+                     <td><input class="chkBox" id="chk'+j+'" type="checkbox" value="'+j+'">와이셔츠</td>
                      <td>
                          <select id="selc'+j+'" class="resOpc" disabled>
                          <option value="1">1</option>
@@ -55,7 +54,7 @@
                     </td>
                 </tr>
                 <tr>
-                     <td><input class="chkBox" id="chk'+j+'" type="checkbox" value="'+j+'">세탁물</td>
+                     <td><input class="chkBox" id="chk'+j+'" type="checkbox" value="'+j+'">이불</td>
                      <td>
                          <select id="selc'+j+'" class="resOpc" disabled>
                          <option value="1">1</option>
@@ -68,7 +67,7 @@
                     </td>
                 </tr>
                 <tr>
-                     <td><input class="chkBox" id="chk'+j+'" type="checkbox" value="'+j+'">세탁물</td>
+                     <td><input class="chkBox" id="chk'+j+'" type="checkbox" value="'+j+'">운동화</td>
                      <td>
                          <select id="selc'+j+'" class="resOpc" disabled>
                          <option value="1">1</option>
@@ -82,11 +81,11 @@
                 </tr>
                  <tr>
                     <th>4~7일 소요</th>
-                    <th>개</th>
-                    <th>예상비용</th>
+                    <th>수 량</th>
+                    <th>금 액</th>
                 </tr>
                 <tr>
-                    <td><input class="chkBox" id="chk'+j+'" type="checkbox" value="'+j+'">세탁물</td>
+                    <td><input class="chkBox" id="chk'+j+'" type="checkbox" value="'+j+'">가죽모피</td>
                     <td>
                         <select id="selc'+j+'" class="resOpc" disabled>
                         <option value="1">1</option>
@@ -99,7 +98,7 @@
                    </td>
                </tr>
                 <tr>
-                    <td><input class="chkBox" id="chk'+j+'" type="checkbox" value="'+j+'">세탁물</td>
+                    <td><input class="chkBox" id="chk'+j+'" type="checkbox" value="'+j+'">명품가방</td>
                     <td>
                         <select id="selc'+j+'" class="resOpc" disabled>
                         <option value="1">1</option>
@@ -112,7 +111,7 @@
                    </td>
                </tr>
                 <tr>
-                    <td><input class="chkBox" id="chk'+j+'" type="checkbox" value="'+j+'">세탁물</td>
+                    <td><input class="chkBox" id="chk'+j+'" type="checkbox" value="'+j+'">아웃도어</td>
                     <td>
                         <select id="selc'+j+'" class="resOpc" disabled>
                         <option value="1">1</option>
@@ -125,7 +124,7 @@
                    </td>
                </tr>
                 <tr>
-                    <td><input class="chkBox" id="chk'+j+'" type="checkbox" value="'+j+'">세탁물</td>
+                    <td><input class="chkBox" id="chk'+j+'" type="checkbox" value="'+j+'">기타</td>
                     <td>
                         <select id="selc'+j+'" class="resOpc" disabled>
                         <option value="1">1</option>
@@ -139,12 +138,9 @@
                </tr>
                <tr id="totalRow">
                     <td id="totalLabel">결제예상금액</td>
-                    <td class="totalAll">2000</td>
+                    <td colspan="2" class="totalAll">2000</td>
                 </tr>
             </table>
-        </div>
-        <div id="verticalLine"></div>
-        <div id="modal_rightBody">
             <p>결제 정보</p>
             <hr>
             <div class="userInfo">
@@ -163,7 +159,6 @@
             <div class="comBtnDiv">
              <button class="comBtn">결제하기</button>
             </div>	
-        </div>
     </div>
     <!-- <script>
         var likeObj={

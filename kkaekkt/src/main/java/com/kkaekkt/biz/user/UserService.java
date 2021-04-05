@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kkaekkt.biz.comm.LaundryVO;
 
+
 public interface UserService {
 	public void insertUser(PersonVO vo);
 	public void insertUser(BusinessVO vo);
@@ -30,5 +31,6 @@ public interface UserService {
 	public PersonVO getPerson(int mno);
 	public BusinessVO getBusiness(BusinessVO vo);
 	public List<LaundryVO> getSalse(int bno);
+	public void updatePw(AccountVO vo);
 
 }

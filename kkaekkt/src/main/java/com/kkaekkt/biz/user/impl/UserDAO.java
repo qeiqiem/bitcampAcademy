@@ -143,6 +143,12 @@ public class UserDAO {
 	public double avgGradeBs(BusinessVO vo) {
 		return  mybatis.selectOne("UserDAO.avgGradeBs", vo);
 	}
+	public void updatePw(AccountVO vo) {
+		System.out.println("pw update");
+		mybatis.update("UserDAO.updatePw", vo);
+		System.out.println("pw 변경완료");
+	}
+
 	public AccountVO getUser(AccountVO vo) {
 		return mybatis.selectOne("UserDAO.getAccount",vo);
 	}

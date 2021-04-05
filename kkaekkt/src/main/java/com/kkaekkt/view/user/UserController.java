@@ -332,6 +332,14 @@ public class UserController {
 		userService.deleteUser(vo);
 		
 	}
+
+	// 비번변
+	@RequestMapping(value = "/updatePw.do", method = RequestMethod.POST)
+	public String updatePw(AccountVO vo) {
+		userService.updatePw(vo);
+		return "/jsp/login/loginPs.jsp";
+	}
+
 	@RequestMapping(value = "/mymark.do", method = RequestMethod.POST)
 	public String getUserDetail(HttpSession session,Model model) {
 		Gson gson = new Gson();
@@ -367,7 +375,6 @@ public class UserController {
 			return "/jsp/mypageBizCoin/coinbio.jsp";
 		}
 	}
-
 	// 매출관리
 	@RequestMapping(value = "/selectSalse.do", method = RequestMethod.POST, produces = "application/text;charset=utf-8")
 	@ResponseBody
@@ -379,4 +386,5 @@ public class UserController {
 		return sales;
 
 	}
+
 }

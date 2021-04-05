@@ -178,6 +178,13 @@ public class UserServiceImpl implements UserService {
 		return userDao.joinCfm(vo);
 	}
 
+	// PW 변경
+	@Override
+	public void updatePw(AccountVO vo) {
+		System.out.println("pw변경 서비스옴");
+		userDao.updatePw(vo);
+	}
+	//logoin?
 	@Override
 	public PersonVO getPerson(int mno) {
 		return userDao.getPerson(mno);
@@ -190,10 +197,6 @@ public class UserServiceImpl implements UserService {
 	public List<LaundryVO> getSalse(int bno) {		// 하루 매출 
 		return userDao.getSalse(bno);
 	}
-
-
-
-
 
 
 }
