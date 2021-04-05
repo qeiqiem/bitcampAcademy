@@ -112,7 +112,7 @@
 					<div id="modal_bodycont">
 						<form action="/deletePs.do" name=form method="GET">
 							<div id="modal_head">
-								<p><input name="name" id="name" value="${sessionScope.user.name} 님 탈퇴 하시겠어요?" readonly /></p>
+								<p><input name="name" id="name" value="${sessionScope.user.name}" 님 탈퇴 하시겠어요? readonly /></p>
 								<hr style="width: 80%; margin-top: 40px; border: 1px solid #E5E5E5;">
 								
 								<p>탈퇴하면 모든 정보가 지워집니다. 정말 탈퇴하시겠어요?</p>
