@@ -14,10 +14,10 @@ function initEvent() {
         }
         $('#detail'+rsvNum).toggleClass('none');
     });
-    $('.rsvList').on("click",".commentBtn",function() {
+    $('.rsvList').on("click",".commentBtn",function() {//리뷰쓰기 버튼이 눌렸을 경우
         rsvNum=$(this).attr('id').substr(10);
-        commObj.rsvNum=Number($('#rsvNum'+rsvNum)[0].innerHTML);
-        commObj.bno=Number($('#rsvBox'+rsvNum+' .like').eq(0).val());
+        commObj.rsvNum=Number(rsvNum);
+        commObj.bno=Number($('#rsvBox'+rsvNum+' .like').attr('value'));
         $("#modal_container").show();
     });
     $('.rsvList').on("click",".cancelBtn",function() {

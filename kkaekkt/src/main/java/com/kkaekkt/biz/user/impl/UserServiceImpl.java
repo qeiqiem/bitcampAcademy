@@ -72,14 +72,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void deleteUser(PersonVO vo) {
+	public void deleteUser(AccountVO vo) {
 		System.out.println("회원탈퇴 서비스 옴");
-		userDao.deleteUser(vo);
-
-	}
-
-	@Override
-	public void deleteUser(BusinessVO vo) {
 		userDao.deleteUser(vo);
 
 	}
@@ -97,7 +91,7 @@ public class UserServiceImpl implements UserService {
 		return userDao.getUser(vo);
 	}
 	
-	public PersonVO method(PersonVO vo) {
+	public AccountVO method(AccountVO vo) {
 		System.out.println("소셜유저로그인 servie옴");		
 		return userDao.getUserSNS(vo);
 	}
@@ -120,17 +114,17 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public BusinessVO getComspec(BusinessVO vo) {
 		// System.out.println("servie옴");
-		vo.setLaundryList(userDao.getLaundry(vo));
-		vo.setScheduleList(userDao.getSchedule(vo));
+		vo.setLaundryList(userDao.getLaundry(vo.getBno()));
+		vo.setScheduleList(userDao.getSchedule(vo.getBno()));
 		return vo;
 	}
 
 	@Override
 	public BusinessVO getCoinspec(BusinessVO vo) {
 		// System.out.println("servie옴");
-		vo.setEquipmentList(userDao.getEquipment(vo));
-		vo.setEtcList(userDao.getEtc(vo));
-		vo.setScheduleList(userDao.getSchedule(vo));
+		vo.setEquipmentList(userDao.getEquipment(vo.getBno()));
+		vo.setEtcList(userDao.getEtc(vo.getBno()));
+		vo.setScheduleList(userDao.getSchedule(vo.getBno()));
 		return vo;
 	}
 
@@ -178,13 +172,6 @@ public class UserServiceImpl implements UserService {
 		return userDao.joinCfm(vo);
 	}
 
-	// PW 변경
-	@Override
-	public void updatePw(AccountVO vo) {
-		System.out.println("pw변경 서비스옴");
-		userDao.updatePw(vo);
-	}
-	//logoin?
 	@Override
 	public PersonVO getPerson(int mno) {
 		return userDao.getPerson(mno);
@@ -194,9 +181,13 @@ public class UserServiceImpl implements UserService {
 		return userDao.getBusiness(vo);
 	}
 	@Override
-	public List<LaundryVO> getSalse(int bno) {		// 하루 매출 
-		return userDao.getSalse(bno);
+	public List<LaundryVO> getLaundryList(int bno) {
+		return userDao.getLaundry(bno);
 	}
+
+
+
+
 
 
 }

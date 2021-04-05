@@ -5,6 +5,7 @@ public class LaundryVO {
 	private String rsvDate;
 	private int rsvNum;
 	private String mname;
+	private String bname;
 	private int mno;
 	private int dDay;
 	private int lno;
@@ -13,6 +14,12 @@ public class LaundryVO {
 	private String state;
 	private int price;
 	
+	public String getBname() {
+		return bname;
+	}
+	public void setBname(String bname) {
+		this.bname = bname;
+	}
 	public int getMno() {
 		return mno;
 	}

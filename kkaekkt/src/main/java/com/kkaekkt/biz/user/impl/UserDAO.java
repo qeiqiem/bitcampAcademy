@@ -46,13 +46,9 @@ public class UserDAO {
 		mybatis.update("UserDAO.updateBs", vo);
 	}
 
-	public void deleteUser(PersonVO vo) {
+	public void deleteUser(AccountVO vo) {
 		System.out.println("mybatis로 기능처리 - 회원탈퇴");
-		mybatis.delete("UserDAO.deletePs", vo);
-	}
-
-	public void deleteUser(BusinessVO vo) {
-		mybatis.delete("UserDAO.deleteBs", vo);
+		mybatis.delete("UserDAO.deleteUser", vo);
 	}
 
 	public List<BusinessVO> getLikedBs(int mno) {
@@ -67,7 +63,7 @@ public class UserDAO {
 		return res;
 	}
 		// 소셜 로그인
-		public PersonVO getUserSNS(PersonVO vo) {
+		public AccountVO getUserSNS(AccountVO vo) {
 			System.out.println("mybatis로 기능처리 소셜유저");
 			return mybatis.selectOne("UserDAO.getPersonSNS", vo);
 		}
@@ -81,25 +77,23 @@ public class UserDAO {
 		}
 
 	// laundry
-	public List<LaundryVO> getLaundry(BusinessVO vo) {
-		// System.out.println("dao : " + mybatis.selectList("UserDAO.getcomspecList",vo)
-		// );
-		return mybatis.selectList("UserDAO.getLaundryList", vo);
+	public List<LaundryVO> getLaundry(int bno) {
+		return mybatis.selectList("UserDAO.getLaundryList", bno);
 	}
 
 	// equipment
-	public List<EquipmentVO> getEquipment(BusinessVO vo) {
-		return mybatis.selectList("UserDAO.getEquipmentList", vo);
+	public List<EquipmentVO> getEquipment(int bno) {
+		return mybatis.selectList("UserDAO.getEquipmentList", bno);
 	}
 
 	// etc
-	public List<EtcVO> getEtc(BusinessVO vo) {
-		return mybatis.selectList("UserDAO.getEtc", vo);
+	public List<EtcVO> getEtc(int bno) {
+		return mybatis.selectList("UserDAO.getEtc", bno);
 	}
 
 	// schedule
-	public List<ScheduleVO> getSchedule(BusinessVO vo) {
-		return mybatis.selectList("UserDAO.getScheduleList", vo);
+	public List<ScheduleVO> getSchedule(int bno) {
+		return mybatis.selectList("UserDAO.getScheduleList", bno);
 	}
 
 	public void updateSpec(BusinessVO vo) {

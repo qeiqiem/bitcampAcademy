@@ -207,16 +207,16 @@ public class UserController {
 
 	// 소셜로그인
 	@RequestMapping(value = "/loginSNS.do", method = RequestMethod.POST)
-	public String kakaologin(PersonVO vo, HttpSession session, HttpServletResponse response) {
+	public String kakaologin(AccountVO vo, HttpSession session, HttpServletResponse response) {
 		System.out.println("카카오 로그인 컨트롤러 접속");
 		// 로그인 성공했을 때
 		vo = userService.method(vo);
 
-		PersonVO user = vo;
+		AccountVO user = vo;
 		System.out.println(user); // 카카오 로그인시 vo 확인
 
-		if (user.getState() != 0) {
-			session.setAttribute("person", user);
+		if (user.getMno() != 0) {
+			session.setAttribute("user", user);
 			System.out.println("user정보 " + user);
 			return "/jsp/indexPerson.jsp";
 		} else {
@@ -247,14 +247,13 @@ public class UserController {
 	// 일반설비관리
 	@RequestMapping(value = "/selectCoinspec.do", method = RequestMethod.POST, produces = "application/text;charset=utf-8")
 	@ResponseBody
-	public String SelcetCoinspec(BusinessVO vo) {
+	public String SelcetCoinspec(BusinessVO vo) {//여기도 bno 하나만 전달해서 처리가능함 
 		System.out.println(vo);
 		Gson gson = new Gson();
 		String coinspec = gson.toJson(userService.getCoinspec(vo));
 		System.out.println("test:" + coinspec);
-		
-		return coinspec;
 
+		return coinspec;
 	}
 
 	// 일반(사양,설비)관리 update
@@ -324,25 +323,18 @@ public class UserController {
 	}
 	
 	// 회원탈퇴
-	@RequestMapping(value = "/deletePs.do", method = RequestMethod.POST)
-	public void deleteUser(PersonVO vo) {
+	@RequestMapping(value = "/deletePs.do", method = RequestMethod.GET)
+	public void deleteUser(AccountVO vo, HttpSession session ) {
 		System.out.println("회원탈퇴 controller옴");
+		AccountVO userDel = (AccountVO) session.getAttribute("user");
+		System.out.println(userDel);
 		userService.deleteUser(vo);
-		
 	}
-
-	// 비번변
-	@RequestMapping(value = "/updatePw.do", method = RequestMethod.POST)
-	public String updatePw(AccountVO vo) {
-		userService.updatePw(vo);
-		return "/jsp/login/loginPs.jsp";
-	}
-
-	@RequestMapping(value = "/mymark.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/mymark.do", method = RequestMethod.GET)
 	public String getUserDetail(HttpSession session,Model model) {
 		Gson gson = new Gson();
 		AccountVO account = (AccountVO) session.getAttribute("user");
-		model.addAttribute("userDetail", gson.toJson(userService.getPerson(account.getMno())))
+		model.addAttribute("userDetail", userService.getPerson(account.getMno()))
 			 .addAttribute("likedBsList",gson.toJson(userService.getLikedBs(account.getMno())));
 		return "/jsp/mypageUser/mymark.jsp";
 	}
@@ -353,8 +345,8 @@ public class UserController {
 		AccountVO account = (AccountVO) session.getAttribute("user");
 		model.addAttribute("person", userService.getPerson(account.getMno()));
 		return "/jsp/mypageUser/mybio.jsp";
+//		return "/jsp/mypageUser/Test_mybio.jsp";
 	}
-
 	// 업체 프로필 정보 get
 	@RequestMapping(value = "/bsBio.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String getBusiness(BusinessVO vo, HttpSession session, Model model) {
@@ -373,16 +365,10 @@ public class UserController {
 			return "/jsp/mypageBizCoin/coinbio.jsp";
 		}
 	}
-	// 매출관리
-	@RequestMapping(value = "/selectSalse.do", method = RequestMethod.POST, produces = "application/text;charset=utf-8")
+	@RequestMapping(value="/getLaundryList.do", method = RequestMethod.POST, produces = "application/text;charset=utf-8")
 	@ResponseBody
-	public String selectSalse(int bno) {
+	public String getLaundryList(int bno) {
 		Gson gson = new Gson();
-		String sales = gson.toJson(userService.getSalse(bno));
-		System.out.println("test:" + sales);
-
-		return sales;
-
+		return gson.toJson(userService.getLaundryList(bno));
 	}
-
 }
