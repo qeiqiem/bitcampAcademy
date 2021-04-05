@@ -189,6 +189,11 @@ public class UserServiceImpl implements UserService {
 	public List<LaundryVO> getLaundryList(int bno) {
 		return userDao.getLaundry(bno);
 	}
+	@Override
+	public void deleteUser(BusinessVO vo) {
+		// TODO Auto-generated method stub
+		
+	}
 
 
 }
