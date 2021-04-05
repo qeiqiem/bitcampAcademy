@@ -214,16 +214,16 @@ public class UserController {
 
 	// 소셜로그인
 	@RequestMapping(value = "/loginSNS.do", method = RequestMethod.POST)
-	public String kakaologin(PersonVO vo, HttpSession session, HttpServletResponse response) {
+	public String kakaologin(AccountVO vo, HttpSession session, HttpServletResponse response) {
 		System.out.println("카카오 로그인 컨트롤러 접속");
 		// 로그인 성공했을 때
 		vo = userService.method(vo);
 
-		PersonVO user = vo;
+		AccountVO user = vo;
 		System.out.println(user); // 카카오 로그인시 vo 확인
 
-		if (user.getState() != 0) {
-			session.setAttribute("person", user);
+		if (user.getMno() != 0) {
+			session.setAttribute("user", user);
 			System.out.println("user정보 " + user);
 			return "/jsp/indexPerson.jsp";
 		} else {
@@ -331,9 +331,11 @@ public class UserController {
 	}
 	
 	// 회원탈퇴
-	@RequestMapping(value = "/deletePs.do", method = RequestMethod.POST)
-	public void deleteUser(PersonVO vo) {
+	@RequestMapping(value = "/deletePs.do", method = RequestMethod.GET)
+	public void deleteUser(AccountVO vo, HttpSession session ) {
 		System.out.println("회원탈퇴 controller옴");
+		AccountVO userDel = (AccountVO) session.getAttribute("user");
+		System.out.println(userDel);
 		userService.deleteUser(vo);
 		
 	}
@@ -345,6 +347,7 @@ public class UserController {
 		vo.setMno(account.getMno());
 		model.addAttribute("person", userService.getPerson(vo));
 		return "/jsp/mypageUser/mybio.jsp";
+//		return "/jsp/mypageUser/Test_mybio.jsp";
 	}
 	// 업체 프로필 정보 get
 		@RequestMapping(value = "/bsBio.do", method = RequestMethod.GET)

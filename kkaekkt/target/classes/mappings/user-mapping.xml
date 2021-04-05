@@ -64,15 +64,15 @@
 			</otherwise>
 		</choose>
 	</update>
-    <select id="countLikeBs" resultType="_int">
-        SELECT count(mno) FROM liked
-        WHERE bno=#{bno};
-    </select>
-    <select id="avgGradeBs" resultType="_double">
-	   SELECT round(AVG(grade),1)
-	   FROM comments
-	   WHERE bno=#{bno};
-    </select>
+	<select id="countLikeBs" resultType="_int">
+		SELECT count(mno) FROM liked
+		WHERE bno=#{bno};
+	</select>
+	<select id="avgGradeBs" resultType="_double">
+		SELECT round(AVG(grade),1)
+		FROM comments
+		WHERE bno=#{bno};
+	</select>
 	<update id="updateSpec">
 		<choose>
 			<when test="bizType==1"> <!-- 일반세탁소라면 -->
@@ -107,13 +107,18 @@
 		</choose>
 	</update>
 	<select id="getPerson" resultType="person">
-		SELECT ac.mno as mno, id, password, mname, phone, birth, address, email
-		FROM account ac, member mb
+		SELECT ac.mno as mno, id,
+		password, mname, phone, birth, address, email
+		FROM account ac, member
+		mb
 		WHERE ac.mno=mb.mno AND ac.mno=#{mno};
 	</select>
 	<select id="getBusiness" resultType="business">
-		SELECT ac.mno as mno, bs.bno, id, password, bname, phone, address, email, bz.typenum as bizType, bkno as bankNum, acno as bankAccountNum
-		FROM account ac, business bs, biztype bz
+		SELECT ac.mno as mno,
+		bs.bno, id, password, bname, phone, address, email, bz.typenum as
+		bizType, bkno as bankNum, acno as bankAccountNum
+		FROM account ac,
+		business bs, biztype bz
 		WHERE ac.mno=bs.mno
 		AND bs.typeNum=bz.typenum
 		AND mno=#{mno};
@@ -140,15 +145,16 @@
 		FROM account ac
 		left outer join member mb on ac.mno=mb.mno
 		left outer join reservation res on mb.mno=res.mno
-		<if test="stno == 3 or stno == 4">
-			AND id=#{id} AND password=#{password};
-		</if> 
+		WHERE stno='3' and id=#{id} and password=#{password};
 	</delete>
 	<!-- 로그인들 -->
 	<select id="getAccount" resultType="account">
-		SELECT ac.mno,bno,mname,b.bname,mtype
-		FROM (SELECT mno,mtype FROM account WHERE id=#{id} AND password=#{password}) ac
-		LEFT JOIN member m ON m.mno=ac.mno
+		SELECT
+		ac.mno,bno,mname,b.bname,mtype
+		FROM (SELECT mno,mtype,id,password FROM account
+		WHERE id=#{id} AND password=#{password}) ac
+		LEFT JOIN member m ON
+		m.mno=ac.mno
 		LEFT JOIN business b ON b.mno=ac.mno;
 	</select>
 	<select id="getPersonSNS" resultType="person">
@@ -159,10 +165,7 @@
 		AND email=#{email};
 	</select>
 	<select id="getEmail" resultType="int">
-	<!-- 	SELECT *
-		FROM member
-		WHERE
-		email=#{email); -->
+		<!-- SELECT * FROM member WHERE email=#{email); -->
 
 		SELECT count(*)
 		FROM member m
@@ -170,11 +173,14 @@
 		WHERE m.email=#{email} OR b.email=#{email};
 	</select>
 	<select id="getLikedBs" resultType="business"><!-- 찜한 업체 목록 조회 -->
-		SELECT IFNULL(comm,0) count,l.bno,bname,IFNULL(ROUND(eval,1),0) eval,address,phone
-		FROM business b ,liked l 
-		LEFT OUTER JOIN (SELECT count(mno) comm,AVG(grade) eval, bno FROM comments WHERE depth=0 GROUP BY bno) c ON c.bno=l.bno
+		SELECT IFNULL(comm,0) count,l.bno,bname,IFNULL(ROUND(eval,1),0)
+		eval,address,phone
+		FROM business b ,liked l
+		LEFT OUTER JOIN (SELECT count(mno) comm,AVG(grade) eval, bno FROM comments
+		WHERE depth=0 GROUP BY bno) c ON c.bno=l.bno
 		WHERE l.bno=b.bno
-		AND l.mno=#{mno}
+		AND
+		l.mno=#{mno}
 		GROUP BY b.bno;
 	</select>
 	<!-- 관리자 페이지 기능이기 때문에 일단 대기.. -->
@@ -201,7 +207,8 @@
 		SELECT bs.schno, time
 		FROM bsn_schedule bs, schedule sc
 		WHERE bs.schno = sc.schno
-		AND bno=#{bno};
+		AND
+		bno=#{bno};
 	</select>
 	<select id="findId" resultType="account">
 
@@ -230,7 +237,7 @@
 		SELECT count(*)
 		FROM account
 		WHERE
-		id=#{id} AND password=#{password};
+		id=#{id};
 	</select>
 	<select id="joinCfm" resultType="account">
 		SELECT id, mname, bname

@@ -76,14 +76,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void deleteUser(PersonVO vo) {
+	public void deleteUser(AccountVO vo) {
 		System.out.println("회원탈퇴 서비스 옴");
-		userDao.deleteUser(vo);
-
-	}
-
-	@Override
-	public void deleteUser(BusinessVO vo) {
 		userDao.deleteUser(vo);
 
 	}

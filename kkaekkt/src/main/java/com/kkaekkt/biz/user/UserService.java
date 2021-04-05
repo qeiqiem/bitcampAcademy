@@ -7,8 +7,8 @@ public interface UserService {
 	public void insertUser(BusinessVO vo);
 	public void updateUser(PersonVO vo);
 	public void updateUser(BusinessVO vo);
-	public void deleteUser(PersonVO vo);
-	public void deleteUser(BusinessVO vo);
+	public void deleteUser(AccountVO vo);
+//	public void deleteUser(BusinessVO vo);
 	public void likeOn(BusinessVO vo);
 	public void likeOff(BusinessVO vo);
 	public AccountVO getUser(AccountVO vo);

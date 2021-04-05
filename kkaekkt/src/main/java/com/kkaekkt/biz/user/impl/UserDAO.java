@@ -46,13 +46,9 @@ public class UserDAO {
 		mybatis.update("UserDAO.updateBs", vo);
 	}
 
-	public void deleteUser(PersonVO vo) {
+	public void deleteUser(AccountVO vo) {
 		System.out.println("mybatis로 기능처리 - 회원탈퇴");
-		mybatis.delete("UserDAO.deletePs", vo);
-	}
-
-	public void deleteUser(BusinessVO vo) {
-		mybatis.delete("UserDAO.deleteBs", vo);
+		mybatis.delete("UserDAO.deleteUser", vo);
 	}
 
 	public List<BusinessVO> getLikedBs(int mno) {
