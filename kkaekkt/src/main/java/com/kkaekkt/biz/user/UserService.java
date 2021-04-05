@@ -2,6 +2,8 @@ package com.kkaekkt.biz.user;
 
 import java.util.List;
 
+import com.kkaekkt.biz.comm.LaundryVO;
+
 public interface UserService {
 	public void insertUser(PersonVO vo);
 	public void insertUser(BusinessVO vo);
@@ -27,5 +29,6 @@ public interface UserService {
 	public int idchkBs(BusinessVO vo);
 	public PersonVO getPerson(int mno);
 	public BusinessVO getBusiness(BusinessVO vo);
+	public List<LaundryVO> getSalse(int bno);
 
 }

@@ -5,52 +5,50 @@
 <link href='../lib/main.css' rel='stylesheet' />
 <script src='../lib/main.js'></script>
 <script>
-
-  document.addEventListener('DOMContentLoaded', function() {
+  //var sales = new Array();
+  document.addEventListener('DOMContentLoaded', function () {
     var calendarEl = document.getElementById('calendar');
-
     var calendar = new FullCalendar.Calendar(calendarEl, {
       headerToolbar: {
-        left: 'prevYear,prev,next,nextYear today',    // 클릭시 전달 한달치 데이터를 가져와야함 
-        center: 'title',
-        right: 'dayGridMonth,dayGridWeek,dayGridDay'
+        // left: 'prevYear,prev,next,nextYear today',    // 클릭시 전달 한달치 데이터를 가져와야함 
+        // center: 'title'
+        // right: 'dayGridMonth,dayGridWeek,dayGridDay'
       },
       initialDate: new Date(),
       navLinks: true, // can click day/week names to navigate views
-      editable: true,
+      editable: false,
       dayMaxEvents: true, // allow "more" link when too many events
-      events: [
-        {
-          title: '215000원',         // 일일 매출 
-          start: '2021-03-02',  
-          color: '#FFBB3A'        
-        },
-        {
-        	title: '120000원',         // 일일 매출 
-            start: '2021-03-03',  
-            color: 'rgb(116, 116, 116)'    
-        },
-        {
-        	title: '250000원',         // 일일 매출 
-            start: '2021-03-04',  
-            color: '#FFBB3A'    
-        },
-        {
-        	title: '300000원',         // 일일 매출 
-            start: '2021-03-05',  
-            color: 'rgb(200, 228, 255)'    
-        }
-      ]
-    });
+      events: function (info, successCallback, failureCallback) {
+        $.post({
+          url: "/selectSalse.do",
+          data: pageObj,
+          success: function (data) {
+            console.log('ajax 함수 완료');
+            let sales = JSON.parse(data);
+            console.log(sales);
+            var events = [];
+            $.each(sales, function (index, item) {
+              events.push({
+                title: item.price + "원",
+                start: item.rsvDate
+              }); // push end
+
+            }); // each end
+            console.log(events);
+            successCallback(events);
+          }// success end
+        });  // ajax end
+      }, // event end
+
+    }); // calender end
 
     calendar.render();
-  });
+  }); // document end
 
 </script>
 <style>
 
   body {
-    margin: 40px 10px;
     padding: 0;
     font-size: 14px;
   }

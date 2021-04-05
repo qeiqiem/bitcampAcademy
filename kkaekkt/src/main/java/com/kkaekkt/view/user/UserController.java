@@ -254,7 +254,7 @@ public class UserController {
 		Gson gson = new Gson();
 		String coinspec = gson.toJson(userService.getCoinspec(vo));
 		System.out.println("test:" + coinspec);
-
+		
 		return coinspec;
 
 	}
@@ -366,5 +366,17 @@ public class UserController {
 		} else {
 			return "/jsp/mypageBizCoin/coinbio.jsp";
 		}
+	}
+
+	// 매출관리
+	@RequestMapping(value = "/selectSalse.do", method = RequestMethod.POST, produces = "application/text;charset=utf-8")
+	@ResponseBody
+	public String selectSalse(int bno) {
+		Gson gson = new Gson();
+		String sales = gson.toJson(userService.getSalse(bno));
+		System.out.println("test:" + sales);
+
+		return sales;
+
 	}
 }
