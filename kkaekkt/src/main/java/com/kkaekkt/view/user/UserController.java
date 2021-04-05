@@ -1,5 +1,7 @@
 package com.kkaekkt.view.user;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
@@ -60,13 +62,13 @@ public class UserController {
 	// 아이디 중복체크
 	@RequestMapping(value = "/idchk.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String idchk(PersonVO vo) {
-		System.out.println("vo 값 담겼음");
-		System.out.println(vo);
-		Gson gson = new Gson();
-		vo.setState(userService.idchk(vo));
-		System.out.println("서비스에서 값 담겨 넘어옴");
-		return gson.toJson(vo);
+	public int idchk(PersonVO vo) {
+//		System.out.println("vo 값 담겼음");
+//		System.out.println(vo);
+//		Gson gson = new Gson();
+//		vo.setState(userService.idchk(vo));
+//		System.out.println("서비스에서 값 담겨 넘어옴");
+		return userService.idchk(vo);
 	}
 
 	// 회원개입-개인
@@ -181,22 +183,23 @@ public class UserController {
 	}
 
 	// 아이디 중복체크 업체........
-	@RequestMapping(value = "/idchkBs.do", method = RequestMethod.POST)
-	@ResponseBody
-	public String idchkBs(BusinessVO vo) {
-		System.out.println("vo 값 담겼음");
-		System.out.println(vo);
-		Gson gson = new Gson();
-		vo.setState(userService.idchkBs(vo));
-		System.out.println("서비스에서 값 담겨 넘어옴");
-		return gson.toJson(vo);
-	}
+//	@RequestMapping(value = "/idchkBs.do", method = RequestMethod.POST)
+//	@ResponseBody
+//	public String idchkBs(BusinessVO vo) {
+//		System.out.println("vo 값 담겼음");
+//		System.out.println(vo);
+//		Gson gson = new Gson();
+//		vo.setState(userService.idchkBs(vo));
+//		System.out.println("서비스에서 값 담겨 넘어옴");
+//		return gson.toJson(vo);
+//	}
 
 	// 일반유저 로그인
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String Login(AccountVO vo, HttpSession session) {
 			AccountVO result = userService.getUser(vo);
+			System.out.println(result);
 			if (result == null) {
 				return "fail";
 			} else {
@@ -212,12 +215,12 @@ public class UserController {
 		// 로그인 성공했을 때
 		vo = userService.method(vo);
 
-		AccountVO user = vo;
-		System.out.println(user); // 카카오 로그인시 vo 확인
+		//AccountVO user = vo;
+		System.out.println(vo); // 카카오 로그인시 vo 확인
 
-		if (user.getMno() != 0) {
-			session.setAttribute("user", user);
-			System.out.println("user정보 " + user);
+		if (vo.getMno() != 0) {
+			session.setAttribute("person", vo);
+			System.out.println("user정보 " + vo);
 			return "/jsp/indexPerson.jsp";
 		} else {
 			System.out.println("로그인 실패");
@@ -269,11 +272,21 @@ public class UserController {
 
 	// 아이디찾기
 	@RequestMapping(value = "/findId.do", method = RequestMethod.POST)
-	public String findId(AccountVO vo, Model model) {
+	public String findId(AccountVO vo, Model model,HttpServletResponse response) throws IOException {
+	   
 		System.out.println("findID 진입");
 		System.out.println(vo);
-		model.addAttribute("userId", userService.findId(vo));
-		return "/jsp/login/findIdConfirmed.jsp";
+		vo=userService.findId(vo);
+		if(vo!=null) {
+			model.addAttribute("userId", vo);
+			return "/jsp/login/findIdConfirmed.jsp";			
+		}else {
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            out.println("<script>alert('해당 정보로 가입된 내역이 없습니다.'); history.go(-1);</script>");
+            out.flush();
+            return "/jsp/login/find.jsp";
+		}
 	}
 
 	// 비밀번호찾기
@@ -324,11 +337,18 @@ public class UserController {
 	
 	// 회원탈퇴
 	@RequestMapping(value = "/deletePs.do", method = RequestMethod.GET)
-	public void deleteUser(AccountVO vo, HttpSession session ) {
+	@ResponseBody
+	public String deleteUser(AccountVO vo) {
 		System.out.println("회원탈퇴 controller옴");
-		AccountVO userDel = (AccountVO) session.getAttribute("user");
-		System.out.println(userDel);
 		userService.deleteUser(vo);
+		System.out.println(vo);
+		
+		if(vo == null) {
+			return "fail";
+		} else {
+			return "/jsp/index.jsp";			
+		}
+		
 	}
 	@RequestMapping(value = "/mymark.do", method = RequestMethod.GET)
 	public String getUserDetail(HttpSession session,Model model) {
@@ -345,7 +365,6 @@ public class UserController {
 		AccountVO account = (AccountVO) session.getAttribute("user");
 		model.addAttribute("person", userService.getPerson(account.getMno()));
 		return "/jsp/mypageUser/mybio.jsp";
-//		return "/jsp/mypageUser/Test_mybio.jsp";
 	}
 	// 업체 프로필 정보 get
 	@RequestMapping(value = "/bsBio.do", method = {RequestMethod.GET, RequestMethod.POST})

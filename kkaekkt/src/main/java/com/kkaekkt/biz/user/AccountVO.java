@@ -106,8 +106,7 @@ public class AccountVO {
 	public String toString() {
 		return "AccountVO [mno=" + mno + ", bno=" + bno + ", id=" + id + ", password=" + password + ", name=" + name
 				+ ", phone=" + phone + ", address=" + address + ", email=" + email + ", emailchk=" + emailchk
-				+ ", mtype=" + mtype + ", idchk=" + idchk + ", stno=" + stno + "]";
+				+ ", mtype=" + mtype + ", idchk=" + idchk + "]";
 	}
-
 	
 }

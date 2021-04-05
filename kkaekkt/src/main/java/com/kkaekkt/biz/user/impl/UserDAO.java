@@ -51,6 +51,10 @@ public class UserDAO {
 		mybatis.delete("UserDAO.deleteUser", vo);
 	}
 
+	public void deleteUser(BusinessVO vo) {
+		mybatis.delete("UserDAO.deleteBs", vo);
+	}
+
 	public List<BusinessVO> getLikedBs(int mno) {
 		return mybatis.selectList("UserDAO.getLikedBs", mno);
 	}
