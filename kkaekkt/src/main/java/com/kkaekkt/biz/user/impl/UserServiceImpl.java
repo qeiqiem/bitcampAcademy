@@ -189,13 +189,6 @@ public class UserServiceImpl implements UserService {
 	public List<LaundryVO> getLaundryList(int bno) {
 		return userDao.getLaundry(bno);
 	}
-    @Override
-    public List<LaundryVO> getSales(int bno) {        // 하루 매출 
-        return userDao.getSales(bno);
-    }
-
-
-
 
 
 }

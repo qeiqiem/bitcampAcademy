@@ -224,9 +224,6 @@
 		b.mno=a.mno
 		WHERE id=#{id};
 	</select>
-	<!-- 매출관리-->
-    <select id="getSales" resultType="laundry">
-        
-    </select>
+	
 </mapper>
 
