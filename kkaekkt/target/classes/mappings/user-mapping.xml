@@ -58,7 +58,11 @@
 			</when>
 			<otherwise>
 				<!-- UPDATE account SET password=#{password} WHERE mno=#{mno}; -->
+<<<<<<< HEAD
+				UPDATE member SET
+=======
 				UPDATE `member` SET
+>>>>>>> 97dab2f613d22881ff5931f379138215922b6ff8
 				phone=#{phone},birth=#{birth},address=#{address},email=#{email}
 				WHERE mno=#{mno};
 			</otherwise>
@@ -136,6 +140,19 @@
 	</update>
 	<!-- 회원탈퇴 -->
 	<delete id="deleteUser">
+<<<<<<< HEAD
+		DELETE ac, mb, res 
+		FROM account ac 
+		left outer join member mb on ac.mno=mb.mno
+		left outer join reservation res on mb.mno=res.mno 
+		WHERE stno='3' and id=#{id} AND password=#{password}; 
+	</delete>
+	<!-- 로그인들 -->
+	<select id="getAccount" resultType="account">
+		SELECT ac.mno,bno,mname,b.bname,mtype,ac.id,ac.password
+		FROM (SELECT mno,mtype,id,password FROM account WHERE id=#{id} AND password=#{password}) ac
+		LEFT JOIN member m ON m.mno=ac.mno
+=======
 		DELETE ac, mb, res
 		FROM account ac
 		left outer join `member` mb on ac.mno=mb.mno
@@ -149,6 +166,7 @@
 		SELECT ac.mno,bno,mname,b.bname,mtype
 		FROM (SELECT mno,mtype FROM account WHERE id=#{id} AND password=#{password}) ac
 		LEFT JOIN `member` m ON m.mno=ac.mno
+>>>>>>> 97dab2f613d22881ff5931f379138215922b6ff8
 		LEFT JOIN business b ON b.mno=ac.mno;
 	</select>
 	<select id="getPersonSNS" resultType="person">
