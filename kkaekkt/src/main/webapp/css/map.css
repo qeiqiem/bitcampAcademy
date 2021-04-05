@@ -19,7 +19,7 @@
 .rating__icon--star2 { color: lightgray; }
 .rating__icon--none { color: #eee; }
 
-/* �뒳�씪�씠�뱶 遺�紐� */
+/*  뒳 씪 씠 뱶 遺 紐  */
 .slide_container{
     flex-direction: row;
     position: relative;
@@ -58,7 +58,7 @@
     background-color: #f0f0f0;
 }
 .slide_res div{
-	padding-inline-start: 23px;
+   padding-inline-start: 23px;
     height: auto;
     background: white;
 }
@@ -68,11 +68,11 @@
     margin: auto;
 } */
 #resShortOpt{
-	width: 95%;
+   width: 95%;
     height: 160px;
 }
 #resShortOpt table>tr{
-	height: 10px;
+   height: 10px;
 }
 #resLongOpts{
     width: 100%;
@@ -96,7 +96,7 @@
 }
 
 #res_p{
-	width: 100%;
+   width: 100%;
     height: 32px;
     margin: 0;
     padding-block-start: 17px;
@@ -214,7 +214,7 @@
     white-space: nowrap;
     margin: 0;
 }
-/* footer : �븯�떒�쓽 由ъ뒪�듃/�떒�씪議고쉶/�삁�빟�븯湲� �벑 援щ텇 */
+/* footer :  븯 떒 쓽 由ъ뒪 듃/ 떒 씪議고쉶/ 삁 빟 븯湲   벑 援щ텇 */
 
 .footer{
     margin-top: 33px;
@@ -241,20 +241,20 @@
     
 }
 .searchtag :nth-child(1) {
-	float: left;
-    font-size: 14px;	
+   float: left;
+    font-size: 14px;   
 }
 
 .searchtag :nth-child(2) {
-	float: right;
+   float: right;
     margin-right: 10%;
-    font-size: 12px;	
+    font-size: 12px;   
 }
 
 .searchtag :nth-child(3) {
-	float: right;
+   float: right;
     margin-right: 10%;
-    font-size: 12px;	
+    font-size: 12px;   
 }
 .slide_card{
     margin-top: 22px;
@@ -434,7 +434,7 @@
     border: 1px solid lightgray;
 }
 
-/* �뾽泥댁젙蹂�/由щ럭 踰꾪듉�젣�뼱------------------------ */
+/*  뾽泥댁젙蹂 /由щ럭 踰꾪듉 젣 뼱------------------------ */
 .infoBtn{
     width: 50%;
     height: 40px;
@@ -473,7 +473,7 @@
     display: none;
 }
 
-/* �궡遺��슂�냼 */
+/*  궡遺  슂 냼 */
 .comhead{
     width: 100%;
     height: 20px;
@@ -528,7 +528,7 @@
 }
 
 .comment{
-	width: 80%;
+   width: 80%;
     height: 58px;
     border: 0px;
     margin: 0;
@@ -536,9 +536,9 @@
 }
 
 .res_totalprice{
-	display: none;
+   display: none;
 }
-/* �삁�빟 紐⑤떖愿��젴 �씠踰ㅽ듃 */
+/*  삁 빟 紐⑤떖愿  젴  씠踰ㅽ듃 */
 .res_loading {
     position: fixed;
     left: 50%;
@@ -601,9 +601,9 @@
     }
   }
   
-/* �럹�씠吏� 踰꾪듉 �슚怨� */
+/*  럹 씠吏  踰꾪듉  슚怨  */
 #pagination{
-	text-align: center;
+   text-align: center;
     border: 1px solid;
     width: 25px;
     height: 25px;
@@ -613,7 +613,7 @@
 
 /* 예약 */
 .fa-edit{
-	background: var(--key--color);
+   background: var(--key--color);
 }
 
 .totalAll{
@@ -627,10 +627,10 @@
     color: rgb(152 206 255);
 }
 .userInfo{
-	height: 20%;
+   height: 20%;
 }
 .userInfo p:nth-child(1){
-	padding-block-start: 17px;
+   padding-block-start: 17px;
     height: 15%;
 }
 .userInfo p:nth-child(2){
@@ -642,7 +642,7 @@
 }
 
 .sellerInfo p:nth-child(1){
-	width: 100%;
+   width: 100%;
     height: 30px;
     padding-block-start: 23px;
     margin-bottom: 6px;
@@ -651,7 +651,7 @@
     margin-top: 0;
 }
 .sellerInfo input:nth-child(3){
-	width: 90%;
+   width: 90%;
     height: 28px;
     margin-block-end: 6px;
     font-size: 14px;
@@ -660,14 +660,14 @@
     text-align: center;
 }
 .sellerInfo input:nth-child(4){
-	width: 90%;
+   width: 90%;
     height: 28px;
     margin-bottom: 10px;
     border: 1px solid lightgray;
     text-align: center;
 }
 .sellerInfo ul:nth-child(5) {
-	display: inline-block;
+   display: inline-block;
     margin-bottom: 10px;
     margin-top: 2px;
 }
@@ -675,14 +675,14 @@
     display: inline-block;
 }
 .sellerInfo ul li:nth-child(2) {
-	display: inline;
+   display: inline;
     font-size: 14px;
     color: red;
     text-align: right;
 }
 
 .sellerInfo p:nth-child(6) {
-	width: 84%;
+   width: 84%;
     height: 62px;
     color: lightgray;
     margin: 0;
@@ -698,7 +698,7 @@
 }
 
 .comBtn{
-	margin: 19px 26%;
+   margin: 19px 26%;
     width: 34%;
     height: 45px;
     border-radius: 31px;
@@ -709,7 +709,7 @@
 }
 
 .res_price{
-	text-align: right;
+   text-align: right;
     margin-right: 30px;
 }
 
@@ -719,7 +719,7 @@
 }
 
 .res_num{
-	text-align: center;
+   text-align: center;
     padding-right: 19px;
 }
 

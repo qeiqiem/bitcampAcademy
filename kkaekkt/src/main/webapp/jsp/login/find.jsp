@@ -23,15 +23,10 @@
                     <div id="nav_pw" class="unselect" onclick="showPW()">비밀번호 찾기</div>
                 </nav>
 
-                <form action="/findId.do" method="POST">
+                <form action="/findId.do" method="POST" name="findID">
                     <div id="findID">
                         <p>아이디와 비밀번호를 찾기 위해서는 이름, 회원정보에 등록된 이메일을 통해 본인인증을 받아야 합니다.</p>
                         <div class="veri_btn id_box">
-                            <!-- <div class="veri_btn idBox" onclick="check()"> -->
-                            <!-- <i class="far fa-envelope"></i> -->
-                            <!-- <i class="fas fa-envelope"></i> -->
-                            <!-- 내 정보에 저장된 이메일로 찾기 -->
-                            <!-- <input type="button" id="veri" value="" /> -->
                             <ul>
                                 <li>
                                     <input id="name" type="text" name="name" placeholder="이름을 입력하세요."> <br>
@@ -41,7 +36,8 @@
                                 </li>
                             </ul>
 
-                            <button type="submit" onclick="check();">다음</button>
+                            <!-- <button type="button" onclick="nameEmail();">다음</button> -->
+                            <button type="button" onclick="idSubmit();">다음</button>
                         </div>
 
 
@@ -51,7 +47,7 @@
                     </div>
                 </form>
 
-                <form action="/findPw.do" method="POST">
+                <form action="/findPw.do" method="POST" name="findPW">
                     <!-- <form action="/findPw.do" method="POST" onsubmit="return check()"> -->
                     <div id="findPW" style="display: none;">
                         <p>아이디와 비밀번호를 찾기 위해서는 이름, 회원정보에 등록된 이메일을 통해 본인인증을 받아야 합니다.
@@ -61,8 +57,8 @@
 
                         <!-- <form action=""> -->
                         <div class="veri_btn pw_box">
-                            <input type="text" name="id" placeholder="비밀번호를 찾을 아이디를 입력하세요."> <br>
-                            <button type="submit">다음</button>
+                            <input type="text" id="id" name="id" placeholder="비밀번호를 찾을 아이디를 입력하세요."> <br>
+                            <button type="button" onclick="pwSubmit()">다음</button>
                         </div>
 
                         <!-- </form> -->

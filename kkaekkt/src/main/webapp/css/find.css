@@ -32,7 +32,8 @@ input {
 button {
   width: 80px;
   border: none;
-  border-radius: 10px;
+  /* border-radius: 10px; */
+  border-radius: 38px;
   padding: 10px;
   background-color: var(--gray-color);
 }

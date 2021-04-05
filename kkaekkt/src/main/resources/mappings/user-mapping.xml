@@ -50,21 +50,6 @@
 			</otherwise>
 		</choose>
 	</insert>
-	
-	<update id="updatePs">
-		<choose>
-			<when test="email == null">
-				UPDATE account SET password=#{password} WHERE
-				mno=#{mno};
-			</when>
-			<otherwise>
-				<!-- UPDATE account SET password=#{password} WHERE mno=#{mno}; -->
-				UPDATE member SET
-				phone=#{phone},birth=#{birth},address=#{address},email=#{email}
-				WHERE mno=#{mno};
-			</otherwise>
-		</choose>
-	</update>
     <select id="countLikeBs" resultType="_int">
         SELECT count(mno) FROM liked
         WHERE bno=#{bno};
@@ -108,7 +93,7 @@
 		</choose>
 	</update>
 	<select id="getPerson" resultType="person">
-		SELECT ac.mno as mno, id, password, mname, phone, birth, address, email
+		SELECT ac.mno, id, password, mname, phone, birth, address, email
 		FROM account ac, member mb
 		WHERE ac.mno=mb.mno AND ac.mno=#{mno};
 	</select>
@@ -118,22 +103,14 @@
 		WHERE ac.mno=bs.mno
 		AND bs.typeNum=bz.typenum
 		AND ac.mno=#{mno};
-	</select>
+	</select>	
+	<update id="updatePs">
+			UPDATE member SET phone=#{phone},birth=#{birth},address=#{address},email=#{email}
+			WHERE mno=#{mno};
+	</update>
 	<update id="updateBs">
-		<choose>
-			<when test="email == null">
-				UPDATE account SET password=#{password} WHERE
-				mno=#{mno};
-			</when>
-			<otherwise>
-				<!-- UPDATE account SET password=#{password} WHERE mno=#{mno}; -->
-				UPDATE business SET
-				phone=#{phone},bkno=#{bankNum},acno=#{bankAccountNum},
-				address=#{address},email=#{email}
+				UPDATE business SET phone=#{phone},bkno=#{bankNum},acno=#{bankAccountNum}, address=#{address},email=#{email}
 				WHERE mno=#{mno};
-			</otherwise>
-		</choose>
-
 	</update>
 	<!-- 회원탈퇴 -->
 	<delete id="deleteUser">
@@ -185,11 +162,10 @@
 	</select>
 	<!-- 사양관리/설비관리 -->
 	<select id="getLaundryList" resultType="laundry">
-		SELECT bs.lno as lno,
-		lname as laundry, price
-		FROM bsn_laundry bs, laundry_type la, business
-		b
-		WHERE bs.lno=la.lno AND bs.bno=b.bno AND b.bno=#{bno};
+		SELECT b_l.lno, lname as laundry,price,bname
+		FROM bsn_laundry b_l, laundry_type l_t,business b
+		WHERE b_l.lno=l_t.lno AND b.bno=b_l.bno 
+		AND b_l.bno=#{bno};
 	</select>
 	<select id="getEquipmentList" resultType="equipment">
 		SELECT eno, cnt, price
@@ -206,10 +182,6 @@
 		AND bno=#{bno};
 	</select>
 	<select id="findId" resultType="account">
-
-		<!-- SELECT * FROM account ac LEFT JOIN member mb on ac.mno=mb.mno LEFT 
-			JOIN business bs on ac.mno=bs.mno WHERE (mname='테스트업체' AND mb.email='test@naver.com') 
-			OR (bname='테스트업체' AND bs.email='test@naver.com'); -->
 		SELECT id
 		FROM account ac
 		LEFT JOIN member mb on ac.mno=mb.mno
@@ -220,22 +192,18 @@
 		OR (bname=#{name} AND bs.email=#{email});
 	</select>
 	<select id="findPw" resultType="account">
-		<!-- SELECT b.email bmail, m.email mmail, id -->
-		SELECT b.email mmail, m.email bmail, id
+       SELECT b.email mmail, m.email bmail, id
 		FROM account ac
 		LEFT OUTER JOIN
 		member m on ac.mno=m.mno
 		LEFT OUTER JOIN business b on ac.mno=b.mno
 		WHERE ac.id=#{id};
 	</select>
-	
-	<update id="updatePw">
-		UPDATE account 
-		SET password=#{password} 
-		WHERE id=#{id};
-	</update>
-	
-	
+	    <update id="updatePw">
+        UPDATE account 
+        SET password=#{password} 
+        WHERE id=#{id};
+    </update>
 	<select id="idchk" resultType="int">
 		SELECT count(*)
 		FROM account
@@ -251,5 +219,9 @@
 		b.mno=a.mno
 		WHERE id=#{id};
 	</select>
+	<!-- 매출관리-->
+    <select id="getSales" resultType="laundry">
+        
+    </select>
 </mapper>
 
