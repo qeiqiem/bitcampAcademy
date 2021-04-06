@@ -124,4 +124,5 @@ public class ReservationDAO {
 	public List<LaundryVO> getSales(int bno) {
 		return mybatis.selectList("reservationDAO.getSales", bno);
 	}
+	
 }

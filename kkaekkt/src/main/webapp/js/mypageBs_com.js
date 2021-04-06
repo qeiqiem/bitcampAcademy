@@ -312,7 +312,7 @@ function printlist(list) {//리팩토링 무조건 필요함 뇌빼고 작업한
     });
 }
 function openPopup(rno){
-    var options = 'width=500, height=700, top=30, left=30, resizable=no, scrollbars=no, location=no';
+    var options = 'width=500, height=700, top=150, left=700, resizable=no, scrollbars=no, location=no';
 
     window.open("/openPopup.do?rsvNum="+rno, "printOrder", options);
 
