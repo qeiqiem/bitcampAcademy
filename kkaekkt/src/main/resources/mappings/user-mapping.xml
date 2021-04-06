@@ -52,11 +52,11 @@
 	</insert>
 
     <select id="countLikeBs" resultType="_int">
-        SELECT count(mno) FROM liked
+        SSELECT IFNULL(count(mno),0) FROM liked
         WHERE bno=#{bno};
     </select>
     <select id="avgGradeBs" resultType="_double">
-	   SELECT round(AVG(grade),1)
+	   SELECT IFNULL(round(AVG(grade),1),0) 
 	   	 FROM comments
 	    WHERE bno=#{bno};
     </select>
