@@ -340,13 +340,13 @@ public class UserController {
 	@ResponseBody
 	public String deleteUser(AccountVO vo) {
 		System.out.println("회원탈퇴 controller옴");
-		userService.deleteUser(vo);
+		int result = userService.deleteUser(vo);
 		System.out.println(vo);
 		
-		if(vo == null) {
+		if(result == 0) {
 			return "fail";
 		} else {
-			return "/jsp/index.jsp";			
+			return "success";			
 		}
 		
 	}

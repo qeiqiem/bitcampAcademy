@@ -121,20 +121,27 @@
 				UPDATE business SET phone=#{phone},bkno=#{bankNum},acno=#{bankAccountNum}, address=#{address},email=#{email}
 				WHERE mno=#{mno};
 	</update>
+	<!-- 회원탈퇴 전에 예약이 있는지 확인한다 -->
+	<select id="orderChk" resultType="int">
+		SELECT count(rno)
+          FROM reservation res, account ac
+	     WHERE res.mno=ac.mno
+		   AND stno in ('1','2')
+           AND id=#{id} AND password=#{password};
+	</select>
 	<!-- 회원탈퇴 -->
 	<delete id="deleteUser">
 		DELETE ac, mb, res
-		FROM account ac
-		left outer join `member` mb on ac.mno=mb.mno
-		left outer join reservation res on mb.mno=res.mno
-		<if test="stno == 3 or stno == 4">
-			AND id=#{id} AND password=#{password};
-		</if> 
+		FROM account AS ac
+		INNER JOIN member AS mb ON ac.mno = mb.mno 
+		INNER JOIN reservation AS res ON ac.mno=res.mno
+		WHERE id=#{id} AND password=#{password};
+		
 	</delete>
 	<!-- 로그인들 -->
 	<select id="getAccount" resultType="account">
-		SELECT ac.mno,bno,mname,b.bname,mtype
-		FROM (SELECT mno,mtype FROM account WHERE id=#{id} AND password=#{password}) ac
+		SELECT ac.mno,bno,mname,b.bname,mtype,id,password
+		FROM (SELECT mno,mtype,id,password FROM account WHERE id=#{id} AND password=#{password}) ac
 		LEFT JOIN `member` m ON m.mno=ac.mno
 		LEFT JOIN business b ON b.mno=ac.mno;
 	</select>
