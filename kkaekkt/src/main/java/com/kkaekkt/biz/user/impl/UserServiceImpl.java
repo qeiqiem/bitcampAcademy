@@ -72,19 +72,20 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int deleteUser(AccountVO vo) {
+	public String deleteUser(AccountVO vo) {
 		System.out.println("회원탈퇴 서비스 옴");
 		int result = userDao.orderChk(vo);
 		System.out.println(result);
 		
 		if(result == 0) {
-			return 0;
-			
+			if(1==userDao.deleteUser(vo)) {
+				return "success";
+			}else {
+				return "fail";
+			}
 		} else {
-			return userDao.deleteUser(vo);
+			return "fail";
 		}
-		
-
 	}
 	
 	// 로그인 들

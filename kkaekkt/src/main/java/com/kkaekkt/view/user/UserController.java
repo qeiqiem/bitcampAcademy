@@ -340,15 +340,7 @@ public class UserController {
 	@ResponseBody
 	public String deleteUser(AccountVO vo) {
 		System.out.println("회원탈퇴 controller옴");
-		int result = userService.deleteUser(vo);
-		System.out.println(vo);
-		
-		if(result == 0) {
-			return "fail";
-		} else {
-			return "success";			
-		}
-		
+		return userService.deleteUser(vo);
 	}
 	@RequestMapping(value = "/mymark.do", method = {RequestMethod.GET,RequestMethod.POST})
 	public String getUserDetail(HttpSession session,Model model) {
