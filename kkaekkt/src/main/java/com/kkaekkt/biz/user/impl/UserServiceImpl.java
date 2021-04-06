@@ -72,9 +72,18 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void deleteUser(AccountVO vo) {
+	public int deleteUser(AccountVO vo) {
 		System.out.println("회원탈퇴 서비스 옴");
-		userDao.deleteUser(vo);
+		int result = userDao.orderChk(vo);
+		System.out.println(result);
+		
+		if(result == 0) {
+			return 0;
+			
+		} else {
+			return userDao.deleteUser(vo);
+		}
+		
 
 	}
 	
@@ -188,6 +197,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<LaundryVO> getLaundryList(int bno) {
 		return userDao.getLaundry(bno);
+	}
+	@Override
+	public void deleteUser(BusinessVO vo) {
+		// TODO Auto-generated method stub
+		
 	}
 
 
