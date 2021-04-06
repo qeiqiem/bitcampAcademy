@@ -46,9 +46,14 @@ public class UserDAO {
 		mybatis.update("UserDAO.updateBs", vo);
 	}
 
-	public void deleteUser(AccountVO vo) {
+	public int deleteUser(AccountVO vo) {
 		System.out.println("mybatis로 기능처리 - 회원탈퇴");
-		mybatis.delete("UserDAO.deleteUser", vo);
+		return mybatis.delete("UserDAO.deleteUser", vo);
+	}
+	
+	public int orderChk(AccountVO vo) {
+		System.out.println("mybatis로 기능처리 - 예약 찾기");
+		return mybatis.selectOne("UserDAO.orderChk", vo);
 	}
 
 	public void deleteUser(BusinessVO vo) {
@@ -155,6 +160,12 @@ public class UserDAO {
 	}
 	public BusinessVO getBusiness(BusinessVO vo) {
 		return mybatis.selectOne("UserDAO.getBusiness",vo);
+	}
+	public int bnoChk(int bno) {
+		return mybatis.selectOne("UserDAO.bnoChk",bno);
+	}
+	public int mailChk(String email) {
+		return mybatis.selectOne("UserDAO.mailChk",email);
 	}
 	
 	

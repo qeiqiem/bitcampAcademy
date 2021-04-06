@@ -10,7 +10,7 @@ public interface UserService {
 	public void insertUser(BusinessVO vo);
 	public void updateUser(PersonVO vo);
 	public void updateUser(BusinessVO vo);
-	public void deleteUser(AccountVO vo);
+	public String deleteUser(AccountVO vo);
 	public void deleteUser(BusinessVO vo);
 	public void likeOn(BusinessVO vo);
 	public void likeOff(BusinessVO vo);
@@ -32,5 +32,7 @@ public interface UserService {
 	public BusinessVO getBusiness(BusinessVO vo);
 	public List<LaundryVO> getLaundryList(int bno);
     public void updatePw(AccountVO vo);
+	public int bnoChk(int bno);
+	public int mailchk(String email);
    
 }

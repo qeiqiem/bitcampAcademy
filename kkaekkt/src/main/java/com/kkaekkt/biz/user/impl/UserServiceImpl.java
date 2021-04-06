@@ -72,10 +72,20 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void deleteUser(AccountVO vo) {
+	public String deleteUser(AccountVO vo) {
 		System.out.println("회원탈퇴 서비스 옴");
-		userDao.deleteUser(vo);
-
+		int result = userDao.orderChk(vo);
+		System.out.println(result);
+		
+		if(result == 0) {
+			if(1==userDao.deleteUser(vo)) {
+				return "success";
+			}else {
+				return "fail";
+			}
+		} else {
+			return "fail";
+		}
 	}
 	
 	// 로그인 들
@@ -193,6 +203,14 @@ public class UserServiceImpl implements UserService {
 	public void deleteUser(BusinessVO vo) {
 		// TODO Auto-generated method stub
 		
+	}
+	@Override
+	public int bnoChk(int bno) {
+		return userDao.bnoChk(bno);
+	}
+	@Override
+	public int mailchk(String email) {
+		return userDao.mailChk(email);
 	}
 
 

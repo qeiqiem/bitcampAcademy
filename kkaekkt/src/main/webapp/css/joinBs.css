@@ -29,9 +29,10 @@ table {
 #timeOut{
   position: absolute;
   bottom: 7px;
-    left: 165px;
-    font-size: 12px;
-    color: red;
+  left: 163px;
+  font-size: 12px;
+  color: red;
+  width: 37px;
 }
 #mailCodeChk{
   width: 200px;

@@ -54,7 +54,7 @@ public class EchoHandler extends TextWebSocketHandler {
 	//연결 해제될때
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		//System.out.println("afterConnectionClosed " + session + ", " + status);
+		System.out.println("소켓 닫음");
 		userSessionsMap.remove(session.getId());
 		sessions.remove(session);
 	}
