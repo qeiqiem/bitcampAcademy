@@ -32,5 +32,7 @@ public interface UserService {
 	public BusinessVO getBusiness(BusinessVO vo);
 	public List<LaundryVO> getLaundryList(int bno);
     public void updatePw(AccountVO vo);
+	public int bnoChk(int bno);
+	public int mailchk(String email);
    
 }

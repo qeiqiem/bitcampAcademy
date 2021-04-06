@@ -156,6 +156,12 @@ public class UserDAO {
 	public BusinessVO getBusiness(BusinessVO vo) {
 		return mybatis.selectOne("UserDAO.getBusiness",vo);
 	}
+	public int bnoChk(int bno) {
+		return mybatis.selectOne("UserDAO.bnoChk",bno);
+	}
+	public int mailChk(String email) {
+		return mybatis.selectOne("UserDAO.mailChk",email);
+	}
 	
 	
 }

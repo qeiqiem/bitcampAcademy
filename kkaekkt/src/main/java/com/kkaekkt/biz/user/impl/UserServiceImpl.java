@@ -194,6 +194,14 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public int bnoChk(int bno) {
+		return userDao.bnoChk(bno);
+	}
+	@Override
+	public int mailchk(String email) {
+		return userDao.mailChk(email);
+	}
 
 
 }

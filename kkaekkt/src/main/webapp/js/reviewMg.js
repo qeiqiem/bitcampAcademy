@@ -19,9 +19,16 @@ function ajax() {
         }
     });
 }
-function printList(list) {//리뷰 리스트 출력
+function removeCommentForm(){
+    $('.comments').remove();
+}
+function initList() {
+    removeCommentForm();
     $('.reviewList').remove();
     $('.replyList').remove();
+}
+function printList(list) {//리뷰 리스트 출력
+    initList();
     $.each(list,function(key,value) {
         if(value.depth==0) {//리뷰일 때
             $('.process').append(
@@ -61,7 +68,7 @@ function editAjax() {
         url:'/updateComm.do',
         data:pageObj,
         success:function() {
-            $('#comments').remove();
+            removeCommentForm();
             ajax();
             alert('답글이 수정되었습니다.');
         }
@@ -74,7 +81,7 @@ function insertAjax() {
         data:pageObj,
         success:function() {
             sendMsg();
-            $('#comments').remove();
+            removeCommentForm();
             ajax();
             alert('답글이 등록되었습니다.');
         }
@@ -346,7 +353,7 @@ function submitReply(idx) {//답글 등록
     alertObj.addressee=$('#review'+idx+' .cell4')[0].id;//알림 수신자 회원번호
     pageObj.content=$('#commentBox'+idx).val();//답글 내용 담기
     insertAjax();
-    $('#comments').remove();
+    removeCommentForm();
 }
 function cancelReply() {
     var type = $('#comments button').eq(1).attr('class');//폼의 타입을 체크한다.(1. 등록 / 2. 수정)
@@ -357,7 +364,7 @@ function cancelReply() {
         btnChange(idx-1,'답글완료',true);//리뷰의 버튼을 답글완료로 전환한다.
         $('#reply'+idx).show();//숨겼던 기존의 답글을 다시 띄운다.
     }
-    $('#comments').remove();//폼을 없앤다
+    removeCommentForm();//폼을 없앤다
 }
 function printReplyForm(idx,content,type){//답글 폼 출력 (인덱스,텍스트내용,등록타입-INSERT,UPDATE)
     console.log('답글 폼 출력');
@@ -385,7 +392,7 @@ function printReplyForm(idx,content,type){//답글 폼 출력 (인덱스,텍스�
         '<div class="comments_body">'+
             '<span>┗</span>'+
             '<textarea class="commentBox" id="commentBox'+idx+'" cols="30" rows="3">'+content+'</textarea>'+
-            '<span>0 / 300</span>'+
+            '<span>'+content.length+' / 300</span>'+
         '</div>'+
     '</div>').insertAfter($(id));//답글 폼 추가
 }

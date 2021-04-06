@@ -31,16 +31,16 @@ public class UserController {
 	@Autowired
 	private JavaMailSender mailSender;
 
-//	@RequestMapping(value="/login.do", method=RequestMethod.POST) //인터페이스로 VO를 합칠지 고민 중..
-//	public String Join(PersonVO vo) {
-//		userService.insertUser(vo);		
-//		return "Join.html";
-//	}
-//	@RequestMapping(value="/logout.do", method=RequestMethod.POST)
-//	public String Join(PersonVO vo) {
-//		userService.insertUser(vo);		
-//		return "Join.html";
-//	}
+	@RequestMapping(value="/emailChk.do",method=RequestMethod.POST)
+	@ResponseBody
+	public int mailChk(String email) {
+		return userService.mailchk(email);
+	}
+	@RequestMapping(value="/bnoChk.do",method=RequestMethod.POST)
+	@ResponseBody
+	public int bnoChk(int bno) {
+		return userService.bnoChk(bno);
+	}
 	@RequestMapping(value = "/likeOff.do", method = RequestMethod.POST)
 	@ResponseBody
 	public void likeOff(BusinessVO vo) {
@@ -85,7 +85,7 @@ public class UserController {
 	public String Join(BusinessVO vo) {
 		System.out.println("메서드 진입");
 		userService.insertUser(vo);
-		return "index.jsp";
+		return "/jsp/index.jsp";
 	}
 
 	// 가입완료
@@ -350,7 +350,7 @@ public class UserController {
 		}
 		
 	}
-	@RequestMapping(value = "/mymark.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/mymark.do", method = {RequestMethod.GET,RequestMethod.POST})
 	public String getUserDetail(HttpSession session,Model model) {
 		Gson gson = new Gson();
 		AccountVO account = (AccountVO) session.getAttribute("user");
