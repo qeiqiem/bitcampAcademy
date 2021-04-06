@@ -95,7 +95,7 @@
 									<td><span class="checkbox checkbox-circle">
 											<input type="checkbox" value=8 /> <span class="checkbox-icon">
 										</span>
-									</span> <input type="text" placeholder="기타" style="width:100px; height:25px"></td>
+									</span> 기타<small>(가방/모자/인형)</small></td>
 									<td><input id="won" type="text" placeholder="받아온정보"
 										disabled> 원</td>
 								</tr>

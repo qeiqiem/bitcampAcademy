@@ -54,7 +54,7 @@
 	</insert>
 
     <select id="countLikeBs" resultType="_int">
-        SSELECT IFNULL(count(mno),0) FROM liked
+        SELECT IFNULL(count(mno),0) FROM liked
         WHERE bno=#{bno};
     </select>
     <select id="avgGradeBs" resultType="_double">
@@ -114,7 +114,7 @@
 		AND ac.mno=#{mno};
 	</select>
 	<update id="updatePs">
-			UPDATE member SET phone=#{phone},birth=#{birth},address=#{address},email=#{email}
+			UPDATE `member` SET phone=#{phone},birth=#{birth},address=#{address},email=#{email}
 			WHERE mno=#{mno};
 	</update>
 	<update id="updateBs">

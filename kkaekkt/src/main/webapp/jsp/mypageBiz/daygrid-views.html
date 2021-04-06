@@ -29,26 +29,28 @@
             var events = [];
             $.each(sales, function (index, item) {
               let price = item.price;
+              price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+              console.log(price);
               if (price <= 300000){
                 events.push({
-                title: item.price + "원",
+                title: price + "원",
                 start: item.rsvDate,
-                color: "#FA5858"    // 붉은색
+                color: "var(--text-red)"    // 붉은색
 
                 }); // push end
               }
               else if(price > 300000 && price <= 600000 ){
                 events.push({
-                title: item.price + "원",
+                title: price + "원",
                 start: item.rsvDate,
-                color: "##A5DF00"   // 연두
+                color: "var(--text-gray)"   // 연두
 
                 }); // push end
               } else if(price > 600000){
                 events.push({
-                title: item.price + "원",
+                title: price + "원",
                 start: item.rsvDate,
-                color: "#2ECCFA"    // 푸른색
+                color: "var(--key-text)"    // 푸른색
 
                 }); // push end
               }
