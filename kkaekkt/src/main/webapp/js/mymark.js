@@ -78,7 +78,7 @@ function modalprint(list) {
             '<option value='+i+'>'+i+'개</option>'
         );
     }
-    $('#bname')[0].innerHTML=list[0].bname;//업체명 삽입
+    $('.bname').text(list[0].bname);//업체명 삽입
 }
 function initBodyEvent() {
     initModal();//모달 이벤트 관리fn
@@ -189,6 +189,16 @@ function initModal() {//모달 이벤트 관리
     $("#mask").click(function(){//마스크 쪽이 눌렸다면
         modalClose();
     });
+    $("#agreement i").click(function() {
+        $(this).toggleClass('fa-chevron-down');
+        $(this).toggleClass('fa-chevron-up');
+        console.log($(this).css('display'));
+        if($('.termsText').eq($(this).attr('value')).css('display')=="none"){
+            $('.termsText').eq($(this).attr('value')).show();
+        }else{
+            $('.termsText').eq($(this).attr('value')).hide();
+        }
+    });
 }
 function openModal() {
     $("#mask").show();
@@ -228,6 +238,7 @@ function requestPay(totalPrice) {
           msg += '우편번호 : ' + rsp.buyer_postcode
           alert(msg)
           modalClose();
+
           //알림과 insert 들어갈 예정
        } else { // 실패시
           var msg = '결제에 실패하였습니다.';

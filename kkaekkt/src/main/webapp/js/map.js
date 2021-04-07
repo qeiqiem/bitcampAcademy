@@ -343,9 +343,7 @@ $(document).ready(function() {
 		        //단일금액
 		        var pri = $('#price'+idx)[0].innerHTML		        
 		        arrayRes[i] = Array(idx, selc, pri)
-		    	
 		     }
-
 		   $("#mask").show()		  
 		   requestPay(arrayRes)
 	   }
