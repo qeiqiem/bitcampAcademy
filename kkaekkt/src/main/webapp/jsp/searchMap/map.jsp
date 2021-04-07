@@ -1,27 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
    <html>
    <head>
    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>지도생성하기</title>
-    
+  
     <!-- map 에서 필요한 참조 -->
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>    
     <!-- 아임포트 -->
-     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
      <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-     
-    <script src="/js/map.js"></script>
-   <link rel="stylesheet" href="/css/map.css">
-   
+	 <script src="/js/map.js"></script>
+   	<link rel="stylesheet" href="/css/map.css">  
    </head>
    <body>
-      <jsp:include page="/jsp/header0.jsp"></jsp:include>
+    <c:choose>
+         <c:when test="${person.mtype==0}">
+            <jsp:include page="/jsp/header0.jsp"></jsp:include>
+         </c:when>
+         <c:otherwise>
+            <jsp:include page="/jsp/header1.jsp"></jsp:include>
+         </c:otherwise>
+   </c:choose>
       <div id="mask"></div>
            <div class="body_container">
                <div class="map_container">
+               <!-- 지도타입 컨트롤 div 입니다 -->
+			    <div class="custom_typecontrol radius_border">
+			        <span id="btnRoadmap" class="selected_btn_map" onclick="setMapType('roadmap')">지도</span>
+			        <span id="btnSkyview" class="btn_sky" onclick="setMapType('skyview')">스카이뷰</span>
+			    </div>
+			    <!-- 지도 확대, 축소 컨트롤 div 입니다 -->
+			    <div class="custom_zoomcontrol radius_border"> 
+			        <span onclick="zoomIn()"><img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_plus.png" alt="확대"></span>  
+			        <span onclick="zoomOut()"><img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/ico_minus.png" alt="축소"></span>
+			    </div>
                    <!-- 예약창 로딩중 -->
                    <div class="res_loading hidden">
                        <div class="dot">
@@ -55,12 +69,6 @@
                                </div>
                            </div>
                            <div class="footer list">
-                               <ul class="searchtag">
-                                   <li><b id="countp">장 소 </b></li>
-                                  <!--  <li style="margin-left: 45%;font-size: 12px;">거리순</li> -->
-                                   <li class="popul"style="font-size: 12px;">인기순 | </li>
-                                   <li class="gradescore" style="font-size: 12px;">평점순</li>
-                               </ul>
                                <div class="slide_card">
                                    <table id="placesList"></table>
                                    <div id="pagination"></div>
@@ -68,12 +76,14 @@
                            </div>
                            <div class="footer single">
                                <div class="card">
-                                   <img id="single_img" src="/img/kkaekkt.png" style="width: 100%; height: 200px; background-color: aliceblue;">
-                                   <p id="s_title"> <i class="far fa-heart" id="heart" style="color:lightgray; font-size:30px"></i></p>
+                        
+                                   <img id="single_img" src="/img/kkaekkt.png" style="width: 100%; height: 200px; background-color: aliceblue;"> 
+                                   <p id="s_title"></p><button class="likeThis"><i class="far fa-heart" id="heart" ></i></button>
                                    <div id="s_star">
                                    </div>
-                           <div>
-                              <button id="res">예약하기</button>
+                           <div class="btnSet">
+                              <button class="resbtn">예약하기</button>
+                              <button class="chat">상담하기</button>                             
                            </div>
                                </div>
                                <div>
@@ -115,6 +125,16 @@
                            
                            </div>
                        </div><!-- slide -->
+                       <div class="slide_success">
+                       		<h3>예약이 완료되었습니다!</h3>
+                       		<p>*예약취소는 1시간 이내까지만 가능합니다</p>
+	                       	<div class="res_child">
+	                       		<p>3/7일 이내로 세탁이 완료될 예정입니다.</p>
+	                       		<p>세탁물은 작업완료 이후 1~3일 이내 배송됩니다.</p> 
+	                       		<button id="res_return">돌아가기</button>
+	                       		<button id="res_check">예약확인</button>
+	                       	</div>                       		
+                       </div>
                        <div class="slide_res">     
                            <p id="res_p">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<i class="far fa-edit"></i>&nbsp&nbsp예약하기</p>
                            <div class="rescont">
@@ -122,9 +142,9 @@
                                <table id="resShortOpt"></table>
                            </div>
                            <div class="userInfo">
-                              <p>예약자 &nbsp;나애교</p>
-                                <p>연락처 &nbsp;010-9871-6512</p>
-                        <p>이메일 &nbsp;testNa@kkaekkt.com</p>
+                              <p>예약자 &nbsp;${person.mname}</p>
+                                <p>연락처 &nbsp;${person.phone}</p>
+                        <p>이메일 &nbsp;${person.email}</p>
                            </div>
                            <div class="sellerInfo">
                               <p id="selname">판매자정보 &nbsp;</p>   
@@ -148,9 +168,8 @@
                    </div>
                    <div id="map"></div>
                </div>
-               
            </div>
-       </body>    
+       </body>   
        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3845f493917a302d1ea69e946c0443ff&libraries=services"></script>
        <script>
    
@@ -162,31 +181,49 @@
                    center: new kakao.maps.LatLng(37.566826, 126.9786567),level: 2
                }; 
            
-           /* 주소정보 교환을 위한 변수 */
-           var name = ""              
-           var address = ""              
-           var phone = ""                 
-           var contentNum = ""         
-           var grade = ""  
-           var bno= ""
-
-         
+           var itemel;
+           var bno= "";    
+           var dbData = [];
+           var mno = ${person.mno};	
+          
            var map = new kakao.maps.Map(mapContainer, mapOption);
-            mapContainer.style.position = "initial";
+           mapContainer.style.position = "initial";
             
            var ps = new kakao.maps.services.Places();  
-   
+           
+           function setMapType(maptype) { 
+        	    var roadmapControl = document.getElementById('btnRoadmap');
+        	    var skyviewControl = document.getElementById('btnSkyview'); 
+        	    if (maptype === 'roadmap') {
+        	        map.setMapTypeId(kakao.maps.MapTypeId.ROADMAP);    
+        	        roadmapControl.className = 'selected_btn_map';
+        	        skyviewControl.className = 'btn_sky';
+        	    } else {
+        	        map.setMapTypeId(kakao.maps.MapTypeId.HYBRID);    
+        	        skyviewControl.className = 'selected_btn';
+        	        roadmapControl.className = 'btn';
+        	    }
+        	}
+           
+           // 지도 확대, 축소 컨트롤에서 확대 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
+           function zoomIn() {
+               map.setLevel(map.getLevel() - 1);
+           }
+
+           // 지도 확대, 축소 컨트롤에서 축소 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
+           function zoomOut() {
+               map.setLevel(map.getLevel() + 1);
+           }
+           
            // 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
            //-> 일반세탁의 경우 예약하기가 나오게 컨트롤
            var infowindow = new kakao.maps.InfoWindow({zIndex:1});
-   
+   	
    
            // 키워드 검색
            function searchPlaces() { 
                  
-               var keyword = document.getElementById('keyword').value;      
-   
-               
+               var keyword = document.getElementById('keyword').value;
                if (!keyword.replace(/^\s+|\s+$/g,'')) { 
                    alert('키워드를 입력해주세요!'); 
                return false;
@@ -207,16 +244,7 @@
            // 리뷰순 검색 
            function searchGrade(item) { }
            
-           //DB바인딩 값 받는 함수
-           function splitLand(data) {
-            //추후 for 문을 이용해 길이만큼 추가
-            name = data[0].bname         
-            address = data[0].address
-            phone = data[0].phone
-            contentNum = data[0].content
-            grade = data[0].grade
-            bno = data[0].bno
-         }
+        
    
            //데이터 바인딩
            function bindinglandry(keyaddr) {
@@ -230,10 +258,10 @@
                       , dataType: 'json'
                       , success: function(data){ //성공후 처리는 추후 진행.                         
                                 if(data==null){
-                                   console.log("data 가 조회되지 않았습니다.")                                   
+                                   console.log("data 가 조회되지 않았습니다.");
+                                   dbData = null
                                 }
-                      
-                                splitLand(data)                                
+                                   dbData = data
                                  // 장소검색을 요청           
                                    keyaddr = keyaddr+" 크리닝"
                                    ps.keywordSearch(keyaddr, placesSearchCB); 
@@ -243,21 +271,19 @@
            
          }
    
-           // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
-           function placesSearchCB(data, status, pagination) {
-               if (status === kakao.maps.services.Status.OK) {
-   
-                   displayPlaces(data);
-   
-                   // 페이지 번호를 표출합니다
-                   displayPagination(pagination);
-   
-               } else if (status === kakao.maps.services.Status.ZERO_RESULT) { alert('검색 결과가 존재하지 않습니다.');
-                   return;
-               } else if (status === kakao.maps.services.Status.ERROR) { alert('검색 결과 중 오류가 발생했습니다.');
-                   return;
-               }
-           }
+         // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
+         function placesSearchCB(data, status, pagination) {
+             if (status === kakao.maps.services.Status.OK) {           	   
+                 displayPlaces(data);   
+                 // 페이지 번호를 표출합니다
+                 displayPagination(pagination);
+ 
+             } else if (status === kakao.maps.services.Status.ZERO_RESULT) { alert('검색 결과가 존재하지 않습니다.');
+                 return;
+             } else if (status === kakao.maps.services.Status.ERROR) { alert('검색 결과 중 오류가 발생했습니다.');
+                 return;
+             }
+         }
    
            // 검색 결과 목록과 마커를 표출
            function displayPlaces(places) {
@@ -276,38 +302,39 @@
    
        
                for ( var i=0; i<places.length; i++ ) {
-               $('#countp').html("장 소"+places.length);
+              	 $('#countp').html("장 소"+places.length);
                
                    // 마커를 생성하고 지도에 표시합니다
                    var placePosition = new kakao.maps.LatLng(places[i].y, places[i].x),
                        marker = addMarker(placePosition, i), 
-                       itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성합니다
-   
-                   // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
-                   // LatLngBounds 객체에 좌표를 추가합니다
-                   bounds.extend(placePosition);
-   
-                   // 마커와 검색결과 항목에 mouseover 했을때
-                   // 해당 장소에 인포윈도우에 장소명을 표시합니다
-                   // mouseout 했을 때는 인포윈도우를 닫습니다
-                   (function(marker, title) {
-                       kakao.maps.event.addListener(marker, 'mouseover', function() {
-                           displayInfowindow(marker, title);
-                       });
-   
-                       kakao.maps.event.addListener(marker, 'mouseout', function() {
-                           infowindow.close();
-                       });
-   
-                       itemEl.onmouseover =  function () {
-                           displayInfowindow(marker, title);
-                       };
-   
-                       itemEl.onmouseout =  function () {
-                           infowindow.close();
-                       };
-                   })(marker, places[i].place_name);
-                   fragment.appendChild(itemEl);
+                       itemEl = getListItem(i, places); // 검색 결과 항목 Element를 생성합니다 
+                       itemEl = itemel
+                       
+                       // LatLngBounds 객체에 좌표를 추가합니다
+                       bounds.extend(placePosition);
+
+                       // 마커와 검색결과 항목에 mouseover 했을때
+                       // 해당 장소에 인포윈도우에 장소명을 표시합니다
+                       // mouseout 했을 때는 인포윈도우를 닫습니다
+                       (function(marker, title) {
+                           kakao.maps.event.addListener(marker, 'mouseover', function() {
+                               displayInfowindow(marker, title);
+                           });
+
+                           kakao.maps.event.addListener(marker, 'mouseout', function() {
+                               infowindow.close();
+                           });
+                           
+                           itemEl.onmouseover =  function () {
+                               displayInfowindow(marker, title);
+                           };
+
+                           itemEl.onmouseout =  function () {
+                               infowindow.close();
+                           };
+                       })(marker, places[i].place_name);
+                       fragment.appendChild(itemEl);
+                   
                }
    
                // 검색결과 항목들을 검색결과 목록 Elemnet에 추가합니다
@@ -317,74 +344,7 @@
                map.setBounds(bounds);
            }
    
-           // 리스트 출력
-           function getListItem(index, places) {
-              
-              
-              //api검색결과 출력
-              var apiName = places.place_name
-            var apiAddress = places.road_address_name
-            var apiPhone = places.phone
-            var ranNum = Math.random();            
-            var apiContentNum = Math.floor(ranNum*2+1)
-            var apiGrade = Math.floor(ranNum*2+1)
-               
-              if(name.indexOf(apiName) == apiName.indexOf(name) && name.indexOf(apiAddress) == apiName.indexOf(address)){
-                 console.log("DB정보 Bind")
-                 name = name
-                 address = address
-                 phone = phone           
-                   contentNum = contentNum        
-                     grade = grade
-                     bno = bno
-                     
-                 }else {
-                   console.log("기존정보 out")
-                   name = apiName
-                   address = apiAddress
-                 phone = apiPhone          
-                   contentNum = 0      
-                     grade = 0   
-                     bno = 0
-   
-                 }
-                             
-              
-               var el = document.createElement('table'),
-                        
-               itemStr =  '<tbody class="place_body">'
-                     +'<tr>'
-                               + '<td class="place_name" value='+bno+'>'+ (index+1)+'&nbsp;&nbsp;' + name + '</td>'
-                               + '<td rowspan="3"  style="float: right;">'
-                               + '<i class="far fa-heart" id="heart" style="color:lightgray; font-size:30px"></i></td>'
-                           + '</tr>'
-                              if(grade != 0){
-                                    itemStr += '<tr><td>'+grade+'.0 &nbsp;'
-                                               for(var i=0; i<grade; i++) {
-                                                   itemStr += '<i class="rating__icon rating__icon--star fa fa-star"></i>'
-                                               }
-                                               for(var i=0; i<(5-grade); i++) {
-                                                   itemStr += '<i class="rating__icon rating__icon--star2 fa fa-star" sytle="color:lightgray"></i>'
-                                               }
-                                     itemStr +='&nbsp;&nbsp;'+contentNum+'건 | 리뷰</td></tr>'
-                               }
-                           itemStr += '<tr><td class="place_address">' + address + '</td></tr>'                                
-                                    if(phone!=""){
-                                       itemStr += '<tr><td class="place_phone">' +phone + '</td><tr>'
-                                    }                      
-                           +'</tbody>';
-               el.innerHTML = itemStr;
-               el.className = 'item';
-   
-              name = ""              
-              address = ""              
-              phone = ""              
-              contentNum = ""         
-              grade = "" 
-              bno = ""
-               return el;
-
-           }
+           
    
        
            //지도 위에 마커를 표시
@@ -416,6 +376,66 @@
                markers = [];
            }
    
+        	// 리스트 출력
+           function getListItem(i,place) {  
+        		
+				if(dbData[i] == null){
+					var contentNum = 0
+					var grade = 0
+					var bno = 0
+	        		wirteHtml(i,place[i],contentNum,grade, bno)  
+				}else if(place[i].place_name == dbData[i].bname){	
+	        		   //조회된 값이 있다면 데이터 체인지					
+						console.log(place[i].place_name+" : "+ dbData[i].bname)
+						console.log(place[i].road_address_name+" : "+ dbData[i].address)
+						console.log(place[i].phone+" : "+dbData[i].phone)
+						console.log(dbData[i].content)
+						console.log(dbData[i].grade)
+						console.log(dbData[i].bno)
+						
+						place[i].place_name = dbData[i].bname
+						place[i].road_address_name = dbData[i].address
+						place[i].phone  = dbData[i].phone
+						var contentNum = dbData[i].content
+						var grade = dbData[i].grade
+						var bno = dbData[i].bno
+						wirteHtml(i,place[i],contentNum,grade, bno)  
+	        	}
+				
+				
+           }
+        
+           function wirteHtml(i,place ,contentNum, grade, bno) { 
+        	   
+        	   var el = document.createElement('table'),               
+	               itemStr =  '<tbody class="place_body">'
+	                     +'<tr>'
+                              + '<td class="place_name" value='+bno+'>'+ (i+1)+'&nbsp;&nbsp;' + place.place_name + '</td>'
+                              + '<td rowspan="3"  style="float: right;"></td>'
+                         + '</tr>'
+                            if(grade != 0){
+                                  itemStr += '<tr><td>'+grade+'.0 &nbsp;'
+                                             for(var i=0; i<grade; i++) {
+                                                 itemStr += '<i class="rating__icon rating__icon--star fa fa-star"></i>'
+                                             }
+                                             for(var i=0; i<(5-grade); i++) {
+                                                 itemStr += '<i class="rating__icon rating__icon--star2 fa fa-star" sytle="color:lightgray"></i>'
+                                             }
+                                   itemStr +='&nbsp;&nbsp;'+contentNum+'건 | 리뷰</td></tr>'
+                             }
+                         itemStr += '<tr><td class="place_address">' + place.road_address_name + '</td></tr>'                                
+                                  if(place.phone!=""){
+                                     itemStr += '<tr><td class="place_phone">' +place.phone + '</td><tr>'
+                                  }                      
+                         +'</tbody>';
+	               el.innerHTML = itemStr;
+	               el.className = 'item';
+
+	  	     	   itemel =  el;                  
+				}
+	
+        	
+        	
            function displayPagination(pagination) {
                var paginationEl = document.getElementById('pagination'),
                    fragment = document.createDocumentFragment(),

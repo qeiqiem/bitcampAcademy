@@ -1,6 +1,8 @@
 package com.kkaekkt.view.map;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -22,23 +24,34 @@ import com.kkaekkt.biz.user.AccountVO;
 import com.kkaekkt.biz.user.PersonVO;
 import com.kkaekkt.biz.user.UserService;
 
+
 @Controller
 public class MapListController {
 	@Autowired
 	MapService mapserv;
+	@Autowired
 	UserService userService;
 	
 		@RequestMapping(value="/showMap.do", method = {RequestMethod.GET, RequestMethod.POST})
 		public String loginView( HttpSession session, Model model) {
-			System.out.println("map으로 이동  + 정보 : " + session.getAttribute("user"));
-			AccountVO account = (AccountVO) session.getAttribute("user");
 			
-			System.out.println(account.getMno());
-			//로그인시 받아온 mno로 db 조회
-			userService.getPerson(account.getMno());		
-			model.addAttribute("person", userService.getPerson(account.getMno()));
-
-			return "/jsp/searchMap/map.jsp";
+			if(session.getAttribute("user")==null) {
+				PersonVO vo = new PersonVO();
+				vo.setMno(0);
+				vo.setMtype(0);
+				model.addAttribute("person",vo);
+				
+				return "/jsp/searchMap/map.jsp";
+			}else {
+				
+				AccountVO account = (AccountVO) session.getAttribute("user");								
+				model.addAttribute("person", userService.getPerson(account.getMno()));				
+				
+				return "/jsp/searchMap/map.jsp";			
+			
+			}
+			
+			
 		}
 	
 	
@@ -87,15 +100,12 @@ public class MapListController {
 			System.out.println("select 데이터 확인  : "+singleList); 
 			return singleList; 
 		}
-	  
-	  
-		//회원업체 리뷰 조회
+		//예약 목록 추가 
 		@RequestMapping(value="/respay.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
-	  	public String respay(ResPayVO vo) {
-			System.out.println("예약관련정보 : "+vo); 
-			return "/jsp/searchMap/map.jsp";
+	  	public String respay(MapListVO mapvo) {
+			mapserv.respay(mapvo);
+			return "success";
 		}
 		
-	 
 }
 

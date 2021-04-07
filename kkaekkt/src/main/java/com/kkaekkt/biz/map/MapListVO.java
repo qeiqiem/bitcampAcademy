@@ -1,19 +1,54 @@
 package com.kkaekkt.biz.map;
 
+import java.util.List;
+
 public class MapListVO {
 	
-	//laundryinfo-------------------------
+	//세탁 리스트를 위한 
 	int bno;
 	String bname;
 	String phone;
 	String address;
 	int content;
 	String rdate;
-	int grade;
+	int grade;	
 	
+	//예약을 위한 유저 정보
+	int mno;
+	int totalPrice;
+	int rbno;
+	List<ResPayVO> resList;
 	
-	
-	
+	public List<ResPayVO> getResList() {
+		return resList;
+	}
+	public void setResList(List<ResPayVO> resList) {
+		this.resList = resList;
+	}
+	public int getBno() {
+		return bno;
+	}
+	public void setBno(int bno) {
+		this.bno = bno;
+	}
+	public int getMno() {
+		return mno;
+	}
+	public void setMno(int mno) {
+		this.mno = mno;
+	}
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+	public int getRbno() {
+		return rbno;
+	}
+	public void setRbno(int rbno) {
+		this.rbno = rbno;
+	}
 	public String getBname() {
 		return bname;
 	}
@@ -51,13 +86,15 @@ public class MapListVO {
 		this.grade = grade;
 	}
 	
-	
 	@Override
 	public String toString() {
-		return "MapListVO [bname=" + bname + ", phone=" + phone + ", address=" + address + ", content=" + content
-				+ ", rdate=" + rdate + ", grade=" + grade + "]";
+		return "MapListVO [bno=" + bno + ", bname=" + bname + ", phone=" + phone + ", address=" + address + ", content="
+				+ content + ", rdate=" + rdate + ", grade=" + grade + ", mno=" + mno + ", totalPrice=" + totalPrice
+				+ ", rbno=" + rbno + ", resList=" + resList + "]";
 	}
-
+	
+	
+	
 		
 	
 	

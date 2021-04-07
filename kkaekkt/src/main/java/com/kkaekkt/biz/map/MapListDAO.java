@@ -33,8 +33,8 @@ public class MapListDAO {
 		return mybatis.selectList("MapListDAO.reviewList",bno); 
 	}
 
-	public void respay(ResPayVO vo) {
-		mybatis.insert("MapListDAO.respay",vo);		
+	public void respay(MapListVO mapvo) {
+		mybatis.insert("MapListDAO.respay",mapvo);		
 	}
 	 
 

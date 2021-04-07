@@ -30,17 +30,11 @@ public class UserController {
 
 	@Autowired
 	private JavaMailSender mailSender;
-
-//	@RequestMapping(value="/login.do", method=RequestMethod.POST) //인터페이스로 VO를 합칠지 고민 중..
-//	public String Join(PersonVO vo) {
-//		userService.insertUser(vo);		
-//		return "Join.html";
-//	}
-//	@RequestMapping(value="/logout.do", method=RequestMethod.POST)
-//	public String Join(PersonVO vo) {
-//		userService.insertUser(vo);		
-//		return "Join.html";
-//	}
+	@RequestMapping(value="/bnoChk.do",method=RequestMethod.POST)
+	@ResponseBody
+	public int bnoChk(int bno) {
+		return userService.bnoChk(bno);
+	}
 	@RequestMapping(value = "/likeOff.do", method = RequestMethod.POST)
 	@ResponseBody
 	public void likeOff(BusinessVO vo) {
@@ -85,7 +79,7 @@ public class UserController {
 	public String Join(BusinessVO vo) {
 		System.out.println("메서드 진입");
 		userService.insertUser(vo);
-		return "index.jsp";
+		return "/jsp/index.jsp";
 	}
 
 	// 가입완료
@@ -157,43 +151,9 @@ public class UserController {
 	// 이메일 체크 sns에서 로그인할때 디비에 있는지 확인하려고 만든 컨트롤러이다
 	@RequestMapping(value = "/findemail.do", method = {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	public String emailchk(AccountVO vo) {
-		System.out.println("controller에서 이메일 찾음");
-		// vo = userService.email(vo);
-
-//		AccountVO findEmail = vo;
-//		vo.setEmail();
-//		System.out.println("findEmail" + vo);
-//
-//		Gson gson = new Gson();
-//		return userService.email(vo);
-
-		////////////////////////////// 위까지 소정 코드
-		Gson gson = new Gson();
-		vo.setEmailchk(userService.emailchk(vo));
-		System.out.println("값 담겨");
-		System.out.println(vo);
-
-		return gson.toJson(vo);
-
-//		Gson gson = new Gson();
-//		vo.setState(userService.idchk(vo));
-//		System.out.println("서비스에서 값 담겨 넘어옴");
-//		return gson.toJson(vo)
+	public int emailchk(String email) {
+		return userService.emailchk(email);
 	}
-
-	// 아이디 중복체크 업체........
-//	@RequestMapping(value = "/idchkBs.do", method = RequestMethod.POST)
-//	@ResponseBody
-//	public String idchkBs(BusinessVO vo) {
-//		System.out.println("vo 값 담겼음");
-//		System.out.println(vo);
-//		Gson gson = new Gson();
-//		vo.setState(userService.idchkBs(vo));
-//		System.out.println("서비스에서 값 담겨 넘어옴");
-//		return gson.toJson(vo);
-//	}
-
 	// 일반유저 로그인
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
 	@ResponseBody
@@ -274,7 +234,7 @@ public class UserController {
 	@RequestMapping(value = "/findId.do", method = RequestMethod.POST)
 	public String findId(AccountVO vo, Model model,HttpServletResponse response) throws IOException {
 	   
-		System.out.println("findID 진입");
+		System.out.println("findID 진입"); 
 		System.out.println(vo);
 		vo=userService.findId(vo);
 		if(vo!=null) {
@@ -340,17 +300,9 @@ public class UserController {
 	@ResponseBody
 	public String deleteUser(AccountVO vo) {
 		System.out.println("회원탈퇴 controller옴");
-		userService.deleteUser(vo);
-		System.out.println(vo);
-		
-		if(vo == null) {
-			return "fail";
-		} else {
-			return "/jsp/index.jsp";			
-		}
-		
+		return userService.deleteUser(vo);
 	}
-	@RequestMapping(value = "/mymark.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/mymark.do", method = {RequestMethod.GET,RequestMethod.POST})
 	public String getUserDetail(HttpSession session,Model model) {
 		Gson gson = new Gson();
 		AccountVO account = (AccountVO) session.getAttribute("user");
@@ -389,6 +341,12 @@ public class UserController {
 	public String getLaundryList(int bno) {
 		Gson gson = new Gson();
 		return gson.toJson(userService.getLaundryList(bno));
+	}
+	@RequestMapping(value="/getuserInfo.do", method = RequestMethod.POST, produces = "application/text;charset=utf-8")
+	@ResponseBody
+	public String getuserInfo(int mno) {
+		Gson gson = new Gson();
+		return gson.toJson(userService.getPerson(mno));
 	}
 	
   

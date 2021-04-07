@@ -14,6 +14,7 @@
 				senderName:`${sessionScope.user.name}`,
 				mtype:${sessionScope.user.mtype}
 			};
+			
 	</script>
 	<script src="/js/header.js"></script>
 	<script src="/js/index.js"></script>
@@ -25,7 +26,8 @@
 				</a>
 			</div>
 			<div class="menu">
-				<a href="">일반세탁소</a> <a href="">코인세탁소</a>
+				<a href="/showMap.do">일반세탁소</a>
+				<a href="/showMap.do">코인세탁소</a>
 			</div>
 		</div>
 
