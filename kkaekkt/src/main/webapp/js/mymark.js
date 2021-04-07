@@ -207,7 +207,6 @@ function initModal() {//모달 이벤트 관리
 function resListSet(){
     var list=new Array();
     var cntChk=$('.chked');
-    var idx;
     for(var i=0;i<cntChk.length;i++){
         lno = Number($('.chked').eq(i).attr('id').charAt(3))+1;//lno추출
         cnt = $('#selc'+lno).val();//cnt추출
@@ -262,8 +261,35 @@ function requestPay(totalPrice) {
         url:'/respay.do'
         , method : 'POST'
         , data: rsvObj
-        , success:function(data){
-           console.log(data);
+        , success:function(result){
+           msgSet(result);
         }
     })
+}
+function msgSet(rsvNum) {
+        alertObj.rsvNum=rsvNum;
+        alertObj.msg='주문번호'+rsvNum+' 가 취소되었습니다.';
+        alertObj.typenum=2;
+}
+function sendMsg() {
+    $.post({
+        url:'/regitAlert.do',
+        data:alertObj,
+        success:function() {
+            if(socket){
+                var receiver=alertObj.addressee;
+                var msg='<li>'+
+                            '<div class="msgTop">'+
+                                '<a href="/jsp/mypageUser/mypagePs.jsp">['+(alertObj.typenum==3?'완료':'취소')+']⠀'+alertObj.msg+'</a>'+
+                            '</div>'+
+                            '<div class="msgBottom">'+
+                                '<span class="date">'+today()+'</span>'+
+                                '<span class="byBs">by '+alertObj.senderName+'</span>'+
+                            '</div>'+
+                            '<i class="fas fa-times"></i>'+
+                        '</li>'
+                socket.send(receiver+','+msg);//메시지 보냄
+            }
+        }
+    });
 }

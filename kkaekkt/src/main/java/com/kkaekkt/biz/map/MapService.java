@@ -14,8 +14,5 @@ public interface MapService {
 	public List<SingleListVO> selectSingle(int bno);
 	public List<SingleListVO> singleOption(int bno);
 	public List<SingleListVO> reviewList(int bno);
-	public void respay(MapListVO mapvo);
-	
-
-	
+	public int respay(MapListVO mapvo);
 }

@@ -99,6 +99,9 @@ $(document).ready(function() {
          idx=$('.chked').eq(i).attr('id').charAt(3);
          totalPrice+=Number($('#price'+idx)[0].innerHTML);
       }
+      if(totalPrice==0){
+         totalPrice=""; //0일 경우 공백표시
+      }
       $(".totalAll").text(totalPrice);
    }
    //4. 결제 api 대기 팝업
