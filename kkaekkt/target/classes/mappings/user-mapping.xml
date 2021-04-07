@@ -101,7 +101,8 @@
 			   phone, 
 			   birth, 
 			   address, 
-			   email
+			   email,
+			   mtype
 		  FROM account ac, `member` mb
 		 WHERE ac.mno=mb.mno AND ac.mno=#{mno};
 	</select>

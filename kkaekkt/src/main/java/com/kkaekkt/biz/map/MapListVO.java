@@ -1,6 +1,9 @@
 package com.kkaekkt.biz.map;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import com.google.gson.Gson;
 
 public class MapListVO {
 	
@@ -18,7 +21,20 @@ public class MapListVO {
 	int totalPrice;
 	int rbno;
 	List<ResPayVO> resList;
+	String resListData;
 	
+	public void setResListData(String resListData) {
+		String temp = resListData.substring(1, resListData.length() - 1); // 양 끝의 [ ] 제거
+		String[] temp2 = temp.split("},"); // {~},{~} 을 split하여 배열로 나눔
+		this.resList = new ArrayList<ResPayVO>();
+		Gson gson = new Gson();
+		for (int i = 0; i < temp2.length; i++) {
+			if (i != temp2.length - 1) {// 만약 마지막 { ~ }이 아니라면,
+				temp2[i] += "}";// split 과정에서 떨어졌던 '}'를 붙여준다.
+			}
+		this.resList.add(gson.fromJson(temp2[i], ResPayVO.class));
+		}
+	}
 	public List<ResPayVO> getResList() {
 		return resList;
 	}

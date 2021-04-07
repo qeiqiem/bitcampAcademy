@@ -9,7 +9,7 @@ $(document).ready(function() {
 //	console.log(url)
 //	url = url.split("?")
 
-	
+   var rsvObj={};
    // method/var-----------------------------------------------------------------------
    var adrress = "서울 용산"
    var random = Math.floor(Math.random() * 10) + "," + "000"
@@ -20,7 +20,16 @@ $(document).ready(function() {
    
 
    // [Click 이벤트]----------------------------------------------------------------------
-
+   $("#agreement i").click(function() {//약관 클릭 시
+      $(this).toggleClass('fa-chevron-down');
+      $(this).toggleClass('fa-chevron-up');
+      console.log($(this).css('display'));
+      if($('.termsText').eq($(this).attr('value')).css('display')=="none"){
+          $('.termsText').eq($(this).attr('value')).show();
+      }else{
+          $('.termsText').eq($(this).attr('value')).hide();
+      }
+  });
    /* [사이드바] */
    // 1. 리스트 : 슬라이드 show
    $('.foldBtn').click(function() {
@@ -48,6 +57,11 @@ $(document).ready(function() {
 
    // 3. 예약슬라이드 (2depth) show
    $('#res').click(function() { resItemList(bno); $('.slide_res').show(); })
+   $('#res_return').click(function() { resItemList(bno); $('.slide_res').show(); })
+   $('#res_check').click(function() { 
+	   //아예 못돌아가게 (데이터가 꼬일수있음으로 replace 사용
+	   location.replace('/jsp/mypageUser/mypagePs.jsp')}
+   )
    $('.input_searchBtn').on("click", function() { var item = $(".input_search").val(); viewSearch(item)})
    
    //예약항목 옵션 클릭시 감지
@@ -290,7 +304,7 @@ $(document).ready(function() {
         $('.single').show()
    }
            
-   function requestPay(arrayRes) {
+   function requestPay() {
 	   
        IMP.request_pay({
            pg : 'kakao', // 결제방식
@@ -315,11 +329,12 @@ $(document).ready(function() {
             msg += '메일 : ' + rsp.buyer_email
             msg += '이름 : ' + rsp.buyer_name
             msg += '우편번호 : ' + rsp.buyer_postcode
-     	   	
-            var arrayRe = arrayRes
      	   	//결제관련 api 기능
-     	   
-            mapRes(arrayRe)
+
+            mapRes()
+            $('.slide_res').hide()
+            $('.slide_success').show()
+            
             $("#mask").hide()	
             
          } else { // 실패시
@@ -335,34 +350,31 @@ $(document).ready(function() {
 		 //뿌려져있는 row
 		  var cntChk = $('.chked')
 		   var arrayRes = new Array();
+         var idx;
+         var selc;
 		     for (var i = 0; i < cntChk.length ; i++) {		    	 
 		    	//lno 발최
-		    	var idx = $('.chked').eq(i).attr('id').charAt(3)
+		      idx = $('.chked').eq(i).attr('id').charAt(3);
 		        //개수
-		        var selc = $('#selc'+idx).val()+",/"
-		        arrayRes[i] = Array(Number(idx)+1, selc)		    	
+		        selc = $('#selc'+idx).val();
+		        arrayRes.push({lno:Number(idx)+1, cnt:selc});
 		     }
-
-		   $("#mask").show()		  
-		   requestPay(arrayRes)
+           rsvObj.resListData=JSON.stringify(arrayRes);
+		   $("#mask").show()
+		   requestPay()
 	   }
    
  //리스트 컨트롤러로 보내기
-   function mapRes(arrayRe) {
-	   var arrayTos = arrayRe.toString()
-	   var userInfo = new Array(mno, totalPrice, bno)
-	   userInfo = userInfo.toString()
+   function mapRes() {
+	   rsvObj.mno = mno;
+      rsvObj.totalPrice=totalPrice;
+      rsvObj.bno=bno;
 	   $.ajax({
            url:'/respay.do'
            , method : 'POST'
-           , data: { arrayTos : arrayTos,
-        	   		 userInfo :  userInfo 
-        	   		 }
-           , dataType: 'json'
+           , data: rsvObj
            , success:function(data){
-        	   
            }
 	   })
    }
-  
-})
+});

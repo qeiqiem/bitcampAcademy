@@ -45,7 +45,7 @@
 }
 
 
-/* 사이드바관련 css ------------------------------------------*/
+/* 예약하기 관련 css ------------------------------------------*/
 .slide_res{
     width: 20vw;
     height: 90vh;
@@ -113,6 +113,86 @@
     border-bottom: 1px solid var(--gray-color);
 }
 
+
+/* 예약완료 사이드바 관련 */
+.slide_success{
+    width: 20vw;
+    height: 90vh;
+    float: left;
+    background-color: rgb(255 255 255);
+    -webkit-transition: width 1s;
+    transition: width 1s;
+    display: none;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url(/img/respop.jpg);
+}
+
+.slide_success h3{
+	text-align: center;
+    font-size: 27px;
+    padding-block-start: 103px;
+    margin-bottom: 2px;
+}
+.slide_success p{
+    font-size: 14px;
+    padding-block-end: 220px;
+    margin: 0;
+    text-align: center;
+}
+
+.res_child{
+	padding-inline-start: 35px;
+    padding-inline-end: 35px;
+}
+
+.res_child p{
+	font-size: 13px;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+
+
+#res_return{
+	width: 99px;
+    height: 42px;
+    left: 231px;
+    top: 907px;
+    background: var(--gray-color);
+    border-radius: 25px;
+    margin: 8% 7% 4%;
+    border: none;
+    color: black;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+#res_return:hover{
+	background-color: var(--key-color);
+    color: white;
+    font-weight: 500;
+}
+
+#res_check{
+	width: 99px;
+    height: 42px;
+    left: 231px;
+    top: 907px;
+    background: var(--gray-color);
+    border-radius: 25px;
+    border: none;
+    color: black;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+#res_check:hover{
+	background-color: var(--key-color);
+    color: white;
+    font-weight: 500;
+}
 /* 슬라이드관련 버튼제어  */
 .contBtn{
     display: inline;
@@ -729,6 +809,40 @@
     text-align: center;
 }
 
+#agreement{
+    padding: 0;
+    border: 1px solid lightgray;
+}
+#agreement div {
+    height: 50%;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+#agreementTop {
+    border-bottom: 1px solid lightgray;
+}
+#agreement i{
+    position: relative;
+    top: 4px;
+    cursor: pointer;
+}
+#agreement .termsText{
+    display: none;
+    font-size: 14px;
+    padding: 13px;
+    width: 100%;
+    box-sizing: border-box;
+    height: 110px;
+    overflow-y: scroll;
+}
+#agreement .termsText:nth-child(2){
+    border-bottom: 1px solid lightgray;
+}
+#agreement .termsText:nth-child(4){
+    border-top: 1px solid lightgray;
+}
 
 /* map api 버튼 */
 

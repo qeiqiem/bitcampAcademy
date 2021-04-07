@@ -97,8 +97,11 @@
 			</div>
 		</div>
 		<div id="modal_userInfo">
+			<button id="modal_close" onclick="modalClose()">x</button><br>
+			<h2>고객정보</h2>
+			<hr>
 			<div id="userInfo_bodycont">
-				
+			
 			</div>
 			<div id="modal_foot">
 				<p style="text-align: center;"></p>

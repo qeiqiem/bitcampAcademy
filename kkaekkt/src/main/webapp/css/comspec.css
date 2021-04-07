@@ -109,8 +109,9 @@ input{
 }
 
 #btn_update {
-    padding-top: 110px;
-    display: inline-block; 
+    position: absolute;
+    top: 78vh;
+    display: block;
 }
 
 #btn_update button {

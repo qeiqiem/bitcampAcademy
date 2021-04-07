@@ -339,21 +339,20 @@ function modal_userInfo(mno){
             let address = (info.address).replaceAll(",", " ");
           $("#userInfo_bodycont").append(
               '<table class="userInfo">' +
-              '<h2>고객정보</h2>' +
               '<tr>'+
                     '<th>회원번호</th>' +
                     '<td>'+ info.mno + '</td>' +
                 '</tr>' +
                 '<tr>'+
-                    '<th>이름</th>' +
+                    '<th>이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;름</th>' +
                     '<td>'+ info.mname + '</td>' +
                 '</tr>' +
                 '<tr>'+
-                    '<th>연락처</th>' +
+                    '<th>연&nbsp;&nbsp;락&nbsp;&nbsp;처</th>' +
                     '<td>'+ info.phone + '</td>' +
                 '</tr>' +
                 '<tr>'+
-                    '<th>주소</th>' +
+                    '<th>주&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</th>' +
                     '<td>'+ address + '</td>' +
                 '</tr>' +
               '</table>'
