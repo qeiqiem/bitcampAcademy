@@ -1,24 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
    <html>
    <head>
    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>지도생성하기</title>
-    
+  
     <!-- map 에서 필요한 참조 -->
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>    
     <!-- 아임포트 -->
      <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
      <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-     
     <script src="/js/map.js"></script>
-   <link rel="stylesheet" href="/css/map.css">
-   
+    <script type="text/javascript">
+	    var mno = ${person.mno};	  
+	    var mtype = ${person.mtype};	  
+	    alert(mno, mtype)
+		  /* if(mno == 0){
+			  alert("비회원")
+		  }else if(mno == 1){
+			  alert("회원")
+		  }   */      
+    </script>
+   	<link rel="stylesheet" href="/css/map.css">
+  
    </head>
    <body>
-      <jsp:include page="/jsp/header0.jsp"></jsp:include>
+   <c:choose>
+   		<c:when test="${mtype==0}">
+   			<jsp:include page="/jsp/header0.jsp"></jsp:include>
+   		</c:when>
+   		<c:otherwise>
+   			<jsp:include page="/jsp/header1.jsp"></jsp:include>
+   		</c:otherwise>
+   </c:choose>
       <div id="mask"></div>
            <div class="body_container">
                <div class="map_container">
@@ -152,6 +168,19 @@
                             <button class="comBtn">결제하기</button>
                            </div>                          
                        </div><!-- res_slide --> 
+                       <div class="slide_success">
+                       		<h3>예약이 완료되었습니다!</h3>
+                       		<p>*예약취소는 1시간 이내까지만 가능합니다</p>	   
+	                       	<div class="res_child">
+	                       		<p>3/7일 이내로 세탁이 완료될 예정입니다.</p>
+	                       		<p>세탁물은 작업완료 이후 1~3일 이내 배송됩니다.</p> 
+	                       		<button id="res_return" >돌아가기</button>
+	                       		<button id="res_check">예약확인</button>
+	                       	</div>
+                       		
+                       </div>
+                       
+                       
                        <div class="contBtn">
                            <button class="foldBtn">&lt;</button>
                            <button class="foldBtn expand">&gt;</button>
@@ -177,8 +206,7 @@
            var bno= "";    
            var dbData = [];
            
-           var mno = ${person.mno};	  
-
+          
            var map = new kakao.maps.Map(mapContainer, mapOption);
            mapContainer.style.position = "initial";
             
@@ -251,7 +279,7 @@
                       , dataType: 'json'
                       , success: function(data){ //성공후 처리는 추후 진행.                         
                                 if(data==null){
-                                   console.log("data 가 조회되지 않았습니다.") 
+                                   console.log("data 가 조회되지 않았습니다.");
                                    dbData = null
                                 }
                                    dbData = data

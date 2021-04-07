@@ -15,6 +15,7 @@ $(document).ready(function() {
    var random = Math.floor(Math.random() * 10) + "," + "000"
    var bno = ""
    var totalPrice = 0
+   
    IMP.init("imp27421713");
    selectNum()
    
@@ -48,6 +49,11 @@ $(document).ready(function() {
 
    // 3. 예약슬라이드 (2depth) show
    $('#res').click(function() { resItemList(bno); $('.slide_res').show(); })
+   $('#res_return').click(function() { resItemList(bno); $('.slide_res').show(); })
+   $('#res_check').click(function() { 
+	   //아예 못돌아가게 (데이터가 꼬일수있음으로 replace 사용
+	   location.replace('/jsp/mypageUser/mypagePs.jsp')}
+   )
    $('.input_searchBtn').on("click", function() { var item = $(".input_search").val(); viewSearch(item)})
    
    //예약항목 옵션 클릭시 감지
@@ -318,8 +324,11 @@ $(document).ready(function() {
      	   	
             var arrayRe = arrayRes
      	   	//결제관련 api 기능
-     	   
+
             mapRes(arrayRe)
+            $('.slide_res').hide()
+            $('.slide_success').show()
+            
             $("#mask").hide()	
             
          } else { // 실패시
@@ -360,7 +369,7 @@ $(document).ready(function() {
         	   		 }
            , dataType: 'json'
            , success:function(data){
-        	   
+        	  
            }
 	   })
    }
