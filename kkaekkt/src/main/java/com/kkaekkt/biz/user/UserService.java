@@ -22,7 +22,7 @@ public interface UserService {
 	public AccountVO findId(AccountVO vo);
 	public AccountVO findPw(AccountVO vo);
 	public int idchk(PersonVO vo);
-	public int emailchk(AccountVO vo);
+	public int emailchk(String email);
 	public AccountVO method(AccountVO vo);
 	public AccountVO joinCfm(AccountVO vo);
 	public double avgGradeBs(BusinessVO vo);
@@ -33,6 +33,5 @@ public interface UserService {
 	public List<LaundryVO> getLaundryList(int bno);
     public void updatePw(AccountVO vo);
 	public int bnoChk(int bno);
-	public int mailchk(String email);
    
 }

@@ -30,12 +30,6 @@ public class UserController {
 
 	@Autowired
 	private JavaMailSender mailSender;
-
-	@RequestMapping(value="/emailChk.do",method=RequestMethod.POST)
-	@ResponseBody
-	public int mailChk(String email) {
-		return userService.mailchk(email);
-	}
 	@RequestMapping(value="/bnoChk.do",method=RequestMethod.POST)
 	@ResponseBody
 	public int bnoChk(int bno) {
@@ -157,43 +151,9 @@ public class UserController {
 	// 이메일 체크 sns에서 로그인할때 디비에 있는지 확인하려고 만든 컨트롤러이다
 	@RequestMapping(value = "/findemail.do", method = {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
-	public String emailchk(AccountVO vo) {
-		System.out.println("controller에서 이메일 찾음");
-		// vo = userService.email(vo);
-
-//		AccountVO findEmail = vo;
-//		vo.setEmail();
-//		System.out.println("findEmail" + vo);
-//
-//		Gson gson = new Gson();
-//		return userService.email(vo);
-
-		////////////////////////////// 위까지 소정 코드
-		Gson gson = new Gson();
-		vo.setEmailchk(userService.emailchk(vo));
-		System.out.println("값 담겨");
-		System.out.println(vo);
-
-		return gson.toJson(vo);
-
-//		Gson gson = new Gson();
-//		vo.setState(userService.idchk(vo));
-//		System.out.println("서비스에서 값 담겨 넘어옴");
-//		return gson.toJson(vo)
+	public int emailchk(String email) {
+		return userService.emailchk(email);
 	}
-
-	// 아이디 중복체크 업체........
-//	@RequestMapping(value = "/idchkBs.do", method = RequestMethod.POST)
-//	@ResponseBody
-//	public String idchkBs(BusinessVO vo) {
-//		System.out.println("vo 값 담겼음");
-//		System.out.println(vo);
-//		Gson gson = new Gson();
-//		vo.setState(userService.idchkBs(vo));
-//		System.out.println("서비스에서 값 담겨 넘어옴");
-//		return gson.toJson(vo);
-//	}
-
 	// 일반유저 로그인
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
 	@ResponseBody

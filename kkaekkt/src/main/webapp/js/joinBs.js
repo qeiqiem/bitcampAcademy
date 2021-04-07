@@ -117,17 +117,7 @@ function initEvent() {
     });
     $('#emailChkBtn').click(function() {
        if(regEmail.test(email.value)){//이메일이 양식에 맞을 경우
-        var resulty=mailOverlapChk();
-        console.log(resulty);
-        console.log(typeof resulty);
-        if(resulty){//이메일 중복검사 통과=true,중복=false 반환
-            console.log('....??');
-            emailAjax(email.value);
-        }else {
-            console.log('...왜 여기..?');
-            alert('이미 가입된 이메일입니다.');
-            email.focus();
-        }
+        mailDuplChk();
        }else {
         alert('이메일이 양식에 맞지 않습니다.');
         email.focus();
@@ -180,16 +170,16 @@ function timerStart() {
 function timeStop() {
     clearInterval(AuthTimer.timer);
 }
-function mailOverlapChk() {
+function mailDuplChk() {
     $.post({
-        url:'/emailChk.do',
+        url:'/findemail.do',
         data:{email:email.value},
-        async:false,//동기
         success:function(result) {
             if(result==0){
-                return true;
+                emailAjax(email.value);
             }else{
-                return false;
+                alert('중복된 이메일이 존재합니다.');
+                email.focus();
             }
         }
     })
