@@ -41,13 +41,16 @@ public class MapListController {
 				model.addAttribute("person",vo);
 				
 				return "/jsp/searchMap/map.jsp";
+			}else {
+				
+				AccountVO account = (AccountVO) session.getAttribute("user");								
+				model.addAttribute("person", userService.getPerson(account.getMno()));				
+				
+				return "/jsp/searchMap/map.jsp";			
+			
 			}
 			
-			System.out.println("map으로 이동  + 정보 : " + session.getAttribute("user"));
-			AccountVO account = (AccountVO) session.getAttribute("user");			
-			//로그인시 받아온 mno로 db 조회
-			model.addAttribute("person", userService.getPerson(account.getMno()));
-			return "/jsp/searchMap/map.jsp";
+			
 		}
 	
 	

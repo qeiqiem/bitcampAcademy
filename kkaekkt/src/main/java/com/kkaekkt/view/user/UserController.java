@@ -234,7 +234,7 @@ public class UserController {
 	@RequestMapping(value = "/findId.do", method = RequestMethod.POST)
 	public String findId(AccountVO vo, Model model,HttpServletResponse response) throws IOException {
 	   
-		System.out.println("findID 진입");
+		System.out.println("findID 진입"); 
 		System.out.println(vo);
 		vo=userService.findId(vo);
 		if(vo!=null) {

@@ -40,9 +40,22 @@ $(document).ready(function() {
    })
 
    // 1-1. 리스트 내부 조회이벤트
-   $('.slide_ul').on("click", "#all_search", function() { var item = adrress + "클리닝"; navSearch(item)})
-   $('.slide_ul').on("click", "#basic_search", function() { var item = adrress + "세탁소"; navSearch(item)})
-   $('.slide_ul').on("click", "#coin_search", function() {   var item = adrress + "코인세탁소"; navSearch(item)})
+   $('.slide_ul').on("click", "#all_search", function() { 
+	   resetInput()
+	   var item = adrress + "클리닝"; 
+	   navSearch(item)	   
+   })
+   
+   $('.slide_ul').on("click", "#basic_search", function() { 
+	   resetInput()
+	   var item = adrress + "세탁소"; 
+	   navSearch(item)
+   })
+   $('.slide_ul').on("click", "#coin_search", function() { 
+	   resetInput()
+	   var item = adrress + "코인세탁소"; 
+	   navSearch(item)
+   })
 
    $('.list').on("click", ".popul", function() { alert("준비중입니다.")})
    $('.list').on("click", ".gradescore", function() { alert("준비중입니다.")})
@@ -56,13 +69,18 @@ $(document).ready(function() {
    $('#infoReview').click(function() { $('.cardinfo').hide(); $('.cominfo').show();})
 
    // 3. 예약슬라이드 (2depth) show
-   $('#res').click(function() { resItemList(bno); $('.slide_res').show(); })
-   $('#res_return').click(function() { resItemList(bno); $('.slide_res').show(); })
+   $('.resbtn').click(function() { resItemList(bno); $('.slide_res').show(); })
+   
+   $('#res_return').click(function() { 
+	   resItemList(bno); 	   
+	   $('.slide_success').hide(); 
+	   $('.slide_res').show(); 
+	})
    $('#res_check').click(function() { 
 	   //아예 못돌아가게 (데이터가 꼬일수있음으로 replace 사용
 	   location.replace('/jsp/mypageUser/mypagePs.jsp')}
    )
-   $('.input_searchBtn').on("click", function() { var item = $(".input_search").val(); viewSearch(item)})
+   $('.input_searchBtn').on("click", function() { $('.single').hide(); $('.list').show(); var item = $(".input_search").val();  viewSearch(item)})
    
    //예약항목 옵션 클릭시 감지
    $("#resShortOpt").on("click", 'input:checkbox', function() {
@@ -199,12 +217,17 @@ $(document).ready(function() {
        })
       
       $('.list').hide()
-        $('.single').show()
+      $('.single').show()
       
       
       
    }
-
+   function resetInput() {
+	   var text =  $('.input_search').val() 
+	   if( text != null){
+		   $('.input_search').val('') 
+	   }
+   }
    //리뷰 조회
    function findReview(bno) {
       
@@ -248,7 +271,7 @@ $(document).ready(function() {
    // selectbox 옵션
    function selectNum() {
       $(".resOpc").append(
-            '<option value="" selected disabled hidden selected>선택</option>')
+            '<option value="" selected disabled hidden selected>1</option>')
       for (var i = 1; i < 11; i++) {
          $(".resOpc").append(
                '<option value="' + i + '">' + i + '</option')

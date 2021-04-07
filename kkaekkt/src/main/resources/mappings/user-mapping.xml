@@ -52,7 +52,6 @@
 			</otherwise>
 		</choose>
 	</insert>
-
     <select id="countLikeBs" resultType="_int">
         SELECT IFNULL(count(mno),0) FROM liked
         WHERE bno=#{bno};
@@ -67,11 +66,12 @@
 			<when test="bizType==1"> <!-- 일반세탁소라면 -->
 				<foreach collection="laundryList" item="laundry">
 					UPDATE bsn_laundry
-					   SET price=#{laundry.price} WHERE bno=#{bno} AND lno=#{laundry.lno};
+					SET price=#{laundry.price} WHERE bno=#{bno} AND lno=#{laundry.lno};
 				</foreach>
 				<foreach collection="scheduleList" item="schedule">
 					UPDATE bsn_schedule
-					   SET time=#{schedule.time} WHERE bno=#{bno} AND schno=#{schedule.schno};
+					SET time=#{schedule.time} WHERE bno=#{bno} AND
+					schno=#{schedule.schno};
 				</foreach>
 			</when>
 			<otherwise> <!-- else문,, 코인세탁소라면 -->
@@ -108,18 +108,17 @@
 	</select>
 	<select id="getBusiness" resultType="business">
 		SELECT ac.mno as mno, bs.bno, id, password, bname, phone, address, email, bz.typenum as bizType, bkno as bankNum, acno as bankAccountNum
-		FROM account ac, business bs, biztype bz
-		WHERE ac.mno=bs.mno
-		AND bs.typeNum=bz.typenum
-		AND ac.mno=#{mno};
+		  FROM account ac, business bs, biztype bz
+		 WHERE ac.mno=bs.mno
+		   AND bs.typeNum=bz.typenum
+		   AND ac.mno=#{mno};
 	</select>
 	<update id="updatePs">
 			UPDATE `member` SET phone=#{phone},birth=#{birth},address=#{address},email=#{email}
 			WHERE mno=#{mno};
 	</update>
 	<update id="updateBs">
-				UPDATE business SET phone=#{phone},bkno=#{bankNum},acno=#{bankAccountNum}, address=#{address},email=#{email}
-				WHERE mno=#{mno};
+		UPDATE business SET phone=#{phone},bkno=#{bankNum},acno=#{bankAccountNum},address=#{address},email=#{email}
 	</update>
 	<!-- 회원탈퇴 전에 예약이 있는지 확인한다 -->
 	<select id="orderChk" resultType="int">
@@ -210,16 +209,11 @@
 		LEFT OUTER JOIN business b on ac.mno=b.mno
 		WHERE ac.id=#{id};
 	</select>
-	    <update id="updatePw">
-        UPDATE account 
-        SET password=#{password} 
-        WHERE id=#{id};
-    </update>
 	<select id="idchk" resultType="int">
 		SELECT count(*)
 		FROM account
 		WHERE
-		id=#{id};
+		id=#{id} AND password=#{password};
 	</select>
 	<select id="joinCfm" resultType="account">
 		SELECT id, mname, bname
@@ -230,6 +224,5 @@
 		b.mno=a.mno
 		WHERE id=#{id};
 	</select>
-	
 </mapper>
 
