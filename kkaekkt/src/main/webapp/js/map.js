@@ -5,9 +5,9 @@ $(document).ready(function() {
 
    // 화면 생성시 기본호출
    // url에서 로그인 정보 가져오기
-	var url = document.location.href
-	console.log(link)
-	url = url.split("?")
+//	var url = document.location.href
+//	console.log(url)
+//	url = url.split("?")
 
 	
    // method/var-----------------------------------------------------------------------
@@ -95,7 +95,9 @@ $(document).ready(function() {
     	  insertResList() 
       }     
    })
-   
+   $('#chat').click(function() {
+	   
+   })
    
    $('.res_loading button').click(function() { $(".res_loading").hide(); $("#mask").hide(); })   
    $("#mask").on("click", function() {  $(".res_loading").hide(); $("#mask").hide();});
@@ -123,8 +125,8 @@ $(document).ready(function() {
       var name = s_title[0].innerText.substr(3)
         var star = s_title[2].innerHTML
         var address = s_title[3].innerHTML   
-       var phone = s_title[4].innerHTML
-       if(star != null)
+        var phone = s_title[4].innerHTML
+        if(star != null)
            $("#memberlog").html('<input class="tag_kkaekkt" value="kkarkkt 가맹점 입니다">')
         
            
@@ -238,7 +240,7 @@ $(document).ready(function() {
    
    //예약가능 품목 불러오기
    function resItemList(bno) { 
-      
+      bno = bno
       $.ajax({
            url:'/singleOption.do'
            , method : 'POST'
@@ -289,43 +291,42 @@ $(document).ready(function() {
    }
            
    function requestPay(arrayRes) {
-	   var arrayRe = arrayRes
-      //결제관련 api 기능
 	   
-       mapRes(arrayRe)
-       $("#mask").hide()	
-	   
-//       IMP.request_pay({
-//           pg : 'kakao', // 결제방식
-//           pay_method : 'card',   // 결제 수단
-//           merchant_uid : 'merchant_' + new Date().getTime(),
-//           name : '주문명: 결제 테스트',   // order 테이블에 들어갈 주문명 혹은 주문 번호
-//           amount : totalPrice,   // 결제 금액
-//           buyer_email : 'test',   // 구매자 email
-//           buyer_name :  'test',   // 구매자 이름
-//           buyer_tel :  'test',   // 구매자 전화번호
-//           buyer_addr :  'test',   // 구매자 주소
-//           buyer_postcode :  'test',   // 구매자 우편번호
-//           m_redirect_url : '/khx/payEnd.action'   // 결제 완료 후 보낼 컨트롤러의 메소드명
-// 
-//         }, function(rsp) {
-//         if ( rsp.success ) { // 성공시
-//            
-//            var msg = '결제가 완료되었습니다.'
-//            msg += '고유ID : ' + rsp.imp_uid
-//            msg += '상점 거래ID : ' + rsp.merchant_uid
-//            msg += '결제 금액 : ' + rsp.paid_amount
-//            msg += '메일 : ' + rsp.buyer_email
-//            msg += '이름 : ' + rsp.buyer_name
-//            msg += '우편번호 : ' + rsp.buyer_postcode
-//            alert(msg)
-//            mapRes(arrayRe)
-//            $("#mask").hide()	
-//         } else { // 실패시
-//            var msg = '결제에 실패하였습니다.';
-//            msg += '에러내용 : ' + rsp.error_msg;
-//         }
-//      })
+       IMP.request_pay({
+           pg : 'kakao', // 결제방식
+           pay_method : 'card',   // 결제 수단
+           merchant_uid : 'merchant_' + new Date().getTime(),
+           name : '주문명: 결제 테스트',   // order 테이블에 들어갈 주문명 혹은 주문 번호
+           amount : totalPrice,   // 결제 금액
+           buyer_email : 'test',   // 구매자 email
+           buyer_name :  'test',   // 구매자 이름
+           buyer_tel :  'test',   // 구매자 전화번호
+           buyer_addr :  'test',   // 구매자 주소
+           buyer_postcode :  'test',   // 구매자 우편번호
+           m_redirect_url : '/khx/payEnd.action'   // 결제 완료 후 보낼 컨트롤러의 메소드명
+ 
+         }, function(rsp) {
+         if ( rsp.success ) { // 성공시
+            
+            var msg = '결제가 완료되었습니다.'
+            msg += '고유ID : ' + rsp.imp_uid
+            msg += '상점 거래ID : ' + rsp.merchant_uid
+            msg += '결제 금액 : ' + rsp.paid_amount
+            msg += '메일 : ' + rsp.buyer_email
+            msg += '이름 : ' + rsp.buyer_name
+            msg += '우편번호 : ' + rsp.buyer_postcode
+     	   	
+            var arrayRe = arrayRes
+     	   	//결제관련 api 기능
+     	   
+            mapRes(arrayRe)
+            $("#mask").hide()	
+            
+         } else { // 실패시
+            var msg = '결제에 실패하였습니다.';
+            msg += '에러내용 : ' + rsp.error_msg;
+         }
+      })
    }
    
    
@@ -334,16 +335,12 @@ $(document).ready(function() {
 		 //뿌려져있는 row
 		  var cntChk = $('.chked')
 		   var arrayRes = new Array();
-		     for (var i = 0; i < cntChk.length ; i++) {
-		    	 
+		     for (var i = 0; i < cntChk.length ; i++) {		    	 
 		    	//lno 발최
 		    	var idx = $('.chked').eq(i).attr('id').charAt(3)
 		        //개수
-		        var selc = $('#selc'+idx).val()
-		        //단일금액
-		        var pri = $('#price'+idx)[0].innerHTML		        
-		        arrayRes[i] = Array(idx, selc, pri)
-		    	
+		        var selc = $('#selc'+idx).val()+",/"
+		        arrayRes[i] = Array(Number(idx)+1, selc)		    	
 		     }
 
 		   $("#mask").show()		  
@@ -352,13 +349,15 @@ $(document).ready(function() {
    
  //리스트 컨트롤러로 보내기
    function mapRes(arrayRe) {
-	   var arrayTos = arrayRe
-	   console.log(arrayRe)
-	   
+	   var arrayTos = arrayRe.toString()
+	   var userInfo = new Array(mno, totalPrice, bno)
+	   userInfo = userInfo.toString()
 	   $.ajax({
            url:'/respay.do'
            , method : 'POST'
-           , data: { 'arrayRe' : JSON.stringify(arrayRe) }
+           , data: { arrayTos : arrayTos,
+        	   		 userInfo :  userInfo 
+        	   		 }
            , dataType: 'json'
            , success:function(data){
         	   

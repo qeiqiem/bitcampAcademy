@@ -264,6 +264,8 @@
     font-size: 14px;
     margin-bottom: 20px;
     text-align: left;
+    margin-left: 14px;
+    margin-top: 17px;
 }
 
 #placesList{
@@ -726,3 +728,58 @@
 .ores_price{
     text-align: center;
 }
+
+
+/* map api 버튼 */
+
+/* position: absolute;
+    z-index: 9999;
+    width: 150px;
+    height: 28px;
+    margin-right: 19px;
+    text-align: center;
+    border: 1px solid;
+    display: inline-block;
+    left: 80%;
+    top: 5%;
+    border-radius: 10px;
+    background-color: white;
+    overflow: hidden; */
+
+.custom_typecontrol {     
+	z-index: 9999;
+    position: fixed;
+    top: 120px;
+    right: 27px;
+    overflow: hidden;
+    width: 130px;
+    height: 30px;
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
+    border-radius: 10px;
+    
+    }
+.custom_typecontrol span {display:block;width:65px;height:30px;float:left;text-align:center;line-height:30px;cursor:pointer;}
+.custom_typecontrol .btn_sky {background:#fff;background:linear-gradient(#fff,  #e6e6e6);}       
+.custom_typecontrol .btn_sky:hover {background:#f5f5f5;background:linear-gradient(#f5f5f5,#e3e3e3);}
+.custom_typecontrol .btn_sky:active {background:#e6e6e6;background:linear-gradient(#e6e6e6, #fff);}    
+.custom_typecontrol .selected_btn_map {color:#fff;background:#425470;background:linear-gradient(#425470, #5b6d8a);}
+.custom_typecontrol .selected_btn_map:hover {color:#fff;}   
+
+.custom_zoomcontrol {
+	position: absolute;
+    top: 124px;
+    right: 44px;
+    width: 36px;
+    height: 80px;
+    overflow: hidden;
+    z-index: 9999;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    border: 2px solid lightgray;
+    } 
+.custom_zoomcontrol span {display:block;width:36px;height:40px;text-align:center;cursor:pointer;}     
+.custom_zoomcontrol span img {width:15px;height:15px;padding:12px 0;border:none;}             
+.custom_zoomcontrol span:first-child{border-bottom:1px solid #bfbfbf;}    
