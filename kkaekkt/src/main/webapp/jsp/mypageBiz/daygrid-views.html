@@ -6,7 +6,7 @@
 <script src='../lib/main.js'></script>
 <script>
   //var sales = new Array();
-  document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
       headerToolbar: {
@@ -29,26 +29,26 @@
             var events = [];
             $.each(sales, function (index, item) {
               let price = item.price;
-              price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+              let inputprice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
               console.log(price);
-              if (price <= 300000){
+              if (price <= 200000){
                 events.push({
-                title: price + "원",
+                title: inputprice + " 원",
                 start: item.rsvDate,
                 color: "var(--text-red)"    // 붉은색
 
                 }); // push end
               }
-              else if(price > 300000 && price <= 600000 ){
+              else if(price > 200000 && price <= 400000 ){
                 events.push({
-                title: price + "원",
+                title: inputprice + " 원",
                 start: item.rsvDate,
                 color: "var(--text-gray)"   // 연두
 
                 }); // push end
-              } else if(price > 600000){
+              } else if(price > 400000){
                 events.push({
-                title: price + "원",
+                title: inputprice + " 원",
                 start: item.rsvDate,
                 color: "var(--key-text)"    // 푸른색
 
