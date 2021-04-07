@@ -90,6 +90,7 @@
 					SET time=#{schedule.time} WHERE bno=#{bno} AND
 					schno=#{schedule.schno};
 				</foreach>
+
 			</otherwise>
 		</choose>
 	</update>
@@ -101,8 +102,7 @@
 			   phone, 
 			   birth, 
 			   address, 
-			   email,
-			   mtype
+			   email
 		  FROM account ac, `member` mb
 		 WHERE ac.mno=mb.mno AND ac.mno=#{mno};
 	</select>
@@ -148,6 +148,11 @@
 		AND email=#{email};
 	</select>
 	<select id="getEmail" resultType="int">
+	<!-- 	SELECT *
+		FROM member
+		WHERE
+		email=#{email); -->
+
 		SELECT count(*)
 		FROM `member` m
 		LEFT JOIN business b on m.mno = b.mno
