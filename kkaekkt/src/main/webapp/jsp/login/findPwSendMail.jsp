@@ -10,7 +10,7 @@
 		<link rel="stylesheet" href="/css/find.css">
 		<script src="https://kit.fontawesome.com/2fc57dd2db.js" crossorigin="anonymous"></script>
 		<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-		<script src="/js/find.js"></script>
+
 		<style>
 			/* .val input {
 				margin: 0 0 15px;
@@ -39,11 +39,11 @@
 
 				<div id="findPW">
 					<form action="/updatePw.do" method="POST">
+						<p>
+							<span style="font-weight:bolder;">${userPw.id}</span>님, 해당 아이디에 등록된 이메일로 인증 후 비밀번호 변경이
+							가능합니다.
+						</p>
 						<div class="veri_btn val" style="text-align: center;">
-							<p>
-								<span style="font-weight:bolder;">${userPw.id}</span>님, 해당 아이디에 등록된 이메일로 인증 후 비밀번호 변경이
-								가능합니다.
-							</p>
 							<div>
 								<p>
 									<span id="emailVal"></span>${userPw.email}로 인증 메일을 전송하시겠습니까?
@@ -126,7 +126,7 @@
 				</div>
 			</div>
 		</div>
-		<!-- <script src="/js/find.js"></script> -->
+		<script src="/js/find.js"></script>
 		<script src="/js/findPw.js"></script>
 	</body>
 

@@ -4,6 +4,9 @@
 p{
     margin: 0;
 }
+button{
+    cursor: pointer;
+}
 .content hr {
 height: 1px;
 border: none;
@@ -106,7 +109,7 @@ margin: 0 auto;
     margin-left: 3px;
 }
 #modal_container{
-    /* display: none; */
+    display: none;
     position: fixed;
     top: 0;
     bottom: 0;
@@ -121,7 +124,7 @@ margin: 0 auto;
     /* box-shadow: 5px 12px 5px rgb(212 212 212); */
     overflow-y: scroll;
     padding: 40px;
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
     z-index: 1000;
 }
 #modal_close{
@@ -142,7 +145,7 @@ margin: 0 auto;
     background: gray;
 }
 #modal_container td{
-    padding: 10px 0;
+    padding: 11px 0;
 }
 /* #modal_leftBody{
     width: 50%;
@@ -166,7 +169,7 @@ margin: 0 auto;
     text-align: left;
 }
 .resOpc{
-    width: 40px;
+    width: 50px;
 }
 #single_option tr td:nth-child(1){
     width: 45%;
@@ -224,7 +227,7 @@ margin: 0 auto;
     box-sizing: border-box;
 }
 #cancelTerms{
-    padding: 10px 0;
+    padding: 20px 0;
 }
 #warning{
     font-size: 14px;
@@ -241,13 +244,46 @@ margin: 0 auto;
     width: 100%;
     text-align: center;
 }
-.comBtn{
+.comBtnDiv button{
     width: 100px;
     height: 45px;
     border-radius: 30px;
     border: 0px;
     font-size: 14px;
     text-align: center;
-    margin-top: 20px;
+    margin: 20px 10px 0px; /*상 좌우 하*/
     background-color: var(--key-color);
+}
+#agreement{
+    border: 1px solid lightgray;
+}
+#agreement div {
+    height: 50%;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+#agreementTop {
+    border-bottom: 1px solid lightgray;
+}
+#agreement i{
+    position: relative;
+    top: 4px;
+    cursor: pointer;
+}
+#agreement .termsText{
+    display: none;
+    font-size: 14px;
+    padding: 13px;
+    width: 100%;
+    box-sizing: border-box;
+    height: 110px;
+    overflow-y: scroll;
+}
+#agreement .termsText:nth-child(2){
+    border-bottom: 1px solid lightgray;
+}
+#agreement .termsText:nth-child(4){
+    border-top: 1px solid lightgray;
 }

@@ -52,20 +52,7 @@
 			</otherwise>
 		</choose>
 	</insert>
-	<update id="updatePs">
-		<choose>
-			<when test="email == null">
-				UPDATE account SET password=#{password} WHERE
-				mno=#{mno};
-			</when>
-			<otherwise>
-				<!-- UPDATE account SET password=#{password} WHERE mno=#{mno}; -->
-				UPDATE `member` SET
-				phone=#{phone},birth=#{birth},address=#{address},email=#{email}
-				WHERE mno=#{mno};
-			</otherwise>
-		</choose>
-	</update>
+
     <select id="countLikeBs" resultType="_int">
         SELECT IFNULL(count(mno),0) FROM liked
         WHERE bno=#{bno};
@@ -103,7 +90,6 @@
 					SET time=#{schedule.time} WHERE bno=#{bno} AND
 					schno=#{schedule.schno};
 				</foreach>
-
 			</otherwise>
 		</choose>
 	</update>
@@ -134,9 +120,6 @@
 	<update id="updateBs">
 				UPDATE business SET phone=#{phone},bkno=#{bankNum},acno=#{bankAccountNum}, address=#{address},email=#{email}
 				WHERE mno=#{mno};
-			</otherwise>
-		</choose>
-
 	</update>
 	<!-- 회원탈퇴 전에 예약이 있는지 확인한다 -->
 	<select id="orderChk" resultType="int">
@@ -227,7 +210,7 @@
 		LEFT OUTER JOIN business b on ac.mno=b.mno
 		WHERE ac.id=#{id};
 	</select>
-    <update id="updatePw">
+	    <update id="updatePw">
         UPDATE account 
         SET password=#{password} 
         WHERE id=#{id};
@@ -247,7 +230,6 @@
 		b.mno=a.mno
 		WHERE id=#{id};
 	</select>
-
 	
 </mapper>
 

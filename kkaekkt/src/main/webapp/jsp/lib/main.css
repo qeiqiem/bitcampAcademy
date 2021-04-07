@@ -869,12 +869,12 @@ A HORIZONTAL event
 .fc-liquid-hack .fc-daygrid-day-frame {
     position: static; /* will cause inner absolute stuff to expand to <td> */
   }
-.fc-daygrid-event { /* make root-level, because will be dragged-and-dropped outside of a component root */
+.fc-daygrid-event { /* make root-level, because will be dragged-and-dropped outside of a component root */ 
   position: relative; /* for z-indexes assigned later */
   white-space: nowrap;
   border-radius: 3px; /* dot event needs this to when selected */
-  font-size: .85em;
-  font-size: var(--fc-small-font-size, .85em);
+  font-size: 1em;   /*글자크기*/
+  /* font-size: var(--fc-small-font-size, .85em); */
 }
 /* --- the rectangle ("block") style of event --- */
 .fc-daygrid-block-event .fc-event-time {

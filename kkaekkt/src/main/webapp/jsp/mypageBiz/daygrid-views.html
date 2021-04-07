@@ -6,7 +6,7 @@
 <script src='../lib/main.js'></script>
 <script>
   //var sales = new Array();
-  document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
       headerToolbar: {
@@ -20,7 +20,7 @@
       dayMaxEvents: true, // allow "more" link when too many events
       events: function (info, successCallback, failureCallback) {
         $.post({
-          url: "/selectSalse.do",
+          url: "/selectSales.do",
           data: pageObj,
           success: function (data) {
             console.log('ajax 함수 완료');
@@ -28,10 +28,32 @@
             console.log(sales);
             var events = [];
             $.each(sales, function (index, item) {
-              events.push({
-                title: item.price + "원",
-                start: item.rsvDate
-              }); // push end
+              let price = item.price;
+              let inputprice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+              console.log(price);
+              if (price <= 200000){
+                events.push({
+                title: inputprice + " 원",
+                start: item.rsvDate,
+                color: "var(--text-red)"    // 붉은색
+
+                }); // push end
+              }
+              else if(price > 200000 && price <= 400000 ){
+                events.push({
+                title: inputprice + " 원",
+                start: item.rsvDate,
+                color: "var(--text-gray)"   // 연두
+
+                }); // push end
+              } else if(price > 400000){
+                events.push({
+                title: inputprice + " 원",
+                start: item.rsvDate,
+                color: "var(--key-text)"    // 푸른색
+
+                }); // push end
+              }
 
             }); // each end
             console.log(events);

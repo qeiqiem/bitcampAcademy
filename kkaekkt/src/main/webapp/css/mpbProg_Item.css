@@ -272,3 +272,56 @@ select,button {
 #review_btn button:hover{
     background: rgba(143, 188, 255, 0.48);
 }
+#modal_userInfo{
+    display: none;
+    position: fixed;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 400px;
+    height: 415px;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    /* box-shadow: 5px 12px 5px rgb(212, 212, 212); */
+    z-index: 1000;
+}
+#userInfo_bodycont{
+    clear: both;
+    margin: 20px 45px 0 45px;
+    height: 170px;
+}
+#modal_userInfo hr{
+    height: 1px;
+    width: 80%;
+    background-color: var(--gray-color);
+}
+#modal_userInfo h2{
+    text-align: center;
+    margin-top: 30px;
+    margin-left: 14px;
+    color: var(--text-gray);
+}
+#userInfo_bodycont tr{
+    margin-top: 5px;
+    padding: 5px;
+    height: 32px;
+}
+#userInfo_bodycont th{
+    width: 82px;
+    text-align: left;
+    vertical-align: initial;
+    color: var(--text-gray);
+}
+
+.btn_info{
+    background: none;
+    border: none;
+    font-size: 16px;
+}
+.btn_info:hover{
+    font-weight: bold;
+}

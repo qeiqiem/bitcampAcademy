@@ -68,6 +68,7 @@ function initEvent() {
 		openModal('complete');
 	});
     $("#mask").on("click", function() {  $("#modal_container").hide(); $("#mask").hide();});
+    $("#mask").on("click", function() {  $("#modal_userInfo").hide(); $("#mask").hide();});
 }
 function initModal() {
     /* 모달 생성 */
@@ -140,6 +141,7 @@ function sendMsg() {
 }
 function modalClose() {
     $('#modal_container').hide();
+    $('#modal_userInfo').hide();
     $("#mask").hide();
 }
 function complete() {
@@ -304,6 +306,7 @@ function printlist(list) {
             count+=val.count;
             price+=val.price;
             state+=val.state;
+            console.log(value.laundryList.length+'...품목길이');
             if(value.laundryList.length!=idx+1) { //마지막이 아니라면 <br>붙이기
                 laundry+='<br>';
                 count+='<br>';
@@ -316,7 +319,7 @@ function printlist(list) {
                 '<tr>' +
                     '<td>'+value.rsvDate+'</td>'+
                     '<td>'+value.rsvNum+'</td>'+
-                    '<td id="'+value.mno+'">'+value.mname+'</td>'+
+                    '<td id="'+value.mno+'"><button class="btn_info" onclick="modal_userInfo('+value.mno+')">'+value.mname+'</td>'+
                     '<td>'+laundry+'</td>'+
                     '<td>'+count+'</td>'+
                     '<td>'+price+'</td>'+
@@ -329,5 +332,42 @@ function printlist(list) {
                 '</tr>'+
             '</table>'
         );
+    });
+}
+function modal_userInfo(mno){
+    $("#mask").show();
+    $("#modal_userInfo").show();
+    $("#userInfo_bodycont *").remove();
+    $.ajax({
+        url: '/getuserInfo.do',
+        type: 'post',
+        data: {
+            mno: mno,   
+        }, success: function(data){
+            let info = JSON.parse(data);
+            let address = (info.address).replaceAll(",", " ");
+          $("#userInfo_bodycont").append(
+              '<table class="userInfo">' +
+              '<tr>'+
+                    '<th>회원번호</th>' +
+                    '<td>'+ info.mno + '</td>' +
+                '</tr>' +
+                '<tr>'+
+                    '<th>이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;름</th>' +
+                    '<td>'+ info.mname + '</td>' +
+                '</tr>' +
+                '<tr>'+
+                    '<th>연&nbsp;&nbsp;락&nbsp;&nbsp;처</th>' +
+                    '<td>'+ info.phone + '</td>' +
+                '</tr>' +
+                '<tr>'+
+                    '<th>주&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</th>' +
+                    '<td>'+ address + '</td>' +
+                '</tr>' +
+              '</table>'
+             
+          )
+        }   
+
     });
 }

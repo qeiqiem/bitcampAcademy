@@ -19,20 +19,11 @@
 
 <body>
 	<jsp:include page="/jsp/header0.jsp"></jsp:include>
-
 	<div class="body_container">
-		
-
 		<div class="content">
-			<button id="log">
-				<a href="#">일반로그인</a>
-			</button>
-			<button id="log">
-				<a href="/jsp/login/loginBs.jsp">업체로그인</a>
-			</button>
 			<div class="login">
 				<form action="/login.do" method="post">
-					<a href="http://developers.kakao.com/logout"><h3 class="loginTitle">로그인</h3></a>
+					<a href="http://developers.kakao.com/logout"><h2 class="loginTitle">로그인</h2></a>
 					<hr>
 					<div>
 						<input type="text" name="id" id="id" placeholder="아이디" />

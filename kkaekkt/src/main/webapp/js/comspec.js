@@ -19,13 +19,22 @@ function initEvent(){
         $("#week button").attr("disabled", true);
     // 체크박스 선택시 해당 품목 가격인풋창 활성화
     chkBox.click(function(){
-            for(var i=0; i<chkBox.size();i++) {
-            if(chkBox[i].checked){
-                priceBox.eq(i).attr("disabled", false);
-            } else{
-                priceBox.eq(i).attr("disabled", true);
-                priceBox.eq(i).val("");
+        let idx = this.value;
+        console.log(idx);
+            if(chkBox[idx-1].checked){
+                priceBox.eq(idx-1).attr("disabled", false);
+                console.log( priceBox.eq(idx-1).attr("disabled"));
+            } else if (!chkBox[idx-1].checked){
+                priceBox.eq(idx-1).attr("disabled", true);
+                priceBox.eq(idx-1).val("");
             }
+        
+    });
+    //숫자만
+    priceBox.keyup(function (event) {
+        if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
+            var inputVal = $(this).val();
+            $(this).val(inputVal.replace(/[^0-9]/gi, ""));
         }
     });
     // 수정하기 버튼 클릭시 
@@ -139,7 +148,7 @@ function ajax(pageObj) { //ajax로 리스트 받아오기
                         if(item.price !=0){
                             checkli.eq(i).prop("checked", true);
                            $(".laundry input[id='won']").eq(item.lno - 1).val(item.price);
-                        }
+                        } 
 					}
 				} 
 			}); // 품목리스트 반복문

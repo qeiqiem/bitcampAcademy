@@ -9,9 +9,20 @@
         <title>Document</title>
         <link rel="stylesheet" href="/css/find.css">
         <script src="https://kit.fontawesome.com/2fc57dd2db.js" crossorigin="anonymous"></script>
+        <script>
+            window.onload = function () {
+                let str = document.getElementById("idValue").innerHTML;
+                console.log(str);
+                let idVal = str.substring(0, 3)
+                console.log(idVal);
+                let idRp = '*'.repeat(str.length - 3);
+                console.log(idRp);
+                document.getElementById("idValue").innerText = (idVal + idRp);
+            }
+        </script>
         <style>
             .pw_box {
-                color: var(--text-gray);
+                color: var(- -text-gray);
             }
 
             .pw_box span {
@@ -20,27 +31,15 @@
                 margin-left: 10px;
                 color: black;
             }
-        </style>
-        <script>
-            window.onload = function () {
 
-                let str = document.getElementById("idValue").innerHTML;
-                console.log(str);
-
-                let idVal = str.substring(0, 3)
-                console.log(idVal);
-
-                let idRp = '*'.repeat(str.length - 3);
-                console.log(idRp);
-                document.getElementById("id").innerText = (idVal + idRp);
-
-                // str.substring(3, str.length)
-
-                // for (const i = 0; i < str.length - 3; i++) {
-                //     str.replace(str.substring(i), '*');
-                //
+            .pw_box button {
+                width: 110px;
+                padding: 16px;
+                margin: 39px 24px;
             }
-        </script>
+        </style>
+
+
     </head>
 
     <body>
@@ -52,16 +51,21 @@
                     <div id="nav_id" onclick="showID()">아이디 찾기</div>
                     <div id="nav_pw" class="unselect" onclick="showPW()">비밀번호 찾기</div>
                 </nav>
+                <div id="findID">
+                    <p>아이디 찾기가 완료되었습니다.</p>
 
-                <p>아이디 찾기가 완료되었습니다.</p>
+                    <!-- 아이디 -->
+                    <div class="veri_btn pw_box" onclick="" style="text-align: center;">
+                        ID <span id="idValue">${userId.id}</span>
+                        <div>
+                            <button type="button" onclick="showPW()">비밀번호 찾기</button>
+                            <button type="button" onclick="location.href='/jsp/login/loginPs.jsp'">로그인</button>
+                        </div>
+                    </div>
 
-                <!-- 아이디 -->
-                <div class="veri_btn pw_box" onclick="" style="text-align: center;">
-                    ID <span id="idValue">${userId.id}</span>
-                </div>
-                <div class="mail">
-                    아이디 찾기 시 문제가 있나요?
-                    <a href="mailto:info@kkaekkt.com">고객센터</a>
+                    <div class="mail">
+                        아이디 찾기 시 문제가 있나요? <a href="mailto:info@kkaekkt.com">고객센터</a>
+                    </div>
                 </div>
 
                 <!-- 비번 -->
@@ -73,7 +77,8 @@
 
                         <!-- <form action=""> -->
                         <div class="veri_btn pw_box">
-                            <input type="text" name="id" placeholder="비밀번호를 찾을 아이디를 입력하세요."> <br>
+                            <input type="text" name="id" placeholder="비밀번호를 찾을 아이디를 입력하세요.">
+                            <br>
                             <button type="submit">다음</button>
                         </div>
 
