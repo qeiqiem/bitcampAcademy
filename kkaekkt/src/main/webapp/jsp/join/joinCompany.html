@@ -84,7 +84,7 @@
                                 <p>비밀번호</p>
                                 <input type="password" id="pw" onfocusout="chkPw()"
                                     placeholder="영어 대문자, 특수문자, 숫자를 포함한 8~16글자" minlength="8" maxlength="16">
-                                <label id="pwchk" class="regexChk hide">비밀번호는 특수문자,문자,숫자 포함 8~15자리 이내로 작성해주십시오</label>
+                                <label id="pwchk" class="regexChk hide">비밀번호는 영어 대문자, 특수문자, 숫자를 포함한 8~16글자 이내로 작성해주십시오</label>
                                 <p>비밀번호 확인</p>
                                 <input name="password" id="repw" onfocusout="chkRePw()" type="password"
                                     placeholder="영어 대문자, 특수문자, 숫자를 포함한 8~16글자" minlength="8" maxlength="16">
@@ -115,7 +115,6 @@
                                     <button type="button" class="two">평일</button>
                                     <button type="button" class="two">주말</button>
                                 </div>
-
                                 <div class="weekBox">
                                     <ul>
                                     </ul>
@@ -137,7 +136,6 @@
                                 </div>
                                 <div class="address">
                                     <p>주소</p>
-
                                     <input type="text" id="postcode" placeholder="우편번호" readonly>
                                     <button type="button" onclick=execDaumPostcode() id="btn_address">우편번호
                                         찾기</button><br>

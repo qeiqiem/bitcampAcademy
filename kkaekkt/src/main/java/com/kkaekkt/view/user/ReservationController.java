@@ -109,4 +109,16 @@ public class ReservationController {
 	public void updateAlert(AlertVO vo) {
 		reservationService.updateAlert(vo);
 	}
+	
+	// 매출관리
+	@RequestMapping(value = "/selectSales.do", method = RequestMethod.POST, produces = "application/text;charset=utf-8")
+	@ResponseBody
+	public String selectSalse(int bno) {
+		Gson gson = new Gson();
+		String sales = gson.toJson(reservationService.getSales(bno));
+		System.out.println("test:" + sales);
+
+		return sales;
+
+	}
 }

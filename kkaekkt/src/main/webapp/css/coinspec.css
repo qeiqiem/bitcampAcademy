@@ -91,7 +91,9 @@ input{
 }
 
 #btn_update {
-    display: inline-block;
+    position: absolute;
+    top: 75vh;
+    display: block;
 }
 
 #coinLaundry input {
@@ -138,9 +140,6 @@ input{
     background-color: white;
     border-radius: 20px;
     overflow: scroll;
-}
-#btn_update {
-    padding-top: 100px;
 }
 
 #btn_update button {

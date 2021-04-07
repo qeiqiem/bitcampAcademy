@@ -34,7 +34,7 @@ input {
     padding-bottom: 10px;
 }
 #combio_title #title_right{
-    margin-left: 650px;
+    margin-left: 720px;
 
 }
 #combio_title #bname{
@@ -45,9 +45,13 @@ input {
     font-size: 16px;
     font-weight: bold;
 }
-.fa-star{
+.yellow{
     font-size: 16px;
     color: yellow;
+}
+.grey{
+    font-size: 16px;
+    color: var(--gray-color);
 }
 
 .bizinfo table td {

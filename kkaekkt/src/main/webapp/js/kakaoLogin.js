@@ -11,37 +11,26 @@ function kakaoLogin(){
                 success: res => {
                     const kakao = res.kakao_account;
                     
-                    var userNick = kakao.NickName;
-                    console.log(userNick);
                     var userEmail = kakao.email;
                     console.log(userEmail);
                     
                     
                     var userdata = {
-                    	nick: userNick,
                     	email: userEmail
                     }
+                    
 $.ajax({
-	url: '/findemail.do',
+	url: '/loginSNS.do',
 	type: 'POST',
 	data: {
-		email:userEmail
+		email:userEmail,
 	},
 	success: function(data){		
-		console.log("보냄");
-		console.log(data);
-		var info = JSON.parse(data);
-		console.log(info);
-		
-	if(info.emailchk == 0){
+	if(data == "fail"){
 		alert("회원정보 없음");
-		$('#email').val();
-	} //else {
-		//console.log(location.href);
-		//console.log(window.location.protocol + "/" + window.location.host + "/" + data);
-		// location.href = "../../" + data;
-		//location.href = data;
-	//}
+	} else{
+        location.href = "/jsp/indexPerson.jsp";
+	}
 		}
 }); // ajax
 

@@ -67,7 +67,7 @@
                         </ul>
 
                     </div>
-                    <div class="user_btn" onclick="location.href='joinCompany.jsp'">
+                    <div class="user_btn" onclick="location.href='joinCompany.html'">
                         <ul>
                             <li>
                                 <i class="far fa-building fa-5x"></i>

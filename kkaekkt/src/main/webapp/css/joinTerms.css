@@ -1,0 +1,47 @@
+
+.container{
+	width: 100%;
+	padding-top: 80px;
+}
+.content{
+    position: relative;
+    top: 50px;
+    margin: 0 auto;
+    max-width: 768px;
+    min-width: 460px;
+    background-color: blanchedalmond;
+}
+.terms{
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    resize: none;
+}
+#warnBox{
+    position: relative;
+    height: 30px;
+    text-align: center;
+    background-color: gray;
+}
+#termsChk{
+    position: absolute;
+    display: none;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    color: red;
+}
+#footer{
+    width: 100%;
+    /* background-color: chocolate; */
+    height: 45px;
+    text-align: center;
+}
+#footer button{
+    width: 100px;
+    height: 100%;
+    border: none;
+    background-color: var(--key-color);
+    /* border-radius: 30px; */
+    margin: 0 20px;
+}

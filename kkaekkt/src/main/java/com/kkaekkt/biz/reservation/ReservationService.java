@@ -24,4 +24,5 @@ public interface ReservationService {
 	public List<AlertVO> getAlertList(AlertVO vo);
 	public void delAlert(AlertVO vo);
 	public void updateAlert(AlertVO vo);
+	public List<LaundryVO> getSales(int bno);
 }

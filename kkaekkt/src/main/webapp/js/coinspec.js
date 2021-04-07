@@ -29,7 +29,7 @@ function initEvent() {
             if(i<3){
                 selectBox.eq(i).attr("disabled", false);
             }
-        } else{
+        } else if(!chkBox[i].checked){
             priceBox.eq(i).attr("disabled", true);
             priceBox.eq(i).val("");
             if(i<3){
@@ -39,6 +39,13 @@ function initEvent() {
         }
     }
         });
+    //숫자만
+    priceBox.keyup(function (event) {
+        if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
+            var inputVal = $(this).val();
+            $(this).val(inputVal.replace(/[^0-9]/gi, ""));
+        }
+    });
     // 수정하기 버튼 클릭시 
     clickupdate.click(function () {
         clickupdate.hide();
