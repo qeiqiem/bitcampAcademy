@@ -342,6 +342,12 @@ public class UserController {
 		Gson gson = new Gson();
 		return gson.toJson(userService.getLaundryList(bno));
 	}
+	@RequestMapping(value="/getuserInfo.do", method = RequestMethod.POST, produces = "application/text;charset=utf-8")
+	@ResponseBody
+	public String getuserInfo(int mno) {
+		Gson gson = new Gson();
+		return gson.toJson(userService.getPerson(mno));
+	}
 	
   
 }

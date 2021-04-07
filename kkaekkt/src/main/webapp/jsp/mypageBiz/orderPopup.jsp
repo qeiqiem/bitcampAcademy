@@ -140,11 +140,11 @@ hr{
             <td>${rsv.rsvDate}</td>
         </tr>
         <tr>
-            <th>예약번호</th>
+            <th>주문번호</th>
             <td>${rsv.rsvNum}</td>
         </tr>
         <tr>
-            <th>예약자명</th>
+            <th>주문자명</th>
             <td>${rsv.mname}</td>
         </tr>
         <tr>
