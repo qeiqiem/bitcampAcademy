@@ -38,14 +38,14 @@ public class MapListController {
 			if(session.getAttribute("user")==null) {
 				PersonVO vo = new PersonVO();
 				vo.setMno(0);
+				vo.setMtype(0);
 				model.addAttribute("person",vo);
 				
 				return "/jsp/searchMap/map.jsp";
 			}
 			
 			System.out.println("map으로 이동  + 정보 : " + session.getAttribute("user"));
-			AccountVO account = (AccountVO) session.getAttribute("user");
-			
+			AccountVO account = (AccountVO) session.getAttribute("user");			
 			//로그인시 받아온 mno로 db 조회
 			userService.getPerson(account.getMno());		
 			model.addAttribute("person", userService.getPerson(account.getMno()));
