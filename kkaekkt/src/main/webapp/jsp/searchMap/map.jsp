@@ -10,30 +10,18 @@
     <!-- map 에서 필요한 참조 -->
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>    
     <!-- 아임포트 -->
-     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
      <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-    <script src="/js/map.js"></script>
-    <script type="text/javascript">
-	    var mno = ${person.mno};	  
-	    var mtype = ${person.mtype};	  
-	    alert(mno, mtype)
-		  /* if(mno == 0){
-			  alert("비회원")
-		  }else if(mno == 1){
-			  alert("회원")
-		  }   */      
-    </script>
-   	<link rel="stylesheet" href="/css/map.css">
-  
+	 <script src="/js/map.js"></script>
+   	<link rel="stylesheet" href="/css/map.css">  
    </head>
    <body>
-   <c:choose>
-   		<c:when test="${mtype==0}">
-   			<jsp:include page="/jsp/header0.jsp"></jsp:include>
-   		</c:when>
-   		<c:otherwise>
-   			<jsp:include page="/jsp/header1.jsp"></jsp:include>
-   		</c:otherwise>
+    <c:choose>
+         <c:when test="${person.mtype==0}">
+            <jsp:include page="/jsp/header0.jsp"></jsp:include>
+         </c:when>
+         <c:otherwise>
+            <jsp:include page="/jsp/header1.jsp"></jsp:include>
+         </c:otherwise>
    </c:choose>
       <div id="mask"></div>
            <div class="body_container">
@@ -81,12 +69,6 @@
                                </div>
                            </div>
                            <div class="footer list">
-                               <ul class="searchtag">
-                                   <li><b id="countp">장 소 </b></li>
-                                  <!--  <li style="margin-left: 45%;font-size: 12px;">거리순</li> -->
-                                   <li class="popul"style="font-size: 12px;">인기순 | </li>
-                                   <li class="gradescore" style="font-size: 12px;">평점순</li>
-                               </ul>
                                <div class="slide_card">
                                    <table id="placesList"></table>
                                    <div id="pagination"></div>
@@ -94,13 +76,14 @@
                            </div>
                            <div class="footer single">
                                <div class="card">
-                                   <img id="single_img" src="/img/kkaekkt.png" style="width: 100%; height: 200px; background-color: aliceblue;">
-                                   <p id="s_title"> <i class="far fa-heart" id="heart" style="color:lightgray; font-size:30px"></i></p>
+                        
+                                   <img id="single_img" src="/img/kkaekkt.png" style="width: 100%; height: 200px; background-color: aliceblue;"> 
+                                   <p id="s_title"></p><button class="likeThis"><i class="far fa-heart" id="heart" ></i></button>
                                    <div id="s_star">
                                    </div>
-                           <div>
-                              <button id="res">예약하기</button>
-                              <button id="chat">상담하기</button>
+                           <div class="btnSet">
+                              <button class="resbtn">예약하기</button>
+                              <button class="chat">상담하기</button>                             
                            </div>
                                </div>
                                <div>
@@ -142,6 +125,16 @@
                            
                            </div>
                        </div><!-- slide -->
+                       <div class="slide_success">
+                       		<h3>예약이 완료되었습니다!</h3>
+                       		<p>*예약취소는 1시간 이내까지만 가능합니다</p>
+	                       	<div class="res_child">
+	                       		<p>3/7일 이내로 세탁이 완료될 예정입니다.</p>
+	                       		<p>세탁물은 작업완료 이후 1~3일 이내 배송됩니다.</p> 
+	                       		<button id="res_return">돌아가기</button>
+	                       		<button id="res_check">예약확인</button>
+	                       	</div>                       		
+                       </div>
                        <div class="slide_res">     
                            <p id="res_p">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<i class="far fa-edit"></i>&nbsp&nbsp예약하기</p>
                            <div class="rescont">
@@ -168,19 +161,6 @@
                             <button class="comBtn">결제하기</button>
                            </div>                          
                        </div><!-- res_slide --> 
-                       <div class="slide_success">
-                       		<h3>예약이 완료되었습니다!</h3>
-                       		<p>*예약취소는 1시간 이내까지만 가능합니다</p>	   
-	                       	<div class="res_child">
-	                       		<p>3/7일 이내로 세탁이 완료될 예정입니다.</p>
-	                       		<p>세탁물은 작업완료 이후 1~3일 이내 배송됩니다.</p> 
-	                       		<button id="res_return" >돌아가기</button>
-	                       		<button id="res_check">예약확인</button>
-	                       	</div>
-                       		
-                       </div>
-                       
-                       
                        <div class="contBtn">
                            <button class="foldBtn">&lt;</button>
                            <button class="foldBtn expand">&gt;</button>
@@ -188,9 +168,8 @@
                    </div>
                    <div id="map"></div>
                </div>
-               
            </div>
-       </body>    
+       </body>   
        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3845f493917a302d1ea69e946c0443ff&libraries=services"></script>
        <script>
    
@@ -205,7 +184,7 @@
            var itemel;
            var bno= "";    
            var dbData = [];
-           
+           var mno = ${person.mno};	
           
            var map = new kakao.maps.Map(mapContainer, mapOption);
            mapContainer.style.position = "initial";
@@ -398,11 +377,15 @@
            }
    
         	// 리스트 출력
-           function getListItem(i,place) {   
+           function getListItem(i,place) {  
         		
-	        	if(i==0) var i = 0      		
-	        	if(place[i].place_name == dbData[i].bname){	
-	        		//조회된 값이 있다면 데이터 체인지					
+				if(dbData[i] == null){
+					var contentNum = 0
+					var grade = 0
+					var bno = 0
+	        		wirteHtml(i,place[i],contentNum,grade, bno)  
+				}else if(place[i].place_name == dbData[i].bname){	
+	        		   //조회된 값이 있다면 데이터 체인지					
 						console.log(place[i].place_name+" : "+ dbData[i].bname)
 						console.log(place[i].road_address_name+" : "+ dbData[i].address)
 						console.log(place[i].phone+" : "+dbData[i].phone)
@@ -417,12 +400,9 @@
 						var grade = dbData[i].grade
 						var bno = dbData[i].bno
 						wirteHtml(i,place[i],contentNum,grade, bno)  
-	        	}else {
-	        		var contentNum = 0
-					var grade = 0
-					var bno = 0
-	        		wirteHtml(i,place[i],contentNum,grade, bno)  
 	        	}
+				
+				
            }
         
            function wirteHtml(i,place ,contentNum, grade, bno) { 
