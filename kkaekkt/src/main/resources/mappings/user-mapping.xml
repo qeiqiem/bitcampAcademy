@@ -1,57 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="UserDAO">
-	<select id="bnoChk" resultType="_int">
-		SELECT count(bno) FROM business WHERE bno=#{bno};
-	</select>
-	<insert id="insertPs" parameterType="person">
-		INSERT INTO account
-		(id,password) VALUES
-		(#{id},#{password});
-		INSERT INTO `member` VALUES
-		((SELECT MAX(mno) FROM
-		account),#{name},#{phone},#{birth},#{address},#{email});
-	</insert>
-	<delete id="likeOff">
-		DELETE FROM liked WHERE mno=#{mno} AND bno=#{bno};
-	</delete>
-	<insert id="likeOn">
-		INSERT INTO liked (bno,mno) VALUES(#{bno},#{mno});
-	</insert>
-	<insert id="insertBs" parameterType="business">
-		INSERT INTO account (id,password) VALUES (#{id},#{password});
-		INSERT
-		INTO business (mno,bname,address,phone,bkno,acno,email,typeNum)
-		VALUES
-		((SELECT MAX(mno) FROM
-		account),#{bname},#{address},#{phone},#{bankNum},#{bankAccountNum},#{email},#{bizType});
+   <select id="bnoChk" resultType="_int">
+      SELECT count(bno) FROM business WHERE bno=#{bno};
+   </select>
+   <insert id="insertPs" parameterType="person">
+      INSERT INTO account
+      (id,password) VALUES
+      (#{id},#{password});
+      INSERT INTO `member` VALUES
+      ((SELECT MAX(mno) FROM
+      account),#{name},#{phone},#{birth},#{address},#{email});
+   </insert>
+   <delete id="likeOff">
+      DELETE FROM liked WHERE mno=#{mno} AND bno=#{bno};
+   </delete>
+   <insert id="likeOn">
+      INSERT INTO liked (bno,mno) VALUES(#{bno},#{mno});
+   </insert>
+   <insert id="insertBs" parameterType="business">
+      INSERT INTO account (id,password) VALUES (#{id},#{password});
+      INSERT
+      INTO business (mno,bname,address,phone,bkno,acno,email,typeNum)
+      VALUES
+      ((SELECT MAX(mno) FROM
+      account),#{bname},#{address},#{phone},#{bankNum},#{bankAccountNum},#{email},#{bizType});
 
-		<foreach collection="scheduleList" item="schedule"> <!-- 스케쥴 저장 -->
-			INSERT INTO bsn_schedule VALUES ((SELECT MAX(bno) FROM
-			business),${schedule.schno},'${schedule.time}');
-		</foreach>
+      <foreach collection="scheduleList" item="schedule"> <!-- 스케쥴 저장 -->
+         INSERT INTO bsn_schedule VALUES ((SELECT MAX(bno) FROM
+         business),${schedule.schno},'${schedule.time}');
+      </foreach>
 
-		<choose>
-			<when test="bizType==1"> <!-- 일반세탁소라면 -->
-				<foreach collection="laundryList" item="laundry">
-					INSERT INTO
-					bsn_laundry VALUES ((SELECT MAX(bno) FROM
-					business),${laundry.lno},${laundry.price});
-				</foreach>
-			</when>
-			<otherwise> <!-- else문,, 코인세탁소라면 -->
-				<foreach collection="equipmentList" item="equipment">
-					INSERT INTO
-					bsn_equipment VALUES ((SELECT MAX(bno) FROM
-					business),${equipment.eno},${equipment.cnt},${equipment.price});
-				</foreach>
-				<foreach collection="etcList" item="etc">
-					INSERT INTO bsn_etc
-					VALUES((SELECT MAX(bno) FROM business),${etc.etcno},${etc.price});
-				</foreach>
-			</otherwise>
-		</choose>
-	</insert>
+      <choose>
+         <when test="bizType==1"> <!-- 일반세탁소라면 -->
+            <foreach collection="laundryList" item="laundry">
+               INSERT INTO
+               bsn_laundry VALUES ((SELECT MAX(bno) FROM
+               business),${laundry.lno},${laundry.price});
+            </foreach>
+         </when>
+         <otherwise> <!-- else문,, 코인세탁소라면 -->
+            <foreach collection="equipmentList" item="equipment">
+               INSERT INTO
+               bsn_equipment VALUES ((SELECT MAX(bno) FROM
+               business),${equipment.eno},${equipment.cnt},${equipment.price});
+            </foreach>
+            <foreach collection="etcList" item="etc">
+               INSERT INTO bsn_etc
+               VALUES((SELECT MAX(bno) FROM business),${etc.etcno},${etc.price});
+            </foreach>
+         </otherwise>
+      </choose>
+   </insert>
 
     <select id="countLikeBs" resultType="_int">
         SELECT IFNULL(count(mno),0) FROM liked
@@ -155,39 +155,39 @@
 	</select>
 	<select id="getLikedBs" resultType="business"><!-- 찜한 업체 목록 조회 -->
         SELECT IFNULL(comm,0) count,l.bno,bname,IFNULL(ROUND(eval,1),0) eval,address,phone,likedNum
-		FROM business b ,liked l
-		LEFT OUTER JOIN (SELECT count(mno) comm,AVG(grade) eval, bno FROM comments WHERE depth=0 GROUP BY bno) c ON c.bno=l.bno
+      FROM business b ,liked l
+      LEFT OUTER JOIN (SELECT count(mno) comm,AVG(grade) eval, bno FROM comments WHERE depth=0 GROUP BY bno) c ON c.bno=l.bno
         , (SELECT count(mno) likedNum, bno FROM liked GROUP BY bno) lc
-		WHERE l.bno=b.bno AND b.bno=lc.bno
-		AND l.mno=#{mno}
-		GROUP BY b.bno;
-	</select>
-	<!-- 관리자 페이지 기능이기 때문에 일단 대기.. -->
-	<select id="getUserList">
+      WHERE l.bno=b.bno AND b.bno=lc.bno
+      AND l.mno=#{mno}
+      GROUP BY b.bno;
+   </select>
+   <!-- 관리자 페이지 기능이기 때문에 일단 대기.. -->
+   <select id="getUserList">
 
-	</select>
-	<!-- 사양관리/설비관리 -->
-	<select id="getLaundryList" resultType="laundry">
-		SELECT b_l.lno, lname as laundry,price,bname
-		FROM bsn_laundry b_l, laundry_type l_t,business b
-		WHERE b_l.lno=l_t.lno AND b.bno=b_l.bno 
-		AND b_l.bno=#{bno};
-	</select>
-	<select id="getEquipmentList" resultType="equipment">
-		SELECT eno, cnt, price
-		FROM bsn_equipment WHERE bno= #{bno};
-	</select>
-	<select id="getEtc" resultType="etc">
-		SELECT etcno, price FROM bsn_etc
-		WHERE bno = #{bno};
-	</select>
-	<select id="getScheduleList" resultType="schedule">
-		SELECT bs.schno, time
-		FROM bsn_schedule bs, schedule sc
-		WHERE bs.schno = sc.schno
-		AND bno=#{bno};
-	</select>
-	<select id="findId" resultType="account">
+   </select>
+   <!-- 사양관리/설비관리 -->
+   <select id="getLaundryList" resultType="laundry">
+      SELECT b_l.lno, lname as laundry,price,bname
+      FROM bsn_laundry b_l, laundry_type l_t,business b
+      WHERE b_l.lno=l_t.lno AND b.bno=b_l.bno 
+      AND b_l.bno=#{bno};
+   </select>
+   <select id="getEquipmentList" resultType="equipment">
+      SELECT eno, cnt, price
+      FROM bsn_equipment WHERE bno= #{bno};
+   </select>
+   <select id="getEtc" resultType="etc">
+      SELECT etcno, price FROM bsn_etc
+      WHERE bno = #{bno};
+   </select>
+   <select id="getScheduleList" resultType="schedule">
+      SELECT bs.schno, time
+      FROM bsn_schedule bs, schedule sc
+      WHERE bs.schno = sc.schno
+      AND bno=#{bno};
+   </select>
+   <select id="findId" resultType="account">
 
 		<!-- SELECT * FROM account ac LEFT JOIN member mb on ac.mno=mb.mno LEFT 
 			JOIN business bs on ac.mno=bs.mno WHERE (mname='테스트업체' AND mb.email='test@naver.com') 
@@ -232,4 +232,3 @@
 	</select>
 	
 </mapper>
-
