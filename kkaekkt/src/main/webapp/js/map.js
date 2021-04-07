@@ -416,7 +416,7 @@ $(document).ready(function() {
           alertObj.addressee=Number($('#addressee').val());
           alertObj.rsvNum=rsvNum;
           alertObj.msg='새로운 주문(번호:'+rsvNum+')이 등록되었습니다.';
-          alertObj.typenum=2;
+          alertObj.typenum=1;
   }
   function sendMsg() {
       $.post({
