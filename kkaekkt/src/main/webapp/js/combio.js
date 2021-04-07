@@ -355,12 +355,12 @@ function emailDuplChk() {
         email: $("#email").val(),
       },
       success: function (data) {
-        console.log(data);
-        var key = JSON.parse(data);
-        if (key.emailchk != 0) {
+          var key = JSON.parse(data);
+          console.log(key);
+        if (key != 0) {
           alert("해당 이메일로 가입된 아이디가 존재합니다.");
           return false;
-        } else if (key.emailchk == 0) {
+        } else if (key == 0) {
           emailApi();
         } 
       }
