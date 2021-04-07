@@ -111,7 +111,7 @@ public class ReservationController {
 	}
 	
 	// 매출관리
-	@RequestMapping(value = "/selectSalse.do", method = RequestMethod.POST, produces = "application/text;charset=utf-8")
+	@RequestMapping(value = "/selectSales.do", method = RequestMethod.POST, produces = "application/text;charset=utf-8")
 	@ResponseBody
 	public String selectSalse(int bno) {
 		Gson gson = new Gson();
