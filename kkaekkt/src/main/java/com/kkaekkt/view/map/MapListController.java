@@ -1,6 +1,8 @@
 package com.kkaekkt.view.map;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -22,22 +24,33 @@ import com.kkaekkt.biz.user.AccountVO;
 import com.kkaekkt.biz.user.PersonVO;
 import com.kkaekkt.biz.user.UserService;
 
+
 @Controller
 public class MapListController {
 	@Autowired
 	MapService mapserv;
+	@Autowired
 	UserService userService;
 	
 		@RequestMapping(value="/showMap.do", method = {RequestMethod.GET, RequestMethod.POST})
 		public String loginView( HttpSession session, Model model) {
+			
+			if(session.getAttribute("user")==null) {
+				PersonVO vo = new PersonVO();
+				vo.setMno(0);
+				model.addAttribute("person",vo);
+				
+				return "/jsp/searchMap/map.jsp";
+			}
+			
 			System.out.println("map으로 이동  + 정보 : " + session.getAttribute("user"));
 			AccountVO account = (AccountVO) session.getAttribute("user");
 			
-			System.out.println(account.getMno());
 			//로그인시 받아온 mno로 db 조회
 			userService.getPerson(account.getMno());		
 			model.addAttribute("person", userService.getPerson(account.getMno()));
 
+			
 			return "/jsp/searchMap/map.jsp";
 		}
 	
@@ -91,11 +104,41 @@ public class MapListController {
 	  
 		//회원업체 리뷰 조회
 		@RequestMapping(value="/respay.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
-	  	public String respay(ResPayVO vo) {
-			System.out.println("예약관련정보 : "+vo); 
-			return "/jsp/searchMap/map.jsp";
+	  	public String respay(String userInfo, String arrayTos ) {
+			
+			MapListVO mapvo = new MapListVO();
+			ResPayVO resvo = null;			
+			List<ResPayVO> resList  = new ArrayList<>();
+			
+			System.out.println("예약관련정보 : "+ arrayTos); 	
+			//가져온 문자열 튜닝
+			arrayTos = arrayTos.replace("/", "");
+			arrayTos = arrayTos.replace(",,", ",");			
+			String[] arr = arrayTos.split(",");
+			System.out.println("스플릿 결과 : " + Arrays.toString(arr));
+			
+			for (int i = 0; i < arr.length-1; i++) {
+				resvo = new ResPayVO();
+				if(i==0 ||(i&1)==0) {					
+					System.out.println("lno : "+arr[i]+", cnt : "+arr[i+1]);
+					resvo.setLno(Integer.parseInt(arr[i]));
+					resvo.setCnt(Integer.parseInt(arr[i+1]));
+					resList.add(resvo);
+				}									
+			}
+			mapvo.setResList(resList);		
+			
+			System.out.println("유저관련정보 : "+ userInfo); 	
+			//유저관련 정보
+			String[] user = userInfo.split(",",4);
+			mapvo.setMno(Integer.parseInt(user[0]));	
+			mapvo.setTotalPrice(Integer.parseInt(user[1]));
+			mapvo.setRbno(Integer.parseInt(user[2]));
+			
+			mapserv.respay(mapvo);
+			
+			return "success";
 		}
 		
-	 
 }
 
