@@ -260,7 +260,6 @@ $(document).ready(function() {
                                  html += ' <li> <p class="comment">'+data[i].content+'</p></li>'
                               html += '</ul>'
                            }
-                        
                         $(".combody").append(html)                        
                        }   
        })      
@@ -318,7 +317,8 @@ $(document).ready(function() {
                                     }
                            
                            html +='<tr><td style="height: 55px; font-weight: 600; font-size: 18px;">결제예상금액</td>'
-                           html +='<td colspan="2" class="totalAll"></td></tr>'                          
+                           html +='<td colspan="2" class="totalAll"></td></tr>'  
+                           html +='<input type="hidden" id="addressee" value="'+data[0].mno+'">'
                        $("#resShortOpt").append(html)
                        selectNum()
                   } 
@@ -394,13 +394,50 @@ $(document).ready(function() {
    function mapRes() {
 	   rsvObj.mno = mno;
       rsvObj.totalPrice=totalPrice;
-      rsvObj.bno=bno;
+      rsvObj.rbno=bno;
 	   $.ajax({
            url:'/respay.do'
            , method : 'POST'
            , data: rsvObj
-           , success:function(data){
+           , success:function(result){
+            msgSet(result);
+            sendMsg();
            }
 	   })
    }
+   function today() {
+      var date=new Date();
+      var mm=date.getMonth()+1;
+      var dd=date.getDate();
+      var today=date.getFullYear()+'.'+(mm<10?'0'+mm:mm)+'.'+(dd<10?'0'+dd:dd);
+      return today;
+  }
+  function msgSet(rsvNum) {
+          alertObj.addressee=Number($('#addressee').val());
+          alertObj.rsvNum=rsvNum;
+          alertObj.msg='새로운 주문(번호:'+rsvNum+')이 등록되었습니다.';
+          alertObj.typenum=2;
+  }
+  function sendMsg() {
+      $.post({
+          url:'/regitAlert.do',
+          data:alertObj,
+          success:function() {
+              if(socket){
+                  var receiver=alertObj.addressee;
+                  var msg='<li>'+
+                              '<div class="msgTop">'+
+                                  '<a href="/jsp/mypageBiz/mpbProg_Num.jsp">[결제]⠀'+alertObj.msg+'</a>'+
+                              '</div>'+
+                              '<div class="msgBottom">'+
+                                  '<span class="date">'+today()+'</span>'+
+                                  '<span class="byBs">by '+alertObj.senderName+'</span>'+
+                              '</div>'+
+                              '<i class="fas fa-times"></i>'+
+                          '</li>'
+                  socket.send(receiver+','+msg);//메시지 보냄
+              }
+          }
+      });
+  }
 });

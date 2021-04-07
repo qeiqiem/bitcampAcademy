@@ -97,11 +97,10 @@ public class MapListController {
 			return singleList; 
 		}
 		//예약 목록 추가 
-		@RequestMapping(value="/respay.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
-	  	public String respay(MapListVO mapvo) {
-			mapserv.respay(mapvo);
-			return "success";
+		@RequestMapping(value="/respay.do",method=RequestMethod.POST)
+		@ResponseBody
+	  	public int respay(MapListVO mapvo) {
+			return mapserv.respay(mapvo);
 		}
-		
 }
 

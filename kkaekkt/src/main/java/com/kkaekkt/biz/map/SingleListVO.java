@@ -10,6 +10,7 @@ public class SingleListVO {
 	
 	//laundryinfo-------------------------
 	int no;
+	int mno; //알림 전송을 위한 업체의 mno
 	int lno;
 	int price;
 	String product;
@@ -23,6 +24,14 @@ public class SingleListVO {
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="YYYY.MM.DD")
 	Date rdate;
 	
+	public int getMno() {
+		return mno;
+	}
+
+	public void setMno(int mno) {
+		this.mno = mno;
+	}
+
 	public String getContent() {
 		return content;
 	}

@@ -90,7 +90,8 @@ function initBodyEvent() {
     });
     $('.content').on("click",'button',function() {
         var bno=$(this).attr('id').substr(6);
-        rsvObj.rbno=Number(bno);
+        rsvObj.rbno=Number(bno);//업체의 bno
+        alertObj.addressee=Number($(this).val());//업체의 mno 
         modalAjax(bno);
     });
     table.on("click",'input:checkbox',function() {
@@ -167,7 +168,7 @@ function printList() {
                     '</div>'+
                 '</div>'+
                 '<div class="bsTagRight">'+
-                    '<button id="rsvBtn'+value.bno+'">예약하기</button>'+
+                    '<button id="rsvBtn'+value.bno+'" value="'+value.mno+'">예약하기</button>'+
                 '</div>'+
             '</div>');
     });
@@ -263,12 +264,20 @@ function requestPay(totalPrice) {
         , data: rsvObj
         , success:function(result){
            msgSet(result);
+           sendMsg();
         }
     })
 }
+function today() {
+    var date=new Date();
+    var mm=date.getMonth()+1;
+    var dd=date.getDate();
+    var today=date.getFullYear()+'.'+(mm<10?'0'+mm:mm)+'.'+(dd<10?'0'+dd:dd);
+    return today;
+}
 function msgSet(rsvNum) {
         alertObj.rsvNum=rsvNum;
-        alertObj.msg='주문번호'+rsvNum+' 가 취소되었습니다.';
+        alertObj.msg='새로운 주문(번호:'+rsvNum+')이 등록되었습니다.';
         alertObj.typenum=2;
 }
 function sendMsg() {
@@ -280,7 +289,7 @@ function sendMsg() {
                 var receiver=alertObj.addressee;
                 var msg='<li>'+
                             '<div class="msgTop">'+
-                                '<a href="/jsp/mypageUser/mypagePs.jsp">['+(alertObj.typenum==3?'완료':'취소')+']⠀'+alertObj.msg+'</a>'+
+                                '<a href="/jsp/mypageBiz/mpbProg_Num.jsp">[결제]⠀'+alertObj.msg+'</a>'+
                             '</div>'+
                             '<div class="msgBottom">'+
                                 '<span class="date">'+today()+'</span>'+

@@ -84,7 +84,6 @@ function pwSubmit() {
         $('#findPwForm').submit();
       }
     },
-
     error: function (request, status, error) {
       console.log(
         "code:" +

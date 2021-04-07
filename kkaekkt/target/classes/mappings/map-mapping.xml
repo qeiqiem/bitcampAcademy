@@ -27,7 +27,8 @@
 	</select>
 	
 	<select id="selectOption" parameterType="int" resultType="single">
-			SELECT bno
+			SELECT mno 
+				 , bno
 			     , lno
 			     , name
 			     , product

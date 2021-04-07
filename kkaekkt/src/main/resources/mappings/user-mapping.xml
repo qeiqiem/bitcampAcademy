@@ -154,7 +154,7 @@
 		WHERE m.email=#{email} OR b.email=#{email};
 	</select>
 	<select id="getLikedBs" resultType="business"><!-- 찜한 업체 목록 조회 -->
-        SELECT IFNULL(comm,0) count,l.bno,bname,IFNULL(ROUND(eval,1),0) eval,address,phone,likedNum
+        SELECT IFNULL(comm,0) count,l.bno,bname,IFNULL(ROUND(eval,1),0) eval,address,phone,likedNum,b.mno
 		FROM business b ,liked l
 		LEFT OUTER JOIN (SELECT count(mno) comm,AVG(grade) eval, bno FROM comments WHERE depth=0 GROUP BY bno) c ON c.bno=l.bno
         , (SELECT count(mno) likedNum, bno FROM liked GROUP BY bno) lc
