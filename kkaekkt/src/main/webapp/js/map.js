@@ -20,7 +20,16 @@ $(document).ready(function() {
    
 
    // [Click 이벤트]----------------------------------------------------------------------
-
+   $("#agreement i").click(function() {//약관 클릭 시
+      $(this).toggleClass('fa-chevron-down');
+      $(this).toggleClass('fa-chevron-up');
+      console.log($(this).css('display'));
+      if($('.termsText').eq($(this).attr('value')).css('display')=="none"){
+          $('.termsText').eq($(this).attr('value')).show();
+      }else{
+          $('.termsText').eq($(this).attr('value')).hide();
+      }
+  });
    /* [사이드바] */
    // 1. 리스트 : 슬라이드 show
    $('.foldBtn').click(function() {
