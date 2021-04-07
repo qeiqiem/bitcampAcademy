@@ -103,14 +103,12 @@ public class UserDAO {
 	public List<ScheduleVO> getSchedule(int bno) {
 		return mybatis.selectList("UserDAO.getScheduleList", bno);
 	}
-
 	public void updateSpec(BusinessVO vo) {
 		System.out.println("마이바티스 update");
 		mybatis.update("UserDAO.updateSpec", vo);
 		System.out.println("마이바티스 update완료");
 
 	}
-
 	// 아이디 중복확인
 	public int idchk(PersonVO vo) {
 		System.out.println(vo);
@@ -119,11 +117,9 @@ public class UserDAO {
 		System.out.println(res);
 		return res;
 	}
-	
 	// 아이디 찾기
 	public AccountVO findId(AccountVO vo) {
-		return mybatis.selectOne("UserDAO.findId",vo);
-		 
+		return mybatis.selectOne("UserDAO.findId",vo); 
 	}
 	// 비밀번호 찾기
 	public AccountVO findPw(AccountVO vo) {
@@ -132,7 +128,6 @@ public class UserDAO {
 		System.out.println(res);
 		return res;
 	}
-
 	public AccountVO joinCfm(AccountVO vo) {
 		return mybatis.selectOne("UserDAO.joinCfm",vo);
 	}
@@ -162,6 +157,5 @@ public class UserDAO {
 	}
 	public int bnoChk(int bno) {
 		return mybatis.selectOne("UserDAO.bnoChk",bno);
-	}
-	
+	}	
 }
