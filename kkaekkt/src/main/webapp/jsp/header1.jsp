@@ -25,7 +25,8 @@
 				</a>
 			</div>
 			<div class="menu">
-				<a href="">일반세탁소</a> <a href="">코인세탁소</a>
+				<a href="/showMap.do">일반세탁소</a>
+				<a href="/showMap.do">코인세탁소</a>
 			</div>
 		</div>
 

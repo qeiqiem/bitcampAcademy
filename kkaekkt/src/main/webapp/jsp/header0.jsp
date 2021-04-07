@@ -18,8 +18,8 @@
 				</a>
 			</div>
 			<div class="menu">
-				<a href="/jsp/searchMap/laundryMap.jsp">일반세탁소</a>
-				<a href="/jsp/searchMap/laundryMap.jsp">코인세탁소</a>
+				<a href="/showMap.do">일반세탁소</a>
+				<a href="/showMap.do">코인세탁소</a>
 			</div>
 		</div>
 		<div class="head_right">
