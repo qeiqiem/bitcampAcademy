@@ -28,8 +28,8 @@
         </div>
 
         <div class="search_box">
-            <input type="text" placeholder="동네를 입력해주세요" name="search">
-            <button type="submit">
+            <input type="text" placeholder="동네를 입력해주세요" name="search" id="searchBar">
+            <button onclick='location.href="/showMap.do"'>
                 <i class="fas fa-search fa-lg "></i>
                 <!-- <i class="fas fa-search fa-2x"></i> -->
             </button>
@@ -37,8 +37,6 @@
         <div>
             <p>서비스 개요 영역</p>
         </div>
-
-
 
 
     </div>
