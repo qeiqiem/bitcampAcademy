@@ -97,7 +97,10 @@
         var likedBsList=${likedBsList};
         var likeObj={
             mno:alertObj.sender
-        }
+        };
+        var rsvObj={
+            mno:alertObj.sender
+        };
     </script>
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
     <script src="/js/mymark.js"></script>

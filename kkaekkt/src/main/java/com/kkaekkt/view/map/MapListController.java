@@ -119,12 +119,12 @@ public class MapListController {
 			
 			for (int i = 0; i < arr.length-1; i++) {
 				resvo = new ResPayVO();
-				if(i==0 ||(i&1)==0) {					
+				if(i==0 ||(i&1)==0) {
 					System.out.println("lno : "+arr[i]+", cnt : "+arr[i+1]);
 					resvo.setLno(Integer.parseInt(arr[i]));
 					resvo.setCnt(Integer.parseInt(arr[i+1]));
 					resList.add(resvo);
-				}									
+				}
 			}
 			mapvo.setResList(resList);		
 			
