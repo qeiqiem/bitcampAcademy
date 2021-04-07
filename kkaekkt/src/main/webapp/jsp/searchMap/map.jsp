@@ -6,29 +6,17 @@
    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>지도생성하기</title>
-  
     <!-- map 에서 필요한 참조 -->
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>    
     <!-- 아임포트 -->
      <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
      <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
     <script src="/js/map.js"></script>
-    <script type="text/javascript">
-	    var mno = ${person.mno};	  
-	    var mtype = ${person.mtype};	  
-	    alert(mno, mtype)
-		  /* if(mno == 0){
-			  alert("비회원")
-		  }else if(mno == 1){
-			  alert("회원")
-		  }   */      
-    </script>
    	<link rel="stylesheet" href="/css/map.css">
-  
    </head>
    <body>
    <c:choose>
-   		<c:when test="${mtype==0}">
+   		<c:when test="${person.mtype==0}">
    			<jsp:include page="/jsp/header0.jsp"></jsp:include>
    		</c:when>
    		<c:otherwise>
@@ -193,7 +181,6 @@
        </body>    
        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3845f493917a302d1ea69e946c0443ff&libraries=services"></script>
        <script>
-   
        /* 지도 api에서 제공하는 이벤트 */
            var markers = [];
            var mapContainer = 

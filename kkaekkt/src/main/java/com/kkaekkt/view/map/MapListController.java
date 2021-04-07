@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -47,10 +46,7 @@ public class MapListController {
 			System.out.println("map으로 이동  + 정보 : " + session.getAttribute("user"));
 			AccountVO account = (AccountVO) session.getAttribute("user");			
 			//로그인시 받아온 mno로 db 조회
-			userService.getPerson(account.getMno());		
 			model.addAttribute("person", userService.getPerson(account.getMno()));
-
-			
 			return "/jsp/searchMap/map.jsp";
 		}
 	
@@ -100,43 +96,10 @@ public class MapListController {
 			System.out.println("select 데이터 확인  : "+singleList); 
 			return singleList; 
 		}
-	  
-	  
-		//회원업체 리뷰 조회
+		//예약 목록 추가 
 		@RequestMapping(value="/respay.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
-	  	public String respay(String userInfo, String arrayTos ) {
-			
-			MapListVO mapvo = new MapListVO();
-			ResPayVO resvo = null;			
-			List<ResPayVO> resList  = new ArrayList<>();
-			
-			System.out.println("예약관련정보 : "+ arrayTos); 	
-			//가져온 문자열 튜닝
-			arrayTos = arrayTos.replace("/", "");
-			arrayTos = arrayTos.replace(",,", ",");			
-			String[] arr = arrayTos.split(",");
-			System.out.println("스플릿 결과 : " + Arrays.toString(arr));
-			
-			for (int i = 0; i < arr.length-1; i++) {
-				resvo = new ResPayVO();
-				if(i==0 ||(i&1)==0) {
-					System.out.println("lno : "+arr[i]+", cnt : "+arr[i+1]);
-					resvo.setLno(Integer.parseInt(arr[i]));
-					resvo.setCnt(Integer.parseInt(arr[i+1]));
-					resList.add(resvo);
-				}
-			}
-			mapvo.setResList(resList);		
-			
-			System.out.println("유저관련정보 : "+ userInfo); 	
-			//유저관련 정보
-			String[] user = userInfo.split(",",4);
-			mapvo.setMno(Integer.parseInt(user[0]));	
-			mapvo.setTotalPrice(Integer.parseInt(user[1]));
-			mapvo.setRbno(Integer.parseInt(user[2]));
-			
+	  	public String respay(MapListVO mapvo) {
 			mapserv.respay(mapvo);
-			
 			return "success";
 		}
 		

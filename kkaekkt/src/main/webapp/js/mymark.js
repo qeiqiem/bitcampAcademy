@@ -186,8 +186,8 @@ function initModal() {//모달 이벤트 관리
         }else {
             resListSet();//체크된 품목 리스트 입력
             rsvObj.totalPrice=totalPrice;//총 금액 입력
-            // requestPay(totalPrice);
-            console.log(JSON.stringify(rsvObj));
+            requestPay(totalPrice);
+            // console.log(JSON.stringify(rsvObj));
         }
     });
     $("#mask").click(function(){//마스크 쪽이 눌렸다면
@@ -209,7 +209,7 @@ function resListSet(){
     var cntChk=$('.chked');
     var idx;
     for(var i=0;i<cntChk.length;i++){
-        lno = $('.chked').eq(i).attr('id').charAt(3);//lno추출
+        lno = Number($('.chked').eq(i).attr('id').charAt(3))+1;//lno추출
         cnt = $('#selc'+lno).val();//cnt추출
         list.push({lno:lno,cnt:cnt});//리스트 셋
     }
@@ -257,3 +257,13 @@ function requestPay(totalPrice) {
        }
     })
  }
+ function rsvAjax() {
+    $.ajax({
+        url:'/respay.do'
+        , method : 'POST'
+        , data: rsvObj
+        , success:function(data){
+           console.log(data);
+        }
+    })
+}
