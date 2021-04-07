@@ -193,8 +193,8 @@ public class UserServiceImpl implements UserService {
 	public BusinessVO getBusiness(BusinessVO vo) {
 		return userDao.getBusiness(vo);
 	}
-	@Override
-	public List<LaundryVO> getSalse(int bno) {		// 하루 매출 
+
+	public List<LaundryVO> getSalse(int bno) {		
 		return userDao.getSalse(bno);
 	}
 
