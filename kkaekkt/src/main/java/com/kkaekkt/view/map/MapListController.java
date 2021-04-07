@@ -41,16 +41,13 @@ public class MapListController {
 				model.addAttribute("person",vo);
 				
 				return "/jsp/searchMap/map.jsp";
-			}else {
-				
-				AccountVO account = (AccountVO) session.getAttribute("user");								
-				model.addAttribute("person", userService.getPerson(account.getMno()));				
-				
-				return "/jsp/searchMap/map.jsp";			
-			
 			}
 			
-			
+			System.out.println("map으로 이동  + 정보 : " + session.getAttribute("user"));
+			AccountVO account = (AccountVO) session.getAttribute("user");			
+			//로그인시 받아온 mno로 db 조회
+			model.addAttribute("person", userService.getPerson(account.getMno()));
+			return "/jsp/searchMap/map.jsp";
 		}
 	
 	
@@ -101,8 +98,9 @@ public class MapListController {
 		}
 		//예약 목록 추가 
 		@RequestMapping(value="/respay.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
-	  	public int respay(MapListVO mapvo) {
-			return mapserv.respay(mapvo);
+	  	public String respay(MapListVO mapvo) {
+			mapserv.respay(mapvo);
+			return "success";
 		}
 		
 }

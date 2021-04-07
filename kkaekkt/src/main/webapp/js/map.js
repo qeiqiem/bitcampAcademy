@@ -373,7 +373,7 @@ $(document).ready(function() {
    
    //화면단에있는 목록 가져오기
    function insertResList() {
-		 //뿌려져있는 row
+		 //뿌려져있는 row 체크
 		  var cntChk = $('.chked')
 		   var arrayRes = new Array();
          var idx;

@@ -282,7 +282,7 @@ select,button {
     right: 0;
     margin: auto;
     width: 400px;
-    height: 380px;
+    height: 415px;
     background-color: white;
     border: 1px solid lightgray;
     border-radius: 10px;
@@ -291,17 +291,32 @@ select,button {
 }
 #userInfo_bodycont{
     clear: both;
-    margin: 60px 10px 0 10px;
-    height: 220px;
+    margin: 20px 45px 0 45px;
+    height: 170px;
 }
-#userInfo_bodycont h2{
+#modal_userInfo hr{
+    height: 1px;
+    width: 80%;
+    background-color: var(--gray-color);
+}
+#modal_userInfo h2{
     text-align: center;
-}
-#userInfo_bodycont th{
-    width: 70px;
-    text-align: left;
+    margin-top: 30px;
+    margin-left: 14px;
     color: var(--text-gray);
 }
+#userInfo_bodycont tr{
+    margin-top: 5px;
+    padding: 5px;
+    height: 32px;
+}
+#userInfo_bodycont th{
+    width: 82px;
+    text-align: left;
+    vertical-align: initial;
+    color: var(--text-gray);
+}
+
 .btn_info{
     background: none;
     border: none;

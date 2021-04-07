@@ -169,22 +169,20 @@ public class UserController {
 	}
 
 	// 소셜로그인
-	@RequestMapping(value = "/loginSNS.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/loginSNS.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String kakaologin(AccountVO vo, HttpSession session, HttpServletResponse response) {
 		System.out.println("카카오 로그인 컨트롤러 접속");
 		// 로그인 성공했을 때
 		vo = userService.method(vo);
-
-		//AccountVO user = vo;
 		System.out.println(vo); // 카카오 로그인시 vo 확인
 
 		if (vo.getMno() != 0) {
 			session.setAttribute("person", vo);
 			System.out.println("user정보 " + vo);
-			return "/jsp/indexPerson.jsp";
+			return "success";
 		} else {
 			System.out.println("로그인 실패");
-			return "/jsp/login/loginPs";
+			return "fail";
 		}
 	}
 
@@ -234,7 +232,7 @@ public class UserController {
 	@RequestMapping(value = "/findId.do", method = RequestMethod.POST)
 	public String findId(AccountVO vo, Model model,HttpServletResponse response) throws IOException {
 	   
-		System.out.println("findID 진입"); 
+		System.out.println("findID 진입");
 		System.out.println(vo);
 		vo=userService.findId(vo);
 		if(vo!=null) {
