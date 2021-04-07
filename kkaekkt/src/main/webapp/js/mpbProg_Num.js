@@ -304,6 +304,7 @@ function printlist(list) {
             count+=val.count;
             price+=val.price;
             state+=val.state;
+            console.log(value.laundryList.length+'...품목길이');
             if(value.laundryList.length!=idx+1) { //마지막이 아니라면 <br>붙이기
                 laundry+='<br>';
                 count+='<br>';

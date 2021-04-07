@@ -26,7 +26,7 @@
 				</a>
 			</div>
 			<div class="menu">
-				<a href="">일반세탁소</a> <a href="">코인세탁소</a> <a href="/jsp/mypageBiz/mpbProg_Num.jsp">매장관리</a>
+				<a href="/jsp/mypageBiz/mpbProg_Num.jsp">매장관리</a>
 			</div>
 		</div>
 

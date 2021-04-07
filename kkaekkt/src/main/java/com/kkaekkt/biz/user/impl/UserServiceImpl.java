@@ -171,9 +171,9 @@ public class UserServiceImpl implements UserService {
 		return userDao.idchk(vo);
 	}
 	@Override
-	public int emailchk(AccountVO vo) {
+	public int emailchk(String email) {
 		System.out.println("email 찾는 서비스 옴");
-		return userDao.emailchk(vo);
+		return userDao.emailchk(email);
 	}
 
 	@Override
@@ -208,10 +208,4 @@ public class UserServiceImpl implements UserService {
 	public int bnoChk(int bno) {
 		return userDao.bnoChk(bno);
 	}
-	@Override
-	public int mailchk(String email) {
-		return userDao.mailChk(email);
-	}
-
-
 }
