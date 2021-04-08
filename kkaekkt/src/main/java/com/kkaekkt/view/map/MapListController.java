@@ -38,9 +38,9 @@ public class MapListController {
 	          vo.setMtype(0);
 	          vo.setMno(0);
 	          if(type==1) {
-	             vo.setAddress("클리닝");
+	             vo.setAddress("서울 클리닝");
 	          }else {
-	             vo.setAddress("코인");
+	             vo.setAddress("서울 코인 세탁소");
 	          }
 	          model.addAttribute("user", vo);
 	       }else { //로그인 상태

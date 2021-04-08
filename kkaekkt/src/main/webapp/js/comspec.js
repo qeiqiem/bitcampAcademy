@@ -22,10 +22,10 @@ function initEvent(){
     chkBox.click(function(){
         let idx = this.value;
         console.log(idx);
-        // console.log(chkBox.eq(idx-1).attr("disabled"));
-        // if(chkBox.eq(idx-1).attr("disabled") == true){
-        //     alert("수정하기상태가 아님");
-        // }
+        console.log(chkBox.eq(idx-1).attr("disabled"));
+        if(chkBox.eq(idx-1).attr("disabled")){
+            alert("수정하기상태가 아님");
+        }
             if(chkBox[idx-1].checked){
                 priceBox.eq(idx-1).attr("disabled", false);
                 console.log( priceBox.eq(idx-1).attr("disabled"));

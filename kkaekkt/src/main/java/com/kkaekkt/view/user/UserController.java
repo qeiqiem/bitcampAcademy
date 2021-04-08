@@ -206,7 +206,7 @@ public class UserController {
 	public String logout(HttpSession session) {
 		System.out.println("로그아웃 처리");
 		session.invalidate();
-		return "/index.do";
+		return "redirect:/index.do";
 	}
 
 	// 일반사양관리
