@@ -1,6 +1,8 @@
 package com.kkaekkt.biz.reservation.impl;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -121,8 +123,8 @@ public class ReservationDAO {
 	}
 
 	// 매출관리
-	public List<LaundryVO> getSales(int bno) {
-		return mybatis.selectList("reservationDAO.getSales", bno);
+	public List<LaundryVO> getSales(Map<String, Object> param) {
+		return mybatis.selectList("reservationDAO.getSales", param);
 	}
 	
 }

@@ -94,7 +94,7 @@ public class UserController {
 	public String Join(BusinessVO vo) {
 		System.out.println("메서드 진입");
 		userService.insertUser(vo);
-		return "/jsp/index.do";
+		return "/index.do";
 	}
 
 	// 가입완료
@@ -191,7 +191,6 @@ public class UserController {
 		// 로그인 성공했을 때
 		vo = userService.method(vo);
 		System.out.println(vo); // 카카오 로그인시 vo 확인
-
 		if (vo != null) {
 			session.setAttribute("person", vo);
 			System.out.println("user정보 " + vo);
@@ -316,6 +315,13 @@ public class UserController {
 		System.out.println("회원탈퇴 controller옴");
 		return userService.deleteUser(vo);
 	}
+	// 비번변경
+	@RequestMapping(value = "/updatePw.do", method = RequestMethod.POST)
+	public String updatePw(AccountVO vo) {
+		userService.updatePw(vo);
+		return "/jsp/login/login.jsp";
+	}
+
 	@RequestMapping(value = "/mymark.do", method = {RequestMethod.GET,RequestMethod.POST})
 	public String getUserDetail(HttpSession session,Model model) {
 		Gson gson = new Gson();
