@@ -19,7 +19,7 @@
 		INSERT INTO liked (bno,mno) VALUES(#{bno},#{mno});
 	</insert>
 	<insert id="insertBs" parameterType="business">
-		INSERT INTO account (id,password) VALUES (#{id},#{password});
+		INSERT INTO account (id,password,mtype) VALUES (#{id},#{password},#{bizType}+1);
 		INSERT
 		INTO business (mno,bname,address,phone,bkno,acno,email,typeNum)
 		VALUES

@@ -22,7 +22,7 @@ hr{
 }
 #popup{
     width: 500px;
-    height: 680px;
+    height: 580px;
     clear: both;
     color: var(--text-gray);
     margin: 0;
@@ -51,7 +51,7 @@ hr{
     margin: 0 200px 20px 80px;
 }
 #textColor{
-    color: var(--key-color);
+    color: var(--key-text);
 }
 #rsvInfo{
     margin-left: 30px;

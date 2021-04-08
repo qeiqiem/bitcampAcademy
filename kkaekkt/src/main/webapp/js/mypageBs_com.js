@@ -314,7 +314,7 @@ function printlist(list) {//리팩토링 무조건 필요함 뇌빼고 작업한
     });
 }
 function openPopup(rno){
-    var options = 'width=500, height=700, top=150, left=700, resizable=no, scrollbars=no, location=no';
+    var options = 'width=500, height=600, top=150, left=700, resizable=no, scrollbars=no, location=no';
 
     window.open("/openPopup.do?rsvNum="+rno, "printOrder", options);
 
@@ -340,7 +340,7 @@ function modal_userInfo(mno){
                 '</tr>' +
                 '<tr>'+
                     '<th>이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;름</th>' +
-                    '<td>'+ info.mname + '</td>' +
+                    '<td>'+ info.name + '</td>' +
                 '</tr>' +
                 '<tr>'+
                     '<th>연&nbsp;&nbsp;락&nbsp;&nbsp;처</th>' +
