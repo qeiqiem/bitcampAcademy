@@ -19,7 +19,7 @@
 	</style>
 
 	<body>
-		<jsp:include page="/jsp/header0.jsp"></jsp:include>
+		<jsp:include page="/jsp/header.jsp"></jsp:include>
 		<div class="body_container">
 			<div>
 				<h2>회원가입</h2>
@@ -71,9 +71,9 @@
 					</div>
 				</div>
 				<div>
-					<button type="button" onclick="location.href='/jsp/index.jsp'">홈으로</button>
+					<button type="button" onclick="location.href='/jsp/index.do'">홈으로</button>
 					<button type="button" class="login_btn"
-						onclick="location.href='/jsp/login/loginPs.jsp'">로그인</button>
+						onclick="location.href='/jsp/login/login.jsp'">로그인</button>
 				</div>
 			</div>
 		</div>

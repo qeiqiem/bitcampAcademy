@@ -43,7 +43,7 @@
     </head>
 
     <body>
-        <jsp:include page="/jsp/header0.jsp"></jsp:include>
+        <jsp:include page="/jsp/header.jsp"></jsp:include>
 
         <div class="body_container">
             <div class="wrapper_find">
@@ -59,7 +59,7 @@
                         ID <span id="idValue">${userId.id}</span>
                         <div>
                             <button type="button" onclick="showPW()">비밀번호 찾기</button>
-                            <button type="button" onclick="location.href='/jsp/login/loginPs.jsp'">로그인</button>
+                            <button type="button" onclick="location.href='/jsp/login/login.jsp'">로그인</button>
                         </div>
                     </div>
 

@@ -35,6 +35,8 @@ public class MapListController {
 		public String loginView( HttpSession session, Model model,int type) {
 			AccountVO vo = new AccountVO();
 			if(session.getAttribute("user")==null) {//비 로그인 상태
+				vo.setMtype(0);
+				vo.setMno(0);
 				if(type==1) {
 					vo.setAddress("클리닝");
 				}else {
@@ -43,18 +45,16 @@ public class MapListController {
 				model.addAttribute("user", vo);
 			}else { //로그인 상태
 				vo=(AccountVO)session.getAttribute("user");
-//				vo.setAddress(userService.getAddress(vo.getMno()));
+				vo=userService.getPerson(vo.getMno());
 				if(type==1) {//일반 세탁소
-					vo.setAddress(userService.getAddress(vo.getMno())+" 클리닝");
+					vo.setAddress(vo.getAddress()+" 클리닝");
 				}else {//코인 세탁소
-					vo.setAddress(userService.getAddress(vo.getMno())+" 코인");
+					vo.setAddress(vo.getAddress()+" 코인");
 				}
 				session.setAttribute("user",vo);
 			}
 			return "jsp/searchMap/map.jsp";
 		}
-	
-	
 		@RequestMapping(value="/maplist.do", method=RequestMethod.POST,produces="application/text;charset=utf-8")   
 		public @ResponseBody String maplist(String keyaddr) {
 		      String keyword = keyaddr;

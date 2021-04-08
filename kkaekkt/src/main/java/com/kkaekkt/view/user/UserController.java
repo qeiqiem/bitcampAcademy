@@ -38,7 +38,7 @@ public class UserController {
 			AccountVO user=new AccountVO();
 			user.setMno(0);
 			user.setMtype(0);
-			model.addAttribute("user",user);			
+			model.addAttribute("user",user);	
 			return "/jsp/index.jsp";
 		}else {
 			return "/jsp/index.jsp";		
@@ -94,7 +94,7 @@ public class UserController {
 	public String Join(BusinessVO vo) {
 		System.out.println("메서드 진입");
 		userService.insertUser(vo);
-		return "/jsp/index.jsp";
+		return "/jsp/index.do";
 	}
 
 	// 가입완료
@@ -206,7 +206,7 @@ public class UserController {
 	public String logout(HttpSession session) {
 		System.out.println("로그아웃 처리");
 		session.invalidate();
-		return "/jsp/index.jsp";
+		return "/index.do";
 	}
 
 	// 일반사양관리

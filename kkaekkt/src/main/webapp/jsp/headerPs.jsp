@@ -29,7 +29,6 @@
 				<a href="/showMap.do?type=2">코인세탁소</a>
 			</div>
 		</div>
-
 		<div class="head_right">
 			<input name="name" id="name" value="${sessionScope.user.name} 님" readonly /> 
 			<div id="bellBox">

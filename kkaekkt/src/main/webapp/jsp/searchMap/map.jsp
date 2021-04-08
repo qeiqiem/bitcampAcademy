@@ -11,16 +11,19 @@
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>    
     <!-- 아임포트 -->
      <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+     <script>
+     	var userAddress=`${user.address}`;
+     </script>
 	 <script src="/js/map.js"></script>
    	<link rel="stylesheet" href="/css/map.css">  
    </head>
    <body>
     <c:choose>
          <c:when test="${person.mtype==0}">
-            <jsp:include page="/jsp/header0.jsp"></jsp:include>
+            <jsp:include page="/jsp/header.jsp"></jsp:include>
          </c:when>
          <c:otherwise>
-            <jsp:include page="/jsp/header1.jsp"></jsp:include>
+            <jsp:include page="/jsp/headerPs.jsp"></jsp:include>
          </c:otherwise>
    </c:choose>
       <div id="mask"></div>
@@ -214,7 +217,6 @@
        </body>   
        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3845f493917a302d1ea69e946c0443ff&libraries=services"></script>
        <script>
-   
        /* 지도 api에서 제공하는 이벤트 */
            var markers = [];
            var mapContainer = 

@@ -3,7 +3,7 @@
 <mapper namespace="UserDAO">
 	<select id="getAddress" resultType="string">
 		SELECT address  
-		  FROM member
+		  FROM `member`
 		 WHERE mno=#{mno};
 	</select>
 	<select id="bnoChk" resultType="_int">
@@ -102,7 +102,7 @@
 		SELECT ac.mno, 
 		       id, 
 			   password, 
-			   mname, 
+			   mname,
 			   phone, 
 			   birth, 
 			   address, 

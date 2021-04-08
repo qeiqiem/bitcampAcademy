@@ -2,7 +2,6 @@
 
 /* 실제 사용 이벤트  */
 $(document).ready(function() {
-
    // 화면 생성시 기본호출
    // url에서 로그인 정보 가져오기
 //	var url = document.location.href
@@ -247,7 +246,7 @@ $(document).ready(function() {
                           var html = ''   
                              for (var i = 0; i < data.length; i++) {
                                 html += '<ul class="combodyul">'
-                                 html += ' <li>'+data[i].mname+'</li>'
+                                 html += ' <li>'+data[i].name+'</li>'
                                  html += '<li>'
                                     var grade = data[i].grade;                        
                                     for(var j=0; j<grade; j++) {
