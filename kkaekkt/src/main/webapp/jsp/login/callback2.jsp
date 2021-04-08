@@ -1,4 +1,4 @@
-<%@ page import="java.net.URLEncoder" %>
+<%-- <%@ page import="java.net.URLEncoder" %>
 <%@ page import="java.net.URL" %>
 <%@ page import="java.net.HttpURLConnection" %>
 <%@ page import="java.io.BufferedReader" %>
@@ -70,4 +70,4 @@
     }
   %>
   </body>
-</html>
+</html> --%>

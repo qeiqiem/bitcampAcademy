@@ -5,22 +5,25 @@
    <head>
    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>지도생성하기</title>
-  
+    <title>지도생성하기</title>  
     <!-- map 에서 필요한 참조 -->
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>    
     <!-- 아임포트 -->
      <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+     <script>
+   		//로딩시 생성
+	    var useraddress = `${user.address}`	      
+     </script>
 	 <script src="/js/map.js"></script>
    	<link rel="stylesheet" href="/css/map.css">  
    </head>
    <body>
     <c:choose>
-         <c:when test="${person.mtype==0}">
-            <jsp:include page="/jsp/header0.jsp"></jsp:include>
+         <c:when test="${user.mtype==0}">
+            <jsp:include page="/jsp/header.jsp"></jsp:include>
          </c:when>
          <c:otherwise>
-            <jsp:include page="/jsp/header1.jsp"></jsp:include>
+            <jsp:include page="/jsp/headerPs.jsp"></jsp:include>
          </c:otherwise>
    </c:choose>
       <div id="mask"></div>
@@ -142,9 +145,9 @@
                                <table id="resShortOpt"></table>
                            </div>
                            <div class="userInfo">
-                              <p>예약자 &nbsp;${person.mname}</p>
-                                <p>연락처 &nbsp;${person.phone}</p>
-                        <p>이메일 &nbsp;${person.email}</p>
+                              <p>예약자 &nbsp;${user.name}</p>
+                                <p>연락처 &nbsp;${user.phone}</p>
+                        <p>이메일 &nbsp;${user.email}</p>
                            </div>
                            <div class="sellerInfo">
                               <p id="selname">판매자정보 &nbsp;</p>   
@@ -213,25 +216,24 @@
            </div>
        </body>   
        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3845f493917a302d1ea69e946c0443ff&libraries=services"></script>
-       <script>
-   
+       <script>         	
+             
        /* 지도 api에서 제공하는 이벤트 */
            var markers = [];
            var mapContainer = 
             map = document.getElementById('map'),
                mapOption = {
                    center: new kakao.maps.LatLng(37.566826, 126.9786567),level: 2
-               }; 
-           
+               };            
            var itemel;
            var bno= "";    
            var dbData = [];
-           var mno = ${person.mno};	
-          
+           var mno = ${user.mno};	          
            var map = new kakao.maps.Map(mapContainer, mapOption);
-           mapContainer.style.position = "initial";
-            
-           var ps = new kakao.maps.services.Places();  
+           mapContainer.style.position = "initial";            
+           var ps = new kakao.maps.services.Places();            
+ 
+           
            
            function setMapType(maptype) { 
         	    var roadmapControl = document.getElementById('btnRoadmap');
@@ -257,24 +259,20 @@
                map.setLevel(map.getLevel() + 1);
            }
            
-           // 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우를 생성합니다
-           //-> 일반세탁의 경우 예약하기가 나오게 컨트롤
+
            var infowindow = new kakao.maps.InfoWindow({zIndex:1});
-   	
+   			
    
            // 키워드 검색
            function searchPlaces() { 
-                 
                var keyword = document.getElementById('keyword').value;
                if (!keyword.replace(/^\s+|\s+$/g,'')) { 
                    alert('키워드를 입력해주세요!'); 
                return false;
-               }
-               
-               bindinglandry(keyword)               
-              
-           }
-   
+               }               
+               bindinglandry(keyword)
+           }              
+           
            // 대분류 검색 
            function searchMajor(item) {             
             var item = item      
@@ -285,8 +283,7 @@
            function searchPopul(item) { }           
            // 리뷰순 검색 
            function searchGrade(item) { }
-           
-        
+                   
    
            //데이터 바인딩
            function bindinglandry(keyaddr) {
@@ -427,14 +424,7 @@
 					var bno = 0
 	        		wirteHtml(i,place[i],contentNum,grade, bno)  
 				}else if(place[i].place_name == dbData[i].bname){	
-	        		   //조회된 값이 있다면 데이터 체인지					
-						console.log(place[i].place_name+" : "+ dbData[i].bname)
-						console.log(place[i].road_address_name+" : "+ dbData[i].address)
-						console.log(place[i].phone+" : "+dbData[i].phone)
-						console.log(dbData[i].content)
-						console.log(dbData[i].grade)
-						console.log(dbData[i].bno)
-						
+
 						place[i].place_name = dbData[i].bname
 						place[i].road_address_name = dbData[i].address
 						place[i].phone  = dbData[i].phone
@@ -524,8 +514,6 @@
                    el.removeChild (el.lastChild);
                }
            }
-          
-           
         
        </script>
    </html>

@@ -14,7 +14,7 @@
 </head>
 
 <body>
-<jsp:include page="header1.jsp"></jsp:include>
+<jsp:include page="headerPs.jsp"></jsp:include>
    
     <div class="body_container">
         <h2>깨끗하게 간편하게 끝.</h2>
