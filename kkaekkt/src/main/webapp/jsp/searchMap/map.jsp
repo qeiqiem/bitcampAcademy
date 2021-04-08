@@ -17,10 +17,10 @@
    <body>
     <c:choose>
          <c:when test="${person.mtype==0}">
-            <jsp:include page="/jsp/header0.jsp"></jsp:include>
+            <jsp:include page="/jsp/header.jsp"></jsp:include>
          </c:when>
          <c:otherwise>
-            <jsp:include page="/jsp/header1.jsp"></jsp:include>
+            <jsp:include page="/jsp/headerPs.jsp"></jsp:include>
          </c:otherwise>
    </c:choose>
       <div id="mask"></div>
