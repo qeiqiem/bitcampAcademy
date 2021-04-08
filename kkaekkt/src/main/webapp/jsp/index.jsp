@@ -15,7 +15,7 @@
 
 <body>
 
-<jsp:include page="header0.jsp"></jsp:include>
+<jsp:include page="header.jsp"></jsp:include>
 	 <div class="body_container">
         <h2>깨끗하게 간편하게 끝.</h2>
 

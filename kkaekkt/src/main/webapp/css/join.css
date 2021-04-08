@@ -97,6 +97,10 @@ hr {
 .wrapper_select {
   position: relative;
   width: 100%;
-  height: 900px;
+  height: 1200px;
   background-color: var(--background-gray);
+}
+
+i {
+  color: var(--gray-color);
 }

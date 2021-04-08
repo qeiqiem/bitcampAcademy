@@ -1,4 +1,4 @@
-<%@ page import="java.net.URLEncoder" %>
+<%-- <%@ page import="java.net.URLEncoder" %>
 <%@ page import="java.net.URL" %>
 <%@ page import="java.net.HttpURLConnection" %>
 <%@ page import="java.io.BufferedReader" %>
@@ -26,20 +26,7 @@
     String refresh_token = "";
     System.out.println("apiURL="+apiURL);
     
-    // 정보 받아오기??
-    JSONParser parsing = new JSONParser();
-    Object obj = parsing.parse(res.toString());
-    JSONObject jsonObj = (JSONObject)obj;
-    JSONObject resObj = (JSONObject)jsonObj.get("response");
-     
-    //왼쪽 변수 이름은 원하는 대로 정하면 된다. 
-    //단, 우측의 get()안에 들어가는 값은 와인색 상자 안의 값을 그대로 적어주어야 한다.
-    String naverCode = (String)resObj.get("id");
-    String email = (String)resObj.get("email");
-    String name = (String)resObj.get("name");
-    String nickName = (String)resObj.get("nickname");
-    StringBuffer res = new StringBuffer();
-    
+   
     
     try {
       URL url = new URL(apiURL);
@@ -70,4 +57,4 @@
     }
   %>
   </body>
-</html>
+</html> --%>

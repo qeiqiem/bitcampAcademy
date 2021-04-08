@@ -27,7 +27,6 @@ public interface UserService {
 	public AccountVO joinCfm(AccountVO vo);
 	public double avgGradeBs(BusinessVO vo);
 	public int countLikeBs(BusinessVO vo);	
-//	public int idchkBs(BusinessVO vo);
 	public PersonVO getPerson(int mno);
 	public BusinessVO getBusiness(BusinessVO vo);
 	public List<LaundryVO> getLaundryList(int bno);

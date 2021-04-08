@@ -2,20 +2,14 @@
 
 /* 실제 사용 이벤트  */
 $(document).ready(function() {
-
-   // 화면 생성시 기본호출
-   // url에서 로그인 정보 가져오기
-//	var url = document.location.href
-//	console.log(url)
-//	url = url.split("?")
-
-   var rsvObj={};
+	
+	var rsvObj={};
    // method/var-----------------------------------------------------------------------
    var adrress = "서울 용산"
    var random = Math.floor(Math.random() * 10) + "," + "000"
    var bno = ""
    var totalPrice = 0
-   IMP.init("imp27421713");
+ 
    selectNum()
    
 
@@ -327,7 +321,7 @@ $(document).ready(function() {
        })
          
       $('.list').hide()
-        $('.single').show()
+      $('.single').show()
    }
            
    function requestPay() {
@@ -359,8 +353,7 @@ $(document).ready(function() {
 
             mapRes()
             $('.slide_res').hide()
-            $('.slide_success').show()
-            
+            $('.slide_success').show()            
             $("#mask").hide()	
             
          } else { // 실패시
@@ -378,14 +371,21 @@ $(document).ready(function() {
 		   var arrayRes = new Array();
          var idx;
          var selc;
+         var ddate;
 		     for (var i = 0; i < cntChk.length ; i++) {		    	 
 		    	//lno 발최
 		      idx = $('.chked').eq(i).attr('id').charAt(3);
 		        //개수
 		        selc = $('#selc'+idx).val();
 		        arrayRes.push({lno:Number(idx)+1, cnt:selc});
+              if(idx<4){
+                     ddate=3;
+               }else{
+                     ddate=7;
+               }
 		     }
            rsvObj.resListData=JSON.stringify(arrayRes);
+           rsvObj.ddate=ddate;
 		   $("#mask").show()
 		   requestPay()
 	   }

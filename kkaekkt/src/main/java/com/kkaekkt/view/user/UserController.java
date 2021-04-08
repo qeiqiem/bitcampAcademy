@@ -30,6 +30,21 @@ public class UserController {
 
 	@Autowired
 	private JavaMailSender mailSender;
+	
+	@RequestMapping(value="/index.do",method=RequestMethod.GET)
+	public String index(HttpSession session,Model model) {
+		
+		if(session.getAttribute("user")==null) {
+			AccountVO user=new AccountVO();
+			user.setMno(0);
+			user.setMtype(0);
+			model.addAttribute("user",user);	
+			return "/jsp/index.jsp";
+		}else {
+			return "/jsp/index.jsp";		
+		}
+	}
+	
 	@RequestMapping(value="/bnoChk.do",method=RequestMethod.POST)
 	@ResponseBody
 	public int bnoChk(int bno) {
@@ -79,7 +94,11 @@ public class UserController {
 	public String Join(BusinessVO vo) {
 		System.out.println("메서드 진입");
 		userService.insertUser(vo);
+<<<<<<< HEAD
 		return "/jsp/index.jsp";
+=======
+		return "/index.do";
+>>>>>>> c7d2328c0af2b5556196cfa015d00a6cd0afe16e
 	}
 
 	// 가입완료
@@ -170,13 +189,21 @@ public class UserController {
 
 	// 소셜로그인
 	@RequestMapping(value = "/loginSNS.do", method = {RequestMethod.GET, RequestMethod.POST})
+<<<<<<< HEAD
+=======
+	@ResponseBody
+>>>>>>> c7d2328c0af2b5556196cfa015d00a6cd0afe16e
 	public String kakaologin(AccountVO vo, HttpSession session, HttpServletResponse response) {
 		System.out.println("카카오 로그인 컨트롤러 접속");
 		// 로그인 성공했을 때
 		vo = userService.method(vo);
 		System.out.println(vo); // 카카오 로그인시 vo 확인
 
+<<<<<<< HEAD
 		if (vo.getMno() != 0) {
+=======
+		if (vo != null) {
+>>>>>>> c7d2328c0af2b5556196cfa015d00a6cd0afe16e
 			session.setAttribute("person", vo);
 			System.out.println("user정보 " + vo);
 			return "success";
@@ -191,7 +218,7 @@ public class UserController {
 	public String logout(HttpSession session) {
 		System.out.println("로그아웃 처리");
 		session.invalidate();
-		return "/jsp/index.jsp";
+		return "/index.do";
 	}
 
 	// 일반사양관리
@@ -300,6 +327,16 @@ public class UserController {
 		System.out.println("회원탈퇴 controller옴");
 		return userService.deleteUser(vo);
 	}
+<<<<<<< HEAD
+=======
+	// 비번변경
+	@RequestMapping(value = "/updatePw.do", method = RequestMethod.POST)
+	public String updatePw(AccountVO vo) {
+		userService.updatePw(vo);
+		return "/jsp/login/login.jsp";
+	}
+
+>>>>>>> c7d2328c0af2b5556196cfa015d00a6cd0afe16e
 	@RequestMapping(value = "/mymark.do", method = {RequestMethod.GET,RequestMethod.POST})
 	public String getUserDetail(HttpSession session,Model model) {
 		Gson gson = new Gson();

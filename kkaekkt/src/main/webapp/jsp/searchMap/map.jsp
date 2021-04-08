@@ -15,14 +15,7 @@
    	<link rel="stylesheet" href="/css/map.css">  
    </head>
    <body>
-    <c:choose>
-         <c:when test="${person.mtype==0}">
-            <jsp:include page="/jsp/header0.jsp"></jsp:include>
-         </c:when>
-         <c:otherwise>
-            <jsp:include page="/jsp/header1.jsp"></jsp:include>
-         </c:otherwise>
-   </c:choose>
+      <jsp:include page="/jsp/header.jsp"></jsp:include>
       <div id="mask"></div>
            <div class="body_container">
                <div class="map_container">
