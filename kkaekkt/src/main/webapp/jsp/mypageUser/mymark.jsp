@@ -28,7 +28,7 @@
                 <p class="modal_Header">결제 정보</p>
                 <hr>
                 <div class="userInfo">
-                    <p>예약자: <span id="mname">${userDetail.mname}</span></p>
+                    <p>예약자: <span id="name">${userDetail.name}</span></p>
                     <p>연락처: <span id="phone">${userDetail.phone}</span></p>
                     <p>주소: <span id="address">${userDetail.address}</span></p>
                 </div>
