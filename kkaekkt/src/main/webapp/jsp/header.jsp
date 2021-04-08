@@ -11,7 +11,7 @@
 		<nav class="head">
 			<div class="head_left">
 				<div class="logo">
-					<a href="/jsp/index.do"> <img src="/img/logo.svg" alt="">
+					<a href="/index.do"> <img src="/img/logo.svg" alt="">
 					</a>
 				</div>
 				<div class="menu">
