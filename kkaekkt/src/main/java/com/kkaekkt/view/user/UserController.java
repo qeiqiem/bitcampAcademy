@@ -94,7 +94,7 @@ public class UserController {
 	public String Join(BusinessVO vo) {
 		System.out.println("메서드 진입");
 		userService.insertUser(vo);
-		return "/index.do";
+		return "/joinCfm.do";
 	}
 
 	// 가입완료
