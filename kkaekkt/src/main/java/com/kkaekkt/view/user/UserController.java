@@ -191,7 +191,6 @@ public class UserController {
 		// 로그인 성공했을 때
 		vo = userService.method(vo);
 		System.out.println(vo); // 카카오 로그인시 vo 확인
-
 		if (vo != null) {
 			session.setAttribute("person", vo);
 			System.out.println("user정보 " + vo);

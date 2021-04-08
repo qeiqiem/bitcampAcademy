@@ -14,17 +14,17 @@
 	<nav class="head">
 		<div class="head_left">
 			<div class="logo">
-				<a href="/jsp/index.jsp"> <img src="/img/logo.svg" alt="">
+				<a href="/jsp/index.do"> <img src="/img/logo.svg" alt="">
 				</a>
 			</div>
 			<div class="menu">
-				<a href="/jsp/searchMap/laundryMap.jsp">일반세탁소</a>
-				<a href="/jsp/searchMap/laundryMap.jsp">코인세탁소</a>
+				<a href="/showMap.do?type=1">일반세탁소</a>
+				<a href="/showMap.do?type=2">코인세탁소</a>
 			</div>
 		</div>
 		<div class="head_right">
 			<a href="/jsp/join/joinSelect.jsp">회원가입</a> 
-			<a href="/jsp/login/loginPs.jsp">로그인</a>
+			<a href="/jsp/login/login.jsp">로그인</a>
 			<a href="/jsp/faq.jsp">FAQ</a>
 		</div>
 	</nav>

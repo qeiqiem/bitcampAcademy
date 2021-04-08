@@ -50,8 +50,13 @@ color: var(--text-gray);
 			$(".side_sub").hide();
 			$('.side button').eq(3).addClass("side_select");
 		});
+		var date = new Date();
+		// var startDt =new Date(now.getFullYear(), now.getMonth(), 1);
+		// var endDt = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 		var pageObj={//세션에서 정보를 받아오는건 독립된 js파일에서 불가능, jsp 내에서만 가능하기 때문에 여기서 값을 받아준다.
-                bno:'${sessionScope.user.bno}'//더미번호 (추후 세션에서 받아올 예정)
+                bno:'${user.bno}',//더미번호 (추후 세션에서 받아올 예정)
+				startDt:date,
+				endDt:date
             };
 	</script>
 </body>

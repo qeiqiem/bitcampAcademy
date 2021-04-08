@@ -19,7 +19,7 @@ function deleteUser() {
 			if(result=='fail'){
 				alert("예약있어서 탈퇴안됨")
 			}else {
-				location.href="/jsp/index.do"
+				location.href="/index.do"
 			}
 		}
 	})

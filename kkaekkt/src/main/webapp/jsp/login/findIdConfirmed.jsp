@@ -30,7 +30,7 @@
                         ID <span id="idValue">${userId.id}</span>
                         <div>
                             <button type="button" onclick="location.href='/jsp/login/findPw.jsp'">비밀번호 찾기</button>
-                            <button type="button" onclick="location.href='/jsp/login/loginPs.jsp'">로그인</button>
+                            <button type="button" onclick="location.href='/jsp/login/login.jsp'">로그인</button>
                         </div>
                     </div>
 

@@ -43,7 +43,7 @@
 				<div id="modal_bodycont">
 						<div id="modal_head">
 							<p>만족도를 평가해주세요</p>
-								<input id="starVal" value="1">
+								<input id="starVal" value="5">
 								<div class="rating-group" value="">
 									<label aria-label="1 star" class="rating__label" for="rating-1">
 									<i class="rating__icon rating__icon--star fa fa-star"></i></label> 
