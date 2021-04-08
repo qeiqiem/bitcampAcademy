@@ -343,7 +343,7 @@ function modal_userInfo(mno){
                 '</tr>' +
                 '<tr>'+
                     '<th>이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;름</th>' +
-                    '<td>'+ info.mname + '</td>' +
+                    '<td>'+ info.name + '</td>' +
                 '</tr>' +
                 '<tr>'+
                     '<th>연&nbsp;&nbsp;락&nbsp;&nbsp;처</th>' +

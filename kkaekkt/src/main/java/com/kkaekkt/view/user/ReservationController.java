@@ -118,10 +118,10 @@ public class ReservationController {
 	@ResponseBody
 	public String selectSalse(String bno, Date startDt, Date endDt) {
 		Map<String, Object> param = new HashMap<>(); 
+		System.out.println(startDt +","+ endDt );
 		param.put("bno", bno); 
 		param.put("startDt", startDt);
 		param.put("endDt", endDt);
-
 		Gson gson = new Gson();
 		String sales = gson.toJson(reservationService.getSales(param));
 		System.out.println("test:" + sales);

@@ -5,12 +5,21 @@
 <link href='../lib/main.css' rel='stylesheet' />
 <script src='../lib/main.js'></script>
 <script>
-  //var sales = new Array();
-<<<<<<< HEAD
-
-=======
->>>>>>> c7d2328c0af2b5556196cfa015d00a6cd0afe16e
+  var prevBtn=0;
+  if(prevBtn ==1){
+          prev();
+          var now = new Date();
+          var startDt =new Date(now.getFullYear(), now.getMonth() - 1, 1);
+          var endDt = new Date(now.getFullYear(), now.getMonth(), 0);
+          console.log("이전달클릭시"+startDt +endDt);
+            pageObj = {
+                        bno : 1,
+                        startDt:startDt,
+				                endDt:endDt
+                    }
+    } 
   document.addEventListener('DOMContentLoaded', function() {
+    console.log("event내부"+pageObj);
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
       headerToolbar: {
@@ -22,9 +31,7 @@
       navLinks: true, // can click day/week names to navigate views
       editable: false,
       dayMaxEvents: true, // allow "more" link when too many events
-      events: function (info, successCallback, failureCallback) {
-        
-        console.log(pageObj);
+      events: function (info, successCallback, failureCallback) {       
         $.post({
           url: "/selectSales.do",
           data: pageObj,
@@ -71,32 +78,17 @@
           }// success end
         });  // ajax end
       }, // event end
-
     }); // calender end
 
     calendar.render();
 
-    document.getElementsByClassName("fc-prev-button")[0].onclick = function(){
-      var now = new Date();
-      var startDt =new Date(now.getFullYear(), now.getMonth() - 1, 1);
-      var endDt = new Date(now.getFullYear(), now.getMonth(), 0);
-      console.log("전달클릭시"+startDt +endDt);
-                $.post({
-                    url: "/selectSales.do",
-                    data: {
-                        bno : 1,
-                        startDt:startDt,
-				                endDt:endDt
-                    },
-                    success: function (data) {
-                        console.log('ajax 함수 완료');
-                        let date = JSON.parse(data);
-                        console.log(date);
-                    }
-                    });
-    }
+   
   }); // document end
-
+ document.getElementsByClassName("fc-prev-button")[0].click(function () {
+      console.log("이전달 클릭");
+      prevBtn =1;
+      
+    })
 </script>
 <style>
 
@@ -118,9 +110,7 @@
 </head>
 <body>
   <div id="monthSales">
-    <span>월별매출</span><br>
-    <hr>
-    <span id="inputTotal"></span>
+    <span>월별매출</span> : <span id="inputTotal"></span>
   </div>
   <div id='calendar'></div>
   
