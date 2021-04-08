@@ -96,10 +96,10 @@ function emailDuplChk() {
     success: function (data) {
       console.log(data);
       var key = JSON.parse(data);
-      if (key.emailchk != 0) {
+      if (key != 0) {
         alert("해당 이메일로 가입된 아이디가 존재합니다.");
         return false;
-      } else if (key.emailchk == 0) {
+      } else if (key == 0) {
         emailApi();
       }
     },
@@ -334,13 +334,11 @@ function fn_idchk() {
       id: $("#id").val(),
     },
     success: function (data) {
-      console.log(data);
-      var test = JSON.parse(data);
-      console.log(test.state);
-      if (test.state == 1) {
+      // console.log(data);
+      var key = JSON.parse(data);
+      if (key == 1) {
         alert("중복된 아이디가 있습니다.");
-      } else if (test.state == 0) {
-        // $("#idchk").attr("value", "Y");
+      } else if (key == 0) {
         formatidchk = 1;
         alert("사용 가능한 아이디입니다.");
         console.log($("#idchk").val());
@@ -387,7 +385,7 @@ $("#join_submit").on("click", function () {
   //주소 합치기
   fn_combine();
   //
-  const idchkVal = $("#idchk").val();
+  // const idchkVal = $("#idchk").val();
   if (formatidchk == 0) {
     alert("아이디 중복확인을 해 주세요.");
     $("#id").focus();

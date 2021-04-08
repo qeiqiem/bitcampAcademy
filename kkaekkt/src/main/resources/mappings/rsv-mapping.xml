@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="reservationDAO">
+	<select id="getRno" resultType="_int">
+		SELECT MAX(rno) FROM reservation WHERE mno=#{mno};
+	</select>
 	<select id="getAno" resultType="_int"><!-- 등록한 알림의 번호 가져오기 -->
 		SELECT MAX(ano) FROM alert WHERE sender=#{sender};
 	</select>
@@ -22,7 +25,7 @@
 	<select id="getAlertList" resultType="alert"><!-- 개인&업체 관계없이 이름을 불러오기 위한 쿼리문.. 필요시 분기할 예정 -->
 		SELECT ano,mname,bname,msg,a.typenum,typename,date_format(time,"%Y.%m.%d") date,state
 		FROM alert a,alerttype at, (SELECT mname,bname,ac.mno mno 
-									FROM account ac LEFT JOIN member m on ac.mno=m.mno 
+									FROM account ac LEFT JOIN `member` m on ac.mno=m.mno 
                                     LEFT JOIN business b on b.mno=ac.mno) n
 		WHERE a.typenum=at.typenum
         AND a.sender=n.mno
@@ -54,7 +57,7 @@
 	</select>
 	<select id="getCommListBs" resultType="comment">
 		SELECT cno,c.mno,orderNum,content,groupNum rsvNum,date_format(rdate,'%Y.%m.%d, %r') rdate,grade eval,mname,depth,replytf
-		FROM comments c, member m
+		FROM comments c, `member` m
 		<where>
 			m.mno=c.mno AND c.bno=#{bno}
 			<if test="searchOption==1"><!-- 이름검색 -->
@@ -87,7 +90,7 @@
 				WHERE c.bno=#{bno}
 			</if>
 			<if test="searchOption==1"><!-- 이름검색 -->
-				, member m
+				, `member` m
 				WHERE m.mno=c.mno
 				AND c.bno=#{bno}
 				AND mname LIKE CONCAT('%',#{search},'%')
@@ -170,7 +173,7 @@
 	</select>
 	<select id="getRsvListBs_ld" resultType="laundry"> <!-- 업체 품목별 리스트 출력 -->
 		SELECT date_format(rdate,'%Y.%m.%d, %T') rsvDate,r.mno, r.rno rsvNum, mname, lname laundry,cnt count,DATEDIFF(ddate,NOW()) dDay 
-		FROM reservation r, member m, rsv_laundry r_l, laundry_type lt 
+		FROM reservation r, `member` m, rsv_laundry r_l, laundry_type lt 
 		<where>
 			r.mno=m.mno AND r.rno=r_l.rno AND r_l.lno=lt.lno
 			AND bno=#{bno} AND r_l.stno=1
@@ -195,7 +198,7 @@
 	<select id="getRsvListBs_rn" resultType="reservation"> 
 		<if test="listType==3"><!-- 업체회원 주문번호별 리스트 출력 -->
 			SELECT r.rno rsvNum,r.mno,date_format(rdate,'%Y.%m.%d, %r') rsvdate,mname,DATEDIFF(ddate,NOW()) dDay
-			FROM member m,reservation r
+			FROM `member` m,reservation r
 			WHERE r.mno=m.mno AND bno=#{bno} AND stno=1
 			<if test="searchOption==1"> <!-- 검색옵션-이름 입력시 -->
 					AND mname LIKE CONCAT('%',#{search},'%')
@@ -213,7 +216,7 @@
 		</if>
 		<if test="listType==4"> <!-- 업체회원 완료목록 출력 -->
 			SELECT r.rno rsvNum,r.mno,date_format(rdate,'%Y.%m.%d, %T') rsvdate,mname,date_format(dDate,'%Y.%m.%d, %T')dDate,stname state,DATEDIFF(ddate,NOW()) dDay 
-			FROM member m,reservation r,state s 
+			FROM `member` m,reservation r,state s 
 			<where> 
 			r.mno=m.mno AND s.stno=r.stno AND bno=#{bno} 
 				<if test="searchOption==1"> <!-- 검색옵션-이름 입력시 -->
@@ -230,13 +233,13 @@
 	</select>
 	<select id="getCommListPs" resultType="comment">
 			SELECT mname,r.mno,bname,r.bno,content,date_format(c.rdate,'%Y.%m.%d, %r') rdate,depth
-			FROM comments c, reservation r, member m,business b
+			FROM comments c, reservation r, `member` m,business b
 			WHERE b.bno=r.bno AND m.mno=r.mno AND c.groupNum=r.rno
 			AND groupNum=#{rsvNum}
 			ORDER BY orderNum DESC;
 	</select>
 	<select id="getLaundry" resultType="laundry"> <!-- 상태가 표시된 품목 리스트 출력 -->
-			SELECT lname laundry, cnt count, price,stname state 
+			SELECT DISTINCT lname laundry, cnt count, price,stname state 
 			FROM reservation r, rsv_laundry r_l, business b, bsn_laundry b_l, laundry_type lt,state s
 			WHERE r.rno=r_l.rno AND r.bno=b.bno AND b.bno=b_l.bno 
 			AND lt.lno=r_l.lno AND b_l.lno=r_l.lno AND r_l.stno=s.stno
@@ -246,10 +249,10 @@
 			SELECT count(r.rno) FROM
 		<choose>
 			<when test="listType==2"> <!-- 품목별 조회일 경우 -->
-				rsv_laundry r_l, laundry_type lt, member m,reservation r
+				rsv_laundry r_l, laundry_type lt, `member` m,reservation r
 			</when>
 			<otherwise> <!-- 일반 조회일 경우 -->
-				reservation r, member m
+				reservation r, `member` m
 			</otherwise>
 		</choose>
 		<where>
@@ -292,4 +295,11 @@
 		JOIN `member` m ON m.mno = r.mno
 		WHERE r.rno=#{rsvNum};
 	</select>
+	<!-- 매출관리-->
+    <select id="getSales" resultType="laundry">
+        	SELECT 	date_format(r.rdate, '%Y-%m-%d') rsvDate, sum(cnt*price) price
+			FROM reservation r, rsv_laundry r_l, business b, bsn_laundry b_l
+			WHERE r.rno=r_l.rno AND r.bno=b.bno AND b.bno=b_l.bno AND b_l.lno=r_l.lno
+            group by rsvDate;
+    </select>
 </mapper>

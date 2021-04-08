@@ -315,10 +315,18 @@ function inputInfo(){
     document.getElementById('likeNum').innerHTML = pageObj["likedNum"];
     document.getElementById('avglike').innerHTML = pageObj["eval"];
     let star = pageObj["eval"].split('.');
-    console.log(star[0]);
+    let starNum;
     let addstar = "";
     for(let i = 0; i<star[0]; i++){
-        addstar += '<i class="fas fa-star"></i>';
+        addstar += '<i class="fas fa-star yellow"></i>';
+        starNum = 5-star[0];
+    }
+    if(star[1]>=5){
+        addstar += '<i class="fas fa-star-half-alt yellow"></i>';
+        starNum = starNum-1;
+    }
+    for(let i = 0; i<starNum; i++){
+        addstar += '<i class="fas fa-star grey"></i>';
     }
     document.getElementById('starIcon').innerHTML = addstar;
     document.getElementById('bizname').innerHTML = pageObj["bname"];
@@ -347,12 +355,12 @@ function emailDuplChk() {
         email: $("#email").val(),
       },
       success: function (data) {
-        console.log(data);
-        var key = JSON.parse(data);
-        if (key.emailchk != 0) {
+          var key = JSON.parse(data);
+          console.log(key);
+        if (key != 0) {
           alert("해당 이메일로 가입된 아이디가 존재합니다.");
           return false;
-        } else if (key.emailchk == 0) {
+        } else if (key == 0) {
           emailApi();
         } 
       }

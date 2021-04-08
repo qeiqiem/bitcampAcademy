@@ -10,8 +10,8 @@ public interface UserService {
 	public void insertUser(BusinessVO vo);
 	public void updateUser(PersonVO vo);
 	public void updateUser(BusinessVO vo);
-	public void deleteUser(AccountVO vo);
-//	public void deleteUser(BusinessVO vo);
+	public String deleteUser(AccountVO vo);
+	public void deleteUser(BusinessVO vo);
 	public void likeOn(BusinessVO vo);
 	public void likeOff(BusinessVO vo);
 	public AccountVO getUser(AccountVO vo);
@@ -22,15 +22,14 @@ public interface UserService {
 	public AccountVO findId(AccountVO vo);
 	public AccountVO findPw(AccountVO vo);
 	public int idchk(PersonVO vo);
-	public int emailchk(AccountVO vo);
+	public int emailchk(String email);
 	public AccountVO method(AccountVO vo);
 	public AccountVO joinCfm(AccountVO vo);
 	public double avgGradeBs(BusinessVO vo);
 	public int countLikeBs(BusinessVO vo);	
-	public int idchkBs(BusinessVO vo);
 	public PersonVO getPerson(int mno);
 	public BusinessVO getBusiness(BusinessVO vo);
 	public List<LaundryVO> getLaundryList(int bno);
     public void updatePw(AccountVO vo);
-    public List<LaundryVO> getSales(int bno);
+	public int bnoChk(int bno);
 }

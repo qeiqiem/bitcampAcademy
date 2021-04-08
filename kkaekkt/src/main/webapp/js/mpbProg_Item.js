@@ -40,7 +40,9 @@ function initEvent() {
         alertObj.addressee=$('.processList tr').eq($(this)[0].value).children()[2].id; //알림 수신자 회원번호
 		openModal('complete');
 	});
+   
     $("#mask").on("click", function() {  $("#modal_container").hide(); $("#mask").hide();});
+    $("#mask").on("click", function() {  $("#modal_userInfo").hide(); $("#mask").hide();});
 }
 function cancel() {
 	$.post({
@@ -88,13 +90,13 @@ function sendMsg() {
                             '<i class="fas fa-times"></i>'+
                         '</li>'
                 socket.send(receiver+','+msg);//메시지 보냄
-                // socket.send('2,'+msg);//메시지 보냄
             }
         }
     });
 }
 function modalClose() {
     $('#modal_container').hide();
+    $('#modal_userInfo').hide();
     $("#mask").hide();
 }
 function complete() {
@@ -307,7 +309,7 @@ function printlist(list) {
                 '<tr>' +
                     '<td>'+value.rsvDate+'</td>'+
                     '<td>'+value.rsvNum+'</td>'+
-                    '<td id="'+value.mno+'">'+value.mname+'</td>'+
+                    '<td id="'+value.mno+'"><button class="btn_info" onclick="modal_userInfo('+value.mno+')">'+value.mname+'</td>'+
                     '<td>'+value.laundry+'</td>'+
                     '<td>'+value.count+'</td>'+
                     (value.dDay<0?
@@ -318,5 +320,43 @@ function printlist(list) {
                 '</tr>'+
             '</table>'
         );
+    });
+}
+
+function modal_userInfo(mno){
+    $("#mask").show();
+    $("#modal_userInfo").show();
+    $("#userInfo_bodycont *").remove();
+    $.ajax({
+        url: '/getuserInfo.do',
+        type: 'post',
+        data: {
+            mno: mno,   
+        }, success: function(data){
+            let info = JSON.parse(data);
+            let address = (info.address).replaceAll(",", " ");
+          $("#userInfo_bodycont").append(
+              '<table class="userInfo">' +
+              '<tr>'+
+                    '<th>회원번호</th>' +
+                    '<td>'+ info.mno + '</td>' +
+                '</tr>' +
+                '<tr>'+
+                    '<th>이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;름</th>' +
+                    '<td>'+ info.mname + '</td>' +
+                '</tr>' +
+                '<tr>'+
+                    '<th>연&nbsp;&nbsp;락&nbsp;&nbsp;처</th>' +
+                    '<td>'+ info.phone + '</td>' +
+                '</tr>' +
+                '<tr>'+
+                    '<th>주&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</th>' +
+                    '<td>'+ address + '</td>' +
+                '</tr>' +
+              '</table>'
+             
+          )
+        }   
+
     });
 }

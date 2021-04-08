@@ -117,7 +117,7 @@ function initEvent() {
     });
     $('#emailChkBtn').click(function() {
        if(regEmail.test(email.value)){//이메일이 양식에 맞을 경우
-        emailAjax(email.value);
+        mailDuplChk();
        }else {
         alert('이메일이 양식에 맞지 않습니다.');
         email.focus();
@@ -150,7 +150,7 @@ function initEvent() {
             }else if(formatArray[3]==false){//타이머가 공백인데 인증이 되지 않았다면
                 alert('이메일 인증을 먼저 진행해주세요.');
             }else {// 그 외에 경우는 어떻게 정의할 지 잘 모르겠음
-    
+                
             }
         }else {//코드가 숫자 6자리가 아니라면
             alert('인증코드의 양식과 일치하지 않습니다.');
@@ -161,9 +161,6 @@ function initEvent() {
             formatArray[3]=false;//인증 초기화
         }
     });
-    // $('#join').click(function() {
-    //     clicked();
-    // });
 }
 function timerStart() {
     AuthTimer.comSecond = 180;
@@ -172,6 +169,20 @@ function timerStart() {
 }
 function timeStop() {
     clearInterval(AuthTimer.timer);
+}
+function mailDuplChk() {
+    $.post({
+        url:'/findemail.do',
+        data:{email:email.value},
+        success:function(result) {
+            if(result==0){
+                emailAjax(email.value);
+            }else{
+                alert('중복된 이메일이 존재합니다.');
+                email.focus();
+            }
+        }
+    })
 }
 function mailChk() {
     if($('#mailCodeChk')[0].value==mailCode){
@@ -186,10 +197,9 @@ function idAjax(data) {
     $.post({
         url:'/idchk.do',
         data:{id:data},
-        success:function(data) {
+        success:function(result) {
             console.log('ajax완료');
-            var data=JSON.parse(data);
-            if(data.state==0){
+            if(result==0){
                 alert('사용가능한 아이디입니다.');
                 formatArray[0]=true;
             }else {
@@ -275,6 +285,20 @@ function chkAccount() {
     }
 
 }
+function bnoChk() {
+    var bno=$('#bno').val();
+    $.post({
+        url:"/bnoChk.do",
+        data:{bno:bno},
+        success:function(result) {
+            if(result==0){
+                return true;
+            }else {
+                return false;
+            }
+        }
+    })
+}
 function formatChk() {//유효성검사가 걸린 차례대로 input값 체크
         for(var i=0; i<formatArray.length;i++) {
             if(!formatArray[i]){//false가 반환된다면
@@ -292,6 +316,11 @@ function formatChk() {//유효성검사가 걸린 차례대로 input값 체크
                 }
             }
         }
+        if(!bnoChk()){//사업자등록번호 중복체크 결과 통과=true, 중복=false 반환
+            alert('이미 등록된 사업자등록번호입니다.');
+            $('#bno').focus();
+            return false;
+        }
         return true;//유효성검사를 전부 통과했을 경우
 }
 function nullchk() {
@@ -305,13 +334,18 @@ function nullchk() {
             alert('주소는 필수입력사항입니다.');
             return false;
         }
+        
         return true;//유효성과 null체크 전부 통과할 경우 true반환
     }else {//유효성 통과못했을 경우 false반환
         return false;
     }
 }
 function clicked() {
-    if(nullchk()) {
+    if(nullchk()) {//유효성 검사를 통과했다면
+        //주소 데이터 처리
+        var roadAddress=$("#roadAddress").val();
+        var detailAddress=$("#detailAddress").val();
+        $('#address')[0].value=roadAddress+' '+detailAddress;
         // 운영시간 데이터 처리
         var weekLi=$('.weekBox ul li');
         var time=$('.weekBox select');
@@ -326,12 +360,14 @@ function clicked() {
         }
         $(".weekBox input[name='schedule']")[0].value=JSON.stringify(list);
         if($('.bizType input')[0].value==1) { //일반 세탁소를 작성했다면,
+            var chkCount=0; //입력된 품목 개수 검사 변수 초기화 (0 이면 null 체크)
             // 품목 리스트 데이터 처리
             var chkBox=$(".laundry input[type='checkbox']");
             var priceBox=$(".laundry input[class='won']");
             list=[];//위에서 쓰인 리스트 초기화
             for(var i=0; i<chkBox.size();i++) {
                 if(chkBox[i].checked) {//체크가 되어 있다면
+                    chkCount++;//입력된 품목 개수 카운트 증가
                     if(!regPrice.test(priceBox[i].value)){//유효성에 맞지 않다면
                         alert('금액엔 숫자를 입력해주세요.');
                         priceBox[i].focus();
@@ -343,8 +379,12 @@ function clicked() {
                     price:(chkBox[i].checked==false?0:JSON.parse(priceBox[i].value))//체크가 안되어있다면 0, 되어있다면 숫자로 변환하여 저장
                 });
             }
-            $("input[name='laundry']")[0].value=JSON.stringify(list);
-            
+            if(chkCount==0){//입력된 품목 중 하나라도 체크가 되어있지 않다면,
+                alert('취급품목은 하나 이상 입력되어야 합니다.');
+                return;
+            }else {//하나 이상의 품목을 취급하고 있다면,
+                $("input[name='laundry']")[0].value=JSON.stringify(list);
+            }
         } else { //코인 세탁소를 작성했다면,
             // 설비 리스트 데이터 처리
             var chkBox=$(".coinLaundry .equipment input[type='checkbox']");

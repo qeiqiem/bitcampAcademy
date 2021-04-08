@@ -14,9 +14,7 @@ public class AccountVO {
     private int idchk;
     
     // 테스트용
-    private int stno;
-    
-    
+    private int stno; 
     
     public int getStno() {
 		return stno;

@@ -1,6 +1,8 @@
 package com.kkaekkt.view.map;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -8,7 +10,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,24 +23,38 @@ import com.kkaekkt.biz.user.AccountVO;
 import com.kkaekkt.biz.user.PersonVO;
 import com.kkaekkt.biz.user.UserService;
 
+
 @Controller
 public class MapListController {
 	@Autowired
 	MapService mapserv;
+	@Autowired
 	UserService userService;
 	
-		@RequestMapping(value="/showMap.do", method = {RequestMethod.GET, RequestMethod.POST})
-		public String loginView( HttpSession session, Model model) {
-			System.out.println("map으로 이동  + 정보 : " + session.getAttribute("user"));
-			AccountVO account = (AccountVO) session.getAttribute("user");
-			
-			System.out.println(account.getMno());
-			//로그인시 받아온 mno로 db 조회
-			userService.getPerson(account.getMno());		
-			model.addAttribute("person", userService.getPerson(account.getMno()));
-
-			return "/jsp/searchMap/map.jsp";
-		}
+	    @RequestMapping(value="/showMap.do", method = {RequestMethod.GET, RequestMethod.POST})
+	    public String loginView( HttpSession session, Model model,int type) {
+	       AccountVO vo = new AccountVO();
+	       if(session.getAttribute("user")==null) {//비 로그인 상태
+	          vo.setMtype(0);
+	          vo.setMno(0);
+	          if(type==1) {
+	             vo.setAddress("클리닝");
+	          }else {
+	             vo.setAddress("코인");
+	          }
+	          model.addAttribute("user", vo);
+	       }else { //로그인 상태
+	          vo=(AccountVO)session.getAttribute("user");
+	          vo=userService.getPerson(vo.getMno());
+	          if(type==1) {//일반 세탁소
+	        	 vo.setAddress("클리닝");
+	          }else {//코인 세탁소
+	        	  vo.setAddress("코인");
+	          }
+	          session.setAttribute("user",vo);
+	       }
+	       return "jsp/searchMap/map.jsp";
+	    }
 	
 	
 		@RequestMapping(value="/maplist.do", method=RequestMethod.POST,produces="application/text;charset=utf-8")   
@@ -76,7 +91,6 @@ public class MapListController {
 			System.out.println("select 데이터 확인  : "+singleList); 
 			return singleList; 
 		}
-		
 		//회원업체 리뷰 조회
 		@RequestMapping(value="/reviewList.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
 		public @ResponseBody String reviewList(int bno) {
@@ -87,15 +101,11 @@ public class MapListController {
 			System.out.println("select 데이터 확인  : "+singleList); 
 			return singleList; 
 		}
-	  
-	  
-		//회원업체 리뷰 조회
-		@RequestMapping(value="/respay.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
-	  	public String respay(ResPayVO vo) {
-			System.out.println("예약관련정보 : "+vo); 
-			return "/jsp/searchMap/map.jsp";
+		//예약 목록 추가 
+		@RequestMapping(value="/respay.do",method=RequestMethod.POST)
+		@ResponseBody
+	  	public int respay(MapListVO mapvo) {
+			return mapserv.respay(mapvo);
 		}
-		
-	 
 }
 

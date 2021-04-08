@@ -147,4 +147,9 @@ public class ReservationServiceImpl implements ReservationService {
 	public void updateAlert(AlertVO vo) {
 		reservationDAO.updateAlert(vo);
 	}
+
+	@Override
+	public List<LaundryVO> getSales(int bno) { // 하루 매출
+		return reservationDAO.getSales(bno);
+	}
 }

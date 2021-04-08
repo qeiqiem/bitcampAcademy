@@ -72,19 +72,29 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void deleteUser(AccountVO vo) {
+	public String deleteUser(AccountVO vo) {
 		System.out.println("회원탈퇴 서비스 옴");
-		userDao.deleteUser(vo);
-
+		int result = userDao.orderChk(vo);
+		System.out.println(result);
+		
+		if(result == 0) {
+			if(1==userDao.deleteUser(vo)) {
+				return "success";
+			}else {
+				return "fail";
+			}
+		} else {
+			return "fail";
+		}
 	}
 	
 	// 로그인 들
 	
-	@Override
-	public int idchkBs(BusinessVO vo) {
-		System.out.println("아이디 찾는 서비스 옴 -- 업체");
-		return userDao.idchkBs(vo);
-	}
+//	@Override
+//	public int idchkBs(BusinessVO vo) {
+//		System.out.println("아이디 찾는 서비스 옴 -- 업체");
+//		return userDao.idchkBs(vo);
+//	}
 
 	@Override
 	public AccountVO getUser(AccountVO vo) {
@@ -161,9 +171,9 @@ public class UserServiceImpl implements UserService {
 		return userDao.idchk(vo);
 	}
 	@Override
-	public int emailchk(AccountVO vo) {
+	public int emailchk(String email) {
 		System.out.println("email 찾는 서비스 옴");
-		return userDao.emailchk(vo);
+		return userDao.emailchk(email);
 	}
 
 	@Override
@@ -189,10 +199,13 @@ public class UserServiceImpl implements UserService {
 	public List<LaundryVO> getLaundryList(int bno) {
 		return userDao.getLaundry(bno);
 	}
-    @Override
-    public List<LaundryVO> getSales(int bno) {        // 하루 매출 
-        return userDao.getSales(bno);
-    }
-
-
+	@Override
+	public void deleteUser(BusinessVO vo) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public int bnoChk(int bno) {
+		return userDao.bnoChk(bno);
+	}
 }

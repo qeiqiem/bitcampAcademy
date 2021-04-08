@@ -78,7 +78,7 @@ function modalprint(list) {
             '<option value='+i+'>'+i+'개</option>'
         );
     }
-    $('#bname')[0].innerHTML=list[0].bname;//업체명 삽입
+    $('.bname').text(list[0].bname);//업체명 삽입
 }
 function initBodyEvent() {
     initModal();//모달 이벤트 관리fn
@@ -90,6 +90,8 @@ function initBodyEvent() {
     });
     $('.content').on("click",'button',function() {
         var bno=$(this).attr('id').substr(6);
+        rsvObj.rbno=Number(bno);//업체의 bno
+        alertObj.addressee=Number($(this).val());//업체의 mno 
         modalAjax(bno);
     });
     table.on("click",'input:checkbox',function() {
@@ -166,7 +168,7 @@ function printList() {
                     '</div>'+
                 '</div>'+
                 '<div class="bsTagRight">'+
-                    '<button id="rsvBtn'+value.bno+'">예약하기</button>'+
+                    '<button id="rsvBtn'+value.bno+'" value="'+value.mno+'">예약하기</button>'+
                 '</div>'+
             '</div>');
     });
@@ -183,20 +185,46 @@ function initModal() {//모달 이벤트 관리
         if(totalPrice == 0){
             alert("지불할 금액이없습니다. 옵션을 선택해주세요.")
         }else {
+            resListSet();//체크된 품목 리스트 입력
+            rsvObj.totalPrice=totalPrice;//총 금액 입력
             requestPay(totalPrice);
+            // console.log(JSON.stringify(rsvObj));
         }
     });
     $("#mask").click(function(){//마스크 쪽이 눌렸다면
         modalClose();
     });
+    $("#agreement i").click(function() {
+        $(this).toggleClass('fa-chevron-down');
+        $(this).toggleClass('fa-chevron-up');
+        console.log($(this).css('display'));
+        if($('.termsText').eq($(this).attr('value')).css('display')=="none"){
+            $('.termsText').eq($(this).attr('value')).show();
+        }else{
+            $('.termsText').eq($(this).attr('value')).hide();
+        }
+    });
+}
+function resListSet(){
+    var list=new Array();
+    var cntChk=$('.chked');
+    var ddate;
+    for(var i=0;i<cntChk.length;i++){
+        lno = Number($('.chked').eq(i).attr('id').charAt(3))+1;//lno추출
+        cnt = $('#selc'+lno).val();//cnt추출
+        list.push({lno:lno,cnt:cnt});//리스트 셋
+        if(lno<5){
+            ddate=3;
+        }else{
+            ddate=7;
+        }
+    }
+    rsvObj.resListData=JSON.stringify(list);
+    rsvObj.ddate=ddate;
 }
 function openModal() {
     $("#mask").show();
     $('#modal_container').show();
-}
-function requestPay() {
-    console.log('결제api');
-    //결제 api 연동한 fn 입력할 예정
 }
 function modalClose() {
     $('#modal_container').hide();
@@ -226,7 +254,7 @@ function requestPay(totalPrice) {
           msg += '메일 : ' + rsp.buyer_email
           msg += '이름 : ' + rsp.buyer_name
           msg += '우편번호 : ' + rsp.buyer_postcode
-          alert(msg)
+          rsvAjax();
           modalClose();
           //알림과 insert 들어갈 예정
        } else { // 실패시
@@ -235,3 +263,48 @@ function requestPay(totalPrice) {
        }
     })
  }
+ function rsvAjax() {
+    $.ajax({
+        url:'/respay.do'
+        , method : 'POST'
+        , data: rsvObj
+        , success:function(result){
+           msgSet(result);
+           sendMsg();
+        }
+    })
+}
+function today() {
+    var date=new Date();
+    var mm=date.getMonth()+1;
+    var dd=date.getDate();
+    var today=date.getFullYear()+'.'+(mm<10?'0'+mm:mm)+'.'+(dd<10?'0'+dd:dd);
+    return today;
+}
+function msgSet(rsvNum) {
+        alertObj.rsvNum=rsvNum;
+        alertObj.msg='새로운 주문(번호:'+rsvNum+')이 등록되었습니다.';
+        alertObj.typenum=1;
+}
+function sendMsg() {
+    $.post({
+        url:'/regitAlert.do',
+        data:alertObj,
+        success:function() {
+            if(socket){
+                var receiver=alertObj.addressee;
+                var msg='<li>'+
+                            '<div class="msgTop">'+
+                                '<a href="/jsp/mypageBiz/mpbProg_Num.jsp">[결제]⠀'+alertObj.msg+'</a>'+
+                            '</div>'+
+                            '<div class="msgBottom">'+
+                                '<span class="date">'+today()+'</span>'+
+                                '<span class="byBs">by '+alertObj.senderName+'</span>'+
+                            '</div>'+
+                            '<i class="fas fa-times"></i>'+
+                        '</li>'
+                socket.send(receiver+','+msg);//메시지 보냄
+            }
+        }
+    });
+}

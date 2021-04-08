@@ -9,6 +9,7 @@
   --footer: rgba(207, 207, 207, 0.253);
   --disabled: (#e5e5e5);
   --text-red: rgba(254, 54, 54, 0.55);
+  --key-text: rgba(79, 150, 255, 1);
 }
 
 html,
@@ -16,7 +17,7 @@ body {
   margin: 0;
   padding: 0;
   color: var(--black-color);
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
 }
 
 .body_container {
@@ -50,12 +51,12 @@ ul {
   padding: 0;
 }
 
-#mask{
-	width: 100vw;
-    height: 100vh;
-    display: none;
-    background: black;
-    opacity: 86%;
-    z-index: 999;
-    position: absolute;
+#mask {
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  background: black;
+  opacity: 86%;
+  z-index: 999;
+  position: absolute;
 }

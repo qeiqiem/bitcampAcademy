@@ -3,7 +3,7 @@
 <mapper namespace="MapListDAO">
 
 	<select id="selecList" parameterType="String" resultType="maplist">
-			SELECT b.bname 
+			SELECT b.bname  
 				 , b.bno
 				 , b.phone
 				 , b.address
@@ -12,7 +12,8 @@
 				 , AVG(c.grade)  AS grade
 			 FROM business b
 			 JOIN comments c ON b.bno = c.bno
-			WHERE b.address LIKE CONCAT('%',#{keyaddr},'%');
+			WHERE b.address LIKE CONCAT('%',#{keyaddr},'%')
+			GROUP BY b.bno;
 	</select>
 	
 	<select id="selectSingle" parameterType="int" resultType="single">
@@ -26,7 +27,8 @@
 	</select>
 	
 	<select id="selectOption" parameterType="int" resultType="single">
-			SELECT bno
+			SELECT mno 
+				 , bno
 			     , lno
 			     , name
 			     , product
@@ -45,8 +47,32 @@
 			ORDER BY rdate DESC;
 	</select>
 	
-	<insert id="respay" parameterType="respay">
-		
+	<insert id="respay" parameterType="maplist">
+		INSERT INTO reservation ( mno
+							    , bno
+								, rdate
+								, ddate
+								, totalprice
+								, payment
+								, stno
+			   						) 
+		       VALUES (   #{mno}
+		     	   		, #{rbno}
+		     	   		, now()
+		     	   		, date_add(now(),INTERVAL #{ddate} day) 
+		     	   		, #{totalPrice}
+		     	   		, "카드"
+		     	   		, DEFAULT
+		      );
+		<foreach collection="resList" item="list">
+				INSERT INTO rsv_laundry VALUES ((SELECT MAX(rno) 
+												      FROM reservation 
+												     WHERE mno = #{mno})
+												  , #{list.lno}
+												  , #{list.cnt} 
+												  , 1
+												);
+		</foreach>
 	</insert>
 </mapper>
 
