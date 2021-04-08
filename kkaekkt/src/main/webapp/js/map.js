@@ -2,19 +2,16 @@
 
 /* 실제 사용 이벤트  */
 $(document).ready(function() {
-   // 화면 생성시 기본호출
-   // url에서 로그인 정보 가져오기
-//	var url = document.location.href
-//	console.log(url)
-//	url = url.split("?")
 
-   var rsvObj={};
+	
+	
+	var rsvObj={};
    // method/var-----------------------------------------------------------------------
    var adrress = "서울 용산"
    var random = Math.floor(Math.random() * 10) + "," + "000"
    var bno = ""
    var totalPrice = 0
-   IMP.init("imp02061320");
+ 
    selectNum()
    
 
@@ -246,7 +243,7 @@ $(document).ready(function() {
                           var html = ''   
                              for (var i = 0; i < data.length; i++) {
                                 html += '<ul class="combodyul">'
-                                 html += ' <li>'+data[i].name+'</li>'
+                                 html += ' <li>'+data[i].mname+'</li>'
                                  html += '<li>'
                                     var grade = data[i].grade;                        
                                     for(var j=0; j<grade; j++) {
@@ -326,7 +323,7 @@ $(document).ready(function() {
        })
          
       $('.list').hide()
-        $('.single').show()
+      $('.single').show()
    }
            
    function requestPay() {
@@ -358,8 +355,7 @@ $(document).ready(function() {
 
             mapRes()
             $('.slide_res').hide()
-            $('.slide_success').show()
-            
+            $('.slide_success').show()            
             $("#mask").hide()	
             
          } else { // 실패시
