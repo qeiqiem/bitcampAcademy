@@ -19,11 +19,11 @@
 #warnBox {
   position: relative;
   height: 42px;
-  text-align: center;
+  /* text-align: center; */
+  display: none;
 }
 #termsChk {
   position: absolute;
-  display: none;
   left: 0;
   right: 0;
   margin: 0 auto;
@@ -41,7 +41,7 @@
   border: none;
   background-color: var(--gray-color);
   border-radius: 30px;
-  margin: 0 20px;
+  margin: 15px 20px;
 }
 
 .allChkDiv {

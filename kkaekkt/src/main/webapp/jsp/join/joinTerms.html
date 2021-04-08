@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,17 +15,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
         rel="stylesheet">
-    <style>
-        .textbox {
-            border: 1px solid var(--gray-color);
-            /* width: 100%; */
-            padding: 30px;
-            background-color: white;
-            height: 300px;
-            /* overflow: scroll; */
-            overflow-y: scroll;
-        }
-    </style>
 </head>
 
 <body>
@@ -41,7 +31,7 @@
                 </div>
             </div>
             <div class="head_right">
-                <a href="../../jsp/join/joinSelect.jsp">회원가입</a> 
+                <a href="../../jsp/join/joinSelect.jsp">회원가입</a>
                 <a href="../../jsp/login/login.jsp">로그인</a>
                 <a href="../../jsp/faq.jsp">FAQ</a>
             </div>
@@ -90,8 +80,6 @@
 
         <div class="wrapper_select">
             <hr>
-
-
             <div class="content">
                 <div class="allChkDiv">
                     <input id="allChk" type="checkbox" value=0>kkaekkt
@@ -318,15 +306,16 @@ KKAEKKT 내의 개별 서비스 이용, 이벤트 응모 및 경품 신청 과�
 
 
                 <div id="warnBox">
-                    <p id="termsChk">kkaekkt 이용약관, 개인정보 수집 및 이용에 대한 안내, 위치정보 이용약관 모두 동의해주세요.</p>
+                    <p id="termsChk">* kkaekkt 이용약관, 개인정보 수집 및 이용에 대한 안내, 위치정보 이용약관 모두 동의해주세요.</p>
                 </div>
                 <div id="termBtn">
-                    <button id="cancel">취소</button>
-                    <button id="ok">확인</button>
+                    <button id="cancel" type="button">취소</button>
+                    <button id="ok" type="button">확인</button>
                 </div>
             </div>
         </div>
     </div>
     <script src="../../js/joinTerms.js"></script>
 </body>
+
 </html>

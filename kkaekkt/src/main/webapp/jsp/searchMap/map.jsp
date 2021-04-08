@@ -233,7 +233,7 @@
            mapContainer.style.position = "initial";            
            var ps = new kakao.maps.services.Places();            
  
-           
+           bindinglandry(useraddress)
            
            function setMapType(maptype) { 
         	    var roadmapControl = document.getElementById('btnRoadmap');
@@ -274,8 +274,8 @@
            }              
            
            // 대분류 검색 
-           function searchMajor(item) {             
-            var item = item      
+           function searchMajor(useraddress) {             
+            var item = useraddress
             ps.keywordSearch(item, placesSearchCB);       
            }
            

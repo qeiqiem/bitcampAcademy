@@ -56,7 +56,8 @@
 				</form>
 				<div>
 					<div>
-						<a href="">아이디/비밀번호 찾기</a>
+						<a href="/jsp/login/findId.jsp">아이디 찾기</a> 
+						<a href="/jsp/login/findPw.jsp">비밀번호 찾기</a>
 					</div>
 					<hr>
 					<div>

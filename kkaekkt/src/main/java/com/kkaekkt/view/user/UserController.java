@@ -31,7 +31,7 @@ public class UserController {
 	@Autowired
 	private JavaMailSender mailSender;
 	
-	@RequestMapping(value="/index.do",method=RequestMethod.GET)
+	@RequestMapping(value="/index.do",method={RequestMethod.GET,RequestMethod.POST})
 	public String index(HttpSession session,Model model) {
 		
 		if(session.getAttribute("user")==null) {
