@@ -32,7 +32,7 @@ public class MapListController {
 	UserService userService;
 	
 	    @RequestMapping(value="/showMap.do", method = {RequestMethod.GET, RequestMethod.POST})
-	    public String loginView( HttpSession session, Model model,int type) {
+	    public String loginView( HttpSession session ,Model model ,int type) {
 	       AccountVO vo = new AccountVO();
 	       if(session.getAttribute("user")==null) {//비 로그인 상태
 	          vo.setMtype(0);
