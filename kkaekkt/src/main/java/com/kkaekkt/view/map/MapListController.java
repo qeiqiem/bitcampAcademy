@@ -32,7 +32,7 @@ public class MapListController {
 	UserService userService;
 	
 	    @RequestMapping(value="/showMap.do", method = {RequestMethod.GET, RequestMethod.POST})
-	    public String loginView( HttpSession session, Model model,int type) {
+	    public String loginView( HttpSession session ,Model model ,int type) {
 	       AccountVO vo = new AccountVO();
 	       if(session.getAttribute("user")==null) {//비 로그인 상태
 	          vo.setMtype(0);
@@ -47,9 +47,18 @@ public class MapListController {
 	          vo=(AccountVO)session.getAttribute("user");
 	          vo=userService.getPerson(vo.getMno());
 	          if(type==1) {//일반 세탁소
-	        	 vo.setAddress("클리닝");
+	        	 String address = vo.getAddress(); 
+	        	 String[] arrayAddr = address.split(",");
+	        	 address = arrayAddr[0];
+	        	 arrayAddr = address.split("로");
+	        	 vo.setAddress(arrayAddr[0]);
 	          }else {//코인 세탁소
-	        	  vo.setAddress("코인");
+	        	  String address = vo.getAddress(); 
+	        	 String[] arrayAddr = address.split(",");
+	        	 address = arrayAddr[0];
+	        	 arrayAddr = address.split("로");	        	 
+	        	 System.out.println(arrayAddr[0]);
+	        	  vo.setAddress(arrayAddr[0]);
 	          }
 	          session.setAttribute("user",vo);
 	       }

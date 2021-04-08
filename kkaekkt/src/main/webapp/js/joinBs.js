@@ -292,15 +292,16 @@ function bnoChk() {
         data:{bno:bno},
         success:function(result) {
             if(result==0){
-                return true;
+                formatArray[5]=true;
             }else {
-                return false;
+                formatArray[5]=false;
             }
         }
     })
 }
 function formatChk() {//유효성검사가 걸린 차례대로 input값 체크
-        for(var i=0; i<formatArray.length;i++) {
+    bnoChk();//임시로 bno 검사 위치함    
+    for(var i=0; i<formatArray.length;i++) {
             if(!formatArray[i]){//false가 반환된다면
                 if(i==0){
                     alert('ID 중복검사를 진행해주세요.');
@@ -315,11 +316,6 @@ function formatChk() {//유효성검사가 걸린 차례대로 input값 체크
                     return false;
                 }
             }
-        }
-        if(!bnoChk()){//사업자등록번호 중복체크 결과 통과=true, 중복=false 반환
-            alert('이미 등록된 사업자등록번호입니다.');
-            $('#bno').focus();
-            return false;
         }
         return true;//유효성검사를 전부 통과했을 경우
 }
