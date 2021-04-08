@@ -27,7 +27,8 @@
 	</select>
 	
 	<select id="selectOption" parameterType="int" resultType="single">
-			SELECT bno
+			SELECT mno 
+				 , bno
 			     , lno
 			     , name
 			     , product
@@ -58,7 +59,7 @@
 		       VALUES (   #{mno}
 		     	   		, #{rbno}
 		     	   		, now()
-		     	   		, date_add(now(),INTERVAL 5 day) 
+		     	   		, date_add(now(),INTERVAL #{ddate} day) 
 		     	   		, #{totalPrice}
 		     	   		, "카드"
 		     	   		, DEFAULT

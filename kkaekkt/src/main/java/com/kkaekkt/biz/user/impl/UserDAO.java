@@ -157,5 +157,8 @@ public class UserDAO {
 	}
 	public int bnoChk(int bno) {
 		return mybatis.selectOne("UserDAO.bnoChk",bno);
+	}
+	public String getAddress(int mno) {
+		return mybatis.selectOne("UserDAO.getAddress",mno);
 	}	
 }

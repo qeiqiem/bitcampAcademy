@@ -30,6 +30,21 @@ public class UserController {
 
 	@Autowired
 	private JavaMailSender mailSender;
+	
+	@RequestMapping(value="/index.do",method=RequestMethod.GET)
+	public String index(HttpSession session,Model model) {
+		
+		if(session.getAttribute("user")==null) {
+			AccountVO user=new AccountVO();
+			user.setMno(0);
+			user.setMtype(0);
+			model.addAttribute("user",user);			
+			return "/jsp/index.jsp";
+		}else {
+			return "/jsp/index.jsp";		
+		}
+	}
+	
 	@RequestMapping(value="/bnoChk.do",method=RequestMethod.POST)
 	@ResponseBody
 	public int bnoChk(int bno) {

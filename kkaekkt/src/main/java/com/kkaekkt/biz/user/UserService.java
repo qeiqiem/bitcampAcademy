@@ -33,5 +33,5 @@ public interface UserService {
 	public List<LaundryVO> getLaundryList(int bno);
     public void updatePw(AccountVO vo);
 	public int bnoChk(int bno);
-   
+	public String getAddress(int mno);
 }

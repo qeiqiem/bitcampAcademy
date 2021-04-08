@@ -36,6 +36,10 @@ public class MapListDAO {
 	public void respay(MapListVO mapvo) {
 		mybatis.insert("MapListDAO.respay",mapvo);		
 	}
+
+	public int getRsvNum(int mno) {
+		return mybatis.selectOne("reservationDAO.getRno",mno);
+	}
 	 
 
 }

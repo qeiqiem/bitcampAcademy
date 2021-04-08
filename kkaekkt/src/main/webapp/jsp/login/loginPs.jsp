@@ -8,7 +8,6 @@
 <%@ page import="java.io.BufferedReader"%>
 <%@ page import="java.io.InputStreamReader"%>
 
-
 <!DOCTYPE html>
 <html lang="en">
 

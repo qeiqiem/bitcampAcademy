@@ -90,7 +90,8 @@ function initBodyEvent() {
     });
     $('.content').on("click",'button',function() {
         var bno=$(this).attr('id').substr(6);
-        rsvObj.rbno=Number(bno);
+        rsvObj.rbno=Number(bno);//업체의 bno
+        alertObj.addressee=Number($(this).val());//업체의 mno 
         modalAjax(bno);
     });
     table.on("click",'input:checkbox',function() {
@@ -167,7 +168,7 @@ function printList() {
                     '</div>'+
                 '</div>'+
                 '<div class="bsTagRight">'+
-                    '<button id="rsvBtn'+value.bno+'">예약하기</button>'+
+                    '<button id="rsvBtn'+value.bno+'" value="'+value.mno+'">예약하기</button>'+
                 '</div>'+
             '</div>');
     });
@@ -207,13 +208,19 @@ function initModal() {//모달 이벤트 관리
 function resListSet(){
     var list=new Array();
     var cntChk=$('.chked');
-    var idx;
+    var ddate;
     for(var i=0;i<cntChk.length;i++){
         lno = Number($('.chked').eq(i).attr('id').charAt(3))+1;//lno추출
         cnt = $('#selc'+lno).val();//cnt추출
         list.push({lno:lno,cnt:cnt});//리스트 셋
+        if(lno<5){
+            ddate=3;
+        }else{
+            ddate=7;
+        }
     }
     rsvObj.resListData=JSON.stringify(list);
+    rsvObj.ddate=ddate;
 }
 function openModal() {
     $("#mask").show();
@@ -247,7 +254,6 @@ function requestPay(totalPrice) {
           msg += '메일 : ' + rsp.buyer_email
           msg += '이름 : ' + rsp.buyer_name
           msg += '우편번호 : ' + rsp.buyer_postcode
-        //   alert(msg)
           rsvAjax();
           modalClose();
           //알림과 insert 들어갈 예정
@@ -262,8 +268,43 @@ function requestPay(totalPrice) {
         url:'/respay.do'
         , method : 'POST'
         , data: rsvObj
-        , success:function(data){
-           console.log(data);
+        , success:function(result){
+           msgSet(result);
+           sendMsg();
         }
     })
+}
+function today() {
+    var date=new Date();
+    var mm=date.getMonth()+1;
+    var dd=date.getDate();
+    var today=date.getFullYear()+'.'+(mm<10?'0'+mm:mm)+'.'+(dd<10?'0'+dd:dd);
+    return today;
+}
+function msgSet(rsvNum) {
+        alertObj.rsvNum=rsvNum;
+        alertObj.msg='새로운 주문(번호:'+rsvNum+')이 등록되었습니다.';
+        alertObj.typenum=1;
+}
+function sendMsg() {
+    $.post({
+        url:'/regitAlert.do',
+        data:alertObj,
+        success:function() {
+            if(socket){
+                var receiver=alertObj.addressee;
+                var msg='<li>'+
+                            '<div class="msgTop">'+
+                                '<a href="/jsp/mypageBiz/mpbProg_Num.jsp">[결제]⠀'+alertObj.msg+'</a>'+
+                            '</div>'+
+                            '<div class="msgBottom">'+
+                                '<span class="date">'+today()+'</span>'+
+                                '<span class="byBs">by '+alertObj.senderName+'</span>'+
+                            '</div>'+
+                            '<i class="fas fa-times"></i>'+
+                        '</li>'
+                socket.send(receiver+','+msg);//메시지 보냄
+            }
+        }
+    });
 }

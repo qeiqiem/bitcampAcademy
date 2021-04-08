@@ -90,13 +90,11 @@ function sendMsg() {
                             '<i class="fas fa-times"></i>'+
                         '</li>'
                 socket.send(receiver+','+msg);//메시지 보냄
-                // socket.send('2,'+msg);//메시지 보냄
             }
         }
     });
 }
 function modalClose() {
-    console.log("dd");
     $('#modal_container').hide();
     $('#modal_userInfo').hide();
     $("#mask").hide();

@@ -37,9 +37,9 @@ public class MapServiceImpl implements MapService {
 
 
 	@Override
-	public void respay(MapListVO mapvo) {
-		maplistDao.respay(mapvo); 
-		
+	public int respay(MapListVO mapvo) { 
+		maplistDao.respay(mapvo);
+		return maplistDao.getRsvNum(mapvo.getMno());
 	}
 
 	
