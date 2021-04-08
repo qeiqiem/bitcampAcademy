@@ -25,15 +25,24 @@
 						<div class="join_numBox">
 							<ul>
 								<li class="num">01</li>
-								<li>회원유형선택</li>
+								<li>약관동의</li>
 							</ul>
 						</div>
 						<div>
 							<i class="fas fa-chevron-right fa-3x"></i>
 						</div>
 						<div class="join_numBox">
-							<ul style="color: var(- -black-color); font-weight: bolder;">
+							<ul>
 								<li class="num">02</li>
+								<li>회원유형선택</li>
+							</ul>
+						</div>
+						<div>
+							<i class="fas fa-chevron-right fa-3x"></i>
+						</div>
+						<div class="join_numBox numBox_select">
+							<ul>
+								<li class="num">03</li>
 								<li>정보입력</li>
 							</ul>
 						</div>
@@ -42,7 +51,7 @@
 						</div>
 						<div class="join_numBox">
 							<ul>
-								<li class="num">03</li>
+								<li class="num">04</li>
 								<li>가입완료</li>
 							</ul>
 						</div>
