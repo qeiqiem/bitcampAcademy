@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,8 +15,14 @@
 </head>
 
 <body>
-
-<jsp:include page="header0.jsp"></jsp:include>
+    <c:choose>
+         <c:when test="${user.mtype==0}">
+            <jsp:include page="/jsp/header.jsp"></jsp:include>
+         </c:when>
+         <c:otherwise>
+            <jsp:include page="/jsp/headerPs.jsp"></jsp:include>
+         </c:otherwise>
+   </c:choose>
 	 <div class="body_container">
         <h2>깨끗하게 간편하게 끝.</h2>
 

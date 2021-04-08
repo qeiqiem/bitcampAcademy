@@ -208,4 +208,8 @@ public class UserServiceImpl implements UserService {
 	public int bnoChk(int bno) {
 		return userDao.bnoChk(bno);
 	}
+	@Override
+	public String getAddress(int mno) {
+		return userDao.getAddress(mno);
+	}
 }

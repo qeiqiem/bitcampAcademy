@@ -20,9 +20,16 @@ public class MapListVO {
 	int mno;
 	int totalPrice;
 	int rbno;
+	int ddate;
 	List<ResPayVO> resList;
 	String resListData;
 	
+	public int getDdate() {
+		return ddate;
+	}
+	public void setDdate(int ddate) {
+		this.ddate = ddate;
+	}
 	public void setResListData(String resListData) {
 		String temp = resListData.substring(1, resListData.length() - 1); // 양 끝의 [ ] 제거
 		String[] temp2 = temp.split("},"); // {~},{~} 을 split하여 배열로 나눔

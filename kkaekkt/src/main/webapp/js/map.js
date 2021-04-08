@@ -15,7 +15,7 @@ $(document).ready(function() {
    var random = Math.floor(Math.random() * 10) + "," + "000"
    var bno = ""
    var totalPrice = 0
-   IMP.init("imp27421713");
+   IMP.init("imp02061320");
    selectNum()
    
 
@@ -378,14 +378,21 @@ $(document).ready(function() {
 		   var arrayRes = new Array();
          var idx;
          var selc;
+         var ddate;
 		     for (var i = 0; i < cntChk.length ; i++) {		    	 
 		    	//lno 발최
 		      idx = $('.chked').eq(i).attr('id').charAt(3);
 		        //개수
 		        selc = $('#selc'+idx).val();
 		        arrayRes.push({lno:Number(idx)+1, cnt:selc});
+              if(idx<4){
+                     ddate=3;
+               }else{
+                     ddate=7;
+               }
 		     }
            rsvObj.resListData=JSON.stringify(arrayRes);
+           rsvObj.ddate=ddate;
 		   $("#mask").show()
 		   requestPay()
 	   }

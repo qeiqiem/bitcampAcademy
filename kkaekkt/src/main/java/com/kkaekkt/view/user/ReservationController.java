@@ -55,6 +55,7 @@ public class ReservationController {
 	@RequestMapping(value="/regitComm.do", method=RequestMethod.POST)
 	@ResponseBody
 	public void regitComm(CommVO vo) {
+		System.out.println(vo);
 		reservationService.regitComm(vo);
 	}
 	@RequestMapping(value="/updateComm.do", method=RequestMethod.POST)

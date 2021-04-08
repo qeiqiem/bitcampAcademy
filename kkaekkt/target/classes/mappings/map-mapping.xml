@@ -59,7 +59,7 @@
 		       VALUES (   #{mno}
 		     	   		, #{rbno}
 		     	   		, now()
-		     	   		, date_add(now(),INTERVAL 5 day) 
+		     	   		, date_add(now(),INTERVAL #{ddate} day) 
 		     	   		, #{totalPrice}
 		     	   		, "카드"
 		     	   		, DEFAULT

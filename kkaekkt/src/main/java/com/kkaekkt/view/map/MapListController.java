@@ -32,22 +32,26 @@ public class MapListController {
 	UserService userService;
 	
 		@RequestMapping(value="/showMap.do", method = {RequestMethod.GET, RequestMethod.POST})
-		public String loginView( HttpSession session, Model model) {
-			
-			if(session.getAttribute("user")==null) {
-				PersonVO vo = new PersonVO();
-				vo.setMno(0);
-				vo.setMtype(0);
-				model.addAttribute("person",vo);
-				
-				return "/jsp/searchMap/map.jsp";
+		public String loginView( HttpSession session, Model model,int type) {
+			AccountVO vo = new AccountVO();
+			if(session.getAttribute("user")==null) {//비 로그인 상태
+				if(type==1) {
+					vo.setAddress("클리닝");
+				}else {
+					vo.setAddress("코인");
+				}
+				model.addAttribute("user", vo);
+			}else { //로그인 상태
+				vo=(AccountVO)session.getAttribute("user");
+//				vo.setAddress(userService.getAddress(vo.getMno()));
+				if(type==1) {//일반 세탁소
+					vo.setAddress(userService.getAddress(vo.getMno())+" 클리닝");
+				}else {//코인 세탁소
+					vo.setAddress(userService.getAddress(vo.getMno())+" 코인");
+				}
+				session.setAttribute("user",vo);
 			}
-			
-			System.out.println("map으로 이동  + 정보 : " + session.getAttribute("user"));
-			AccountVO account = (AccountVO) session.getAttribute("user");			
-			//로그인시 받아온 mno로 db 조회
-			model.addAttribute("person", userService.getPerson(account.getMno()));
-			return "/jsp/searchMap/map.jsp";
+			return "jsp/searchMap/map.jsp";
 		}
 	
 	
@@ -85,7 +89,6 @@ public class MapListController {
 			System.out.println("select 데이터 확인  : "+singleList); 
 			return singleList; 
 		}
-		
 		//회원업체 리뷰 조회
 		@RequestMapping(value="/reviewList.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
 		public @ResponseBody String reviewList(int bno) {
