@@ -170,13 +170,14 @@ public class UserController {
 
 	// 소셜로그인
 	@RequestMapping(value = "/loginSNS.do", method = {RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
 	public String kakaologin(AccountVO vo, HttpSession session, HttpServletResponse response) {
 		System.out.println("카카오 로그인 컨트롤러 접속");
 		// 로그인 성공했을 때
 		vo = userService.method(vo);
 		System.out.println(vo); // 카카오 로그인시 vo 확인
 
-		if (vo.getMno() != 0) {
+		if (vo != null) {
 			session.setAttribute("person", vo);
 			System.out.println("user정보 " + vo);
 			return "success";
