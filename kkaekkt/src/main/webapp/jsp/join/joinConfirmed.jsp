@@ -71,9 +71,9 @@
 					</div>
 				</div>
 				<div>
-					<button type="button" onclick="location.href='/jsp/index.jsp'">홈으로</button>
+					<button type="button" onclick="location.href='/index.do'">홈으로</button>
 					<button type="button" class="login_btn"
-						onclick="location.href='/jsp/login/loginPs.jsp'">로그인</button>
+						onclick="location.href='/jsp/login/login.jsp'">로그인</button>
 				</div>
 			</div>
 		</div>

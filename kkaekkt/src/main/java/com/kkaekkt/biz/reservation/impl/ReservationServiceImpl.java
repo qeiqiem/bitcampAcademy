@@ -1,6 +1,8 @@
 package com.kkaekkt.biz.reservation.impl;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -149,7 +151,7 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public List<LaundryVO> getSales(int bno) { // 하루 매출
-		return reservationDAO.getSales(bno);
+	public List<LaundryVO> getSales(Map<String, Object> param) { // 하루 매출
+		return reservationDAO.getSales(param);
 	}
 }

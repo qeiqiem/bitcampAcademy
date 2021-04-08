@@ -1,7 +1,10 @@
 package com.kkaekkt.biz.reservation;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
+import com.google.gson.JsonElement;
 import com.kkaekkt.biz.comm.AlertVO;
 import com.kkaekkt.biz.comm.CommListVO;
 import com.kkaekkt.biz.comm.CommVO;
@@ -24,5 +27,5 @@ public interface ReservationService {
 	public List<AlertVO> getAlertList(AlertVO vo);
 	public void delAlert(AlertVO vo);
 	public void updateAlert(AlertVO vo);
-	public List<LaundryVO> getSales(int bno);
+	public List<LaundryVO> getSales(Map<String, Object> param);
 }
