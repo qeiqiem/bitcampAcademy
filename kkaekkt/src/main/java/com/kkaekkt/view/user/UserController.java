@@ -31,7 +31,7 @@ public class UserController {
 	@Autowired
 	private JavaMailSender mailSender;
 	
-	@RequestMapping(value="/index.do",method=RequestMethod.GET)
+	@RequestMapping(value="/index.do",method={RequestMethod.GET,RequestMethod.POST})
 	public String index(HttpSession session,Model model) {
 		
 		if(session.getAttribute("user")==null) {
@@ -206,7 +206,7 @@ public class UserController {
 	public String logout(HttpSession session) {
 		System.out.println("로그아웃 처리");
 		session.invalidate();
-		return "/index.do";
+		return "redirect:/index.do";
 	}
 
 	// 일반사양관리

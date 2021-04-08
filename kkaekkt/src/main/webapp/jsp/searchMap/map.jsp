@@ -63,9 +63,9 @@
                                <div class="tag">
                                    <ul class="slide_ul">
                                        <li id="all_search"   value="1">전체</li>
-                                       <li id="basic_search" value="2" >일반세탁소</li>
+                                     <!--   <li id="basic_search" value="2" >일반세탁소</li>
                                        <li id="coin_search"  value="3">코인세탁소</li>
-                                       <li id="my_search">my</li>
+                                       <li id="my_search">my</li> -->
                                    </ul>
                                    <hr>
                                    <p class="slide_mini"></p>
@@ -233,7 +233,7 @@
            mapContainer.style.position = "initial";            
            var ps = new kakao.maps.services.Places();            
  
-           
+           bindinglandry(useraddress)
            
            function setMapType(maptype) { 
         	    var roadmapControl = document.getElementById('btnRoadmap');
@@ -274,8 +274,8 @@
            }              
            
            // 대분류 검색 
-           function searchMajor(item) {             
-            var item = item      
+           function searchMajor(useraddress) {             
+            var item = useraddress
             ps.keywordSearch(item, placesSearchCB);       
            }
            

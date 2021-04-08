@@ -115,6 +115,11 @@ function totalPriceSet() {
        idx=$('.chked').eq(i).attr('id').charAt(3);//id(chk)의 idx 추출
        totalPrice+=Number($('#price'+idx)[0].innerHTML);
     }
+    if(idx<4) {
+        $('#dDay').text(dDay(3));
+    }else {
+        $('#dDay').text(dDay(7));
+    }
     $(".totalAll").text(totalPrice);
 }
 function changeListener(idx,ckTf){
@@ -276,6 +281,14 @@ function requestPay(totalPrice) {
 }
 function today() {
     var date=new Date();
+    var mm=date.getMonth()+1;
+    var dd=date.getDate();
+    var today=date.getFullYear()+'.'+(mm<10?'0'+mm:mm)+'.'+(dd<10?'0'+dd:dd);
+    return today;
+}
+function dDay(addDate) {
+    var date=new Date();
+    date.setDate(date.getDate()+addDate);
     var mm=date.getMonth()+1;
     var dd=date.getDate();
     var today=date.getFullYear()+'.'+(mm<10?'0'+mm:mm)+'.'+(dd<10?'0'+dd:dd);

@@ -15,7 +15,7 @@
 
 <body>
 	<div id="mask"></div>
-	<jsp:include page="/jsp/header2.jsp"/>
+	<jsp:include page="/jsp/headerPs.jsp"/>
 	<div class="body_container">
 		<div class="my_container">
 			<jsp:include page="sidebar_bs.jsp"/>

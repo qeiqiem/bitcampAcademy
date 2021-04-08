@@ -325,7 +325,7 @@ $(document).ready(function() {
    }
            
    function requestPay() {
-	   
+	   IMP.init("imp27421713")
        IMP.request_pay({
            pg : 'kakao', // 결제방식
            pay_method : 'card',   // 결제 수단

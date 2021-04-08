@@ -21,13 +21,13 @@
 	<body>
 		<jsp:include page="/jsp/header.jsp"></jsp:include>
 		<div class="body_container">
-			<div>
+			<div class="wrapper_joinInfo">
 				<h2>회원가입</h2>
 				<div class="join_seq">
 					<div class="join_numBox">
 						<ul>
 							<li class="num">01</li>
-							<li>회원유형선택</li>
+							<li>약관동의</li>
 						</ul>
 					</div>
 					<div>
@@ -36,20 +36,30 @@
 					<div class="join_numBox">
 						<ul>
 							<li class="num">02</li>
-							<li>정보입력</li>
+							<li>회원유형선택</li>
 						</ul>
 					</div>
 					<div>
 						<i class="fas fa-chevron-right fa-3x"></i>
 					</div>
 					<div class="join_numBox">
-						<ul style="color: var(- -black-color); font-weight: bolder;">
+						<ul>
 							<li class="num">03</li>
+							<li>정보입력</li>
+						</ul>
+					</div>
+					<div>
+						<i class="fas fa-chevron-right fa-3x"></i>
+					</div>
+					<div class="join_numBox numBox_select">
+						<ul>
+							<li class="num">04</li>
 							<li>가입완료</li>
 						</ul>
 					</div>
 				</div>
 			</div>
+
 			<div class="wrapper_select">
 				<hr>
 				<div class="confirmBox">
@@ -72,8 +82,7 @@
 				</div>
 				<div>
 					<button type="button" onclick="location.href='/index.do'">홈으로</button>
-					<button type="button" class="login_btn"
-						onclick="location.href='/jsp/login/login.jsp'">로그인</button>
+					<button type="button" class="login_btn" onclick="location.href='/jsp/login/login.jsp'">로그인</button>
 				</div>
 			</div>
 		</div>
