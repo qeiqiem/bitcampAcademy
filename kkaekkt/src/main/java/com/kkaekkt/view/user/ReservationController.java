@@ -1,5 +1,9 @@
 package com.kkaekkt.view.user;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -111,9 +115,14 @@ public class ReservationController {
 	// 매출관리
 	@RequestMapping(value = "/selectSales.do", method = RequestMethod.POST, produces = "application/text;charset=utf-8")
 	@ResponseBody
-	public String selectSalse(int bno) {
+	public String selectSalse(String bno, Date startDt, Date endDt) {
+		Map<String, Object> param = new HashMap<>(); 
+		param.put("bno", bno); 
+		param.put("startDt", startDt);
+		param.put("endDt", endDt);
+
 		Gson gson = new Gson();
-		String sales = gson.toJson(reservationService.getSales(bno));
+		String sales = gson.toJson(reservationService.getSales(param));
 		System.out.println("test:" + sales);
 		return sales;
 	}

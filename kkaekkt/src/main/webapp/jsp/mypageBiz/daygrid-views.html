@@ -6,6 +6,7 @@
 <script src='../lib/main.js'></script>
 <script>
   //var sales = new Array();
+
   document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -19,6 +20,8 @@
       editable: false,
       dayMaxEvents: true, // allow "more" link when too many events
       events: function (info, successCallback, failureCallback) {
+        
+        console.log(pageObj);
         $.post({
           url: "/selectSales.do",
           data: pageObj,
@@ -27,8 +30,10 @@
             let sales = JSON.parse(data);
             console.log(sales);
             var events = [];
+            let totalPrice = 0;
             $.each(sales, function (index, item) {
               let price = item.price;
+              totalPrice = totalPrice+price;
               let inputprice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
               console.log(price);
               if (price <= 200000){
@@ -56,6 +61,8 @@
               }
 
             }); // each end
+            console.log(totalPrice);
+            document.getElementById("inputTotal").innerText = totalPrice +" 원";
             console.log(events);
             successCallback(events);
           }// success end
@@ -65,6 +72,26 @@
     }); // calender end
 
     calendar.render();
+
+    document.getElementsByClassName("fc-prev-button")[0].onclick = function(){
+      var now = new Date();
+      var startDt =new Date(now.getFullYear(), now.getMonth() - 1, 1);
+      var endDt = new Date(now.getFullYear(), now.getMonth(), 0);
+      console.log("전달클릭시"+startDt +endDt);
+                $.post({
+                    url: "/selectSales.do",
+                    data: {
+                        bno : 1,
+                        startDt:startDt,
+				                endDt:endDt
+                    },
+                    success: function (data) {
+                        console.log('ajax 함수 완료');
+                        let date = JSON.parse(data);
+                        console.log(date);
+                    }
+                    });
+    }
   }); // document end
 
 </script>
@@ -80,12 +107,20 @@
     padding-top: 20px;
     padding-left: 50px;
   }
+  #monthSales{
+    width: 200px;
+  }
 
 </style>
 </head>
 <body>
-
+  <div id="monthSales">
+    <span>월별매출</span><br>
+    <hr>
+    <span id="inputTotal"></span>
+  </div>
   <div id='calendar'></div>
+  
 
 </body>
 </html>
