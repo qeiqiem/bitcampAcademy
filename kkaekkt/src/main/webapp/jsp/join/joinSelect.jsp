@@ -29,7 +29,7 @@
                         <div>
                             <i class="fas fa-chevron-right fa-3x"></i>
                         </div>
-                        <div class="join_numBox">
+                        <div class="join_numBox numBox_select">
                             <ul>
                                 <li class="num">02</li>
                                 <li>회원유형선택</li>

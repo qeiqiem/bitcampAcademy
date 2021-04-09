@@ -51,7 +51,7 @@
 					<div>
 						<i class="fas fa-chevron-right fa-3x"></i>
 					</div>
-					<div class="join_numBox">
+					<div class="join_numBox numBox_select">
 						<ul>
 							<li class="num">04</li>
 							<li>가입완료</li>

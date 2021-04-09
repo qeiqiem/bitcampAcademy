@@ -15,7 +15,7 @@
 
 <body>
 	<div id="mask"></div>
-	<jsp:include page="/jsp/header2.jsp"/>
+	<jsp:include page="/jsp/headerPs.jsp"/>
 	<div class="body_container">
 		<div class="my_container">
 			<jsp:include page="sidebar_bs.jsp"/>
@@ -109,6 +109,7 @@
                 bno:${sessionScope.user.bno},//더미번호 (추후 세션에서 받아올 예정)
 				currentPageNum:1,//현재 페이지 1
 				listType:3,//처리중-주문번호별
+				state:1,
 				order:1 //주문번호 순
             };
 		var rsvObj={};

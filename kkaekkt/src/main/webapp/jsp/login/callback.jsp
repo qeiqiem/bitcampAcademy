@@ -34,8 +34,10 @@
 				success : function(vo) {
 					if (vo == "fail") {
 						alert("회원정보 없음");
+						https://nid.naver.com/oauth2.0/token?grant_type=delete&client_id=CLIENT_ID&client_secret=CLIENT_SECRET&access_token=ACCESS_TOKEN
+
 					} else {
-						location.href = "/jsp/indexPerson.jsp";
+						location.href = "/index.do";
 					}
 				}
 			}); // ajax
