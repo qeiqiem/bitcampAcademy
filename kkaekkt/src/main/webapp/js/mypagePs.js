@@ -344,6 +344,7 @@ function deleteComm(rsvNum) {
                 $('#commBox'+rsvNum).children().remove();
                 commBtn.addClass('commentBtn');
                 commBtn.removeClass('reviewBtn');
+                commBtn.attr('id','commentBtn'+rsvNum);
                 commBtn[0].innerHTML='리뷰쓰기';
             }
         });

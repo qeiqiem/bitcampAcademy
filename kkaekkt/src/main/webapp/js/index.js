@@ -11,9 +11,8 @@ function connectWs(){
     };
     socket.onmessage = function(evt) { //socket.send 했을 때 데이터를 받는 메서드이다.
         var data = evt.data;
-        console.log($('#noticeBox ul'));
         $('#noticeBox ul').prepend(data);
-        $('#bellBox .redDot').css('display','unset');//빨간 불 올리기
+        upDotCount();
     };
     socket.onclose = function() {
         console.log('connect close');
