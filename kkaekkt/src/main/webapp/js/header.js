@@ -9,9 +9,9 @@ function initHeaderEvent() {
     });
     $('.fa-bell').click(function() {
         $('#noticeBox').toggle();
-        if($('#bellBox .redDot').css('display')!='none'){//종 빨간 점 없애기
-            $('#bellBox .redDot').css('display','none');
-        }
+        // if($('#bellBox .redDot').css('display')!='none'){//종 빨간 점 없애기
+        //     $('#bellBox .redDot').css('display','none');
+        
     });
     $('#noticeBox').on('click','i',function() {
         alertObj.ano=Number($(this).attr('id'));
@@ -23,7 +23,7 @@ function readAlert() {//알림 탭 페이지 공용메서드
     var url;
     if(alertObj.mtype==1){
         url="/jsp/mypageUser/mypagePs.jsp";
-    }else{
+    }else if(alertObj.mtype==2){
         url="/jsp/mypageBiz/mpbProg_Num.jsp";
     }
     $.post({
@@ -41,6 +41,9 @@ function delHeaderAlert() {//알림 삭제 메서드
         success:function() {
             $('.alertLi'+alertObj.ano).remove();
             initAlertObj();
+            if($('.alertLi'+alertObj.ano).hasClass('read')){
+                downDotCount();
+            }
         }
     });
 }
@@ -59,8 +62,14 @@ function headerAlertAjax() {
 }
 function printHeaderList(list) {
     var read;
+    var count=list.length;
     $.each(list, function(key,value) {
-        read=(value.state==2?' read':'');
+        if(value.state==2){
+            read=' read';
+            count--;
+        }else {
+            read='';
+        }
         $('#noticeBox ul').append('<li class="alertLi'+value.ano+read+'">'+
                                     '<div class="msgTop'+read+'">'+
                                         '<span>'+value.typename+'</span>⠀<span id="msg'+value.ano+'" class="msgBody">'+value.msg+'</span>'+
@@ -73,9 +82,32 @@ function printHeaderList(list) {
                                 '</li>'
         );
     });
+    printRedDot(count);
 }
 function initAlertObj() {//객체 초기화 공용 메서드
     delete alertObj.state;
     delete alertObj.typenum;
     delete alertObj.ano;
+}
+function printRedDot(count){
+        $('#bellBox .redDot').text(count);
+    if(count!=0){
+        $('#bellBox .redDot').show();
+    }
+}
+function downDotCount(){
+    var count=Number($('#bellBox .redDot')[0].innerHTML)-1;
+    if(count==0){
+        $('#bellBox .redDot').hide();
+    }
+    $('#bellBox .redDot').text(count);
+}
+function upDotCount(){
+    var count=Number($('#bellBox .redDot')[0].innerHTML)+1;
+    $('#bellBox .redDot').text(count);
+    $('#bellBox .redDot').show();
+}
+function dotCountZero(){
+    $('#bellBox .redDot').hide();//먼저 숨긴다.
+    $('#bellBox .redDot').text(0);//숫자를 0으로 돌린다.
 }
