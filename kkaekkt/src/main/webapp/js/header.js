@@ -35,15 +35,16 @@ function readAlert() {//알림 탭 페이지 공용메서드
     });
 }
 function delHeaderAlert() {//알림 삭제 메서드
+    console.log('알림삭제');
     $.post({
         url:'/delAlert.do',
         data:alertObj,
         success:function() {
-            $('.alertLi'+alertObj.ano).remove();
-            initAlertObj();
-            if($('.alertLi'+alertObj.ano).hasClass('read')){
+            if(!$('.alertLi'+alertObj.ano).hasClass('read')){//읽은 알림이 아니라면
                 downDotCount();
             }
+            $('.alertLi'+alertObj.ano).remove();
+            initAlertObj();
         }
     });
 }
