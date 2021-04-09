@@ -141,7 +141,7 @@
 		LEFT JOIN business b ON b.mno=ac.mno;
 	</select>
 	<select id="getPersonSNS" resultType="account">
-		SELECT ac.mno, id,	password, mname, email,mtype
+		SELECT ac.mno, id,	password, mname, email, ac.mtype
 		FROM account ac, `member` mb
 		WHERE ac.mno=mb.mno
 		AND email=#{email};

@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -190,6 +191,7 @@ public class UserController {
 		System.out.println("카카오 로그인 컨트롤러 접속");
 		// 로그인 성공했을 때
 		vo = userService.method(vo);
+		Cookie kc = new Cookie("vo", null) ;
 		System.out.println(vo); // 카카오 로그인시 vo 확인
 		if (vo != null) {
 			session.setAttribute("user", vo);
@@ -197,6 +199,8 @@ public class UserController {
 			return "success";
 		} else {
 			System.out.println("로그인 실패");
+		    kc.setMaxAge(0) ;
+		    response.addCookie(kc) ;
 			return "fail";
 		}
 	}
