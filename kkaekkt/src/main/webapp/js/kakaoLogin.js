@@ -25,8 +25,8 @@ function kakaoLogin() {
                         data: {
                             email: userEmail,
                         },
-                        success: function (data) {
-                            if (data == "fail") {
+                        success: function (result) {
+                            if (result == "fail") {
                                 alert("회원정보 없음");
                                 Kakao.API.request({
                                     url: '/v1/user/unlink',
@@ -38,7 +38,7 @@ function kakaoLogin() {
                                     },
                                 });
                             } else {
-                                location.href = "/index.do";
+        						location.href="/index.do";
                                 Kakao.API.request({
                                     url: '/v1/user/unlink',
                                     success: function (response) {

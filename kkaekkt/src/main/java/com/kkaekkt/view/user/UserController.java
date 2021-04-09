@@ -190,17 +190,14 @@ public class UserController {
 	public String kakaologin(AccountVO vo, HttpSession session, HttpServletResponse response) {
 		System.out.println("카카오 로그인 컨트롤러 접속");
 		// 로그인 성공했을 때
-		vo = userService.method(vo);
-		Cookie kc = new Cookie("vo", null) ;
-		System.out.println(vo); // 카카오 로그인시 vo 확인
+		AccountVO result = userService.method(vo);
+		System.out.println(result); // 카카오 로그인시 vo 확인
 		if (vo != null) {
-			session.setAttribute("person", vo);
-			System.out.println("user정보 " + vo);
+			session.setAttribute("user", result);
+			System.out.println("user정보 " + result);
 			return "success";
 		} else {
 			System.out.println("로그인 실패");
-		    kc.setMaxAge(0) ;
-		    response.addCookie(kc) ;
 			return "fail";
 		}
 	}
