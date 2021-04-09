@@ -29,7 +29,7 @@ $.ajax({
 	if(data == "fail"){
 		alert("회원정보 없음");
 	} else{
-        location.href = "/jsp/indexPerson.jsp";
+        location.href = "/login.do";
 	}
 		}
 }); // ajax

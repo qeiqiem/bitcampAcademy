@@ -192,7 +192,7 @@ public class UserController {
 		vo = userService.method(vo);
 		System.out.println(vo); // 카카오 로그인시 vo 확인
 		if (vo != null) {
-			session.setAttribute("person", vo);
+			session.setAttribute("user", vo);
 			System.out.println("user정보 " + vo);
 			return "success";
 		} else {
