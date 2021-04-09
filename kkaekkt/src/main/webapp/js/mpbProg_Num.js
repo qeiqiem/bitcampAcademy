@@ -214,10 +214,12 @@ function initPageObj(data) {
 }
 function ajax() { //ajax로 리스트 받아오기
     console.log('ajax 함수 진입');
+    console.log('1번 : '+JSON.stringify(pageObj));
     $.post({
         url:"/getRsvListBs.do",
         data:pageObj,
         success: function(data) {
+            console.log('2번 : '+data);
             var rsv=JSON.parse(data);
             $('.content_header p:nth-child(1) span').html(rsv.totalPostCount);
             var list=rsv.rsvListRno;
@@ -267,24 +269,24 @@ function printHeader(key,value) {
             if(value.dDay<0) {//남은 기한이 음수라면
                 $('.process p')[0].innerHTML="기한을 넘긴 주문";
                 $('.process p')[0].style.color='red';
-            }else if(value.dDay<3) {//남은 기한이 3미만
+            }else if(value.dDay<=3) {//남은 기한이 3이하
                 $('.process p')[0].innerHTML="마감이 임박한 주문";
-            }else if(value.dDay>=3) {//남은 기한이 3이상
+            }else if(value.dDay>3) {//남은 기한이 3초과
                 $('.process p')[0].innerHTML='기한이 넉넉한 주문';
             }
         } else if($('.process p')[1]==undefined) {//두 번째 제목이 선정되지 않았다면
             if($('.process p')[0].innerHTML=="기한을 넘긴 주문"){//첫 번째 제목이 기한을 넘긴 주문이라면
-                if(value.dDay<3&&dDay>=0) {
+                if(value.dDay<=3&&dDay>=0) {
                     $('.process').append('<p class="processTitle">마감이 임박한 주문</p>');
-                }else if(value.dDay>=3){
+                }else if(value.dDay>3){
                     $('.process').append('<p class="processTitle">기한이 넉넉한 주문</p>');
                 }
             } else if($('.process p')[0].innerHTML=="마감이 임박한 주문" //첫 번째 제목이 마감임박 주문이고
-                        &&value.dDay>=3) { //기한이 3일 이상이라면
+                        &&value.dDay>3) { //기한이 3일 초과라면
                     $('.process').append('<p class="processTitle">기한이 넉넉한 주문</p>');
             }
         } else if($('.process p')[2]==undefined) {//3번째 제목이 선정되지 않았다면
-            if(value.dDay>=3&&$('.process p')[1].innerHTML!='기한이 넉넉한 주문') {
+            if(value.dDay>3&&$('.process p')[1].innerHTML!='기한이 넉넉한 주문') {
                 $('.process').append('<p class="processTitle">기한이 넉넉한 주문</p>');
             }
         }

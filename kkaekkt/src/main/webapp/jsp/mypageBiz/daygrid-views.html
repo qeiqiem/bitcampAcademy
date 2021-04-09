@@ -6,27 +6,27 @@
 <script src='../lib/main.js'></script>
 <script>
   var prevBtn=0;
-  if(prevBtn ==1){
-          prev();
-          var now = new Date();
-          var startDt =new Date(now.getFullYear(), now.getMonth() - 1, 1);
-          var endDt = new Date(now.getFullYear(), now.getMonth(), 0);
-          console.log("이전달클릭시"+startDt +endDt);
-            pageObj = {
-                        bno : 1,
-                        startDt:startDt,
-				                endDt:endDt
-                    }
-    } 
+  var events = [];
+  let totalPrice
   document.addEventListener('DOMContentLoaded', function() {
     console.log("event내부"+pageObj);
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
-      headerToolbar: {
-        // left: 'prevYear,prev,next,nextYear today',    // 클릭시 전달 한달치 데이터를 가져와야함 
-        // center: 'title'
-        // right: 'dayGridMonth,dayGridWeek,dayGridDay'
-      },
+      customButtons: {
+      myCustomButton: {
+      text: 'custom!',
+      click: function() {
+        calendar.prev();
+        prevselct();
+        
+      }
+    }
+  },
+  headerToolbar: {
+    right: 'prev,next today myCustomButton',
+    center: 'title',
+    //right: 'dayGridMonth,timeGridWeek,timeGridDay'
+  },
       initialDate: new Date(),
       navLinks: true, // can click day/week names to navigate views
       editable: false,
@@ -39,8 +39,8 @@
             console.log('ajax 함수 완료');
             let sales = JSON.parse(data);
             console.log(sales);
-            var events = [];
-            let totalPrice = 0;
+            events =[];
+            totalPrice = 0;
             $.each(sales, function (index, item) {
               let price = item.price;
               totalPrice = totalPrice+price;
@@ -82,13 +82,35 @@
 
     calendar.render();
 
-   
+  
   }); // document end
- document.getElementsByClassName("fc-prev-button")[0].click(function () {
-      console.log("이전달 클릭");
-      prevBtn =1;
-      
-    })
+
+  // function prevselct() {
+
+  //     var now = new Date();
+  //     var startDt = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+  //     var endDt = new Date(now.getFullYear(), now.getMonth(), 0);
+  //     console.log("전달클릭시" + startDt + endDt);
+  //     $.post({
+  //       url: "/selectSales.do",
+  //       data: {
+  //         bno: 1,
+  //         startDt: startDt,
+  //         endDt: endDt
+  //       },
+  //       success: function (data) {
+  //         console.log('ajax 함수 완료');
+  //         let date = JSON.parse(data);
+  //         var arr ={ 'title':date.price, 'start':date.rsvDate };
+  //         console.log(date);
+  //         $.each(arr, function (index, item) {
+  //           calendar.addEvent(item);
+  //         });
+  //         calendar.render();
+
+  //       }
+  //     });
+  //   }
 </script>
 <style>
 

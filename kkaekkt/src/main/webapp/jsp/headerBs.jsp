@@ -22,7 +22,7 @@
 	<nav class="head">
 		<div class="head_left">
 			<div class="logo">
-				<a href="/jsp/indexCompany.jsp"> <img src="/img/logo.svg" alt="">
+				<a href="/jsp/mypageBiz/mpbProg_Num.jsp"> <img src="/img/logo.svg" alt="">
 				</a>
 			</div>
 			<div class="menu">

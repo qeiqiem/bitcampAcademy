@@ -239,7 +239,7 @@
 			ORDER BY orderNum DESC;
 	</select>
 	<select id="getLaundry" resultType="laundry"> <!-- 상태가 표시된 품목 리스트 출력 -->
-			SELECT DISTINCT lname laundry, cnt count, price,stname state 
+			SELECT DISTINCT lname laundry, cnt count, price,stname state
 			FROM reservation r, rsv_laundry r_l, business b, bsn_laundry b_l, laundry_type lt,state s
 			WHERE r.rno=r_l.rno AND r.bno=b.bno AND b.bno=b_l.bno 
 			AND lt.lno=r_l.lno AND b_l.lno=r_l.lno AND r_l.stno=s.stno
@@ -283,8 +283,8 @@
 			<if test="listType==2"> <!-- 품목별 목록 -->
 				AND r_l.stno=1;
 			</if>
-			<if test="listType==1 or listType==3"> <!-- 일반목록 -->
-				AND r.stno=1
+			<if test="listType==1 or listType==3"> <!-- 일반회원의 목록 or 업체 회원의 처리중-품목별 목록 -->
+				AND r.stno=#{state}
 			</if>
 		</where>
 	</select>

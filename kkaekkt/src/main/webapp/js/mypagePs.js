@@ -393,6 +393,8 @@ function printlist(list) {
     var totalPrice=0;
     var btnText;
     var btnClass;
+    console.log(JSON.stringify(pageObj)+'..하하 1번째');
+    console.log(JSON.stringify(list)+'..하하 2번째');
     if(list[0].state=='세탁 중') {
 		$('.content_header')[0].innerHTML='진행중 주문';
     } else {
@@ -400,13 +402,18 @@ function printlist(list) {
     }
     $('.rsvList').children().remove();
     $.each(list, function(key,value) {
+        console.log(value.commList.length+'...3번 길이');
+        console.log(JSON.stringify(value.commList)+"...4번");
+        
         if(list[0].state=='세탁 중'){
             btnText='주문취소';
             btnClass='cancelBtn';
         }else if(value.commList.length>0){
+            console.log('5번 진입');
             btnText='리뷰보기';
             btnClass="reviewBtn";
             var comm=value.commList;
+            console.log(JSON.stringify(comm)+'..6번');
         } else {
             btnText='리뷰쓰기';
             btnClass='commentBtn';
