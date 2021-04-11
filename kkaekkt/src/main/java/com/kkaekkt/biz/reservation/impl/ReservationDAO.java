@@ -126,5 +126,8 @@ public class ReservationDAO {
 	public List<LaundryVO> getSales(Map<String, Object> param) {
 		return mybatis.selectList("reservationDAO.getSales", param);
 	}
+	public int getRsvCount(Map<String, Object> param) {
+		return mybatis.selectOne("reservationDAO.getRsvCount", param);
+	}
 	
 }

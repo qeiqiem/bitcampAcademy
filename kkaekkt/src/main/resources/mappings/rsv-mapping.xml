@@ -304,4 +304,12 @@
             AND b.bno=#{bno}
             group by rsvDate;
     </select>
+    <!-- 매출관리 월별 예약건수 -->
+    <select id="getRsvCount" resultType="_int">
+    		SELECT count(r.rno) count
+			FROM business b,reservation r
+			WHERE r.bno=b.bno 
+            <![CDATA[AND ( r.rdate > LAST_DAY(#{startDt} - interval 1 month) AND r.rdate <= LAST_DAY(#{endDt}) )]]>
+            AND b.bno=#{bno};
+    </select>
 </mapper>

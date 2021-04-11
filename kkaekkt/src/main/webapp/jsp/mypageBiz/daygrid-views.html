@@ -12,6 +12,7 @@
     ajax(pageObj);
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
+      locale: 'ko',       // 한글로 표기 할 때 
       customButtons: {
       prev: {
       click: function() {
@@ -65,7 +66,7 @@
       today: {
       text: 'today',
       click: function() {
-        calendar.next();
+        calendar.today()
         console.log("today 클릭");
         var date = calendar.getDate ();
         var startDt = new Date(date.getFullYear(), date.getMonth(), 1);
@@ -97,24 +98,26 @@
           id: "dataList", 
           events: eventval
         });
+    calendar.setOption('aspectRatio', 1.3);
     calendar.render();
     console.log(eventval);
-    console.log();
+    
   });
   
 
   function ajax(pageObj){
-
+  
   $.post({
           url: "/selectSales.do",
           data: pageObj,
           async:false,
           success: function (data) {
             console.log('ajax 함수 완료');
-            let sales = JSON.parse(data);
-            console.log(sales);
-            inputEvent(sales);
+            let result = JSON.parse(data);
+            console.log(result);
+            inputEvent(result.sales);
             document.getElementById("inputTotal").innerText = totalPrice +" 원";
+            document.getElementById("inputTotalNum").innerText = "총 "+result.count +" 건";
             console.log(eventval);
            
           } // success end
@@ -163,24 +166,58 @@
     padding: 0;
     font-size: 14px;
   }
-
-  #calendar {
-    max-width: 50vw;
-    padding-top: 20px;
-    padding-left: 50px;
+  #wrap{
+    width: 85%;
   }
   #monthSales{
-    width: 200px;
+    width: 20%;
+    float: left;
   }
+  #monthtable{
+    margin-top: 55px;
+    font-size: 20px;
+  }
+  #monthtable tr{
+    padding: 5px;
+  }
+  #monthtable th{
+    text-align: left;
+  }
+  #calendar {
+    max-width: 50vw;
+    /* padding-top: 20px; */
+    /* padding-left: 250px; */
+    width: 80%;
+    float: left;
+  }
+  
 
 </style>
 </head>
 <body>
+  <div id="wrap">
+   
   <div id="monthSales">
-    <span>월별매출</span> : <span id="inputTotal"></span>
+    <table id="monthtable">
+      <tr>
+        <th>이번 달 통계</th>
+      </tr>
+      <tr>
+        <th>매출</th>
+      </tr>
+      <tr>
+        <td><span id="inputTotal"></span></td>
+      </tr>
+      <tr>
+        <th>예약</th>
+      </tr>
+      <tr>
+        <td><span id="inputTotalNum"></span></td>
+      </tr>
+    </table>
   </div>
   <div id='calendar'></div>
-  
+  </div>
 
 </body>
 </html>
