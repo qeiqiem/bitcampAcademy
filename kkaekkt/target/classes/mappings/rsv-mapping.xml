@@ -56,7 +56,7 @@
 		SELECT orderNum FROM comments WHERE groupNum=#{rsvNum} AND depth=#{depth};
 	</select>
 	<select id="getCommListBs" resultType="comment">
-		SELECT cno,c.mno,orderNum,content,groupNum rsvNum,date_format(rdate,'%Y.%m.%d, %r') rdate,grade eval,mname,depth,replytf
+		SELECT cno,c.mno,orderNum,content,groupNum rsvNum,date_format(rdate,'%Y.%m.%d %r') rdate,grade eval,mname,depth,replytf
 		FROM comments c, `member` m
 		<where>
 			m.mno=c.mno AND c.bno=#{bno}
@@ -156,7 +156,7 @@
 			AND lno=(SELECT lno FROM laundry_type WHERE lname=#{laundry});	
 	</update>
 	<select id="getRsvListPs" resultType="reservation"> <!-- 일반회원 예약리스트 출력 -->	
-		SELECT r.rno rsvNum,b.mno,r.bno,date_format(rdate,'%Y.%m.%d, %r') rsvDate,bname,phone,
+		SELECT r.rno rsvNum,b.mno,r.bno,date_format(rdate,'%Y.%m.%d %r') rsvDate,bname,phone,
 		<if test="state==1">
 		<![CDATA[	TIMESTAMPDIFF(HOUR,rdate,NOW())<1 timeOut]]>
 		</if>
@@ -172,7 +172,7 @@
 		LIMIT #{rowStartNum},#{POSTS_PER_PAGE};
 	</select>
 	<select id="getRsvListBs_ld" resultType="laundry"> <!-- 업체 품목별 리스트 출력 -->
-		SELECT date_format(rdate,'%Y.%m.%d, %T') rsvDate,r.mno, r.rno rsvNum, mname, lname laundry,cnt count,DATEDIFF(ddate,NOW()) dDay 
+		SELECT date_format(rdate,'%Y.%m.%d %T') rsvDate,r.mno, r.rno rsvNum, mname, lname laundry,cnt count,DATEDIFF(ddate,NOW()) dDay 
 		FROM reservation r, `member` m, rsv_laundry r_l, laundry_type lt 
 		<where>
 			r.mno=m.mno AND r.rno=r_l.rno AND r_l.lno=lt.lno
@@ -197,7 +197,7 @@
 	</select>
 	<select id="getRsvListBs_rn" resultType="reservation"> 
 		<if test="listType==3"><!-- 업체회원 주문번호별 리스트 출력 -->
-			SELECT r.rno rsvNum,r.mno,date_format(rdate,'%Y.%m.%d, %r') rsvdate,mname,DATEDIFF(ddate,NOW()) dDay
+			SELECT r.rno rsvNum,r.mno,date_format(rdate,'%Y.%m.%d %r') rsvdate,mname,DATEDIFF(ddate,NOW()) dDay
 			FROM `member` m,reservation r
 			WHERE r.mno=m.mno AND bno=#{bno} AND stno=1
 			<if test="searchOption==1"> <!-- 검색옵션-이름 입력시 -->
@@ -215,7 +215,7 @@
 				LIMIT #{rowStartNum},#{POSTS_PER_PAGE};
 		</if>
 		<if test="listType==4"> <!-- 업체회원 완료목록 출력 -->
-			SELECT r.rno rsvNum,r.mno,date_format(rdate,'%Y.%m.%d, %T') rsvdate,mname,date_format(dDate,'%Y.%m.%d, %T')dDate,stname state,DATEDIFF(ddate,NOW()) dDay 
+			SELECT r.rno rsvNum,r.mno,date_format(rdate,'%Y.%m.%d %T') rsvdate,mname,date_format(dDate,'%Y.%m.%d %T')dDate,stname state,DATEDIFF(ddate,NOW()) dDay 
 			FROM `member` m,reservation r,state s 
 			<where> 
 			r.mno=m.mno AND s.stno=r.stno AND bno=#{bno} 
@@ -232,7 +232,7 @@
 		</if>
 	</select>
 	<select id="getCommListPs" resultType="comment">
-			SELECT mname,r.mno,bname,r.bno,content,date_format(c.rdate,'%Y.%m.%d, %r') rdate,depth
+			SELECT mname,r.mno,bname,r.bno,content,date_format(c.rdate,'%Y.%m.%d %r') rdate,depth
 			FROM comments c, reservation r, `member` m,business b
 			WHERE b.bno=r.bno AND m.mno=r.mno AND c.groupNum=r.rno
 			AND groupNum=#{rsvNum}

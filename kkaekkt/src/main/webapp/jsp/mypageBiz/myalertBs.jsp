@@ -18,7 +18,7 @@
 </head>
 
 <body>
-    <jsp:include page="/jsp/headerPs.jsp"></jsp:include>
+    <jsp:include page="/jsp/headerBs.jsp"></jsp:include>
     <div class="body_container">
         <jsp:include page="sidebar_bs.jsp"></jsp:include>
         <div class="content">

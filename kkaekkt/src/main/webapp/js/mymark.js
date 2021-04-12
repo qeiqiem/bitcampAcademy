@@ -83,7 +83,7 @@ function modalprint(list) {
 function initBodyEvent() {
     initModal();//모달 이벤트 관리fn
     var table=$('#single_option');
-    $('.content').on('click','.like i.fa-heart',function() {
+    $('.content').on('click','.unlike',function() {//좋아요 취소 버튼 클릭
         var bno=Number($(this).attr("value"));
         likeObj.bno=bno;
         likeOff(likeObj);
@@ -177,6 +177,7 @@ function printList() {
                 '</div>'+
                 '<div class="bsTagRight">'+
                     '<button id="rsvBtn'+value.bno+'" value="'+value.mno+'">예약하기</button>'+
+                    '<button class="unlikeBtn" value="'+value.bno+'">찜하기 취소</button>'+
                 '</div>'+
             '</div>');
     });

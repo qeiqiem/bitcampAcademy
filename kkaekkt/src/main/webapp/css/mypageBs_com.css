@@ -98,25 +98,27 @@ p{
     left: 0;
     right: 0;
     width: 60%;
-    height: 80%;
+    height: 75px;
     color: black;
 }
 .processList tr td:nth-child(9) div button:nth-child(1) {
     position: relative;
-    height: 47%;
     background: rgb(251, 135, 135);
-    border: 1px solid red;
     margin-bottom: 5px;
+    border:none;
     width: 100%;
     font-size: 14px;
+    border-radius: 30px;
+    height: 35px;
 }
 .processList tr td:nth-child(9) div button:nth-child(2) {
     position:relative;
-    height: 47%;
-    background: rgb(129, 129, 248);
-    border: 1px solid blue;
+    background: var(--key-color);
+    border:none;
     width: 100%;
     font-size: 14px;
+    border-radius: 30px;
+    height: 35px;
 }
 .completeList {
     width: 100%;
@@ -145,8 +147,8 @@ p{
     right: 0;
     background: var(--key-color);
     width: 60%;
-    height: 50px;
-    color: white;
+    height: 45px;
+    border-radius: 30px;
     border: none;
 }
 #modal_container{
@@ -190,8 +192,8 @@ p{
     margin: 15px 20px;
     border: none;
     width: 96px;
-    height: 34px;
-    border-radius: 18px;
+    height: 45px;
+    border-radius: 30px;
     cursor: pointer;
 }
 #review_btn button:hover{
@@ -226,7 +228,7 @@ p{
   cursor: pointer;
 }
 .page_btn li.curPage{
-    background: var(--key-color);
+    background-color: var(--gray-color);
 }
 .page_prevBlock {
   border-top-left-radius: 3px;
