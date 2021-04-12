@@ -154,4 +154,8 @@ public class ReservationServiceImpl implements ReservationService {
 	public List<LaundryVO> getSales(Map<String, Object> param) { // 하루 매출
 		return reservationDAO.getSales(param);
 	}
+	@Override
+	public int getRsvCount(Map<String, Object> param) { // 한달예약건수
+		return reservationDAO.getRsvCount(param);
+	}
 }

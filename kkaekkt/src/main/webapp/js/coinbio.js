@@ -216,31 +216,46 @@ window.onload = function () {
         }
     });
     // 연락처 입력형식 확인
-    document.getElementById("phone1").addEventListener('keyup', () => {
+    $("#phone1").keyup(function (event) {
         formatphone1 = 0;
-        let inputphone =  document.getElementById("phone1");
-        if (!regPhone.test(inputphone.value)) {
-           formatphone1 = 0;
+        let inputphone = document.getElementById("phone1");
+        if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
+            var inputVal = $(this).val();
+            $(this).val(inputVal.replace(/[^0-9]/gi, ""));
         } else {
-            formatphone1 = 1;
+            if (!regPhone.test(inputphone.value)) {
+                formatphone1 = 0;
+            } else {
+                formatphone1 = 1;
+            }
         }
     })
-    document.getElementById("phone2").addEventListener('keyup', () => {
+    $("#phone2").keyup(function (event) {
         formatphone2 = 0;
-        let inputphone =  document.getElementById("phone2");
-        if (!regPhone.test(inputphone.value)) {
-           formatphone2 = 0;
+        let inputphone = document.getElementById("phone2");
+        if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
+            var inputVal = $(this).val();
+            $(this).val(inputVal.replace(/[^0-9]/gi, ""));
         } else {
-            formatphone2 = 1;
+            if (!regPhone.test(inputphone.value)) {
+                formatphone2 = 0;
+            } else {
+                formatphone2 = 1;
+            }
         }
     })
-    document.getElementById("phone3").addEventListener('keyup', () => {
+    $("#phone3").keyup(function (event) {
         formatphone3 = 0;
-        let inputphone =  document.getElementById("phone3");
-        if (!regPhone.test(inputphone.value)) {
-           formatphone3 = 0;
+        let inputphone = document.getElementById("phone3");
+        if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
+            var inputVal = $(this).val();
+            $(this).val(inputVal.replace(/[^0-9]/gi, ""));
         } else {
-            formatphone3 = 1;
+            if (!regPhone.test(inputphone.value)) {
+                formatphone3 = 0;
+            } else {
+                formatphone3 = 1;
+            }
         }
     })
 

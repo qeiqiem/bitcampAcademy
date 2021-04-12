@@ -15,6 +15,9 @@ select,button{
     font-size: 20px;
     margin: 0 auto 0 10px;
 }
+.content_header span{
+    color: var(--key-text);
+}
 .content hr {
     border: none;
     background: var(--gray-color);
@@ -85,6 +88,7 @@ p{
     text-align: center;
     margin-bottom: 5px;
     min-height: 85px;
+    margin-top: -1px;
 }
 .processList tr{
     position: relative;
@@ -105,25 +109,29 @@ p{
     left: 0;
     right: 0;
     width: 60%;
-    height: 80%;
+    height: 75px;
     color: black;
 }
 .processList tr td:nth-child(9) div button:nth-child(1) {
     position: relative;
     height: 47%;
     background: rgb(251, 135, 135);
-    border: 1px solid red;
     margin-bottom: 5px;
     width: 100%;
     font-size: 14px;
+    border:none;
+    border-radius: 30px;
+    max-height: 35px;
 }
 .processList tr td:nth-child(9) div button:nth-child(2) {
     position:relative;
     height: 47%;
-    background: rgb(129, 129, 248);
-    border: 1px solid blue;
+    background: var(--key-color);
     width: 100%;
+    border:none;
     font-size: 14px;
+    border-radius: 30px;
+    max-height: 35px;
 }
 
 .page_btn button {
@@ -155,7 +163,7 @@ p{
   cursor: pointer;
 }
 .page_btn li.curPage{
-    background: var(--key-color);
+    background: var(--gray-color);
 }
 .page_prevBlock {
   border-top-left-radius: 3px;
@@ -172,6 +180,7 @@ p{
     border: 1px solid #999;  /* 테두리 설정 */
     z-index: 1;
     height: 30px;
+    border-radius: 10px;
 }
 /* 가상 선택자를 활용 화살표 대체 */
 .selectbox:before {
@@ -248,8 +257,8 @@ p{
     margin: 15px 20px;
     border: none;
     width: 96px;
-    height: 34px;
-    border-radius: 18px;
+    height: 45px;
+    border-radius: 30px;
     cursor: pointer;
 }
 #review_btn button:hover{

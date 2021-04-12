@@ -9,8 +9,8 @@ function initEvent() {
 	var rsvNum;
     $('.rsvList').on("click",".detailBtn",function() { // 버블링으로 생성된 주문에 클릭 이벤트 활성화
 		rsvNum=$(this).attr('id').substr(9);
-        if(!$('.comments').eq(0).hasClass('none')){ //만약, 리뷰 보기가 열려있다면
-            $('.comments').eq(0).addClass('none');
+        if(!$('#commBox'+rsvNum).hasClass('none')){ //만약, 리뷰 보기가 열려있다면
+            $('#commBox'+rsvNum).addClass('none'); // 닫기
         }
         $('#detail'+rsvNum).toggleClass('none');
     });
@@ -39,6 +39,9 @@ function initEvent() {
     });
     $('.rsvList').on("click",".reviewBtn",function() {
         rsvNum=$(this).attr('id').substr(9);
+        if(!$('#detail'+rsvNum).hasClass('none')){//만약 상세보기가 열려있다면
+            $('#detail'+rsvNum).addClass('none');//상세보기 닫기
+        }
         $('#commBox'+rsvNum).eq(0).toggleClass('none');
     });
     $('.rsvList').on("click",".cancel",function() {
@@ -90,14 +93,12 @@ function initEvent() {
     });
     $('.rsvList').on('click','i.fa-heart',function() {
         likeObj.bno=Number($(this).attr('value'));
-        if($(this).hasClass('fas')) {
-            $(this).removeClass('fas');
-            $(this).addClass('far');
-            likeOff(likeObj);
-        }else {
-            $(this).addClass('fas');
-            $(this).removeClass('far');
+        if($(this).hasClass('unlike')) {
+            $(this).removeClass('unlike');
             likeOn(likeObj);
+        }else {
+            $(this).addClass('unlike');
+            likeOff(likeObj);
         }
     });
     $('.rsvList').on("click",".dotBtn",function() {
@@ -249,7 +250,7 @@ function initModal() {
     $('#review_text').keyup(function() {
         $('#review_texter').html($(this).val().length)
     });
-    $("#modal_close").click(function(){
+    $(".fa-times").click(function(){
         closeModal();
     });
     $("#closeBtn").click(function(event){ //모달 닫기
@@ -424,7 +425,7 @@ function printlist(list) {
                 '<table class="rsvTable">'+
                     '<tr>'+
                     '<th colspan="2" class="mno" id="mno'+value.mno+'">'+value.bname+'</th>'+
-                        '<td><i class="'+(value.like==1?'fas':'far')+' fa-heart like" value='+value.bno+'></i></td>'+
+                        '<td><i class="fas fa-heart like '+(value.like==0?'unlike':'')+'" value='+value.bno+'></i></td>'+
                     '</tr>'+
                     '<tr>' +
                         '<td class="column">주문일시</td>' +
@@ -440,7 +441,9 @@ function printlist(list) {
                     '</tr>'+
                     '<tr>'+
                         '<td class="column">주문항목</td>'+
-                        '<td><span>'+value.laundryList[0].laundry+'</span> 외 <span>'+(value.laundryList.length-1)+'</span>개</td>'+
+                        '<td><span>'+value.laundryList[0].laundry+'</span>'+
+                            (value.laundryList.length-1==0?''://만약 0개라면 공백 아니면 외 ~ 개 추가
+                            '</span> 외 <span>'+(value.laundryList.length-1)+'</span>개</td>')+
                     '</tr>'+
                 '</table>'+
                 '<div id="btnDiv'+value.rsvNum+'" class="btnDiv">'+
