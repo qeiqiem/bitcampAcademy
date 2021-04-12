@@ -313,7 +313,9 @@ function initSide() {
 // 디폴트
 function defaultDisable(){
     for (let i = 0; i < inputli.length; i++) {
-        inputli[i].disabled = true;
+        if(i!=1){
+            inputli[i].disabled = true;
+        }
     }
     for (let i = 0; i < buttonli.length; i++) {
         buttonli[i].disabled = true;
@@ -341,7 +343,7 @@ function inputInfo(){
         starNum = starNum-1;
     }
     for(let i = 0; i<starNum; i++){
-        addstar += '<i class="fas fa-star grey"></i>';
+        addstar += '<i class="fas fa-star gray"></i>';
     }
     document.getElementById('starIcon').innerHTML = addstar;
     document.getElementById('bizname').innerHTML = pageObj["bname"];

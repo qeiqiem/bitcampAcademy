@@ -123,8 +123,6 @@ public class ReservationController {
 		param.put("startDt", startDt);
 		param.put("endDt", endDt);
 		Gson gson = new Gson();
-		String sales = gson.toJson(reservationService.getSales(param));
-		String count = gson.toJson(reservationService.getRsvCount(param));
 		
 		Map<String, Object> val = new HashMap<>();
 		val.put("sales", reservationService.getSales(param));

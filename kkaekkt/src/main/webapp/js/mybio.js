@@ -313,7 +313,7 @@ function initSide() {
  // input button 초기값 비활성화  
  function defaultDisable(){
     document.getElementsByClassName("side_sub")[0].style.display = "none"
-    for (var i = 0; i < inputli.length; i++) {
+    for (var i = 2; i < inputli.length; i++) {  // 아이디 비밀번호 제외
         inputli[i].disabled = true;
     }
     for (var i = 0; i < buttonli.length; i++) {
