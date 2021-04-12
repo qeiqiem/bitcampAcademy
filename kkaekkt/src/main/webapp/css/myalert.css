@@ -34,29 +34,13 @@ button{
 #headerRight button:hover{
     background-color: var(--key-color);
 }
-#refresh{
-    display: inline-block;
-    background-color: var(--gray-color);
-    width: 38px;
-    height: 38px;
-    text-align: center;
+i.fa-redo-alt{/*새로고침 버튼*/
+    font-size: 22px;
     position: relative;
-    top: 13px;
-    border-radius: 20px;
-    right: 5px;
-}
-#refresh:hover{
-    /* background-color: var(--key-color); */
-}
-#refresh i{
-    font-size: 27px;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 6px;
+    top: 3px;
     cursor: pointer;
+    margin: 0 5px;
     transform: rotate(-50deg);
-    cursor: pointer;
 }
 /* #alertListBox{
     text-align: center;

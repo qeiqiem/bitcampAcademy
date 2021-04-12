@@ -163,7 +163,7 @@ a:hover {
   color: gray;
 }
 .msgHeader {
-  color:var(--key-color);
+  color:var(--key-text);
 }
 .read{
   color: rgb(116 116 116 / 50%) !important;

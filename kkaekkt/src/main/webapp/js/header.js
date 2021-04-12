@@ -61,7 +61,7 @@ function headerAlertAjax() {
         }
     });
 }
-function printHeaderList(list) {
+function printHeaderList(list) {//헤더에 알림 리스트 출력
     var read;
     var count=list.length;
     $.each(list, function(key,value) {
@@ -90,20 +90,20 @@ function initAlertObj() {//객체 초기화 공용 메서드
     delete alertObj.typenum;
     delete alertObj.ano;
 }
-function printRedDot(count){
+function printRedDot(count){//알림 출력 메서드
         $('#bellBox .redDot').text(count);
     if(count!=0){
         $('#bellBox .redDot').show();
     }
 }
-function downDotCount(){
+function downDotCount(){//알림 카운트 내리기 메서드
     var count=Number($('#bellBox .redDot')[0].innerHTML)-1;
     if(count==0){
         $('#bellBox .redDot').hide();
     }
     $('#bellBox .redDot').text(count);
 }
-function upDotCount(){
+function upDotCount(){//알림 카운트 올리기 메서드
     var count=Number($('#bellBox .redDot')[0].innerHTML)+1;
     $('#bellBox .redDot').text(count);
     $('#bellBox .redDot').show();
