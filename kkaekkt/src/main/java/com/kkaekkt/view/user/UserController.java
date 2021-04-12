@@ -171,7 +171,7 @@ public class UserController {
 		return userService.emailchk(email);
 	}
 	// 일반유저 로그인
-	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/login.do", method = {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public String Login(AccountVO vo, HttpSession session) {
 			AccountVO result = userService.getUser(vo);

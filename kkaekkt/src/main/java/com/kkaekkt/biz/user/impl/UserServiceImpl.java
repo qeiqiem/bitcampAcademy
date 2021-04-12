@@ -85,7 +85,7 @@ public class UserServiceImpl implements UserService {
 
 		// result가 0이면 삭제
 		// 1이면 삭제 안 함
-		if (result == 1) {
+		if (result == 0) {
 			userDao.deleteUser(vo);
 			return "success";
 		} else {
