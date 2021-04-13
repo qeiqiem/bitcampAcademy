@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kkaekkt.biz.user.AccountVO;
 import com.kkaekkt.biz.user.BusinessVO;
 
 @Repository
@@ -17,8 +18,8 @@ public class MapListDAO {
 		System.out.println("[MapListDAO 진입---------------------]");		
 	}
 	
-	public List<MapListVO> selectlandry(String keyaddr) {	
-		return mybatis.selectList("MapListDAO.selecList", keyaddr);
+	public List<MapListVO> selectlandry(AccountVO vo) {	
+		return mybatis.selectList("MapListDAO.selecList", vo);
 	}
 
 	public List<SingleListVO> selectSingle(int bno) {
