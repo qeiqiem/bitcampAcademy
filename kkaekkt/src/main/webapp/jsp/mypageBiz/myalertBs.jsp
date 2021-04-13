@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>알림</title>
 <link rel="stylesheet" href="/css/myalert.css">
 <link rel="stylesheet" href="/css/all.css">
 <link rel="stylesheet" href="/css/head0.css">

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>매장관리</title>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <style>
 *:focus {

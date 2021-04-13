@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>매장관리</title>
 <link rel="stylesheet" href="/css/all.css">
 <script src="https://kit.fontawesome.com/2fc57dd2db.js"crossorigin="anonymous"></script>
 <link
