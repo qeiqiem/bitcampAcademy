@@ -3,28 +3,36 @@ $(document).ready(function() {
     headerAlertAjax();
 });
 function initHeaderEvent() {
-    $('#noticeBox ul').on('click','.msgBody',function() {
+    $('#noticeBox ul').on('click','.msgBody',function() {//알림 리스트의 제목 클릭 시
         alertObj.ano=Number($(this).attr('id').substr(3));
-        readAlert();
+        var header=$(this).siblings()[0].innerHTML;
+        readAlert(header);
     });
-    $('.fa-bell').click(function() {
-        $('#noticeBox').toggle();
-        // if($('#bellBox .redDot').css('display')!='none'){//종 빨간 점 없애기
-        //     $('#bellBox .redDot').css('display','none');
-        
+    $('.fa-bell').click(function() {//종을 누를 경우 알림 리스트 출력/숨기기
+        $('#noticeBox').toggle();        
     });
-    $('#noticeBox').on('click','i',function() {
-        alertObj.ano=Number($(this).attr('id'));
+    $('#noticeBox').on('click','i',function() {//알림 리스트의 삭제버튼 클릭 시
+        alertObj.ano=Number($(this).attr('id').substr(8));
         delHeaderAlert();
     });
 }
-function readAlert() {//알림 탭 페이지 공용메서드
+function readAlert(header) {//알림 탭 페이지 공용메서드... 이 부분은 수정 필요
     console.log('읽기 진입');
     var url;
-    if(alertObj.mtype==1){
-        url="/jsp/mypageUser/mypagePs.jsp";
-    }else if(alertObj.mtype==2){
-        url="/jsp/mypageBiz/mpbProg_Num.jsp";
+    if(alertObj.mtype==1){//만약 개인 회원이라면
+        if(header=='[결제]')//헤더가 결제라면
+            url="/jsp/mypageUser/mypagePs.jsp";
+        else if(header=='[완료]')//헤더가 완료라면..이슈
+            url="/jsp/mypageUser/mypagePs.jsp";
+        else if(header=='[답글]')//헤더가 답글이라면
+            url="/jsp/mypageUser/mypagePs.jsp";
+        else if(header=='[취소]')//헤더가 취소라면..이슈
+            url="/jsp/mypageUser/mypagePs.jsp";
+    }else if(alertObj.mtype==2){//만약 업체회원이라면..리뷰 추가해야할 듯
+        if(header=='[결제]')//헤더가 결제라면
+            url="/jsp/mypageBiz/mpbProg_Num.jsp";
+        else if(header=='[취소]')//헤더가 취소라면..이슈
+            url="/jsp/mypageBiz/mypageBs_com.jsp";
     }
     $.post({
         url:'/updateAlert.do',
@@ -79,7 +87,7 @@ function printHeaderList(list) {//헤더에 알림 리스트 출력
                                         '<span class="date">'+value.date+'</span>'+
                                         '<span class="byBs">by '+value.senderName+'</span>'+
                                     '</div>'+
-                                    '<i id="'+value.ano+'" class="fas fa-times"></i>'+
+                                    '<i id="alertDel'+value.ano+'" class="fas fa-times"></i>'+
                                 '</li>'
         );
     });

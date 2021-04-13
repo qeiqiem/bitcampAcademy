@@ -148,24 +148,25 @@ function msgSet(result) {
         console.log('알림메시지 처리 에러');
     }
 }
-function sendMsg() {
+function sendAlarm() {
+    var msgType=0;//메시지 타입은 알람
     $.post({
         url:'/regitAlert.do',
         data:alertObj,
-        success:function() {
+        success:function(ano) {
             if(socket){
                 var receiver=alertObj.addressee;
                 var msg='<li>'+
                             '<div class="msgTop">'+
-                                '<a href="/jsp/mypageUser/mypagePs.jsp">['+(alertObj.typenum==3?'완료':'취소')+']⠀'+alertObj.msg+'</a>'+
+                            '<span>['+(alertObj.typenum==3?'완료':'취소')+']</span> <span id="msg'+ano+'" class="msgBody">'+alertObj.msg+'</span>'+
                             '</div>'+
                             '<div class="msgBottom">'+
                                 '<span class="date">'+today()+'</span>'+
                                 '<span class="byBs">by '+alertObj.senderName+'</span>'+
                             '</div>'+
-                            '<i class="fas fa-times"></i>'+
+                            '<i id="'+ano+'" class="fas fa-times"></i>'+
                         '</li>'
-                socket.send(receiver+','+msg);//메시지 보냄
+                socket.send(receiver+','+msgType+','+msg);//메시지 보냄
             }
         }
     });
@@ -177,7 +178,7 @@ function cancel() {
         success: function(result) {
             if(result!=''){//JAVA에서 null 반환시 공백으로 전달
                 msgSet(result);
-                sendMsg();
+                sendAlarm();
             }
 			ajax();
             alert('주문이 정상적으로 취소되었습니다.');
@@ -197,7 +198,7 @@ function complete() {
 		success: function(result) {
             if(result!=''){
                 msgSet(result);
-                sendMsg();
+                sendAlarm();
             }
 			ajax();
             alert('작업이 완료되었습니다.');

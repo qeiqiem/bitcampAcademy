@@ -38,48 +38,6 @@
 					</ul>
 				</div>
 			</div>
-			<div id="modal_container">
-				<i class="fas fa-times"></i>
-				<div id="modal_bodycont">
-						<div id="modal_head">
-							<p>만족도를 평가해주세요</p>
-								<input id="starVal" value="5">
-								<div class="rating-group" value="">
-									<label aria-label="1 star" class="rating__label" for="rating-1">
-									<i class="rating__icon rating__icon--star fa fa-star"></i></label> 
-									<input class="rating__input" name="rating" id="rating-1" value="1" type="radio" checked> 
-						
-									<label aria-label="2 stars"   class="rating__label" for="rating-2">
-									<i   class="rating__icon rating__icon--star fa fa-star"></i></label>             
-									<input class="rating__input" name="rating" id="rating-2" value="2" type="radio" checked>
-						
-									<label aria-label="3 stars" class="rating__label" for="rating-3">
-										<i class="rating__icon rating__icon--star fa fa-star"></i></label> 
-									<input class="rating__input" name="rating" id="rating-3" value="3" type="radio" checked>
-						
-									<label aria-label="4 stars" class="rating__label" for="rating-4">
-										<i class="rating__icon rating__icon--star fa fa-star"></i></label>            
-									<input class="rating__input" name="rating" id="rating-4" value="4" type="radio" checked>
-									
-									<label aria-label="5 stars" class="rating__label" for="rating-5">
-										<i class="rating__icon rating__icon--star fa fa-star"></i></label>                
-									<input class="rating__input" name="rating" id="rating-5" value="5" type="radio" checked>
-								</div>
-						</div>
-						<hr style="width: 80%; margin-top: 40px; border: 1px solid #E5E5E5;">
-						<div id="modal_foot">
-							<p style="text-align: center;">업체의 서비스는 어떠셨나요?</p>
-                            <textarea id="review_text" maxlength="300"  placeholder="최대 300자까지 작성할 수 있습니다."></textarea>
-                            <div id="review_sub">
-                                <span id="review_texter">0</span><span> / 300</span>
-                            </div>
-                            <div id="review_btn">
-                                <button id="closeBtn">돌아가기</button>
-                                <button id="regit">등록하기</button>
-                            </div>
-						</div>
-				</div>
-			</div>
 	</div>
 	<script src="https://kit.fontawesome.com/2fc57dd2db.js"
 		crossorigin="anonymous"></script>
@@ -92,7 +50,6 @@
                 state:1
             };
 			var likeObj={mno:${sessionScope.user.mno}};
-			var commObj={};
     </script>
     <script src="/js/mypagePs.js"></script>
 </body>

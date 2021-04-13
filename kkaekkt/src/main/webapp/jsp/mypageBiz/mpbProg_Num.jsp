@@ -76,7 +76,7 @@
 			</div>
 		</div>
 		<div id="modal_container">
-			<button id="modal_close">x</button>
+			<button id="modal_close"><i class="fas fa-times"></i></button>
 			<div id="modal_bodycont">
 					<div id="modal_foot">
 						<p style="text-align: center;"></p>
@@ -88,7 +88,7 @@
 			</div>
 		</div>
 		<div id="modal_userInfo">
-			<button id="modal_close" onclick="modalClose()">x</button><br>
+			<button id="modal_close" onclick="modalClose()"><i class="fas fa-times"></i></button><br>
 			<h2>고객정보</h2>
 			<hr>
 			<div id="userInfo_bodycont">

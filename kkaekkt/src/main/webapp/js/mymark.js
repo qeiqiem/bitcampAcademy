@@ -83,12 +83,12 @@ function modalprint(list) {
 function initBodyEvent() {
     initModal();//모달 이벤트 관리fn
     var table=$('#single_option');
-    $('.content').on('click','.unlike',function() {//좋아요 취소 버튼 클릭
+    $('.content').on('click','.unlikeBtn',function() {//좋아요 취소 버튼 클릭
         var bno=Number($(this).attr("value"));
         likeObj.bno=bno;
         likeOff(likeObj);
     });
-    $('.content').on("click",'button',function() {
+    $('.content').on("click",'.rsvBtn',function() {
         var bno=$(this).attr('id').substr(6);
         rsvObj.rbno=Number(bno);//업체의 bno
         alertObj.addressee=Number($(this).val());//업체의 mno 
@@ -176,7 +176,7 @@ function printList() {
                     '</div>'+
                 '</div>'+
                 '<div class="bsTagRight">'+
-                    '<button id="rsvBtn'+value.bno+'" value="'+value.mno+'">예약하기</button>'+
+                    '<button class="rsvBtn" id="rsvBtn'+value.bno+'" value="'+value.mno+'">예약하기</button>'+
                     '<button class="unlikeBtn" value="'+value.bno+'">찜하기 취소</button>'+
                 '</div>'+
             '</div>');
@@ -279,7 +279,7 @@ function requestPay(totalPrice) {
         , data: rsvObj
         , success:function(result){
            msgSet(result);
-           sendMsg();
+           sendAlarm();
         }
     })
 }
@@ -303,24 +303,25 @@ function msgSet(rsvNum) {
         alertObj.msg='새로운 주문(번호:'+rsvNum+')이 등록되었습니다.';
         alertObj.typenum=1;
 }
-function sendMsg() {
+function sendAlarm() {
+    var msgType=0;//메시지 타입은 알람
     $.post({
         url:'/regitAlert.do',
         data:alertObj,
-        success:function() {
+        success:function(ano) {
             if(socket){
                 var receiver=alertObj.addressee;
                 var msg='<li>'+
                             '<div class="msgTop">'+
-                                '<a href="/jsp/mypageBiz/mpbProg_Num.jsp">[결제]⠀'+alertObj.msg+'</a>'+
+                                '<span>[결제]</span> <span id="msg'+ano+'" class="msgBody">'+alertObj.msg+'</span>'+
                             '</div>'+
                             '<div class="msgBottom">'+
                                 '<span class="date">'+today()+'</span>'+
                                 '<span class="byBs">by '+alertObj.senderName+'</span>'+
                             '</div>'+
-                            '<i class="fas fa-times"></i>'+
+                            '<i id="'+ano+'" class="fas fa-times"></i>'+
                         '</li>'
-                socket.send(receiver+','+msg);//메시지 보냄
+                socket.send(receiver+','+msgType+','+msg);//메시지 보냄
             }
         }
     });

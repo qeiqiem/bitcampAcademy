@@ -523,7 +523,7 @@ $(document).ready(function() {
            , data: rsvObj
            , success:function(result){
             msgSet(result);
-            sendMsg();
+            sendAlarm();
            }
 	   })
    }
@@ -540,24 +540,25 @@ $(document).ready(function() {
           alertObj.msg='새로운 주문(번호:'+rsvNum+')이 등록되었습니다.';
           alertObj.typenum=1;
   }
-  function sendMsg() {
+  function sendAlarm() {
+     var msgType=0;//메시지 타입은 알람
       $.post({
           url:'/regitAlert.do',
           data:alertObj,
-          success:function() {
+          success:function(ano) {
               if(socket){
                   var receiver=alertObj.addressee;
                   var msg='<li>'+
                               '<div class="msgTop">'+
-                                  '<a href="/jsp/mypageBiz/mpbProg_Num.jsp">[결제]⠀'+alertObj.msg+'</a>'+
+                                 '<span>[결제]</span> <span id="msg'+ano+'" class="msgBody">'+alertObj.msg+'</span>'+
                               '</div>'+
                               '<div class="msgBottom">'+
                                   '<span class="date">'+today()+'</span>'+
                                   '<span class="byBs">by '+alertObj.senderName+'</span>'+
                               '</div>'+
-                              '<i class="fas fa-times"></i>'+
+                              '<i id="'+ano+'" class="fas fa-times"></i>'+
                           '</li>'
-                  socket.send(receiver+','+msg);//메시지 보냄
+                  socket.send(receiver+','+msgType+','+msg);//메시지 보냄
               }
           }
       });

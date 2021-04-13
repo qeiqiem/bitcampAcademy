@@ -7,23 +7,26 @@
   position: absolute;
   top: 9px;
   right: 220px;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--text-red);
 }
 
 #mail_check_input_box_false {
   background-color: var(--gray-color);
 }
+#pw {
+  margin-left: 37px;
+}
 
 #pw,
 #repw {
-  margin-left: 5px;
+  margin-bottom: 0;
 }
 
 label {
   font-size: small;
   color: var(--text-red);
-  margin-left: 166px;
+  margin-left: 157px;
 }
 
 .pw_box {
@@ -40,6 +43,7 @@ label {
 .newPw_input ul {
   text-align: left;
   height: 52px;
+  padding-bottom: 11px;
 }
 
 .newPw_input ul > li {
@@ -52,7 +56,7 @@ label {
 
 .newPw_box {
   height: 317px;
-  padding: 44px;
+  padding: 34px;
 }
 
 .newPw_input {

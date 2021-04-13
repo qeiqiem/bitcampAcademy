@@ -133,9 +133,9 @@ function initEvent(){
         console.log($(this).html());
         $(this).toggleClass('selected');
         if ($(this).hasClass("selected")) {
-            $("#weekBox ul li[id='"+ (idx+1) +"']").show();
+            $("#weekBox ul li[id='weekli_"+ (idx+1) +"']").show();
         } else {
-            $("#weekBox ul li[id='"+ (idx+1) +"']").hide();
+            $("#weekBox ul li[id='weekli_"+ (idx+1) +"']").hide();
         }
     });
     
@@ -172,20 +172,20 @@ function ajax(pageObj) { //ajax로 리스트 받아오기
                 var end = (item.time).split("~")[1];
                 var idx = item.schno;
                 if (start != "00:00" && end != "00:00") {
-                    $('#' + idx).toggleClass('selected');
+                    $('#week_' + idx).toggleClass('selected');
                 }
 
                 if (idx <= 7) {
-                    weekLi.append("<li id=" + idx + " style='order:"
+                    weekLi.append("<li id=weekli_" + idx + " style='order:"
                         + (idx)
                         + "'><span>"
-                        + $('#' + idx).html()
+                        + $('#week_' + idx).html()
                         + "요일</span>시간 <select disabled><option>" + start + "</option></select> ~ <select disabled><option>" + end + "</option></select></li>").trigger("create");
                 } else {
-                    weekLi.append("<li id=" + idx + " style='order:"
+                    weekLi.append("<li id=weekli_" + idx + " style='order:"
                         + (idx)
                         + "'><span>"
-                        + $('#' + idx).html()
+                        + $('#week_' + idx).html()
                         + "</span>시간 <select disabled><option>" + start + "</option></select> ~ <select disabled><option>" + end + "</option></select></li>").trigger("create");
                 }
                 var opt = $("#weekBox li[style='order:"
@@ -196,8 +196,8 @@ function ajax(pageObj) { //ajax로 리스트 받아오기
                         opt.append("<option>" + (i < 10 ? "0" + i : i) + ":30</option>");
                     }
                 }
-                if (!($('#' + idx).hasClass("selected"))) {
-                    $("#weekBox ul li[id='"+ (idx) +"']").hide();
+                if (!($('#week_' + idx).hasClass("selected"))) {
+                    $("#weekBox ul li[id='weekli_"+ (idx) +"']").hide();
                 }
 
             }); // 운영시간 반복문
