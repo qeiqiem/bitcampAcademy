@@ -115,20 +115,22 @@ input{
 }
 
 #btn_update button {
-    background: var(--key-color);
-    border-radius: 23px;
+    background: var(--gray-color);
+    border-radius: 30px;
     border: none;
-    width: 99px;
-    height: 42px;
+    width: 100px;
+    height: 45px;
     color: var(--black-color);
 }
 #btn_change {
-    margin-left: 21vw;
+    margin-left: 20vw;
+    margin-top: -5px;
 }
 
 #resetSpec, #submitSpec {
     width: 100px;
     height: 30px;
+    margin: 10px;
 }
 
 #updateSpec {
@@ -194,7 +196,7 @@ input{
 }
 #week .selected{
 	background-color: var(--key-color);
-	border: none;
+	border: 1px solid var(--key-color);
 }
 .checkbox {
     position: relative;

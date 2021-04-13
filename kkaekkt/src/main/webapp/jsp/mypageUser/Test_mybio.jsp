@@ -110,7 +110,7 @@
 				<div id="modal_container">
 					<button id="modal_close">x</button>
 					<div id="modal_bodycont">
-						<form action="/deletePs.do" name=form method="GET">
+						<form action="/deletePs.do" name=form method="POST">
 							<div id="modal_head">
 								<p><input name="name" id="name" value="${sessionScope.user.name}" 님 탈퇴 하시겠어요? readonly /></p>
 								<hr style="width: 80%; margin-top: 40px; border: 1px solid #E5E5E5;">

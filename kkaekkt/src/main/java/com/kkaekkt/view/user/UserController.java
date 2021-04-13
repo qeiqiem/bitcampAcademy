@@ -171,7 +171,7 @@ public class UserController {
 		return userService.emailchk(email);
 	}
 	// 일반유저 로그인
-	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/login.do", method = {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public String Login(AccountVO vo, HttpSession session) {
 			AccountVO result = userService.getUser(vo);
@@ -185,7 +185,7 @@ public class UserController {
 	}
 
 	// 소셜로그인
-	@RequestMapping(value = "/loginSNS.do", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "/loginSNS.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String kakaologin(AccountVO vo, HttpSession session, HttpServletResponse response) {
 		System.out.println("카카오 로그인 컨트롤러 접속");
@@ -310,11 +310,12 @@ public class UserController {
 	}
 	
 	// 회원탈퇴
-	@RequestMapping(value = "/deletePs.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/deletePs.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String deleteUser(AccountVO vo) {
 		System.out.println("회원탈퇴 controller옴");
 		return userService.deleteUser(vo);
+				
 	}
 	// 비번변경
 	@RequestMapping(value = "/updatePw.do", method = RequestMethod.POST)
