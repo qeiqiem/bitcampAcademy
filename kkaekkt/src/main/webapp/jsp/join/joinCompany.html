@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../../css/all.css">
-    <link rel="stylesheet" href="../../css/head0.css">
+    <link rel="stylesheet" href="../../css/header.css">
     <link rel="stylesheet" href="../../css/join.css">
     <link rel="stylesheet" href="../../css/joinPerson.css">
     <link rel="stylesheet" href="../../css/joinBs.css">
@@ -19,7 +19,7 @@
         <nav class="head">
             <div class="head_left">
                 <div class="logo">
-                    <a href="">
+                    <a href="/index.do">
                         <img src="../../img/logo.svg" alt="">
                     </a>
                 </div>
@@ -38,7 +38,7 @@
     <!-- 공통 -->
     <div class="body_container">
         <div class="wrapper_joinInfo">
-            <h2>회원가입</h2>
+            <!-- <h2>회원가입</h2> -->
             <div class="join_seq">
                 <div class="join_numBox">
                     <ul>
@@ -83,18 +83,19 @@
                     <div class="centerDiv">
                         <h3>업체회원</h3>
                         <form action="/joinBs.do" method="POST">
-                            <div>
+                            <div class="full">
                                 <p>아이디</p>
-                                <input name="id" id="id" type="text" onfocusout="chkId()" placeholder="아이디를 입력해주세요.">
-                                <button type="button" id="idChkBtn">중복확인</button>
-                                <label id="idchk" class="regexChk hide">아이디는 영문자,숫자로 4~10글자 이내로 작성해주십시오</label>
+                                <!-- <input name="id" id="id" type="text" onfocusout="chkId()" placeholder=""> -->
+                                <input name="id" id="id" type="text" placeholder="">
+                                <!-- <button type="button" id="idChkBtn">중복확인</button> -->
+                                <label id="idchk" class="regexChk hide">아이디는 6자 이상, 최소 하나의 알파벳(a-z)을 포함해야 합니다.</label>
                             </div>
                             <div class="full">
                                 <p>비밀번호</p>
                                 <input type="password" id="pw" onfocusout="chkPw()"
                                     placeholder="영어 대문자, 특수문자, 숫자를 포함한 8~16글자" minlength="8" maxlength="16">
-                                <label id="pwchk" class="regexChk hide">비밀번호는 영어 대문자, 특수문자, 숫자를 포함한 8~16글자 이내로
-                                    작성해주십시오</label>
+                                <label id="pwchk" class="regexChk hide">영어 대문자, 특수문자, 숫자를 포함한 8~16글자 이내로
+                                    입력하세요</label>
                                 <p>비밀번호 확인</p>
                                 <input name="password" id="repw" onfocusout="chkRePw()" type="password"
                                     placeholder="영어 대문자, 특수문자, 숫자를 포함한 8~16글자" minlength="8" maxlength="16">
@@ -103,12 +104,12 @@
                             <div>
                                 <p>이메일</p>
                                 <input name="email" id="email" onfocusout="chkEmail()" type="text">
-                                <button type="button" id="emailChkBtn">이메일인증</button>
-                                <label id="emailchk" class="regexChk hide">양식과 맞지 않습니다</label>
+                                <button type="button" id="emailChkBtn">인증번호 전송</button>
+                                <label id="emailchk" class="regexChk hide">이메일 양식과 맞지 않습니다</label>
                                 <div id="mailChkDiv">
                                     <input id="mailCodeChk" type="text" placeholder="인증번호를 입력해주세요."><span
                                         id='timeout'></span>
-                                    <button type="button" id="certified">확인</button>
+                                    <button type="button" id="certified">인증하기</button>
                                 </div>
                             </div>
                             <div>
@@ -132,17 +133,17 @@
                                 </div>
                                 <div class="phone full">
                                     <p>연락처</p>
-                                    <input class="phone" id="phoneNum" name="phone" placeholder="ex) 010-1234-5678"
+                                    <input class="phone" id="phoneNum" name="phone" placeholder="010-1234-5678"
                                         onfocusout="chkPhone()" type='text'>
-                                    <label id="phonechk" class="regexChk hide">하이픈(-)을 포함한 번호를 입력해주세요</label>
+                                    <label id="phonechk" class="regexChk hide">하이픈(-)을 포함한 번호를 입력하세요</label>
                                 </div>
                                 <div class="full">
                                     <p>업체명</p>
                                     <input type="text" id="bname" name="bname">
                                     <p>사업자등록번호</p>
                                     <input type="text" name="bno" onfocusout="chkBno()" id="bno"
-                                        placeholder="숫자만 작성해주세요">
-                                    <label id="bnochk" class="regexChk hide">숫자만 입력해주세요</label>
+                                        placeholder="숫자만 입력하세요">
+                                    <label id="bnochk" class="regexChk hide">10자리 숫자만 입력하세요</label>
                                 </div>
                                 <div class="address">
                                     <p>주소</p>
@@ -150,12 +151,11 @@
                                     <button type="button" onclick=execDaumPostcode() id="btn_address">우편번호
                                         찾기</button><br>
                                     <input type="text" id="roadAddress" placeholder="도로명주소" readonly><br>
-                                    <!-- <span id="guide" style="color:#999;"></span><br> -->
                                     <div id="addressWrap">
                                         <input type="text" id="detailAddress" placeholder="상세주소">
-                                        <input type="text" id="extraAddress" placeholder="참고항목">
+                                        <input type="text" id="extraAddress">
                                     </div>
-                                    <span id="guide" style="color:#999;display:none"></span><br>
+                                    <span id="guide" style="display:none"></span><br>
                                     <input type="hidden" name="address" id="address" value="">
                                     <!--여기에 디비로 보낼 도로명주소+상세주소 해서 보내기-->
                                 </div>
@@ -173,11 +173,12 @@
                                             <option value=7>카카오뱅크</option>
                                         </select>
                                         <input name="bankAccountNum" type="text" id="account" onfocusout="chkAccount()"
-                                            placeholder="거래할 계좌를 입력하세요">
+                                            placeholder="하이픈(-)을 포함한 거래 계좌를 입력하세요.">
                                     </div>
+                                    <label id="accountchk" class="regexChk hide" style="margin-left:120px">하이픈(-)을 포함하여
+                                        입력하세요</label>
                                 </div>
-                                <label id="accountchk" class="regexChk hide" style="margin-left:120px">하이픈(-)을 포함하여
-                                    입력해주세요</label>
+
                                 <div class="bizType">
                                     <div class="selected">세탁소</div>
                                     <div class="unselected">코인세탁소</div>
@@ -374,8 +375,7 @@
                             </div>
                             <div class="join_btn">
                                 <button type="reset" name="reset">다시입력</button>
-                                <button type="button" id="join" style="background-color: var(--key-color);"
-                                    onclick="clicked()">가입하기</button>
+                                <button type="button" id="join" onclick="clicked()">가입하기</button>
                             </div>
                         </form>
                     </div>

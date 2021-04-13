@@ -309,20 +309,27 @@ function initKeyEvent() {
 } // window onload
 
 // 중복확인
-function fn_idchk() {
+// function fn_idchk() {}
+
+$("#id").focusout(function () {
   if ($("#id").val() == "") {
-    alert("아이디를 입력하세요.");
+    // alert("아이디를 입력하세요.");
+    document.getElementById("id_label").innerText =
+      "아이디는 필수 입력사항입니다.";
     $("#id").focus();
     return false;
   }
   if ($("#id").val().length < 6) {
-    alert("아이디를 6자 이상으로 입력해 주세요.");
+    // alert("아이디를 6자 이상으로 입력해 주세요.");
+    document.getElementById("id_label").innerText =
+      "아이디를 6자 이상으로 입력해 주세요.";
     $("#id").focus();
     return false;
   }
-
   if (!regId.test(id.value)) {
-    alert("아이디는 6자 이상, 최소 하나의 알파벳(a-z)을 포함해야 합니다.");
+    // alert("아이디는 6자 이상, 최소 하나의 알파벳(a-z)을 포함해야 합니다.");
+    document.getElementById("id_label").innerText =
+      "아이디는 6자 이상, 최소 하나의 알파벳(a-z)을 포함해야 합니다.";
     $("#id").focus();
     return false;
   }
@@ -337,31 +344,19 @@ function fn_idchk() {
       // console.log(data);
       var key = JSON.parse(data);
       if (key == 1) {
-        alert("중복된 아이디가 있습니다.");
+        document.getElementById("id_label").innerText =
+          "중복된 아이디가 있습니다.";
+        // alert("중복된 아이디가 있습니다.");
       } else if (key == 0) {
         formatidchk = 1;
-        alert("사용 가능한 아이디입니다.");
-        console.log($("#idchk").val());
+        // alert("사용 가능한 아이디입니다.");
+        document.getElementById("idchk").style.color = "var(--key-text)";
+        document.getElementById("id_label").innerText =
+          "사용 가능한 아이디입니다.";
       }
     },
-    // , failure: function (errMsg) {
-    // 	alert(errMsg);
-    // }
-
-    error: function (request, status, error) {
-      console.log(
-        "code:" +
-          request.status +
-          "\n" +
-          "message:" +
-          request.responseText +
-          "\n" +
-          "error:" +
-          error
-      );
-    },
   });
-}
+});
 
 function fn_combine() {
   let ad =
@@ -385,7 +380,7 @@ $("#join_submit").on("click", function () {
   //주소 합치기
   fn_combine();
   //
-  // const idchkVal = $("#idchk").val();
+
   if (formatidchk == 0) {
     alert("아이디 중복확인을 해 주세요.");
     $("#id").focus();

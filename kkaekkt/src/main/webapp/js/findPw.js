@@ -73,7 +73,7 @@ $ComTimer.prototype = {
     if (this.comSecond < 0) {
       // 시간이 종료 되었으면..
       clearInterval(this.timer); // 타이머 해제
-      alert("인증시간이 초과하였습니다. 다시 이메일 인증을 해 주세요.");
+      alert("인증 시간이 초과하였습니다. 다시 이메일 인증을 해 주세요.");
       $("#timeout").hide();
       $(".mail_check_input").attr("disabled", true);
       $("#mail_check").attr("disabled", true);

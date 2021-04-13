@@ -6,9 +6,9 @@
   --black-color: rgb(51, 51, 51);
   --text-gray: rgb(116, 116, 116);
   --dark-gray: (97, 97, 97);
-  --footer: rgba(207, 207, 207, 0.253);
+  --footer: rgba(78, 78, 78, 0.342);
   --disabled: (#e5e5e5);
-  --text-red: rgba(254, 54, 54, 0.55);
+  --text-red: rgba(254, 54, 54);
   --key-text: rgba(79, 150, 255, 1);
 }
 

@@ -69,7 +69,7 @@
 										</li>
 										<li>
 											<input type="password" value="" placeholder="영어 대문자, 특수문자, 숫자를 포함한 8~16글자"
-												id="pw" minlength="8" maxlength="16" style="margin-left: 37px;">
+												id="pw" minlength="8" maxlength="16">
 											<br><label id="pw_label"></label>
 										</li>
 									</ul>
