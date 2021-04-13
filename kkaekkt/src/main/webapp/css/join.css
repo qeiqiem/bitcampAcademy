@@ -21,6 +21,13 @@ h2 {
   /* color: var(--text-gray); */
 }
 
+input {
+  font-size: 16px;
+}
+input::placeholder {
+  font-size: 14px;
+}
+
 .body_container {
   height: 100%;
   text-align: center;
@@ -111,4 +118,8 @@ i {
   /* color: rgb(97, 97, 97); */
   font-weight: bolder;
   font-size: larger;
+}
+
+.join_btn {
+  margin-top: 30px;
 }
