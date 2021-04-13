@@ -122,7 +122,7 @@ function cancelRsv(rsvNum) {
         success:function(result) {
             if(result!=''){//JAVA에서 null 반환시 공백으로 전달
                 msgSet(rsvNum);
-                sendMsg();
+                sendAlarm();
             }
             ajax();//초기화
         }
@@ -140,7 +140,8 @@ function msgSet(rsvNum) {
     alertObj.typenum=5;
     alertObj.msg='주문번호'+rsvNum+' 가 취소되었습니다.'
 }
-function sendMsg() {
+function sendAlarm() {
+    var msgType=0;//메시지 타입은 알람
     $.post({
         url:'/regitAlert.do',
         data:alertObj,
@@ -156,7 +157,7 @@ function sendMsg() {
                             '</div>'+
                             '<i id="del'+ano+'"class="fas fa-times"></i>'+
                         '</li>'
-                socket.send(receiver+','+msg);//메시지 보냄
+                socket.send(receiver+','+msgType+','+msg);//메시지 보냄
             }
         }
     });

@@ -51,7 +51,7 @@ function cancel() {
         success: function(result) {//주문완료-complete 반환, 주문취소-cancel 반환
             if(result!=''){
                 msgSet(result);
-                sendMsg();
+                sendAlarm();
             }
 			ajax(pageObj);
             alert('주문이 정상적으로 취소되었습니다.');
@@ -72,24 +72,25 @@ function msgSet(result) {
         console.log('알림메시지 처리 에러');
     }
 }
-function sendMsg() {
+function sendAlarm() {
+    var msgType=0; //메시지 타입은 알림으로 전달 (0=알림,1=채팅)
     $.post({
         url:'/regitAlert.do',
         data:alertObj,
-        success:function() {
+        success:function(ano) {
             if(socket){
                 var receiver=alertObj.addressee;
                 var msg='<li>'+
                             '<div class="msgTop">'+
-                                '<a href="/jsp/mypageUser/mypagePs.jsp">['+(alertObj.typenum==3?'완료':'취소')+']⠀'+alertObj.msg+'</a>'+
+                                '<span>['+(alertObj.typenum==3?'완료':'취소')+']</span> <span id="msg'+ano+'" class="msgBody">'+alertObj.msg+'</span>'+
                             '</div>'+
                             '<div class="msgBottom">'+
                                 '<span class="date">'+today()+'</span>'+
                                 '<span class="byBs">by '+alertObj.senderName+'</span>'+
                             '</div>'+
-                            '<i class="fas fa-times"></i>'+
+                            '<i id="'+ano+'" class="fas fa-times"></i>'+
                         '</li>'
-                socket.send(receiver+','+msg);//메시지 보냄
+                socket.send(receiver+','+msgType+','+msg);//메시지 보냄
             }
         }
     });
@@ -106,7 +107,7 @@ function complete() {
 		success: function(result) {
             if(result!=''){//JAVA에서 null 반환시 공백으로 전달
                 msgSet(result);
-                sendMsg();
+                sendAlarm();
             }
 			ajax();
             alert('작업이 완료되었습니다.');
@@ -282,9 +283,9 @@ function printHeader(key,value) {
             }
         } else if($('.process p')[1]==undefined) {//두 번째 제목이 선정되지 않았다면
             if($('.process p')[0].innerHTML=="기한을 넘긴 주문"){//첫 번째 제목이 기한을 넘긴 주문이라면
-                if(value.dDay<=3&&dDay>=0) {
+                if(value.dDay<=3&&value.dDay>=0) {
                     $('.process').append('<p class="processTitle">마감이 임박한 주문</p>');
-                }else if(dDay>3){
+                }else if(value.dDay>3){
                     $('.process').append('<p class="processTitle">기한이 넉넉한 주문</p>');
                 }
             } else if($('.process p')[0].innerHTML=="마감이 임박한 주문" //첫 번째 제목이 마감임박 주문이고

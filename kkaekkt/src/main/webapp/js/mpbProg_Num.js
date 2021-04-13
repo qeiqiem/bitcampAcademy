@@ -109,7 +109,7 @@ function cancel() {
             if(result!=''){//JAVA에서 null 반환시 공백으로 전달
                 msgSet(result);
                 console.log(alertObj+":..알림객체 js 체크");
-                sendMsg();
+                sendAlarm();
             }
 			ajax();
             alert('주문이 정상적으로 취소되었습니다.');
@@ -117,24 +117,25 @@ function cancel() {
 		}
 	});
 }
-function sendMsg() {
+function sendAlarm() {
+    var msgType=0;//메시지 타입은 알람
     $.post({
         url:'/regitAlert.do',
         data:alertObj,
-        success:function() {
+        success:function(ano) {
             if(socket){
                 var receiver=alertObj.addressee;
                 var msg='<li>'+
                             '<div class="msgTop">'+
-                                '<a href="/jsp/mypageUser/mypagePs.jsp">['+(alertObj.typenum==3?'완료':'취소')+']⠀'+alertObj.msg+'</a>'+
+                            '<span>['+(alertObj.typenum==3?'완료':'취소')+']</span> <span id="msg'+ano+'" class="msgBody">'+alertObj.msg+'</span>'+
                             '</div>'+
                             '<div class="msgBottom">'+
                                 '<span class="date">'+today()+'</span>'+
                                 '<span class="byBs">by '+alertObj.senderName+'</span>'+
                             '</div>'+
-                            '<i class="fas fa-times"></i>'+
+                            '<i id="'+ano+'" class="fas fa-times"></i>'+
                         '</li>'
-                socket.send(receiver+','+msg);//메시지 보냄
+                socket.send(receiver+','+msgType+','+msg);//메시지 보냄
             }
         }
     });
@@ -151,7 +152,7 @@ function complete() {
 		success: function(result) {
             if(result!=''){//JAVA에서 null 반환시 공백으로 전달
                 msgSet(result);
-                sendMsg();
+                sendAlarm();
             }
 			ajax();
             alert('작업이 완료되었습니다.');
@@ -214,12 +215,10 @@ function initPageObj(data) {
 }
 function ajax() { //ajax로 리스트 받아오기
     console.log('ajax 함수 진입');
-    console.log('1번 : '+JSON.stringify(pageObj));
     $.post({
         url:"/getRsvListBs.do",
         data:pageObj,
         success: function(data) {
-            console.log('2번 : '+data);
             var rsv=JSON.parse(data);
             $('.content_header p:nth-child(1) span').html(rsv.totalPostCount);
             var list=rsv.rsvListRno;
@@ -253,8 +252,6 @@ function today() {
 }
 function printHeader(key,value) {
     if($('.selectbox select')[0].value==1) { //정렬이 주문번호 순이라면,
-        console.log(value.rsvDate.substr(0,10)+'...날짜를 함 보자!');
-        console.log(today()+'...날짜를 또 보자!');
         if(key==0&&value.rsvDate.substr(0,10)==today()){
             $('.process p')[0].innerHTML="오늘 주문";
         }else if(key==0) {
@@ -276,7 +273,7 @@ function printHeader(key,value) {
             }
         } else if($('.process p')[1]==undefined) {//두 번째 제목이 선정되지 않았다면
             if($('.process p')[0].innerHTML=="기한을 넘긴 주문"){//첫 번째 제목이 기한을 넘긴 주문이라면
-                if(value.dDay<=3&&dDay>=0) {
+                if(value.dDay<=3&&value.dDay>=0) {
                     $('.process').append('<p class="processTitle">마감이 임박한 주문</p>');
                 }else if(value.dDay>3){
                     $('.process').append('<p class="processTitle">기한이 넉넉한 주문</p>');
@@ -308,7 +305,6 @@ function printlist(list) {
             count+=val.count;
             price+=val.price;
             state+=val.state;
-            console.log(value.laundryList.length+'...품목길이');
             if(value.laundryList.length!=idx+1) { //마지막이 아니라면 <br>붙이기
                 laundry+='<br>';
                 count+='<br>';
