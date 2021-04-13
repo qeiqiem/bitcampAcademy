@@ -182,6 +182,8 @@ function ajax(pageObj) { //ajax로 리스트 받아오기
                         + $('#' + idx).html()
                         + "요일</span>시간 <select disabled><option>" + start + "</option></select> ~ <select disabled><option>" + end + "</option></select></li>").trigger("create");
                 } else {
+                    console.log($('#' + idx));
+                    console.log('인덱스:'+idx);
                     weekLi.append("<li id=" + idx + " style='order:"
                         + (idx)
                         + "'><span>"

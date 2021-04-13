@@ -7,14 +7,57 @@ $(document).ready(function() {
 });
 function initEvent() {
 	var rsvNum;
+    $('.rsvList').on("click",".detailBtn",function() { // 버블링으로 생성된 주문에 클릭 이벤트 활성화
+		rsvNum=$(this).attr('id').substr(9);
+        if(!$('#commBox'+rsvNum).hasClass('none')){ //만약, 리뷰 보기가 열려있다면
+            $('#commBox'+rsvNum).addClass('none'); // 닫기
+        }
+        $('#detail'+rsvNum).toggleClass('none');
+    });
+    $('.rsvList').on("click",".commentBtn",function() {//리뷰쓰기 버튼이 눌렸을 경우
+        rsvNum=$(this).attr('id').substr(10);
+        commObj.rsvNum=Number(rsvNum);
+        commObj.bno=Number($('#rsvBox'+rsvNum+' .like').attr('value'));
+        $("#modal_container").show();
+    });
     $('.rsvList').on("click",".cancelBtn",function() {//주문 취소 버튼이 눌렸을 경우
         rsvNum=Number($(this).attr('id').substr(9));
         alertObj.addressee=Number($('#rsvBox'+rsvNum+' .mno').eq(0).attr('id').substr(3));
         cancelRsv(rsvNum);
     });
-    $('.side_sub button').click(function() { // 서브 사이드 버튼(진행중인 주문, 완료된 주문) 클릭 시
-        if($(this).index()==1){ //완료된 주문일 경우 이동  
-            location.href="mypagePs_com.jsp";
+    $('.rsvList').on("keyup",".commentBox",function() {//리뷰 텍스트 입력 시 글자 길이 반영
+        if($(this).val().length>=300) {
+            alert("300자 까지 입력할 수 있습니다.");
+            $(this)[0].value=$(this).val().substr(0,300);
+        }
+        $('.comments_bottom span')[0].innerHTML=$(this).val().length+' / 300';
+    });
+    $(".rsvList").on("click",".comments_bottom button",function(){ //수정->등록 버튼 누를 경우
+        commObj.content=$('.commentBox').eq(0).val();
+        commObj.rsvNum=$(this).val();
+        edit();
+    });
+    $('.rsvList').on("click",".reviewBtn",function() {//리뷰보기 버튼 클릭 시
+        rsvNum=$(this).attr('id').substr(9);
+        if(!$('#detail'+rsvNum).hasClass('none')){//만약 상세보기가 열려있다면
+            $('#detail'+rsvNum).addClass('none');//상세보기 닫기
+        }
+        $('#commBox'+rsvNum).eq(0).toggleClass('none');
+    });
+    $('.rsvList').on("click",".cancel",function() {//취소버튼이 눌렸을 경우
+        rsvNum=$(this).val();
+        $('.comments').remove();
+        $('#comments_view'+rsvNum).removeClass('none');
+    });
+    $('.side_sub button').click(function() { // 완료된 주문 출력
+        if($(this).index()==0){ //진행중인 주문
+            pageObj.state=1;
+            pageObj.currentPageNum=1;
+            ajax();
+        }else{ //완료된 주문
+            pageObj.currentPageNum=1;
+            pageObj.state=3;
+            ajax();
         }
     });
     $('.page_next').click(function() {
@@ -57,28 +100,42 @@ function initEvent() {
             likeOff(likeObj);
         }
     });
+    $('.rsvList').on("click",".dotBtn",function() {//3점 버튼
+        $(this).siblings().eq(1).toggleClass('none');
+    });
+    $('.rsvList').on("click",".popMenu button",function() {//3점 버튼->수정 or 삭제가 눌렸을 경우
+        rsvNum=$(this).attr('id').substr(3);
+        $('#popMenu'+rsvNum).addClass('none');
+            commObj.rsvNum=Number(rsvNum);
+        if($(this).index()==0) {//수정버튼이 눌렸을 경우
+            commObj.content=$('#comments_content'+rsvNum)[0].innerHTML;
+            editBtn(rsvNum);
+        }else {//삭제버튼이 눌렸을 경우
+            deleteComm(rsvNum);
+        }
+    });
 }
-function cancelRsv(rsvNum) {//주문 취소 버튼을 눌렀을 때 함수
+function cancelRsv(rsvNum) {
     $.post({
         url:"/cancel.do",
         data:{rsvNum:rsvNum},
         success:function(result) {
             if(result!=''){//JAVA에서 null 반환시 공백으로 전달
-                alertMsgSet(rsvNum);
+                msgSet(rsvNum);
                 sendAlarm();
             }
             ajax();//초기화
         }
     });
 }
-function today() { //오늘 날짜 문자열 출력 함수
+function today() {
     var date=new Date();
     var mm=date.getMonth()+1;
     var dd=date.getDate();
     var today=date.getFullYear()+'.'+(mm<10?'0'+mm:mm)+'.'+dd;
     return today;
 }
-function alertMsgSet(rsvNum) { //알림 보낼 메시지를 세팅하는 함수
+function msgSet(rsvNum) {
     alertObj.rsvNum=rsvNum;
     alertObj.typenum=5;
     alertObj.msg='주문번호'+rsvNum+' 가 취소되었습니다.'
