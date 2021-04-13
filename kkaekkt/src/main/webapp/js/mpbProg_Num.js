@@ -109,7 +109,7 @@ function cancel() {
             if(result!=''){//JAVA에서 null 반환시 공백으로 전달
                 msgSet(result);
                 console.log(alertObj+":..알림객체 js 체크");
-                sendMsg();
+                sendAlarm();
             }
 			ajax();
             alert('주문이 정상적으로 취소되었습니다.');
@@ -117,24 +117,25 @@ function cancel() {
 		}
 	});
 }
-function sendMsg() {
+function sendAlarm() {
+    var msgType=0;//메시지 타입은 알람
     $.post({
         url:'/regitAlert.do',
         data:alertObj,
-        success:function() {
+        success:function(ano) {
             if(socket){
                 var receiver=alertObj.addressee;
                 var msg='<li>'+
                             '<div class="msgTop">'+
-                                '<a href="/jsp/mypageUser/mypagePs.jsp">['+(alertObj.typenum==3?'완료':'취소')+']⠀'+alertObj.msg+'</a>'+
+                            '<span>['+(alertObj.typenum==3?'완료':'취소')+']</span> <span id="msg'+ano+'" class="msgBody">'+alertObj.msg+'</span>'+
                             '</div>'+
                             '<div class="msgBottom">'+
                                 '<span class="date">'+today()+'</span>'+
                                 '<span class="byBs">by '+alertObj.senderName+'</span>'+
                             '</div>'+
-                            '<i class="fas fa-times"></i>'+
+                            '<i id="'+ano+'" class="fas fa-times"></i>'+
                         '</li>'
-                socket.send(receiver+','+msg);//메시지 보냄
+                socket.send(receiver+','+msgType+','+msg);//메시지 보냄
             }
         }
     });
@@ -151,7 +152,7 @@ function complete() {
 		success: function(result) {
             if(result!=''){//JAVA에서 null 반환시 공백으로 전달
                 msgSet(result);
-                sendMsg();
+                sendAlarm();
             }
 			ajax();
             alert('작업이 완료되었습니다.');
@@ -168,11 +169,11 @@ function enter() {
 }
 function initSide() {
         $('.side_sub')[0].innerHTML=
-        '<button onclick="location.href='+"'/jsp/mypageBiz/mpbProg_Item.jsp'"+'">품목별</button>'+
-        '<button onclick="location.href='+"'/jsp/mypageBiz/mpbProg_Num.jsp'"+'">주문번호별</button>';
+        '<button onclick="location.href='+"'/jsp/mypageBiz/mpbProg_Num.jsp'"+'">주문번호별</button>'+
+        '<button onclick="location.href='+"'/jsp/mypageBiz/mpbProg_Item.jsp'"+'">품목별</button>';
 		$('.side_sub').css('display','unset');
 		$('.side button').eq(0).addClass("side_select");
-		$('.side_sub button').eq(1).addClass("side_sub_select");
+		$('.side_sub button').eq(0).addClass("side_sub_select");
 }
 function initPageBtn() {
     if(pageObj.isNextExist) {
@@ -251,8 +252,6 @@ function today() {
 }
 function printHeader(key,value) {
     if($('.selectbox select')[0].value==1) { //정렬이 주문번호 순이라면,
-        console.log(value.rsvDate.substr(0,10)+'...날짜를 함 보자!');
-        console.log(today()+'...날짜를 또 보자!');
         if(key==0&&value.rsvDate.substr(0,10)==today()){
             $('.process p')[0].innerHTML="오늘 주문";
         }else if(key==0) {
@@ -267,24 +266,24 @@ function printHeader(key,value) {
             if(value.dDay<0) {//남은 기한이 음수라면
                 $('.process p')[0].innerHTML="기한을 넘긴 주문";
                 $('.process p')[0].style.color='red';
-            }else if(value.dDay<3) {//남은 기한이 3미만
+            }else if(value.dDay<=3) {//남은 기한이 3이하
                 $('.process p')[0].innerHTML="마감이 임박한 주문";
-            }else if(value.dDay>=3) {//남은 기한이 3이상
+            }else if(value.dDay>3) {//남은 기한이 3초과
                 $('.process p')[0].innerHTML='기한이 넉넉한 주문';
             }
         } else if($('.process p')[1]==undefined) {//두 번째 제목이 선정되지 않았다면
             if($('.process p')[0].innerHTML=="기한을 넘긴 주문"){//첫 번째 제목이 기한을 넘긴 주문이라면
-                if(value.dDay<3&&dDay>=0) {
+                if(value.dDay<=3&&value.dDay>=0) {
                     $('.process').append('<p class="processTitle">마감이 임박한 주문</p>');
-                }else if(value.dDay>=3){
+                }else if(value.dDay>3){
                     $('.process').append('<p class="processTitle">기한이 넉넉한 주문</p>');
                 }
             } else if($('.process p')[0].innerHTML=="마감이 임박한 주문" //첫 번째 제목이 마감임박 주문이고
-                        &&value.dDay>=3) { //기한이 3일 이상이라면
+                        &&value.dDay>3) { //기한이 3일 초과라면
                     $('.process').append('<p class="processTitle">기한이 넉넉한 주문</p>');
             }
         } else if($('.process p')[2]==undefined) {//3번째 제목이 선정되지 않았다면
-            if(value.dDay>=3&&$('.process p')[1].innerHTML!='기한이 넉넉한 주문') {
+            if(value.dDay>3&&$('.process p')[1].innerHTML!='기한이 넉넉한 주문') {
                 $('.process').append('<p class="processTitle">기한이 넉넉한 주문</p>');
             }
         }
@@ -306,7 +305,6 @@ function printlist(list) {
             count+=val.count;
             price+=val.price;
             state+=val.state;
-            console.log(value.laundryList.length+'...품목길이');
             if(value.laundryList.length!=idx+1) { //마지막이 아니라면 <br>붙이기
                 laundry+='<br>';
                 count+='<br>';

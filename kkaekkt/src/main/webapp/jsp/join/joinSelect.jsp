@@ -18,7 +18,7 @@
         <div class="body_container">
             <div>
                 <div class="wrapper_joinInfo">
-                    <h2>회원가입</h2>
+                    <!-- <h2>회원가입</h2> -->
                     <div class="join_seq">
                         <div class="join_numBox">
                             <ul>

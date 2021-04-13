@@ -34,19 +34,20 @@ public class EchoHandler extends TextWebSocketHandler {
 		System.out.println("메시지 수신");
 		//protocol : mno , 내용
 		String msg = message.getPayload();
-		System.out.println(msg);
+		//System.out.println(msg); 메시지 로그
 		if(!StringUtils.isNullOrEmpty(msg)) {
 			String[] strs = msg.split(",");
-			if(strs != null && strs.length == 2) {
+			if(strs != null && strs.length == 3) {
 				String mno = strs[0];
-				String content = strs[1];
+				String msgType = strs[1];
+				String content = strs[2];
 				
 				//작성자가 로그인 해서 있다면
 				WebSocketSession boardWriterSession = userSessionsMap.get(mno);
-				
+
 				if(boardWriterSession != null) {//작성자가 세션에 있다면, 
-					TextMessage tmpMsg = new TextMessage(content);
-					boardWriterSession.sendMessage(tmpMsg);// 메시지를 보낸다.
+					TextMessage sendMsg = new TextMessage(msgType+","+content);
+					boardWriterSession.sendMessage(sendMsg);// 메시지를 보낸다.
 				}
 			}
 		}

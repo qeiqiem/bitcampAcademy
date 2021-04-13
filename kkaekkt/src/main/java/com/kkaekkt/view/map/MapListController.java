@@ -38,9 +38,9 @@ public class MapListController {
 	          vo.setMtype(0);
 	          vo.setMno(0);
 	          if(type==1) {
-	             vo.setAddress("서울 클리닝");
+	             vo.setAddress("천호동");
 	          }else {
-	             vo.setAddress("서울 코인 세탁소");
+	             vo.setAddress("천호동");
 	          }
 	          model.addAttribute("user", vo);
 	       }else { //로그인 상태
@@ -49,16 +49,16 @@ public class MapListController {
 	          if(type==1) {//일반 세탁소
 	        	 String address = vo.getAddress(); 
 	        	 String[] arrayAddr = address.split(",");
-	        	 address = arrayAddr[0];
+	        	 address = arrayAddr[1];
 	        	 arrayAddr = address.split("로");
-	        	 vo.setAddress(arrayAddr[0]);
+	        	 vo.setAddress(arrayAddr[0].trim());
 	          }else {//코인 세탁소
 	        	  String address = vo.getAddress(); 
 	        	 String[] arrayAddr = address.split(",");
-	        	 address = arrayAddr[0];
+	        	 address = arrayAddr[1];
 	        	 arrayAddr = address.split("로");	        	 
 	        	 System.out.println(arrayAddr[0]);
-	        	  vo.setAddress(arrayAddr[0]);
+	        	  vo.setAddress(arrayAddr[0].trim());
 	          }
 	          session.setAttribute("user",vo);
 	       }
@@ -67,11 +67,15 @@ public class MapListController {
 	
 	
 		@RequestMapping(value="/maplist.do", method=RequestMethod.POST,produces="application/text;charset=utf-8")   
-		public @ResponseBody String maplist(String keyaddr) {
+		public @ResponseBody String maplist(String keyaddr, int type) {
 		      String keyword = keyaddr;
-		      System.out.println("ajax 요청 도착!"+keyword);    
+		      int mtype = type;
+		      System.out.println("ajax 요청 도착!"+keyword+mtype);    
+		      AccountVO vo = new AccountVO();
+		      vo.setAddress(keyword);
+		      vo.setMtype(mtype);
 		      
-		      List<MapListVO> modelList = mapserv.selectlandry(keyword);
+		      List<MapListVO> modelList = mapserv.selectlandry(vo);
 		      Gson gson=new Gson();
 		      String keylist=gson.toJson(modelList);
 		      System.out.println("select 데이터 확인 :" + keylist);

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.kkaekkt.biz.comm.EquipmentVO;
@@ -76,13 +77,12 @@ public class UserServiceImpl implements UserService {
 		System.out.println("회원탈퇴 서비스 옴");
 		int result = userDao.orderChk(vo);
 		System.out.println(result);
-		
-		if(result == 0) {
-			if(1==userDao.deleteUser(vo)) {
-				return "success";
-			}else {
-				return "fail";
-			}
+
+		// result가 0이면 삭제
+		// 1이면 삭제 안 함
+		if (result == 0) {
+			userDao.deleteUser(vo);
+			return "success";
 		} else {
 			return "fail";
 		}

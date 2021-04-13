@@ -12,14 +12,16 @@ function deleteUser() {
 		id:$('#id').val(),
     	password:$('#pwd').val()
 	}
-	$.get({
+	$.post({
 		url:"/deletePs.do",
 		data:userData,
 		success: function(result){
-			if(result=='fail'){
-				alert("예약있어서 탈퇴안됨")
-			}else {
+			if(result=='success'){
+				alert("!회원탈퇴!");
 				location.href="/index.do"
+			}if(result=='fail'){
+				alert("실패. 다시 한 번 확인해주세요!");
+				location.href="/jsp/mypageUser/Test_mybio.jsp"	
 			}
 		}
 	})

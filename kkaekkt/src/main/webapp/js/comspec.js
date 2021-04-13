@@ -12,6 +12,7 @@ function initEvent(){
     var resetbtn = $("#resetSpec");
     var chkBox=$(".laundry input[type='checkbox']");
     var priceBox=$(".laundry input[id='won']");
+    var state =0;
 
     // 디폴트
         changebtn.hide();
@@ -23,9 +24,9 @@ function initEvent(){
         let idx = this.value;
         console.log(idx);
         console.log(chkBox.eq(idx-1).attr("disabled"));
-        if(chkBox.eq(idx-1).attr("disabled")){
-            alert("수정하기상태가 아님");
-        }
+        if(state == 0){
+            alert("수정하시려면 수정하기버튼을 눌러주세요.");
+        } else {
             if(chkBox[idx-1].checked){
                 priceBox.eq(idx-1).attr("disabled", false);
                 console.log( priceBox.eq(idx-1).attr("disabled"));
@@ -33,6 +34,7 @@ function initEvent(){
                 priceBox.eq(idx-1).attr("disabled", true);
                 priceBox.eq(idx-1).val("");
             }
+        }
         
     });
     //숫자만
@@ -42,8 +44,10 @@ function initEvent(){
             $(this).val(inputVal.replace(/[^0-9]/gi, ""));
         }
     });
+    
     // 수정하기 버튼 클릭시 
         clickupdate.click(function(){
+            state =1;
             clickupdate.hide();
             changebtn.show();
         // 체크된 품목의 인풋창만 활성화
@@ -61,7 +65,8 @@ function initEvent(){
         
     });
     // 돌아가기 버튼 클릭시
-        resetbtn.click(function(){            
+        resetbtn.click(function(){   
+            state = 0;         
 			clickupdate.show();
             changebtn.hide();
 
@@ -77,6 +82,7 @@ function initEvent(){
 
 	// 수정완료 버튼 클릭시
 	$("#submitSpec").click(function(){
+        state = 0;
         var list = new Array();
         
         // 품목 리스트 데이터 처리
@@ -124,12 +130,12 @@ function initEvent(){
     var weekLi = $('#weekBox ul');
     weekBtn.click(function () {
         var idx = $(this).index();
-        console.log($(this));
+        console.log($(this).html());
         $(this).toggleClass('selected');
         if ($(this).hasClass("selected")) {
-            $("#weekBox ul li").eq(idx).show();
+            $("#weekBox ul li[id='"+ (idx+1) +"']").show();
         } else {
-            $("#weekBox ul li").eq(idx).hide();
+            $("#weekBox ul li[id='"+ (idx+1) +"']").hide();
         }
     });
     
@@ -191,7 +197,7 @@ function ajax(pageObj) { //ajax로 리스트 받아오기
                     }
                 }
                 if (!($('#' + idx).hasClass("selected"))) {
-                    $("#weekBox ul li[style='order:" + (idx) + "']").hide();
+                    $("#weekBox ul li[id='"+ (idx) +"']").hide();
                 }
 
             }); // 운영시간 반복문

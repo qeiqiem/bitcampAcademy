@@ -5,64 +5,148 @@
 <link href='../lib/main.css' rel='stylesheet' />
 <script src='../lib/main.js'></script>
 <script>
-  var prevBtn=0;
-  if(prevBtn ==1){
-          prev();
-          var now = new Date();
-          var startDt =new Date(now.getFullYear(), now.getMonth() - 1, 1);
-          var endDt = new Date(now.getFullYear(), now.getMonth(), 0);
-          console.log("이전달클릭시"+startDt +endDt);
-            pageObj = {
-                        bno : 1,
-                        startDt:startDt,
-				                endDt:endDt
-                    }
-    } 
+  var totalPrice;
+  var eventval=[];
+  
   document.addEventListener('DOMContentLoaded', function() {
-    console.log("event내부"+pageObj);
+    ajax(pageObj);
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
-      headerToolbar: {
-        // left: 'prevYear,prev,next,nextYear today',    // 클릭시 전달 한달치 데이터를 가져와야함 
-        // center: 'title'
-        // right: 'dayGridMonth,dayGridWeek,dayGridDay'
+      locale: 'ko',       // 한글로 표기 할 때 
+      customButtons: {
+      prev: {
+      click: function() {
+        calendar.prev();
+        console.log("이전달 클릭");
+        var date = calendar.getDate ();
+        var startDt = new Date(date.getFullYear(), date.getMonth(), 1);
+        var endDt = new Date(date.getFullYear(),  date.getMonth(), date.getDate());
+        console.log(startDt);
+        pageObj = {
+          bno: pageObj["bno"],
+          startDt: startDt,
+          endDt: endDt
+        }
+        ajax(pageObj);
+        if( calendar.getEventSourceById("dataList") != null ){
+	          calendar.getEventSourceById("dataList").remove();
+        }
+        calendar.addEventSource({
+          id: "dataList", 
+          events: eventval
+        });
+        
+        console.log(date);
+      }
       },
-      initialDate: new Date(),
-      navLinks: true, // can click day/week names to navigate views
-      editable: false,
-      dayMaxEvents: true, // allow "more" link when too many events
-      events: function (info, successCallback, failureCallback) {       
-        $.post({
+      next: {
+      click: function() {
+        calendar.next();
+        console.log("다음달 클릭");
+        var date = calendar.getDate ();
+        var startDt = new Date(date.getFullYear(), date.getMonth(), 1);
+        var endDt = new Date(date.getFullYear(),  date.getMonth(), date.getDate());
+        console.log(startDt);
+        pageObj = {
+          bno: pageObj["bno"],
+          startDt: startDt,
+          endDt: endDt
+        }
+        ajax(pageObj);
+        if( calendar.getEventSourceById("dataList") != null ){
+	          calendar.getEventSourceById("dataList").remove();
+        }
+        calendar.addEventSource({
+          id: "dataList", 
+          events: eventval
+        });
+        console.log(date);
+      }
+      },
+      today: {
+      text: 'today',
+      click: function() {
+        calendar.today()
+        console.log("today 클릭");
+        var date = calendar.getDate ();
+        var startDt = new Date(date.getFullYear(), date.getMonth(), 1);
+        var endDt = new Date(date.getFullYear(),  date.getMonth(), date.getDate());
+        console.log(startDt);
+        pageObj = {
+          bno: pageObj["bno"],
+          startDt: startDt,
+          endDt: endDt
+        }
+        ajax(pageObj);
+        if( calendar.getEventSourceById("dataList") != null ){
+	          calendar.getEventSourceById("dataList").remove();
+        }
+        calendar.addEventSource({
+          id: "dataList", 
+          events: eventval
+        });
+        console.log(date);
+      }
+      }
+    },
+      initialView: 'dayGridMonth',
+    });
+      if( calendar.getEventSourceById("dataList") != null ){
+	          calendar.getEventSourceById("dataList").remove();
+        }
+        calendar.addEventSource({
+          id: "dataList", 
+          events: eventval
+        });
+    calendar.setOption('aspectRatio', 1.3);
+    calendar.render();
+    console.log(eventval);
+    
+  });
+  
+
+  function ajax(pageObj){
+  
+  $.post({
           url: "/selectSales.do",
           data: pageObj,
+          async:false,
           success: function (data) {
             console.log('ajax 함수 완료');
-            let sales = JSON.parse(data);
-            console.log(sales);
-            var events = [];
-            let totalPrice = 0;
-            $.each(sales, function (index, item) {
+            let result = JSON.parse(data);
+            console.log(result);
+            inputEvent(result.sales);
+            document.getElementById("inputTotal").innerText = totalPrice +" 원";
+            document.getElementById("inputTotalNum").innerText = "총 "+result.count +" 건";
+            console.log(eventval);
+           
+          } // success end
+        });  // ajax end
+}
+  function inputEvent(sales){
+    totalPrice = 0;
+    eventval = [];
+    $.each(sales, function (index, item) {
               let price = item.price;
               totalPrice = totalPrice+price;
               let inputprice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-              console.log(price);
-              if (price <= 200000){
-                events.push({
+              if (price <= 100000){
+                eventval.push({
                 title: inputprice + " 원",
                 start: item.rsvDate,
                 color: "var(--text-red)"    // 붉은색
 
                 }); // push end
               }
-              else if(price > 200000 && price <= 400000 ){
-                events.push({
+              else if(price > 100000 && price <= 200000 ){
+                eventval.push({
                 title: inputprice + " 원",
                 start: item.rsvDate,
                 color: "var(--text-gray)"   // 연두
 
                 }); // push end
-              } else if(price > 400000){
-                events.push({
+              } else if(price > 200000){
+                eventval.push({
                 title: inputprice + " 원",
                 start: item.rsvDate,
                 color: "var(--key-text)"    // 푸른색
@@ -71,49 +155,69 @@
               }
 
             }); // each end
-            console.log(totalPrice);
-            document.getElementById("inputTotal").innerText = totalPrice +" 원";
-            console.log(events);
-            successCallback(events);
-          }// success end
-        });  // ajax end
-      }, // event end
-    }); // calender end
+        
+  }
 
-    calendar.render();
-
-   
-  }); // document end
- document.getElementsByClassName("fc-prev-button")[0].click(function () {
-      console.log("이전달 클릭");
-      prevBtn =1;
-      
-    })
 </script>
+
 <style>
 
   body {
     padding: 0;
     font-size: 14px;
   }
-
-  #calendar {
-    max-width: 50vw;
-    padding-top: 20px;
-    padding-left: 50px;
+  #wrap{
+    width: 85%;
   }
   #monthSales{
-    width: 200px;
+    width: 20%;
+    float: left;
   }
+  #monthtable{
+    margin-top: 55px;
+    font-size: 20px;
+  }
+  #monthtable tr{
+    padding: 5px;
+  }
+  #monthtable th{
+    text-align: left;
+  }
+  #calendar {
+    max-width: 50vw;
+    /* padding-top: 20px; */
+    /* padding-left: 250px; */
+    width: 80%;
+    float: left;
+  }
+  
 
 </style>
 </head>
 <body>
+  <div id="wrap">
+   
   <div id="monthSales">
-    <span>월별매출</span> : <span id="inputTotal"></span>
+    <table id="monthtable">
+      <tr>
+        <th>이번 달 통계</th>
+      </tr>
+      <tr>
+        <th>매출</th>
+      </tr>
+      <tr>
+        <td><span id="inputTotal"></span></td>
+      </tr>
+      <tr>
+        <th>예약</th>
+      </tr>
+      <tr>
+        <td><span id="inputTotalNum"></span></td>
+      </tr>
+    </table>
   </div>
   <div id='calendar'></div>
-  
+  </div>
 
 </body>
 </html>

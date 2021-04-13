@@ -192,39 +192,61 @@ window.onload = function () {
         }
     });
     // 연락처 입력형식 확인
-    document.getElementById("phone1").addEventListener('keyup', () => {
+    $("#phone1").keyup(function (event) {
         formatphone1 = 0;
         let inputphone =  document.getElementById("phone1");
-        if (!regPhone.test(inputphone.value)) {
-           formatphone1 = 0;
-        } else {
-            formatphone1 = 1;
+        if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
+            var inputVal = $(this).val();
+            $(this).val(inputVal.replace(/[^0-9]/gi, ""));
+        }else{
+
+            if (!regPhone.test(inputphone.value)) {
+                formatphone1 = 0;
+            } else {
+                formatphone1 = 1;
+            }
         }
+        
     })
-    document.getElementById("phone2").addEventListener('keyup', () => {
+    $("#phone2").keyup(function (event) {
         formatphone2 = 0;
         let inputphone =  document.getElementById("phone2");
-        if (!regPhone.test(inputphone.value)) {
-           formatphone2 = 0;
-        } else {
-            formatphone2 = 1;
+        if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
+            var inputVal = $(this).val();
+            $(this).val(inputVal.replace(/[^0-9]/gi, ""));
+        } else{
+
+            if (!regPhone.test(inputphone.value)) {
+                formatphone2 = 0;
+            } else {
+                formatphone2 = 1;
+            }
         }
     })
-    document.getElementById("phone3").addEventListener('keyup', () => {
+    $("#phone3").keyup(function (event) {
         formatphone3 = 0;
         let inputphone =  document.getElementById("phone3");
+        if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
+            var inputVal = $(this).val();
+            $(this).val(inputVal.replace(/[^0-9]/gi, ""));
+        } else{
         if (!regPhone.test(inputphone.value)) {
            formatphone3 = 0;
         } else {
             formatphone3 = 1;
         }
+    }
     })
 
     // 생년월일 입력형식 확인
-    document.getElementsByName("birth")[0].addEventListener('keyup', () => {
+        $("input[name=birth]").keyup(function (event) {
         //20210101
         var regex = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
         let inputBirth = document.getElementsByName("birth")[0];
+        if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
+            var inputVal = $(this).val();
+            $(this).val(inputVal.replace(/[^0-9]/gi, ""));
+        } else{
         if (!regex.test(inputBirth.value)) {
             if (inputBirth.value.length == 0) {
                 document.getElementById("checkbirth").innerText = "";
@@ -237,6 +259,7 @@ window.onload = function () {
             document.getElementById("checkbirth").innerText = "";
 
         }
+    }
     })
 
     // 이메일 입력형식 확인
@@ -290,7 +313,7 @@ function initSide() {
  // input button 초기값 비활성화  
  function defaultDisable(){
     document.getElementsByClassName("side_sub")[0].style.display = "none"
-    for (var i = 0; i < inputli.length; i++) {
+    for (var i = 2; i < inputli.length; i++) {  // 아이디 비밀번호 제외
         inputli[i].disabled = true;
     }
     for (var i = 0; i < buttonli.length; i++) {
