@@ -60,3 +60,6 @@ ul {
   z-index: 999;
   position: absolute;
 }
+.fa-times{
+  color: var(--text-gray);
+}
