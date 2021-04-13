@@ -415,8 +415,8 @@
 }
 
 .likeThis{
-    color: lightgray;
-    font-size: 36px;
+	color: lightgray;
+    font-size: 30px;
     border: 0;
     z-index: 2;
     background-color: white;
@@ -818,6 +818,7 @@
 #agreement{
     padding: 0;
     border: 1px solid lightgray;
+    width: 92%;
 }
 #agreement div {
     height: 50%;
@@ -958,4 +959,8 @@
         background-color: #e6e6e6;
         color: rgb(51, 51, 51);
 
+    }
+    
+    #heart{
+    	display: none;
     }
