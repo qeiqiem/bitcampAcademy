@@ -63,7 +63,13 @@ $(document).ready(function() {
    $('#infoReview').click(function() { $('.cardinfo').hide(); $('.cominfo').show();})
 
    // 3. 예약슬라이드 (2depth) show
-   $('.resbtn').click(function() { resItemList(bno); $('.slide_res').show(); })
+   $('.resbtn').click(function() { 
+	   if(mno == 0){
+		   alert("로그인후 이용해주세요")
+	   }else{
+		   resItemList(bno); $('.slide_res').show(); 
+	   } 
+   })
    
    $('#res_return').click(function() { 
 	   resItemList(bno); 	   
@@ -121,11 +127,42 @@ $(document).ready(function() {
       if(totalPrice == 0 && totalPrice == "" ){
          alert("지불할 금액이없습니다. 옵션을 선택해주세요.")
       }else {
-    	  insertResList() 
+		  /*$("#mask").show()*/
+    	  $(".choicePay").show();
       }     
    })
-   $('#chat').click(function() {
+   
+   //버튼이벤트
+   $("#kakaoPay").click(function() {
+	   var payType = 1
+	   requestPay(payType)
+	   $(".choicePay").hide();
+	   $("#mask").show()
 	   
+   })
+      
+   $("#toss").click(function() {
+	   var payType = 2
+	   requestPay(payType)
+	   $(".choicePay").hide();
+	   $("#mask").show()
+   })
+      
+   $("#ectPay").click(function() {
+	   var payType = 3
+	   requestPay(payType)
+	   $(".choicePay").hide();
+	   $("#mask").show()
+   })
+   
+   
+   /*insertResList() */
+   $('#chat').click(function() {
+	   if(mno == 0){
+		   alert("로그인후 이용해주세요")
+	   }else{
+		   alert("준비중입니다.")
+	   } 
    })
    
    $('.res_loading button').click(function() { $(".res_loading").hide(); $("#mask").hide(); })   
@@ -324,8 +361,25 @@ $(document).ready(function() {
       $('.single').show()
    }
            
-   function requestPay() {
-	   IMP.init("imp27421713")
+   function requestPay(payType) {
+	   //버튼값에따라 pay open
+	   switch (payType) {
+			case 1:
+				//kakao
+				IMP.init("imp27421713")
+				break;
+				
+			case 2:
+				//toss
+				IMP.init("imp76861865")
+				break;	
+				
+			case 3:
+				//ectpay
+				IMP.init("imp02061320")
+			 break;
+	   }
+
        IMP.request_pay({
            pg : 'kakao', // 결제방식
            pay_method : 'card',   // 결제 수단
@@ -341,24 +395,13 @@ $(document).ready(function() {
  
          }, function(rsp) {
          if ( rsp.success ) { // 성공시
-            
-            var msg = '결제가 완료되었습니다.'
-            msg += '고유ID : ' + rsp.imp_uid
-            msg += '상점 거래ID : ' + rsp.merchant_uid
-            msg += '결제 금액 : ' + rsp.paid_amount
-            msg += '메일 : ' + rsp.buyer_email
-            msg += '이름 : ' + rsp.buyer_name
-            msg += '우편번호 : ' + rsp.buyer_postcode
-     	   	//결제관련 api 기능
-
+            //결제관련 api 기능
             mapRes()
             $('.slide_res').hide()
             $('.slide_success').show()            
-            $("#mask").hide()	
-            
+            $("#mask").hide()	            
          } else { // 실패시
-            var msg = '결제에 실패하였습니다.';
-            msg += '에러내용 : ' + rsp.error_msg;
+            console.log('결제에 실패하였습니다.');
          }
       })
    }
@@ -386,8 +429,7 @@ $(document).ready(function() {
 		     }
            rsvObj.resListData=JSON.stringify(arrayRes);
            rsvObj.ddate=ddate;
-		   $("#mask").show()
-		   requestPay()
+		   $("choicePay").show()		   
 	   }
    
  //리스트 컨트롤러로 보내기

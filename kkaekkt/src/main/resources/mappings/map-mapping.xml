@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="MapListDAO">
 
-	<select id="selecList" parameterType="String" resultType="maplist">
+	<select id="selecList" parameterType="account" resultType="maplist">
 			SELECT b.bname  
 				 , b.bno
 				 , b.phone
@@ -12,7 +12,8 @@
 				 , AVG(c.grade)  AS grade
 			 FROM business b
 			 JOIN comments c ON b.bno = c.bno
-			WHERE b.address LIKE CONCAT('%',#{keyaddr},'%')
+			WHERE b.address LIKE CONCAT('%',#{address},'%')
+			  AND b.typeNum = #{mtype}
 			GROUP BY b.bno;
 	</select>
 	

@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kkaekkt.biz.user.AccountVO;
+
 @Service("mapService")
 public class MapServiceImpl implements MapService {
 	@Autowired
@@ -16,8 +18,8 @@ public class MapServiceImpl implements MapService {
 	}
 	
 	@Override
-	public List<MapListVO> selectlandry(String keyaddr) {
-		return maplistDao.selectlandry(keyaddr);
+	public List<MapListVO> selectlandry(AccountVO vo) {
+		return maplistDao.selectlandry(vo);
 		
 	}
 

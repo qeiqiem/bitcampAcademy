@@ -109,8 +109,7 @@
                                            </tr>
                                            <tr>
                                            </tr>
-                                       </table>
-   
+                                       </table>   
                                        <div class="moreinfo">
                                            <p class="more_title">취급 품목</p>
                                            <hr>
@@ -204,7 +203,14 @@
                            </div>
                            <div class="comBtnDiv">
                             <button class="comBtn">결제하기</button>
-                           </div>                          
+                           </div>  
+           			       <div class="choicePay">        
+						       <p>결제수단 선택</p>
+						        <button id="kakaoPay"  style="background-color: #ffe607;">카카오페이</button>
+						        <button id="toss" value="2"  style="background-color: #3182f6;">toss</button>
+						        <button id="ectPay" value="3"  style="background-color: #d50101;">일반결제</button>
+						        <button class="outPaybtn">나가기</button>
+						    </div>
                        </div><!-- res_slide --> 
                        <div class="contBtn">
                            <button class="foldBtn">&lt;</button>
@@ -229,12 +235,14 @@
            var bno= "";    
            var dbData = [];
            var mno = ${user.mno};	          
-           var map = new kakao.maps.Map(mapContainer, mapOption);
-           mapContainer.style.position = "initial";            
-           var ps = new kakao.maps.services.Places();            
+       	   var url = window.location.href;
+           url = url.split("type=")
+           var type = Number(url[1])
  
            bindinglandry(useraddress)
-           
+           var map = new kakao.maps.Map(mapContainer, mapOption);
+           mapContainer.style.position = "initial";            
+           var ps = new kakao.maps.services.Places();   
            function setMapType(maptype) { 
         	    var roadmapControl = document.getElementById('btnRoadmap');
         	    var skyviewControl = document.getElementById('btnSkyview'); 
@@ -290,10 +298,13 @@
               
               //0325-주옥 : 검색하려는 키워드 캐치 및 select을 하기위해 controller 접근
               var keyaddr = keyaddr;
+           
                   $.ajax({
                       url:'/maplist.do'
                       , method : 'POST'
-                      , data: { keyaddr : keyaddr }
+                      , data: { keyaddr : keyaddr,
+                    	        type : type  
+                      }
                       , dataType: 'json'
                       , success: function(data){ //성공후 처리는 추후 진행.                         
                                 if(data==null){
@@ -301,8 +312,13 @@
                                    dbData = null
                                 }
                                    dbData = data
-                                 // 장소검색을 요청           
-                                   keyaddr = keyaddr+" 크리닝"
+                                   
+                                   // 장소검색을 요청        
+                                   if(type == 1)
+                                	   keyaddr = keyaddr+" 크리닝"
+                                   else if(type == 2)
+                                	   keyaddr = keyaddr+"코인세탁"
+                                	   
                                    ps.keywordSearch(keyaddr, placesSearchCB); 
                                } 
                   })
