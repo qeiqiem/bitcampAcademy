@@ -25,15 +25,24 @@
 						<div class="join_numBox">
 							<ul>
 								<li class="num">01</li>
-								<li>회원유형선택</li>
+								<li>약관동의</li>
 							</ul>
 						</div>
 						<div>
 							<i class="fas fa-chevron-right fa-3x"></i>
 						</div>
 						<div class="join_numBox">
-							<ul style="color: var(- -black-color); font-weight: bolder;">
+							<ul>
 								<li class="num">02</li>
+								<li>회원유형선택</li>
+							</ul>
+						</div>
+						<div>
+							<i class="fas fa-chevron-right fa-3x"></i>
+						</div>
+						<div class="join_numBox numBox_select">
+							<ul>
+								<li class="num">03</li>
 								<li>정보입력</li>
 							</ul>
 						</div>
@@ -42,7 +51,7 @@
 						</div>
 						<div class="join_numBox">
 							<ul>
-								<li class="num">03</li>
+								<li class="num">04</li>
 								<li>가입완료</li>
 							</ul>
 						</div>
@@ -57,6 +66,7 @@
 							<h3>개인 회원</h3>
 							<form action="/joinPs.do" method="POST" id="joinPerson" name="joinPerson">
 								<div>
+									<input type="text" name="mtype" value="1" hidden>
 									<p>아이디</p>
 									<input type="text" placeholder="아이디를 입력하세요." name="id" id="id" value=""
 										minlength="6" maxlength="15">

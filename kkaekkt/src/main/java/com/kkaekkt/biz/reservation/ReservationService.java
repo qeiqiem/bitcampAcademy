@@ -28,4 +28,5 @@ public interface ReservationService {
 	public void delAlert(AlertVO vo);
 	public void updateAlert(AlertVO vo);
 	public List<LaundryVO> getSales(Map<String, Object> param);
+	public int getRsvCount(Map<String, Object> param);
 }

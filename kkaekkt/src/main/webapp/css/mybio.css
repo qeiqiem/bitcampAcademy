@@ -2,19 +2,18 @@
     outline: none;
 }
 hr {
-height: 1px;
-border: none;
-background-color: var(--gray-color);
-/* border: solid 0.5px var(--gray-color); */
-width: 85%;
-margin: 10px 0 20px 0;
-}
+    height: 0.5px;
+    border: none;
+    background-color: var(--gray-color);
+    /* border: solid 0.5px var(—gray-color); */
+    /* width: 95%; */
+  }
 
-input {
+.content input {
     box-sizing: border-box;
     padding: 15px;
     width: 200px;
-    height: 30px;
+    height: 40px;
     margin-top: 10px;
     border: 1px solid var(--gray-color);
     border-radius: 10px;
@@ -23,11 +22,11 @@ input {
 float:left;
 width: 65vw;
 height: 100vh;
-padding: 10px 0px 30px 250px;
-font-size: 14px;
+padding: 0px 0px 30px 250px;
+font-size: 16px;
 }
 .content div {
-    padding-top: 15px;
+    padding-top: 20px;
 }
 
 .content #mybio_info {
@@ -36,12 +35,12 @@ font-size: 14px;
 }
 
 .content #mybio_info button {
-    height: 30px;
+    height: 40px;
     width: 120px;
-    margin-left: 5px;
-    background: var(--text-gray);
+    margin-left: 10px;
+    background: var(--gray-color);
+    color:  var(--black-color);
     border: none;
-    color: #ffffff;
     padding: 5px;
     border-radius: 10px;
 }
@@ -51,13 +50,17 @@ font-size: 14px;
 }
 
 .content table td {
+    padding-top: 8px;
     padding-right: 50px;
 }
 #email {
+    box-sizing: border-box;
+    padding: 15px;
     width: 300px;
-    height: 30px;
+    height: 40px;
     margin-top: 10px;
     border: 1px solid var(--gray-color);
+    border-radius: 10px;
 }
 
 #mybio_title {
@@ -67,13 +70,13 @@ font-size: 14px;
 
 #btn_mybio {
     background: var(--key-color);
-    border-radius: 23px;
+    border-radius: 30px;
     border: none;
     float: right;
-    margin-top: 1vh;
+    margin-top: 2vh;
     margin-right: 10vW;
-    width: 99px;
-    height: 42px;
+    width: 100px;
+    height: 45px;
     display: block;
     /* 수정하기 버튼 클릭시 none으로*/
 
@@ -81,7 +84,6 @@ font-size: 14px;
 
 #btn_mybioClick {
     float: right;
-    margin-top: -1vh;
     margin-right: 10vw;
     display: none;
     /* 수정하기 버튼 클릭시 inline-block으로*/
@@ -90,10 +92,10 @@ font-size: 14px;
 
 #btn_mybiofin, #btn_back {
     background: var(--key-color);
-    border-radius: 23px;
+    border-radius: 30px;
     border: none;
-    width: 99px;
-    height: 42px;
+    width: 100px;
+    height: 45px;
     color: var(--black-color);
 
 }
@@ -107,7 +109,6 @@ font-size: 14px;
 
 #mybioPhone input {
     width: 80px;
-    padding-left: 10px;
 }
 
 #mybioBirth{

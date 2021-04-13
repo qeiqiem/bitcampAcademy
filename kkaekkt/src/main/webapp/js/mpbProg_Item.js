@@ -123,11 +123,11 @@ function enter() {
 }
 function initSide() {
         $('.side_sub')[0].innerHTML=
-        '<button onclick="location.href='+"'/jsp/mypageBiz/mpbProg_Item.jsp'"+'">품목별</button>'+
-        '<button onclick="location.href='+"'/jsp/mypageBiz/mpbProg_Num.jsp'"+'">주문번호별</button>';
+        '<button onclick="location.href='+"'/jsp/mypageBiz/mpbProg_Num.jsp'"+'">주문번호별</button>'+
+        '<button onclick="location.href='+"'/jsp/mypageBiz/mpbProg_Item.jsp'"+'">품목별</button>';
 		$('.side_sub').css('display','unset');
 		$('.side button').eq(0).addClass("side_select");
-		$('.side_sub button').eq(0).addClass("side_sub_select");
+		$('.side_sub button').eq(1).addClass("side_sub_select");
 }
 function initPageBtn() {
     if(pageObj.isNextExist) {
@@ -275,24 +275,24 @@ function printHeader(key,value) {
             if(value.dDay<0) {//남은 기한이 음수라면
                 $('.process p')[0].innerHTML="기한을 넘긴 주문";
                 $('.process p')[0].style.color='red';
-            }else if(value.dDay<3) {//남은 기한이 3미만
+            }else if(value.dDay<=3) {//남은 기한이 3미만
                 $('.process p')[0].innerHTML="마감이 임박한 주문";
-            }else if(value.dDay>=3) {//남은 기한이 3이상
+            }else if(value.dDay>3) {//남은 기한이 3이상
                 $('.process p')[0].innerHTML='기한이 넉넉한 주문';
             }
         } else if($('.process p')[1]==undefined) {//두 번째 제목이 선정되지 않았다면
             if($('.process p')[0].innerHTML=="기한을 넘긴 주문"){//첫 번째 제목이 기한을 넘긴 주문이라면
-                if(value.dDay<3&&dDay>=0) {
+                if(value.dDay<=3&&dDay>=0) {
                     $('.process').append('<p class="processTitle">마감이 임박한 주문</p>');
-                }else if(dDay>=3){
+                }else if(dDay>3){
                     $('.process').append('<p class="processTitle">기한이 넉넉한 주문</p>');
                 }
             } else if($('.process p')[0].innerHTML=="마감이 임박한 주문" //첫 번째 제목이 마감임박 주문이고
-                        &&value.dDay>=3) { //기한이 3일 이상이라면
+                        &&value.dDay>3) { //기한이 3일 이상이라면
                     $('.process').append('<p class="processTitle">기한이 넉넉한 주문</p>');
             }
         } else if($('.process p')[2]==undefined) {//3번째 제목이 선정되지 않았다면
-            if(value.dDay>=3&&$('.process p')[1].innerHTML!='기한이 넉넉한 주문') {
+            if(value.dDay>3&&$('.process p')[1].innerHTML!='기한이 넉넉한 주문') {
                 $('.process').append('<p class="processTitle">기한이 넉넉한 주문</p>');
             }
         }

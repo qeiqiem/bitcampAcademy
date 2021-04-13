@@ -31,14 +31,15 @@
 				data : {
 					email : userEmail,
 				},
-				success : function(vo) {
-					if (vo == "fail") {
+				success : function(result) {
+					if (result == "fail") {
 						alert("회원정보 없음");
 					} else {
-						location.href = "/jsp/indexPerson.jsp";
+						location.href = "/index.do";
 					}
 				}
-			}); // ajax
+			}); // 
+			ajax
 		}
 	</script>
 </body>

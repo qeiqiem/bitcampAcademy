@@ -15,7 +15,7 @@
 
 <body>
 	<div id="mask"></div>
-	<jsp:include page="/jsp/header2.jsp"></jsp:include>
+	<jsp:include page="/jsp/headerBs.jsp"></jsp:include>
 	<div class="body_container">
 		<div class="my_container">
 			<jsp:include page="sidebar_bs.jsp"></jsp:include>
@@ -32,7 +32,7 @@
 					<li value=8>기타</li>
 				</ul>
 				<div class="content_header">
-					<p>전체 개수 : <span></span> 개</p>
+					<p>전체 개수 <span></span> 개</p>
 					<div class="searchBox">
 						<select>
 							<option value="1">이름</option>

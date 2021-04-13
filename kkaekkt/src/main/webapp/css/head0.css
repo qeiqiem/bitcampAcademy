@@ -79,10 +79,15 @@ a:hover {
 #bellBox .redDot{/*종 레드 닷*/
   position: absolute;
   display: none;
-  font-size: 1px;
-  left: 15px;
+  font-size: 10px;
+  left: 12px;
   top: -8px;
-  color: red;
+  color: white;
+  background: red;
+  border-radius: 20px;
+  padding: 0px 4px 1px 3px;
+  text-align: center;
+  min-width: 10px;
 }
 #chatBox .redDot{/*챗 레드 닷*/
   position: absolute;
@@ -158,7 +163,7 @@ a:hover {
   color: gray;
 }
 .msgHeader {
-  color:var(--key-color);
+  color:var(--key-text);
 }
 .read{
   color: rgb(116 116 116 / 50%) !important;

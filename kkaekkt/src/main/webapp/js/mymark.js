@@ -53,13 +53,13 @@ function modalprint(list) {
             }
             table.append(
             '<tr>'+
-                '<td><input class="chkBox" id="chk'+idx+'" type="checkbox" value="'+idx+'">'+value.laundry+'</td>'+
+                '<td><input class="chkBox" id="chk'+value.lno+'" type="checkbox" value="'+value.lno+'">'+value.laundry+'</td>'+
                 '<td>'+
-                    '<select id="selc'+idx+'" class="resOpc" disabled>'+
+                    '<select id="selc'+value.lno+'" class="resOpc" disabled>'+
                     '</select>'+
                 '</td>'+
                 '<td>'+
-                    '<p class="res_price" id="price'+idx+'" value="'+value.price+'">'+value.price+'</p>'+
+                    '<p class="res_price" id="price'+value.lno+'" value="'+value.price+'">'+value.price+'</p>'+
                 '</td>'+
             '</tr>'
            );
@@ -68,7 +68,7 @@ function modalprint(list) {
             table.append(
             '<tr id="totalRow">'+
                 '<td id="totalLabel">결제예상금액</td>'+
-                '<td colspan="2" class="totalAll">0</td>'+
+                '<td colspan="2" class="totalAll"></td>'+
             '</tr>'
             );
         }
@@ -83,7 +83,7 @@ function modalprint(list) {
 function initBodyEvent() {
     initModal();//모달 이벤트 관리fn
     var table=$('#single_option');
-    $('.content').on('click','.like i.fa-heart',function() {
+    $('.content').on('click','.unlike',function() {//좋아요 취소 버튼 클릭
         var bno=Number($(this).attr("value"));
         likeObj.bno=bno;
         likeOff(likeObj);
@@ -95,42 +95,45 @@ function initBodyEvent() {
         modalAjax(bno);
     });
     table.on("click",'input:checkbox',function() {
-        var idx=$(this).val();
+        var lno=$(this).val();
         var ckTf=$(this).is(":checked");
-        changeListener(idx,ckTf);
+        changeListener(lno,ckTf);
     });
     table.on("change",'select.resOpc',function(){
-        var idx=Number($(this).attr('id').charAt(4));//id(selc)의 idx 추출
+        var lno=Number($(this).attr('id').charAt(4));//id(selc)의 lno 추출
         var cnt=$(this).val();
-        var price=Number($('p.res_price').eq(idx).attr('value'));
-        $('p.res_price').eq(idx).text(cnt*price);//개수*기존가격 반영
+        var price=Number($('#price'+lno).attr('value'));
+        $('#price'+lno).text(cnt*price);//개수*기존가격 반영
         totalPriceSet();
     });
 }
 function totalPriceSet() {
     totalPrice=0;
     var chkedList = $('.chked');
-    var idx;
+    var lno;
     for(var i=0;i<chkedList.length;i++){
-       idx=$('.chked').eq(i).attr('id').charAt(3);//id(chk)의 idx 추출
-       totalPrice+=Number($('#price'+idx)[0].innerHTML);
+       lno=$('.chked').eq(i).attr('id').charAt(3);//id(chk)의 lno 추출
+       totalPrice+=Number($('#price'+lno)[0].innerHTML);
     }
-    if(idx<4) {
+    if(lno<5) {
         $('#dDay').text(dDay(3));
     }else {
         $('#dDay').text(dDay(7));
     }
+    if(totalPrice==0){
+        totalPrice="";
+    }
     $(".totalAll").text(totalPrice);
 }
-function changeListener(idx,ckTf){
+function changeListener(lno,ckTf){
     if(ckTf) {//활성화라면,
-        $('.chkBox').eq(idx).addClass('chked');
-        $("select.resOpc").eq(idx).attr("disabled",false); //셀렉트 항목 활성화
+        $('#chk'+lno).addClass('chked');
+        $("#selc"+lno).attr("disabled",false); //셀렉트 항목 활성화
         totalPriceSet();
     }else {
-        $('.chkBox').eq(idx).removeClass('chked');
-        $('select.resOpc').eq(idx).val("1").trigger('change');
-        $("select.resOpc").eq(idx).attr("disabled",true); //셀렉트 항목 비활성화
+        $('#chk'+lno).removeClass('chked');
+        $('#selc'+lno).val("1").trigger('change');
+        $("#selc"+lno).attr("disabled",true); //셀렉트 항목 비활성화
     }
 }
 function likeOff(likeObj) {
@@ -174,6 +177,7 @@ function printList() {
                 '</div>'+
                 '<div class="bsTagRight">'+
                     '<button id="rsvBtn'+value.bno+'" value="'+value.mno+'">예약하기</button>'+
+                    '<button class="unlikeBtn" value="'+value.bno+'">찜하기 취소</button>'+
                 '</div>'+
             '</div>');
     });

@@ -18,18 +18,13 @@
 	margin: auto;
 	border: 1px solid;
 	width: 530px;
-	height: 600px;
+	height: 660px;
 }
-
-/* img #kakao{
-	width: 60px;
-	height: 60px;
-} */
 
 hr {
 	height: 0.5px;
 	border: none;
-	background-color: var(- -gray-color);
+	background-color: #C4C4C4;
 	/* border: solid 0.5px var(--gray-color); */
 	width: 85%;
 }
@@ -40,6 +35,7 @@ hr {
 	left: 557px;
 	top: 478px;
 	margin-bottom: 20px;
+	border: none;
 }
 
 input {
@@ -48,6 +44,10 @@ input {
 	left: 556px;
 	top: 339px;
 	margin: 10px;
+	border-radius: 10px;
+}
+.login_box input{
+	border: solid 1px #C4C4C4;
 }
 
 .content button {
@@ -60,11 +60,25 @@ input {
 a {
 	text-decoration: none;
 	color: #000;
+	margin: 10px
 }
 .loginTitle {
 	text-align: center;
 	margin-bottom: 60px;
 }
-img #kakao {
-	width : 150px;
+.login_API img{
+	width: 60px;
+    height: 60px;
 }
+.login_foot p {
+	font-size : 9pt;
+	color:#BCBCBC;
+	margin-left:20%;
+}
+.finds{
+	margin-left: 20%;
+}
+.the_others{
+	margin-left:25%;
+}
+

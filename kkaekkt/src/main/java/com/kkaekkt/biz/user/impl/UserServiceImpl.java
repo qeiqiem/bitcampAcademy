@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.kkaekkt.biz.comm.EquipmentVO;
@@ -24,22 +25,27 @@ public class UserServiceImpl implements UserService {
 	public void insertUser(PersonVO vo) {
 		userDao.insertUser(vo);
 	}
+
 	@Override
 	public void likeOff(BusinessVO vo) {
 		userDao.likeOff(vo);
 	}
+
 	@Override
 	public void likeOn(BusinessVO vo) {
 		userDao.likeOn(vo);
 	}
+
 	@Override
 	public List<BusinessVO> getLikedBs(int mno) {
 		return userDao.getLikedBs(mno);
 	}
+
 	@Override
 	public int countLikeBs(BusinessVO vo) {
 		return userDao.countLikeBs(vo);
 	}
+
 	@Override
 	public double avgGradeBs(BusinessVO vo) {
 		return userDao.avgGradeBs(vo);
@@ -76,20 +82,19 @@ public class UserServiceImpl implements UserService {
 		System.out.println("회원탈퇴 서비스 옴");
 		int result = userDao.orderChk(vo);
 		System.out.println(result);
-		
-		if(result == 0) {
-			if(1==userDao.deleteUser(vo)) {
-				return "success";
-			}else {
-				return "fail";
-			}
+
+		// result가 0이면 삭제
+		// 1이면 삭제 안 함
+		if (result == 0) {
+			userDao.deleteUser(vo);
+			return "success";
 		} else {
 			return "fail";
 		}
 	}
-	
+
 	// 로그인 들
-	
+
 //	@Override
 //	public int idchkBs(BusinessVO vo) {
 //		System.out.println("아이디 찾는 서비스 옴 -- 업체");
@@ -100,9 +105,9 @@ public class UserServiceImpl implements UserService {
 	public AccountVO getUser(AccountVO vo) {
 		return userDao.getUser(vo);
 	}
-	
+
 	public AccountVO method(AccountVO vo) {
-		System.out.println("소셜유저로그인 servie옴");		
+		System.out.println("소셜유저로그인 servie옴");
 		return userDao.getUserSNS(vo);
 	}
 
@@ -170,6 +175,7 @@ public class UserServiceImpl implements UserService {
 		System.out.println("idchk 서비스옴");
 		return userDao.idchk(vo);
 	}
+
 	@Override
 	public int emailchk(String email) {
 		System.out.println("email 찾는 서비스 옴");
@@ -181,29 +187,35 @@ public class UserServiceImpl implements UserService {
 		System.out.println("가입완료 서비스옴");
 		return userDao.joinCfm(vo);
 	}
-    // PW 변경
-    @Override
-    public void updatePw(AccountVO vo) {
-        System.out.println("pw변경 서비스옴");
-        userDao.updatePw(vo);
-    }
+
+	// PW 변경
+	@Override
+	public void updatePw(AccountVO vo) {
+		System.out.println("pw변경 서비스옴");
+		userDao.updatePw(vo);
+	}
+
 	@Override
 	public PersonVO getPerson(int mno) {
 		return userDao.getPerson(mno);
 	}
+
 	@Override
 	public BusinessVO getBusiness(BusinessVO vo) {
 		return userDao.getBusiness(vo);
 	}
+
 	@Override
 	public List<LaundryVO> getLaundryList(int bno) {
 		return userDao.getLaundry(bno);
 	}
+
 	@Override
 	public void deleteUser(BusinessVO vo) {
 		// TODO Auto-generated method stub
-		
+
 	}
+
 	@Override
 	public int bnoChk(int bno) {
 		return userDao.bnoChk(bno);
