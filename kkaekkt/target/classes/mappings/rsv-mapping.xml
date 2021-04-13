@@ -108,7 +108,7 @@
 			</if>;
 	</select>
 	<update id="deleteCommCh">
-		UPDATE comments SET mno=#{mno}, content=#{content} WHERE groupNum=#{rsvNum} AND depth=#{depth};
+		UPDATE comments SET content=#{content} WHERE groupNum=#{rsvNum} AND depth=#{depth};
 	</update>
 	<delete id="deleteCommAb">
 		DELETE FROM comments WHERE depth=#{depth} AND groupNum=#{rsvNum};
