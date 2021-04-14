@@ -257,7 +257,7 @@ $(document).ready(function() {
                               for (var i = 0; i <7; i++) {
                                         var week = data[i].week                 
                                         var time = data[i].time
-                                        html += "&nbsp&nbsp&nbsp&nbsp"+week+" : "+time+"</br>"
+                                        html += "&nbsp&nbsp&nbsp&nbsp<span class='weektext'>"+week+"</span>&nbsp"+time+"</br>"
                                    }
                         $("#s_time").append(html)         
                        }   
@@ -273,15 +273,15 @@ $(document).ready(function() {
         	   			$("#single_option").empty()
                         if(data==null)console.log("data 가 조회되지 않았습니다.") 
                         var html =  ''
-                            html += '<tr><td class="option_title">1~3일 소요</td>'
-                            html += '<td class="option_title">금액(개당)</td></tr>'
+                            html += '<tr><th class="option_title">1~3일 소요</th>'
+                            html += '<th class="option_title">금액(개당)</th></tr>'
                               for (var j = 0; j <4; j++) {
                                         var item = data[j].product              
                                         var price = data[j].price
                                         html += '<tr><td>'+item+'</td><td>'+price+'</td></tr>'
                                     }
-                           html += '<tr><td class="option_title">4~7일 소요</td>'
-                           html += '<td class="option_title">금액(개당)</td></tr>'
+                           html += '<tr><th class="option_title">4~7일 소요</th>'
+                           html += '<th class="option_title">금액(개당)</td></tr>'
                               for (j; j <8; j++) {
                                         var longitem = data[j].product              
                                         var longprice = data[j].price
