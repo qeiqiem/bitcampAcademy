@@ -53,6 +53,12 @@
                     <jsp:include page="/jsp/header.jsp"></jsp:include>
                 </c:otherwise>
             </c:choose>
+            <script type="text/javascript">
+                window.onload = function () {
+                    document.getElementById("logoImg").src = "/img/logo-white.png"
+
+                }
+            </script>
             <link rel="stylesheet" href="/css/indexFullpage.css">
             <div id="full-page">
                 <div class="section index0">
@@ -131,10 +137,10 @@
                         </div>
                         <div>
                             <ul>
-                                <li><a href="">이용약관</a></li>
-                                <li><a href="">자주묻는 질문</a></li>
+                                <li><a href="#">이용약관</a></li>
+                                <li><a href="/jsp/faq.jsp">자주묻는 질문</a></li>
                                 <li><a href="mailto:kkaekkt@naver.com">제휴문의</a></li>
-                                <li><a href="">About kkaekkt</a></li>
+                                <li><a href="#">About kkaekkt</a></li>
                             </ul>
                         </div>
                     </footer>
