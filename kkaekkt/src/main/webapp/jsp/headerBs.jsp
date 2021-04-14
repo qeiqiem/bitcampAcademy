@@ -25,6 +25,10 @@
 		.head_container a {
 			color: white;
 		}
+
+		.logo img {
+			width: 270px;
+		}
 	</style>
 	<header class="head_container">
 		<nav class="head">
@@ -33,8 +37,7 @@
 			</div>
 			<div class="head_logo">
 				<div class="logo">
-					<a href="/index.do"> <img src="/img/logo-white.png">for Business
-					</a>
+					<a href="/jsp/mypageBiz/mpbProg_Num.jsp"> <img src="/img/logo-biz.png"></a>
 				</div>
 			</div>
 			<!-- <nav class="head">

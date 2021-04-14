@@ -52,6 +52,10 @@ video {
   color: white;
 }
 
+.head {
+  padding: 15px 50px;
+}
+
 .logo img {
   width: 200px;
   padding: 10px;

@@ -15,7 +15,7 @@
 .head {
   display: flex;
   justify-content: space-between;
-  padding: 13px 50px;
+  padding: 9px 50px;
   flex-wrap: wrap;
 }
 
@@ -31,7 +31,7 @@
   display: flex;
   margin: auto 0;
   bottom: 0;
-  font-size: 1.1em;
+  font-size: 15px;
   font-weight: bolder;
 }
 .head_right .fas {

@@ -4,15 +4,16 @@
   height: 100vh;
   /* float: left; */
   position: fixed;
-  top: 9vh;
+  top: 8vh;
 }
 .side_sub {
-  float: left;
+  position: fixed;
+  left: 11vw;
+  top: 8vh;
   background-color: white;
   border-right: 1px solid var(--gray-color);
   width: 11vw;
   height: 100vh;
-  display: none;
 }
 .side button {
   width: 100%;
