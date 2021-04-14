@@ -28,7 +28,35 @@
 				</div>
 			</div>
 			<div class="head_right">
-				<span><input name="name" id="name" value="${sessionScope.user.name}" readonly /></span>님
+				<ul>
+					<li>
+						<span>${sessionScope.user.name}</span>님
+					</li>
+					<li>
+						<div id="bellBox">
+							<i class="fas fa-bell"></i>
+							<span class="redDot">●</span>
+							<div id="noticeBox">
+								<ul>
+
+								</ul>
+								<button>내 알림 전체보기</button>
+							</div>
+						</div>
+					</li>
+					<li>
+						<div id="chatBox">
+							<i class="fas fa-comments"></i>
+							<!-- <i class="far fa-comment-dots fa-lg"></i> -->
+							<span class="redDot">●</span>
+						</div>
+					</li>
+					<li><a href="/jsp/mypageUser/mypagePs.jsp">마이페이지</a></li>
+					<li><a href="/logout.do">로그아웃</a></li>
+					<li><a href="/jsp/faq.jsp">FAQ</a></li>
+				</ul>
+
+				<!-- <div><span>${sessionScope.user.name}</span>님</div>
 				<div id="bellBox">
 					<i class="fas fa-bell"></i>
 					<span class="redDot">●</span>
@@ -43,10 +71,9 @@
 					<i class="fas fa-comments"></i>
 					<span class="redDot">●</span>
 				</div>
-				<!--<a href="/jsp/mypageUser/Test_mybio.jsp">마이페이지</a> -->
 				<a href="/jsp/mypageUser/mypagePs.jsp">마이페이지</a>
 				<a href="/logout.do">로그아웃</a>
-				<a href="/jsp/faq.jsp">FAQ</a>
+				<a href="/jsp/faq.jsp">FAQ</a> -->
 			</div>
 		</nav>
 	</header>

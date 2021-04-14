@@ -43,19 +43,13 @@ video {
   background-image: url(/img/laundry1.jpeg);
   background-size: cover;
 }
-/* .index6 {
-  background-image: url(/img/);
-  background-size: cover;
-} */
 
 .head_container {
-  top: 0;
-  position: fixed;
-  width: 100%;
-  /* background-color: rgba(255, 255, 255, 0.705); */
   background: none;
-  z-index: 4;
-  flex-wrap: wrap;
+  color: white;
+}
+.head_container a {
+  color: white;
 }
 
 .logo img {
@@ -85,15 +79,9 @@ video {
 }
 
 .search_btn button:hover {
-  /* color: var(--black-color);
-  border: 5px solid var(--black-color); */
-  border: 5px solid white;
+  border: 4px solid white;
   color: var(--black-color);
-  /* color: var(--key-text); */
   background-color: white;
-}
-
-.btn_unselected {
 }
 
 .btn_selected {

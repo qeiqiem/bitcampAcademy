@@ -200,8 +200,7 @@ public class UserServiceImpl implements UserService {
 	}
 	@Override
 	public void deleteUser(BusinessVO vo) {
-		// TODO Auto-generated method stub
-		
+		//
 	}
 	@Override
 	public int bnoChk(int bno) {

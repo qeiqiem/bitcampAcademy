@@ -21,9 +21,11 @@
 			</div>
 
 			<div class="head_right">
-				<a href="/jsp/join/joinTerms.html">회원가입</a>
-				<a href="/jsp/login/login.jsp">로그인</a>
-				<a href="/jsp/faq.jsp">FAQ</a>
+				<ul>
+					<li><a href="/jsp/join/joinTerms.html">회원가입</a></li>
+					<li><a href="/jsp/login/login.jsp">로그인</a></li>
+					<li><a href="/jsp/faq.jsp">FAQ</a></li>
+				</ul>
 			</div>
 		</nav>
 	</header>
