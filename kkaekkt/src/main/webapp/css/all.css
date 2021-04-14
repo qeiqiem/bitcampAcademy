@@ -82,6 +82,6 @@ ul {
   --animate-duration: 0.7s;
   /* overflow: hidden; */
 }
-.fa-times{
+.fa-times {
   color: var(--text-gray);
 }
