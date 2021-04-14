@@ -94,6 +94,6 @@
 			var likeObj={mno:${sessionScope.user.mno}};
 			var commObj={};
     </script>
-    <script src="/js/mypagePs.js"></script>
+    <script src="/js/mypagePs_com.js"></script>
 </body>
 </html>

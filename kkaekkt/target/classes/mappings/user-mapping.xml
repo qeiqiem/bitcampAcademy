@@ -27,7 +27,7 @@
 		account),#{bname},#{address},#{phone},#{bankNum},#{bankAccountNum},#{email},#{bizType});
 
 		<foreach collection="scheduleList" item="schedule"> <!-- 스케쥴 저장 -->
-			INSERT INTO bsn_schedule VALUES ((SELECT MAX(bno) FROM
+			INSERT INTO bsn_schedule VALUES ((SELECT MAX(mno) FROM
 			business),${schedule.schno},'${schedule.time}');
 		</foreach>
 
@@ -35,19 +35,19 @@
 			<when test="bizType==1"> <!-- 일반세탁소라면 -->
 				<foreach collection="laundryList" item="laundry">
 					INSERT INTO
-					bsn_laundry VALUES ((SELECT MAX(bno) FROM
+					bsn_laundry VALUES ((SELECT MAX(mno) FROM
 					business),${laundry.lno},${laundry.price});
 				</foreach>
 			</when>
 			<otherwise> <!-- else문,, 코인세탁소라면 -->
 				<foreach collection="equipmentList" item="equipment">
 					INSERT INTO
-					bsn_equipment VALUES ((SELECT MAX(bno) FROM
+					bsn_equipment VALUES ((SELECT MAX(mno) FROM
 					business),${equipment.eno},${equipment.cnt},${equipment.price});
 				</foreach>
 				<foreach collection="etcList" item="etc">
 					INSERT INTO bsn_etc
-					VALUES((SELECT MAX(bno) FROM business),${etc.etcno},${etc.price});
+					VALUES((SELECT MAX(mno) FROM business),${etc.etcno},${etc.price});
 				</foreach>
 			</otherwise>
 		</choose>
