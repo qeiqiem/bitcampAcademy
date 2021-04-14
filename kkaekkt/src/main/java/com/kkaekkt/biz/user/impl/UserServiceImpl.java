@@ -107,17 +107,16 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public <T> List<T> convertToObj(String json, Class<T> type) {
-		String temp = json.substring(1, json.length() - 1); // 양 끝의 [ ] 제거
-		String[] temp2 = temp.split("},"); // {~},{~} 을 split하여 배열로 나눔
+		String data = json.substring(1, json.length() - 1); // 양 끝의 [ ] 제거
+		String[] dataArray = data.split("},"); // {~},{~} 을 split하여 배열로 나눔
 		List<T> list = new ArrayList<T>();
 		Gson gson = new Gson();
-		for (int i = 0; i < temp2.length; i++) {
-			if (i != temp2.length - 1) {// 만약 마지막 { ~ }이 아니라면,
-				temp2[i] += "}";// split 과정에서 떨어졌던 '}'를 붙여준다.
+		for (int i = 0; i < dataArray.length; i++) {
+			if (i != dataArray.length - 1) {// 만약 마지막 { ~ }이 아니라면,
+				dataArray[i] += "}";// split 과정에서 떨어졌던 '}'를 붙여준다.
 			}
-			list.add(gson.fromJson(temp2[i], type));
+			list.add(gson.fromJson(dataArray[i], type));
 		}
-		System.out.println(list + json);
 		return list;
 	}
 

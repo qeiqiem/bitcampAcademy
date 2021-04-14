@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>매장관리</title>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <link rel="stylesheet" href="/css/coinspec.css">
 </head>
@@ -138,16 +138,16 @@
 							운영시간
 							<hr>
 							<div id="week">
-								<button type="button" id="1">월</button>
-								<button type="button" id="2">화</button>
-								<button type="button" id="3">수</button>
-								<button type="button" id="4">목</button>
-								<button type="button" id="5">금</button>
-								<button type="button" id="6">토</button>
-								<button type="button" id="7">일</button>
-								<button type="button" id="8">매일</button>
-								<button type="button" id="9">평일</button>
-								<button type="button" id="10">주말</button>
+								<button type="button" id="week_1">월</button>
+								<button type="button" id="week_2">화</button>
+								<button type="button" id="week_3">수</button>
+								<button type="button" id="week_4">목</button>
+								<button type="button" id="week_5">금</button>
+								<button type="button" id="week_6">토</button>
+								<button type="button" id="week_7">일</button>
+								<button type="button" id="week_8" class="two">매일</button>
+								<button type="button" id="week_9" class="two">평일</button>
+								<button type="button" id="week_10" class="two">주말</button>
 							</div>
 
 							<div id="weekBox">

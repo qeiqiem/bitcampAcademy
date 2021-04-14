@@ -12,7 +12,7 @@ function initHeaderEvent() {
         $('#noticeBox').toggle();        
     });
     $('#noticeBox').on('click','i',function() {//알림 리스트의 삭제버튼 클릭 시
-        alertObj.ano=Number($(this).attr('id'));
+        alertObj.ano=Number($(this).attr('id').substr(8));
         delHeaderAlert();
     });
 }
@@ -87,7 +87,7 @@ function printHeaderList(list) {//헤더에 알림 리스트 출력
                                         '<span class="date">'+value.date+'</span>'+
                                         '<span class="byBs">by '+value.senderName+'</span>'+
                                     '</div>'+
-                                    '<i id="'+value.ano+'" class="fas fa-times"></i>'+
+                                    '<i id="alertDel'+value.ano+'" class="fas fa-times"></i>'+
                                 '</li>'
         );
     });

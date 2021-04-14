@@ -35,7 +35,8 @@ hr {
     padding-bottom: 10px;
 }
 #combio_title #title_right{
-    margin-left: 720px;
+    /* margin-left: 720px; */
+    float: right;
 
 }
 #combio_title #bname{

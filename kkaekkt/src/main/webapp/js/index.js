@@ -3,6 +3,9 @@ var socket = null;
  
 $(document).ready(function (){
     connectWs();
+     $("h1").addClass("animate__animated animate__fadeInUp");
+  $(".search_tab").addClass("animate__animated animate__fadeInUp");
+  $(".search_box").addClass("animate__animated animate__fadeInUp");
 });
 function connectWs(){
     socket = new WebSocket("ws://localhost:8080/echo.do");
