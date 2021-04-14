@@ -210,13 +210,10 @@ function initSide() {
     $('.side_sub').css('display','unset');
     $('.side button').eq(0).addClass("side_select");
     $('.side_sub button').eq(1).addClass("side_sub_select");
-
     $('.side_sub button').click(function() { // 완료된 주문 출력
-        console.log($(this).index()==0);
-        // if($(this).index()==0){ //진행중인 주문
-        //     console.log('진행중인 주문으로 이동');
-        //     location.href="mypagePs.jsp"
-        // }
+        if($(this).index()==0){ //진행중인 주문
+            location.href="mypagePs.jsp"
+        }
     });
 }
 function initModal() {

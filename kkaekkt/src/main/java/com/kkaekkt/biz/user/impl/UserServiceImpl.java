@@ -120,7 +120,7 @@ public class UserServiceImpl implements UserService {
 			if (i != dataArray.length - 1) {// 만약 마지막 { ~ }이 아니라면,
 				dataArray[i] += "}";// split 과정에서 떨어졌던 '}'를 붙여준다.
 			}
-			list.add(gson.fromJson(dataArray[i], type));
+			list.add(gson.fromJson(dataArray[i], type));//지정한 타입으로 형변환 후 리스트에 저장
 		}
 		return list;
 	}
