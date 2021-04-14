@@ -33,6 +33,10 @@ public class MapListDAO {
 	public List<SingleListVO> reviewList(int bno) {
 		return mybatis.selectList("MapListDAO.reviewList",bno); 
 	}
+	
+	public List<SingleListVO> reviewListGrade(int bno) {
+		return mybatis.selectList("MapListDAO.reviewListGrade",bno); 
+	}
 
 	public void respay(MapListVO mapvo) {
 		mybatis.insert("MapListDAO.respay",mapvo);		
@@ -41,6 +45,12 @@ public class MapListDAO {
 	public int getRsvNum(int mno) {
 		return mybatis.selectOne("reservationDAO.getRno",mno);
 	}
-	 
+	
+	public int likeYn(SingleListVO vo) {
+		return mybatis.selectOne("MapListDAO.selectLike",vo);
+	}
+
+
+
 
 }

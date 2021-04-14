@@ -6,7 +6,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>매장관리</title>
         <script src="https://kit.fontawesome.com/415f6f6023.js" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
         <link rel="stylesheet" href="/css/combio.css">
@@ -76,7 +76,7 @@
                                             <td>비밀번호</td>
                                             <td>
                                                 <input name="password" type="password" id="curpwd"> 
-                                                <button type="button" id="btn_checkpwd">수 정</button></br>
+                                                <button type="button" id="btn_checkpwd">수정</button></br>
                                                 <label id="checkpwd"></label>
                                             </td>
                                         </tr>

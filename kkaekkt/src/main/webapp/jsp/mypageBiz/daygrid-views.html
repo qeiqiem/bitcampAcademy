@@ -98,7 +98,7 @@
           id: "dataList", 
           events: eventval
         });
-    calendar.setOption('aspectRatio', 1.3);
+    calendar.setOption('aspectRatio', 1.8);
     calendar.render();
     console.log(eventval);
     
@@ -116,8 +116,9 @@
             let result = JSON.parse(data);
             console.log(result);
             inputEvent(result.sales);
-            document.getElementById("inputTotal").innerText = totalPrice +" 원";
-            document.getElementById("inputTotalNum").innerText = "총 "+result.count +" 건";
+            let inputtotalPrice = totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            document.getElementById("inputTotal").innerText = inputtotalPrice +" 원";
+            document.getElementById("inputTotalNum").innerText = result.count +" 건";
             console.log(eventval);
            
           } // success end
@@ -170,25 +171,28 @@
     width: 85%;
   }
   #monthSales{
-    width: 20%;
-    float: left;
+    width: 100%;
   }
   #monthtable{
-    margin-top: 55px;
+    margin-top: 25px;
     font-size: 20px;
+    width: 30%;
+    float: right;
+    text-align: right;
+    padding-right: 100px;
   }
   #monthtable tr{
     padding: 5px;
   }
-  #monthtable th{
-    text-align: left;
-  }
   #calendar {
     max-width: 50vw;
-    /* padding-top: 20px; */
-    /* padding-left: 250px; */
-    width: 80%;
+    padding-top: 20px;
+    padding-left: 80px;
+    width: 100%;
     float: left;
+  }
+  #row1{
+    border-bottom: 0.5px solid var(--text-gray);
   }
   
 
@@ -196,27 +200,19 @@
 </head>
 <body>
   <div id="wrap">
-   
+  <div id='calendar'></div>
   <div id="monthSales">
     <table id="monthtable">
-      <tr>
-        <th>이번 달 통계</th>
-      </tr>
-      <tr>
-        <th>매출</th>
+      <tr >
+        <td id="row1">매출</td>
+        <td id="row1">예약</td>
       </tr>
       <tr>
         <td><span id="inputTotal"></span></td>
-      </tr>
-      <tr>
-        <th>예약</th>
-      </tr>
-      <tr>
         <td><span id="inputTotalNum"></span></td>
       </tr>
     </table>
   </div>
-  <div id='calendar'></div>
   </div>
 
 </body>

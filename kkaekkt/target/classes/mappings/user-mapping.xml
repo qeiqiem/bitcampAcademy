@@ -6,8 +6,8 @@
 	</select>
 	<insert id="insertPs" parameterType="person">
 		INSERT INTO account
-		(id,password) VALUES
-		(#{id},#{password});
+		(id,password,mtype) VALUES
+		(#{id},#{password}, #{mtype});
 		INSERT INTO `member` VALUES
 		((SELECT MAX(mno) FROM
 		account),#{name},#{phone},#{birth},#{address},#{email});

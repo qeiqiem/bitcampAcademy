@@ -42,7 +42,7 @@ font-size: 16px;
     color:  var(--black-color);
     border: none;
     padding: 5px;
-    border-radius: 10px;
+    border-radius: 30px;
 }
 
 .content table th {

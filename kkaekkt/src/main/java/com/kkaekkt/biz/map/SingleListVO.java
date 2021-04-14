@@ -10,7 +10,8 @@ public class SingleListVO {
 	
 	//laundryinfo-------------------------
 	int no;
-	int mno; //알림 전송을 위한 업체의 mno
+	int mno; //알림 전송을 위한 업체의 mno?
+	int bno; //like 조회
 	int lno;
 	int price;
 	String product;
@@ -21,9 +22,20 @@ public class SingleListVO {
 	String mname;
 	String grade;
 	
+	
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="YYYY.MM.DD")
 	Date rdate;
 	
+
+	public int getBno() {
+		return bno;
+	}
+
+	public void setBno(int bno) {
+		this.bno = bno;
+	}
+
+
 	public int getMno() {
 		return mno;
 	}
@@ -118,13 +130,15 @@ public class SingleListVO {
 	public void setTime(String time) {
 		this.time = time;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "SingleListVO [no=" + no + ", lno=" + lno + ", price=" + price + ", product=" + product + ", name="
-				+ name + ", week=" + week + ", time=" + time + "]";
+		return "SingleListVO [no=" + no + ", mno=" + mno + ", bno=" + bno + ", lno=" + lno + ", price=" + price
+				+ ", product=" + product + ", name=" + name + ", week=" + week + ", time=" + time
+				+ ", content=" + content + ", mname=" + mname + ", grade=" + grade + ", rdate=" + rdate + "]";
 	}
 
+	
 	
 	
 }
