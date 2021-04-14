@@ -23,7 +23,7 @@
 			</div>
 			<div class="head_logo">
 				<div class="logo">
-					<a href="/index.do"> <img src="/img/logo.png" alt="">
+					<a href="/index.do"> <img id="logoImg" src="/img/logo.png" alt="">
 					</a>
 				</div>
 			</div>
