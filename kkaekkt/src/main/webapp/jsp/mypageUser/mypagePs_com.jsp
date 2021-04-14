@@ -89,7 +89,7 @@
 				mname:`${sessionScope.user.name}`,
 				currentPageNum:1,
 				listType:1,
-                state:1
+                state:3
             };
 			var likeObj={mno:${sessionScope.user.mno}};
 			var commObj={};
