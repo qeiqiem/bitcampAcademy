@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+</head>
+<script>
+    /* 
+    https://openweathermap.org/current   //api사이트
+    5da980755c49bb363969b9ad694421ac    // apikey
+    https://namjackson.tistory.com/27   // 참고블로그
+    https://erikflowers.github.io/weather-icons/        // 날씨 아이콘 부트스트랩
+    화씨에서 섭씨로( ==  섭씨 = 화씨 -273 )
+    */
+
+    window.onload = function () {
+        var apiURI = "https://api.openweathermap.org/data/2.5/weather?q="+"seoul"+",KR&appid=" + "5da980755c49bb363969b9ad694421ac"; // 우편번호가 안되서 일단 도시명으로..
+        var imgURL;
+        $.ajax({
+            url: apiURI,
+            dataType: "json",
+            type: "GET",
+            async: "false",
+            success: function (resp) {
+                console.log(resp);
+                console.log("현재온도 : " + (resp.main.temp - 273.15));
+                console.log("현재습도 : " + resp.main.humidity);
+                console.log("날씨 : " + resp.weather[0].main);
+                console.log("상세날씨설명 : " + resp.weather[0].description);
+                console.log("날씨 이미지 : " + resp.weather[0].icon);
+                console.log("바람   : " + resp.wind.speed);
+                console.log("나라   : " + resp.sys.country);
+                console.log("도시이름  : " + resp.name);
+                console.log("구름  : " + (resp.clouds.all) + "%");
+                imgURL = "http://openweathermap.org/img/w/" + resp.weather[0].icon + ".png";
+                $("#weatherImg").attr("src", imgURL);
+            }
+        })
+
+    }
+// 공공포탈 안되네유..
+// var url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService/getUltraSrtNcst'; /*URL*/
+// var queryParams = '?' + encodeURIComponent('ServiceKey') + '='+'aenOV8jTq15Z%2Bw5z%2Fv%2F%2Bc2bra5Xe7C%2Fkj0Jh5AfQXnvbMiZ%2F8EY3mdUqh0%2F8nxCNLX809Erp41ivPkXwRBqjAQ%3D%3D'; /*Service Key*/
+// queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /**/
+// queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('10'); /**/
+// queryParams += '&' + encodeURIComponent('dataType') + '=' + encodeURIComponent('JSON'); /**/
+// queryParams += '&' + encodeURIComponent('base_date') + '=' + encodeURIComponent('20210414'); /**/
+// queryParams += '&' + encodeURIComponent('base_time') + '=' + encodeURIComponent('1100'); /**/
+// queryParams += '&' + encodeURIComponent('nx') + '=' + encodeURIComponent('59'); /**/
+// queryParams += '&' + encodeURIComponent('ny') + '=' + encodeURIComponent('126'); /**/
+
+// window.onload = function () {
+//         var apiURI = url + queryParams; 
+//         var imgURL;
+//         $.ajax({
+//             url: apiURI,
+//             //dataType: "json",
+//             type: "GET",
+//             async: "false",
+//             success: function (resp) {
+//                 console.log(resp);
+              
+//             }
+//         })
+
+//     }
+
+</script>
+<body>
+    <img id="weatherImg" src="">
+</body>
+</html>
