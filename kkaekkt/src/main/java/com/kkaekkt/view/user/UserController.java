@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.kkaekkt.biz.comm.ChatVO;
 import com.kkaekkt.biz.user.AccountVO;
 import com.kkaekkt.biz.user.BusinessVO;
 import com.kkaekkt.biz.user.PersonVO;
@@ -31,6 +32,13 @@ public class UserController {
 
 	@Autowired
 	private JavaMailSender mailSender;
+	
+	@RequestMapping(value="/crtRoom.do",method=RequestMethod.POST)
+	@ResponseBody
+	public String crtRoom(ChatVO vo) {
+		Gson gson = new Gson();
+		return gson.toJson(userService.getRoomNum(vo));
+	}
 	
 	@RequestMapping(value="/index.do",method={RequestMethod.GET,RequestMethod.POST})
 	public String index(HttpSession session,Model model) {

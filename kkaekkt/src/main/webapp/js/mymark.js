@@ -313,7 +313,7 @@ function sendAlarm() {
                 var receiver=alertObj.addressee;
                 var msg='<li>'+
                             '<div class="msgTop">'+
-                                '<span>[결제]</span> <span id="msg'+ano+'" class="msgBody">'+alertObj.msg+'</span>'+
+                                '<span class="msgHeader">[결제]</span> <span id="msg'+ano+'" class="msgBody">'+alertObj.msg+'</span>'+
                             '</div>'+
                             '<div class="msgBottom">'+
                                 '<span class="date">'+today()+'</span>'+

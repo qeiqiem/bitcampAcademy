@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="UserDAO">
+	<select id="getChatRog" resultType="chat">
+		SELECT sender,content,date_format(stime,'%Y.%m.%d %T') stime FROM chat WHERE roomnum=#{roomnum}
+		<if test='closetime!=""'><!-- 파라미터가 공백이 아니라면 -->
+			<![CDATA[AND stime>#{closetime}]]>
+		</if>
+		;
+	</select>
+	<update id="updateChatRog">
+		UPDATE SET state=1 FROM chat WHERE roomnum=#{roomnum} AND addressee=#{sender};
+	</update>
+	<update id="updateCloser">
+		UPDATE SET state=1 FROM closer WHERE roomnum=#{roomnum} AND closermno=#{sender}; 
+	</update>
+	<select id="chkCloser" resultType="chat">
+		SELECT if(count(closermno)=0,'null',date_format(closetime,'%Y.%m.%d %T')) closetime, 
+		       ifnull(state,0) state 
+		  FROM closer 
+		 WHERE roomnum=#{roomnum} 
+		   AND closermno=#{sender};
+	</select>
+	<insert id="createRoom">
+		INSERT INTO chatroom (bno,mno) VALUES (#{bno},#{mno});
+	</insert>
+	<select id="chkRoomNum" resultType="_int">
+		SELECT if(count(roomnum)=0,0,roomnum) FROM chatroom WHERE mno=#{mno} AND bno=#{bno};
+	</select>
 	<select id="bnoChk" resultType="_int">
 		SELECT count(bno) FROM business WHERE bno=#{bno};
 	</select>

@@ -14,6 +14,14 @@ function initEvent() {
         alertObj.addressee=Number($('#rsvBox'+rsvNum+' .mno').eq(0).attr('id').substr(3));
         cancelRsv(rsvNum);
     });
+    $('.rsvList').on("click",".chatBtn",function() {
+        //채팅방 만들기 코드
+        var bno=Number($(this).val());//업체번호 추출
+        chatObj.mno=alertObj.sender;
+        chatObj.bno=bno;
+        var bname=$(this).attr('id');//업체명 추출
+        crtRoom(bname);
+    });
     $('.page_next').click(function() {
         if(!$(this).hasClass('no')) {
             pageObj.currentPageNum+=1;
@@ -54,6 +62,7 @@ function initEvent() {
             likeOff(likeObj);
         }
     });
+    
 }
 function cancelRsv(rsvNum) {//주문 취소 버튼을 눌렀을 때 함수
     $.post({
@@ -95,7 +104,7 @@ function sendAlarm() {
                                 '<span class="byBs">by '+alertObj.senderName+' </span><span>⠀|⠀</span>'+
                                 '<span class="alertDate">'+today()+'</span>'+
                             '</div>'+
-                            '<i id="del'+ano+'"class="fas fa-times"></i>'+
+                            '<i id="del'+ano+'"class="fas fa-times alertDelBtn"></i>'+
                         '</li>'
                 socket.send(receiver+','+msgType+','+msg);//메시지 보냄
             }
@@ -226,7 +235,7 @@ function printlist(list) {
                     '</tr>'+
                 '</table>'+
                 '<div id="btnDiv'+value.rsvNum+'" class="btnDiv">'+
-                    '<button>채팅상담</button>'+
+                    '<button class="chatBtn" id="'+value.bname+'" value='+value.bno+'>채팅상담</button>'+
                     '<button id="detailBtn'+value.rsvNum+'"class="detailBtn">상세보기</button>'+
                     (value.timeOut==0?'<button disabled>':'<button id="cancelBtn'+value.rsvNum+'" class="cancelBtn">')// if 리뷰가 없으면 -> 7일이 지났으면 비활성화 아니면 활성화
                     +'주문취소</button>'+
