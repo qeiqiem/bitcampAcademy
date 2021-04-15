@@ -104,19 +104,13 @@ a {
 
 
 /* 채팅 css */
-
-
-.chatCont p{
-  margin: 0;
-}
-
 .chatContainer p{
   margin: 0;
 }
 .chatRogUl{
   margin: 0;
 }
-.chatCont{
+#chatCont{
   /* display: none; */
   float: right;
   width: 20vw;
@@ -130,6 +124,7 @@ a {
   border-top-right-radius: 0px;
   right: 10px;
   top: 15px;
+  color: black;
 }
 .chatHeader{
   width: 95%;
@@ -159,7 +154,9 @@ a {
 .chatList:hover{
   background-color: rgb(235, 235, 235);
 }
-
+.chatList p{
+  margin: 0;
+}
 .chatList li{
   display: inline-block;
   height: 65px;
@@ -169,11 +166,11 @@ a {
   margin-left: 10px;
   float: left;
   width: 55%;
+  font-weight: normal;
 }
 .chatList li:nth-child(1) p:nth-child(1){
   font-size: 14px;
   font-weight: bolder;
-  width: 200px;
 }
 
 .chatList li:nth-child(1) p:nth-child(2){
