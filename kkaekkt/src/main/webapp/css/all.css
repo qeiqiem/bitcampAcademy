@@ -75,7 +75,7 @@ ul {
   background: black;
   opacity: 57%;
   z-index: 999;
-  position: absolute;
+  position: fixed;
 }
 
 .animate__animated.animate__fadeInUp {
