@@ -17,7 +17,9 @@
     */
 
     window.onload = function () {
-        var apiURI = "https://api.openweathermap.org/data/2.5/weather?q="+"seoul"+",KR&appid=" + "5da980755c49bb363969b9ad694421ac"; // 우편번호가 안되서 일단 도시명으로..
+        var lat = "37.59856"; // 위도
+        var lon = "126.9783";   // 경도
+        var apiURI = "https://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&appid=" + "5da980755c49bb363969b9ad694421ac"; // 우편번호가 안되서 일단 도시명으로..
        // let city = document.getElementById("city").value;
         let imgURL;
             $.ajax({
@@ -27,8 +29,8 @@
             async: "false",
             success: function (resp) {
                 console.log(resp.weather);
-                var temper = Math.floor(resp.main.temp - 273.15);
-                console.log("현재온도 : " + (temper));
+                 
+                console.log("현재온도 : " + Math.floor(resp.main.temp - 273.15));
                 console.log("현재습도 : " + resp.main.humidity);
                 console.log("날씨 : " + resp.weather[0].main);
                 console.log("상세날씨설명 : " + resp.weather[0].description);
@@ -38,8 +40,28 @@
                 console.log("도시이름  : " + resp.name);
                 console.log("구름  : " + (resp.clouds.all) + "%");
                 imgURL = "/img/weather/" + resp.weather[0].icon + ".png";
+                var weatherText;
+                if(resp.weather[0].main == "Clear"){
+                    weatherText = "맑음"
+                } else if(resp.weather[0].main == "Rain"){
+                    weatherText = "비"
+                } else if(resp.weather[0].main == "Thunderstorm"){
+                    weatherText = "천둥번개"
+                } else if(resp.weather[0].main == "Clouds"){
+                    weatherText = "구름"
+                } else if(resp.weather[0].main == "Snow"){
+                    weatherText = "눈"
+                } else if(resp.weather[0].main == "Drizzle"){
+                    weatherText = "이슬비"
+                } else if(resp.weather[0].main == "Haze"){
+                    weatherText = "안개"
+                } else if(resp.weather[0].main == "Mist"){
+                    weatherText = "옅은 안개"
+                }
                 $("#weatherImg").attr("src", imgURL);
-                $("#temper").text(temper + "℃");
+                $("#weatherMain").text(weatherText);
+                $("#temp").text( Math.floor(resp.main.temp - 273.15) + "℃");
+                $("#humidity").text(resp.main.humidity + "%");
             }
         })
         
@@ -73,9 +95,58 @@
 //     }
 
 </script>
+<style>
+.boxLeft {
+    float: left;
+    padding-top: 13px;
+    width: 50px;
+}
+#weatherImg{
+    width: 45px;
+    height: auto;
+}
+.boxRight {
+    float: left;
+    font-size: 15px;
+    height: 70px;
+    padding-top: 10px;
+    text-align: center;
+}
+
+.boxRight table th, td{
+    padding: 0 14px 3px 0;
+}
+.boxCenter {
+    float: left;
+    font-size: 25px;
+    font-weight: bolder;
+    height: 70px;
+    padding: 15px;
+    text-align: center;
+}
+
+</style>
 <body>
-    <img id="weatherImg" src="">
-    <p id="img"></p>
-    <div id="temper"></div>
+    <div class="weatherBox">
+        <div class="boxLeft">
+            <img id="weatherImg" src=""><br>
+        </div>
+        <div class="boxCenter">
+            <span id="weatherMain"></span>
+        </div>
+        <div class="boxRight">
+            <table>
+                <tr>
+                    <th>온도</th>
+                    <th>습도</th>
+                </tr>
+                <tr>
+                    <td id="temp"></td>
+                    <td id="humidity"></td>
+                </tr>
+            </table>
+        </div>
+        
+    </div>
 </body>
 </html>

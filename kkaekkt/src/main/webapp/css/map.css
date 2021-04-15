@@ -473,7 +473,7 @@
     height: 30px;
 }
 #single_table p{
-  margin: 0
+  margin-bottom: 6px;
 }
 
 .tag_kkaekkt{
@@ -526,8 +526,16 @@
     text-align: left;
 }
 
+#single_option th{
+  padding-top: 20px;
+  padding-bottom: 20px
+}
 
-/*  뾽泥댁젙蹂 /由щ럭 踰꾪듉 젣 뼱------------------------ */
+#single_option td{
+	padding-bottom: 10px
+}
+
+/* ????------------------------ */
 .infoBtn{
     width: 50%;
     height: 40px;
@@ -963,4 +971,11 @@
     
     #heart{
     	display: none;
+    }
+    
+    .weektext{
+    font-weight: bolder;
+    margin-right: 10px;
+    padding-bottom: 6px;
+    display: inline-block;
     }

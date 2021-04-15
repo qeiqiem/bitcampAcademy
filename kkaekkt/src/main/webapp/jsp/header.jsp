@@ -10,8 +10,10 @@
 	<header class="head_container">
 		<nav class="head">
 			<div class="menu">
-				<a href="/showMap.do?type=1">일반세탁소</a>
-				<a href="/showMap.do?type=2">코인세탁소</a>
+				<ul>
+					<li><a href="/showMap.do?type=1">일반세탁소</a></li>
+					<li><a href="/showMap.do?type=2">코인세탁소</a></li>
+				</ul>
 			</div>
 			<div class="head_logo">
 				<div class="logo">
@@ -19,7 +21,6 @@
 					</a>
 				</div>
 			</div>
-
 			<div class="head_right">
 				<ul>
 					<li><a href="/jsp/join/joinTerms.html">회원가입</a></li>
