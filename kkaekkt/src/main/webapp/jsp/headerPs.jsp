@@ -63,7 +63,7 @@
 											<p>글씨가 넘어가면 어떻게되지요?</p>
 										</li>
 										<li>
-											<button class="chatBtn">나가기</button>
+											<button class="chatExitBtn">나가기</button>
 										</li>
 									</ul>
 								</div>
