@@ -1,11 +1,16 @@
 $(document).ready(function() {
 		
 		$("#modal_show").click(function() {
+			$("#mask").show();
 			$("#modal_container").show()
 		})
 		$("#modal_close").click(function() {
 			$("#modal_container").hide()
 		})
+		  $("#mask").on("click", function () {
+    		$("#modal_container").hide();
+    		$("#mask").hide();
+  });
 	})
 
 

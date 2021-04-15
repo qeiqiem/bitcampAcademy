@@ -38,11 +38,12 @@
 
 .menu ul li {
   float: left;
-  margin-right: 30px;
+  margin-right: 58px;
 }
+
 .head_right ul li {
   float: left;
-  margin-left: 36px;
+  margin-left: 24px;
 }
 .head_right {
   display: flex;
