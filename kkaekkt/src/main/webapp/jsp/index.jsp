@@ -53,37 +53,41 @@
                     <jsp:include page="/jsp/header.jsp"></jsp:include>
                 </c:otherwise>
             </c:choose>
+            <script type="text/javascript">
+                window.onload = function () {
+                    document.getElementById("logoImg").src = "/img/logo-white.png"
+
+                }
+            </script>
             <link rel="stylesheet" href="/css/indexFullpage.css">
             <div id="full-page">
                 <div class="section index0">
+                    <!-- <div class="body_container"> -->
+                    <video src="/img/girl.mp4" muted loop autoplay></video>
+                    <!-- <h2>깨끗하게 간편하게 끝.</h2> -->
+                    <div class="search">
+                        <div class="search_btn">
 
-
-                    <div class="body_container">
-                        <video src="/img/girl.mp4" muted loop autoplay></video>
-                        <!-- <h2>깨끗하게 간편하게 끝.</h2> -->
-                        <div class="search">
-                            <div class="search_btn">
-
-                                <!-- <h1 class="animate__animated animate__fadeInUp">오늘은 <br> -->
-                                <h1>오늘은 <br>
-                                    어디서 <br>
-                                    빨래를 할까요?
-                                </h1>
-                                <div class="search_tab">
-                                    <button class="btn1" type="button" onclick="">일반세탁소</button>
-                                    <button class="btn2" type="button" onclick="">코인세탁소</button>
-                                </div>
-                            </div>
-
-                            <div class="search_box">
-                                <input type="text" placeholder="동네 또는 세탁소 이름을 입력해주세요" name="search" id="searchBar">
-                                <button onclick='location.href="/showMap.do"'>
-                                    <i class="fas fa-search fa-lg "></i>
-                                    <!-- <i class="fas fa-search fa-2x"></i> -->
-                                </button>
+                            <!-- <h1 class="animate__animated animate__fadeInUp">오늘은 <br> -->
+                            <h1>오늘은 <br>
+                                어디서 <br>
+                                빨래를 할까요?
+                            </h1>
+                            <div class="search_tab">
+                                <button class="btn1" type="button" onclick="">일반세탁소</button>
+                                <button class="btn2" type="button" onclick="">코인세탁소</button>
                             </div>
                         </div>
+
+                        <div class="search_box">
+                            <input type="text" placeholder="동네 또는 세탁소 이름을 입력해주세요" name="search" id="searchBar">
+                            <button onclick='location.href="/showMap.do"'>
+                                <i class="fas fa-search fa-lg "></i>
+                                <!-- <i class="fas fa-search fa-2x"></i> -->
+                            </button>
+                        </div>
                     </div>
+                    <!-- </div> -->
                 </div>
                 <!-- img page -->
                 <div class="section index1">
@@ -131,10 +135,10 @@
                         </div>
                         <div>
                             <ul>
-                                <li><a href="">이용약관</a></li>
-                                <li><a href="">자주묻는 질문</a></li>
+                                <li><a href="#">이용약관</a></li>
+                                <li><a href="/jsp/faq.jsp">자주묻는 질문</a></li>
                                 <li><a href="mailto:kkaekkt@naver.com">제휴문의</a></li>
-                                <li><a href="">About kkaekkt</a></li>
+                                <li><a href="#">About kkaekkt</a></li>
                             </ul>
                         </div>
                     </footer>

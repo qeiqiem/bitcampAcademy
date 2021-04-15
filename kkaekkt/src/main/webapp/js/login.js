@@ -1,4 +1,16 @@
 $(document).ready(function() {
+		
+		$("#modal_show").click(function() {
+			$("#modal_container").show()
+		})
+		$("#modal_close").click(function() {
+			$("#modal_container").hide()
+		})
+	})
+
+
+
+$(document).ready(function() {
   $('#login').click(function(){ 
     login();
   });
@@ -12,14 +24,15 @@ function login() {
     url:"/login.do",
     data:userData,
     success:function(result) {
+    console.log("로그인js" + result)
       if(result=='fail'){
-        alert('id 혹은 password가 일치하지 않습니다.')
-      }else if(result=='1'){
+        alert('id 혹은 password가 일치하지 않습니다.');
+        
+      }else if(result == 1){
         location.href="/index.do";
-      }else if(result=='2'){
+        
+      }else if(result == 2){
         location.href='/jsp/mypageBiz/mpbProg_Num.jsp';
-      }else if(result=='3'){
-      	location.href='/jsp/mypageBizCoin/coinbio.jsp';
       }
     }
   })

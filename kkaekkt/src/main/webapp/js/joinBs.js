@@ -157,6 +157,7 @@ function initEvent() {
   });
 
   $("#id").focusout(function () {
+    document.getElementById("idchk").style.color = "var(--text-red)";
     $("#idchk").removeClass("hide");
     if ($("#id").val() == "") {
       // alert("아이디를 입력하세요.");

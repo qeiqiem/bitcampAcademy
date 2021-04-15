@@ -10,20 +10,23 @@
 	<header class="head_container">
 		<nav class="head">
 			<div class="menu">
-				<a href="/showMap.do?type=1">일반세탁소</a>
-				<a href="/showMap.do?type=2">코인세탁소</a>
+				<ul>
+					<li><a href="/showMap.do?type=1">일반세탁소</a></li>
+					<li><a href="/showMap.do?type=2">코인세탁소</a></li>
+				</ul>
 			</div>
 			<div class="head_logo">
 				<div class="logo">
-					<a href="/index.do"> <img src="/img/logo-white.png" alt="">
+					<a href="/index.do"> <img id="logoImg" src="/img/logo.png" alt="">
 					</a>
 				</div>
 			</div>
-
 			<div class="head_right">
-				<a href="/jsp/join/joinTerms.html">회원가입</a>
-				<a href="/jsp/login/login.jsp">로그인</a>
-				<a href="/jsp/faq.jsp">FAQ</a>
+				<ul>
+					<li><a href="/jsp/join/joinTerms.html">회원가입</a></li>
+					<li><a href="/jsp/login/login.jsp">로그인</a></li>
+					<li><a href="/jsp/faq.jsp">FAQ</a></li>
+				</ul>
 			</div>
 		</nav>
 	</header>

@@ -173,16 +173,16 @@ function initKeyEvent() {
   // id
   id.addEventListener("keyup", () => {
     formatidchk = 0;
-    if (!regId.test(id.value)) {
-      if (id.value.length == 0) {
-        document.getElementById("id_label").innerText = "";
-      } else {
-        document.getElementById("id_label").innerText =
-          "아이디는 6자 이상, 최소 하나의 알파벳(a-z)을 포함해야 합니다.";
-      }
-    } else {
-      document.getElementById("id_label").innerText = "";
-    }
+    // if (!regId.test(id.value)) {
+    //   if (id.value.length == 0) {
+    //     document.getElementById("id_label").innerText = "";
+    //   } else {
+    //     document.getElementById("id_label").innerText =
+    //       "아이디는 6자 이상, 최소 하나의 알파벳(a-z)을 포함해야 합니다.";
+    //   }
+    // } else {
+    //   document.getElementById("id_label").innerText = "";
+    // }
   });
 
   // pw
@@ -309,26 +309,24 @@ function initKeyEvent() {
 } // window onload
 
 // 중복확인
-// function fn_idchk() {}
-
 $("#id").focusout(function () {
+  const idLbl = document.getElementById("id_label");
+  idLbl.style.color = "var(--text-red)";
   if ($("#id").val() == "") {
     // alert("아이디를 입력하세요.");
-    document.getElementById("id_label").innerText =
-      "아이디는 필수 입력사항입니다.";
+    idLbl.innerText = "아이디는 필수 입력사항입니다.";
     $("#id").focus();
     return false;
   }
   if ($("#id").val().length < 6) {
     // alert("아이디를 6자 이상으로 입력해 주세요.");
-    document.getElementById("id_label").innerText =
-      "아이디를 6자 이상으로 입력해 주세요.";
+    idLbl.innerText = "아이디를 6자 이상으로 입력해 주세요.";
     $("#id").focus();
     return false;
   }
   if (!regId.test(id.value)) {
     // alert("아이디는 6자 이상, 최소 하나의 알파벳(a-z)을 포함해야 합니다.");
-    document.getElementById("id_label").innerText =
+    idLbl.innerText =
       "아이디는 6자 이상, 최소 하나의 알파벳(a-z)을 포함해야 합니다.";
     $("#id").focus();
     return false;
@@ -343,16 +341,14 @@ $("#id").focusout(function () {
     success: function (data) {
       // console.log(data);
       var key = JSON.parse(data);
-      if (key == 1) {
-        document.getElementById("id_label").innerText =
-          "중복된 아이디가 있습니다.";
+      if (key != 0) {
+        idLbl.innerText = "중복된 아이디가 있습니다.";
         // alert("중복된 아이디가 있습니다.");
       } else if (key == 0) {
         formatidchk = 1;
         // alert("사용 가능한 아이디입니다.");
-        document.getElementById("idchk").style.color = "var(--key-text)";
-        document.getElementById("id_label").innerText =
-          "사용 가능한 아이디입니다.";
+        idLbl.style.color = "var(--key-text)";
+        idLbl.innerText = "사용 가능한 아이디입니다.";
       }
     },
   });

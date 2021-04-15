@@ -2,81 +2,97 @@
   top: 0;
   position: fixed;
   width: 100%;
-  /* background-color: rgba(255, 255, 255, 0.705); */
+  height: 75px;
   background-color: white;
   z-index: 4;
   flex-wrap: wrap;
+  color: var(--dark-gray);
+}
+.head_container a {
+  text-decoration: none;
+  color: var(--dark-gray);
 }
 
 .head {
   display: flex;
   justify-content: space-between;
-  padding: 13px 50px;
+  /* padding: 9px 50px; */
+  padding: 0 100px;
   flex-wrap: wrap;
 }
 
-.head_logo {
-  display: flex;
-  flex-wrap: wrap;
-}
-.logo {
-  margin-right: 30px;
-}
-
-.logo img {
-  width: 150px;
-  padding: 10px;
-}
-
-.menu a {
-  margin: 0 25px;
-}
-
-.head_right a {
-  margin: 0 15px;
-}
-.head_right input {
-  margin-right: 10px;
-  text-align: right;
-  border: none;
-  font-size: 15px;
-}
-
-a {
-  text-decoration: none;
-  color: var(--dark-gray);
-}
-
-a:hover {
-  /* color: var(--black-color); */
-}
+/* .menu a {
+  margin-right: 25px;
+} */
 
 .menu {
-  font-size: 1.4em;
-  /* margin: auto; */
+  display: flex;
   margin: auto 0;
   bottom: 0;
-  margin-left: 20px;
+  /* margin: auto; */
+  /* bottom: 0; */
+  /* margin-left: 20px; */
   font-weight: bolder;
+  font-size: 23px;
 }
 
+.menu ul li {
+  float: left;
+  margin-right: 30px;
+}
+.head_right ul li {
+  float: left;
+  margin-left: 36px;
+}
 .head_right {
   display: flex;
   margin: auto 0;
   bottom: 0;
-  font-size: 1.1em;
+  font-size: 19px;
   font-weight: bolder;
 }
+.head_right .fas {
+  font-size: 23px;
+  cursor: pointer;
+}
+.head_right span {
+  font-size: larger;
+}
+.head_logo {
+  display: flex;
+  flex-wrap: wrap;
+  position: fixed;
+  margin: auto 0;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 9px;
+}
+/* .logo {
+  margin-right: 30px;
+} */
+
+.logo img {
+  width: 195px;
+  padding: 10px;
+}
+
+/* 비회원일 때 margin */
+/* .head_right a { 
+  margin: 0 15px;
+} */
+/* .head_right input {
+  margin-right: 10px;
+  text-align: right;
+  border: none;
+  font-size: 15px;
+} */
 
 #bellBox,
 #chatBox {
   margin: 0 10px;
   position: relative;
 }
-.head_right .fas {
-  font-size: 23px;
-  cursor: pointer;
-}
+
 #bellBox .redDot {
   /*종 레드 닷*/
   position: absolute;
