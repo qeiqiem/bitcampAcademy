@@ -2,53 +2,72 @@
   top: 0;
   position: fixed;
   width: 100%;
-  /* background-color: rgba(255, 255, 255, 0.705); */
   background-color: white;
   z-index: 4;
   flex-wrap: wrap;
+  color: var(--dark-gray);
+}
+.head_container a {
+  text-decoration: none;
+  color: var(--dark-gray);
 }
 
 .head {
   display: flex;
   justify-content: space-between;
-  padding: 13px 50px;
+  padding: 9px 50px;
   flex-wrap: wrap;
-}
-
-.head_logo {
-  display: flex;
-  flex-wrap: wrap;
-}
-.logo {
-  margin-right: 30px;
-}
-
-.logo img {
-  width: 150px;
-  padding: 10px;
 }
 
 .menu a {
   margin: 0 25px;
 }
 
-.head_right a {
-  margin: 0 15px;
+.head_right ul li {
+  float: left;
+  margin: 0 10px;
 }
-.head_right input {
+.head_right {
+  display: flex;
+  margin: auto 0;
+  bottom: 0;
+  font-size: 15px;
+  font-weight: bolder;
+}
+.head_right .fas {
+  font-size: 23px;
+  cursor: pointer;
+}
+
+.head_logo {
+  display: flex;
+  flex-wrap: wrap;
+  position: fixed;
+  margin: 0 auto;
+  left: 50%;
+  transform: translateX(-50%);
+}
+/* .logo {
+  margin-right: 30px;
+} */
+
+.logo img {
+  width: 200px;
+  padding: 10px;
+}
+
+/* 비회원일 때 margin */
+/* .head_right a { 
+  margin: 0 15px;
+} */
+/* .head_right input {
   margin-right: 10px;
   text-align: right;
   border: none;
   font-size: 15px;
-}
-
-a {
-  text-decoration: none;
-  color: var(--dark-gray);
-}
-
-a:hover {
-  /* color: var(--black-color); */
+} */
+.head_right span {
+  font-size: larger;
 }
 
 .menu {
@@ -60,23 +79,12 @@ a:hover {
   font-weight: bolder;
 }
 
-.head_right {
-  display: flex;
-  margin: auto 0;
-  bottom: 0;
-  font-size: 1.1em;
-  font-weight: bolder;
-}
-
 #bellBox,
 #chatBox {
   margin: 0 10px;
   position: relative;
 }
-.head_right .fas {
-  font-size: 23px;
-  cursor: pointer;
-}
+
 #bellBox .redDot {
   /*종 레드 닷*/
   position: absolute;
