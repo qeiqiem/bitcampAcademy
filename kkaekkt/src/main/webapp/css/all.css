@@ -21,7 +21,7 @@ body {
 }
 
 .body_container {
-  /* position : relative해야 Footer 밑으로 내려감 */
+  /* position : relative해야 밑으로 내려감 */
   position: relative;
   top: 11vh;
   width: 100vw;
@@ -61,11 +61,11 @@ button {
 input {
   outline: none;
 }
-
 ul {
   text-decoration: none;
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 #mask {
@@ -88,4 +88,212 @@ ul {
 
 .key-sel {
   color: var(--key-text);
+}
+
+
+/* 채팅 css */
+
+.chatCont p{
+  margin: 0;
+}
+
+.chatContainer p{
+  margin: 0;
+}
+.chatCont{
+  /* display: none; */
+  float: right;
+  width: 20vw;
+  background-color: white;
+  border: 1px solid lightgray;
+  border-radius: 20px;
+  box-shadow: lightgrey 3px 3px 10px 1px;
+  margin-top: 20px;
+  padding-bottom: 25px;
+  position: absolute;
+  border-top-right-radius: 0px;
+  right: 10px;
+  top: 15px;
+}
+.chatHeader{
+  width: 95%;
+  height: 38px;
+  margin: 20px auto 5px;
+  box-shadow: 0px 1px 0px 0px lightgrey;
+}
+.chatHeader p {
+  text-align: left;
+  margin-left: 30px;
+  font-weight: 500;
+  font-size: 18px;
+  color: rgb(73,135,255);;
+}
+
+.chatList{
+  list-style: none;
+  width: 75%;
+  height: 50px;
+  margin: 15px 10px 0;
+  padding: 0 23px 0 23px;
+  padding-block-start: 15px;
+  border: 1px solid lightgray;
+  border-radius: 20px;
+}
+
+.chatList:hover{
+  background-color: rgb(235, 235, 235);
+}
+
+.chatList li{
+  display: inline-block;
+  height: 65px;
+}
+
+.chatList li:nth-child(1){
+  margin-left: 10px;
+  float: left;
+  width: 55%;
+}
+.chatList li:nth-child(1) p:nth-child(1){
+  font-size: 14px;
+  font-weight: bolder;
+  width: 200px;
+}
+
+.chatList li:nth-child(1) p:nth-child(2){
+  font-size: 12px;
+  width: 130px;
+  height: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.chatList li:nth-child(2){
+  float: right;
+}
+.chatBtn{
+  width: 60px;
+  height: 30px;
+  float: right;
+  border: none;
+  border-radius: 20px;
+  background-color: rgb(235, 235, 235);
+  font-weight: 800;
+  color: rgb(73,135,255);
+  margin: 0% 0% 30%;
+}
+
+.chatBtn:hover{
+  background-color: rgb(73,135,255);
+  color: rgb(248, 248, 248);
+}
+
+.chatfooter{
+  margin: 0 auto;
+  width: 90%;
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.chatContainer{
+  width: 100%;
+  height: 470px;
+  position: fixed;
+  bottom: 0;
+  padding-right: 60px;
+  box-sizing: border-box;
+}
+.chatBox{
+  list-style-type: none;
+  float: right;
+  position: relative;
+  width: 340px;
+  height: 470px;
+  padding: 5px 5px;
+  box-sizing: border-box;
+  margin-bottom: 3px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  box-shadow: -2px 0px 8px 1px lightgrey;
+  background: white;
+  margin-left: 20px;
+}
+.chatBoxHeader{
+  position: relative;
+  padding: 10px 15px 15px 15px;
+  font-size: 18px;
+}
+.closeChatBtn{
+  position: absolute;
+  right: 15px;
+  top: 12px;
+  color: gray;
+  font-size: 20px;
+}
+.chatRogsUl{
+  height: 330px;
+  box-sizing: border-box;
+  padding: 0 15px;
+  overflow-y: scroll;
+}
+.chatInputBox{
+  width: 100%;
+  height: 80px;
+  position: absolute;
+  left: 0;
+  box-sizing: border-box;
+  padding: 10px 5px;
+}
+.chatText{
+  width: 69%;
+  border: none;
+  height: 60px;
+  padding: 0px 10px;
+  resize: none;
+  float: left;
+  outline: none;
+  box-sizing: border-box;
+}
+.chatWriteBtn{
+  width: 20%;
+  height: 35px;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  font-weight: 800;
+  color: white;
+  left: 20px;
+  background-color: rgb(73,135,255);
+  position: relative;
+  top: 12px;
+}
+.chatRogli{
+  margin-bottom: 10px;
+}
+.chatRight{
+  text-align: right;
+}
+.chatLeft{
+  text-align: left;
+}
+.chatRogP{
+  max-width: 70%;
+  word-break: break-all;
+  display: inline-block;
+  border-radius: 10px;
+  padding: 10px 15px;
+  font-size: 14px;
+}
+.timeRog{
+  color: gray;
+  font-size: 10px;
+}
+.chatGuest{
+  background-color: rgb(235, 235, 235);
+  border-bottom-left-radius: 0px;
+}
+.chatMine{
+  background-color: rgb(73,135,255);
+  color: white;
+  border-bottom-right-radius: 0px;
 }

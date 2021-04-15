@@ -50,7 +50,6 @@
 					<a href="/jsp/mypageBiz/mpbProg_Num.jsp">매장관리</a>
 				</div>
 			</div> -->
-
 			<div class="head_right">
 				<ul>
 					<li>
@@ -59,7 +58,7 @@
 					<li>
 						<div id="bellBox">
 							<i class="fas fa-bell"></i>
-							<span class="redDot">●</span>
+							<span class="redDot"></span>
 							<div id="noticeBox">
 								<ul>
 
@@ -72,7 +71,14 @@
 						<div id="chatBox">
 							<i class="fas fa-comments"></i>
 							<!-- <i class="far fa-comment-dots fa-lg"></i> -->
-							<span class="redDot">●</span>
+							<span class="redDot"></span>
+							<div class="chatCont">
+								<div class="chatHeader">
+										<p>💬 채팅상담</p>
+								</div>
+								<div class="chatfooter">
+								</div>
+							</div>
 						</div>
 					</li>
 					<li><a href="/logout.do">로그아웃</a></li>
@@ -80,4 +86,5 @@
 				</ul>
 			</div>
 		</nav>
+		<ul class="chatContainer"></ul>
 	</header>

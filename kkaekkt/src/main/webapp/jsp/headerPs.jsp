@@ -35,7 +35,7 @@
 					<li>
 						<div id="bellBox">
 							<i class="fas fa-bell"></i>
-							<span class="redDot">●</span>
+							<span class="redDot"></span>
 							<div id="noticeBox">
 								<ul>
 
@@ -48,7 +48,14 @@
 						<div id="chatBox">
 							<i class="fas fa-comments"></i>
 							<!-- <i class="far fa-comment-dots fa-lg"></i> -->
-							<span class="redDot">●</span>
+							<span class="redDot"></span>
+							<div class="chatCont">
+								<div class="chatHeader">
+										<p>💬 채팅상담</p>
+								</div>
+								<div class="chatfooter">
+								</div>
+							</div>
 						</div>
 					</li>
 					<li><a href="/jsp/mypageUser/mypagePs.jsp">마이페이지</a></li>
