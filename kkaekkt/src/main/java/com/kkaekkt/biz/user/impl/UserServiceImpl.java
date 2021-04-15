@@ -81,16 +81,29 @@ public class UserServiceImpl implements UserService {
 	public String deleteUser(AccountVO vo) {
 		System.out.println("회원탈퇴 서비스 옴");
 		int result = userDao.orderChk(vo);
-		System.out.println(result);
+		System.out.println("예약수가 " + result);
 
-		// result가 0이면 삭제
-		// 1이면 삭제 안 함
-		if (result == 0) {
-			userDao.deleteUser(vo);
-			return "success";
-		} else {
-			return "fail";
-		}
+		// 이걸로 하면 다 fail로 감
+//		if (result == 0) {
+//			if (1 == userDao.deleteUser(vo)) {
+//				return "success";
+//			} else {
+//				return "fail";
+//			}
+//		}
+//		return "fail";
+		
+		// 이걸로하면 다 success로 감...
+//			 result가 0이면 삭제
+// 					 1이면 삭제 안 함
+	      if (result != 0) {
+	         return "fail";
+	      } else {
+	         userDao.deleteUser(vo);
+	         return "success";
+	         
+	      }
+
 	}
 
 	// 로그인 들

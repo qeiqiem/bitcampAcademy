@@ -14,28 +14,14 @@ textarea {
 #modal_container {
 	display: none;
 	position: relative;
-	margin: auto;
+	margin: 0 auto;
 	width: 364px;
 	height: 550px;
 	background-color: white;
 	border: 1px solid lightgray;
-	box-shadow: 5px 12px 5px rgb(212, 212, 212);
+	/*box-shadow: 5px 12px 5px rgb(212, 212, 212);*/
 }
 
-#starVal {
-	float: left;
-	margin-left: 21px;
-	font-size: 36px;
-	width: 28px;
-	height: 44px;
-	border: 0px;
-	background: none;
-	text-align: center;
-	color: rgba(97, 97, 97, 1);
-	font-family: Noto Sans KR;
-	font-style: normal;
-	font-weight: bold;
-}
 
 #modal_close {
 	float: right;
@@ -45,7 +31,8 @@ textarea {
 	background: white;
 	margin: 18px 20px 0 0;
 	font-size: 24px;
-	border: 1px solid lightgray;
+	border: none;
+	cursor: pointer;
 }
 
 #modal_bodycont {
@@ -62,10 +49,10 @@ textarea {
 }
 
 #modal_foot {
-	
 	margin-top: 300px;
-	width: 80%;
-	height: 500px;
+	margin-left: 23%;
+	/* width: 80%;
+	height: 500px;*/
 }
 #modal_foot input{
 	width : 100px;
