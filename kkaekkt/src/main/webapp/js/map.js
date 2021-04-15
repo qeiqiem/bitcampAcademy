@@ -1,17 +1,15 @@
-
-
 /* 실제 사용 이벤트  */
 $(document).ready(function() {
-	
+	 $(".head_container").css("box-shadow", "1px 2px 4px 5px lightgrey");
 	var rsvObj={};
    // method/var-----------------------------------------------------------------------
-   var adrress = "서울 용산"
+   
    var random = Math.floor(Math.random() * 10) + "," + "000"
    var bno = ""
    var totalPrice = 0
    var name = ""
    selectNum()
-   
+  
 
    // [Click 이벤트]----------------------------------------------------------------------
    $("#agreement i").click(function() {//약관 클릭 시
@@ -23,7 +21,7 @@ $(document).ready(function() {
       }else{
           $('.termsText').eq($(this).attr('value')).hide();
       }
-  });
+   })
    /* [사이드바] */
    // 1. 리스트 : 슬라이드 show
    $('.foldBtn').click(function() {
@@ -100,6 +98,10 @@ $(document).ready(function() {
 	   
    })
    
+   $("#outPaybtn").click(function() {
+	   choicePay.hide();
+   })
+   
    //예약항목 옵션 클릭시 감지
    $("#resShortOpt").on("click", 'input:checkbox', function() {
       //체크란 row의 값
@@ -148,7 +150,7 @@ $(document).ready(function() {
       if(totalPrice == 0 && totalPrice == "" ){
          alert("지불할 금액이없습니다. 옵션을 선택해주세요.")
       }else {
-		  /*$("#mask").show()*/
+		  $("#mask").show()
     	  $(".choicePay").show();
       }     
    })
@@ -198,7 +200,7 @@ $(document).ready(function() {
    }
 
    // 검색결과 COMMENT 보이게하기
-   function viewSearch(clone) { $(".slide_mini").html(clone + "&nbsp&nbsp검색결과") }
+   function viewSearch(clone) { $(".slide_mini").html(clone) }
 
    //단일 업체 db data 뽑아오기
    function findSingle(s_title) {
@@ -210,9 +212,9 @@ $(document).ready(function() {
       
       //화면정보 출력
       name = s_title[0].innerText.substr(3)
-      var star = s_title[2].innerHTML
-      var address = s_title[3].innerHTML   
-      var phone = s_title[4].innerHTML
+      var star = s_title[1].innerHTML
+      var address = s_title[2].innerHTML   
+      var phone = s_title[3].innerHTML
         if(star != null)
            $("#memberlog").html('<input class="tag_kkaekkt" value="kkarkkt 가맹점 입니다">')       
            
@@ -257,7 +259,7 @@ $(document).ready(function() {
                               for (var i = 0; i <7; i++) {
                                         var week = data[i].week                 
                                         var time = data[i].time
-                                        html += "&nbsp&nbsp&nbsp&nbsp"+week+" : "+time+"</br>"
+                                        html += "&nbsp&nbsp&nbsp&nbsp<span class='weektext'>"+week+"</span>&nbsp"+time+"</br>"
                                    }
                         $("#s_time").append(html)         
                        }   
@@ -273,15 +275,15 @@ $(document).ready(function() {
         	   			$("#single_option").empty()
                         if(data==null)console.log("data 가 조회되지 않았습니다.") 
                         var html =  ''
-                            html += '<tr><td class="option_title">1~3일 소요</td>'
-                            html += '<td class="option_title">금액(개당)</td></tr>'
+                            html += '<tr><th class="option_title">1~3일 소요</th>'
+                            html += '<th class="option_title">금액(개당)</th></tr>'
                               for (var j = 0; j <4; j++) {
                                         var item = data[j].product              
                                         var price = data[j].price
                                         html += '<tr><td>'+item+'</td><td>'+price+'</td></tr>'
                                     }
-                           html += '<tr><td class="option_title">4~7일 소요</td>'
-                           html += '<td class="option_title">금액(개당)</td></tr>'
+                           html += '<tr><th class="option_title">4~7일 소요</th>'
+                           html += '<th class="option_title">금액(개당)</td></tr>'
                               for (j; j <8; j++) {
                                         var longitem = data[j].product              
                                         var longprice = data[j].price
@@ -431,7 +433,7 @@ $(document).ready(function() {
                            html +='<td colspan="2" class="totalAll"></td></tr>'  
                            html +='<input type="hidden" id="addressee" value="'+data[0].mno+'">'
                         $("#resShortOpt").append(html)
-                        $("#selname").append(name)
+                        $("#selname").append('<span style="font-weight: 500;">'+name+'</span>')
                        
                        selectNum()
                   } 

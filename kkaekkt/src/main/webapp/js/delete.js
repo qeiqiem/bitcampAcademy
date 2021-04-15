@@ -18,8 +18,8 @@ function deleteUser() {
 		success: function(result){
 			if(result=='success'){
 				alert("!회원탈퇴!");
-				location.href="/index.do"
-			}if(result=='fail'){
+				location.href="/logout.do"
+			}else {
 				alert("실패. 다시 한 번 확인해주세요!");
 				location.href="/jsp/mypageUser/Test_mybio.jsp"	
 			}
