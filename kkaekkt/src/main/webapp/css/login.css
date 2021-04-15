@@ -1,6 +1,7 @@
-*{
-	box-sizing:border-box;
+* {
+	box-sizing: border-box;
 }
+
 .body_container {
 	width: 100%;
 	padding-top: 80px;
@@ -29,7 +30,7 @@ hr {
 	width: 85%;
 }
 
-#btn_login {
+#login {
 	width: 324px;
 	height: 59px;
 	left: 557px;
@@ -46,7 +47,12 @@ input {
 	margin: 10px;
 	border-radius: 10px;
 }
-.login_box input{
+
+.login_box {
+	margin-left: 12%;
+}
+
+.login_box input {
 	border: solid 1px #C4C4C4;
 }
 
@@ -59,26 +65,101 @@ input {
 
 a {
 	text-decoration: none;
-	color: #000;
+	/*color: #000;*/
 	margin: 10px
 }
+
+8
 .loginTitle {
 	text-align: center;
 	margin-bottom: 60px;
 }
-.login_API img{
-	width: 60px;
-    height: 60px;
-}
-.login_foot p {
-	font-size : 9pt;
-	color:#BCBCBC;
-	margin-left:20%;
-}
-.finds{
-	margin-left: 20%;
-}
-.the_others{
-	margin-left:25%;
+
+.login_API {
+	margin-left: 28%;
 }
 
+.login_API img {
+	width: 80px;
+	/* position: relative;
+	left: 80px; */
+}
+
+.login_foot {
+	margin-left: 12%;
+}
+
+.login_foot p {
+	font-size: 9pt;
+	color: #BCBCBC;
+	/* position: relative;
+    left: 33%; */
+	margin-top: 30px;
+	margin-left: 22%;
+}
+
+.finds {
+	/* position: relative;
+	left: 13%; */
+	margin-left: 17%;
+}
+
+.finds a {
+	margin: 30px;
+	color: var(--dark-gray);
+}
+
+.the_others p {
+	/* position: relative;
+    left: 33%; */
+	margin-top: 20px;
+	margin-left: 35%;
+	color: var(--black-color);
+}
+
+/* 모달 영역 */
+#modal_container {
+	display: none;
+	position: relative;
+	margin: 0 auto;
+	width: 450px;
+	height: 650px;
+	background-color: white;
+	border: 1px solid lightgray;
+	z-index: 9999;
+	/* 	box-shadow: 5px 12px 5px rgb(212, 212, 212); */
+}
+
+#modal_close {
+	float: right;
+	width: 36px;
+	height: 36px;
+	background: white;
+	margin: 18px 20px 0 0;
+	font-size: 24px;
+	border: none;
+	cursor: pointer;
+}
+
+#modal_bodycont {
+	margin-top: 28px;
+	height: 80%;
+	padding-block: 14px;
+}
+
+#modal_head {
+	width: 80%;
+	height: 80px;
+	text-align: center;
+	margin: 0 auto;
+}
+
+#modal_head h2 {
+  color: var(--black-color);
+}
+
+/* #modal_foot {
+	margin: 0px 15%;
+	width: 80%;
+	height: 315px;
+} */

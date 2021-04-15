@@ -1,10 +1,13 @@
 package com.kkaekkt.view.map;
 
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,16 +35,22 @@ public class MapListController {
 	UserService userService;
 	
 	    @RequestMapping(value="/showMap.do", method = {RequestMethod.GET, RequestMethod.POST})
-	    public String loginView( HttpSession session ,Model model ,int type) {
-	       AccountVO vo = new AccountVO();
+	    public String loginView( HttpSession session ,Model model ,int type, HttpServletRequest req) throws UnknownHostException {
+	    	AccountVO vo = new AccountVO();
+	    	
 	       if(session.getAttribute("user")==null) {//비 로그인 상태
 	          vo.setMtype(0);
 	          vo.setMno(0);
 	          if(type==1) {
-	             vo.setAddress("천호동");
+	             vo.setAddress("서울 강동구");
 	          }else {
-	             vo.setAddress("천호동");
+	             vo.setAddress("서울 강동구");
 	          }
+		    		
+
+	          String ip = req.getHeader("X-Forwarded-For");
+		      if (ip == null) ip = req.getRemoteAddr();
+	          vo.setIp(ip);	          
 	          model.addAttribute("user", vo);
 	       }else { //로그인 상태
 	          vo=(AccountVO)session.getAttribute("user");
@@ -69,7 +78,7 @@ public class MapListController {
 	       }
 	       return "jsp/searchMap/map.jsp";
 	    }
-	
+	    
 	
 		@RequestMapping(value="/maplist.do", method=RequestMethod.POST,produces="application/text;charset=utf-8")   
 		public @ResponseBody String maplist(String keyaddr, int type) {

@@ -21,85 +21,14 @@
 <script type="text/javascript"
 	src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
 	charset="utf-8"></script>
+	<script src="https://kit.fontawesome.com/2fc57dd2db.js"
+	crossorigin="anonymous"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com">
 <script src="https://kit.fontawesome.com/2fc57dd2db.js"
 	crossorigin="anonymous"></script>
+	<script src="/js/login.js"></script>
 <title>Document</title>
-<style>
-.word {
-	width: 100vw;
-	height: 100vh;
-	position: absolute;
-}
 
-/* 모달 container 입니다 기본은 none 상태로 두셔야합니다.
-        본인 화면에서 사용할때, position을 정해주셔야 합니다. */
-#modal_container {
-	display: none;
-	position: relative;
-	margin: auto;
-	width: 530px;
-	height: 600px;
-	background-color: white;
-	border: 1px solid lightgray;
-	/* 	box-shadow: 5px 12px 5px rgb(212, 212, 212); */
-}
-
-#modal_close {
-	float: right;
-	width: 36px;
-	height: 36px;
-	border: 1px solid;
-	background: white;
-	margin: 18px 20px 0 0;
-	font-size: 24px;
-	border: 1px solid lightgray;
-}
-
-#modal_bodycont {
-	margin-top: 28px;
-	height: 80%;
-	padding-block: 14px;
-}
-
-#modal_head {
-	width: 80%;
-	height: 80px;
-	text-align: center;
-	margin: 0 auto;
-}
-
-#modal_foot {
-	margin: 0px 15%;
-	width: 80%;
-	height: 315px;
-}
-
-#review_text {
-	width: 100%;
-	background-color: rgba(249, 249, 249, 1);
-	border-radius: 4px;
-	border: 1px solid lightgray;
-}
-
-#review_texter {
-	float: right;
-	font-size: 15px;
-	color: lightgray;
-}
-</style>
-<script>
-	$(document).ready(function() {
-
-		/* button click event */
-		/* 모달 생성 */
-		$("#modal_show").click(function() {
-			$("#modal_container").show()
-		})
-		$("#modal_close").click(function() {
-			$("#modal_container").hide()
-		})
-	})
-</script>
 </head>
 <%
 String clientId = "kEvFCZyOPXmysr20FrkK";//애플리케이션 클라이언트 아이디값";
@@ -114,12 +43,12 @@ session.setAttribute("state", state);
 %>
 <body>
 	<div class="word">
-		<button id="modal_show">모달 띄우기</button>
+		<a id="modal_show">로그인</a>
 
 		<div id="modal_container">
-			<button id="modal_close">x</button>
+			<button id="modal_close"><i class="fas fa-times"></i></button>
 			<div id="modal_bodycont">
-
+			<form>
 				<div id="modal_head">
 					<h2>로그인</h2>
 				</div>
@@ -130,8 +59,8 @@ session.setAttribute("state", state);
 							<input type="text" name="id" id="id" placeholder=" 아이디" /> <input
 								type="password" name="password" id="password"
 								placeholder=" 비밀번호" />
+						<input type="button" id="login" value="로그인" />
 						</div>
-						<input type="button" id="btn_login" value="로그인" />
 					</form>
 					<div class="finds">
 						<a href="/jsp/login/findId.jsp">아이디 찾기</a> <a
@@ -176,6 +105,6 @@ session.setAttribute("state", state);
 	</script>
 </body>
 <script src="/js/kakaoLogin.js"></script>
-<script src="/js/login.js"></script>
+
 
 </html>
