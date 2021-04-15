@@ -15,6 +15,9 @@ function initHeaderEvent() {
         alertObj.ano=Number($(this).attr('id').substr(8));
         delHeaderAlert();
     });
+    $('.fa-comments').click(function() {
+        $('#chatCont').toggle();
+    });
 }
 function readAlert(header) {//알림 탭 페이지 공용메서드... 이 부분은 수정 필요
     console.log('읽기 진입');

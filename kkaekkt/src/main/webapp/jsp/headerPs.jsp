@@ -40,7 +40,7 @@
 							<i class="fas fa-bell"></i>
 							<span class="redDot"></span>
 							<div id="noticeBox">
-								<ul>
+								<ul id="noticeUl">
 
 								</ul>
 								<button>내 알림 전체보기</button>
@@ -52,11 +52,20 @@
 							<i class="fas fa-comments"></i>
 							<!-- <i class="far fa-comment-dots fa-lg"></i> -->
 							<span class="redDot"></span>
-							<div class="chatCont">
+							<div id="chatCont">
 								<div class="chatHeader">
 										<p>💬 채팅상담</p>
 								</div>
 								<div class="chatfooter">
+									<ul class="chatList">
+										<li>
+											<p>게스트</p>
+											<p>글씨가 넘어가면 어떻게되지요?</p>
+										</li>
+										<li>
+											<button class="chatBtn">나가기</button>
+										</li>
+									</ul>
 								</div>
 							</div>
 						</div>
