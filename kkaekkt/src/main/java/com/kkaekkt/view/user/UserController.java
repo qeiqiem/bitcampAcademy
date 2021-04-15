@@ -175,10 +175,11 @@ public class UserController {
 	@ResponseBody
 	public String Login(AccountVO vo, HttpSession session) {
 			AccountVO result = userService.getUser(vo);
-			System.out.println(result);
+			System.out.println("result값 뭐야 : "+result);
 			if (result == null) {
 				return "fail";
 			} else {
+				System.out.println("회원정보있음");
 				session.setAttribute("user", result);
 				return result.getMtype()+"";					
 			}
@@ -204,8 +205,11 @@ public class UserController {
 
 	// 로그아웃
 	@RequestMapping("/logout.do")
-	public String logout(HttpSession session) {
+	public String logout(HttpSession session, HttpServletResponse response) {
 		System.out.println("로그아웃 처리");
+//		Cookie c = null ;
+//        c.setMaxAge(0);        
+//		response.addCookie(c);
 		session.invalidate();
 		return "redirect:/index.do";
 	}
@@ -370,6 +374,9 @@ public class UserController {
 		Gson gson = new Gson();
 		return gson.toJson(userService.getPerson(mno));
 	}
+	
+	
+
 	
   
 }

@@ -10,12 +10,40 @@
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>    
     <!-- 아임포트 -->
      <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+     
      <script>
    		//로딩시 생성
-	    var useraddress = `${user.address}`	      
+	    var useraddress = `${user.address}`	    
+		   function getUrl(){
+			    var apiKey = 'd77bcfbb4c2a5211ea63199c58543ab0';
+			    var ipAdd = `${user.ip}`
+			    var regUrl = 'http://ip-api.com/json'+ipAdd+'?access_key='+apiKey+'&format=1';
+			 
+			    $.ajax({
+			        type:"POST",
+			        url:regUrl,
+			        dataType : "json",
+			        success: function(json){
+			 
+			            console.log(json); // 리턴받은 json
+			            console.log(json.country_name); // 국가이름
+			            console.log(json.latitude); // 위도
+			            console.log(json.longitude); // 경도
+			            console.log(json.region_name); // 지역이름
+			            console.log(json.location.country_flag); // 국기 이미지
+			             
+			        },
+			        error: function(xhr, status, error) {
+			            alert(error);
+			        }  
+			    })
+			} 
+	    
+	    getUrl()
+	    
      </script>
 	 <script src="/js/map.js"></script>
-   	<link rel="stylesheet" href="/css/map.css">  
+   	 <link rel="stylesheet" href="/css/map.css">  
    </head>
    <body>
     <c:choose>
@@ -50,7 +78,6 @@
                    <div class="slide_container">
                        <div class="slide">
                            <div class="slide_top">
-                               <img class="map_logo" src="/img/logo.svg" alt="">
                                <p class="here"><input type="radio">내 주변 찾기</p>
                                <div class="slide_search">
                                    <form onsubmit="searchPlaces(); return false;">
@@ -61,13 +88,6 @@
                                    </form>
                                </div>
                                <div class="tag">
-                                   <ul class="slide_ul">
-                                       <li id="all_search"   value="1">전체</li>
-                                     <!--   <li id="basic_search" value="2" >일반세탁소</li>
-                                       <li id="coin_search"  value="3">코인세탁소</li>
-                                       <li id="my_search">my</li> -->
-                                   </ul>
-                                   <hr>
                                    <p class="slide_mini"></p>
                                </div>
                            </div>
@@ -78,8 +98,7 @@
                                </div>
                            </div>
                            <div class="footer single">
-                               <div class="card">
-                        
+                               <div class="card">                        
                                    <img id="single_img" src="/img/kkaekkt.png" style="width: 100%; height: 200px; background-color: aliceblue;"> 
                                    <p id="s_title"></p><button class="likeThis"><i class="fas fa-heart" id="heart" ></i></button>
                                    <div id="s_star">
@@ -89,43 +108,43 @@
                               <button class="chat">상담하기</button>                             
                            </div>
                                </div>
-                               <div>
-                                   <button class="infoBtn" id="infoData">업체정보</button>
-                                   <button class="infoBtn" id="infoReview">리&nbsp;뷰</button>
-                               </div>
-                               <div class="cardinfo"> 
-                                       <table id="single_table">
-                                           <tr>
-                                               <td id="memberlog"></td>
-                                           </tr>
-                                           <tr>
-                                               <td><p id="s_phone" style="color:rgb(90, 90, 90); margin: 0"></p></td>
-                                           </tr>
-                                           <tr>
-                                               <td><p id="s_address" style="color:rgb(90, 90, 90); margin: 0"></p></td>
-                                           </tr>
-                                           <tr>
-                                               <td><p id="s_time" style="color:rgb(90, 90, 90); margin: 0"></p></td>
-                                           </tr>
-                                           <tr>
-                                           </tr>
-                                       </table>   
-                                       <div class="moreinfo">
-                                           <p class="more_title">취급 품목</p>
-                                           <hr>
-                                           <table id="single_option"> </table>
-                                       </div> 
-                               </div>
-                               <div class="cominfo">
-                                   <div class="comhead">
-                                       <label for="latest"><input type="radio" class="latest" name="review"checked="checked">최신순</label>
-                                       <label for="grade"><input type="radio" class="grade" name="review">평점순</label>
-                                       <p class="allCom"></p>
-                                   </div>
-                                   <div class="combody"></div>                                
-                               </div>
-                           
+									<div>
+	                                   <button class="infoBtn" id="infoData">업체정보</button>
+	                                   <button class="infoBtn" id="infoReview">리&nbsp;뷰</button>                               
+		                               <div class="cardinfo"> 
+		                                       <table id="single_table">
+		                                           <tr>
+		                                               <td id="memberlog"></td>
+		                                           </tr>
+		                                           <tr>
+		                                               <td><p id="s_phone" style="color:rgb(90, 90, 90); margin: 0"></p></td>
+		                                           </tr>
+		                                           <tr>
+		                                               <td><p id="s_address" style="color:rgb(90, 90, 90); margin: 0"></p></td>
+		                                           </tr>
+		                                           <tr>
+		                                               <td><p id="s_time" style="color:rgb(90, 90, 90); margin: 0"></p></td>
+		                                           </tr>
+		                                           <tr>
+		                                           </tr>
+		                                       </table>   
+		                                       <div class="moreinfo">
+		                                           <p class="more_title">취급 품목</p>
+		                                           <hr>
+		                                           <table id="single_option"> </table>
+		                                       </div> 
+		                               </div>
+		                               <div class="cominfo">
+		                                   <div class="comhead">
+		                                       <label for="latest"><input type="radio" class="latest" name="review"checked="checked">최신순</label>
+		                                       <label for="grade"><input type="radio" class="grade" name="review">평점순</label>
+		                                       <p class="allCom"></p>
+		                                   </div>
+		                                   <div class="combody"></div>                                
+		                               </div>
+	                           </div>
                            </div>
+                           
                        </div><!-- slide -->
                        <div class="slide_success">
                        		<h3>예약이 완료되었습니다!</h3>
@@ -144,12 +163,12 @@
                                <table id="resShortOpt"></table>
                            </div>
                            <div class="userInfo">
-                              	<p>예약자 &nbsp;${user.name}</p>
-                                <p>연락처 &nbsp;${user.phone}</p>
-                        		<p>이메일 &nbsp;${user.email}</p>
+                              	<p style="font-weight: bolder;">예약자 &nbsp;<span style="font-weight: 500;">${user.name}</span></p>
+                                <p style="font-weight: bolder;">연락처 &nbsp;<span style="font-weight: 500;">${user.phone}</span></p>
+                        		<p style="font-weight: bolder;">이메일 &nbsp;<span style="font-weight: 500;">${user.email}</span></p>
                            </div>
                            <div class="sellerInfo">
-                              	<p id="selname">판매자정보 &nbsp;</p>   
+                              	<p id="selname" style="font-weight: bolder;">판매자정보 &nbsp;</p>   
                              	<p>개인정보 수집, 제공 &nbsp;</p>
                                	<div id="agreement">
                                 <div id="agreementTop">
@@ -238,10 +257,17 @@
        	   var url = window.location.href;
            url = url.split("type=")
            var type = Number(url[1])
- 
+           
+           if(type==2){
+        	   $(".resbtn").hide()
+           }
+           
+ 		   $(".slide_mini").html(useraddress)
            bindinglandry(useraddress)
+           
            var map = new kakao.maps.Map(mapContainer, mapOption);
-           mapContainer.style.position = "initial";            
+           mapContainer.style.position = "initial";      
+     
            var ps = new kakao.maps.services.Places();   
            function setMapType(maptype) { 
         	    var roadmapControl = document.getElementById('btnRoadmap');
@@ -256,6 +282,7 @@
         	        roadmapControl.className = 'btn';
         	    }
         	}
+           
            
            // 지도 확대, 축소 컨트롤에서 확대 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
            function zoomIn() {
@@ -459,7 +486,6 @@
 	               itemStr =  '<tbody class="place_body">'
 	                     +'<tr>'
                               + '<td class="place_name" value='+bno+'>'+ (i+1)+'&nbsp;&nbsp;' + place.place_name + '</td>'
-                              + '<td rowspan="3"  style="float: right;"></td>'
                          + '</tr>'
                             if(grade != 0){
                                   itemStr += '<tr><td>'+grade+'.0 &nbsp;'

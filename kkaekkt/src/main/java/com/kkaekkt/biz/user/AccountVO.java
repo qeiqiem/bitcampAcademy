@@ -12,11 +12,18 @@ public class AccountVO {
     private int emailchk;
     private int mtype=1;
     private int idchk;
+    private String ip;
     
     // 테스트용
     private int stno; 
     
-    public int getStno() {
+    public String getIp() {
+		return ip;
+	}
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+	public int getStno() {
 		return stno;
 	}
 	public void setStno(int stno) {
@@ -104,7 +111,8 @@ public class AccountVO {
 	public String toString() {
 		return "AccountVO [mno=" + mno + ", bno=" + bno + ", id=" + id + ", password=" + password + ", name=" + name
 				+ ", phone=" + phone + ", address=" + address + ", email=" + email + ", emailchk=" + emailchk
-				+ ", mtype=" + mtype + ", idchk=" + idchk + "]";
+				+ ", mtype=" + mtype + ", idchk=" + idchk + ", ip=" + ip + ", stno=" + stno + "]";
 	}
+	
 	
 }
