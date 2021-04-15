@@ -5,6 +5,7 @@ $("#allChk").click(function () {
   } else {
     $('input[type="checkbox"]').prop("checked", false);
   }
+  $("#warnBox").hide();
 });
 
 $("#ok").click(function () {

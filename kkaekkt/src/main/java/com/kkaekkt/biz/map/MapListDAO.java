@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kkaekkt.biz.user.AccountVO;
 import com.kkaekkt.biz.user.BusinessVO;
 
 @Repository
@@ -17,8 +18,8 @@ public class MapListDAO {
 		System.out.println("[MapListDAO 진입---------------------]");		
 	}
 	
-	public List<MapListVO> selectlandry(String keyaddr) {	
-		return mybatis.selectList("MapListDAO.selecList", keyaddr);
+	public List<MapListVO> selectlandry(AccountVO vo) {	
+		return mybatis.selectList("MapListDAO.selecList", vo);
 	}
 
 	public List<SingleListVO> selectSingle(int bno) {
@@ -32,6 +33,10 @@ public class MapListDAO {
 	public List<SingleListVO> reviewList(int bno) {
 		return mybatis.selectList("MapListDAO.reviewList",bno); 
 	}
+	
+	public List<SingleListVO> reviewListGrade(int bno) {
+		return mybatis.selectList("MapListDAO.reviewListGrade",bno); 
+	}
 
 	public void respay(MapListVO mapvo) {
 		mybatis.insert("MapListDAO.respay",mapvo);		
@@ -40,6 +45,12 @@ public class MapListDAO {
 	public int getRsvNum(int mno) {
 		return mybatis.selectOne("reservationDAO.getRno",mno);
 	}
-	 
+	
+	public int likeYn(SingleListVO vo) {
+		return mybatis.selectOne("MapListDAO.selectLike",vo);
+	}
+
+
+
 
 }

@@ -20,7 +20,7 @@
 
 			<div class="body_container">
 				<div class="wrapper_joinInfo">
-					<h2>회원가입</h2>
+					<!-- <h2>회원가입</h2> -->
 					<div class="join_seq">
 						<div class="join_numBox">
 							<ul>
@@ -66,12 +66,11 @@
 							<h3>개인 회원</h3>
 							<form action="/joinPs.do" method="POST" id="joinPerson" name="joinPerson">
 								<div>
-									<input type="text" name="mtype" value="1" hidden>
 									<p>아이디</p>
-									<input type="text" placeholder="아이디를 입력하세요." name="id" id="id" value=""
-										minlength="6" maxlength="15">
-									<button type="button" id="id_btn" class="idchk" id="idchk" onclick="fn_idchk()"
-										value="N">중복확인</button>
+									<input type="text" placeholder="" name="id" id="id" value="" minlength="6"
+										maxlength="15">
+									<!-- <button type="button" id="id_btn" class="idchk" id="idchk" onclick="fn_idchk()"
+										value="N">중복확인</button> -->
 									<br><label id="id_label"></label>
 
 

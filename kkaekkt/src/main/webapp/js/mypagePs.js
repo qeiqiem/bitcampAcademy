@@ -1,97 +1,50 @@
 $(document).ready(function() {
     initSide();
     initEvent();
-	initModal();
-    initCommObj();
-    ajax(pageObj); //처음 마이페이지 들어왔을 때, 진행중 주문 항목 출력
+    ajax(); //처음 마이페이지 들어왔을 때, 진행중 주문 항목 출력
 });
 function initEvent() {
 	var rsvNum;
     $('.rsvList').on("click",".detailBtn",function() { // 버블링으로 생성된 주문에 클릭 이벤트 활성화
 		rsvNum=$(this).attr('id').substr(9);
-        if(!$('#commBox'+rsvNum).hasClass('none')){ //만약, 리뷰 보기가 열려있다면
-            $('#commBox'+rsvNum).addClass('none'); // 닫기
-        }
         $('#detail'+rsvNum).toggleClass('none');
     });
-    $('.rsvList').on("click",".commentBtn",function() {//리뷰쓰기 버튼이 눌렸을 경우
-        rsvNum=$(this).attr('id').substr(10);
-        commObj.rsvNum=Number(rsvNum);
-        commObj.bno=Number($('#rsvBox'+rsvNum+' .like').attr('value'));
-        $("#modal_container").show();
-    });
-    $('.rsvList').on("click",".cancelBtn",function() {
+    $('.rsvList').on("click",".cancelBtn",function() {//주문 취소 버튼이 눌렸을 경우
         rsvNum=Number($(this).attr('id').substr(9));
         alertObj.addressee=Number($('#rsvBox'+rsvNum+' .mno').eq(0).attr('id').substr(3));
         cancelRsv(rsvNum);
     });
-    $('.rsvList').on("keyup",".commentBox",function() {
-        if($(this).val().length>=300) {
-            alert("300자 까지 입력할 수 있습니다.");
-            $(this)[0].value=$(this).val().substr(0,300);
-        }
-        $('.comments_bottom span')[0].innerHTML=$(this).val().length+' / 300';
-    });
-    $(".rsvList").on("click",".comments_bottom button",function(){ 
-        commObj.content=$('.commentBox').eq(0).val();
-        commObj.rsvNum=$(this).val();
-        edit();
-    });
-    $('.rsvList').on("click",".reviewBtn",function() {
-        rsvNum=$(this).attr('id').substr(9);
-        if(!$('#detail'+rsvNum).hasClass('none')){//만약 상세보기가 열려있다면
-            $('#detail'+rsvNum).addClass('none');//상세보기 닫기
-        }
-        $('#commBox'+rsvNum).eq(0).toggleClass('none');
-    });
-    $('.rsvList').on("click",".cancel",function() {
-        rsvNum=$(this).val();
-        console.log(rsvNum+'..취소버튼값..46번줄입니다.');
-        $('.comments').remove();
-        $('#comments_view'+rsvNum).removeClass('none');
-    });
-    $('.side_sub button').click(function() { // 완료된 주문 출력
-        if($(this).index()==0){ //진행중인 주문
-            pageObj.state=1;
-            pageObj.currentPageNum=1;
-            ajax(pageObj);
-        }else{ //완료된 주문
-            pageObj.currentPageNum=1;
-            pageObj.state=3;
-            ajax(pageObj);
-        }
-    });
     $('.page_next').click(function() {
         if(!$(this).hasClass('no')) {
             pageObj.currentPageNum+=1;
-            ajax(pageObj);
+            ajax();
         }
     });
     $('.page_prev').click(function() {
         if(!$(this).hasClass('no')) {
             pageObj.currentPageNum-=1;
-            ajax(pageObj);
+            ajax();
         }
     });
     $('.page_prevBlock').click(function() {
         if(!$(this).hasClass('no')) {
             pageObj.currentPageNum=pageObj.blockFirstPageNum-1;
-            ajax(pageObj);
+            ajax();
         }
     });
     $('.page_nextBlock').click(function() {
         if(!$(this).hasClass('no')) {
             pageObj.currentPageNum=pageObj.blockLastPageNum+1;
-            ajax(pageObj);
+            ajax();
         }
     });
     $('.page_btn').on("click",".page_list",function() {
         if(pageObj.currentPageNum!=JSON.parse($(this).html())) {
             pageObj.currentPageNum=JSON.parse($(this).html());
-            ajax(pageObj);
+            ajax();
         }
     });
-    $('.rsvList').on('click','i.fa-heart',function() {
+    $('.rsvList').on('click','i.fa-heart',function() {//좋아요버튼
         likeObj.bno=Number($(this).attr('value'));
         if($(this).hasClass('unlike')) {
             $(this).removeClass('unlike');
@@ -101,47 +54,34 @@ function initEvent() {
             likeOff(likeObj);
         }
     });
-    $('.rsvList').on("click",".dotBtn",function() {
-        $(this).siblings().eq(1).toggleClass('none');
-    });
-    $('.rsvList').on("click",".popMenu button",function() {
-        rsvNum=$(this).attr('id').substr(3);
-        $('#popMenu'+rsvNum).addClass('none');
-            commObj.rsvNum=rsvNum;
-        if($(this).index()==0) {//수정버튼이 눌렸을 경우
-            commObj.content=$('#comments_content'+rsvNum)[0].innerHTML;
-            editBtn(rsvNum);
-        }else {//삭제버튼이 눌렸을 경우
-            deleteComm(rsvNum);
-        }
-    });
 }
-function cancelRsv(rsvNum) {
+function cancelRsv(rsvNum) {//주문 취소 버튼을 눌렀을 때 함수
     $.post({
         url:"/cancel.do",
         data:{rsvNum:rsvNum},
         success:function(result) {
             if(result!=''){//JAVA에서 null 반환시 공백으로 전달
-                msgSet(rsvNum);
-                sendMsg();
+                alertMsgSet(rsvNum);
+                sendAlarm();
             }
-            ajax(pageObj);//초기화
+            ajax();//초기화
         }
     });
 }
-function today() {
+function today() { //오늘 날짜 문자열 출력 함수
     var date=new Date();
     var mm=date.getMonth()+1;
     var dd=date.getDate();
     var today=date.getFullYear()+'.'+(mm<10?'0'+mm:mm)+'.'+dd;
     return today;
 }
-function msgSet(rsvNum) {
+function alertMsgSet(rsvNum) { //알림 보낼 메시지를 세팅하는 함수
     alertObj.rsvNum=rsvNum;
     alertObj.typenum=5;
     alertObj.msg='주문번호'+rsvNum+' 가 취소되었습니다.'
 }
-function sendMsg() {
+function sendAlarm() {
+    var msgType=0;//메시지 타입은 알람
     $.post({
         url:'/regitAlert.do',
         data:alertObj,
@@ -157,7 +97,7 @@ function sendMsg() {
                             '</div>'+
                             '<i id="del'+ano+'"class="fas fa-times"></i>'+
                         '</li>'
-                socket.send(receiver+','+msg);//메시지 보냄
+                socket.send(receiver+','+msgType+','+msg);//메시지 보냄
             }
         }
     });
@@ -167,7 +107,7 @@ function likeOff() {
         url:"/likeOff.do",
         data:likeObj,
         success:function() {
-        	ajax(pageObj);
+        	ajax();
             delete likeObj.bno;//초기화
         }
     });
@@ -177,7 +117,7 @@ function likeOn() {
         url:"/likeOn.do",
         data:likeObj,
         success:function() {
-        	ajax(pageObj);
+        	ajax();
             delete likeObj.bno;//초기화
         }
     });
@@ -221,7 +161,7 @@ function initPageObj(data) {
     pageObj.isPrevExist=data.isPrevExist;
     initPageBtn();
 }
-function ajax(pageObj) { //ajax로 리스트 받아오기
+function ajax() { //ajax로 리스트 받아오기
     console.log('ajax 함수 진입');
     $.post({
         url:"/getRsvListPs.do",
@@ -239,53 +179,11 @@ function initSide() {
     $('.side_sub').css('display','unset');
     $('.side button').eq(0).addClass("side_select");
     $('.side_sub button').eq(0).addClass("side_sub_select");
-
-    $('.side_sub button').click(function(){
-        $(this).addClass("side_sub_select");
-        $(this).siblings().removeClass("side_sub_select");
-    });
-}
-function initModal() {
-    /* 모달 생성 */
-    $('#review_text').keyup(function() {
-        $('#review_texter').html($(this).val().length)
-    });
-    $(".fa-times").click(function(){
-        closeModal();
-    });
-    $("#closeBtn").click(function(event){ //모달 닫기
-        event.preventDefault();
-        closeModal();
-    });
-    /* 평점 받기 */
-    $(".rating__input").click(function(){ 
-        var starVal = $(this).attr('value'); 
-        $("#starVal").val(starVal);
-    });
-    $('#regit').click(function(event) {
-        event.preventDefault();
-        regit();
-    });
-}
-function initCommObj() {
-    commObj.mno=pageObj.mno;
-    commObj.depth=0;
-    commObj.mname=pageObj.mname;
-}
-function closeModal() {
-    $('#review_text').val('');
-    $("#modal_container").hide(); 
-}
-function regit() {
-    commObj.eval=$('#starVal').val();
-    commObj.content=$('#review_text').val();
-    $.post({
-        url:'/regitComm.do',
-        data:commObj,
-        success:function() {
-            alert("리뷰가 정상적으로 등록되었습니다.");
-            closeModal();
-            viewChange();
+    
+    $('.side_sub button').click(function() { // 서브 사이드 버튼(진행중인 주문, 완료된 주문) 클릭 시
+        if($(this).index()==1){ //완료된 주문일 경우 이동  
+            console.log('완료 페이지로 이동');
+            location.href="mypagePs_com.jsp";
         }
     });
 }
@@ -296,140 +194,21 @@ function today() {
     let date = today.getDate();  // 날짜
     return year+'.'+month+'.'+date;
 }
-function viewChange() {//리뷰를 쓴 예약의 버튼을 바꾸고 리뷰박스를 집어넣음
-    var reviewBtn=$('#btnDiv'+commObj.rsvNum+' button:nth-child(3)');
-    reviewBtn.removeClass('commentBtn');
-    reviewBtn.addClass('reviewBtn');
-    reviewBtn.attr('id','reviewBtn'+commObj.rsvNum);
-    reviewBtn[0].innerHTML='리뷰보기';
-    $('#commBox'+commObj.rsvNum)[0].innerHTML=printComment(commObj.mname,commObj.content,today(),commObj.rsvNum);
-}
-
-function printEditBox(rsvNum) {
-    return '<div class="comments">'+
-                '<div class="comments_header">'+
-                    '<button class="cancel" value='+rsvNum+'>취소</button>'+
-                '</div>'+
-                '<textarea class="commentBox" cols="30" rows="3">'+commObj.content+'</textarea>'+
-                '<label class="writer">'+commObj.mname+'</label>  '+
-                '<div class="comments_bottom">'+
-                    '<span>0 / 300</span>'+
-                    '<button value='+rsvNum+'>등록</button>'+
-                '</div>'+
-            '</div>'
-}
-function editBtn(rsvNum) {
-    $('#comments_view'+rsvNum).addClass('none');
-    $('#commBox'+rsvNum).prepend(printEditBox(rsvNum));
-}
-function edit() {
-    $.post({
-        url:'/updateComm.do',
-        data:commObj,
-        success:function() {
-            alert('수정이 완료되었습니다.');
-            $('.comments').remove();
-            $('#comments_content'+commObj.rsvNum)[0].innerHTML=commObj.content;
-            $('#comments_view'+commObj.rsvNum).eq(0).removeClass('none');
-        }
-    });
-}
-function deleteComm(rsvNum) {
-    if($('#commBox'+rsvNum).children()[1]==undefined){//답글이 없을 때
-        $.post({
-            url:'/deleteCommAb.do',
-            data:commObj,
-            success:function() {
-                commBtn=$('#btnDiv'+rsvNum+' button:nth-child(3)');
-                alert('삭제가 완료되었습니다.');
-                $('#commBox'+rsvNum).children().remove();
-                commBtn.addClass('commentBtn');
-                commBtn.removeClass('reviewBtn');
-                commBtn.attr('id','commentBtn'+rsvNum);
-                commBtn[0].innerHTML='리뷰쓰기';
-            }
-        });
-    }else {//답글이 있을 때
-        commObj.content='삭제된 리뷰입니다.';
-        commObj.mno=1;//고스트계정(이름=알수없음)
-        $.post({
-            url:'/deleteCommCh.do',
-            data:commObj,
-            success:function() {
-                alert('삭제가 완료되었습니다.');
-                $('#commBox'+rsvNum).children().remove();
-                $('#reviewBtn'+rsvNum).attr("disabled",true);
-                initCommObj();
-            }
-        });
-    }
-}
-function printComment(name,content,date,rsvNum) {
-    return '<div id="comments_view'+rsvNum+'" class="comments_view">'+
-                    '<div class="comments_writer">'+
-                        '<p class="mname">'+name+'</p>'+
-                        '<div class="dotBtn"></div>'+
-                        '<div id="popMenu'+rsvNum+'"class="popMenu none">'+
-                            '<button id="edt'+rsvNum+'">수정</button>'+
-                            '<button id="del'+rsvNum+'">삭제</button>'+
-                        '</div>'+
-                    '</div>'+
-                    '<div id="comments_content'+rsvNum+'" class="comments_content">'+content+'</div>'+
-                    '<div class="commRdate">'+date+'</div>'+
-                '</div>'
-}
-function printReply(name,content,date) {
-    return '<div class="comments_reply">'+
-            '<span>┗</span>'+
-                '<div class="comments_reply_inner">'+
-                    '<div class="comments_reply_writer">'+
-                        '<p>'+name+'</p>'+
-                    '</div>'+
-                    '<div class="comments_reply_content">'+content+'</div>'+
-                    '<div class="commRdate">'+date+'</div>'+
-                '</div>'+
-            '</div>'
-}
 function printlist(list) {
     var price;
     var totalPrice=0;
-    var btnText;
-    var btnClass;
-    console.log(JSON.stringify(pageObj)+'..하하 1번째');
-    console.log(JSON.stringify(list)+'..하하 2번째');
-    if(list[0].state=='세탁 중') {
-		$('.content_header')[0].innerHTML='진행중 주문';
-    } else {
-		$('.content_header')[0].innerHTML='완료된 주문';
-    }
     $('.rsvList').children().remove();
     $.each(list, function(key,value) {
-        console.log(value.commList.length+'...3번 길이');
-        console.log(JSON.stringify(value.commList)+"...4번");
-        
-        if(list[0].state=='세탁 중'){
-            btnText='주문취소';
-            btnClass='cancelBtn';
-        }else if(value.commList.length>0){
-            console.log('5번 진입');
-            btnText='리뷰보기';
-            btnClass="reviewBtn";
-            var comm=value.commList;
-            console.log(JSON.stringify(comm)+'..6번');
-        } else {
-            btnText='리뷰쓰기';
-            btnClass='commentBtn';
-        }
         $('.rsvList').append(
-            '<div class="rsvBox" id="rsvBox'+value.rsvNum+'">' +
+            '<div class="rsvBox" id="rsvBox'+value.rsvNum+'">'+
                 '<table class="rsvTable">'+
                     '<tr>'+
                     '<th colspan="2" class="mno" id="mno'+value.mno+'">'+value.bname+'</th>'+
                         '<td><i class="fas fa-heart like '+(value.like==0?'unlike':'')+'" value='+value.bno+'></i></td>'+
                     '</tr>'+
-                    '<tr>' +
-                        '<td class="column">주문일시</td>' +
-                        '<td>'+value.rsvDate+'</td>' +
+                    '<tr>'+
+                        '<td class="column">주문일시</td>'+
+                        '<td>'+value.rsvDate+'</td>'+
                     '</tr>'+
                     '<tr>'+
                         '<td class="column">예약번호</td>'+
@@ -449,9 +228,8 @@ function printlist(list) {
                 '<div id="btnDiv'+value.rsvNum+'" class="btnDiv">'+
                     '<button>채팅상담</button>'+
                     '<button id="detailBtn'+value.rsvNum+'"class="detailBtn">상세보기</button>'+
-                    (btnText!='리뷰보기'?(value.timeOut==0?'<button disabled>':'<button id="'+btnClass+value.rsvNum+'" class="'+btnClass+'">')// if 리뷰가 없으면 -> 7일이 지났으면 비활성화 아니면 활성화
-                    :(comm[0].content=='삭제된 리뷰입니다.'?'<button disabled>':'<button id="'+btnClass+value.rsvNum+'" class="'+btnClass+'">')// else 삭제된 ~ 이면 비활성화 아니면 활성화
-                    )+btnText+'</button>'+
+                    (value.timeOut==0?'<button disabled>':'<button id="cancelBtn'+value.rsvNum+'" class="cancelBtn">')// if 리뷰가 없으면 -> 7일이 지났으면 비활성화 아니면 활성화
+                    +'주문취소</button>'+
                 '</div>'+
                 '<div class="detail none" id="detail'+value.rsvNum+'">'+
                     '<hr>'+
@@ -470,12 +248,6 @@ function printlist(list) {
                             '<td><span class="totalPrice"></span> 원</td>'+
                         '</table>'+
                     '</div1-1>'+
-                '</div>'+
-                '<div id="commBox'+value.rsvNum+'" class="commBox none">'+
-                    (value.commList.length==0?''://댓글이 없다면 공백, 아니라면 댓글 추가
-                    printComment(comm[0].mname,comm[0].content,comm[0].rdate,value.rsvNum))+
-                    (value.commList.length<2?'':
-                    printReply(comm[1].bname,comm[1].content,comm[1].rdate))+
                 '</div>'+
             '</div>')+
         '</div>'

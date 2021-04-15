@@ -25,27 +25,22 @@ public class UserServiceImpl implements UserService {
 	public void insertUser(PersonVO vo) {
 		userDao.insertUser(vo);
 	}
-
 	@Override
 	public void likeOff(BusinessVO vo) {
 		userDao.likeOff(vo);
 	}
-
 	@Override
 	public void likeOn(BusinessVO vo) {
 		userDao.likeOn(vo);
 	}
-
 	@Override
 	public List<BusinessVO> getLikedBs(int mno) {
 		return userDao.getLikedBs(mno);
 	}
-
 	@Override
 	public int countLikeBs(BusinessVO vo) {
 		return userDao.countLikeBs(vo);
 	}
-
 	@Override
 	public double avgGradeBs(BusinessVO vo) {
 		return userDao.avgGradeBs(vo);
@@ -81,33 +76,20 @@ public class UserServiceImpl implements UserService {
 	public String deleteUser(AccountVO vo) {
 		System.out.println("회원탈퇴 서비스 옴");
 		int result = userDao.orderChk(vo);
-		System.out.println("예약수가 " + result);
+		System.out.println(result);
 
-		// 이걸로 하면 다 fail로 감
-//		if (result == 0) {
-//			if (1 == userDao.deleteUser(vo)) {
-//				return "success";
-//			} else {
-//				return "fail";
-//			}
-//		}
-//		return "fail";
-		
-		// 이걸로하면 다 success로 감...
-//			 result가 0이면 삭제
-// 					 1이면 삭제 안 함
-	      if (result != 0) {
-	         return "fail";
-	      } else {
-	         userDao.deleteUser(vo);
-	         return "success";
-	         
-	      }
-
+		// result가 0이면 삭제
+		// 1이면 삭제 안 함
+		if (result == 0) {
+			userDao.deleteUser(vo);
+			return "success";
+		} else {
+			return "fail";
+		}
 	}
-
+	
 	// 로그인 들
-
+	
 //	@Override
 //	public int idchkBs(BusinessVO vo) {
 //		System.out.println("아이디 찾는 서비스 옴 -- 업체");
@@ -118,24 +100,23 @@ public class UserServiceImpl implements UserService {
 	public AccountVO getUser(AccountVO vo) {
 		return userDao.getUser(vo);
 	}
-
+	
 	public AccountVO method(AccountVO vo) {
-		System.out.println("소셜유저로그인 servie옴");
+		System.out.println("소셜유저로그인 servie옴");		
 		return userDao.getUserSNS(vo);
 	}
 
 	public <T> List<T> convertToObj(String json, Class<T> type) {
-		String temp = json.substring(1, json.length() - 1); // 양 끝의 [ ] 제거
-		String[] temp2 = temp.split("},"); // {~},{~} 을 split하여 배열로 나눔
+		String data = json.substring(1, json.length() - 1); // 양 끝의 [ ] 제거
+		String[] dataArray = data.split("},"); // {~},{~} 을 split하여 배열로 나눔
 		List<T> list = new ArrayList<T>();
 		Gson gson = new Gson();
-		for (int i = 0; i < temp2.length; i++) {
-			if (i != temp2.length - 1) {// 만약 마지막 { ~ }이 아니라면,
-				temp2[i] += "}";// split 과정에서 떨어졌던 '}'를 붙여준다.
+		for (int i = 0; i < dataArray.length; i++) {
+			if (i != dataArray.length - 1) {// 만약 마지막 { ~ }이 아니라면,
+				dataArray[i] += "}";// split 과정에서 떨어졌던 '}'를 붙여준다.
 			}
-			list.add(gson.fromJson(temp2[i], type));
+			list.add(gson.fromJson(dataArray[i], type));//지정한 타입으로 형변환 후 리스트에 저장
 		}
-		System.out.println(list + json);
 		return list;
 	}
 
@@ -188,7 +169,6 @@ public class UserServiceImpl implements UserService {
 		System.out.println("idchk 서비스옴");
 		return userDao.idchk(vo);
 	}
-
 	@Override
 	public int emailchk(String email) {
 		System.out.println("email 찾는 서비스 옴");
@@ -200,35 +180,28 @@ public class UserServiceImpl implements UserService {
 		System.out.println("가입완료 서비스옴");
 		return userDao.joinCfm(vo);
 	}
-
-	// PW 변경
-	@Override
-	public void updatePw(AccountVO vo) {
-		System.out.println("pw변경 서비스옴");
-		userDao.updatePw(vo);
-	}
-
+    // PW 변경
+    @Override
+    public void updatePw(AccountVO vo) {
+        System.out.println("pw변경 서비스옴");
+        userDao.updatePw(vo);
+    }
 	@Override
 	public PersonVO getPerson(int mno) {
 		return userDao.getPerson(mno);
 	}
-
 	@Override
 	public BusinessVO getBusiness(BusinessVO vo) {
 		return userDao.getBusiness(vo);
 	}
-
 	@Override
 	public List<LaundryVO> getLaundryList(int bno) {
 		return userDao.getLaundry(bno);
 	}
-
 	@Override
 	public void deleteUser(BusinessVO vo) {
-		// TODO Auto-generated method stub
-
+		//
 	}
-
 	@Override
 	public int bnoChk(int bno) {
 		return userDao.bnoChk(bno);

@@ -108,9 +108,10 @@ function initBodyEvent() {
         alertObj.typenum=5;
         ajax();
     });
-    $('#alertListBox').on('click','.msgBody',function() {
+    $('#alertListBox').on('click','.msgBody',function() {//메시지를 클릭했다면
         alertObj.ano=Number($(this).attr('id').substr(3));
-        readAlert();//헤더 js에 저장된 메서드
+        var header=$(this).siblings()[0].innerHTML;
+        readAlert(header);//헤더 js에 저장된 메서드
     });
 }
 function delPageAlert() {//알림 삭제 메서드

@@ -5,17 +5,8 @@
 
 .confirmBox img {
   position: relative;
-  /* z-index: 1; */
   width: 500px;
 }
-
-/* .confirmBox i {
-  position: relative;
-  top: -200px;
-  left: -200px;
-  z-index: 2;
-  color: rgb(63, 62, 62);
-} */
 
 .imgBox {
   text-align: center;

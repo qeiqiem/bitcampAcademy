@@ -81,7 +81,7 @@
                                <div class="card">
                         
                                    <img id="single_img" src="/img/kkaekkt.png" style="width: 100%; height: 200px; background-color: aliceblue;"> 
-                                   <p id="s_title"></p><button class="likeThis"><i class="far fa-heart" id="heart" ></i></button>
+                                   <p id="s_title"></p><button class="likeThis"><i class="fas fa-heart" id="heart" ></i></button>
                                    <div id="s_star">
                                    </div>
                            <div class="btnSet">
@@ -109,8 +109,7 @@
                                            </tr>
                                            <tr>
                                            </tr>
-                                       </table>
-   
+                                       </table>   
                                        <div class="moreinfo">
                                            <p class="more_title">취급 품목</p>
                                            <hr>
@@ -119,8 +118,8 @@
                                </div>
                                <div class="cominfo">
                                    <div class="comhead">
-                                       <label for="latest"><input type="radio" class="latest">최신순</label>
-                                       <label for="grade"><input type="radio" class="grade">평점순</label>
+                                       <label for="latest"><input type="radio" class="latest" name="review"checked="checked">최신순</label>
+                                       <label for="grade"><input type="radio" class="grade" name="review">평점순</label>
                                        <p class="allCom"></p>
                                    </div>
                                    <div class="combody"></div>                                
@@ -145,35 +144,35 @@
                                <table id="resShortOpt"></table>
                            </div>
                            <div class="userInfo">
-                              <p>예약자 &nbsp;${user.name}</p>
+                              	<p>예약자 &nbsp;${user.name}</p>
                                 <p>연락처 &nbsp;${user.phone}</p>
-                        <p>이메일 &nbsp;${user.email}</p>
+                        		<p>이메일 &nbsp;${user.email}</p>
                            </div>
                            <div class="sellerInfo">
-                              <p id="selname">판매자정보 &nbsp;</p>   
-                             <p>개인정보 수집, 제공 &nbsp;</p>
-                               <div id="agreement">
+                              	<p id="selname">판매자정보 &nbsp;</p>   
+                             	<p>개인정보 수집, 제공 &nbsp;</p>
+                               	<div id="agreement">
                                 <div id="agreementTop">
                                     <span>개인정보 수집 동의</span><i value="0" class="fas fa-chevron-down"></i>
                                 </div>
                                 <div class="termsText">
 								        <개인정보 수집 동의><br><br>
-								        1. 기본수집항목: [필수] kkaekkt 아이디, 이름, 전화번호, 주소<br>
-								        ※ 추가 수집하는 필수항목<br>
-								        - 배송, 방문 등이 필요한 상품 구매 시 : 주소<br>
-								        - 해외 여행 관련 상품 구매 시 : 여권상 영문명, 여권번호 끝 4자리, 성별, 
-								        생년월일, 이메일주소, 카카오톡ID, 동행 아동정보(여권상 영문명, 생년월일, 신장)<br>
-								        - 병원을 이용하는 경우: 생년월일<br>
+									        1. 기본수집항목: [필수] kkaekkt 아이디, 이름, 전화번호, 주소<br>
+									        	※ 추가 수집하는 필수항목<br>
+									        - 배송, 방문 등이 필요한 상품 구매 시 : 주소<br>
+									        - 해외 여행 관련 상품 구매 시 : 여권상 영문명, 여권번호 끝 4자리, 성별, 
+									       	생년월일, 이메일주소, 카카오톡ID, 동행 아동정보(여권상 영문명, 생년월일, 신장)<br>
+									        - 병원을 이용하는 경우: 생년월일<br>
 								        <br>
-								        2. 수집 및 이용목적 : 사업자회원과 예약이용자의 원활한 거래 진행, 고객상담, 불만처리 등 민원 처리, 분쟁조정 해결을 위한 기록보존<br>
+								        	2. 수집 및 이용목적 : 사업자회원과 예약이용자의 원활한 거래 진행, 고객상담, 불만처리 등 민원 처리, 분쟁조정 해결을 위한 기록보존<br>
 								        <br>
 								        3. 보관기간<br>
-								        - 회원탈퇴 등 개인정보 이용목적 달성 시까지 보관<br>
-								        - 단, 상법 및 ‘전자상거래 등에서의 소비자 보호에 관한 <br>
-								          법률’ 등 관련 법령에 의하여 일정 기간 보관이 필요<br>
-								          한 경우에는 해당 기간 동안 보관함<br>
+								        	- 회원탈퇴 등 개인정보 이용목적 달성 시까지 보관<br>
+								        	- 단, 상법 및 ‘전자상거래 등에서의 소비자 보호에 관한 <br>
+								          	법률’ 등 관련 법령에 의하여 일정 기간 보관이 필요<br>
+								          	한 경우에는 해당 기간 동안 보관함<br>
 								          <br>
-								        4. 동의 거부권 등에 대한 고지: 정보주체는 개인정보의 수집 및 이용 동의를 거부할 권리가 있으나, 이 경우 상품 및 서비스 예약이 제한될 수 있습니다.<br>
+								        	4. 동의 거부권 등에 대한 고지: 정보주체는 개인정보의 수집 및 이용 동의를 거부할 권리가 있으나, 이 경우 상품 및 서비스 예약이 제한될 수 있습니다.<br>
 							        <br>
 	                                </div>
 							        <div id="agreementBottom">
@@ -200,11 +199,18 @@
 							         <ul>
 							         	<li>취소/환불 규정 &nbsp;</li>
                                		</ul>
-                               <p>예약 서비스 이용을 위한 개인정보 수집 및 제3자 제공, 취소/환불 규정을 확인하였으며 이에동의합니다.</p>
+                               <p style="width: 92%;font-size: 14px;color: var(--text-gray);padding-bottom: 45px;background-color: white;">예약 서비스 이용을 위한 개인정보 수집 및 제3자 제공, 취소/환불 규정을 확인하였으며 이에동의합니다.</p>
                            </div>
                            <div class="comBtnDiv">
                             <button class="comBtn">결제하기</button>
-                           </div>                          
+                           </div>  
+           			       <div class="choicePay">        
+						       <p>결제수단 선택</p>
+						        <button id="kakaoPay"  style="background-color: #ffe607;">카카오페이</button>
+						        <button id="toss" value="2"  style="background-color: #3182f6;">toss</button>
+						        <button id="ectPay" value="3"  style="background-color: #d50101;">일반결제</button>
+						        <button class="outPaybtn">나가기</button>
+						    </div>
                        </div><!-- res_slide --> 
                        <div class="contBtn">
                            <button class="foldBtn">&lt;</button>
@@ -228,13 +234,15 @@
            var itemel;
            var bno= "";    
            var dbData = [];
-           var mno = ${user.mno};	          
-           var map = new kakao.maps.Map(mapContainer, mapOption);
-           mapContainer.style.position = "initial";            
-           var ps = new kakao.maps.services.Places();            
+           var mno = ${user.mno};
+       	   var url = window.location.href;
+           url = url.split("type=")
+           var type = Number(url[1])
  
            bindinglandry(useraddress)
-           
+           var map = new kakao.maps.Map(mapContainer, mapOption);
+           mapContainer.style.position = "initial";            
+           var ps = new kakao.maps.services.Places();   
            function setMapType(maptype) { 
         	    var roadmapControl = document.getElementById('btnRoadmap');
         	    var skyviewControl = document.getElementById('btnSkyview'); 
@@ -290,10 +298,13 @@
               
               //0325-주옥 : 검색하려는 키워드 캐치 및 select을 하기위해 controller 접근
               var keyaddr = keyaddr;
+           
                   $.ajax({
                       url:'/maplist.do'
                       , method : 'POST'
-                      , data: { keyaddr : keyaddr }
+                      , data: { keyaddr : keyaddr,
+                    	        type : type  
+                      }
                       , dataType: 'json'
                       , success: function(data){ //성공후 처리는 추후 진행.                         
                                 if(data==null){
@@ -301,8 +312,13 @@
                                    dbData = null
                                 }
                                    dbData = data
-                                 // 장소검색을 요청           
-                                   keyaddr = keyaddr+" 크리닝"
+                                   
+                                   // 장소검색을 요청        
+                                   if(type == 1)
+                                	   keyaddr = keyaddr+" 크리닝"
+                                   else if(type == 2)
+                                	   keyaddr = keyaddr+"코인세탁"
+                                	   
                                    ps.keywordSearch(keyaddr, placesSearchCB); 
                                } 
                   })

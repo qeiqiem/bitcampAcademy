@@ -24,7 +24,7 @@
 	</delete>
 	<select id="getAlertList" resultType="alert"><!-- 개인&업체 관계없이 이름을 불러오기 위한 쿼리문.. 필요시 분기할 예정 -->
 		SELECT ano,mname,bname,msg,a.typenum,typename,date_format(time,"%Y.%m.%d") date,state
-		FROM alert a,alerttype at, (SELECT mname,bname,ac.mno mno 
+		FROM alert a,alerttype at, (SELECT mname,bname,ac.mno
 									FROM account ac LEFT JOIN `member` m on ac.mno=m.mno 
                                     LEFT JOIN business b on b.mno=ac.mno) n
 		WHERE a.typenum=at.typenum
@@ -108,7 +108,7 @@
 			</if>;
 	</select>
 	<update id="deleteCommCh">
-		UPDATE comments SET mno=#{mno}, content=#{content} WHERE groupNum=#{rsvNum} AND depth=#{depth};
+		UPDATE comments SET content=#{content} WHERE groupNum=#{rsvNum} AND depth=#{depth};
 	</update>
 	<delete id="deleteCommAb">
 		DELETE FROM comments WHERE depth=#{depth} AND groupNum=#{rsvNum};

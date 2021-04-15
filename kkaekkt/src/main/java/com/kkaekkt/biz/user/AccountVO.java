@@ -10,7 +10,7 @@ public class AccountVO {
     private String address;
     private String email;
     private int emailchk;
-    private int mtype;
+    private int mtype=1;
     private int idchk;
     
     // 테스트용
