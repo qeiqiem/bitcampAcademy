@@ -85,15 +85,37 @@ function initChatEvent(){
             content:chatObj.content,
             time:time()
         }
-        sendChat();
-        appendChat(chat);
+        sendChat();//채팅 보내기 메서드
+        appendChat(chat);//채팅로그를 채팅방에 올리기 메서드
     });
     $('.chatfooter').on('click','.chatExitBtn',function(){
         chatObj.closer=chatObj.sender;//본인 번호를 나간(갈)사람으로 입력한다.
         chatObj.roomnum=Number($(this).attr('id') //버튼의 id에서
                                       .substr(11));//방번호만 추출한다.
-        chatRoomExit();
+        chatRoomExit();//채팅방 나가기 메서드
     });
+    $('.chatfooter').on('click','.chatList',function(){
+        var array=$(this).attr('id').split('roomLi');//0=수신자mno, 1=방번호
+        var addressee=Number(array[0]);
+        var roomnum=Number(array[1]);
+        var guest=$('#guest'+addressee).text();
+        chatObj.roomnum=roomnum;
+        chatObj.closer=chatObj.sender;
+        var room={addressee:addressee,roomnum:roomnum,guest:guest}
+        printRoom(room);
+        getChatRog();
+    });
+}
+function getChatRog(){
+    $.get({
+        url:'/getChatRog.do',
+        data:chatObj,
+        success:function(result){
+            var list=JSON.parse(result);
+            printChatRog(chatObj.roomnum,list);
+            initChatObj();
+        }
+    })
 }
 function chatRoomExit(){
     $.get({
@@ -125,12 +147,11 @@ function sendChat(){
     });
     initChatObj();
 }
-function readChatRog(data){//방번호와 본인 번호
+function readChat(data){//방번호와 본인 번호
     $.get({
         url:'/readChat.do',
         data:data,
-        success:function(){
-        }
+        success:function(){}
     });
     initChatObj();
 }
@@ -144,13 +165,13 @@ function appendChat(chat){//매개변수에 담겨있는 정보-방 번호,발�
         chatLiClass='chatLeft';
         chatPClass='chatGuest';
     }
-    console.log($('#chatRog'+chat.roomnum));
     $('#chatRog'+chat.roomnum).append(
         '<li class="chatRogli '+chatLiClass+'">'+
             '<p class="chatRogP '+chatPClass+'">'+chat.content+'</p>'+
             '<p class="timeRog">'+chat.time+'</p>'+
         '</li>'
     );
+    $('#chatRog'+chat.roomnum).scrollTop($('#chatRog'+chat.roomnum)[0].scrollHeight);//스크롤 하단으로 위치하는 코드
 }
 function readAlert(header) {//알림 탭 페이지 공용메서드... 이 부분은 수정 필요
     console.log('읽기 진입');
@@ -179,9 +200,8 @@ function readAlert(header) {//알림 탭 페이지 공용메서드... 이 부분
     });
 }
 function crtRoom(guest) {
-    var bno;
     var rooms=$('.chatBox'); //먼저 열려있는 채팅방을 검사한다.
-    if(rooms!=undefined){//만약 방이 하나이상 존재한다면,    
+    if(rooms!=undefined){//만약 방이 하나이상 존재한다면,
         for(var i=0;i<rooms.length;i++){
             mno=rooms.eq(i) //i 번째 방의
                 .attr('id') //id 에서
@@ -201,7 +221,10 @@ function crtRoom(guest) {
             }
             room.guest=guest;//게스트명 입력
             room.addressee=chatObj.addressee;//수신자 번호 입력
-            printRoom(room);
+            printRoom(room);//채팅방 생성
+            if(room.chatRog!=undefined){//채팅 로그가 있다면
+                printChatRog(room.roomnum,room.chatRog);//방번호,채팅로그 리스트
+            }
             var guestRoomLi=$('#'+room.addressee+'roomLi'+room.roomnum);
             if(guestRoomLi[0]==undefined){//헤더 채팅방 리스트에 상대방과의 채팅방이 없다면,
                 printRoomLi(room);//만들어준다.
@@ -217,7 +240,7 @@ function initChatObj(){//초기화
     delete chatObj.content;//채팅내용 지움
     delete chatObj.addressee;//받는이 지움
 }
-function printRoom(room){
+function printRoom(room){//필요한 정보:수신자번호,방번호,수신자 명
     $('.chatContainer').append(//채팅방을 만듦
         '<li class="chatBox" id="'+room.addressee+'room'+room.roomnum+'">'+
             '<div class="chatBoxHeader">'+
@@ -231,31 +254,32 @@ function printRoom(room){
             '</div>'+
         '</li>'
     );
-    if(room.chatRog!=undefined){//채팅 로그가 있다면
-        var listType; // 보낸 이가 본인일 때 오른쪽, 게스트일 때 왼쪽을 입력
-        var chatType; // 보낸 이가 본인일 때 mine, 게스트일 때 guest 입력
-        $.each(room.chatRog,function(key,value){
-            if(value.sender==chatObj.sender){
-                listType='chatRight';
-                chatType='chatMine';
-            }else{
-                listType='chatLeft';
-                chatType="chatGuest";
-            };
-            $('#chatRog'+room.roomnum).append(
-            '<li class="chatRogli '+listType+'">'+
-                '<p class="chatRogP '+chatType+'">'+value.content+'</p>'+
-                '<p class="timeRog">'+value.stime+'</p>'+
-            '</li>'
-            );
-        });
-    }
+}
+function printChatRog(roomnum,list){
+    var listType; // 보낸 이가 본인일 때 오른쪽, 게스트일 때 왼쪽을 입력
+    var chatType; // 보낸 이가 본인일 때 mine, 게스트일 때 guest 입력
+    $.each(list,function(key,value){
+        if(value.sender==chatObj.sender){
+            listType='chatRight';
+            chatType='chatMine';
+        }else{
+            listType='chatLeft';
+            chatType="chatGuest";
+        };
+        $('#chatRog'+roomnum).append(
+        '<li class="chatRogli '+listType+'">'+
+            '<p class="chatRogP '+chatType+'">'+value.content+'</p>'+
+            '<p class="timeRog">'+value.stime+'</p>'+
+        '</li>'
+        );
+    });
+    $('#chatRog'+roomnum).scrollTop($('#chatRog'+roomnum)[0].scrollHeight);//스크롤 하단으로 위치하는 코드
 }
 function printRoomLi(room){
     $('.chatfooter').append(
         '<ul class="chatList" id="'+room.addressee+'roomLi'+room.roomnum+'">'+
             '<li>'+
-                '<p>'+room.guest+'</p>'+
+                '<p id="guest'+room.addressee+'">'+room.guest+'</p>'+
                 '<p>'+(room.content==undefined?'':room.content)+'</p>'+//컨텐츠가 없을 때는 공백, 있을 때는 정상출력
             '</li>'+
             '<li>'+

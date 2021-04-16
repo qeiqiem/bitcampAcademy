@@ -263,4 +263,11 @@ public class UserServiceImpl implements UserService {
 			userDao.deleteRoom(vo);
 		}
 	}
+	@Override
+	public List<ChatVO> readChatRog(ChatVO vo) {
+		ChatVO closer=userDao.chkCloser(vo);
+		vo.setClosetime(closer.getClosetime());//나간 시간을 입력한다.
+		userDao.updateChatRog(vo);//로그를 읽음처리한다.
+		return userDao.getChatRog(vo);//채팅 로그를 가져온다.
+	}
 }

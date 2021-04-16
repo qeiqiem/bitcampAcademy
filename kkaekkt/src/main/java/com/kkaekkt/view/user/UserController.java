@@ -33,6 +33,12 @@ public class UserController {
 	@Autowired
 	private JavaMailSender mailSender;
 	
+	@RequestMapping(value="/getChatRog.do",method=RequestMethod.GET,produces = "application/text;charset=utf-8")
+	@ResponseBody
+	public String readChatRog(ChatVO vo) {
+		Gson gson=new Gson();
+		return gson.toJson(userService.readChatRog(vo));
+	}
 	
 	@RequestMapping(value="/exitChatRoom.do",method=RequestMethod.GET)
 	@ResponseBody

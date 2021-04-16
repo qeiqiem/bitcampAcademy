@@ -45,7 +45,7 @@ function connectWs() {
       };
       if(guestRoom[0]!=undefined){//상대방과 열려있는 채팅방이 있다면
         appendChat(chat);//채팅로그를 추가한다.
-        readChatRog({roomnum:roomnum,sender:chatObj.sender});
+        readChat({roomnum:roomnum,sender:chatObj.sender});
       }else{//열려있는 채팅방이 없다면
         //upChatDotCount 채팅 카운트 업
         if(guestRoomLi[0]!=undefined){//헤드 채팅방 리스트에 해당 채팅방이 있다면
