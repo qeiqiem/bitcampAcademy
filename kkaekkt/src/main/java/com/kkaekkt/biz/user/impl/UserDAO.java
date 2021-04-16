@@ -168,8 +168,8 @@ public class UserDAO {
 	public ChatVO chkCloser(ChatVO vo) {
 		return mybatis.selectOne("UserDAO.chkCloser",vo);
 	}
-	public void updateCloser(ChatVO vo) {
-		mybatis.update("UserDAO.updateCloser",vo);
+	public void updateCloserIn(ChatVO vo) {
+		mybatis.update("UserDAO.updateCloserIn",vo);
 	}
 	public void updateChatRog(ChatVO vo) {
 		mybatis.update("UserDAO.updateChatRog",vo);
@@ -177,5 +177,25 @@ public class UserDAO {
 	}
 	public List<ChatVO> getChatRog(ChatVO vo) {
 		return mybatis.selectList("UserDAO.getChatRog",vo);
-	}	
+	}
+	public void insertChatRog(ChatVO vo) {
+		mybatis.insert("UserDAO.insertChatRog",vo);
+		
+	}
+	public int chkGuestClose(ChatVO vo) {
+		return mybatis.selectOne("UserDAO.chkGuestClose",vo);
+		
+	}
+	public void deleteRoom(ChatVO vo) {
+		mybatis.delete("UserDAO.deleteRoom",vo);
+	}
+	public int chkCloserMe(ChatVO vo) {
+		return mybatis.selectOne("UserDAO.chkCloserMe",vo);
+	}
+	public void insertCloser(ChatVO vo) {
+		mybatis.insert("UserDAO.insertCloser",vo);
+	}
+	public void updateCloserOut(ChatVO vo) {
+		mybatis.update("UserDAO.updateCloserOut",vo);
+	}
 }

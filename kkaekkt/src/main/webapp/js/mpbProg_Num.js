@@ -132,35 +132,11 @@ function cancel() {
       if (result != "") {
         //JAVA에서 null 반환시 공백으로 전달
         msgSet(result);
-        console.log(alertObj + ":..알림객체 js 체크");
         sendAlarm();
       }
       ajax();
       alert("주문이 정상적으로 취소되었습니다.");
       modalClose();
-    },
-  });
-}
-function sendAlarm() {
-  var msgType = 0; //메시지 타입은 알람
-  $.post({
-    url: "/regitAlert.do",
-    data: alertObj,
-    success:function(ano) {
-      if(socket){
-          var receiver=alertObj.addressee;
-          var msg='<li>'+
-                      '<div class="msgTop">'+
-                          '<span class="msgHeader">['+(alertObj.typenum==3?'완료':'취소')+']</span> <span id="msg'+ano+'" class="msgBody">'+alertObj.msg+'</span>'+
-                      '</div>'+
-                      '<div class="msgBottom">'+
-                          '<span class="date">'+today()+'</span>'+
-                          '<span class="byBs">by '+alertObj.senderName+'</span>'+
-                      '</div>'+
-                      '<i id="'+ano+'" class="fas fa-times"></i>'+
-                  '</li>'
-          socket.send(receiver+','+msgType+','+msg);//메시지 보냄
-      }
     },
   });
 }

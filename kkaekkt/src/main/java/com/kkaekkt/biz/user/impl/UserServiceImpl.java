@@ -214,25 +214,53 @@ public class UserServiceImpl implements UserService {
 		return userDao.bnoChk(bno);
 	}
 	@Override
-	public Map<String,Object> getRoomNum(ChatVO vo) {
+	public Map<String,Object> crtRoom(ChatVO vo) {
 		Map<String,Object> map=new HashMap<String,Object>();
 		int result=userDao.chkRoom(vo);
 		if(result==0) {//만약 방이 없다면
 			userDao.createRoom(vo);//방을 만들고
 			result=userDao.chkRoom(vo);//방 번호를 받아서
-			map.put("roomNum", result);//맵에 넣고 전달한다. 
+			map.put("roomnum", result);//맵에 넣고 전달한다. 
 		}else {//만약 방이 있다면
-			map.put("roomNum",result); //방 번호를 맵에 넣는다.
+			map.put("roomnum",result); //방 번호를 맵에 넣는다.
 			vo.setRoomnum(result);//방 번호를 입력한 후
-			ChatVO closer=userDao.chkCloser(vo);//나간 사람인 지 체크한다(리턴은 나간 시간과 상태를 받는다)
-			if(closer.getClosetime()!="null"&&closer.getState()==0) {//나간 사람이고, 들어온 상태가 아니라면
-				userDao.updateCloser(vo); //들어온 상태로 변환한다.
-			}else {//나간사람이 아니거나, 들어온 상태의 사람이라면
+			vo.setCloser(vo.getSender());//내가 나갔는 지 확인하기 위해 closer 필드에 본인의 번호를 넣는다.
+			ChatVO closer=userDao.chkCloser(vo);//본인이 나간 사람인 지 체크한다(리턴은 나간 시간과 상태를 받는다)
+			if(!closer.getClosetime().equals("null")&&closer.getState()==0) {//나간 사람이고, 들어온 상태가 아니라면
+				userDao.updateCloserIn(vo); //들어온 상태로 변환한다.
+			}else {//본인이 나간사람이 아니거나, 들어온 상태의 사람이라면
 				userDao.updateChatRog(vo);//수신자가 본인인 메시지를 읽음상태로 전환한다.
 				vo.setClosetime(closer.getClosetime());//받아온 종료시점을 입력한다.
 				map.put("chatRog",userDao.getChatRog(vo));//쌓인 채팅로그를 리스트로 받아온다.
 			}
 		}
 		return map;
+	}
+	@Override
+	public void sendChat(ChatVO vo) {
+		userDao.insertChatRog(vo);
+		vo.setCloser(vo.getAddressee());//상대가 나갔는 지 확인하기 위해 closer 필드에 상대방의 번호를 넣는다.
+		ChatVO closer=userDao.chkCloser(vo);//상대가 나간사람인 지 체크한다.
+		if(!closer.getClosetime().equals("null")&&closer.getState()==0) {//상대가 나간 사람이고, 들어온 상태가 아니라면
+			userDao.updateCloserIn(vo); //들어온 상태로 변환한다.
+		}
+	}
+	@Override
+	public void readChat(ChatVO vo) {
+		userDao.updateChatRog(vo);
+	}
+	@Override
+	public void exitChatRoom(ChatVO vo) {
+		int result=userDao.chkGuestClose(vo);
+		if(result==0) {//상대방이 나가지 않았다면
+			result=userDao.chkCloserMe(vo);//내가 나간 기록이 있는 지 체크
+			if(result==0) {//기록이 없다면 insert
+				userDao.insertCloser(vo);
+			}else {//기록이 있다면 update
+				userDao.updateCloserOut(vo);
+			}
+		}else {//상대방이 나갔다면
+			userDao.deleteRoom(vo);
+		}
 	}
 }
