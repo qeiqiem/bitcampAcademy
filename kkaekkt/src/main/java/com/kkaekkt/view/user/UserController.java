@@ -33,11 +33,30 @@ public class UserController {
 	@Autowired
 	private JavaMailSender mailSender;
 	
+	
+	@RequestMapping(value="/exitChatRoom.do",method=RequestMethod.GET)
+	@ResponseBody
+	public void exitChatRoom(ChatVO vo) {
+		userService.exitChatRoom(vo);
+	}
+	
+	@RequestMapping(value="/readChat.do",method=RequestMethod.GET)
+	@ResponseBody
+	public void readChat(ChatVO vo) {
+		userService.readChat(vo);
+	}
+	
+	@RequestMapping(value="/sendChat.do",method=RequestMethod.GET)
+	@ResponseBody
+	public String sendChat(ChatVO vo) {
+		userService.sendChat(vo);
+		return "success";
+	}
 	@RequestMapping(value="/crtRoom.do",method=RequestMethod.POST)
 	@ResponseBody
 	public String crtRoom(ChatVO vo) {
 		Gson gson = new Gson();
-		return gson.toJson(userService.getRoomNum(vo));
+		return gson.toJson(userService.crtRoom(vo));
 	}
 	
 	@RequestMapping(value="/index.do",method={RequestMethod.GET,RequestMethod.POST})

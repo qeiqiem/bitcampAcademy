@@ -16,11 +16,15 @@ function initEvent() {
     });
     $('.rsvList').on("click",".chatBtn",function() {
         //채팅방 만들기 코드
-        var bno=Number($(this).val());//업체번호 추출
+        var rsvNum=Number($(this).attr('id').substr(7));//chatBtn+주문번호 형식의 id에서 주문번호 추출
         chatObj.mno=alertObj.sender;
-        chatObj.bno=bno;
-        var bname=$(this).attr('id');//업체명 추출
-        crtRoom(bname);
+        chatObj.addressee=Number($('#rsvBox'+rsvNum+' .mno').eq(0) //해당 예약번호의 주문박스 안에 mno클래스로 접근
+                                                            .attr('id') //id 요소에 접근
+                                                            .substr(3)); //mno+업체회원번호 형식의 id에서 업체회원번호 추출
+        var guest=$('#rsvBox'+rsvNum+' .mno')[0].innerHTML;//해당 예약번호의 주문박스 안에 mno클래스로 접근해서 업체명을 추출
+        chatObj.bno=Number($('#rsvBox'+rsvNum+' .like').eq(0)//해당 예약번호의 주문박스 안에 like클래스로 접근
+                                                       .attr('value'));//value 속성으로 접근해서 업체번호 추출
+        crtRoom(guest);
     });
     $('.page_next').click(function() {
         if(!$(this).hasClass('no')) {
@@ -77,39 +81,10 @@ function cancelRsv(rsvNum) {//주문 취소 버튼을 눌렀을 때 함수
         }
     });
 }
-function today() { //오늘 날짜 문자열 출력 함수
-    var date=new Date();
-    var mm=date.getMonth()+1;
-    var dd=date.getDate();
-    var today=date.getFullYear()+'.'+(mm<10?'0'+mm:mm)+'.'+dd;
-    return today;
-}
 function alertMsgSet(rsvNum) { //알림 보낼 메시지를 세팅하는 함수
     alertObj.rsvNum=rsvNum;
     alertObj.typenum=5;
     alertObj.msg='주문번호'+rsvNum+' 가 취소되었습니다.'
-}
-function sendAlarm() {
-    var msgType=0;//메시지 타입은 알람
-    $.post({
-        url:'/regitAlert.do',
-        data:alertObj,
-        success:function(ano) {
-            if(socket){
-                var receiver=alertObj.addressee;
-                var msg='<li class="alertLi'+ano+'"><div>'+
-                                '<span class="msgHeader">[취소]</span>⠀<span class="msgBody" id="msg'+ano+'">'+alertObj.msg+'</span>'+
-                            '</div>'+
-                            '<div>'+
-                                '<span class="byBs">by '+alertObj.senderName+' </span><span>⠀|⠀</span>'+
-                                '<span class="alertDate">'+today()+'</span>'+
-                            '</div>'+
-                            '<i id="del'+ano+'"class="fas fa-times alertDelBtn"></i>'+
-                        '</li>'
-                socket.send(receiver+','+msgType+','+msg);//메시지 보냄
-            }
-        }
-    });
 }
 function likeOff() {
     $.post({
@@ -235,7 +210,7 @@ function printlist(list) {
                     '</tr>'+
                 '</table>'+
                 '<div id="btnDiv'+value.rsvNum+'" class="btnDiv">'+
-                    '<button class="chatBtn" id="'+value.bname+'" value='+value.bno+'>채팅상담</button>'+
+                    '<button class="chatBtn" id="chatBtn'+value.rsvNum+'">채팅상담</button>'+
                     '<button id="detailBtn'+value.rsvNum+'"class="detailBtn">상세보기</button>'+
                     (value.timeOut==0?'<button disabled>':'<button id="cancelBtn'+value.rsvNum+'" class="cancelBtn">')// if 리뷰가 없으면 -> 7일이 지났으면 비활성화 아니면 활성화
                     +'주문취소</button>'+

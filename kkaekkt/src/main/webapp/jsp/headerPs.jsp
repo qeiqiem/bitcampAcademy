@@ -58,15 +58,6 @@
 										<p>💬 채팅상담</p>
 								</div>
 								<div class="chatfooter">
-									<ul class="chatList">
-										<li>
-											<p>게스트</p>
-											<p>글씨가 넘어가면 어떻게되지요?</p>
-										</li>
-										<li>
-											<button class="chatExitBtn">나가기</button>
-										</li>
-									</ul>
 								</div>
 							</div>
 						</div>
