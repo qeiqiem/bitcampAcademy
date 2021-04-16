@@ -112,5 +112,4 @@ function showMap() {
 		location.href = url+'?type=2'
 		break;
 	}
-
 }

@@ -287,6 +287,4 @@
 		b.mno=a.mno
 		WHERE id=#{id};
 	</select>
-	
 </mapper>
-
