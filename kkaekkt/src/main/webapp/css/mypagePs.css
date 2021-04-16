@@ -2,12 +2,12 @@ button{
     cursor: pointer;
 }
 /* 사이드바영역 */
-.content {
+/* .content {
     float:left;
     width: 75vw ;
     height: 100vh;
     padding: 11px;
-}
+} */
 .content hr {
 	border:0px;
 	background:var(--gray-color);

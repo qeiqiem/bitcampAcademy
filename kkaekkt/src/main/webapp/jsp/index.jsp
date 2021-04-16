@@ -21,26 +21,26 @@
         </head>
 
         <body>
-            <!-- <header class="head_container">
-        <nav class="head">
-            <div class="menu">
-                <a href="/showMap.do?type=1">일반세탁소</a>
-                <a href="/showMap.do?type=2">코인세탁소</a>
-            </div>
-            <div class="head_logo">
-                <div class="logo">
-                    <a href="/index.do"> <img src="/img/logo-white.png" alt="">
-                    </a>
-                </div>
-            </div>
-
-            <div class="head_right">
-                <a href="/jsp/join/joinTerms.html">회원가입</a>
-                <a href="/jsp/login/login.jsp">로그인</a>
-                <a href="/jsp/faq.jsp">FAQ</a>
-            </div>
-        </nav>
-    </header> -->
+       <!-- <header class="head_container">
+		        <nav class="head">
+		            <div class="menu">
+		                <a href="/showMap.do?type=1">일반세탁소</a>
+		                <a href="/showMap.do?type=2">코인세탁소</a>
+		            </div>
+		            <div class="head_logo">
+		                <div class="logo">
+		                    <a href="/index.do"> <img src="/img/logo-white.png" alt="">
+		                    </a>
+		                </div>
+		            </div>
+		
+		            <div class="head_right">
+		                <a href="/jsp/join/joinTerms.html">회원가입</a>
+		                <a href="/jsp/login/login.jsp">로그인</a>
+		                <a href="/jsp/faq.jsp">FAQ</a>
+		            </div>
+		        </nav>
+    		</header> -->
 
             <c:choose>
                 <c:when test="${user.mtype==1}">
@@ -53,11 +53,9 @@
                     <jsp:include page="/jsp/header.jsp"></jsp:include>
                 </c:otherwise>
             </c:choose>
-
             <script type="text/javascript">
                 window.onload = function () {
                     document.getElementById("logoImg").src = "/img/logo-white.png"
-
                 }
             </script>
             <link rel="stylesheet" href="/css/indexFullpage.css">
@@ -68,21 +66,20 @@
                     <!-- <h2>깨끗하게 간편하게 끝.</h2> -->
                     <div class="search">
                         <div class="search_btn">
-
                             <!-- <h1 class="animate__animated animate__fadeInUp">오늘은 <br> -->
                             <h1>오늘은 <br>
-                                어디서 <br>
-                                빨래를 할까요?
+		                                어디서 <br>
+		                                빨래를 할까요?
                             </h1>
                             <div class="search_tab">
-                                <button class="btn1" type="button" onclick="">일반세탁소</button>
-                                <button class="btn2" type="button" onclick="">코인세탁소</button>
+                                <button class="tabBtn btn1" type="button" value='1'>일반세탁소</button>
+                                <button class="tabBtn btn2" type="button" value='2'>코인세탁소</button>
                             </div>
                         </div>
 
                         <div class="search_box">
-                            <input type="text" placeholder="동네를 입력해주세요" name="search" id="searchBar">
-                            <button onclick='location.href="/showMap.do"'>
+                            <input type="text" placeholder="동네 또는 세탁소 이름을 입력해주세요" name="search" id="searchBar">
+                            <button onclick='showMap()'>
                                 <i class="fas fa-search fa-lg "></i>
                                 <!-- <i class="fas fa-search fa-2x"></i> -->
                             </button>

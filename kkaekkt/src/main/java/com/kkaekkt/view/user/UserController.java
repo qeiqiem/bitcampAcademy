@@ -345,7 +345,9 @@ public class UserController {
 	@ResponseBody
 	public String deleteUser(AccountVO vo) {
 		System.out.println("회원탈퇴 controller옴");
-		return userService.deleteUser(vo);
+		Gson gson = new Gson();
+	      return gson.toJson(userService.deleteUser(vo));
+		//return userService.deleteUser(vo);
 				
 	}
 	// 비번변경
