@@ -1,25 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="UserDAO">
+	<insert id="insertCloser">
+		INSERT INTO closer (roomnum,closermno) VALUES (#{roomnum},#{sender});
+	</insert>
+	<select id="chkCloserMe">
+		SELECT count(closermno) FROM closer WHERE roomnum=#{roomnum} AND closermno=#{closer};
+	</select>
+	<delete id="deleteRoom">
+		DELETE FROM closer WHERE roomnum=#{roomnum};
+	</delete>
+	<select id="chkGuestClose" resultType="_int">
+		SELECT count(closermno) FROM closer WHERE roomnum=#{roomnum} AND state=0;
+	</select>
+	<insert id="insertChatRog">
+		INSERT INTO chat (roomnum,sender,addressee,content) VALUES (#{roomnum},#{sender},#{addressee},#{content});
+	</insert>
 	<select id="getChatRog" resultType="chat">
 		SELECT sender,content,date_format(stime,'%Y.%m.%d %T') stime FROM chat WHERE roomnum=#{roomnum}
-		<if test='closetime!=""'><!-- 파라미터가 공백이 아니라면 -->
+		<if test='closetime!="null"'><!-- 파라미터가 공백이 아니라면 -->
 			<![CDATA[AND stime>#{closetime}]]>
 		</if>
 		;
 	</select>
-	<update id="updateChatRog">
-		UPDATE SET state=1 FROM chat WHERE roomnum=#{roomnum} AND addressee=#{sender};
+	<update id="updateChatRog"><!-- 읽음처리를 할 시점을 추가해야할 것임.. 현재는 비효율.. -->
+		UPDATE chat SET state=1 WHERE roomnum=#{roomnum} AND addressee=#{sender};
 	</update>
-	<update id="updateCloser">
-		UPDATE SET state=1 FROM closer WHERE roomnum=#{roomnum} AND closermno=#{sender}; 
+	<update id="updateCloserOut">
+		UPDATE SET state=0 FROM closer WHERE roomnum=#{roomnum} AND closermno=#{sender};
+	</update>
+	<update id="updateCloserIn">
+		UPDATE SET state=1 FROM closer WHERE roomnum=#{roomnum} AND closermno=#{closer}; 
 	</update>
 	<select id="chkCloser" resultType="chat">
 		SELECT if(count(closermno)=0,'null',date_format(closetime,'%Y.%m.%d %T')) closetime, 
 		       ifnull(state,0) state 
 		  FROM closer 
 		 WHERE roomnum=#{roomnum} 
-		   AND closermno=#{sender};
+		   AND closermno=#{closer};
 	</select>
 	<insert id="createRoom">
 		INSERT INTO chatroom (bno,mno) VALUES (#{bno},#{mno});
@@ -269,6 +287,4 @@
 		b.mno=a.mno
 		WHERE id=#{id};
 	</select>
-	
 </mapper>
-

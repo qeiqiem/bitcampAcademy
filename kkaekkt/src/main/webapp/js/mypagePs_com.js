@@ -99,39 +99,10 @@ function initEvent() {
         }
     });
 }
-function today() {
-    var date=new Date();
-    var mm=date.getMonth()+1;
-    var dd=date.getDate();
-    var today=date.getFullYear()+'.'+(mm<10?'0'+mm:mm)+'.'+(dd<10?'0'+dd:dd);
-    return today;
-}
 // function msgSet(rsvNum) { //리뷰 작성 시 업체에게 알림을 보낼 경우 사용할 예정
 //     alertObj.rsvNum=rsvNum;
 //     alertObj.typenum=5;
 //     alertObj.msg='주문번호'+rsvNum+' 가 취소되었습니다.'
-// }
-// function sendAlarm() {
-//     var msgType=0;//메시지 타입은 알람
-//     $.post({
-//         url:'/regitAlert.do',
-//         data:alertObj,
-//         success:function(ano) {
-//             if(socket){
-//                 var receiver=alertObj.addressee;
-//                 var msg='<li class="alertLi'+ano+'"><div>'+
-//                                 '<span class="msgHeader">[취소]</span>⠀<span class="msgBody" id="msg'+ano+'">'+alertObj.msg+'</span>'+
-//                             '</div>'+
-//                             '<div>'+
-//                                 '<span class="byBs">by '+alertObj.senderName+' </span><span>⠀|⠀</span>'+
-//                                 '<span class="alertDate">'+today()+'</span>'+
-//                             '</div>'+
-//                             '<i id="del'+ano+'"class="fas fa-times"></i>'+
-//                         '</li>'
-//                 socket.send(receiver+','+msgType+','+msg);//메시지 보냄
-//             }
-//         }
-//     });
 // }
 function likeOff() {
     $.post({

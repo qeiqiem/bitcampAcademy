@@ -85,8 +85,6 @@
 		/*  naver_id_login.setPopup();*/
 		naver_id_login.init_naver_id_login();
 	</script>
-
-
 </body>
 <script src="/js/kakaoLogin.js"></script>
 <script src="/js/login.js"></script>
