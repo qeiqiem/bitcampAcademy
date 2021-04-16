@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-	<link rel="stylesheet" href="/css/all.css">
-	<link rel="stylesheet" href="/css/header.css">
+
 	<script src="https://kit.fontawesome.com/2fc57dd2db.js" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<link rel="preconnect" href="https://fonts.gstatic.com">
@@ -16,6 +15,8 @@
 	</script>
 	<script src="/js/header.js"></script>
 	<script src="/js/index.js"></script>
+	<link rel="stylesheet" href="/css/all.css">
+	<link rel="stylesheet" href="/css/header.css">
 	<style>
 		.head_container {
 			background-color: rgb(44, 44, 44);
@@ -50,6 +51,7 @@
 					<a href="/jsp/mypageBiz/mpbProg_Num.jsp">매장관리</a>
 				</div>
 			</div> -->
+
 			<div class="head_right">
 				<ul>
 					<li>
@@ -58,7 +60,7 @@
 					<li>
 						<div id="bellBox">
 							<i class="fas fa-bell"></i>
-							<span class="redDot"></span>
+							<span class="redDot">●</span>
 							<div id="noticeBox">
 								<ul>
 
@@ -71,14 +73,7 @@
 						<div id="chatBox">
 							<i class="fas fa-comments"></i>
 							<!-- <i class="far fa-comment-dots fa-lg"></i> -->
-							<span class="redDot"></span>
-							<div class="chatCont">
-								<div class="chatHeader">
-										<p>💬 채팅상담</p>
-								</div>
-								<div class="chatfooter">
-								</div>
-							</div>
+							<span class="redDot">●</span>
 						</div>
 					</li>
 					<li><a href="/logout.do">로그아웃</a></li>
@@ -86,5 +81,4 @@
 				</ul>
 			</div>
 		</nav>
-		<ul class="chatContainer"></ul>
 	</header>

@@ -50,4 +50,40 @@ $(".btn1").click(function () {
 $(".btn2").click(function () {
   $(this).toggleClass("btn_selected");
   $(".btn1").removeClass("btn_selected");
-});
+})
+
+function showMap() {
+	var num = ""
+	var inputText = $("#searchBar").val('text')
+	
+	if($(".tabBtn").hasClass('btn_selected')){
+		 num = $(this).attr('value')
+	}else{
+		num = ""
+	}
+	
+	if(num = "" || inputText == "")alert("거주하는 시/군/구와 동이름을 입력해주세요. ")
+	
+	var mapUrl = 'location.href="/showMap.do"'	
+	
+	
+	
+	switch (num) {
+	
+	case "1":
+		url = url+'?type=1'
+		location.href = url+'?type=1'
+		break;
+
+	case "2":
+		url = url+'?type=2'
+		location.href = url+'?type=2'
+		break;
+		
+	default:
+		url = url+'?type=1'
+		location.href = url+'?type=2'
+		break;
+	}
+
+}

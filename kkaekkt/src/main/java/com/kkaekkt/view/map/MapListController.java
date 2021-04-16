@@ -35,22 +35,18 @@ public class MapListController {
 	UserService userService;
 	
 	    @RequestMapping(value="/showMap.do", method = {RequestMethod.GET, RequestMethod.POST})
-	    public String loginView( HttpSession session ,Model model ,int type, HttpServletRequest req) throws UnknownHostException {
+	    public String loginView( HttpSession session ,Model model ,int type) throws UnknownHostException {
 	    	AccountVO vo = new AccountVO();
 	    	
 	       if(session.getAttribute("user")==null) {//비 로그인 상태
 	          vo.setMtype(0);
 	          vo.setMno(0);
 	          if(type==1) {
-	             vo.setAddress("서울 강동구");
+	             vo.setAddress("강동구 천호동");
 	          }else {
-	             vo.setAddress("서울 강동구");
+	             vo.setAddress("강동구 천호동");
 	          }
-		    		
-
-	          String ip = req.getHeader("X-Forwarded-For");
-		      if (ip == null) ip = req.getRemoteAddr();
-	          vo.setIp(ip);	          
+	          
 	          model.addAttribute("user", vo);
 	       }else { //로그인 상태
 	          vo=(AccountVO)session.getAttribute("user");
@@ -59,20 +55,35 @@ public class MapListController {
 	          if(type==1) {//일반 세탁소
 	        	  
 	        	 String address = vo.getAddress(); 
-	        	 String[] arrayAddr = address.split(",");
-	        	 address = arrayAddr[1];
-	        	 arrayAddr = address.split("로");
-	        	 vo.setAddress(arrayAddr[0].trim());
+
+	        	 String[] arrayDong = address.split(",");
+	        	 String[] loadaddr = arrayDong[1].split("로");
+	        	 String addr = loadaddr[0];
+	        	 addr = addr.substring(3,addr.length());
+	        	 
+	        	 String dong = arrayDong[3].trim();
+	        	 dong = dong.substring(1,dong.length()-1);       	 
+	        	 addr = addr+","+dong;
+	        	 
+	        	 System.out.println(addr); 
+	        	 vo.setAddress(addr);	        	 
 	        	 
 	          }else {//코인 세탁소
 	        	  
-	        	  String address = vo.getAddress(); 
-	        	 String[] arrayAddr = address.split(",");
-	        	 address = arrayAddr[1];
-	        	 arrayAddr = address.split("로");	        	 
-	        	 System.out.println(arrayAddr[0]);
-	        	 vo.setAddress(arrayAddr[0].trim());
-	        	  
+	        	 String address = vo.getAddress(); 
+
+	        	 String[] arrayDong = address.split(",");
+	        	 String[] loadaddr = arrayDong[1].split("로");
+	        	 String addr = loadaddr[0].trim();
+	        	 addr = addr.substring(3,addr.length());
+	        	 
+	        	 String dong = arrayDong[3].trim();
+	        	 dong = dong.substring(1,dong.length()-1);       	 
+	        	 addr = addr+","+dong;
+	        	 
+	        	 System.out.println(addr); 
+	        	 vo.setAddress(addr);	
+
 	          }
 	          session.setAttribute("user",vo);
 	       }
