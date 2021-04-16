@@ -49,8 +49,4 @@ public class MapListDAO {
 	public int likeYn(SingleListVO vo) {
 		return mybatis.selectOne("MapListDAO.selectLike",vo);
 	}
-
-
-
-
 }

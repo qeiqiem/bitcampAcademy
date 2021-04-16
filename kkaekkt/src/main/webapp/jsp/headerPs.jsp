@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
+	<link rel="stylesheet" href="/css/all.css">
+	<link rel="stylesheet" href="/css/header.css">
 	<script src="https://kit.fontawesome.com/2fc57dd2db.js" crossorigin="anonymous"></script>
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
@@ -14,8 +15,7 @@
 	</script>
 	<script src="/js/header.js"></script>
 	<script src="/js/index.js"></script>
-	<link rel="stylesheet" href="/css/all.css">
-	<link rel="stylesheet" href="/css/header.css">
+
 	<header class="head_container">
 		<nav class="head">
 			<div class="menu">
@@ -38,7 +38,7 @@
 					<li>
 						<div id="bellBox">
 							<i class="fas fa-bell"></i>
-							<span class="redDot">●</span>
+							<span class="redDot"></span>
 							<div id="noticeBox">
 								<ul>
 
@@ -51,14 +51,20 @@
 						<div id="chatBox">
 							<i class="fas fa-comments"></i>
 							<!-- <i class="far fa-comment-dots fa-lg"></i> -->
-							<span class="redDot">●</span>
+							<span class="redDot"></span>
+							<div class="chatCont">
+								<div class="chatHeader">
+										<p>💬 채팅상담</p>
+								</div>
+								<div class="chatfooter">
+								</div>
+							</div>
 						</div>
 					</li>
 					<li><a href="/jsp/mypageUser/mypagePs.jsp">마이페이지</a></li>
 					<li><a href="/logout.do">로그아웃</a></li>
 					<li><a href="/jsp/faq.jsp">FAQ</a></li>
 				</ul>
-
 				<!-- <div><span>${sessionScope.user.name}</span>님</div>
 				<div id="bellBox">
 					<i class="fas fa-bell"></i>

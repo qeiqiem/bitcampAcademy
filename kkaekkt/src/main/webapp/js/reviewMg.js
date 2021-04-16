@@ -281,32 +281,21 @@ function sendMsg() {
   $.post({
     url: "/regitAlert.do",
     data: alertObj,
-    success: function () {
-      console.log("success");
-      if (socket) {
-        console.log("진입");
-        var receiver = alertObj.addressee;
-        console.log(receiver);
-        var msg =
-          "<li>" +
-          '<div class="msgTop">' +
-          '<a href="/jsp/mypageUser/mypagePs.jsp">[답글]⠀' +
-          alertObj.msg +
-          "</a>" +
-          "</div>" +
-          '<div class="msgBottom">' +
-          '<span class="date">' +
-          today() +
-          "</span>" +
-          '<span class="byBs">by ' +
-          alertObj.sernderName +
-          "</span>" +
-          "</div>" +
-          '<i class="fas fa-times"></i>' +
-          "</li>";
-        socket.send(receiver + "," + msg); //메시지 보냄
+    success:function(ano) {
+      if(socket){
+          var receiver=alertObj.addressee;
+          var msg='<li class="alertLi'+ano+'"><div>'+
+                          '<span class="msgHeader">[답글]</span>⠀<span class="msgBody" id="msg'+ano+'">'+alertObj.msg+'</span>'+
+                      '</div>'+
+                      '<div>'+
+                          '<span class="byBs">by '+alertObj.senderName+' </span><span>⠀|⠀</span>'+
+                          '<span class="alertDate">'+today()+'</span>'+
+                      '</div>'+
+                      '<i id="del'+ano+'"class="fas fa-times"></i>'+
+                  '</li>'
+          socket.send(receiver+','+msgType+','+msg);//메시지 보냄
       }
-    },
+  },
   });
 }
 function initPageEvent() {

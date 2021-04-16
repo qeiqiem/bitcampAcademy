@@ -1,7 +1,7 @@
 //정규식
 const regId = /(?=.*\d{0,})(?=.*[a-z]{1,}).{6,15}/;
 const regPw = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
-const regName = /^[가-힝a-zA-Z]{2,}$/;
+const regName = /^[가-힝a-zA-Z]{1,}$/;
 const regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 const regBno = /^[0-9]{10}$/;
 const regPhone = /^[0-9]{3}\-[0-9]{3,4}\-[0-9]{4}$/;
@@ -296,16 +296,16 @@ function initEvent() {
     }
   });
   // 이름 영어+한글만 입력
-  $("input[name=bname]").keyup(function (event) {
-    if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
-      var inputVal = $(this).val();
-      $(this).val(
-        inputVal.replace(/^[0-9]+$|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"\\]/gi, "")
-        // 이름 한글만 입력 가능
-        // inputVal.replace(/[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"\\]/g, "")
-      );
-    }
-  });
+  // $("input[name=bname]").keyup(function (event) {
+  //   if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
+  //     var inputVal = $(this).val();
+  //     $(this).val(
+  //       inputVal.replace(/^[0-9]+$|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"\\]/gi, "")
+  //       // 이름 한글만 입력 가능
+  //       // inputVal.replace(/[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"\\]/g, "")
+  //     );
+  //   }
+  // });
 
   // 폰넘버 숫자+하이픈
   $("input[name=phone]").keyup(function (event) {
@@ -435,15 +435,45 @@ function chkPhone() {
     formatArray[4] = false;
   }
 }
-function chkBno() {
-  if (regBno.test(bno.value)) {
-    $("#bnochk").addClass("hide");
-    formatArray[5] = true;
-  } else {
+
+$("#bno").focusout(function () {
+  // function chkBno() {
+  // if (!regBno.test($("#bno").val())) {
+  if (!regBno.test(bno.value)) {
     $("#bnochk").removeClass("hide");
-    formatArray[5] = false;
+    document.getElementById("bnochk").innerText = "10자리 숫자만 입력하세요 ";
+    $("#bno").focus();
+    return false;
+    // formatArray[5] = true;
+  } else {
+    $("#bnochk").addClass("hide");
+
+    $.ajax({
+      url: "/bnoChk.do",
+      type: "POST",
+      data: {
+        bno: $("#bno").val(),
+      },
+      success: function (data) {
+        // console.log(data);
+        var key = JSON.parse(data);
+        if (key != 0) {
+          // formatArray[0] = false;
+          document.getElementById("bnochk").innerText =
+            "해당 사업자등록번호로 가입된 아이디가 있습니다.";
+          $("#bnochk").removeClass("hide");
+          $("#bno").focus();
+          return false;
+          // alert("중복된 아이디가 있습니다.");
+        } else if (key == 0) {
+          $("#bnochk").addClass("hide");
+          formatArray[5] = true;
+        }
+      },
+    });
   }
-}
+});
+
 function chkAccount() {
   if (regAccount.test(account.value)) {
     $("#accountchk").addClass("hide");
@@ -453,23 +483,25 @@ function chkAccount() {
     formatArray[6] = false;
   }
 }
-function bnoChk() {
-  var bno = $("#bno").val();
-  $.post({
-    url: "/bnoChk.do",
-    data: { bno: bno },
-    success: function (result) {
-      if (result == 0) {
-        formatArray[5] = true;
-      } else {
-        formatArray[5] = false;
-      }
-    },
-  });
-}
+
+// function bnoChk() {
+//   var bno = $("#bno").val();
+//   $.post({
+//     url: "/bnoChk.do",
+//     data: { bno: bno },
+//     success: function (result) {
+//       if (result == 0) {
+//         formatArray[5] = true;
+//       } else {
+//         formatArray[5] = false;
+//       }
+//     },
+//   });
+// }
+
 function formatChk() {
   //유효성검사가 걸린 차례대로 input값 체크
-  bnoChk(); //임시로 bno 검사 위치함
+  // bnoChk(); //임시로 bno 검사 위치함
   for (var i = 0; i < formatArray.length; i++) {
     if (!formatArray[i]) {
       //false가 반환된다면

@@ -1,12 +1,15 @@
 package com.kkaekkt.biz.user.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.kkaekkt.biz.comm.ChatVO;
 import com.kkaekkt.biz.comm.EquipmentVO;
 import com.kkaekkt.biz.comm.EtcVO;
 import com.kkaekkt.biz.comm.LaundryVO;
@@ -76,19 +79,23 @@ public class UserServiceImpl implements UserService {
 	public String deleteUser(AccountVO vo) {
 		System.out.println("회원탈퇴 서비스 옴");
 		int result = userDao.orderChk(vo);
-		System.out.println(result);
+		System.out.println("예약수 : "+result);
 
 		// result가 0이면 삭제
 		// 1이면 삭제 안 함
 		if (result == 0) {
+			// 삭제부분
 			userDao.deleteUser(vo);
 			return "success";
-		} else {
+		} else if(result != 0) {
+			// 예약있음
 			return "fail";
 		}
+		return null;
 	}
 	
 	// 로그인 들
+	
 	
 //	@Override
 //	public int idchkBs(BusinessVO vo) {
@@ -205,5 +212,27 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int bnoChk(int bno) {
 		return userDao.bnoChk(bno);
+	}
+	@Override
+	public Map<String,Object> getRoomNum(ChatVO vo) {
+		Map<String,Object> map=new HashMap<String,Object>();
+		int result=userDao.chkRoom(vo);
+		if(result==0) {//만약 방이 없다면
+			userDao.createRoom(vo);//방을 만들고
+			result=userDao.chkRoom(vo);//방 번호를 받아서
+			map.put("roomNum", result);//맵에 넣고 전달한다. 
+		}else {//만약 방이 있다면
+			map.put("roomNum",result); //방 번호를 맵에 넣는다.
+			vo.setRoomnum(result);//방 번호를 입력한 후
+			ChatVO closer=userDao.chkCloser(vo);//나간 사람인 지 체크한다(리턴은 나간 시간과 상태를 받는다)
+			if(closer.getClosetime()!="null"&&closer.getState()==0) {//나간 사람이고, 들어온 상태가 아니라면
+				userDao.updateCloser(vo); //들어온 상태로 변환한다.
+			}else {//나간사람이 아니거나, 들어온 상태의 사람이라면
+				userDao.updateChatRog(vo);//수신자가 본인인 메시지를 읽음상태로 전환한다.
+				vo.setClosetime(closer.getClosetime());//받아온 종료시점을 입력한다.
+				map.put("chatRog",userDao.getChatRog(vo));//쌓인 채팅로그를 리스트로 받아온다.
+			}
+		}
+		return map;
 	}
 }

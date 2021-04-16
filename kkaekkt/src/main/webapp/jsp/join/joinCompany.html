@@ -5,11 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../../css/all.css">
-    <link rel="stylesheet" href="../../css/header.css">
-    <link rel="stylesheet" href="../../css/join.css">
-    <link rel="stylesheet" href="../../css/joinPerson.css">
-    <link rel="stylesheet" href="../../css/joinBs.css">
+    <link rel="stylesheet" href="/css/all.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/join.css">
+    <link rel="stylesheet" href="/css/joinPerson.css">
+    <link rel="stylesheet" href="/css/joinBs.css">
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="https://kit.fontawesome.com/2fc57dd2db.js" crossorigin="anonymous"></script>
 </head>
@@ -142,8 +142,8 @@
                                     <p>업체명</p>
                                     <input type="text" id="bname" name="bname">
                                     <p>사업자등록번호</p>
-                                    <input type="text" name="bno" onfocusout="chkBno()" id="bno"
-                                        placeholder="숫자만 입력하세요">
+                                    <input type="text" name="bno" id="bno" placeholder="숫자만 입력하세요" maxlength="10">
+                                    <!-- onfocusout="chkBno()" -->
                                     <label id="bnochk" class="regexChk hide">10자리 숫자만 입력하세요</label>
                                 </div>
                                 <div class="address">

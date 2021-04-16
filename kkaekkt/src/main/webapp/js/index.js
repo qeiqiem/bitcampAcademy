@@ -19,7 +19,7 @@ function connectWs() {
     if (msgType == 0) {
       //메시지 타입이 알람이라면
       $("#noticeBox ul").prepend(msgText);
-      upDotCount();
+      upAlertDotCount();
     } else {
       //메시지 타입이 채팅이라면
       //채팅방이 있는 지 확인

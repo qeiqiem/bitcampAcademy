@@ -61,7 +61,7 @@ function initBodyEvent() {
     $('#alertListBox').on('click','i.fa-times',function() {//삭제버튼이 눌렸을 때
         alertObj.ano=Number($(this).attr('id').substr(3));
         delPageAlert();
-        downDotCount();
+        downAlertDotCount();
     });
     $('#readDelBtn').click(function() {//읽은 알림 삭제버튼이 눌렸을 때
         alertObj.state=2;//읽음 상태인 알림만 삭제
@@ -121,7 +121,7 @@ function delPageAlert() {//알림 삭제 메서드
         success:function() {
             if(alertObj.ano!=undefined){//부분삭제라면
                 if($('.alertLi'+alertObj.ano).eq(0).hasClass('read')){
-                    downDotCount();
+                    downAlertDotCount();
                 }
                 $('.alertLi'+alertObj.ano).remove();
             }else if(alertObj.state!=undefined){//읽은 알림 삭제라면
@@ -130,7 +130,7 @@ function delPageAlert() {//알림 삭제 메서드
             }else {//전체 삭제라면
                 $('#alertListBox .date').remove();
                 $('#noticeBox ul').children().remove();
-                dotCountZero();
+                alertDotCountZero();
             }
             initAlertObj();//헤더 js에 저장된 공용 메서드 -> 객체 초기화
         }
