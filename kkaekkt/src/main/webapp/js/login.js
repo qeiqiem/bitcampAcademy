@@ -1,10 +1,12 @@
 $(document).ready(function() {
 		
 		$("#modal_show").click(function() {
+			$('#mask').show()
 			$("#modal_container").show()
 		})
 		$("#modal_close").click(function() {
 			$("#modal_container").hide()
+			$('#mask').hide()
 		})
 	})
 
@@ -12,9 +14,10 @@ $(document).ready(function() {
 
 $(document).ready(function() {
   $('#login').click(function(){ 
-    login();
-  });
-});
+    login()
+  })
+})
+
 function login() {
   var userData={
     id:$('#id').val(),
