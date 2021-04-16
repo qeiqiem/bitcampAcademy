@@ -65,6 +65,7 @@ function enter() {
     }
 }
 function initSide() {
+    $(".content").css("left", "22vw");
     $('.side button').eq(1).addClass("side_select");
 }
 function initPageBtn() {
@@ -158,7 +159,7 @@ function sendAlarm() {
                 var receiver=alertObj.addressee;
                 var msg='<li>'+
                             '<div class="msgTop">'+
-                            '<span>['+(alertObj.typenum==3?'완료':'취소')+']</span> <span id="msg'+ano+'" class="msgBody">'+alertObj.msg+'</span>'+
+                                '<span class="msgHeader">['+(alertObj.typenum==3?'완료':'취소')+']</span> <span id="msg'+ano+'" class="msgBody">'+alertObj.msg+'</span>'+
                             '</div>'+
                             '<div class="msgBottom">'+
                                 '<span class="date">'+today()+'</span>'+

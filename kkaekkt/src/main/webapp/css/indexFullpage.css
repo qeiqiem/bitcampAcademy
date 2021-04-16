@@ -52,7 +52,14 @@ video {
 .head_container a {
   color: white;
 }
-
+/* .head_right ul li {
+  float: left;
+  margin-left: 36px;
+} */
+/* 로그인 아이디/비번찾기 */
+.finds a{
+  color: var(--black-color);
+}
 /* .head {
   padding: 15px 50px;
 } */

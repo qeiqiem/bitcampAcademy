@@ -5,13 +5,13 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
 		rel="stylesheet">
-
 	<script>
 		var alertObj = {
 			sender: ${ sessionScope.user.mno },
 			senderName: `${sessionScope.user.name}`,
 			mtype: ${ sessionScope.user.mtype }
 		};
+		var chatObj ={};
 	</script>
 	<script src="/js/header.js"></script>
 	<script src="/js/index.js"></script>
@@ -60,7 +60,7 @@
 					<li>
 						<div id="bellBox">
 							<i class="fas fa-bell"></i>
-							<span class="redDot">●</span>
+							<span class="alertDot"></span>
 							<div id="noticeBox">
 								<ul>
 
@@ -73,7 +73,14 @@
 						<div id="chatBox">
 							<i class="fas fa-comments"></i>
 							<!-- <i class="far fa-comment-dots fa-lg"></i> -->
-							<span class="redDot">●</span>
+							<span class="chatDot"></span>
+							<div class="chatCont">
+								<div class="chatHeader">
+										<p>💬 채팅상담</p>
+								</div>
+								<div class="chatfooter">
+								</div>
+							</div>
 						</div>
 					</li>
 					<li><a href="/logout.do">로그아웃</a></li>
@@ -82,3 +89,4 @@
 			</div>
 		</nav>
 	</header>
+	<ul class="chatContainer"></ul><!-- 채팅방 들어갈 ul -->

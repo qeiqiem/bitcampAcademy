@@ -58,7 +58,6 @@
 					<li><a href="/logout.do">로그아웃</a></li>
 					<li><a href="/jsp/faq.jsp">FAQ</a></li>
 				</ul>
-
 				<!-- <div><span>${sessionScope.user.name}</span>님</div>
 				<div id="bellBox">
 					<i class="fas fa-bell"></i>

@@ -207,6 +207,7 @@ function ajax() { //ajax로 리스트 받아오기
     });
 }
 function initSide() {
+    $(".content").css("left", "22vw");
     $('.side_sub').css('display','unset');
     $('.side button').eq(0).addClass("side_select");
     $('.side_sub button').eq(1).addClass("side_sub_select");

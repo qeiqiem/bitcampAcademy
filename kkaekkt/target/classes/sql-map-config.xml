@@ -18,6 +18,7 @@
 		<typeAlias alias="single" type="com.kkaekkt.biz.map.SingleListVO"/>
 		<typeAlias alias="respay" type="com.kkaekkt.biz.map.ResPayVO"/>
 		<typeAlias alias="alert" type="com.kkaekkt.biz.comm.AlertVO"/>
+		<typeAlias alias="chat" type="com.kkaekkt.biz.comm.ChatVO"/>
 	</typeAliases>
 			
 	<!-- Sql Mapper 설정 -->
