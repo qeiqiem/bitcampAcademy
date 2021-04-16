@@ -92,8 +92,7 @@ public class UserServiceImpl implements UserService {
 			return "fail";
 		}
 		return null;
-	}
-	
+	}	
 	// 로그인 들
 	
 	

@@ -38,7 +38,7 @@
 		</nav>
 
 		<div id="modal_container">
-			<button id="modal_close"><i class="fas fa-times"></button>
+			<button id="modal_close"><i class="fas fa-times"></i></button>
 			<div id="modal_bodycont">
 				<form>
 					<div id="modal_head">
