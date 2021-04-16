@@ -1,16 +1,41 @@
 /* 실제 사용 이벤트  */
 $(document).ready(function() {
-	 $(".head_container").css("box-shadow", "1px 2px 4px 5px lightgrey");
+	
+	
+	
+	$(".head_container").css("box-shadow", "lightgrey -3px -6px 18px 4px");
 	var rsvObj={};
    // method/var-----------------------------------------------------------------------
    
+   //init 정보
+   //좌표정보
+	
+	if(mno != 0){ //로그인
+		   	var mapaddr = []
+			    mapaddr = useraddress.split(",")
+			    //주소정보
+			    useraddress = mapaddr[0]	   	
+			   	// 주소 정보 출력
+			   	$(".slide_mini").html(useraddress)	  			   	
+			  var maploc = mapaddr[1]
+		   		locationFind(maploc)   
+			    
+		   }else {	//비로그인
+			   $(".slide_mini").html(useraddress)
+			   lat = "37.527"; // 위도
+			   lon = "127.125";   // 경도	
+			   weather(lat,lon)			   
+		   }
+
+	
+   //예약관련 전역변수
    var random = Math.floor(Math.random() * 10) + "," + "000"
    var bno = ""
    var totalPrice = 0
    var name = ""
-   selectNum()
-  
-
+   selectNum()   
+   
+   
    // [Click 이벤트]----------------------------------------------------------------------
    $("#agreement i").click(function() {//약관 클릭 시
       $(this).toggleClass('fa-chevron-down');
@@ -22,7 +47,27 @@ $(document).ready(function() {
           $('.termsText').eq($(this).attr('value')).hide();
       }
    })
+   
+   
    /* [사이드바] */
+   //현재위치  확인하기
+   $('.findPoint').on('change',function(){
+	   
+	   if($('.findPoint').is(":checked") == true){
+		   geolocation()
+		   
+		}else if($('.findPoint').is(":checked") == false){			
+			lon = "127.125"; // 위도
+		    lat = "37.527";   // 경도	 	
+		    weather(lat,lon)
+		    lonLatFind(lat, lon)
+		    useraddress = "강동구 천호동"
+		    $(".slide_mini").html(useraddress)
+		    bindinglandry(useraddress)
+		}
+	   
+   })
+   
    // 1. 리스트 : 슬라이드 show
    $('.foldBtn').click(function() {
       $('.foldBtn').toggleClass('expand')
@@ -95,13 +140,12 @@ $(document).ready(function() {
 	   $('.list').show(); 
 	   var item = $(".input_search").val();  
 	   viewSearch(item)
-	   
    })
    
-   $("#outPaybtn").click(function() {
-	   choicePay.hide();
+   $(".outPaybtn").click(function() {
+	  $('.choicePay').hide();
    })
-   
+ 
    //예약항목 옵션 클릭시 감지
    $("#resShortOpt").on("click", 'input:checkbox', function() {
       //체크란 row의 값
@@ -193,12 +237,15 @@ $(document).ready(function() {
    
    //[기  능] -------------------------------------------------------------------------------
    function navSearch(item) {
-      searchMajor(item);
-      viewSearch(item)
+      searchMajor(item);  
+      viewSearch(item);
       $('.single').hide();
       $('.list').show();
    }
 
+   //타입에 따라 예약하기 숨김        
+   if(type==2){ $(".resbtn").hide() }
+   
    // 검색결과 COMMENT 보이게하기
    function viewSearch(clone) { $(".slide_mini").html(clone) }
 
@@ -401,6 +448,7 @@ $(document).ready(function() {
            , success: function(data){ //성공후 처리는 추후 진행.                                                                                        
                        if(data==null)console.log("data 가 조회되지 않았습니다.") 
                        $("#resShortOpt").empty()
+                       $("#selname").empty()
                        var html = ''              
                           html +='<tr>'
                           html +='<td class="htdres res_title">1~3일 소요</td>'
@@ -477,11 +525,11 @@ $(document).ready(function() {
  
          }, function(rsp) {
          if ( rsp.success ) { // 성공시
-            //결제관련 api 기능
-            mapRes()
-            $('.slide_res').hide()
+        	mapRes()
+            //결제관련 api 기능            
+            $('.slide_res').hide()            
             $('.slide_success').show()            
-            $("#mask").hide()	            
+            $("#mask").hide()           
          } else { // 실패시
             console.log('결제에 실패하였습니다.');
          }
@@ -516,7 +564,7 @@ $(document).ready(function() {
    
  //리스트 컨트롤러로 보내기
    function mapRes() {
-	   rsvObj.mno = mno;
+	  rsvObj.mno = mno;
       rsvObj.totalPrice=totalPrice;
       rsvObj.rbno=bno;
 	   $.ajax({
@@ -524,8 +572,8 @@ $(document).ready(function() {
            , method : 'POST'
            , data: rsvObj
            , success:function(result){
-            msgSet(result);
-            sendAlarm();
+           /* msgSet(result);
+            sendAlarm();*/
            }
 	   })
    }
@@ -552,7 +600,7 @@ $(document).ready(function() {
                   var receiver=alertObj.addressee;
                   var msg='<li>'+
                               '<div class="msgTop">'+
-                                 '<span class="msgHeader">[결제]</span> <span id="msg'+ano+'" class="msgBody">'+alertObj.msg+'</span>'+
+                                 '<span>[결제]</span> <span id="msg'+ano+'" class="msgBody">'+alertObj.msg+'</span>'+
                               '</div>'+
                               '<div class="msgBottom">'+
                                   '<span class="date">'+today()+'</span>'+
@@ -565,4 +613,109 @@ $(document).ready(function() {
           }
       });
   }
+
+
+
+	//날씨 js
+	function weather(lat,lon) {    
+	    var apiURI = "https://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&appid=" + "5da980755c49bb363969b9ad694421ac"; // 우편번호가 안되서 일단 도시명으로..
+	   // let city = document.getElementById("city").value;
+	    let imgURL;
+	        $.ajax({
+	        url: apiURI,
+	        dataType: "json",
+	        type: "GET",
+	        async: "false",
+	        success: function (resp) {
+	            console.log(resp.weather);
+	             
+	            console.log("현재온도 : " + Math.floor(resp.main.temp - 273.15));
+	            console.log("현재습도 : " + resp.main.humidity);
+	            console.log("날씨 : " + resp.weather[0].main);
+	            console.log("상세날씨설명 : " + resp.weather[0].description);
+	            console.log("날씨 이미지 : " + resp.weather[0].icon);
+	            console.log("바람   : " + resp.wind.speed);
+	            console.log("나라   : " + resp.sys.country);
+	            console.log("도시이름  : " + resp.name);
+	            console.log("구름  : " + (resp.clouds.all) + "%");
+	            imgURL = "/img/weather/" + resp.weather[0].icon + ".png";
+	            var weatherText;
+	            if(resp.weather[0].main == "Clear"){
+	                weatherText = "맑음"
+	            } else if(resp.weather[0].main == "Rain"){
+	                weatherText = "비"
+	            } else if(resp.weather[0].main == "Thunderstorm"){
+	                weatherText = "뇌우"
+	            } else if(resp.weather[0].main == "Clouds"){
+	                weatherText = "구름"
+	            } else if(resp.weather[0].main == "Snow"){
+	                weatherText = "눈"
+	            } else if(resp.weather[0].main == "Drizzle"){
+	                weatherText = "이슬비"
+	            } else if(resp.weather[0].main == "Haze"){
+	                weatherText = "안개"
+	            } else if(resp.weather[0].main == "Mist"){
+	                weatherText = "안개"
+	            } else if(resp.weather[0].main == "Sand"){
+	                weatherText = "황사"
+	            }
+	            $("#weatherImg").attr("src", imgURL);
+	            $("#weatherMain").text(weatherText);
+	            $("#temp").text( Math.floor(resp.main.temp - 273.15) + "℃");
+	            $("#humidity").text(resp.main.humidity + "%");
+	        }
+	    })
+	    
+	
+	}
+	
+	  function geolocation() {
+			// Geolocation API에 액세스할 수 있는지를 확인
+		       if (navigator.geolocation) {
+		           //위치 정보를 얻기
+		           navigator.geolocation.getCurrentPosition (function(pos) {
+		        	   lat = pos.coords.latitude;   //위도
+		           	   lon = pos.coords.longitude;  // 경도
+		           	   lat = lat.toFixed(4)
+		           	   lon = lon.toFixed(4)
+		           	   lat = lat.substring(0,lat.length-1)
+		           	   lon = lon.substring(0,lon.length-1)
+			           	weather(lat, lon)	           	
+			           	lonLatFind(lat, lon)
+		           });
+		       } else {
+		           alert("이 브라우저에서는 Geolocation이 지원되지 않습니다.")
+		       }
+	  }
+      
+	  //동이름으로 위도, 경도 검색
+	  function locationFind(maploc) {		  
+		  //주소로 위도, 경도 찾기
+		  $.getJSON('/jsp/searchMap/latLon.json', function(data) {			  
+		       $.each(data, function(i, result) {
+		    	   if( maploc.trim() == result.dong ){
+		    		   console.log("동이름 : "+result.dong)
+		    		   console.log("위도 : "+result.lat)
+		    		   console.log("경도 : "+result.lon)    	
+		    		   weather(result.lat,result.lon)
+		    	   }		
+		       })
+		   })
+	}
+	  
+	  //위도, 경도로 동이름 검색
+	  function lonLatFind(lat,lon) {		  
+		  //주소로 위도, 경도 찾기
+		  $.getJSON('/jsp/searchMap/latLon.json', function(data) {			  
+		       $.each(data, function(i, result) {
+		    	   if( lat == result.lat && lon == result.lon ){
+		    		   console.log("동이름 : "+result.dong)
+		    		   useraddress = result.dong
+		    		   $(".slide_mini").html(useraddress)	 
+		    		   bindinglandry(useraddress)
+		    	   }		
+		       })
+		   })
+	}
+	
 });

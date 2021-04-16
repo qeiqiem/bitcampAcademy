@@ -46,7 +46,8 @@ session.setAttribute("state", state);
 		<a id="modal_show">로그인</a>
 
 		<div id="modal_container">
-<button id="modal_close" onclick="modalClose()"><i class="fas fa-times"></i></button>			<div id="modal_bodycont">
+			<button id="modal_close">x</button>
+			<div id="modal_bodycont">
 			<form>
 				<div id="modal_head">
 					<h2>로그인</h2>
