@@ -8,41 +8,13 @@
     <title>지도생성하기</title>  
     <!-- map 에서 필요한 참조 -->
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>    
+    <script src="/js/map.js"></script>
     <!-- 아임포트 -->
      <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-     
      <script>
-   		//로딩시 생성
-	    var useraddress = `${user.address}`	    
-		   function getUrl(){
-			    var apiKey = 'd77bcfbb4c2a5211ea63199c58543ab0';
-			    var ipAdd = `${user.ip}`
-			    var regUrl = 'http://ip-api.com/json'+ipAdd+'?access_key='+apiKey+'&format=1';
-			 
-			    $.ajax({
-			        type:"POST",
-			        url:regUrl,
-			        dataType : "json",
-			        success: function(json){
-			 
-			            console.log(json); // 리턴받은 json
-			            console.log(json.country_name); // 국가이름
-			            console.log(json.latitude); // 위도
-			            console.log(json.longitude); // 경도
-			            console.log(json.region_name); // 지역이름
-			            console.log(json.location.country_flag); // 국기 이미지
-			             
-			        },
-			        error: function(xhr, status, error) {
-			            alert(error);
-			        }  
-			    })
-			} 
-	    
-	    getUrl()
-	    
-     </script>
-	 <script src="/js/map.js"></script>
+   		//로딩시 주소정보 분기
+	    var useraddress = `${user.address}`	
+	 </script>	
    	 <link rel="stylesheet" href="/css/map.css">  
    </head>
    <body>
@@ -55,8 +27,15 @@
          </c:otherwise>
    </c:choose>
       <div id="mask"></div>
-           <div class="body_container">
-               <div class="map_container">
+      <div class="choicePay">        
+	       <p>결제수단 선택</p>
+	        <button id="kakaoPay"  style="background-color: #ffe607;">카카오페이</button>
+	        <button id="toss" value="2"  style="background-color: #3182f6;">toss</button>
+	        <button id="ectPay" value="3"  style="background-color: #d50101;">일반결제</button>
+	        <button class="outPaybtn">나가기</button>
+		</div>
+           <div class="body_container">           		
+               <div class="map_container">               
                <!-- 지도타입 컨트롤 div 입니다 -->
 			    <div class="custom_typecontrol radius_border">
 			        <span id="btnRoadmap" class="selected_btn_map" onclick="setMapType('roadmap')">지도</span>
@@ -78,10 +57,10 @@
                    <div class="slide_container">
                        <div class="slide">
                            <div class="slide_top">
-                               <p class="here"><input type="radio">내 주변 찾기</p>
+                               <p class="here"><input class="findPoint" type="checkbox">내 주변 찾기</p>
                                <div class="slide_search">
                                    <form onsubmit="searchPlaces(); return false;">
-                                       <input    class="input_search"    type="text" id="keyword" placeholder="동네를 입력해주세요.">
+                                       <input    class="input_search"  type="text" id="keyword" placeholder="동네를 입력해주세요.">
                                        <button class="input_searchBtn" type="submit">
                                            <i class="fas fa-search fa-lg "></i>                
                                        </button>
@@ -89,6 +68,26 @@
                                </div>
                                <div class="tag">
                                    <p class="slide_mini"></p>
+                                   <div class="weatherBox">
+								        <div class="boxLeft">
+								            <img id="weatherImg" src=""><br>
+								        </div>
+								        <div class="boxCenter">
+								            <span id="weatherMain"></span>
+								        </div>
+								        <div class="boxRight">
+								            <table>
+								                <tr>
+								                    <th>온도</th>
+								                    <th>습도</th>
+								                </tr>
+								                <tr>
+								                    <td id="temp"></td>
+								                    <td id="humidity"></td>
+								                </tr>
+								            </table>
+								        </div>								        
+								    </div>    
                                </div>
                            </div>
                            <div class="footer list">
@@ -222,107 +221,73 @@
                            </div>
                            <div class="comBtnDiv">
                             <button class="comBtn">결제하기</button>
-                           </div>  
-           			       <div class="choicePay">        
-						       <p>결제수단 선택</p>
-						        <button id="kakaoPay"  style="background-color: #ffe607;">카카오페이</button>
-						        <button id="toss" value="2"  style="background-color: #3182f6;">toss</button>
-						        <button id="ectPay" value="3"  style="background-color: #d50101;">일반결제</button>
-						        <button class="outPaybtn">나가기</button>
-						    </div>
-                       </div><!-- res_slide --> 
+                           </div>             			       
+                       </div><!-- res_slide -->                        
                        <div class="contBtn">
                            <button class="foldBtn">&lt;</button>
                            <button class="foldBtn expand">&gt;</button>
                        </div>
                    </div>
+                   
                    <div id="map"></div>
                </div>
            </div>
        </body>   
        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3845f493917a302d1ea69e946c0443ff&libraries=services"></script>
-       <script>         	
-             
+       <script>  
+       //위도 경도
+       	   let lat;
+           let lon;
        /* 지도 api에서 제공하는 이벤트 */
            var markers = [];
            var mapContainer = 
             map = document.getElementById('map'),
                mapOption = {
                    center: new kakao.maps.LatLng(37.566826, 126.9786567),level: 2
-               };            
+               };     
+           
            var itemel;
            var bno= "";    
            var dbData = [];
+           
+           // 회원번호
            var mno = ${user.mno};
+           
+           // 일반세탁, 코인세탁 'type' 구분
        	   var url = window.location.href;
-           url = url.split("type=")
+           	   url = url.split("type=")
            var type = Number(url[1])
            
-           if(type==2){
-        	   $(".resbtn").hide()
-           }
-           
- 		   $(".slide_mini").html(useraddress)
+           /* var contuserarr  = []
+	  	       contuserarr  = useraddress.split("구")	
+	  	       useraddress = contuserarr[0]+"구" */	  	          
+ 		   
+ 		   //Controller에서 받아온 주소로 DB 선조회
            bindinglandry(useraddress)
            
+           //map 개체 생성
            var map = new kakao.maps.Map(mapContainer, mapOption);
-           mapContainer.style.position = "initial";      
-     
-           var ps = new kakao.maps.services.Places();   
-           function setMapType(maptype) { 
-        	    var roadmapControl = document.getElementById('btnRoadmap');
-        	    var skyviewControl = document.getElementById('btnSkyview'); 
-        	    if (maptype === 'roadmap') {
-        	        map.setMapTypeId(kakao.maps.MapTypeId.ROADMAP);    
-        	        roadmapControl.className = 'selected_btn_map';
-        	        skyviewControl.className = 'btn_sky';
-        	    } else {
-        	        map.setMapTypeId(kakao.maps.MapTypeId.HYBRID);    
-        	        skyviewControl.className = 'selected_btn';
-        	        roadmapControl.className = 'btn';
-        	    }
-        	}
+           mapContainer.style.position = "initial";
            
-           
-           // 지도 확대, 축소 컨트롤에서 확대 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
-           function zoomIn() {
-               map.setLevel(map.getLevel() - 1);
-           }
-
-           // 지도 확대, 축소 컨트롤에서 축소 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
-           function zoomOut() {
-               map.setLevel(map.getLevel() + 1);
-           }
-           
-
+           //장소 검사
+           var ps = new kakao.maps.services.Places();
            var infowindow = new kakao.maps.InfoWindow({zIndex:1});
    			
    
            // 키워드 검색
            function searchPlaces() { 
                var keyword = document.getElementById('keyword').value;
+               
                if (!keyword.replace(/^\s+|\s+$/g,'')) { 
                    alert('키워드를 입력해주세요!'); 
-               return false;
-               }               
+               	   return false;
+               }    
+               
                bindinglandry(keyword)
            }              
            
-           // 대분류 검색 
-           function searchMajor(useraddress) {             
-            var item = useraddress
-            ps.keywordSearch(item, placesSearchCB);       
-           }
-           
-           // 인기순 검색 
-           function searchPopul(item) { }           
-           // 리뷰순 검색 
-           function searchGrade(item) { }
-                   
-   
            //데이터 바인딩
-           function bindinglandry(keyaddr) {
-              
+           function bindinglandry(keyaddr) {              
               //0325-주옥 : 검색하려는 키워드 캐치 및 select을 하기위해 controller 접근
               var keyaddr = keyaddr;
            
@@ -349,8 +314,6 @@
                                    ps.keywordSearch(keyaddr, placesSearchCB); 
                                } 
                   })
-               
-           
          }
    
          // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
@@ -369,8 +332,8 @@
    
            // 검색 결과 목록과 마커를 표출
            function displayPlaces(places) {
-         
-               var listEl = document.getElementById('placesList'), 
+        	   var listEl = "";
+               listEl = document.getElementById('placesList'), 
                menuEl = document.getElementById('menu_wrap'),
                fragment = document.createDocumentFragment(), 
                bounds = new kakao.maps.LatLngBounds(), 
@@ -555,6 +518,31 @@
                while (el.hasChildNodes()) {
                    el.removeChild (el.lastChild);
                }
+           }
+           
+         //스카이뷰 옵션제어
+           function setMapType(maptype) { 
+        	    var roadmapControl = document.getElementById('btnRoadmap');
+        	    var skyviewControl = document.getElementById('btnSkyview'); 
+        	    if (maptype === 'roadmap') {
+        	        map.setMapTypeId(kakao.maps.MapTypeId.ROADMAP);    
+        	        roadmapControl.className = 'selected_btn_map';
+        	        skyviewControl.className = 'btn_sky';
+        	    } else {
+        	        map.setMapTypeId(kakao.maps.MapTypeId.HYBRID);    
+        	        skyviewControl.className = 'selected_btn';
+        	        roadmapControl.className = 'btn';
+        	    }
+        	}
+         
+        // 지도 확대, 축소 컨트롤에서 확대 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
+           function zoomIn() {
+               map.setLevel(map.getLevel() - 1);
+           }
+
+           // 지도 확대, 축소 컨트롤에서 축소 버튼을 누르면 호출되어 지도를 확대하는 함수입니다
+           function zoomOut() {
+               map.setLevel(map.getLevel() + 1);
            }
         
        </script>
