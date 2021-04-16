@@ -1,3 +1,4 @@
+
 textarea {
 	resize: none;
 	height: 12em; /* height 안먹는데 이유를 모름.. */
@@ -6,17 +7,20 @@ textarea {
 .word {
 	width: 100vw;
 	height: 100vh;
-	position: absolute;
+	position: relative;
 }
 
 /* 모달 container 입니다 기본은 none 상태로 두셔야합니다.
         본인 화면에서 사용할때, position을 정해주셔야 합니다. */
 #modal_container {
 	display: none;
-	position: relative;
+	position: absolute;
+	top:-700px;
+	left: 400px;
+	
 	margin: 0 auto;
 	width: 364px;
-	height: 550px;
+	height: 500px;
 	background-color: white;
 	border: 1px solid lightgray;
 	/*box-shadow: 5px 12px 5px rgb(212, 212, 212);*/
@@ -47,17 +51,24 @@ textarea {
 	text-align: center;
 	margin: 0 auto;
 }
+#modal_head #name{
+    border: none;
+	padding : 0;
+	font-size : 12pt;
+	font-weight :bold;
+}
+#modal_head p{
+	pont-size:11pt;
+}
 
 #modal_foot {
-	margin-top: 300px;
-	margin-left: 23%;
+	margin-top: 230px;
+	margin-left: 17%;
 	/* width: 80%;
 	height: 500px;*/
 }
 #modal_foot input{
 	width : 100px;
 	height: 40px;
-}
-#modal_head #name{
-    border: none;
+	margin: 10px;
 }

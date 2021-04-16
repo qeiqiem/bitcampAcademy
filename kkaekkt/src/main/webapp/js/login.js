@@ -6,6 +6,7 @@ $(document).ready(function() {
 		})
 		$("#modal_close").click(function() {
 			$("#modal_container").hide()
+			$("#mask").hide();
 		})
 		  $("#mask").on("click", function () {
     		$("#modal_container").hide();

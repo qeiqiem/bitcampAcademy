@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kkaekkt.biz.comm.ChatVO;
 import com.kkaekkt.biz.comm.EquipmentVO;
 import com.kkaekkt.biz.comm.EtcVO;
 import com.kkaekkt.biz.comm.LaundryVO;
@@ -157,5 +158,24 @@ public class UserDAO {
 	}
 	public int bnoChk(int bno) {
 		return mybatis.selectOne("UserDAO.bnoChk",bno);
+	}
+	public int chkRoom(ChatVO vo) {
+		return mybatis.selectOne("UserDAO.chkRoomNum",vo);		
+	}
+	public void createRoom(ChatVO vo) {
+		mybatis.insert("UserDAO.createRoom",vo);
+	}
+	public ChatVO chkCloser(ChatVO vo) {
+		return mybatis.selectOne("UserDAO.chkCloser",vo);
+	}
+	public void updateCloser(ChatVO vo) {
+		mybatis.update("UserDAO.updateCloser",vo);
+	}
+	public void updateChatRog(ChatVO vo) {
+		mybatis.update("UserDAO.updateChatRog",vo);
+		
+	}
+	public List<ChatVO> getChatRog(ChatVO vo) {
+		return mybatis.selectList("UserDAO.getChatRog",vo);
 	}	
 }

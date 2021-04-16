@@ -104,20 +104,11 @@ a {
 
 
 /* 채팅 css */
-
-
-.chatCont p{
-  margin: 0;
-}
-
 .chatContainer p{
   margin: 0;
 }
-.chatRogUl{
-  margin: 0;
-}
-.chatCont{
-  /* display: none; */
+#chatCont{
+  display: none;
   float: right;
   width: 20vw;
   background-color: white;
@@ -130,6 +121,7 @@ a {
   border-top-right-radius: 0px;
   right: 10px;
   top: 15px;
+  color: black;
 }
 .chatHeader{
   width: 95%;
@@ -159,7 +151,9 @@ a {
 .chatList:hover{
   background-color: rgb(235, 235, 235);
 }
-
+.chatList p{
+  margin: 0;
+}
 .chatList li{
   display: inline-block;
   height: 65px;
@@ -169,11 +163,11 @@ a {
   margin-left: 10px;
   float: left;
   width: 55%;
+  font-weight: normal;
 }
 .chatList li:nth-child(1) p:nth-child(1){
   font-size: 14px;
   font-weight: bolder;
-  width: 200px;
 }
 
 .chatList li:nth-child(1) p:nth-child(2){
@@ -186,8 +180,9 @@ a {
 }
 .chatList li:nth-child(2){
   float: right;
+  margin-left: unset;
 }
-.chatBtn{
+.chatExitBtn{
   width: 60px;
   height: 30px;
   float: right;
@@ -196,10 +191,10 @@ a {
   background-color: rgb(235, 235, 235);
   font-weight: 800;
   color: rgb(73,135,255);
-  margin: 0% 0% 30%;
+  /* margin: 0% 0% 30%; */
 }
 
-.chatBtn:hover{
+.chatExitBtn:hover{
   background-color: rgb(73,135,255);
   color: rgb(248, 248, 248);
 }
@@ -218,6 +213,7 @@ a {
   bottom: 0;
   padding-right: 60px;
   box-sizing: border-box;
+  margin: 0;
 }
 .chatBox{
   list-style-type: none;
@@ -246,11 +242,12 @@ a {
   color: gray;
   font-size: 20px;
 }
-.chatRogsUl{
+.chatRogUl{
   height: 330px;
   box-sizing: border-box;
   padding: 0 15px;
   overflow-y: scroll;
+  margin: 0;
 }
 .chatInputBox{
   width: 100%;

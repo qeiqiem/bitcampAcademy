@@ -12,6 +12,7 @@
 </head>
 
 <body>
+<div id="mask"></div>
 	<jsp:include page="/jsp/headerPs.jsp"></jsp:include>
 
 	<div class="body_container">
@@ -106,25 +107,27 @@
 			<!-- 모달부분 -->
 			<div class="word">
 				<input type="button" id="modal_show" value="회원탈퇴" />
+				<input type="hidden" class="DUorderChk" value="${reservation.count}"/>
 
 				<div id="modal_container">
-					<button id="modal_close">x</button>
+					<button id="modal_close"><i class="fas fa-times"></i></button>
 					<div id="modal_bodycont">
-						<form action="/deletePs.do" name=form method="POST">
+						<!--  <form action="/deletePs.do" name=form method="POST">-->
 							<div id="modal_head">
 								<p><input name="name" id="name" value="${sessionScope.user.name}님 탈퇴 하시겠어요?"  readonly /></p>
-								<hr style="width: 80%; margin-top: 40px; border: 1px solid #E5E5E5;">
+								<p></p>
+								<hr>
 								
-								<p>탈퇴하면 모든 정보가 지워집니다. 정말 탈퇴하시겠어요?</p>
-								<p><input id="id" name="id" value="${sessionScope.user.id}" readonly/></p>
-								<input type="password" name="password" id="pwd">								
+								<p>탈퇴하면 모든 정보가 지워집니다.</p> <p>정말 탈퇴하시겠어요?</p>
+								<p><input id="deleteid" name="id" value="${sessionScope.user.id}" readonly/></p>
+								<input type="password" name="password" id="deletepwd">								
 							</div>
 							<br>
 							<div id="modal_foot">
-								<input id="yes" type="submit" value="예" />
+								<input id="yes" type="button" value="예" onclick="deleteUser()" />
 								<input id="nope" type="button" value="아니오" />
 							</div>
-						</form>
+						<!--  </form> -->
 					</div>
 				</div>
 			</div>
