@@ -197,5 +197,5 @@ public class UserDAO {
 	}
 	public void updateCloserOut(ChatVO vo) {
 		mybatis.update("UserDAO.updateCloserOut",vo);
-	}	
+	}
 }

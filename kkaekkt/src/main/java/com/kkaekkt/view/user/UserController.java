@@ -46,13 +46,13 @@ public class UserController {
 		userService.readChat(vo);
 	}
 	
-	@RequestMapping(value="/sendChat.do",method=RequestMethod.GET)
+	@RequestMapping(value="/sendChat.do",method=RequestMethod.GET,produces = "application/text;charset=utf-8")
 	@ResponseBody
 	public String sendChat(ChatVO vo) {
 		userService.sendChat(vo);
 		return "success";
 	}
-	@RequestMapping(value="/crtRoom.do",method=RequestMethod.POST)
+	@RequestMapping(value="/crtRoom.do",method=RequestMethod.POST,produces = "application/text;charset=utf-8")
 	@ResponseBody
 	public String crtRoom(ChatVO vo) {
 		Gson gson = new Gson();
