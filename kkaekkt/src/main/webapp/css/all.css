@@ -164,6 +164,7 @@ a {
   float: left;
   width: 55%;
   font-weight: normal;
+  position: relative;
 }
 .chatList li:nth-child(1) p:nth-child(1){
   font-size: 14px;
@@ -181,6 +182,31 @@ a {
 .chatList li:nth-child(2){
   float: right;
   margin-left: unset;
+}
+.rlDot{
+  display: none;
+  position: absolute;
+  font-size: 1px !important; /*헤더 css충돌 부분*/
+  left: -27px;
+  top: 10px;
+  border-radius: 20px;
+  padding: 0px 4px 1px;
+  text-align: center;
+  min-width: 10px;
+  background-color: red;
+  color: white;
+}
+.chatStNum{
+  font-size: 1px;
+  color: #ff8100;
+  position: relative;
+  top: 12px;
+}
+.chatStLeft{
+  left: 3px;
+}
+.chatStRight{
+  right: 3px;
 }
 .chatExitBtn{
   width: 60px;

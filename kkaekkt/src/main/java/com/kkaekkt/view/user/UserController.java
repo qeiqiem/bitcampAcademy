@@ -33,6 +33,14 @@ public class UserController {
 	@Autowired
 	private JavaMailSender mailSender;
 	
+	@RequestMapping(value="/initRoomLi.do",method=RequestMethod.GET,produces = "application/text;charset=utf-8")
+	@ResponseBody
+	public String initRoomLi(ChatVO vo) {
+		Gson gson=new Gson();
+		System.out.println("mtype체크:"+vo);
+		return gson.toJson(userService.initRoomLi(vo));
+	}
+	
 	@RequestMapping(value="/getChatRog.do",method=RequestMethod.GET,produces = "application/text;charset=utf-8")
 	@ResponseBody
 	public String readChatRog(ChatVO vo) {
@@ -43,6 +51,7 @@ public class UserController {
 	@RequestMapping(value="/exitChatRoom.do",method=RequestMethod.GET)
 	@ResponseBody
 	public void exitChatRoom(ChatVO vo) {
+		System.out.println();
 		userService.exitChatRoom(vo);
 	}
 	
