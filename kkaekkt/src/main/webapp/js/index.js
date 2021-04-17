@@ -37,7 +37,7 @@ function connectWs() {
           roomnum:roomnum,
           sender:sendermno,
           content:content,
-          stime:time(),
+          stime:dateTime(),
           state:1
         }
         var room={//헤드의 채팅방을 만들기 위한 객체

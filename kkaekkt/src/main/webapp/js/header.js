@@ -26,12 +26,15 @@ function today() {
     let today=date.getFullYear()+'.'+(mm<10?'0'+mm:mm)+'.'+(dd<10?'0'+dd:dd);
     return today;
 }
-function time(){
-    let today = new Date();   
-    let hours = today.getHours(); // 시
-    let minutes = today.getMinutes();  // 분
-    let thisTime=(hours<13?'오전 '+hours:'오후 '+(hours-12))+':'+(minutes<10?'0':'')+minutes;
-    return thisTime
+function dateTime(){
+    let date = new Date();   
+    let mm=date.getMonth()+1;
+    let dd=date.getDate();
+    let hours = date.getHours(); // 시
+    let minutes = date.getMinutes();  // 분
+    var dateTime=date.getFullYear()+'년 '+mm+'월 '+dd+'일 ';
+    dateTime+=(hours<13?'AM '+hours:'PM '+(hours-12))+':'+(minutes<10?'0':'')+minutes;
+    return dateTime;
 }
 function sendAlarm() {//알림 보내는 공용 메서드
     var msgType=0;//메시지 타입은 알람
@@ -79,7 +82,6 @@ function initChatEvent(){
         $('#'+array[0]+'room'+array[1]).remove();//추출한 정보로 채팅방 id를 만들어 지워준다.                         
     });
     $('.chatContainer').on('click','.chatWriteBtn',function(){ //채팅방에 채팅로그추가버튼
-
         var content=$(this).siblings()[0].value;//버튼 옆에 textArea에서 사용자가 입력한 텍스트를 입력
         if(content!=''){//입력문자가 공백이 아닐 때에만 채팅 로그를 등록
             var array=$(this).attr('id') //버튼의 id에서 
@@ -93,7 +95,7 @@ function initChatEvent(){
                 roomnum:chatObj.roomnum,
                 sender:chatObj.sender,
                 content:content,
-                stime:time(),
+                stime:dateTime(),
                 state:0
             }
             sendChat();//채팅 보내기 메서드
@@ -221,23 +223,42 @@ function appendChat(chat){// 매개변수에 담겨있는 정보-방 번호,발�
 function printRog(chat){
     var listType; // 채팅 li의 말풍선 클래스
     var chatType; // 채팅 p의 글자색 클래스
+    var idx=chat.stime.indexOf('일');
+    var date=chat.stime.substr(0,idx+1);
+    var time=chat.stime.substr(idx+2);
+    time=(time.substr(0,2)=='AM'?'오전 ':'오후 ')+time.substr(2);
     if(chat.sender==chatObj.sender){
         listType='chatRight';
         chatType='chatMine';
-        chatStType='chatStRight'; // 채팅 1 표시 방향
+        divType='timeStDivRight'; // 채팅 1 표시 방향
     }else{
         listType='chatLeft';
         chatType="chatGuest";
-        chatStType='chatStLeft';
+        divType='timeStDivLeft';
+    };
+    if(dateLineChk(date)){//마지막 날짜 로그와 채팅 로그의 날짜가 일치하지 않을 경우
+        $('#chatRog'+chat.roomnum).append(
+            '<li class="dateLine">'+
+                '<hr>'+
+                '<p class="dateRog">'+date+'</p>'+
+            '</li>'
+        );
     };
     $('#chatRog'+chat.roomnum).append(
-        '<li class="chatRogli '+listType+'">'+
-            (chatStType=='chatStRight'?'<span class="chatStNum '+chatStType+'">'+(chat.state==0?'1':'')+'</span>':'')+
-            '<p class="chatRogP '+chatType+'">'+chat.content+'</p>'+//채팅창의 방향에 따라 1 위치 조정
-            (chatStType=='chatStLeft'?'<span class="chatStNum '+chatStType+'">'+(chat.state==0?'1':'')+'</span>':'')+
-            '<p class="timeRog">'+chat.stime+'</p>'+
+        '<li class="chatRogli '+listType+'">'+//리스트 타입에 따라 요소의 위치가 달라짐
+            (listType=='chatRight'?'':'<p class="chatRogP '+chatType+'">'+chat.content+'</p>')+
+            '<div class="timeStDiv '+divType+'"><span class="chatStNum">'+(chat.state==0?'1':'')+'</span>'+
+            '<p class="timeRog">'+time+'</p></div>'+
+            (listType=='chatRight'?'<p class="chatRogP '+chatType+'">'+chat.content+'</p>':'')+
         '</li>'
     );
+}
+function dateLineChk(date){
+    var lastDateRog=$('.dateRog').last().text();
+    if(date==lastDateRog){//마지막 날짜 로그와 일치함
+        return false;
+    }
+    return true;//마지막 날짜 로그와 일치하지 않음
 }
 function readAlert(header) {//알림 탭 페이지 공용메서드... 이 부분은 수정 필요
     var url;

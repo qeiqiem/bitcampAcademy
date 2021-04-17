@@ -183,6 +183,30 @@ a {
   float: right;
   margin-left: unset;
 }
+.chatRogUl .dateLine{ /*날짜 경계선 li*/
+  position: relative;
+  margin: 15px 0;
+}
+.chatRogUl .dateLine hr{
+  height: 1px;
+  background: var(--gray-color);
+  border: none;
+}
+.chatRogUl .dateLine .dateRog{
+  font-size: 12px;
+  text-align: center;
+  color: var(--text-gray);
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: -9px;
+  background: white;
+  display: block;
+  width: 93px;
+  margin: auto;
+  height: 20px;
+  font-weight: unset;
+}
 .rlDot{
   display: none;
   position: absolute;
@@ -199,14 +223,17 @@ a {
 .chatStNum{
   font-size: 1px;
   color: #ff8100;
+}
+.timeStDiv{
+  display: inline-block;
   position: relative;
   top: 12px;
 }
-.chatStLeft{
-  left: 3px;
+.timeStDivLeft{
+  left: 5px;
 }
-.chatStRight{
-  right: 3px;
+.timeStDivRight{
+  right: 5px;
 }
 .chatExitBtn{
   width: 60px;
