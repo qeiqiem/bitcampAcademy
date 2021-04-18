@@ -76,10 +76,26 @@ video {
   position: absolute;
   text-align: right;
 }
+
+.search_box input {
+  width: 370px;
+  padding: 25px;
+  background-color: rgb(255, 255, 255, 0.3);
+  border: 4px solid white;
+  border-radius: 50px;
+  font-size: 20px;
+  font-weight: bolder;
+  color: var(--black-color);
+}
 .search_box button {
   position: absolute;
   top: 26px;
   right: 18px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: white;
+  font-size: 25px;
 }
 
 .search_box input::placeholder {
@@ -97,39 +113,29 @@ video {
   font-weight: bold;
   margin: 0 20px 20px 0px;
   font-size: 22px;
+  background: none;
+  cursor: pointer;
+  color: white;
 }
-
 .search_btn button:hover {
   border: 4px solid white;
   color: var(--black-color);
   background-color: white;
 }
 
+/* button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: white;
+  font-size: 25px;
+} */
+
 .btn_selected {
   /* border: 4px solid white; */
   color: var(--black-color);
   /* color: var(--key-text); */
   background-color: white;
-}
-.search_tab {
-  margin: 80px 0px 10px;
-  /* margin: 80px 60px 10px; */
-}
-
-.search_box input {
-  width: 370px;
-  padding: 25px;
-  background-color: rgb(255, 255, 255, 0.3);
-  border: 4px solid white;
-  border-radius: 50px;
-  font-size: 20px;
-  font-weight: bolder;
-  color: var(--black-color);
-  /* color: var(--key-text); */
-}
-
-.search_box input::placeholder {
-  color: white;
 }
 
 .text {
