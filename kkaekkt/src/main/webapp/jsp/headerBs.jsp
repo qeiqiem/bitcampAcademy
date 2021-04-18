@@ -12,9 +12,9 @@
 			senderName: `${sessionScope.user.name}`,
 			mtype: ${ sessionScope.user.mtype }
 		};
-		var chatObj={
-			sender:alertObj.sender,
-			mtype:alertObj.mtype
+		var chatObj = {
+			sender: alertObj.sender,
+			mtype: alertObj.mtype
 		};
 	</script>
 	<script src="/js/header.js"></script>
@@ -43,16 +43,7 @@
 					<a href="/jsp/mypageBiz/mpbProg_Num.jsp"> <img src="/img/logo-biz.png"></a>
 				</div>
 			</div>
-			<!-- <nav class="head">
-			<div class="head_left">
-				<div class="logo">
-					<a href="/jsp/indexCompany.jsp"> <img src="/img/logo.svg" alt=""> for Business
-					</a>
-				</div>
-				<div class="menu">
-					<a href="/jsp/mypageBiz/mpbProg_Num.jsp">매장관리</a>
-				</div>
-			</div> -->
+
 			<div class="head_right">
 				<ul>
 					<li>
@@ -75,7 +66,7 @@
 							<span class="chatDot chatDotBs"></span>
 							<div id="chatCont">
 								<div class="chatHeader">
-										<p>💬 채팅상담</p>
+									<p>💬 채팅상담</p>
 								</div>
 								<div class="chatfooter">
 								</div>

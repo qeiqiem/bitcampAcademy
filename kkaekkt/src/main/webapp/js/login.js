@@ -25,7 +25,7 @@ function login() {
     data:userData,
     success:function(result) {
       if(result=='fail'){
-        alert('id 혹은 password가 일치하지 않습니다.');
+        alert('아이디 또는 비밀번호가 일치하지 않습니다.');
         
       }else if(result == 1){
         location.href="/index.do";
