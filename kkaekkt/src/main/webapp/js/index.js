@@ -44,7 +44,8 @@ function connectWs() {
           addressee:sendermno,
           roomnum:roomnum,
           guest:senderName,
-          content:content
+          content:content,
+          counts:1
         };
         if(guestRoom[0]!=undefined){//상대방과 열려있는 채팅방이 있다면
           readChat({roomnum:roomnum,sender:chatObj.sender});

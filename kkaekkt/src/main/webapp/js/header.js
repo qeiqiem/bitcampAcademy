@@ -160,6 +160,7 @@ function chatRoomExit(){
             $('.chatBox[id$=room'+chatObj.roomnum+']').remove();//방번호로 끝나는 메인채팅방 삭제
             $('.chatList[id$=roomLi'+chatObj.roomnum+']').remove();//방번호로 끝나는 헤더 채팅방 삭제
             initChatObj();
+            initChatDot();         
         }
     });
 }
@@ -210,10 +211,11 @@ function appendChat(chat){// 매개변수에 담겨있는 정보-방 번호,발�
         roomnum=chat.roomnum;
         content=chat.content;
         if(chat.sender!=chatObj.sender){//만약 보낸 이가 본인이 아니라면,
-            receiver=value.sender;//신호를 보낼 수신인으로 설정
+            receiver=chat.sender;//신호를 보낼 수신인으로 설정
         }
     }
     $('#chatRog'+roomnum).scrollTop($('#chatRog'+roomnum)[0].scrollHeight);//스크롤 하단으로 위치하는 코드
+    console.log('스크롤 하단 이동');
     initLastChat(roomnum,content);//헤드 채팅방 목록에 마지막 채팅 갱신하기
     msg=roomnum;
     if(socket){
@@ -247,7 +249,7 @@ function printRog(chat){
     $('#chatRog'+chat.roomnum).append(
         '<li class="chatRogli '+listType+'">'+//리스트 타입에 따라 요소의 위치가 달라짐
             (listType=='chatRight'?'':'<p class="chatRogP '+chatType+'">'+chat.content+'</p>')+
-            '<div class="timeStDiv '+divType+'"><span class="chatStNum">'+(chat.state==0?'1':'')+'</span>'+
+            '<div class="timeStDiv '+divType+'"><span class="chatStNum" '+(chat.state==0?'>읽지 않음':'style="color:var(--text-gray)">읽음')+'</span>'+
             '<p class="timeRog">'+time+'</p></div>'+
             (listType=='chatRight'?'<p class="chatRogP '+chatType+'">'+chat.content+'</p>':'')+
         '</li>'
@@ -327,8 +329,8 @@ function initChatObj(){//초기화
     delete chatObj.addressee;//받는이 지움
 }
 function rlDotCountUp(roomnum){
-    var rl=$('#rlDot'+roomnum)[0];
-    rl.innerHTML=Number(rl.innerHTML)+1;//카운트를 하나 올려서 넣어준다.
+    var rl=$('#rlDot'+roomnum);
+    rl.text(Number(rl.text())+1);//카운트를 하나 올려서 넣어준다.
     rl.show();//무조건 1 이상이므로, show
     initChatDot();//전체 안읽은 개수 초기화
 }
