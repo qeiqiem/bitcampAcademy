@@ -46,11 +46,12 @@ hr {
 }
 
 .login_API {
-	margin-left: 28%;
+	margin-left: 16%;
 }
 
 .login_API img {
-	width: 80px;
+	width: 312px;
+	height: 57px;
 	/* position: relative;
 	left: 80px; */
 }
