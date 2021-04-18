@@ -295,7 +295,7 @@ function crtRoom(guest) {
         for(var i=0;i<rooms.length;i++){
             mno=rooms.eq(i) //i 번째 방의
                 .attr('id') //id 에서
-                .split('room')[0] //mno부분을 추출한다.
+                .split('room')[0]; //mno부분을 추출한다.
             if(Number(mno)==chatObj.addressee){//열려있는 방 중 이미 상대방과의 채팅방이 있다면,
                 return; //아무것도 하지 않고 리턴한다.
             }

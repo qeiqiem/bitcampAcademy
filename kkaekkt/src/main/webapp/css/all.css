@@ -96,6 +96,7 @@ a {
 }
 .fa-times {
   color: var(--text-gray);
+  cursor: pointer;
 }
 
 .key-sel {

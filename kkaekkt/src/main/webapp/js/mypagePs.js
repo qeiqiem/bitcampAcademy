@@ -17,14 +17,19 @@ function initEvent() {
     $('.rsvList').on("click",".chatBtn",function() {
         //채팅방 만들기 코드
         var rsvNum=Number($(this).attr('id').substr(7));//chatBtn+주문번호 형식의 id에서 주문번호 추출
-        chatObj.mno=alertObj.sender;
-        chatObj.addressee=Number($('#rsvBox'+rsvNum+' .mno').eq(0) //해당 예약번호의 주문박스 안에 mno클래스로 접근
-                                                            .attr('id') //id 요소에 접근
-                                                            .substr(3)); //mno+업체회원번호 형식의 id에서 업체회원번호 추출
-        var guest=$('#rsvBox'+rsvNum+' .mno')[0].innerHTML;//해당 예약번호의 주문박스 안에 mno클래스로 접근해서 업체명을 추출
-        chatObj.bno=Number($('#rsvBox'+rsvNum+' .like').eq(0)//해당 예약번호의 주문박스 안에 like클래스로 접근
-                                                       .attr('value'));//value 속성으로 접근해서 업체번호 추출
-        crtRoom(guest);
+        var addressee=Number($('#rsvBox'+rsvNum+' .mno').eq(0) //해당 예약번호의 주문박스 안에 mno클래스로 접근
+                                                        .attr('id') //id 요소에 접근
+                                                        .substr(3)); //mno+업체회원번호 형식의 id에서 업체회원번호 추출
+        if($('.chatBox[id^='+addressee+'room]')[0]!=undefined){
+            $('.chatBox[id^='+addressee+'room]').remove();
+        }else{
+            chatObj.mno=alertObj.sender;
+            chatObj.addressee=addressee;
+            var guest=$('#rsvBox'+rsvNum+' .mno')[0].innerHTML;//해당 예약번호의 주문박스 안에 mno클래스로 접근해서 업체명을 추출
+            chatObj.bno=Number($('#rsvBox'+rsvNum+' .like').eq(0)//해당 예약번호의 주문박스 안에 like클래스로 접근
+                                                           .attr('value'));//value 속성으로 접근해서 업체번호 추출
+            crtRoom(guest);
+        }
     });
     $('.page_next').click(function() {
         if(!$(this).hasClass('no')) {
