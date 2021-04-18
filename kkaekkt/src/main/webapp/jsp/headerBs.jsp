@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
+	<link rel="stylesheet" href="/css/all.css">
+	<link rel="stylesheet" href="/css/header.css">
 	<script src="https://kit.fontawesome.com/2fc57dd2db.js" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 	<link rel="preconnect" href="https://fonts.gstatic.com">
@@ -11,23 +12,23 @@
 			senderName: `${sessionScope.user.name}`,
 			mtype: ${ sessionScope.user.mtype }
 		};
-		var chatObj={
-			sender:alertObj.sender,
-			mtype:alertObj.mtype
+		var chatObj = {
+			sender: alertObj.sender,
+			mtype: alertObj.mtype
 		};
 	</script>
 	<script src="/js/header.js"></script>
 	<script src="/js/index.js"></script>
-	<link rel="stylesheet" href="/css/all.css">
-	<link rel="stylesheet" href="/css/header.css">
 	<style>
 		.head_container {
 			background-color: rgb(44, 44, 44);
 			color: white;
 		}
+
 		.head_container a {
 			color: white;
 		}
+
 		.logo img {
 			width: 270px;
 		}
@@ -42,16 +43,6 @@
 					<a href="/jsp/mypageBiz/mpbProg_Num.jsp"> <img src="/img/logo-biz.png"></a>
 				</div>
 			</div>
-			<!-- <nav class="head">
-			<div class="head_left">
-				<div class="logo">
-					<a href="/jsp/indexCompany.jsp"> <img src="/img/logo.svg" alt=""> for Business
-					</a>
-				</div>
-				<div class="menu">
-					<a href="/jsp/mypageBiz/mpbProg_Num.jsp">매장관리</a>
-				</div>
-			</div> -->
 
 			<div class="head_right">
 				<ul>
@@ -75,7 +66,7 @@
 							<span class="chatDot chatDotBs"></span>
 							<div id="chatCont">
 								<div class="chatHeader">
-										<p>💬 채팅상담</p>
+									<p>💬 채팅상담</p>
 								</div>
 								<div class="chatfooter">
 								</div>
