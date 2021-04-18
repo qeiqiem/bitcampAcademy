@@ -23,6 +23,7 @@ public class EchoHandler extends TextWebSocketHandler {
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		System.out.println("소켓 열기");
+		System.out.println(session+"..세션");
 		sessions.add(session);
 		String mno = getMno(session);
 		userSessionsMap.put(mno, session);
@@ -42,6 +43,7 @@ public class EchoHandler extends TextWebSocketHandler {
 				String content=msg.substring(msgIndex+4);//msg: 이후부터 담긴 내용을 전부 입력한다.
 				//작성자가 로그인 해서 있다면
 				WebSocketSession boardWriterSession = userSessionsMap.get(mno);
+				System.out.println(boardWriterSession);
 				if(boardWriterSession != null) {//작성자가 세션에 있다면, 
 					TextMessage sendMsg = new TextMessage(msgType+content);
 					boardWriterSession.sendMessage(sendMsg);// 메시지를 보낸다.
