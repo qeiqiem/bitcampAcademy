@@ -112,7 +112,8 @@ function insertAjax() {
     url: "/regitComm.do",
     data: pageObj,
     success: function () {
-      sendMsg();
+      msgSet();
+      sendAlarm();
       removeCommentForm();
       ajax();
       alert("답글이 등록되었습니다.");
@@ -274,29 +275,6 @@ function msgSet() {
   alertObj.msg =
     "주문번호" + pageObj.rsvNum + "의 리뷰에 답글이 등록되었습니다.";
   alertObj.typenum = 4;
-}
-function sendMsg() {
-  console.log("샌드진입");
-  msgSet();
-  $.post({
-    url: "/regitAlert.do",
-    data: alertObj,
-    success:function(ano) {
-      if(socket){
-          var receiver=alertObj.addressee;
-          var msg='<li class="alertLi'+ano+'"><div>'+
-                          '<span class="msgHeader">[답글]</span>⠀<span class="msgBody" id="msg'+ano+'">'+alertObj.msg+'</span>'+
-                      '</div>'+
-                      '<div>'+
-                          '<span class="byBs">by '+alertObj.senderName+' </span><span>⠀|⠀</span>'+
-                          '<span class="alertDate">'+today()+'</span>'+
-                      '</div>'+
-                      '<i id="del'+ano+'"class="fas fa-times"></i>'+
-                  '</li>'
-          socket.send(receiver+','+msgType+','+msg);//메시지 보냄
-      }
-  },
-  });
 }
 function initPageEvent() {
   $(".page_next").click(function () {

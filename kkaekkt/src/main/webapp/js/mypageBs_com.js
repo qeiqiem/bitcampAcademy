@@ -149,29 +149,6 @@ function msgSet(result) {
         console.log('알림메시지 처리 에러');
     }
 }
-function sendAlarm() {
-    var msgType=0;//메시지 타입은 알람
-    $.post({
-        url:'/regitAlert.do',
-        data:alertObj,
-        success:function(ano) {
-            if(socket){
-                var receiver=alertObj.addressee;
-                var msg='<li>'+
-                            '<div class="msgTop">'+
-                                '<span class="msgHeader">['+(alertObj.typenum==3?'완료':'취소')+']</span> <span id="msg'+ano+'" class="msgBody">'+alertObj.msg+'</span>'+
-                            '</div>'+
-                            '<div class="msgBottom">'+
-                                '<span class="date">'+today()+'</span>'+
-                                '<span class="byBs">by '+alertObj.senderName+'</span>'+
-                            '</div>'+
-                            '<i id="'+ano+'" class="fas fa-times"></i>'+
-                        '</li>'
-                socket.send(receiver+','+msgType+','+msg);//메시지 보냄
-            }
-        }
-    });
-}
 function cancel() {
 	$.post({
         url:"/cancel.do",

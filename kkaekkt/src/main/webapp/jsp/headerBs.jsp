@@ -12,7 +12,10 @@
 			senderName: `${sessionScope.user.name}`,
 			mtype: ${ sessionScope.user.mtype }
 		};
-		var chatObj ={};
+		var chatObj={
+			sender:alertObj.sender,
+			mtype:alertObj.mtype
+		};
 	</script>
 	<script src="/js/header.js"></script>
 	<script src="/js/index.js"></script>
@@ -60,9 +63,7 @@
 							<i class="fas fa-bell"></i>
 							<span class="alertDot"></span>
 							<div id="noticeBox">
-								<ul>
-
-								</ul>
+								<ul id="noticeUl"></ul>
 								<button>내 알림 전체보기</button>
 							</div>
 						</div>
@@ -71,8 +72,8 @@
 						<div id="chatBox">
 							<i class="fas fa-comments"></i>
 							<!-- <i class="far fa-comment-dots fa-lg"></i> -->
-							<span class="chatDot"></span>
-							<div class="chatCont">
+							<span class="chatDot chatDotBs"></span>
+							<div id="chatCont">
 								<div class="chatHeader">
 										<p>💬 채팅상담</p>
 								</div>

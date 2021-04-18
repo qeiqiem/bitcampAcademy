@@ -33,11 +33,45 @@ public class UserController {
 	@Autowired
 	private JavaMailSender mailSender;
 	
-	@RequestMapping(value="/crtRoom.do",method=RequestMethod.POST)
+	@RequestMapping(value="/initRoomLi.do",method=RequestMethod.GET,produces = "application/text;charset=utf-8")
+	@ResponseBody
+	public String initRoomLi(ChatVO vo) {
+		Gson gson=new Gson();
+		System.out.println("mtype체크:"+vo);
+		return gson.toJson(userService.initRoomLi(vo));
+	}
+	
+	@RequestMapping(value="/getChatRog.do",method=RequestMethod.GET,produces = "application/text;charset=utf-8")
+	@ResponseBody
+	public String readChatRog(ChatVO vo) {
+		Gson gson=new Gson();
+		return gson.toJson(userService.readChatRog(vo));
+	}
+	
+	@RequestMapping(value="/exitChatRoom.do",method=RequestMethod.GET)
+	@ResponseBody
+	public void exitChatRoom(ChatVO vo) {
+		System.out.println();
+		userService.exitChatRoom(vo);
+	}
+	
+	@RequestMapping(value="/readChat.do",method=RequestMethod.GET)
+	@ResponseBody
+	public void readChat(ChatVO vo) {
+		userService.readChat(vo);
+	}
+	
+	@RequestMapping(value="/sendChat.do",method=RequestMethod.GET,produces = "application/text;charset=utf-8")
+	@ResponseBody
+	public String sendChat(ChatVO vo) {
+		userService.sendChat(vo);
+		return "success";
+	}
+	@RequestMapping(value="/crtRoom.do",method=RequestMethod.POST,produces = "application/text;charset=utf-8")
 	@ResponseBody
 	public String crtRoom(ChatVO vo) {
 		Gson gson = new Gson();
-		return gson.toJson(userService.getRoomNum(vo));
+		return gson.toJson(userService.crtRoom(vo));
 	}
 	
 	@RequestMapping(value="/index.do",method={RequestMethod.GET,RequestMethod.POST})

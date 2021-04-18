@@ -34,5 +34,10 @@ public interface UserService {
 	public List<LaundryVO> getLaundryList(int bno);
     public void updatePw(AccountVO vo);
 	public int bnoChk(int bno);
-	public Map<String, Object> getRoomNum(ChatVO vo);
+	public Map<String, Object> crtRoom(ChatVO vo);
+	public void sendChat(ChatVO vo);
+	public void readChat(ChatVO vo);
+	public void exitChatRoom(ChatVO vo);
+	public List<ChatVO> readChatRog(ChatVO vo);
+	public List<ChatVO> initRoomLi(ChatVO vo);
 }

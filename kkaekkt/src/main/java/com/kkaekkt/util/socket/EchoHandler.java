@@ -22,7 +22,7 @@ public class EchoHandler extends TextWebSocketHandler {
 	//서버에 접속이 성공 했을때
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		System.out.println("서버에 접속 성공했을 때 접근");
+		System.out.println("소켓 열기");
 		sessions.add(session);
 		String mno = getMno(session);
 		userSessionsMap.put(mno, session);
@@ -36,19 +36,16 @@ public class EchoHandler extends TextWebSocketHandler {
 		String msg = message.getPayload();
 		//System.out.println(msg); 메시지 로그
 		if(!StringUtils.isNullOrEmpty(msg)) {
-			String[] strs = msg.split(",");
-			if(strs != null && strs.length == 3) {
-				String mno = strs[0];
-				String msgType = strs[1];
-				String content = strs[2];
-				
+				String msgType=msg.substring(0,1);//맨 처음 메시지 타입넘버를 받는다. 0=알림, 1=채팅
+				int msgIndex=msg.indexOf("msg:"); // msg: 태그의 인덱스를 추출한다.
+				String mno=msg.substring(1,msgIndex);// 메시지 타입넘버와 msg: 태그 사이에 위치한 받는 이의 번호를 추출한다.
+				String content=msg.substring(msgIndex+4);//msg: 이후부터 담긴 내용을 전부 입력한다.
 				//작성자가 로그인 해서 있다면
 				WebSocketSession boardWriterSession = userSessionsMap.get(mno);
-
 				if(boardWriterSession != null) {//작성자가 세션에 있다면, 
-					TextMessage sendMsg = new TextMessage(msgType+","+content);
+					TextMessage sendMsg = new TextMessage(msgType+content);
 					boardWriterSession.sendMessage(sendMsg);// 메시지를 보낸다.
-				}
+					System.out.println("송신완료");
 			}
 		}
 	}
