@@ -21,7 +21,7 @@
         </head>
 
         <body>
-       <!-- <header class="head_container">
+            <!-- <header class="head_container">
 		        <nav class="head">
 		            <div class="menu">
 		                <a href="/showMap.do?type=1">일반세탁소</a>
@@ -68,8 +68,8 @@
                         <div class="search_btn">
                             <!-- <h1 class="animate__animated animate__fadeInUp">오늘은 <br> -->
                             <h1>오늘은 <br>
-		                                어디서 <br>
-		                                빨래를 할까요?
+                                어디서 <br>
+                                빨래를 할까요?
                             </h1>
                             <div class="search_tab">
                                 <button class="tabBtn btn1" type="button" value='1'>일반세탁소</button>
@@ -78,7 +78,7 @@
                         </div>
 
                         <div class="search_box">
-                            <input type="text" placeholder="동네를 입력해주세요" name="search" id="searchBar">
+                            <input type="text" placeholder="동네를 입력하세요" name="search" id="searchBar">
                             <button onclick='showMap()'>
                                 <i class="fas fa-search fa-lg "></i>
                                 <!-- <i class="fas fa-search fa-2x"></i> -->

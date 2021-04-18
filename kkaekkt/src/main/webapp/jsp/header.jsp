@@ -30,8 +30,8 @@
 			</div>
 			<div class="head_right">
 				<ul>
-					<li><a href="/jsp/join/joinTerms.html">회원가입</a></li>
-					<li><a id="modal_show">로그인</a></li>
+					<li><a href="/jsp/join/joinTerms.jsp">회원가입</a></li>
+					<li><a id="modal_show" style="cursor: pointer;">로그인</a></li>
 					<li><a href="/jsp/faq.jsp">FAQ</a></li>
 				</ul>
 			</div>

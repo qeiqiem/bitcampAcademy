@@ -200,10 +200,10 @@ body{
     top: 47%;
     height: 70px;
     width:30px;
-    background-color: var(--key-text);
-    color:white;
+    background-color: white;
+    color: var(--text-gray);
     font-size:15px;
-    border: solid 2px rgb(255 255 255);
+    border: 0px;
     border-top-right-radius:10px;
     border-bottom-right-radius:10px;
     border-left:none;
@@ -1094,7 +1094,7 @@ body{
     }
     
     
-    /* ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â«ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚ÂÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¨ css */
+    /* css */
     .boxLeft {
     float: left;
     padding-top: 27px;
@@ -1102,8 +1102,7 @@ body{
  }
 	#weatherImg{
 	    width: 23px;
-	    height: auto;
-	}
+	height: auto;}
 	.boxRight {
 	    float: left;
 	    font-size: 13px;

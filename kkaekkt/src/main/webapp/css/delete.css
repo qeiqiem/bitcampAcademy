@@ -1,4 +1,3 @@
-
 textarea {
 	resize: none;
 	height: 12em; /* height 안먹는데 이유를 모름.. */
@@ -16,8 +15,7 @@ textarea {
 	display: none;
 	position: absolute;
 	top:-700px;
-	left: 400px;
-	
+	left: 400px;	
 	margin: 0 auto;
 	width: 364px;
 	height: 500px;

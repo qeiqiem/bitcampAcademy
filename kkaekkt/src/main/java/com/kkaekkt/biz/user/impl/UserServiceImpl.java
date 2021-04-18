@@ -269,4 +269,8 @@ public class UserServiceImpl implements UserService {
 		userDao.updateChatRog(vo);//로그를 읽음처리한다.
 		return userDao.getChatRog(vo);//채팅 로그를 가져온다.
 	}
+	@Override
+	public List<ChatVO> initRoomLi(ChatVO vo) {
+		return userDao.getMyRoomLi(vo);
+	}
 }
