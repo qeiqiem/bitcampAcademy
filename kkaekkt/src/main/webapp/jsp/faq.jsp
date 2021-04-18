@@ -138,12 +138,7 @@
             <jsp:include page="/jsp/header.jsp"></jsp:include>
         </c:otherwise>
     </c:choose>
-    <script type="text/javascript">
-        window.onload = function () {
-            document.getElementById("logoImg").src = "/img/logo-white.png"
 
-        }
-    </script>
 <div class="body_container">
 <div class="contend">
 <table align="center" valign="middle" width="100%" height="100%">

@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../../css/all.css">
-    <link rel="stylesheet" href="../../css/head0.css">
-    <link rel="stylesheet" href="../../css/join.css">
-    <link rel="stylesheet" href="../../css/joinTerms.css">
+    <link rel="stylesheet" href="/css/all.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/join.css">
+    <link rel="stylesheet" href="/css/joinTerms.css">
     <script src="https://kit.fontawesome.com/2fc57dd2db.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -20,20 +20,24 @@
 <body>
     <header class="head_container">
         <nav class="head">
-            <div class="head_left">
+            <div class="menu">
+                <ul>
+                    <li><a href="/showMap.do?type=1">일반세탁소</a></li>
+                    <li><a href="/showMap.do?type=2">코인세탁소</a></li>
+                </ul>
+            </div>
+            <div class="head_logo">
                 <div class="logo">
-                    <a href="/index.do"> <img src="../../img/logo.svg" alt="">
+                    <a href="/index.do"> <img id="logoImg" src="/img/logo.png">
                     </a>
-                </div>
-                <div class="menu">
-                    <a href="../../jsp/searchMap/laundryMap.jsp">일반세탁소</a>
-                    <a href="../../jsp/searchMap/laundryMap.jsp">코인세탁소</a>
                 </div>
             </div>
             <div class="head_right">
-                <a href="../../jsp/join/joinSelect.jsp">회원가입</a>
-                <a href="../../jsp/login/login.jsp">로그인</a>
-                <a href="../../jsp/faq.jsp">FAQ</a>
+                <ul>
+                    <li><a href="/jsp/join/joinTerms.html">회원가입</a></li>
+                    <li><a href="/jsp/login/login.jsp">로그인</a></li>
+                    <li><a href="/jsp/faq.jsp">FAQ</a></li>
+                </ul>
             </div>
         </nav>
     </header>
@@ -80,21 +84,21 @@
 
         <div class="wrapper_select">
             <hr>
-            <div class="content">
+            <div class="termsContent">
                 <div class="allChkDiv">
-                			<span class="checkbox checkbox-circle">
-                                 <input id="allChk" type="checkbox" value=0 />
-                           		 <span class="checkbox-icon"></span>
-                           	</span> kkaekkt 이용약관, 개인정보 수집 및 이용, 위치정보 이용약관에 모두 동의합니다.
+                    <span class="checkbox checkbox-circle">
+                        <input id="allChk" type="checkbox" value=0 />
+                        <span class="checkbox-icon"></span>
+                    </span> kkaekkt 이용약관, 개인정보 수집 및 이용, 위치정보 이용약관에 모두 동의합니다.
                 </div>
 
                 <div>
                     <ul>
                         <li>
                             <span class="checkbox checkbox-circle">
-                                 <input type="checkbox" value=1 />
-                           			<span class="checkbox-icon"></span>
-                           	</span> kkaekkt 이용약관 동의 <span>(필수)</span>
+                                <input type="checkbox" value=1 />
+                                <span class="checkbox-icon"></span>
+                            </span> kkaekkt 이용약관 동의 <span>(필수)</span>
                         </li>
                         <li>
                             <textarea class="terms" id="" cols="30" rows="10" readonly>kkaekkt에 오신 여러분 환영합니다.
@@ -181,9 +185,9 @@ KKAEKKT는 여러분의 본의 아닌 불편이나 부담이 최소화될 수 �
                     <ul>
                         <li>
                             <span class="checkbox checkbox-circle">
-                                 <input type="checkbox" value=2 />
-                           			<span class="checkbox-icon"></span>
-                           	</span> 개인정보 수집 및 이용 동의 <span>(필수)</span>
+                                <input type="checkbox" value=2 />
+                                <span class="checkbox-icon"></span>
+                            </span> 개인정보 수집 및 이용 동의 <span>(필수)</span>
                         </li>
                         <li>
                             <textarea class="terms" id="" cols="30" rows="10" readonly>개인정보보호법에 따라 깨끗에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간, 동의 거부권 및 동의 거부 시 불이익에 관한 사항을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.
@@ -245,9 +249,9 @@ KKAEKKT 내의 개별 서비스 이용, 이벤트 응모 및 경품 신청 과�
                     <ul>
                         <li>
                             <span class="checkbox checkbox-circle">
-                                 <input type="checkbox" value=3 />
-                           			<span class="checkbox-icon"></span>
-                           	</span> 위치정보 이용약관 동의 <span>(필수)</span>
+                                <input type="checkbox" value=3 />
+                                <span class="checkbox-icon"></span>
+                            </span> 위치정보 이용약관 동의 <span>(필수)</span>
                         </li>
                         <li>
                             <textarea class="terms" id="" cols="30" rows="10" readonly>위치정보 이용약관에 동의하시면, 위치를 활용한 광고 정보 수신 등을 포함하는 KKAEKKT 위치기반 서비스를 이용할 수 있습니다.
