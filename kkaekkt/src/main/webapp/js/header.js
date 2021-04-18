@@ -166,7 +166,6 @@ function chatRoomExit(){
 function sendChat(chat){
     var msgType='1';//메시지 타입 0=알림, 1=채팅
     var receiver=chatObj.addressee;
-    console.log(receiver+'..리시버');
     $.get({
         url:'/sendChat.do',
         data:chatObj,

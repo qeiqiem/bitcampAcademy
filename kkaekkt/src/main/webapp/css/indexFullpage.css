@@ -82,6 +82,12 @@ video {
   right: 18px;
 }
 
+.search_box input::placeholder {
+  color: white;
+}
+.search_tab {
+  margin: 80px 0px 10px;
+}
 .search_btn button {
   /* border-bottom: 5px solid white; */
   /* border-bottom: 7px dotted white; */
@@ -138,9 +144,7 @@ h1 {
   background-color: white;
 }
 
-/* .text h1 {
-  transition: 0.5ms;
-} */
+
 .text span {
   color: var(--key-text);
 }

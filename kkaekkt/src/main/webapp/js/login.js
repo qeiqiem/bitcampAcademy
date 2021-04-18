@@ -24,7 +24,6 @@ function login() {
     url:"/login.do",
     data:userData,
     success:function(result) {
-    console.log("로그인js" + result)
       if(result=='fail'){
         alert('id 혹은 password가 일치하지 않습니다.');
         

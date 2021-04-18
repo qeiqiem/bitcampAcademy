@@ -86,7 +86,7 @@ a {
   display: none;
   background: black;
   opacity: 57%;
-  z-index: 999;
+  z-index: 30;
   position: fixed;
 }
 
