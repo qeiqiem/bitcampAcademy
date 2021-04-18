@@ -10,7 +10,6 @@
         <link rel="stylesheet" href="/css/find.css">
         <link rel="stylesheet" href="/css/findId.css">
         <script src="https://kit.fontawesome.com/2fc57dd2db.js" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     </head>
 
     <body>
