@@ -14,7 +14,7 @@ video {
 
 .search {
   position: absolute;
-  top: 10px;
+  top: 9%;
   z-index: 1000;
   left: 100px;
   margin-top: 100px;
@@ -68,9 +68,6 @@ video {
   width: 200px;
   padding: 10px;
 } */
-.menu ul li {
-  margin-right: 58px;
-}
 
 .search_box {
   position: absolute;

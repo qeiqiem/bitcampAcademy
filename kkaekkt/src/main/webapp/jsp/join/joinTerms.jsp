@@ -1,107 +1,82 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+    <!DOCTYPE html>
+    <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/all.css">
-    <link rel="stylesheet" href="/css/header.css">
-    <link rel="stylesheet" href="/css/join.css">
-    <link rel="stylesheet" href="/css/joinTerms.css">
-    <script src="https://kit.fontawesome.com/2fc57dd2db.js" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
-        rel="stylesheet">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="/css/join.css">
+        <link rel="stylesheet" href="/css/joinTerms.css">
 
-<body>
-    <header class="head_container">
-        <nav class="head">
-            <div class="menu">
-                <ul>
-                    <li><a href="/showMap.do?type=1">일반세탁소</a></li>
-                    <li><a href="/showMap.do?type=2">코인세탁소</a></li>
-                </ul>
-            </div>
-            <div class="head_logo">
-                <div class="logo">
-                    <a href="/index.do"> <img id="logoImg" src="/img/logo.png">
-                    </a>
-                </div>
-            </div>
-            <div class="head_right">
-                <ul>
-                    <li><a href="/jsp/join/joinTerms.html">회원가입</a></li>
-                    <li><a href="/jsp/login/login.jsp">로그인</a></li>
-                    <li><a href="/jsp/faq.jsp">FAQ</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+    </head>
 
-    <div class="body_container">
-        <div class="wrapper_joinInfo">
-            <!-- <h2>회원가입</h2> -->
-            <div class="join_seq">
-                <div class="join_numBox numBox_select">
-                    <ul>
-                        <li class="num">01</li>
-                        <li>약관동의</li>
-                    </ul>
-                </div>
-                <div>
-                    <i class="fas fa-chevron-right fa-3x"></i>
-                </div>
-                <div class="join_numBox">
-                    <ul>
-                        <li class="num">02</li>
-                        <li>회원유형선택</li>
-                    </ul>
-                </div>
-                <div>
-                    <i class="fas fa-chevron-right fa-3x"></i>
-                </div>
-                <div class="join_numBox">
-                    <ul>
-                        <li class="num">03</li>
-                        <li>정보입력</li>
-                    </ul>
-                </div>
-                <div>
-                    <i class="fas fa-chevron-right fa-3x"></i>
-                </div>
-                <div class="join_numBox">
-                    <ul>
-                        <li class="num">04</li>
-                        <li>가입완료</li>
-                    </ul>
+    <body>
+        <!-- 헤더 -->
+        <jsp:include page="/jsp/header.jsp"></jsp:include>
+
+
+        <div class="body_container">
+            <div class="wrapper_joinInfo">
+                <!-- <h2>회원가입</h2> -->
+                <div class="join_seq">
+                    <div class="join_numBox numBox_select">
+                        <ul>
+                            <li class="num">01</li>
+                            <li>약관동의</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <i class="fas fa-chevron-right fa-3x"></i>
+                    </div>
+                    <div class="join_numBox">
+                        <ul>
+                            <li class="num">02</li>
+                            <li>회원유형선택</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <i class="fas fa-chevron-right fa-3x"></i>
+                    </div>
+                    <div class="join_numBox">
+                        <ul>
+                            <li class="num">03</li>
+                            <li>정보입력</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <i class="fas fa-chevron-right fa-3x"></i>
+                    </div>
+                    <div class="join_numBox">
+                        <ul>
+                            <li class="num">04</li>
+                            <li>가입완료</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="wrapper_select">
-            <hr>
-            <div class="termsContent">
-                <div class="allChkDiv">
-                    <span class="checkbox checkbox-circle">
-                        <input id="allChk" type="checkbox" value=0 />
-                        <span class="checkbox-icon"></span>
-                    </span> kkaekkt 이용약관, 개인정보 수집 및 이용, 위치정보 이용약관에 모두 동의합니다.
-                </div>
+            <div class="wrapper_select">
+                <hr>
+                <div class="termsContent">
+                    <div class="allChkDiv">
+                        <span class="checkbox checkbox-circle">
+                            <input id="allChk" type="checkbox" value=0 />
+                            <span class="checkbox-icon"></span>
+                        </span> kkaekkt 이용약관, 개인정보 수집 및 이용, 위치정보 이용약관에 모두 동의합니다.
+                    </div>
 
-                <div>
-                    <ul>
-                        <li>
-                            <span class="checkbox checkbox-circle">
-                                <input type="checkbox" value=1 />
-                                <span class="checkbox-icon"></span>
-                            </span> kkaekkt 이용약관 동의 <span>(필수)</span>
-                        </li>
-                        <li>
-                            <textarea class="terms" id="" cols="30" rows="10" readonly>kkaekkt에 오신 여러분 환영합니다.
+                    <div>
+                        <ul>
+                            <li>
+                                <span class="checkbox checkbox-circle">
+                                    <input type="checkbox" value=1 />
+                                    <span class="checkbox-icon"></span>
+                                </span> kkaekkt 이용약관 동의 <span>(필수)</span>
+                            </li>
+                            <li>
+                                <textarea class="terms" id="" cols="30" rows="10" readonly>kkaekkt에 오신 여러분 환영합니다.
 KKAEKKT 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 KKAEKKT 서비스의 이용과 관련하여 KKAEKKT 서비스를 제공하는 KKAEKKT 주식회사(이하 ‘KKAEKKT’)와 이를 이용하는 KKAEKKT 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 KKAEKKT 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
 KKAEKKT 서비스를 이용하시거나 KKAEKKT 서비스 회원으로 가입하실 경우 여러분은 본 약관 및 관련 운영 정책을 확인하거나 동의하게 되므로, 잠시 시간을 내시어 주의 깊게 살펴봐 주시기 바랍니다.
 
@@ -177,20 +152,20 @@ KKAEKKT는 여러분의 본의 아닌 불편이나 부담이 최소화될 수 �
     • 적용 일자: 2021년 3월 20일
                             
                         </textarea>
-                        </li>
-                    </ul>
-                </div>
+                            </li>
+                        </ul>
+                    </div>
 
-                <div>
-                    <ul>
-                        <li>
-                            <span class="checkbox checkbox-circle">
-                                <input type="checkbox" value=2 />
-                                <span class="checkbox-icon"></span>
-                            </span> 개인정보 수집 및 이용 동의 <span>(필수)</span>
-                        </li>
-                        <li>
-                            <textarea class="terms" id="" cols="30" rows="10" readonly>개인정보보호법에 따라 깨끗에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간, 동의 거부권 및 동의 거부 시 불이익에 관한 사항을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.
+                    <div>
+                        <ul>
+                            <li>
+                                <span class="checkbox checkbox-circle">
+                                    <input type="checkbox" value=2 />
+                                    <span class="checkbox-icon"></span>
+                                </span> 개인정보 수집 및 이용 동의 <span>(필수)</span>
+                            </li>
+                            <li>
+                                <textarea class="terms" id="" cols="30" rows="10" readonly>개인정보보호법에 따라 깨끗에 회원가입 신청하시는 분께 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간, 동의 거부권 및 동의 거부 시 불이익에 관한 사항을 안내 드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.
 
 1. 수집하는 개인정보
 이용자는 회원가입을 하지 않아도 정보 검색 등의 KKAEKKT 서비스를 회원과 동일하게 이용할 수 있습니다. 이용자가 세탁소이용,마이페이지 관리 등과 같이 개인화 혹은 회원제 서비스를 이용하기 위해 회원가입을 할 경우, 깨끗은 서비스 이용을 위해 필요한 최소한의 개인정보를 수집합니다.
@@ -241,20 +216,20 @@ KKAEKKT 내의 개별 서비스 이용, 이벤트 응모 및 경품 신청 과�
 이용자는 개인정보의 수집 및 이용 동의를 거부할 권리가 있습니다. 회원가입 시 수집하는 최소한의 개인정보, 즉, 필수 항목에 대한 수집 및 이용 동의를 거부하실 경우, 회원가입이 어려울 수 있습니다.
 
                         </textarea>
-                        </li>
-                    </ul>
-                </div>
+                            </li>
+                        </ul>
+                    </div>
 
-                <div>
-                    <ul>
-                        <li>
-                            <span class="checkbox checkbox-circle">
-                                <input type="checkbox" value=3 />
-                                <span class="checkbox-icon"></span>
-                            </span> 위치정보 이용약관 동의 <span>(필수)</span>
-                        </li>
-                        <li>
-                            <textarea class="terms" id="" cols="30" rows="10" readonly>위치정보 이용약관에 동의하시면, 위치를 활용한 광고 정보 수신 등을 포함하는 KKAEKKT 위치기반 서비스를 이용할 수 있습니다.
+                    <div>
+                        <ul>
+                            <li>
+                                <span class="checkbox checkbox-circle">
+                                    <input type="checkbox" value=3 />
+                                    <span class="checkbox-icon"></span>
+                                </span> 위치정보 이용약관 동의 <span>(필수)</span>
+                            </li>
+                            <li>
+                                <textarea class="terms" id="" cols="30" rows="10" readonly>위치정보 이용약관에 동의하시면, 위치를 활용한 광고 정보 수신 등을 포함하는 KKAEKKT 위치기반 서비스를 이용할 수 있습니다.
 제 1 조 (목적)
 이 약관은 KKAEKKT 주식회사 (이하 “회사”)가 제공하는 위치정보사업 또는 위치기반서비스사업과 관련하여 회사와 개인위치정보주체와의 권리, 의무 및 책임사항, 기타 필요한 사항을 규정함을 목적으로 합니다.
 제 2 조 (약관 외 준칙)
@@ -313,23 +288,23 @@ KKAEKKT 내의 개별 서비스 이용, 이벤트 응모 및 경품 신청 과�
 회사는 다음과 같이 위치정보 관리책임자를 지정하여 이용자들이 서비스 이용과정에서 발생한 민원사항 처리를 비롯하여 개인위치정보 주체의 권리 보호를 위해 힘쓰고 있습니다.
 • 위치정보 관리책임자 : (개인)정보보호 담당 부서 임원(개인정보 보호책임자 겸직)
                         </textarea>
-                        </li>
-                    </ul>
-                </div>
+                            </li>
+                        </ul>
+                    </div>
 
 
 
-                <div id="warnBox">
-                    <p id="termsChk">* kkaekkt 이용약관, 개인정보 수집 및 이용에 대한 안내, 위치정보 이용약관 모두 동의해주세요.</p>
-                </div>
-                <div id="termBtn">
-                    <button id="cancel" type="button">취소</button>
-                    <button id="ok" type="button">확인</button>
+                    <div id="warnBox">
+                        <p id="termsChk">* kkaekkt 이용약관, 개인정보 수집 및 이용에 대한 안내, 위치정보 이용약관 모두 동의해주세요.</p>
+                    </div>
+                    <div id="termBtn">
+                        <button id="cancel" type="button">취소</button>
+                        <button id="ok" type="button">확인</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <script src="../../js/joinTerms.js"></script>
-</body>
+        <script src="/js/joinTerms.js"></script>
+    </body>
 
-</html>
+    </html>
