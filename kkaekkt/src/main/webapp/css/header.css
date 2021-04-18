@@ -11,7 +11,7 @@
 
 .head_container a {
 	text-decoration: none;
-	color: var(- -dark-gray);
+	color: var(--dark-gray);
 }
 
 .head {
