@@ -11,14 +11,14 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
-  $('#login').click(function(){ 
-    login();
-  });
+  // $('#login').click(function(){ 
+  //   login();
+  // });
 });
 function login() {
   var userData={
-    id:$('#id').val(),
-    password:$('#password').val()
+    id:$('#login_id').val(),
+    password:$('#login_password').val()
   }
   $.post({
     url:"/login.do",
