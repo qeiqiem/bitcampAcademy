@@ -29,11 +29,11 @@
                     <button id="cancel">취소</button>
                 </div>
                 <div id="headerRight">
+                    <button id="readDelBtn">읽은 알림 삭제</button>
+                    <button id="totalDelBtn">모두 삭제</button>
                     <div id="refresh">
                         <i class="fas fa-redo-alt"></i>
                     </div>
-                    <button id="readDelBtn">읽은 알림 삭제</button>
-                    <button id="totalDelBtn">모두 삭제</button>
                 </div>
             </div>
             <hr>

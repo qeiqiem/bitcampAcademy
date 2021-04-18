@@ -340,7 +340,7 @@ function printRoom(room){//필요한 정보:수신자번호,방번호,수신자 
     $('.chatContainer').append(//채팅방을 만듦
         '<li class="chatBox" id="'+room.addressee+'room'+room.roomnum+'">'+
             '<div class="chatBoxHeader">'+
-                '💬<span id="guest'+room.roomnum+'">'+room.guest+'</span>'+
+                '💬ㅤ<span id="guest'+room.roomnum+'">'+room.guest+'</span>'+
                 '<i class="fas fa-times closeChatBtn" id="'+room.addressee+'clsBtn'+room.roomnum+'"></i>'+
             '</div>'+
             '<ul class="chatRogUl" id="chatRog'+room.roomnum+'">'+

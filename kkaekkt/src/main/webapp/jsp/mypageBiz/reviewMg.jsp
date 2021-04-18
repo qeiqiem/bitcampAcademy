@@ -23,7 +23,7 @@
         <jsp:include page="sidebar_bs.jsp"></jsp:include>
             <div class="content">
 				<div class="content_header">
-					<p>전체 개수 : <span></span> 개</p>
+					<p>전체 개수 <span style="color:var(--key-text)"></span> 개</p>
 					<div class="searchBox">
 						<select>
 							<option value="1">이름</option>
@@ -88,6 +88,21 @@
 							</div>                
 						</div>
 				</div>
+			</div>
+			<div id="modal_userInfo">
+				<button id="modal_close" onclick="userModalClose()"><i class="fas fa-times"></i></button><br>
+				<h2>고객정보</h2>
+				<hr>
+				<div id="userInfo_bodycont">
+				
+				</div>
+				<div id="modal_foot">
+					<p style="text-align: center;"></p>
+					<div id="review_btn">
+						<button id="openChatBtn">채팅</button>
+						<button id="closeBtn" onclick="userModalClose()">돌아가기</button>
+					</div>                
+				</div>			 
 			</div>
 	</div>
 	<script>

@@ -45,6 +45,16 @@ i.fa-redo-alt{/*새로고침 버튼*/
 /* #alertListBox{
     text-align: center;
 } */
+#refresh{/*새로고침 감싸는 div*/
+    display: inline-block;
+    border-radius: 30px;
+    height: 38.5px;
+    width: 38.5px;
+    text-align: center;
+    padding: 6px 3px;
+    box-sizing: border-box;
+    background: rgb(239, 239, 239);
+}
 .date{
     text-align: left;
 }
