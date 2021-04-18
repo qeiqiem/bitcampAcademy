@@ -37,7 +37,7 @@ function dateTime(){
     return dateTime;
 }
 function sendAlarm() {//알림 보내는 공용 메서드
-    var msgType=0;//메시지 타입은 알람
+    var msgType='0';//메시지 타입은 알람
     var alertType; //알람의 타입
     switch(alertObj.typenum) {
         case 1:alertType='[주문]';
@@ -98,7 +98,7 @@ function initChatEvent(){
                 stime:dateTime(),
                 state:0
             }
-            sendChat();//채팅 보내기 메서드
+            sendChat(chat);//채팅 보내기 메서드
             appendChat(chat);//채팅로그를 채팅방에 올리기 메서드
             $(this).siblings().focus();//채팅인풋에 포커스 주기
         }
@@ -163,19 +163,19 @@ function chatRoomExit(){
         }
     });
 }
-function sendChat(){
-    var msgType=1;//메시지 타입 0=알림, 1=채팅
+function sendChat(chat){
+    var msgType='1';//메시지 타입 0=알림, 1=채팅
+    var receiver=chatObj.addressee;
     $.get({
         url:'/sendChat.do',
         data:chatObj,
         success:function(result){//정상적으로 메서드가 완료됐다면,
             if(result=="success"){
                 if(socket){
-                    var receiver=chatObj.addressee;
                     var msg=chatObj.sender+//메시지의 포맷 = 발신자 번호,name:발신인,roomnum:방번호,content:내용
                             ',name:'+alertObj.senderName+
-                            ',roomnum:'+chatObj.roomnum+
-                            ',content:'+chatObj.content;
+                            ',roomnum:'+chat.roomnum+
+                            ',content:'+chat.content;
                     socket.send(msgType+receiver+'msg:'+msg);//메시지 보냄
                 }
             }
@@ -194,7 +194,7 @@ function appendChat(chat){// 매개변수에 담겨있는 정보-방 번호,발�
     var roomnum;
     var content;
     var receiver;
-    var msgType=2;
+    var msgType='2';
     var msg;
     if(chat[0]!=undefined){//배열이라면
         $.each(chat,function(key,value){
@@ -224,9 +224,9 @@ function printRog(chat){
     var listType; // 채팅 li의 말풍선 클래스
     var chatType; // 채팅 p의 글자색 클래스
     var idx=chat.stime.indexOf('일');
-    var date=chat.stime.substr(0,idx+1);
-    var time=chat.stime.substr(idx+2);
-    time=(time.substr(0,2)=='AM'?'오전 ':'오후 ')+time.substr(2);
+    var date=chat.stime.slice(0,idx+1);
+    var time=chat.stime.slice(idx+2);
+    time=(time.slice(0,2)=='AM'?'오전 ':'오후 ')+time.slice(2);
     if(chat.sender==chatObj.sender){
         listType='chatRight';
         chatType='chatMine';

@@ -25,11 +25,9 @@
 			background-color: rgb(44, 44, 44);
 			color: white;
 		}
-
 		.head_container a {
 			color: white;
 		}
-
 		.logo img {
 			width: 270px;
 		}
