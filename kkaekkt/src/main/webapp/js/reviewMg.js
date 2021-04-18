@@ -133,7 +133,7 @@ function delAjax() {
 }
 function initSide() {
   $(".side_sub")[0].innerHTML =
-    "<button>전체 리뷰</button>" + "<button>노답 리뷰</button>";
+    "<button>전체 리뷰</button>" + "<button>미확인 리뷰</button>";
   $(".content").css("left", "22vw");
   $(".side_sub").css("display", "unset");
   $(".side button").eq(5).addClass("side_select");

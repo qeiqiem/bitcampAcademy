@@ -10,7 +10,6 @@
 			<title>Document</title>
 			<link rel="stylesheet" href="/css/join.css">
 			<link rel="stylesheet" href="/css/joinPerson.css">
-			<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 			<script src="https://kit.fontawesome.com/2fc57dd2db.js" crossorigin="anonymous"></script>
 		</head>
 

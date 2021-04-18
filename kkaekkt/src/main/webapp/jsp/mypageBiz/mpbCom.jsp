@@ -72,6 +72,7 @@
 				<div id="modal_foot">
 					<p style="text-align: center;"></p>
 					<div id="review_btn">
+						<button id="openChatBtn">채팅</button>
 						<button id="closeBtn" onclick="modalClose()">돌아가기</button>
 					</div>                
 				</div>			 
