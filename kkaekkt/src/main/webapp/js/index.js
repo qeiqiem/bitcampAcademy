@@ -26,10 +26,10 @@ function connectWs() {
         var nameIdx=msgText.indexOf(',name:');
         var roomnumIdx=msgText.indexOf(',roomnum:');
         var contentIdx=msgText.indexOf(',content:');
-        var sendermno=msgText.substr(0,nameIdx); //발신자 번호
-        var senderName=msgText.substr(nameIdx+6,roomnumIdx); //발신자 명
-        var roomnum=msgText.substr(roomnumIdx+9,contentIdx); //방번호
-        var content=msgText.substr(contentIdx+9); //내용
+        var sendermno=msgText.slice(0,nameIdx); //발신자 번호
+        var senderName=msgText.slice(nameIdx+6,roomnumIdx); //발신자 명
+        var roomnum=msgText.slice(roomnumIdx+9,contentIdx); //방번호
+        var content=msgText.slice(contentIdx+9); //내용
         
         var guestRoomLi=$('#'+sendermno+'roomLi'+roomnum);//헤더의 채팅방 리스트에 상대방과의 채팅방 추출
         var guestRoom=$('#'+sendermno+'room'+roomnum);
@@ -44,7 +44,8 @@ function connectWs() {
           addressee:sendermno,
           roomnum:roomnum,
           guest:senderName,
-          content:content
+          content:content,
+          counts:1
         };
         if(guestRoom[0]!=undefined){//상대방과 열려있는 채팅방이 있다면
           readChat({roomnum:roomnum,sender:chatObj.sender});
@@ -60,7 +61,8 @@ function connectWs() {
       case "2": //메시지의 타입이 읽었다는 신호라면, msgText==방 번호
         var roomnum=msgText;
         if($('.chatBox[id$=room'+roomnum+']')[0]!=undefined){//만약 해당 채팅방을 열어놓은 상태라면
-          $('#chatRog'+roomnum+' .chatStRight').text('');//내가 쓴 채팅의 1 없애기
+          $('#chatRog'+roomnum+' .chatStNum').text('읽음');//내가 쓴 채팅의 1 없애기
+          $('#chatRog'+roomnum+' .chatStNum').css('color','var(--text-gray)');
         }
         break;
     }

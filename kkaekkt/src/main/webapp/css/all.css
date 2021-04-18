@@ -245,6 +245,7 @@ a {
   font-weight: 800;
   color: rgb(73,135,255);
   /* margin: 0% 0% 30%; */
+  font-size: 13px;
 }
 
 .chatExitBtn:hover{
@@ -289,6 +290,7 @@ a {
   position: relative;
   padding: 10px 15px 15px 15px;
   font-size: 18px;
+  color: var(--black-color);
 }
 .closeChatBtn{
   position: absolute;
@@ -334,6 +336,7 @@ a {
   background-color: rgb(73,135,255);
   position: relative;
   top: 12px;
+  font-size: 14px;
 }
 .chatRogli{
   margin-bottom: 10px;
@@ -359,6 +362,7 @@ a {
 .chatGuest{
   background-color: rgb(235, 235, 235);
   border-bottom-left-radius: 0px;
+  color: var(--black-color);
 }
 .chatMine{
   background-color: rgb(73,135,255);

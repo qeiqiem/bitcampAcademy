@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 

@@ -1,6 +1,6 @@
 textarea{
     resize: none;
-    height: 12em;/* height 안먹는데 이유를 모름.. */
+    height: 12em; /* height 안먹는데 이유를 모름.. */
 }
 .word{
     width: 100vw;
