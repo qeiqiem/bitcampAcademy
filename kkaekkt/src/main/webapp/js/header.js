@@ -57,7 +57,8 @@ function sendAlarm() {//알림 보내는 공용 메서드
         success:function(ano) {
             if(socket){
                 var receiver=alertObj.addressee;
-                var msg='<li class="alertLi'+ano+'"><div>'+
+                var msg='<li class="alertLi'+ano+'">'+
+                            '<div class="msgTop">'+
                                 '<span class="msgHeader">'+alertType+'</span>⠀<span class="msgBody" id="msg'+ano+'">'+alertObj.msg+'</span>'+
                             '</div>'+
                             '<div>'+
