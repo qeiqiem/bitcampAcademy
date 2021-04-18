@@ -247,6 +247,14 @@ function initModal() {
   $("#ok").click(function () {
     operate();
   });
+  $('#openChatBtn').click(function(){//채팅 버튼 클릭 시
+    chatObj.mno=Number($('#modalmno').text());
+    chatObj.bno=pageObj.bno;
+    chatObj.addressee=Number(chatObj.mno);
+    var guest=$('#modalName').text();
+    crtRoom(guest);
+    modalClose();
+  });
 }
 function openModal(button) {
   $("#mask").show();
@@ -402,11 +410,11 @@ function modal_userInfo(mno){
             '<table class="userInfo">' +
             '<tr>'+
                   '<th>회원번호</th>' +
-                  '<td>'+ info.mno + '</td>' +
+                  '<td id="modalmno">'+ info.mno + '</td>' +
               '</tr>' +
               '<tr>'+
                   '<th>이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;름</th>' +
-                  '<td>'+ info.name + '</td>' +
+                  '<td id="modalName">'+ info.name + '</td>' +
               '</tr>' +
               '<tr>'+
                   '<th>연&nbsp;&nbsp;락&nbsp;&nbsp;처</th>' +

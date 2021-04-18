@@ -69,7 +69,7 @@
 		SELECT count(closermno) FROM closer WHERE roomnum=#{roomnum} AND closermno=#{closer};
 	</select>
 	<delete id="deleteRoom">
-		DELETE FROM closer WHERE roomnum=#{roomnum};
+		DELETE FROM chatroom WHERE roomnum=#{roomnum};
 	</delete>
 	<select id="chkGuestClose" resultType="_int">
 		SELECT count(closermno) FROM closer WHERE roomnum=#{roomnum} AND state=0;

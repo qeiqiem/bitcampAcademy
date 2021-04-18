@@ -44,7 +44,8 @@ function connectWs() {
           addressee:sendermno,
           roomnum:roomnum,
           guest:senderName,
-          content:content
+          content:content,
+          counts:1
         };
         if(guestRoom[0]!=undefined){//상대방과 열려있는 채팅방이 있다면
           readChat({roomnum:roomnum,sender:chatObj.sender});
@@ -60,7 +61,8 @@ function connectWs() {
       case "2": //메시지의 타입이 읽었다는 신호라면, msgText==방 번호
         var roomnum=msgText;
         if($('.chatBox[id$=room'+roomnum+']')[0]!=undefined){//만약 해당 채팅방을 열어놓은 상태라면
-          $('#chatRog'+roomnum+' .chatStNum').text('');//내가 쓴 채팅의 1 없애기
+          $('#chatRog'+roomnum+' .chatStNum').text('읽음');//내가 쓴 채팅의 1 없애기
+          $('#chatRog'+roomnum+' .chatStNum').css('color','var(--text-gray)');
         }
         break;
     }
