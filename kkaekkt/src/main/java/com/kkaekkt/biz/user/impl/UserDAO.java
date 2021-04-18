@@ -203,7 +203,6 @@ public class UserDAO {
 	}
 	public List<ChatVO> getMyRoomLi(ChatVO vo) {
 		return mybatis.selectList("UserDAO.getMyRoomLi",vo);
-		
 	}
 	public ChatVO getBsGuestData(ChatVO guest) {
 		return mybatis.selectOne("UserDAO.getBsGuestData",guest);

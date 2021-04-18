@@ -268,16 +268,18 @@ function readAlert(header) {//알림 탭 페이지 공용메서드... 이 부분
         if(header=='[결제]')//헤더가 결제라면
             url="/jsp/mypageUser/mypagePs.jsp";
         else if(header=='[완료]')//헤더가 완료라면..이슈
-            url="/jsp/mypageUser/mypagePs.jsp";
+            url="/jsp/mypageUser/mypagePs_com.jsp";
         else if(header=='[답글]')//헤더가 답글이라면
-            url="/jsp/mypageUser/mypagePs.jsp";
+            url="/jsp/mypageUser/mypagePs_com.jsp";
         else if(header=='[취소]')//헤더가 취소라면..이슈
-            url="/jsp/mypageUser/mypagePs.jsp";
+            url="/jsp/mypageUser/mypagePs_com.jsp";
     }else if(alertObj.mtype==2){//만약 업체회원이라면..리뷰 추가해야할 듯
         if(header=='[결제]')//헤더가 결제라면
             url="/jsp/mypageBiz/mpbProg_Num.jsp";
         else if(header=='[취소]')//헤더가 취소라면..이슈
             url="/jsp/mypageBiz/mypageBs_com.jsp";
+        else if(header=='[주문]')
+            url="/jsp/mypageBiz/mpbProg_Num.jsp";
     }
     $.post({
         url:'/updateAlert.do',
