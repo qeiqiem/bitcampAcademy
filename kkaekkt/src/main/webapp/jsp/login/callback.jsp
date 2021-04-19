@@ -13,7 +13,7 @@
 <body>
 	<script type="text/javascript">
 		var naver_id_login = new naver_id_login("kEvFCZyOPXmysr20FrkK",
-				// "http://localhost:8080/jsp/login/callback.jsp");
+				// "http://localhost:8080/jsp/login/callback.jsp";
 				"http://54.180.33.3:8080/jsp/login/callback.jsp");
 		// 접근 토큰 값 출력
 		console.log(naver_id_login.oauthParams.access_token);
