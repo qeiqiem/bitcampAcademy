@@ -303,6 +303,8 @@ KKAEKKT 내의 개별 서비스 이용, 이벤트 응모 및 경품 신청 과�
                 </div>
             </div>
         </div>
+        <!-- footer -->
+        <jsp:include page="/jsp/footer.jsp"></jsp:include>
         <script src="/js/joinTerms.js"></script>
     </body>
 

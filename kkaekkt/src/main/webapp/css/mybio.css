@@ -172,7 +172,7 @@ font-size: 16px;
     width: 150px;
 }
 
-#checkval, #checkpwd {
+#checkval, #checkpwd, #checkbirth {
     color: var(--text-red);
 }
 #mail_check_input_box_false{
