@@ -45,7 +45,7 @@
 							<span class="alertDot"></span>
 							<div id="noticeBox">
 								<ul id="noticeUl"></ul>
-								<button id="myAlarm">내 알림 전체보기</button>
+								<button id="myAlarm" onclick="myAlarm()">내 알림 전체보기</button>
 							</div>
 						</div>
 					</li>

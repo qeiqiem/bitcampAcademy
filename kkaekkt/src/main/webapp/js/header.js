@@ -19,6 +19,15 @@ function initHeaderEvent() {
         delHeaderAlert();
     });
 }
+function myAlarm(){
+    if(alertObj.mtype==1){
+        location.href="/jsp/mypageUser/myalertPs.jsp";
+    }else if(alertObj.mtype==2){
+        location.href="/jsp/mypageBiz/myalertBs.jsp";
+    }else{
+        alert('지원하지 않는 기능입니다.');
+    }
+}
 function today() {
     let date=new Date();
     let mm=date.getMonth()+1;
