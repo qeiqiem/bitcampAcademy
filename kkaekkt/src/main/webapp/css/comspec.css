@@ -257,3 +257,13 @@ input{
 .checkbox-circle input[type="checkbox"] ~ .checkbox-icon {
     border-radius: 50%;
 }
+#clickmask {
+    width: 59vw;
+    height: 64vh;
+    display: block;
+    background: black;
+    opacity: 57%;
+    z-index: 30;
+    position: absolute;
+
+  }

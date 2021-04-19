@@ -50,7 +50,10 @@ window.onload = function () {
     defaultDisable();
     inputInfo();
 
-   
+   //  clickmask 클릭시 alert
+   $("#clickmask").click(function (){
+    alert("정보를 수정하시려면 먼저 수정하기 버튼을 클릭해 주세요.");
+    });
 
     //수정하기 버튼 클릭시 수정완료 돌아가기 버튼 활성화, 인풋창 활성화
     document.getElementById("updateBio").onclick = function btnChange() {
@@ -58,6 +61,7 @@ window.onload = function () {
         //수정완료 돌아가기 버튼 활성화,
         document.getElementById("updateBio").style.display = "none";
         document.getElementById("btn_change").style.display = "block";
+        $("#clickmask").hide();
         //인풋창 활성화
         for (let i = 0; i < inputli.length; i++) {
             if (i != 3 && i != 4 && i != 10 && i != 11 && i != 12 && i != 14 ) {     
@@ -82,7 +86,7 @@ window.onload = function () {
 
         document.getElementById("btn_change").style.display = "none";
         document.getElementById("updateBio").style.display = "block";
-
+        $("#clickmask").show();
         inputInfo();
         defaultDisable();
         // 유효성 안내 문구 지우기

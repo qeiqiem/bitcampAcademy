@@ -36,48 +36,45 @@
 				</ul>
 			</div>
 		</nav>
-
+		<div id="mask"></div>
 		<div id="modal_container">
 			<button id="modal_close"><i class="fas fa-times"></i></button>
 			<div id="modal_bodycont">
-				<form>
-					<div id="modal_head">
-						<h2>로그인</h2>
+				<div id="modal_head">
+					<h2>로그인</h2>
+				</div>
+				<div id="modal_foot">
+					<!-- <form action="/login.do" method="post"> -->
+						<div class="login_box">
+							<input type="text" name="id" id="login_id" placeholder=" 아이디" /> 
+							<input type="password" name="password" id="login_password"  onkeyup="enterkey();" placeholder=" 비밀번호" /> 
+							<input type="button" id="login" value="로그인" onclick="login()"/>
+						</div>
+					<!-- </form> -->
+					<div class="finds">
+						<a href="/jsp/login/findId.jsp">아이디 찾기</a> <a href="/jsp/login/findPw.jsp">비밀번호 찾기</a>
 					</div>
-					<div id="modal_foot">
-						<form action="/login.do" method="post">
-							<div class="login_box">
-
-								<input type="text" name="id" id="id" placeholder=" 아이디" /> <input type="password"
-									name="password" id="password" placeholder=" 비밀번호" /> <input type="button" id="login"
-									value="로그인" />
+					<hr>
+					<div class="the_others">
+						<!--api끌어오는거에 따라 가지수는 줄 수 있습니다...-->
+						<p>다른 계정으로 로그인</p>
+						<form id="snsForm" action="/loginSNS.do" method="POST">
+							<input type="hidden" id="snsMail" name="email">
+		
+							<div class="login_API">
+								<a onclick="kakaoLogin()"><img id="kakao" src="/img/kakao.png"></a>
+								<div id="naver_id_login" style="display: none;"></div>
+								<a class="img_naver" onclick="document.getElementById('naver_id_login_anchor').click();">
+								<img id="naver" src="/img/naver.png"></a>
 							</div>
 						</form>
-						<div class="finds">
-							<a href="/jsp/login/findId.jsp">아이디 찾기</a> <a href="/jsp/login/findPw.jsp">비밀번호 찾기</a>
-						</div>
-						<hr>
-						<div class="the_others">
-							<!--api끌어오는거에 따라 가지수는 줄 수 있습니다...-->
-							<p>다른 계정으로 로그인</p>
-							<form id="snsForm" action="/loginSNS.do" method="POST">
-								<input type="hidden" id="snsMail" name="email">
-
-								<div class="login_API">
-									<a onclick="kakaoLogin()"><img id="kakao" src="/img/kakao.png"></a>
-									<div id="naver_id_login" style="display: none;"></div>
-									<a class="img_naver"
-										onclick="document.getElementById('naver_id_login_anchor').click();"><img
-											id="naver" src="/img/naver.png"></a>
-								</div>
-							</form>
-						</div>
-						<!-- the others -->
-						<hr>
-						<div class="login_foot">
-							<p>©깨끝 All copyrights reserved.</p>
-						</div>
 					</div>
+					<!-- the others -->
+					<hr>
+					<div class="login_foot">
+						<p>©깨끝 All copyrights reserved.</p>
+					</div>
+				</div>
 			</div>
 		</div>
 		<script src="/js/kakaoLogin.js"></script>

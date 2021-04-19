@@ -57,7 +57,8 @@ function sendAlarm() {//알림 보내는 공용 메서드
         success:function(ano) {
             if(socket){
                 var receiver=alertObj.addressee;
-                var msg='<li class="alertLi'+ano+'"><div>'+
+                var msg='<li class="alertLi'+ano+'">'+
+                            '<div class="msgTop">'+
                                 '<span class="msgHeader">'+alertType+'</span>⠀<span class="msgBody" id="msg'+ano+'">'+alertObj.msg+'</span>'+
                             '</div>'+
                             '<div>'+
@@ -295,7 +296,7 @@ function crtRoom(guest) {
         for(var i=0;i<rooms.length;i++){
             mno=rooms.eq(i) //i 번째 방의
                 .attr('id') //id 에서
-                .split('room')[0] //mno부분을 추출한다.
+                .split('room')[0]; //mno부분을 추출한다.
             if(Number(mno)==chatObj.addressee){//열려있는 방 중 이미 상대방과의 채팅방이 있다면,
                 return; //아무것도 하지 않고 리턴한다.
             }
@@ -340,7 +341,7 @@ function printRoom(room){//필요한 정보:수신자번호,방번호,수신자 
     $('.chatContainer').append(//채팅방을 만듦
         '<li class="chatBox" id="'+room.addressee+'room'+room.roomnum+'">'+
             '<div class="chatBoxHeader">'+
-                '💬<span id="guest'+room.roomnum+'">'+room.guest+'</span>'+
+                '💬ㅤ<span id="guest'+room.roomnum+'">'+room.guest+'</span>'+
                 '<i class="fas fa-times closeChatBtn" id="'+room.addressee+'clsBtn'+room.roomnum+'"></i>'+
             '</div>'+
             '<ul class="chatRogUl" id="chatRog'+room.roomnum+'">'+

@@ -56,7 +56,7 @@
 							<span class="chatDot chatDotPs"></span>
 							<div id="chatCont">
 								<div class="chatHeader">
-										<p>💬 채팅상담</p>
+										<p>💬ㅤ채팅상담</p>
 								</div>
 								<div class="chatfooter">
 								</div>

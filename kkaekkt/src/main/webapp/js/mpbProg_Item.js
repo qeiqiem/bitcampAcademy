@@ -352,16 +352,20 @@ function printHeader(key, value) {
   }
 }
 function printlist(list) {
+  var date;
+  var time;
   $(".processList").remove();
   $(".processTitle").remove();
   $(".order p")[0].style.color = null;
   $.each(list, function (key, value) {
     printHeader(key, value);
+    date= value.rsvDate.slice(0,10);
+    time=value.rsvDate.substr(11);
     $(".process").append(
       '<table class="processList">' +
         "<tr>" +
         "<td>" +
-        value.rsvDate +
+        date+'<br>'+time+
         "</td>" +
         "<td>" +
         value.rsvNum +
