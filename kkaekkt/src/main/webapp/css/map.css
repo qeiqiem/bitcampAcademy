@@ -450,11 +450,11 @@ body{
     font-weight: 500;
 }
 
-.chat{
+.mapChat{
    
 }
 
-.chat:hovert{
+.mapChat:hover{
     background: var(--key-text);
     color: white;
     font-weight: 500;
