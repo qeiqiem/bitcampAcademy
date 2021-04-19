@@ -8,6 +8,15 @@ textarea {
 	height: 100vh;
 	position: relative;
 }
+#textDel{
+	color: var(--text-gray);
+	margin: 180px 0 0 2px;
+	
+}
+#textDel a{
+	color: var(--text-gray);
+	text-decoration: underline;
+}
 
 /* 모달 container 입니다 기본은 none 상태로 두셔야합니다.
         본인 화면에서 사용할때, position을 정해주셔야 합니다. */

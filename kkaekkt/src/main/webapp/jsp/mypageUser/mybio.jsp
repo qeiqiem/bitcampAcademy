@@ -17,6 +17,11 @@
 			<div id="mask"></div>
 			<jsp:include page="sidebar_ps.jsp"></jsp:include>
 			<div class="content">
+				<style>
+				.content {
+					width: 72%;
+				}
+				</style>
 				<form action="/updatePs.do" method="POST" name="mybio">
 					<div class="content_header">
 						<p>내 정보</p>
@@ -33,7 +38,7 @@
 					<div id="mybio_info">
 						<div id="clickmask"></div>
 						<div class="wrap_info">
-							<table>
+							<table id="info_left">
 								<tr>
 									<td>아이디</td>
 									<td><input type="text" id="read" name="id" readonly></td>
@@ -46,20 +51,23 @@
 								<tr>
 									<td>비밀번호</td>
 									<td><input name="password" type="password" id="curpwd">
-										<button type="button" id="btn_checkpwd">수 정</button> <label
-											id="checkpwd"></label>
+										<button type="button" id="btn_checkpwd">수 정</button> <br>
+										<label id="checkpwd"></label>
 									</td>
 								</tr>
 								<div id="btn_mybiopwd">
 									<tr>
 										<td>새 비밀번호</td>
-										<td><input type="password" id="pwd"><label id="checkval"></label></td>
+										<td>
+											<input type="password" id="pwd"><br>
+											<label id="checkval"></label>
+										</td>
 									</tr>
 									<tr>
 										<td>새 비밀번호 확인</td>
 										<td><input type="password" id="newpwd">
-											<button type="button" id="btn_updatepwd">변경하기</button> <label
-												id="match"></label>
+											<button type="button" id="btn_updatepwd">변경하기</button> <br>
+											<label id="match"></label>
 										</td>
 									</tr>
 								</div>
@@ -68,32 +76,38 @@
 										<!-- 회원번호 -->
 								</tr>
 							</table>
-							<div>
-								<div id="mybioPhone">
-									연락처<br> <input id="phone1" type='text' maxlength='3'>
-									- <input id="phone2" type="text" maxlength='4'> - <input id="phone3" type="text"
-										maxlength='4'> <input name="phone" type="tel" id="phone" value="" hidden>
-								</div>
-								<div id="mybioBirth">
-									생년월일<br> <input name="birth" type="text" id="input2 birth" value=""><label
-										id="checkbirth" value=""></label>
-								</div>
-								<div>
-									이메일<br> <input name="email" type="email" value="" id="email" class="mail_input">
-									<button type="button" id="btn_checkemail" class="mail_check_button">이메일인증</button>
-									<label id="checkemail" value=""></label></br>
-									<div id="mailChkDiv">
-										<input class="mail_check_input" id="mail_check_input_box_false"
-											disabled="disabled"><span id='timeout'></span>
-										<button type="button" id="mail_check">확인</button>
+								<table id="info_right">
+									<tr>
+										<td>연락처</td>
+										<td id="mybioPhone"><input id="phone1" type='text' maxlength='3'>- <input id="phone2" type="text" maxlength='4'> - <input id="phone3" type="text"maxlength='4'></td>
+										<input name="phone" type="tel" id="phone" value="" hidden>
+									</tr>
+									<tr>
+										<td>생년월일</td>
+										<td id="mybioBirth">
+											<input name="birth" type="text" id="input2 birth" value=""><br>
+											<label id="checkbirth" value=""></label>
 										</td>
-										<br>
-									</div>
-								</div>
-							</div>
+									</tr>
+									<tr>
+										<td id="emailText">이메일</td>
+										<td>
+											<input name="email" type="email" value="" id="email" class="mail_input">
+												<button type="button" id="btn_checkemail" class="mail_check_button">이메일인증</button><br>
+												<label id="checkemail" value=""></label></br>
+												<div id="mailChkDiv">
+													<input class="mail_check_input" id="mail_check_input_box_false" disabled="disabled"><span id='timeout'></span>
+													<button type="button" id="mail_check">확인</button>
+													</td>
+													<br>
+												</div>
+										</td>
+									</tr>
+								</table>
+							
 						</div>
 						<div id="mybioAddress">
-							주소<br> <input type="text" id="postcode" placeholder="우편번호">
+							주소<br><br> <input type="text" id="postcode" placeholder="우편번호">
 							<button type="button" onclick=execDaumPostcode() id="btn_address">우편번호
 								찾기</button>
 							<br> <input type="text" id="roadAddress" placeholder="도로명주소"><br>
@@ -113,10 +127,12 @@
 				</form>
 				<!-- 모달부분 -->
 				<div id="mask"></div>
+				<p id="textDel">
+					kkaekkt을 탈퇴하고 싶으신가요? 정말요?...
+					<a href="#" onclick="delete_show();" id="modal_show" style="cursor: pointer;">회원탈퇴</a>
+					<input type="hidden" class="DUorderChk" value="${reservation.count}" />
+				</p>
 				<div class="word">
-					<input type="button" id="modal_show" value="회원탈퇴" /> <input type="hidden" class="DUorderChk"
-						value="${reservation.count}" />
-
 					<div id="modal_container">
 						<button id="modal_close">
 							<i class="fas fa-times"></i>

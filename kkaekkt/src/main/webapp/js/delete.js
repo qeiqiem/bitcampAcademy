@@ -1,10 +1,7 @@
 $(document).ready(function () {
 	/* button click event */
 	/* 모달 생성 */
-	$("#modal_show").click(function () {
-        $("#modal_container").show() 
-        $("#mask").show();
-    })
+	
 	$("#modal_close").click(function () {
         $("#modal_container").hide() 
         $("#mask").hide();
@@ -19,7 +16,10 @@ $(document).ready(function () {
     });
 	
 })
-
+function delete_show(){
+    $("#modal_container").show() 
+    $("#mask").show();
+}
 function deleteUser() {
 	var count = $('.DUorderChk').val();
 	var userData = {

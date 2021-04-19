@@ -11,7 +11,9 @@ hr {
 .wrap_info{
     display: flex;
 }
-
+.content{
+    width: 75%;
+}
 .content input {
     box-sizing: border-box;
     padding: 15px;
@@ -44,23 +46,37 @@ font-size: 16px;
     padding: 5px;
     border-radius: 30px;
 }
-
-.content table th {
-    text-align: left;
-}
-
-.content table td {
+#info_left td {
     padding-top: 8px;
-    padding-right: 50px;
+    padding-right: 38px;
+}
+#info_right{
+    padding-left: 55px;
+}
+#info_right td:nth-child(1) {
+    padding: 8px 85px 20px 20px;
+}
+#info_right td:nth-child(2) {
+    width: 415px;
+    padding: 0 21px 21px 0;
+}
+#emailText{
+    vertical-align: top;
 }
 #email {
     box-sizing: border-box;
     padding: 15px;
-    width: 300px;
+    width: 257px;
     height: 40px;
     margin-top: 10px;
     border: 1px solid var(--gray-color);
     border-radius: 10px;
+}
+#mybioAddress{
+    padding-top: 25px;
+}
+#mybioAddress input{
+    margin-bottom: 5px;
 }
 
 /* #mybio_title {
@@ -181,18 +197,18 @@ font-size: 16px;
     left: 170px;
     top: 36px;
     font-size: 12px;
-    ccolor :var(--text-red);
+    color :var(--text-red);
 }
 .mail_check_input{
     width: 200px;
 }
 #clickmask {
-    width: 30vw;
-    height: 82vh;
-    display: none;
-    background: black;
+    width: 70vw;
+    height: 55vh;
+    display: block;
+    /* background: black; */
     opacity: 57%;
-    z-index: 30;
+    z-index: 29;
     position: absolute;
 
   }
