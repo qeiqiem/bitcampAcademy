@@ -4,6 +4,7 @@ var socket = null;
 $(document).ready(function () {
   connectWs();
   fadeIn();
+  initIndexEvent();
 });
 function connectWs() {
   // socket = new WebSocket("ws://localhost:8080/echo.do");
@@ -82,46 +83,44 @@ function fadeIn() {
   $(".search_box").addClass("animate__animated animate__fadeInUp");
 }
 
-$(".btn1").click(function () {
-  $(this).toggleClass("btn_selected");
-  $(".btn2").removeClass("btn_selected");
-});
-$(".btn2").click(function () {
-  $(this).toggleClass("btn_selected");
-  $(".btn1").removeClass("btn_selected");
-})
+// $(".btn1").click(function () {
+//   $(this).toggleClass("btn_selected");
+//   $(".btn2").removeClass("btn_selected");
+// });
+// $(".btn2").click(function () {
+//   $(this).toggleClass("btn_selected");
+//   $(".btn1").removeClass("btn_selected");
+// })
+function initIndexEvent(){
+  $('.search_tab button').click(function(){
+    $(this).addClass('btn_selected');
+    $(this).siblings().removeClass('btn_selected');
+  });
+}
 
 function showMap() {
 	var num = ""
-	var inputText = $("#searchBar").val('text')
+	var inputText = $("#searchBar").val();
+
+	num = $('.btn_selected').attr('value');
 	
-	if($(".tabBtn").hasClass('btn_selected')){
-		 num = $(this).attr('value')
-	}else{
-		num = ""
-	}
+	if(num = "" || inputText == ""){
+    alert("거주하는 시/군/구와 동이름을 입력해주세요. ")
+    return;
+  }
 	
-	if(num = "" || inputText == "")alert("거주하는 시/군/구와 동이름을 입력해주세요. ")
-	
-	var mapUrl = 'location.href="/showMap.do"'	
-	
-	
-	
+	var mapUrl = '/showMap.do'	
 	switch (num) {
-	
 	case "1":
-		url = url+'?type=1'
-		location.href = url+'?type=1'
+		location.href = mapUrl+'?type=1&search='+inputText;
 		break;
 
 	case "2":
-		url = url+'?type=2'
-		location.href = url+'?type=2'
+		location.href = mapUrl+'?type=2&search='+inputText;
 		break;
-		
+    
 	default:
-		url = url+'?type=1'
-		location.href = url+'?type=2'
+		location.href = mapUrl+'?type=1&search='+inputText;
 		break;
 	}
 }

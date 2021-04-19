@@ -84,13 +84,13 @@ function initBodyEvent() {
     initModal();//모달 이벤트 관리fn
     var table=$('#single_option');
     $('.content').on('click','.unlikeBtn',function() {//좋아요 취소 버튼 클릭
-        var bno=Number($(this).attr("value"));
+        var bno=$(this).attr("value");
         likeObj.bno=bno;
         likeOff(likeObj);
     });
     $('.content').on("click",'.rsvBtn',function() {
         var bno=$(this).attr('id').substr(6);
-        rsvObj.rbno=Number(bno);//업체의 bno
+        rsvObj.rbno=bno;//업체의 bno
         alertObj.addressee=Number($(this).val());//업체의 mno 
         modalAjax(bno);
     });

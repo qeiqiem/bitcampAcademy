@@ -1,6 +1,10 @@
+footer{
+  margin-top: 75px;
+}
 .confirmBox {
   padding-top: 100px;
   height: 500px;
+  text-align: center;
 }
 
 .confirmBox img {
@@ -54,5 +58,5 @@ button:hover {
 }
 
 .wrapper_select {
-  height: 1000px;
+  height: 763px;
 }

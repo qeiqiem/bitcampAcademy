@@ -59,7 +59,7 @@
 			   AND b.mno=#{sender}; <!-- 본인회원번호 -->
 		</if>
 	</select>
-	<select id="getBno" resultType="_int">
+	<select id="getBno" resultType="String">
 		SELECT bno FROM business WHERE mno=#{sender};
 	</select>
 	<insert id="insertCloser">

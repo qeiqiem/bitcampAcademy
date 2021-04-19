@@ -4,7 +4,9 @@ html {
   margin: 0px;
   color: white;
 }
-
+footer{
+  width: 100%;
+}
 video {
   /* width: 100vw; */
   top: 0;

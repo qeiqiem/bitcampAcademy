@@ -7,7 +7,7 @@ import com.kkaekkt.biz.comm.LaundryVO;
 
 public class ReservationVO {
 	private int rsvNum; // 예약번호
-	private int bno;
+	private String bno;
 	private int mno;//개인회원 번호가 담길수도, 업체회원 번호가 담길수도 있음
 	private String mname; // 회원명
 	private String bname; // 업체명
@@ -34,10 +34,11 @@ public class ReservationVO {
 	public void setCommList(List<CommVO> commList) {
 		this.commList = commList;
 	}
-	public int getBno() {
+	
+	public String getBno() {
 		return bno;
 	}
-	public void setBno(int bno) {
+	public void setBno(String bno) {
 		this.bno = bno;
 	}
 	public int getLike() {

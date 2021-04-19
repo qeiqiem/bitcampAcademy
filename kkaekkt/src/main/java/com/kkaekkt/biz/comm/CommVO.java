@@ -4,7 +4,7 @@ public class CommVO {
 	private int cno; //글 번호
 	private int rsvNum; //댓글이 달린 주문번호
 	private int mno;//회원번호
-	private int bno; //사업자 번호
+	private String bno; //사업자 번호
 	private String mname;
 	private String bname;
 	private int orderNum;//순서
@@ -85,10 +85,11 @@ public class CommVO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public int getBno() {
+	
+	public String getBno() {
 		return bno;
 	}
-	public void setBno(int bno) {
+	public void setBno(String bno) {
 		this.bno = bno;
 	}
 	public int getDepth() {

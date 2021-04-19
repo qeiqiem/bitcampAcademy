@@ -86,22 +86,22 @@ public class UserDAO {
 		}
 
 	// laundry
-	public List<LaundryVO> getLaundry(int bno) {
+	public List<LaundryVO> getLaundry(String bno) {
 		return mybatis.selectList("UserDAO.getLaundryList", bno);
 	}
 
 	// equipment
-	public List<EquipmentVO> getEquipment(int bno) {
+	public List<EquipmentVO> getEquipment(String bno) {
 		return mybatis.selectList("UserDAO.getEquipmentList", bno);
 	}
 
 	// etc
-	public List<EtcVO> getEtc(int bno) {
+	public List<EtcVO> getEtc(String bno) {
 		return mybatis.selectList("UserDAO.getEtc", bno);
 	}
 
 	// schedule
-	public List<ScheduleVO> getSchedule(int bno) {
+	public List<ScheduleVO> getSchedule(String bno) {
 		return mybatis.selectList("UserDAO.getScheduleList", bno);
 	}
 	public void updateSpec(BusinessVO vo) {
@@ -156,7 +156,7 @@ public class UserDAO {
 	public BusinessVO getBusiness(BusinessVO vo) {
 		return mybatis.selectOne("UserDAO.getBusiness",vo);
 	}
-	public int bnoChk(int bno) {
+	public int bnoChk(String bno) {
 		return mybatis.selectOne("UserDAO.bnoChk",bno);
 	}
 	public int chkRoom(ChatVO vo) {
@@ -198,7 +198,7 @@ public class UserDAO {
 	public void updateCloserOut(ChatVO vo) {
 		mybatis.update("UserDAO.updateCloserOut",vo);
 	}
-	public int getBno(ChatVO vo) {
+	public String getBno(ChatVO vo) {
 		return mybatis.selectOne("UserDAO.getBno",vo);
 	}
 	public List<ChatVO> getMyRoomLi(ChatVO vo) {

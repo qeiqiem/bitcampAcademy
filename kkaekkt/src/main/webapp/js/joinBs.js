@@ -63,7 +63,7 @@ $ComTimer.prototype = {
 };
 var AuthTimer = new $ComTimer();
 $(document).ready(function () {
-  console.log("레디완료");
+  //console.log("레디완료");
   scheduleHtml(); //운영시간 html 출력
   initEvent();
 });
@@ -628,7 +628,7 @@ function clicked() {
       }); //건조기 입력
 
       $("input[name='equipment']")[0].value = JSON.stringify(list);
-      console.log($("input[name='equipment']")[0].value);
+      //console.log($("input[name='equipment']")[0].value);
       // 부가서비스 데이터 처리
       chkBox = $(".coinLaundry .etc input[type='checkbox']");
       priceBox = $(".coinLaundry .etc input[class='won']");

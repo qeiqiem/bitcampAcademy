@@ -1,6 +1,12 @@
+footer{
+  margin-top: 75px;
+  }
 .container {
   width: 100%;
   padding-top: 80px;
+}
+.wrapper_select {
+  height: 1159px;
 }
 .termsContent {
   position: relative;
@@ -18,7 +24,7 @@
 }
 #warnBox {
   position: relative;
-  height: 42px;
+  height: 1px;
   display: none;
 }
 #termsChk {

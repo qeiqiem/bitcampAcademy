@@ -10,7 +10,6 @@
 			<title>Document</title>
 			<link rel="stylesheet" href="/css/join.css">
 			<link rel="stylesheet" href="/css/joinPerson.css">
-			<script src="https://kit.fontawesome.com/2fc57dd2db.js" crossorigin="anonymous"></script>
 		</head>
 
 		<body>
@@ -177,17 +176,9 @@
 						</div>
 					</div>
 				</div>
-				<!-- <footer>
-					<p>
-						<img src="img/logo-nowater.png" alt="" style="width: 100px;">
-					</p>
-					kkækkt <br> info@kkækkt.com <br> Copyright © 2021 All right
-					Reserved.
-
-					<div>고객센터 전화문의 1833-3429 평일 오전 9시 ~ 오후 6시 (주말. 공휴일 휴무) 제휴문의 :
-						business@lifegoeson.kr</div>
-				</footer> -->
 			</div>
+			<!-- footer -->
+			<jsp:include page="/jsp/footer.jsp"></jsp:include>
 			<script src="/js/joinPs.js"></script>
 		</body>
 

@@ -7,7 +7,7 @@ import com.kkaekkt.biz.comm.LaundryVO;
 
 public class ReservationListVO extends Criteria{
 	private int mno;//회원번호
-	private int bno;//업체번호
+	private String bno;//업체번호
 	private int state;//작업 상태 : 1.세탁 중 2.세탁 완료 3.전달 완료 4.취소
 	private int laundryType; //품목별 1.일반의류 2.와이셔츠 3.이불 4.운동화 5.가죽모피 6.명품가방 7.아웃도어 8.기타
 	private int order; // 정렬 : 1.주문번호 순  2.남은일자 순
@@ -23,10 +23,11 @@ public class ReservationListVO extends Criteria{
 	public void setMno(int mno) {
 		this.mno = mno;
 	}
-	public int getBno() {
+	
+	public String getBno() {
 		return bno;
 	}
-	public void setBno(int bno) {
+	public void setBno(String bno) {
 		this.bno = bno;
 	}
 	public int getState() {

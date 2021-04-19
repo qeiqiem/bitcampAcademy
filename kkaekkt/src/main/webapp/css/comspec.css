@@ -261,12 +261,12 @@ input{
     border-radius: 50%;
 }
 #clickmask {
-    width: 59vw;
+    width: 65vw;
     height: 64vh;
     display: block;
-    background: black;
+    /* background: black; */
     opacity: 57%;
-    z-index: 30;
+    z-index: 29;
     position: absolute;
 
   }

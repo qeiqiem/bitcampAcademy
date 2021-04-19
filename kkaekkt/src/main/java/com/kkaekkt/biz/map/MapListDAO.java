@@ -22,19 +22,19 @@ public class MapListDAO {
 		return mybatis.selectList("MapListDAO.selecList", vo);
 	}
 
-	public List<SingleListVO> selectSingle(int bno) {
+	public List<SingleListVO> selectSingle(String bno) {
 		 return mybatis.selectList("MapListDAO.selectSingle",bno); 
 	}
 
-	public List<SingleListVO> selectOption(int bno) {
+	public List<SingleListVO> selectOption(String bno) {
 		return mybatis.selectList("MapListDAO.selectOption",bno); 
 	}
 	
-	public List<SingleListVO> reviewList(int bno) {
+	public List<SingleListVO> reviewList(String bno) {
 		return mybatis.selectList("MapListDAO.reviewList",bno); 
 	}
 	
-	public List<SingleListVO> reviewListGrade(int bno) {
+	public List<SingleListVO> reviewListGrade(String bno) {
 		return mybatis.selectList("MapListDAO.reviewListGrade",bno); 
 	}
 

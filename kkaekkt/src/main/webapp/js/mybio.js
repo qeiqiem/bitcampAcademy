@@ -14,6 +14,7 @@ let formatAccNum = 1;
 const regPw = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
 const regPhone = /^[0-9]+$/;
 const regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
+const regBth = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
 const regAccount=/^[0-9,\-]{3,6}\-[0-9,\-]{2,6}\-[0-9,\-]{3,6}(\-[0-9]{1,3})?$/;
 const regMailCode =/^[0-9]{6}$/;
 
@@ -246,25 +247,25 @@ window.onload = function () {
     // 생년월일 입력형식 확인
         $("input[name=birth]").keyup(function (event) {
         //20210101
-        var regex = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
+        const regex = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
         let inputBirth = document.getElementsByName("birth")[0];
-        if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
-            var inputVal = $(this).val();
-            $(this).val(inputVal.replace(/[^0-9]/gi, ""));
-        } else{
-        if (!regex.test(inputBirth.value)) {
-            if (inputBirth.value.length == 0) {
-                document.getElementById("checkbirth").innerText = "";
-            } else {
-                document.getElementById("checkbirth").innerText = " 양식과 맞지 않습니다. ex) 20210101";
+        // if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
+        //     var inputVal = $(this).val();
+        //     $(this).val(inputVal.replace(/[^0-9]/gi, ""));
+        // } else {
+            if (!regBth.test(inputBirth.value)) {
+                if (inputBirth.value.length == 0) {
+                    document.getElementById("checkbirth").innerText = "";
+                } else {
+                    document.getElementById("checkbirth").innerText = " 양식과 맞지 않습니다. ex) 20210101";
             }
             formatbirth = 0;
-        } else {
+            } else {
             formatbirth = 1;
             document.getElementById("checkbirth").innerText = "";
 
-        }
-    }
+            }
+        // }
     })
 
     // 이메일 입력형식 확인

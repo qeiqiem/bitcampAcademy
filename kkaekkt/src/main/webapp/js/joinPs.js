@@ -343,6 +343,7 @@ $("#id").focusout(function () {
       var key = JSON.parse(data);
       if (key != 0) {
         idLbl.innerText = "중복된 아이디가 있습니다.";
+        $("#id").focus();
         // alert("중복된 아이디가 있습니다.");
       } else if (key == 0) {
         formatidchk = 1;
