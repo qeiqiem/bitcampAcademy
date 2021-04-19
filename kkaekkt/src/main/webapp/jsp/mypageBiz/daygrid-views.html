@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset='utf-8' />
@@ -8,7 +8,7 @@
   <script>
     var totalPrice;
     var eventval = [];
-
+    var month_mng;
     document.addEventListener('DOMContentLoaded', function () {
       ajax(pageObj);
       var calendarEl = document.getElementById('calendar');
@@ -20,6 +20,8 @@
               calendar.prev();
               console.log("이전달 클릭");
               var date = calendar.getDate();
+              month_mng = date.getMonth();
+              document.getElementById("month_mng").innerText = month_mng+1;
               var startDt = new Date(date.getFullYear(), date.getMonth(), 1);
               var endDt = new Date(date.getFullYear(), date.getMonth(), date.getDate());
               console.log(startDt);
@@ -70,6 +72,8 @@
               calendar.today()
               console.log("today 클릭");
               var date = calendar.getDate();
+              month_mng = date.getMonth();
+              document.getElementById("month_mng").innerText = month_mng+1;
               var startDt = new Date(date.getFullYear(), date.getMonth(), 1);
               var endDt = new Date(date.getFullYear(), date.getMonth(), date.getDate());
               console.log(startDt);
@@ -102,7 +106,10 @@
       calendar.setOption('aspectRatio', 1.3);
       calendar.render();
       console.log(eventval);
-
+      var date = calendar.getDate();
+      month_mng = date.getMonth();
+      document.getElementById("month_mng").innerText = month_mng+1;
+      
     });
 
 
@@ -132,7 +139,7 @@
         let price = item.price;
         totalPrice = totalPrice + price;
         let inputprice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        if (price <= 100000) {
+        if (price < 100000) {
           eventval.push({
             title: inputprice + " 원",
             start: item.rsvDate,
@@ -140,7 +147,7 @@
 
           }); // push end
         }
-        else if (price > 100000 && price <= 200000) {
+        else if (price >= 100000 && price <= 200000) {
           eventval.push({
             title: inputprice + " 원",
             start: item.rsvDate,
@@ -155,10 +162,9 @@
 
           }); // push end
         }
-
       }); // each end
-
     }
+
 
   </script>
 
@@ -181,14 +187,17 @@
       display: flex;
       /* width: 85%; */
       position: relative;
-      margin-left: 25px;
+      margin-left: 40px;
     }
 
     #calendar {
-      max-width: 50vw;
+      /* max-width: 50vw;
       padding-left: 80px;
       width: 100%;
-      float: left;
+      float: left; */
+      max-width: 50vw;
+      padding-left: 120px;
+      width: 100%;
     }
 
     #monthSales {
@@ -211,12 +220,18 @@
       margin-right: 20px;
     }
 
-    /* .priceTag>ul>li:nth-child(1){
-
+    /* .priceTag>ul {
+      position: absolute;
     } */
+
+    .priceTag>ul>li {
+      display: flex;
+      height: 40px;
+    }
+
+
     .priceTag>ul>li:nth-child(1)>div:nth-child(1) {
       background-color: var(--text-red);
-      background-color: red;
     }
 
     .priceTag>ul>li:nth-child(2)>div:nth-child(1) {
@@ -263,6 +278,8 @@
       </div>
 
     </div>
+    <!-- 월별요약 -->
+
     <div id='calendar'></div>
   </div>
 

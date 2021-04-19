@@ -260,9 +260,11 @@
            	   url = url.split("type=")
            var type = Number(url[1])
            
-           /* var contuserarr  = []
-	  	       contuserarr  = useraddress.split("구")	
-	  	       useraddress = contuserarr[0]+"구" */	  	          
+           var contuserarr  = []
+	  	       contuserarr  = useraddress.split(",")	
+	  	   var gungoarr = contuserarr[0].split("구")
+	  	       useraddress = gungoarr[0]	     
+	  	       useraddress = useraddress+"구, "+contuserarr[1]	
  		   
  		   //Controller에서 받아온 주소로 DB 선조회
            bindinglandry(useraddress)

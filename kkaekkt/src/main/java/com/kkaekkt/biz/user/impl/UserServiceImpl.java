@@ -51,9 +51,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void insertUser(BusinessVO vo) {
-		System.out.println("서비스진입");
 		vo.setScheduleList(convertToObj(vo.getSchedule(), ScheduleVO.class));
-		System.out.println(vo.getScheduleList());
 		if (vo.getBizType() == 1) { // 일반 세탁소라면
 			vo.setLaundryList(convertToObj(vo.getLaundry(), LaundryVO.class));
 		} else {
@@ -77,9 +75,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public String deleteUser(AccountVO vo) {
-		System.out.println("회원탈퇴 서비스 옴");
 		int result = userDao.orderChk(vo);
-		System.out.println("예약수 : "+result);
 
 		// result가 0이면 삭제
 		// 1이면 삭제 안 함
@@ -128,7 +124,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public BusinessVO getComspec(BusinessVO vo) {
-		// System.out.println("servie옴");
 		vo.setLaundryList(userDao.getLaundry(vo.getBno()));
 		vo.setScheduleList(userDao.getSchedule(vo.getBno()));
 		return vo;
@@ -136,7 +131,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public BusinessVO getCoinspec(BusinessVO vo) {
-		// System.out.println("servie옴");
 		vo.setEquipmentList(userDao.getEquipment(vo.getBno()));
 		vo.setEtcList(userDao.getEtc(vo.getBno()));
 		vo.setScheduleList(userDao.getSchedule(vo.getBno()));
@@ -144,10 +138,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public void updateSpec(BusinessVO vo) {
-		System.out.println("서비스진입");
 		vo.setScheduleList(convertToObj(vo.getSchedule(), ScheduleVO.class));
-		System.out.println(vo.getScheduleList());
-
 		if (vo.getBizType() == 1) { // 일반 세탁소라면
 			vo.setLaundryList(convertToObj(vo.getLaundry(), LaundryVO.class));
 		} else {
@@ -160,36 +151,30 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public AccountVO findId(AccountVO vo) {
-		System.out.println("findId 서비스");
 		return userDao.findId(vo);
 	}
 
 	@Override
 	public AccountVO findPw(AccountVO vo) {
-		System.out.println("findPw 서비스옴");
 		return userDao.findPw(vo);
 	}
 
 	@Override
 	public int idchk(PersonVO vo) {
-		System.out.println("idchk 서비스옴");
 		return userDao.idchk(vo);
 	}
 	@Override
 	public int emailchk(String email) {
-		System.out.println("email 찾는 서비스 옴");
 		return userDao.emailchk(email);
 	}
 
 	@Override
 	public AccountVO joinCfm(AccountVO vo) {
-		System.out.println("가입완료 서비스옴");
 		return userDao.joinCfm(vo);
 	}
     // PW 변경
     @Override
     public void updatePw(AccountVO vo) {
-        System.out.println("pw변경 서비스옴");
         userDao.updatePw(vo);
     }
 	@Override

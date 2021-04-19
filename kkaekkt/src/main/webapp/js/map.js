@@ -14,7 +14,7 @@ $(document).ready(function() {
 		   	var mapaddr = []
 			    mapaddr = useraddress.split(",")
 			    //주소정보
-			    useraddress = mapaddr[0]	   	
+			    useraddress = mapaddr[0]+""+mapaddr[1]   	
 			   	// 주소 정보 출력
 			   	$(".slide_mini").html(useraddress)	  			   	
 			  var maploc = mapaddr[1]
@@ -196,8 +196,7 @@ $(document).ready(function() {
          alert("지불할 금액이없습니다. 옵션을 선택해주세요.")
       }else {
 		  $("#mask").show()
-        insertResList();
-    	//   $(".choicePay").show();
+		  insertResList()
       }     
    })
    
@@ -207,7 +206,6 @@ $(document).ready(function() {
 	   requestPay(payType)
 	   $(".choicePay").hide();
 	   $("#mask").show()
-	   
    })
       
    $("#toss").click(function() {
@@ -552,11 +550,12 @@ $(document).ready(function() {
    //화면단에있는 목록 가져오기
    function insertResList() {
 		 //뿌려져있는 row 체크
-		  var cntChk = $('.chked')
-		   var arrayRes = new Array();
+		 var cntChk = $('.chked')
+		 var arrayRes = new Array();
          var idx;
          var selc;
          var ddate;
+         
 		     for (var i = 0; i < cntChk.length ; i++) {		    	 
 		    	//lno 발최
 		      idx = $('.chked').eq(i).attr('id').charAt(3);
@@ -569,26 +568,29 @@ $(document).ready(function() {
                      ddate=7;
                }
 		     }
+		     
            rsvObj.resListData=JSON.stringify(arrayRes);
            rsvObj.ddate=ddate;
-		   $(".choicePay").show();		   
+		   $(".choicePay").show()		   
 	   }
    
  //리스트 컨트롤러로 보내기
    function mapRes() {
 	  rsvObj.mno = mno;
       rsvObj.totalPrice=totalPrice;
-      rsvObj.rbno=bno;
+      rsvObj.rbno=bno;      
+      
 	   $.ajax({
            url:'/respay.do'
            , method : 'POST'
            , data: rsvObj
            , success:function(result){
-           msgSet(result);
-           sendAlarm();
+            msgSet(result);
+            sendAlarm();
            }
 	   })
    }
+   
    function today() {
       var date=new Date();
       var mm=date.getMonth()+1;
@@ -596,6 +598,7 @@ $(document).ready(function() {
       var today=date.getFullYear()+'.'+(mm<10?'0'+mm:mm)+'.'+(dd<10?'0'+dd:dd);
       return today;
   }
+   
   function msgSet(rsvNum) {
           alertObj.addressee=Number($('#addressee').val());
           alertObj.rsvNum=rsvNum;
@@ -679,7 +682,8 @@ $(document).ready(function() {
 		  //주소로 위도, 경도 찾기
 		  $.getJSON('/jsp/searchMap/latLon.json', function(data) {			  
 		       $.each(data, function(i, result) {
-		    	   if( maploc.trim() == result.dong ){
+		    	   maploc = maploc.trim(maploc)
+		    	   if( maploc == result.dong ){
 		    		   console.log("동이름 : "+result.dong)
 		    		   console.log("위도 : "+result.lat)
 		    		   console.log("경도 : "+result.lon)    	
