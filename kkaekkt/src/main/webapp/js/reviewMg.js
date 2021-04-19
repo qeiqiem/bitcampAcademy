@@ -5,17 +5,17 @@ $(document).ready(function () {
   ajax();
 });
 function ajax() {
-  console.log("ajax진입");
+  //console.log("ajax진입");
   $.post({
     url: "/getCommListBs.do",
     data: pageObj,
     success: function (data) {
-      console.log("ajax성공");
+      //console.log("ajax성공");
       var obj = JSON.parse(data);
       var list = obj.commList;
       initPageObj(obj); //페이지 변수 및 버튼 초기화
       printList(list);
-      console.log("ajax작업완료");
+      //console.log("ajax작업완료");
     },
   });
 }
@@ -99,7 +99,7 @@ function printList(list) {
   });
 }
 function editAjax() {
-  console.log("편집");
+  //console.log("편집");
   $.post({
     url: "/updateComm.do",
     data: pageObj,
@@ -111,7 +111,7 @@ function editAjax() {
   });
 }
 function insertAjax() {
-  console.log("등록");
+  //console.log("등록");
   $.post({
     url: "/regitComm.do",
     data: pageObj,
@@ -125,7 +125,7 @@ function insertAjax() {
   });
 }
 function delAjax() {
-  console.log("삭제");
+  //console.log("삭제");
   $.post({
     url: "/deleteCommAb.do",
     data: pageObj,
@@ -146,7 +146,7 @@ function initSide() {
     $(this).siblings().removeClass("side_sub_select");
     $(this).addClass("side_sub_select");
     if ($(this).index() == 1) {
-      //노답리뷰가 눌렸을 경우
+      //미확인 리뷰가 눌렸을 경우
       pageObj.replytf = 0;
       pageObj.currentPageNum = 1;
       resetSearch();
@@ -427,7 +427,7 @@ function cancelReply() {
 }
 function printReplyForm(idx, content, type) {
   //답글 폼 출력 (인덱스,텍스트내용,등록타입-INSERT,UPDATE)
-  console.log("답글 폼 출력");
+  //console.log("답글 폼 출력");
   if ($("#comments").length == 1) {
     //답글 폼이 기존에 존재하는 경우 취소버튼을 누르는 것과 동일하게 진행한다.
     cancelReply();
@@ -477,7 +477,7 @@ function printReplyForm(idx, content, type) {
 }
 function btnChange(idx, name, boolean) {
   //답글 버튼 전환
-  console.log("답글버튼전환");
+  //console.log("답글버튼전환");
   $(".replyBtn[value=" + idx + "]")[0].innerHTML = name; //버튼 텍스트 전환
   $(".replyBtn[value=" + idx + "]").attr("disabled", boolean); //버튼 활성화 전환
 }

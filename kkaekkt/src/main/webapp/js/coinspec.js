@@ -94,22 +94,18 @@ function initEvent() {
         chkBox = $(".coinLaundry input[type='checkbox'][name='equip']");
         priceBox = $(".coinLaundry .equip input[id='won']");
         // 설비 리스트 데이터 처리
-        console.log(chkBox.eq(0));
         for (var i = 0; i < chkBox.size(); i++) {
             if (chkBox[i].checked) {
                 if(priceBox[i].value == "" ||selectBox[i].value == ""){
                     alert("체크항목을 확인해주세요");
                     return false;
                 }
-                console.log(selectBox[i].value);
                 list.push({ eno: JSON.parse(chkBox[i].value), cnt: JSON.parse(selectBox[i].value), price: JSON.parse(priceBox[i].value) });
             } else {
                 list.push({ eno: JSON.parse(chkBox[i].value), cnt:0, price:0 });
             }
         }
-        console.log(list);
         $("input[name='equipment']")[0].value = JSON.stringify(list);
-        console.log($("input[name='equipment']")[0].value);
 
         // 부가서비스 데이터 처리
         chkBox = $(".coinLaundry #etc input[type='checkbox'][id='etc']");
@@ -126,10 +122,7 @@ function initEvent() {
                 list.push({ etcno: i + 1, price: 0 });
             }
         }
-        console.log(list);
         $("input[name='etc']")[0].value = JSON.stringify(list);
-        console.log($("input[name='etc']")[0].value);
-
         // 운영시간 데이터 처리
         var weekLi = $('#weekBox ul li');
         list = [];//위에서 쓰인 리스트 초기화
@@ -146,7 +139,6 @@ function initEvent() {
                 list.push({ schno: JSON.parse(weekLi.eq(i).css("order")), time: "00:00~00:00" });
             }
         }
-        console.log(list);
         $("#weekBox input[name='schedule']")[0].value = JSON.stringify(list);
 
         // form submit 
@@ -160,7 +152,6 @@ function initEvent() {
     var weekLi = $('#weekBox ul');
     weekBtn.click(function () {
         var idx = $(this).index();
-        console.log($(this));
         $(this).toggleClass('selected');
         if ($(this).hasClass("selected")) {
             $("#weekBox ul li[id='weekli_"+ (idx+1) +"']").show();
@@ -172,17 +163,16 @@ function initEvent() {
 };
 
 function ajax(pageObj) { //ajax로 리스트 받아오기
-    console.log('ajax 함수 진입');
+    // console.log('ajax 함수 진입');
     $.post({
         url: "/selectCoinspec.do",
         data: pageObj,
         success: function (data) {
-            console.log('ajax 함수 완료');
+            // console.log('ajax 함수 완료');
             var coinspec = JSON.parse(data);
             $("input[name='bno']").val(coinspec.bno);
             // 설비 일치하면 값 넣어주기
             $.each(coinspec.equipmentList, function (index, item) {
-                console.log(index + ":" + item.eno + "," + item.price);
                 var checkli = $("input[type='checkbox'][name='equip']");
                 for (var i = 0; i < checkli.length; i++) {
                     if (item.eno == checkli[i].value) {
@@ -197,7 +187,6 @@ function ajax(pageObj) { //ajax로 리스트 받아오기
 
             // 부가서비스 일치하면 값 넣어주기
             $.each(coinspec.etcList, function (index, item) {
-                console.log(index + ":" + item.etcno + "," + item.price);
                 var checkli = $("input[type='checkbox'][id='etc']");
                 for (var i = 0; i < checkli.length; i++) {
                     if (item.etcno == checkli[i].value) {
@@ -213,7 +202,6 @@ function ajax(pageObj) { //ajax로 리스트 받아오기
             $.each(coinspec.scheduleList, function (index, item) {
                 var weekBtn = $('#week button');
                 var weekLi = $('#weekBox ul');
-                console.log(index + ":" + item.schno + "," + item.time);
                 var start = (item.time).split("~")[0];
                 var end = (item.time).split("~")[1];
                 var idx = item.schno;
