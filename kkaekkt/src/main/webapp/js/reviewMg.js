@@ -146,7 +146,7 @@ function initSide() {
     $(this).siblings().removeClass("side_sub_select");
     $(this).addClass("side_sub_select");
     if ($(this).index() == 1) {
-      //노답리뷰가 눌렸을 경우
+      //미확인 리뷰가 눌렸을 경우
       pageObj.replytf = 0;
       pageObj.currentPageNum = 1;
       resetSearch();

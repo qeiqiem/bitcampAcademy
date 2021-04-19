@@ -122,8 +122,8 @@
 			SELECT #{mno},#{bno},#{content},#{depth},#{rsvNum},NOW(),IFNULL(MAX(orderNum)+1,1),0,#{eval} FROM comments;
 		</if>
 		<if test="depth==1">
-			INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum,grade)
-			VALUES (#{mno},#{bno},#{content},#{depth},#{rsvNum},NOW(),#{orderNum},#{eval});
+			INSERT INTO comments (mno,bno,content,depth,groupNum,rdate,orderNum,grade,replytf)
+			VALUES (#{mno},#{bno},#{content},#{depth},#{rsvNum},NOW(),#{orderNum},#{eval},1);
 		</if>
 	</insert>
 	<select id="checkLiked" resultType="_int"><!-- 좋아요 개수가 1이면 체크된 것, 0이면 되지 않은 것 -->

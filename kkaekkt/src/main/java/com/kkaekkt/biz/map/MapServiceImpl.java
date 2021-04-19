@@ -19,8 +19,7 @@ public class MapServiceImpl implements MapService {
 	
 	@Override
 	public List<MapListVO> selectlandry(AccountVO vo) {
-		return maplistDao.selectlandry(vo);
-		
+		return maplistDao.selectlandry(vo);		
 	}
 
 	@Override public List<SingleListVO> selectSingle(int bno) {

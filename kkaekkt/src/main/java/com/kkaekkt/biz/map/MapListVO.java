@@ -9,6 +9,7 @@ public class MapListVO {
 	
 	//세탁 리스트를 위한 
 	int bno;
+	int bizMno;
 	String bname;
 	String phone;
 	String address;
@@ -24,6 +25,12 @@ public class MapListVO {
 	List<ResPayVO> resList;
 	String resListData;
 	
+	public int getBizMno() {
+		return bizMno;
+	}
+	public void setBizMno(int bizMno) {
+		this.bizMno = bizMno;
+	}
 	public int getDdate() {
 		return ddate;
 	}
