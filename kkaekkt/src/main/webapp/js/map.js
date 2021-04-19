@@ -196,7 +196,8 @@ $(document).ready(function() {
          alert("지불할 금액이없습니다. 옵션을 선택해주세요.")
       }else {
 		  $("#mask").show()
-    	  $(".choicePay").show();
+        insertResList();
+    	//   $(".choicePay").show();
       }     
    })
    
@@ -224,7 +225,6 @@ $(document).ready(function() {
    })
    
    
-   /*insertResList() */
    $('.mapChat').click(function() {
 	   if(mno == 0){
 		   alert("로그인후 이용해주세요")
@@ -571,7 +571,7 @@ $(document).ready(function() {
 		     }
            rsvObj.resListData=JSON.stringify(arrayRes);
            rsvObj.ddate=ddate;
-		   $("choicePay").show()		   
+		   $(".choicePay").show();		   
 	   }
    
  //리스트 컨트롤러로 보내기
@@ -584,8 +584,8 @@ $(document).ready(function() {
            , method : 'POST'
            , data: rsvObj
            , success:function(result){
-         //   msgSet(result);
-         //   sendAlarm();
+           msgSet(result);
+           sendAlarm();
            }
 	   })
    }
