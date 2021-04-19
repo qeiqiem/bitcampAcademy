@@ -5,14 +5,14 @@ function kakaoLogin() {
     window.Kakao.Auth.login({
         scope: 'profile, account_email, birthday',
         success: function (authObj) {
-            console.log(authObj);
+            //console.log(authObj);
             window.Kakao.API.request({
                 url: '/v2/user/me',
                 success: res => {
                     const kakao = res.kakao_account;
 
                     var userEmail = kakao.email;
-                    console.log(userEmail);
+                    //console.log(userEmail);
 
 
                     var userdata = {
@@ -31,10 +31,10 @@ function kakaoLogin() {
                                 Kakao.API.request({
                                     url: '/v1/user/unlink',
                                     success: function (response) {
-                                        console.log(response);
+                                        //console.log(response);
                                     },
                                     fail: function (error) {
-                                        console.log(error);
+                                        //console.log(error);
                                     },
                                 });
                             } else {
@@ -42,10 +42,10 @@ function kakaoLogin() {
                                 Kakao.API.request({
                                     url: '/v1/user/unlink',
                                     success: function (response) {
-                                        console.log(response);
+                                        //console.log(response);
                                     },
                                     fail: function (error) {
-                                        console.log(error);
+                                        //console.log(error);
                                     },
                                 });
                             }
@@ -68,11 +68,11 @@ function kakaoLogout() {
     Kakao.isInitialized();
 
     if (!Kakao.Auth.getAccessToken()) {
-        console.log('Not logged in.');
+        //console.log('Not logged in.');
         return;
     }
     Kakao.Auth.logout(function () {
-        console.log(Kakao.Auth.getAccessToken());
+        //console.log(Kakao.Auth.getAccessToken());
     });
 }
 

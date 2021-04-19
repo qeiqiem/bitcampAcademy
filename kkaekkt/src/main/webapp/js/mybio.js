@@ -147,7 +147,7 @@ window.onload = function () {
     // 새 비밀번호, 새 비밀번호 확인 인풋 값 같은지 비교 => 비밀법호 업데이트 
     $("#btn_updatepwd").click(function undatePwd() {
         if ($('#pwd').val() == $('#newpwd').val() && formatnewpw == 1) {
-            console.log($('#pwd').val() + $('#newpwd').val() + formatnewpw);
+            //console.log($('#pwd').val() + $('#newpwd').val() + formatnewpw);
             $.ajax({
                 url: '/updatePspwd.do',
                 type: 'post',
@@ -157,7 +157,7 @@ window.onload = function () {
                     password: $('#newpwd').val()
                 }, success: function(data){
                     let password = JSON.parse(data);
-                    console.log("ajax성공 "+password);
+                    //console.log("ajax성공 "+password);
                     pageObj["password"] = password;
                     
                 }, error: function() {
@@ -184,7 +184,7 @@ window.onload = function () {
             document.getElementById("match").style.color = "rgba(254, 54, 54, 0.55)";
 
         } else {
-            console.log("if문탈출" + $('#pwd').val() + $('#newpwd').val() + formatnewpw);
+            //console.log("if문탈출" + $('#pwd').val() + $('#newpwd').val() + formatnewpw);
 
             if (formatnewpw == 0) {
                 document.getElementById("match").innerText = "입력형식을 확인하세요";
@@ -288,7 +288,7 @@ window.onload = function () {
         }
     })
     document.getElementById("btn_checkemail").onclick = function(){
-        console.log(formatemail);
+        //console.log(formatemail);
         if(formatemail == 1){
             //emailApi();
             if(document.getElementById("email").value != pageObj["email"]){
@@ -331,7 +331,7 @@ function inputInfo(){
     document.getElementsByName('mno')[0].value = pageObj["mno"];
     document.getElementsByName('id')[0].value = pageObj["id"];
     document.getElementsByName('mname')[0].value = pageObj["name"];
-    console.log(pageObj["name"]);
+    //console.log(pageObj["name"]);
     var phoneSplit = pageObj["phone"].split('-');
     document.getElementById('phone1').value = phoneSplit[0];
     document.getElementById('phone2').value = phoneSplit[1];
@@ -355,7 +355,7 @@ function emailDuplChk() {
         email: $("#email").val(),
       },
       success: function (data) {
-        console.log(data);
+        //console.log(data);
         var key = JSON.parse(data);
         if (key != 0) {
           alert("해당 이메일로 가입된 아이디가 존재합니다.");
@@ -369,7 +369,7 @@ function emailDuplChk() {
 
 // 인증번호 이메일 전송 
 function emailApi(){
-       console.log("이메일인증 클릭");
+       //console.log("이메일인증 클릭");
        var email = $(".mail_input").val();        // 입력한 이메일
        
        $.ajax({

@@ -4,7 +4,7 @@ $(document).ready(function() {
     ajax();
 });
 function ajax() {
-	console.log('ajax진입');
+	//console.log('ajax진입');
     alertObj.datediff=14;
     $.post({
         url:'/getAlertList.do',

@@ -40,7 +40,7 @@ $(document).ready(function() {
    $("#agreement i").click(function() {//약관 클릭 시
       $(this).toggleClass('fa-chevron-down');
       $(this).toggleClass('fa-chevron-up');
-      console.log($(this).css('display'));
+      //console.log($(this).css('display'));
       if($('.termsText').eq($(this).attr('value')).css('display')=="none"){
           $('.termsText').eq($(this).attr('value')).show();
       }else{
@@ -613,17 +613,17 @@ $(document).ready(function() {
 	        type: "GET",
 	        async: "false",
 	        success: function (resp) {
-	            console.log(resp.weather);
+	            //console.log(resp.weather);
 	             
-	            console.log("현재온도 : " + Math.floor(resp.main.temp - 273.15));
-	            console.log("현재습도 : " + resp.main.humidity);
-	            console.log("날씨 : " + resp.weather[0].main);
-	            console.log("상세날씨설명 : " + resp.weather[0].description);
-	            console.log("날씨 이미지 : " + resp.weather[0].icon);
-	            console.log("바람   : " + resp.wind.speed);
-	            console.log("나라   : " + resp.sys.country);
-	            console.log("도시이름  : " + resp.name);
-	            console.log("구름  : " + (resp.clouds.all) + "%");
+	            //console.log("현재온도 : " + Math.floor(resp.main.temp - 273.15));
+	            //console.log("현재습도 : " + resp.main.humidity);
+	            //console.log("날씨 : " + resp.weather[0].main);
+	            //console.log("상세날씨설명 : " + resp.weather[0].description);
+	            //console.log("날씨 이미지 : " + resp.weather[0].icon);
+	            //console.log("바람   : " + resp.wind.speed);
+	            //console.log("나라   : " + resp.sys.country);
+	            //console.log("도시이름  : " + resp.name);
+	            //console.log("구름  : " + (resp.clouds.all) + "%");
 	            imgURL = "/img/weather/" + resp.weather[0].icon + ".png";
 	            var weatherText;
 	            if(resp.weather[0].main == "Clear"){
@@ -680,9 +680,9 @@ $(document).ready(function() {
 		  $.getJSON('/jsp/searchMap/latLon.json', function(data) {			  
 		       $.each(data, function(i, result) {
 		    	   if( maploc.trim() == result.dong ){
-		    		   console.log("동이름 : "+result.dong)
-		    		   console.log("위도 : "+result.lat)
-		    		   console.log("경도 : "+result.lon)    	
+		    		   //console.log("동이름 : "+result.dong)
+		    		   //console.log("위도 : "+result.lat)
+		    		   //console.log("경도 : "+result.lon)    	
 		    		   weather(result.lat,result.lon)
 		    	   }		
 		       })
@@ -695,7 +695,7 @@ $(document).ready(function() {
 		  $.getJSON('/jsp/searchMap/latLon.json', function(data) {			  
 		       $.each(data, function(i, result) {
 		    	   if( lat == result.lat && lon == result.lon ){
-		    		   console.log("동이름 : "+result.dong)
+		    		   //console.log("동이름 : "+result.dong)
 		    		   useraddress = result.dong
 		    		   $(".slide_mini").html(useraddress)	 
 		    		   bindinglandry(useraddress)

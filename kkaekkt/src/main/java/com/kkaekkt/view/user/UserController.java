@@ -377,9 +377,4 @@ public class UserController {
 		Gson gson = new Gson();
 		return gson.toJson(userService.getPerson(mno));
 	}
-	
-	
-
-	
-  
 }

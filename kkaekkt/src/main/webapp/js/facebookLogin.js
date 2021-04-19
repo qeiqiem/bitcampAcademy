@@ -1,5 +1,5 @@
 	var cheekLoginStatus = function(response) {
-        console.log(response);
+        //console.log(response);
         //statusChangeCallback(response);
         // 로그인 된 상태
         if (response.status === 'connected') {

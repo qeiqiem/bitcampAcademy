@@ -216,7 +216,7 @@ function appendChat(chat){// 매개변수에 담겨있는 정보-방 번호,발�
         }
     }
     $('#chatRog'+roomnum).scrollTop($('#chatRog'+roomnum)[0].scrollHeight);//스크롤 하단으로 위치하는 코드
-    console.log('스크롤 하단 이동');
+    ////console.log('스크롤 하단 이동');
     initLastChat(roomnum,content);//헤드 채팅방 목록에 마지막 채팅 갱신하기
     msg=roomnum;
     if(socket){
@@ -398,7 +398,7 @@ function headerRoomLiAjax() {
     });
 }
 function delHeaderAlert() {//알림 삭제 메서드
-    console.log('알림삭제');
+    //console.log('알림삭제');
     $.post({
         url:'/delAlert.do',
         data:alertObj,
@@ -412,7 +412,7 @@ function delHeaderAlert() {//알림 삭제 메서드
     });
 }
 function headerAlertAjax() {
-    console.log('alert초기화 진입');
+    //console.log('alert초기화 진입');
     alertObj.datediff=7;//7일 내로 온 알림만 추출
     $.post({
         url:'/getAlertList.do',
