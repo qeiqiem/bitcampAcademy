@@ -36,7 +36,6 @@ public class UserController {
 	@ResponseBody
 	public String initRoomLi(ChatVO vo) {
 		Gson gson=new Gson();
-		System.out.println("mtype체크:"+vo);
 		return gson.toJson(userService.initRoomLi(vo));
 	}
 	
@@ -50,7 +49,6 @@ public class UserController {
 	@RequestMapping(value="/exitChatRoom.do",method=RequestMethod.GET)
 	@ResponseBody
 	public void exitChatRoom(ChatVO vo) {
-		System.out.println();
 		userService.exitChatRoom(vo);
 	}
 	
@@ -105,7 +103,6 @@ public class UserController {
 	@RequestMapping(value = "/getLikedBs.do", method = RequestMethod.POST, produces = "application/text;charset=utf-8")
 	@ResponseBody
 	public String getLikedBs(int mno) {//개인 마이페이지 > 좋아요한 업체 목록 조회
-		System.out.println("좋아요업체조회 접근");
 		Gson gson = new Gson();
 		return gson.toJson(userService.getLikedBs(mno));
 	}
@@ -125,7 +122,6 @@ public class UserController {
 	// 회원개입-개인
 	@RequestMapping(value = "/joinPs.do", method = RequestMethod.POST)
 	public String Join(PersonVO vo) {
-		System.out.println("메서드 진입");
 		userService.insertUser(vo);
 //		return "/jsp/join/joinConfirmed.jsp";
 		return "/joinCfm.do";
@@ -134,7 +130,6 @@ public class UserController {
 	// 회원가입-업체
 	@RequestMapping(value = "/joinBs.do", method = RequestMethod.POST)
 	public String Join(BusinessVO vo) {
-		System.out.println("메서드 진입");
 		userService.insertUser(vo);
 		return "/index.do";
 	}
@@ -142,8 +137,6 @@ public class UserController {
 	// 가입완료
 	@RequestMapping(value = "/joinCfm.do", method = RequestMethod.POST)
 	public String joinCfm(AccountVO vo, Model model) {
-		System.out.println("가입완료 진입");
-		System.out.println(vo);
 		model.addAttribute("joinCfm", userService.joinCfm(vo));
 		return "/jsp/join/joinConfirmed.jsp";
 	}
@@ -152,11 +145,9 @@ public class UserController {
 	@RequestMapping(value = "/updatePspwd.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String UpdatePw(PersonVO vo, HttpSession session) {
-		System.out.println(vo);
 		userService.updatePw(vo);
 		AccountVO result = userService.getUser(vo);
 		session.setAttribute("user", result);
-		System.out.println("세션에 수정한 비밀번호 올리기");
 		Gson gson = new Gson();
 		String password = gson.toJson(vo.getPassword());
 
@@ -167,12 +158,9 @@ public class UserController {
 	// 개인 프로필 편집 - 세션
 	@RequestMapping(value = "/updatePs.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String Update(PersonVO vo, HttpSession session) {
-		System.out.println(vo);
 		userService.updateUser(vo);
 		AccountVO result = userService.getUser(vo);
 		session.setAttribute("user", result);
-		System.out.println("세션에 수정한 정보 올리기");
-
 		return "/myBio.do";
 	}
 
@@ -180,15 +168,11 @@ public class UserController {
 	@RequestMapping(value = "/updateBspwd.do", method = {RequestMethod.GET, RequestMethod.POST})
 	@ResponseBody
 	public String UpdatePw(BusinessVO vo, HttpSession session) {
-		System.out.println(vo);
 		userService.updatePw(vo);
 		AccountVO result = userService.getUser(vo);
 		session.setAttribute("user", result);
-		System.out.println("세션에 수정한 비밀번호 올리기");
 		Gson gson = new Gson();
 		String password = gson.toJson(vo.getPassword());
-		System.out.println(password);
-
 		return password;
 
 	}
@@ -196,12 +180,9 @@ public class UserController {
 	// 업체 프로필편집 - 세션
 	@RequestMapping(value = "/updateBs.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String Update(BusinessVO vo, HttpSession session) {
-		System.out.println(vo);
 		userService.updateUser(vo);
 		AccountVO result = userService.getUser(vo);
 		session.setAttribute("user", result);
-		System.out.println("세션에 수정한 정보 올리기");
-
 		return "/bsBio.do";
 	}
 
@@ -216,11 +197,9 @@ public class UserController {
 	@ResponseBody
 	public String Login(AccountVO vo, HttpSession session) {
 			AccountVO result = userService.getUser(vo);
-			System.out.println("result값 뭐야 : "+result);
 			if (result == null) {
 				return "fail";
 			} else {
-				System.out.println("회원정보있음");
 				session.setAttribute("user", result);
 				return result.getMtype()+"";					
 			}
@@ -230,16 +209,12 @@ public class UserController {
 	@RequestMapping(value = "/loginSNS.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String kakaologin(AccountVO vo, HttpSession session, HttpServletResponse response) {
-		System.out.println("카카오 로그인 컨트롤러 접속");
 		// 로그인 성공했을 때
 		AccountVO result = userService.method(vo);
-		System.out.println(result); // 카카오 로그인시 vo 확인
 		if (vo != null) {
 			session.setAttribute("user", result);
-			System.out.println("user정보 " + result);
 			return "success";
 		} else {
-			System.out.println("로그인 실패");
 			return "fail";
 		}
 	}
@@ -247,7 +222,6 @@ public class UserController {
 	// 로그아웃
 	@RequestMapping("/logout.do")
 	public String logout(HttpSession session, HttpServletResponse response) {
-		System.out.println("로그아웃 처리");
 //		Cookie c = null ;
 //        c.setMaxAge(0);        
 //		response.addCookie(c);
@@ -259,7 +233,6 @@ public class UserController {
 	@RequestMapping(value = "/selectComspec.do", method = RequestMethod.POST, produces = "application/text;charset=utf-8")
 	@ResponseBody
 	public String SelcetComspec(BusinessVO vo) {
-		System.out.println(vo);
 		Gson gson = new Gson();
 		String comspec = gson.toJson(userService.getComspec(vo));
 		// System.out.println("test:" + comspec);
@@ -270,18 +243,14 @@ public class UserController {
 	@RequestMapping(value = "/selectCoinspec.do", method = RequestMethod.POST, produces = "application/text;charset=utf-8")
 	@ResponseBody
 	public String SelcetCoinspec(BusinessVO vo) {//여기도 bno 하나만 전달해서 처리가능함 
-		System.out.println(vo);
 		Gson gson = new Gson();
 		String coinspec = gson.toJson(userService.getCoinspec(vo));
-		System.out.println("test:" + coinspec);
-
 		return coinspec;
 	}
 
 	// 일반(사양,설비)관리 update
 	@RequestMapping(value = "/updateSpec.do", method = RequestMethod.POST)
 	public String Update(BusinessVO vo) {
-		System.out.println("메서드 진입" + vo);
 		userService.updateSpec(vo);
 		if (vo.getBizType() == 1) {
 			return "/jsp/mypageBiz/comspec.jsp";
@@ -292,9 +261,6 @@ public class UserController {
 	// 아이디찾기
 	@RequestMapping(value = "/findId.do", method = RequestMethod.POST)
 	public String findId(AccountVO vo, Model model,HttpServletResponse response) throws IOException {
-	   
-		System.out.println("findID 진입");
-		System.out.println(vo);
 		vo=userService.findId(vo);
 		if(vo!=null) {
 			model.addAttribute("userId", vo);
@@ -311,7 +277,6 @@ public class UserController {
 	// 비밀번호찾기
 	@RequestMapping(value = "/findPw.do", method = RequestMethod.POST)
 	public String findPw(AccountVO vo, Model model) {
-		System.out.println(vo);
 		model.addAttribute("userPw", userService.findPw(vo));
 		return "/jsp/login/findPwSendMail.jsp";
 	}
@@ -322,12 +287,12 @@ public class UserController {
 	public String mailCheckGET(String email) throws Exception {
 
 		/* 뷰(View)로부터 넘어온 데이터 확인 */
-		System.out.println("이메일 데이터 전송 확인");
-		System.out.println("인증번호 : " + email);
+//		System.out.println("이메일 데이터 전송 확인");
+//		System.out.println("인증번호 : " + email);
 		/* 인증번호(난수) 생성 */
 		Random random = new Random();
 		int checkNum = random.nextInt(888888) + 111111;
-		System.out.println("인증번호 " + checkNum);
+//		System.out.println("인증번호 " + checkNum);
 		/* 이메일 보내기 */
 		String setFrom = "kkaekkt@naver.com"; // bean에 지정해둔 계정
 		String toMail = email; // 받는메일 테스트 이후 받아온 email변수로 변경
@@ -357,7 +322,6 @@ public class UserController {
 	@RequestMapping(value = "/deletePs.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String deleteUser(AccountVO vo) {
-		System.out.println("회원탈퇴 controller옴");
 		Gson gson = new Gson();
 	      return gson.toJson(userService.deleteUser(vo));
 		//return userService.deleteUser(vo);
@@ -381,7 +345,6 @@ public class UserController {
 	// 개인 프로필 정보 get
 	@RequestMapping(value = "/myBio.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String getPerson(HttpSession session, Model model) {
-		System.out.println("개인프로필편집");
 		AccountVO account = (AccountVO) session.getAttribute("user");
 		model.addAttribute("person", userService.getPerson(account.getMno()));
 		return "/jsp/mypageUser/mybio.jsp";
@@ -389,14 +352,12 @@ public class UserController {
 	// 업체 프로필 정보 get
 	@RequestMapping(value = "/bsBio.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public String getBusiness(BusinessVO vo, HttpSession session, Model model) {
-		System.out.println("업체프로필편집");
 		AccountVO account = (AccountVO) session.getAttribute("user");
 		vo.setMno(account.getMno());
 		vo.setBno(account.getBno());
 		vo = userService.getBusiness(vo);
 		vo.setLikedNum(userService.countLikeBs(vo)); // 프로필편집에서 찜 인원 뽑아와야해서 추가
 		vo.setEval(userService.avgGradeBs(vo)); // 프로필편집에서 찜 인원 뽑아와야해서 추가
-		System.out.println(vo);
 		model.addAttribute("bs", vo);
 		if (vo.getBizType() == 1) {
 			return "/jsp/mypageBiz/combio.jsp";

@@ -94,8 +94,7 @@ public class MapListController {
 		@RequestMapping(value="/maplist.do", method=RequestMethod.POST,produces="application/text;charset=utf-8")   
 		public @ResponseBody String maplist(String keyaddr, int type) {
 		      String keyword = keyaddr;
-		      int mtype = type;
-		      System.out.println("ajax 요청 도착!"+keyword+mtype);    
+		      int mtype = type; 
 		      AccountVO vo = new AccountVO();
 		      vo.setAddress(keyword);
 		      vo.setMtype(mtype);
@@ -103,16 +102,12 @@ public class MapListController {
 		      List<MapListVO> modelList = mapserv.selectlandry(vo);
 		      Gson gson=new Gson();
 		      String keylist=gson.toJson(modelList);
-		      System.out.println("select 데이터 확인 :" + keylist);
 		      return keylist;
 		}
 	   
 		//like Y/N 조회
 		@RequestMapping(value="/likeYn.do", method=RequestMethod.POST)
-		public @ResponseBody int likeYn(SingleListVO vo) {
-			
-			System.out.println("like 정보조회   : "+vo); 
-			System.out.println("like Y/N  : "+ mapserv.likeYn(vo)); 
+		public @ResponseBody int likeYn(SingleListVO vo) { 
 			int likeYn = mapserv.likeYn(vo);
 			
 			return likeYn;
@@ -121,26 +116,19 @@ public class MapListController {
 		//업체 시간조회
 		@RequestMapping(value="/singleTime.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
 		public @ResponseBody String singleList(int bno) {
-			System.out.println("단일 페이지 시간조회  : "+bno); 
 			List<SingleListVO>single = mapserv.selectSingle(bno); 
 			Gson gson=new Gson(); 
-			String singleList = gson.toJson(single); 
-			System.out.println("select 데이터 확인  : "+singleList); 
-			
+			String singleList = gson.toJson(single); 			
 			return singleList; 
 		}
 	  
 		//일반세탁 사양/가격조회
 		@RequestMapping(value="/singleOption.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
 		public @ResponseBody String singleOption(int bno) {
-			
-			System.out.println("일반세탁 사양조회  : "+bno); 
 			List<SingleListVO>single = mapserv.singleOption(bno); 
 			
 			Gson gson=new Gson(); 
 			String singleList = gson.toJson(single); 
-			System.out.println("select 데이터 확인  : "+singleList); 
-			
 			return singleList; 
 		}
 		
@@ -148,26 +136,19 @@ public class MapListController {
 		//회원업체 리뷰 조회
 		@RequestMapping(value="/reviewList.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
 		public @ResponseBody String reviewList(int bno) {
-			
-			System.out.println("리뷰조회 : "+bno); 
 			List<SingleListVO>single = mapserv.reviewList(bno); 
 			Gson gson=new Gson(); 
 			String singleList = gson.toJson(single); 
-			System.out.println("select 데이터 확인  : "+singleList); 
-			
 			return singleList; 
 		}	
 		
 		//회원업체 별점별 리뷰조회
 		@RequestMapping(value="/reviewListGrade.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
 		public @ResponseBody String reviewListGrade(int bno) {
-			System.out.println("리뷰조회 : "+bno); 
 			List<SingleListVO>single = mapserv.reviewListGrade(bno); 
 			
 			Gson gson=new Gson(); 
-			String singleList = gson.toJson(single); 
-			System.out.println("select 데이터 확인  : "+singleList); 
-			
+			String singleList = gson.toJson(single); 			
 			return singleList; 
 		}		
 				

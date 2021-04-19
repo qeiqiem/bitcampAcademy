@@ -39,7 +39,8 @@ button {
     height: 100%;
     border: 0;
     outline: none;
-    background-color: white;
+    background-color: none;
+
   }
   .searchBox i{
     position: absolute;
@@ -106,10 +107,10 @@ button {
   }
   .selectbox label {
     position: absolute;
-    top: -10px; /* 위치정렬 */
+    top: -3px; /* 위치정렬 */
     left: 1px; /* 위치정렬 */
-    padding: 0.8em 0.5em; /* select의 여백 크기 만큼 */
     z-index: -1; /* IE8에서 label이 위치한 곳이 클릭되지 않는 것 해결 */
+    color: var(--black-color);
   }
   .selectbox select {
     width: 100%;

@@ -22,7 +22,6 @@ public class EchoHandler extends TextWebSocketHandler {
 	//서버에 접속이 성공 했을때
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		System.out.println("소켓 열기");
 		sessions.add(session);
 		String mno = getMno(session);
 		userSessionsMap.put(mno, session);
@@ -31,7 +30,6 @@ public class EchoHandler extends TextWebSocketHandler {
 	//소켓에 메세지를 보냈을때
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		System.out.println("메시지 수신");
 		//protocol : mno , 내용
 		String msg = message.getPayload();
 		//System.out.println(msg); 메시지 로그
@@ -45,14 +43,12 @@ public class EchoHandler extends TextWebSocketHandler {
 				if(boardWriterSession != null) {//작성자가 세션에 있다면, 
 					TextMessage sendMsg = new TextMessage(msgType+content);
 					boardWriterSession.sendMessage(sendMsg);// 메시지를 보낸다.
-					System.out.println("송신완료");
 			}
 		}
 	}
 	//연결 해제될때
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		System.out.println("소켓 닫음");
 		userSessionsMap.remove(session.getId());
 		sessions.remove(session);
 	}
@@ -61,7 +57,6 @@ public class EchoHandler extends TextWebSocketHandler {
 	private String getMno(WebSocketSession session) {
 		Map<String, Object> httpSession = session.getAttributes();
 		AccountVO loginUser = (AccountVO)httpSession.get("user");
-		System.out.println(loginUser.getMno()+":회원번호 출력 체크");
 		if(loginUser != null) {
 			return loginUser.getMno()+"";//mno를 String으로 형변환해서 전달
 		}else {//로그인 정보를 찾지 못했으면 sessionId를 반환

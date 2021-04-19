@@ -189,14 +189,17 @@
       display: flex;
       /* width: 85%; */
       position: relative;
-      margin-left: 25px;
+      margin-left: 40px;
     }
 
     #calendar {
-      max-width: 50vw;
+      /* max-width: 50vw;
       padding-left: 80px;
       width: 100%;
-      float: left;
+      float: left; */
+      max-width: 50vw;
+      padding-left: 120px;
+      width: 100%;
     }
 
     #monthSales {
@@ -219,9 +222,16 @@
       margin-right: 20px;
     }
 
-    /* .priceTag>ul>li:nth-child(1){
-
+    /* .priceTag>ul {
+      position: absolute;
     } */
+
+    .priceTag>ul>li {
+      display: flex;
+      height: 40px;
+    }
+
+
     .priceTag>ul>li:nth-child(1)>div:nth-child(1) {
       background-color: var(--text-red);
     }
@@ -270,6 +280,8 @@
       </div>
 
     </div>
+    <!-- 월별요약 -->
+
     <div id='calendar'></div>
   </div>
 

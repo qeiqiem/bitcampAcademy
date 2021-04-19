@@ -150,7 +150,6 @@ window.onload = function () {
     // 새 비밀번호, 새 비밀번호 확인 인풋 값 같은지 비교 => 비밀법호 업데이트 
     $("#btn_updatepwd").click(function undatePwd() {
         if ($('#pwd').val() == $('#newpwd').val() && formatnewpw == 1) {
-            console.log($('#pwd').val + $('#newpwd') + formatnewpw);
             $.ajax({
                 url: '/updateBspwd.do',
                 type: 'post',
@@ -160,7 +159,6 @@ window.onload = function () {
                     password: $('#newpwd').val()
                 }, success: function(data){
                     let password = JSON.parse(data);
-                    console.log("ajax성공 "+password);
                     pageObj["password"] = password;
                     
                 }, error: function() {
@@ -188,8 +186,6 @@ window.onload = function () {
 
         }
         else {
-            console.log("if문탈출" + $('#pwd').val() + $('#newpwd').val() + formatnewpw);
-
             if (formatnewpw == 0) {
                 document.getElementById("match").innerText = "입력형식을 확인하세요";
                 $("#pwd").val("");
@@ -286,7 +282,6 @@ window.onload = function () {
         }
     })
     document.getElementById("btn_checkemail").onclick = function(){
-        console.log(formatemail);
         if(formatemail == 1){
             //emailApi();
             if(document.getElementById("email").value != pageObj["email"]){
@@ -377,7 +372,6 @@ function emailDuplChk() {
       },
       success: function (data) {
           var key = JSON.parse(data);
-          console.log(key);
         if (key != 0) {
           alert("해당 이메일로 가입된 아이디가 존재합니다.");
           return false;
@@ -391,7 +385,7 @@ function emailDuplChk() {
 function emailApi(){
      /* 인증번호 이메일 전송 */
      
-        console.log("이메일인증 클릭");
+        // console.log("이메일인증 클릭");
         var email = $(".mail_input").val();        // 입력한 이메일
         
         $.ajax({
@@ -463,7 +457,6 @@ function submitCombio() {
         + document.getElementById("roadAddress").value + ","
         + document.getElementById("detailAddress").value + ","
         + document.getElementById("extraAddress").value;
-    console.log(address);
     document.getElementById("address").value = address;
 
     if ($("#curpwd").val() == "" || pageObj["password"] != $("#curpwd").val()) {
@@ -487,7 +480,7 @@ function submitCombio() {
     if ($("input[name='email']").val() == "" || formatemail != 1 || formatemailNum !=1) {
         alert("이메일을 확인하세요.");
         $("input[name='email']").focus();
-        console.log(formatemail);
+        // console.log(formatemail);
         return false;
     }
     $("input").attr("disabled", false);
