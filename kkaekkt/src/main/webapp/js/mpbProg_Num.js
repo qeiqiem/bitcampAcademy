@@ -231,7 +231,7 @@ function initPageObj(data) {
 }
 function ajax() {
   //ajax로 리스트 받아오기
-  console.log("ajax 함수 진입");
+  //console.log("ajax 함수 진입");
   $.post({
     url: "/getRsvListBs.do",
     data: pageObj,
@@ -242,12 +242,12 @@ function ajax() {
       printlist(list);
       initPageObj(rsv);
       initPageBtn();
-      console.log("ajax 완료");
+      //console.log("ajax 완료");
     },
   });
 }
 function msgSet(result) {
-  console.log("메시지 송신 진입");
+  //console.log("메시지 송신 진입");
   if (result == "cancel") {
     //주문이 취소되었다면
     alertObj.rsvNum = rsvObj.rsvNum;
@@ -259,7 +259,7 @@ function msgSet(result) {
     alertObj.msg = "주문번호" + rsvObj.rsvNum + "의 세탁이 완료되었습니다.";
     alertObj.typenum = 3;
   } else {
-    console.log("알림메시지 처리 에러");
+    //console.log("알림메시지 처리 에러");
   }
 }
 function today() {

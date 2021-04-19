@@ -7,7 +7,7 @@ $(document).ready(function() {
     printList();
 });
 function modalAjax(bno) { //ajax로 리스트 받아오기
-    console.log('ajax 함수 진입');
+    //console.log('ajax 함수 진입');
     $.post({
         url:"/getLaundryList.do",
         data:{bno:bno},
@@ -15,7 +15,7 @@ function modalAjax(bno) { //ajax로 리스트 받아오기
             var list=JSON.parse(data);
             modalprint(list);
             openModal();
-            console.log('ajax 완료');
+            //console.log('ajax 완료');
         }
     });
 }
@@ -197,7 +197,7 @@ function initModal() {//모달 이벤트 관리
             resListSet();//체크된 품목 리스트 입력
             rsvObj.totalPrice=totalPrice;//총 금액 입력
             requestPay(totalPrice);
-            // console.log(JSON.stringify(rsvObj));
+            // //console.log(JSON.stringify(rsvObj));
         }
     });
     $("#mask").click(function(){//마스크 쪽이 눌렸다면
@@ -206,7 +206,7 @@ function initModal() {//모달 이벤트 관리
     $("#agreement i").click(function() {
         $(this).toggleClass('fa-chevron-down');
         $(this).toggleClass('fa-chevron-up');
-        console.log($(this).css('display'));
+        //console.log($(this).css('display'));
         if($('.termsText').eq($(this).attr('value')).css('display')=="none"){
             $('.termsText').eq($(this).attr('value')).show();
         }else{

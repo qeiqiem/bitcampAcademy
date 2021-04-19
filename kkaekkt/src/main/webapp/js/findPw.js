@@ -96,7 +96,7 @@ document.getElementById("btn_checkemail").onclick = function () {
 };
 // 인증번호 이메일 전송
 function emailApi() {
-  console.log("이메일인증 클릭");
+  //console.log("이메일인증 클릭");
   var email = $(".mail_input").val(); // 입력한 이메일
 
   $.ajax({
@@ -185,18 +185,18 @@ function pwSubmit() {
         }
       },
 
-      error: function (request, status, error) {
-        console.log(
-          "code:" +
-            request.status +
-            "\n" +
-            "message:" +
-            request.responseText +
-            "\n" +
-            "error:" +
-            error
-        );
-      },
+      // error: function (request, status, error) {
+      //   console.log(
+      //     "code:" +
+      //       request.status +
+      //       "\n" +
+      //       "message:" +
+      //       request.responseText +
+      //       "\n" +
+      //       "error:" +
+      //       error
+      //   );
+      // },
     });
   }
 }

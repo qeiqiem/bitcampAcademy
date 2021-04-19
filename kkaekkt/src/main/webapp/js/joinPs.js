@@ -56,7 +56,7 @@ var AuthTimer = new $ComTimer();
 
 // 이메일 입력형식 확인
 document.getElementById("btn_checkemail").onclick = function () {
-  console.log(formatemail);
+  //console.log(formatemail);
   if (formatemail == 1) {
     // emailApi(); //ajax 실행
     emailDuplChk();
@@ -66,7 +66,7 @@ document.getElementById("btn_checkemail").onclick = function () {
 };
 // 인증번호 이메일 전송
 function emailApi() {
-  console.log("이메일인증 클릭");
+  //console.log("이메일인증 클릭");
   var email = $(".mail_input").val(); // 입력한 이메일
 
   $.ajax({
@@ -94,7 +94,7 @@ function emailDuplChk() {
       email: $("#email").val(),
     },
     success: function (data) {
-      console.log(data);
+      //console.log(data);
       var key = JSON.parse(data);
       if (key != 0) {
         alert("해당 이메일로 가입된 아이디가 존재합니다.");
@@ -363,11 +363,11 @@ function fn_combine() {
     document.getElementById("detailAddress").value +
     ", " +
     document.getElementById("extraAddress").value;
-  console.log(ad);
+  //console.log(ad);
   // document.getElementById("address").value = address;
   address.value = ad;
   formatad = 1;
-  console.log(address);
+  //console.log(address);
 }
 
 //submit check

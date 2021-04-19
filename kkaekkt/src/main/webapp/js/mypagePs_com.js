@@ -181,7 +181,7 @@ function initPageObj(data) {
     initPageBtn();
 }
 function ajax() { //ajax로 리스트 받아오기
-    console.log('ajax 함수 진입');
+    //console.log('ajax 함수 진입');
     $.post({
         url:"/getRsvListPs.do",
         data:pageObj,
@@ -190,7 +190,7 @@ function ajax() { //ajax로 리스트 받아오기
             var list=rsv.rsvListRno;
             initPageObj(rsv);
             printlist(list);
-            console.log('ajax 완료');
+            //console.log('ajax 완료');
         }
     });
 }

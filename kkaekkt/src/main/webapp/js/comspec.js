@@ -124,7 +124,7 @@ function initEvent(){
                 list.push({schno:JSON.parse(weekLi.eq(i).css("order")),time:"00:00~00:00"});
             }
     	}
-        console.log(list);
+        // console.log(list);
     	$("#weekBox input[name='schedule']")[0].value=JSON.stringify(list);
 		
         // form submit
@@ -138,7 +138,7 @@ function initEvent(){
     var weekLi = $('#weekBox ul');
     weekBtn.click(function () {
         var idx = $(this).index();
-        console.log($(this).html());
+        //console.log($(this).html());
         $(this).toggleClass('selected');
         if ($(this).hasClass("selected")) {
             $("#weekBox ul li[id='weekli_"+ (idx+1) +"']").show();
@@ -150,17 +150,17 @@ function initEvent(){
 };
 
 function ajax(pageObj) { //ajax로 리스트 받아오기
-    console.log('ajax 함수 진입');
+    //console.log('ajax 함수 진입');
     $.post({
         url:"/selectComspec.do",
         data:pageObj,
         success: function(data) {
-    		console.log('ajax 함수 완료');
+    		//console.log('ajax 함수 완료');
             var comspec=JSON.parse(data);
 			$("input[name='bno']").val(comspec.bno);
            	// 품목이 일치하면 값 넣어주기
 			$.each(comspec.laundryList, function(index, item) {
-				console.log(item.lno + ":" + item.laundry +","+ item.price);
+				//console.log(item.lno + ":" + item.laundry +","+ item.price);
                 var checkli = $("input[type='checkbox']");
 				for(var i = 0; i<checkli.length; i++){
 					if(item.lno == checkli[i].value) {
@@ -177,7 +177,7 @@ function ajax(pageObj) { //ajax로 리스트 받아오기
             $.each(comspec.scheduleList, function (index, item) {
                 var weekBtn = $('#week button');
                 var weekLi = $('#weekBox ul');
-                console.log(index + ":" + item.schno + "," + item.time);
+                //console.log(index + ":" + item.schno + "," + item.time);
                 var start = (item.time).split("~")[0];
                 var end = (item.time).split("~")[1];
                 var idx = item.schno;
