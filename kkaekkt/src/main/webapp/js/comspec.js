@@ -44,12 +44,17 @@ function initEvent(){
             $(this).val(inputVal.replace(/[^0-9]/gi, ""));
         }
     });
+    //  clickmask 클릭시 alert
+    $("#clickmask").click(function (){
+        alert("정보를 수정하시려면 먼저 수정하기 버튼을 클릭해 주세요.");
+    });
     
     // 수정하기 버튼 클릭시 
         clickupdate.click(function(){
             state =1;
             clickupdate.hide();
             changebtn.show();
+            $("#clickmask").hide();
         // 체크된 품목의 인풋창만 활성화
             for(var i=0; i<chkBox.size();i++) {
                 if(chkBox[i].checked) {
@@ -69,6 +74,7 @@ function initEvent(){
             state = 0;         
 			clickupdate.show();
             changebtn.hide();
+            $("#clickmask").show();
 
         // 영업시간 변동사항 삭제후 다시 ajax실행
             $("#week button").removeClass('selected');
@@ -92,7 +98,9 @@ function initEvent(){
                     alert("체크항목을 확인해주세요");
                     return false;
                 }
-                list.push({lno:JSON.parse(chkBox[i].value),price:JSON.parse(priceBox[i].value)});
+                let price = priceBox[i].value;
+                let inputprice = price.toString().replace(',','');
+                list.push({lno:JSON.parse(chkBox[i].value),price:JSON.parse(inputprice)});
             }
             else if(!chkBox[i].checked){
                 list.push({lno:JSON.parse(chkBox[i].value),price:0});
@@ -158,7 +166,9 @@ function ajax(pageObj) { //ajax로 리스트 받아오기
 					if(item.lno == checkli[i].value) {
                         if(item.price !=0){
                             checkli.eq(i).prop("checked", true);
-                           $(".laundry input[id='won']").eq(item.lno - 1).val(item.price);
+                            let price = item.price;
+                            let inputprice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+                           $(".laundry input[id='won']").eq(item.lno - 1).val(inputprice);
                         } 
 					}
 				} 

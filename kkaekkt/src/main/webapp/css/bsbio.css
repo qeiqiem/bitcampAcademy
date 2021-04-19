@@ -223,3 +223,13 @@ select::-ms-expand { /* for IE 11 */
 .incorrect{
     color : red;
 }
+#clickmask {
+    width: 62vw;
+    height: 66vh;
+    display: block;
+    background: black;
+    opacity: 57%;
+    z-index: 30;
+    position: absolute;
+
+  }
