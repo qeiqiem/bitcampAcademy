@@ -7,41 +7,14 @@
             <meta charset="UTF-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Document</title>
-            <!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> -->
-            <!-- <script src="https://kit.fontawesome.com/2fc57dd2db.js" crossorigin="anonymous"></script> -->
+            <title>kkaekkt 깨끝</title>
             <link rel="stylesheet" href="/css/fullpage.min.css">
             <script src="/js/fullpage.min.js"></script>
-            <!-- <link rel="stylesheet" href="/css/index.css"> -->
-            <!-- <link rel="stylesheet" href="/css/all.css"> -->
-            <!-- <link rel="stylesheet" href="/css/header.css"> -->
-            <!-- <link rel="stylesheet" href="/css/indexFullpage.css"> -->
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
         </head>
 
         <body>
-            <!-- <header class="head_container">
-		        <nav class="head">
-		            <div class="menu">
-		                <a href="/showMap.do?type=1">일반세탁소</a>
-		                <a href="/showMap.do?type=2">코인세탁소</a>
-		            </div>
-		            <div class="head_logo">
-		                <div class="logo">
-		                    <a href="/index.do"> <img src="/img/logo-white.png" alt="">
-		                    </a>
-		                </div>
-		            </div>
-		
-		            <div class="head_right">
-		                <a href="/jsp/join/joinTerms.html">회원가입</a>
-		                <a href="/jsp/login/login.jsp">로그인</a>
-		                <a href="/jsp/faq.jsp">FAQ</a>
-		            </div>
-		        </nav>
-    		</header> -->
-
             <c:choose>
                 <c:when test="${user.mtype==1}">
                     <jsp:include page="/jsp/headerPs.jsp"></jsp:include>
@@ -58,6 +31,7 @@
                     document.getElementById("logoImg").src = "/img/logo-white.png"
                 }
             </script>
+
             <link rel="stylesheet" href="/css/indexFullpage.css">
             <div id="full-page">
                 <div class="section index0">

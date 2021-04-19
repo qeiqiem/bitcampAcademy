@@ -47,7 +47,7 @@
 			<div class="head_right">
 				<ul>
 					<li>
-						<span>${sessionScope.user.name}</span>님
+						<span id="headName">${sessionScope.user.name}</span>님
 					</li>
 					<li>
 						<div id="bellBox">
