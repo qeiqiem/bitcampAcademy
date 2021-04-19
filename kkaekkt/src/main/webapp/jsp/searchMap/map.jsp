@@ -247,24 +247,31 @@
                    center: new kakao.maps.LatLng(37.566826, 126.9786567),level: 2
                };     
            
-           var itemel;
-           var bno= "";    
-           var bizMno; 
-           var dbData = [];
+            var itemel;
+            var bno= "";    
+            var bizMno; 
+            var dbData = [];
+            
+            // 회원번호
+            var mno = ${user.mno};
+            
+            // 일반세탁, 코인세탁 'type' 구분
+            var url = window.location.href;
+            var typeIdx = url.indexOf("type=")
+                //~~~?type=1&search=검색어
+            var type = url.substr(typeIdx+5,1);
+            if(url.substr(typeIdx+6)==""){
+                    var contuserarr  = []
+                        contuserarr  = useraddress.split(",")	
+                    var gungoarr = contuserarr[0].split("구")
+                        useraddress = gungoarr[0]	     
+                        useraddress = useraddress+"구, "+contuserarr[1]	
+            }else{
+                    var searchIdx=url.indexOf("search=");
+                    var searchVal=url.substr(searchIdx+7);
+            }
            
-           // 회원번호
-           var mno = ${user.mno};
            
-           // 일반세탁, 코인세탁 'type' 구분
-       	   var url = window.location.href;
-           	   url = url.split("type=")
-           var type = Number(url[1])
-           
-           var contuserarr  = []
-	  	       contuserarr  = useraddress.split(",")	
-	  	   var gungoarr = contuserarr[0].split("구")
-	  	       useraddress = gungoarr[0]	     
-	  	       useraddress = useraddress+"구, "+contuserarr[1]	
  		   
  		   //Controller에서 받아온 주소로 DB 선조회
            bindinglandry(useraddress)

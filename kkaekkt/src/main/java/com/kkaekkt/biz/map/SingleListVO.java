@@ -11,7 +11,7 @@ public class SingleListVO {
 	//laundryinfo-------------------------
 	int no;
 	int mno; //알림 전송을 위한 업체의 mno?
-	int bno; //like 조회
+	String bno; //like 조회
 	int lno;
 	int price;
 	String product;
@@ -27,14 +27,14 @@ public class SingleListVO {
 	Date rdate;
 	
 
-	public int getBno() {
+
+	public String getBno() {
 		return bno;
 	}
 
-	public void setBno(int bno) {
+	public void setBno(String bno) {
 		this.bno = bno;
 	}
-
 
 	public int getMno() {
 		return mno;

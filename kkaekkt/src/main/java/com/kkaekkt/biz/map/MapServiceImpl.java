@@ -22,22 +22,22 @@ public class MapServiceImpl implements MapService {
 		return maplistDao.selectlandry(vo);		
 	}
 
-	@Override public List<SingleListVO> selectSingle(int bno) {
+	@Override public List<SingleListVO> selectSingle(String bno) {
 		 return maplistDao.selectSingle(bno); 
 	 }
 
 	@Override
-	public List<SingleListVO> singleOption(int bno) {
+	public List<SingleListVO> singleOption(String bno) {
 		return maplistDao.selectOption(bno); 
 	}
 
 	@Override
-	public List<SingleListVO> reviewList(int bno) {
+	public List<SingleListVO> reviewList(String bno) {
 		return maplistDao.reviewList(bno); 
 	}
 
 	@Override
-	public List<SingleListVO> reviewListGrade(int bno) {
+	public List<SingleListVO> reviewListGrade(String bno) {
 		return maplistDao.reviewListGrade(bno); 
 	}
 

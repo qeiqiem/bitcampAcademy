@@ -277,7 +277,7 @@ $(document).ready(function() {
         if(star != null)
            $("#memberlog").html('<input class="tag_kkaekkt" value="kkarkkt 가맹점 입니다">')       
            
-        $("#s_title").html(name)             
+        $("#s_title").html(name)
         $("#s_star").html(star)
         $("#s_address").html('<i class="fas fa-map-marker-alt"></i>&nbsp;'+address)
         $("#s_phone").html('<i class="fas fa-phone-alt"></i>&nbsp;'+phone)

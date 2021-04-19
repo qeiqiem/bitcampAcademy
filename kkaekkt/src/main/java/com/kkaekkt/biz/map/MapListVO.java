@@ -8,7 +8,7 @@ import com.google.gson.Gson;
 public class MapListVO {
 	
 	//세탁 리스트를 위한 
-	int bno;
+	String bno;
 	int bizMno;
 	String bname;
 	String phone;
@@ -55,10 +55,11 @@ public class MapListVO {
 	public void setResList(List<ResPayVO> resList) {
 		this.resList = resList;
 	}
-	public int getBno() {
+	
+	public String getBno() {
 		return bno;
 	}
-	public void setBno(int bno) {
+	public void setBno(String bno) {
 		this.bno = bno;
 	}
 	public int getMno() {
