@@ -22,14 +22,14 @@ function initEvent(){
     // 체크박스 선택시 해당 품목 가격인풋창 활성화
     chkBox.click(function(){
         let idx = this.value;
-        console.log(idx);
-        console.log(chkBox.eq(idx-1).attr("disabled"));
+        // console.log(idx);
+        // console.log(chkBox.eq(idx-1).attr("disabled"));
         if(state == 0){
             alert("수정하시려면 수정하기버튼을 눌러주세요.");
         } else {
             if(chkBox[idx-1].checked){
                 priceBox.eq(idx-1).attr("disabled", false);
-                console.log( priceBox.eq(idx-1).attr("disabled"));
+                // console.log( priceBox.eq(idx-1).attr("disabled"));
             } else if (!chkBox[idx-1].checked){
                 priceBox.eq(idx-1).attr("disabled", true);
                 priceBox.eq(idx-1).val("");

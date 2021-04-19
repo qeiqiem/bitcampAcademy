@@ -28,7 +28,6 @@ public class ReservationController {
 	@RequestMapping(value="/getRsvListPs.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
 	@ResponseBody
 	public String getRsvListPs(ReservationListVO vo) {
-		System.out.println(vo);
 		Gson gson=new Gson();
 		String result=gson.toJson(reservationService.getRsvListPs(vo));
 		return result;
@@ -36,7 +35,6 @@ public class ReservationController {
 	@RequestMapping(value="/getRsvListBs.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
 	@ResponseBody
 	public String getRsvListBs(ReservationListVO vo) {
-		System.out.println(vo);
 		Gson gson=new Gson();
 		String result=gson.toJson(reservationService.getRsvListBs(vo));
 		return result;
@@ -59,7 +57,6 @@ public class ReservationController {
 	@RequestMapping(value="/regitComm.do", method=RequestMethod.POST)
 	@ResponseBody
 	public void regitComm(CommVO vo) {
-		System.out.println(vo);
 		reservationService.regitComm(vo);
 	}
 	@RequestMapping(value="/updateComm.do", method=RequestMethod.POST)
@@ -80,7 +77,6 @@ public class ReservationController {
 	@RequestMapping(value="/getCommListBs.do", method=RequestMethod.POST,produces="application/text;charset=utf-8")//리뷰관리 리스트조회
 	@ResponseBody
 	public String getCommListBs(CommListVO vo) {
-		System.out.println(vo);
 		Gson gson=new Gson();
 		String result=gson.toJson(reservationService.getCommListBs(vo));
 		return result;
@@ -93,7 +89,6 @@ public class ReservationController {
 	// 주문전표인쇄 창
 	@RequestMapping(value="/openPopup.do",method=RequestMethod.GET)
 	public String openPopup(ReservationVO vo, Model model) {
-		System.out.println(reservationService.getRsvDetail(vo));
 		model.addAttribute("rsv", reservationService.getRsvDetail(vo) );
 		return "/jsp/mypageBiz/orderPopup.jsp";
 	}
@@ -118,7 +113,6 @@ public class ReservationController {
 	@ResponseBody
 	public String selectSalse(String bno, Date startDt, Date endDt) {
 		Map<String, Object> param = new HashMap<>(); 
-		System.out.println(startDt +","+ endDt );
 		param.put("bno", bno); 
 		param.put("startDt", startDt);
 		param.put("endDt", endDt);
@@ -127,7 +121,6 @@ public class ReservationController {
 		Map<String, Object> val = new HashMap<>();
 		val.put("sales", reservationService.getSales(param));
 		val.put("count", reservationService.getRsvCount(param));
-		System.out.println("test:" + val);
 		return gson.toJson(val);
 		
 	}
