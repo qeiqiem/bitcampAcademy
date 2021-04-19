@@ -11,6 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>매장관리</title>
 <link rel="stylesheet" href="/css/mypageBs_com.css">
+<link rel="stylesheet" href="/css/orderList.css">
 </head>
 
 <body>
@@ -72,6 +73,7 @@
 				<div id="modal_foot">
 					<p style="text-align: center;"></p>
 					<div id="review_btn">
+						<button id="openChatBtn">채팅</button>
 						<button id="closeBtn" onclick="modalClose()">돌아가기</button>
 					</div>                
 				</div>			 

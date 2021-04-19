@@ -6,13 +6,11 @@ body {
   padding: 0;
   /* background-color: rgba(233, 233, 233, 0.048); */
 }
-hr {
+/* hr {
   height: 0.5px;
   border: none;
   background-color: var(--gray-color);
-  /* border: solid 0.5px var(--gray-color); */
-  /* width: 95%; */
-}
+} */
 
 h2 {
   margin: 50px 0;

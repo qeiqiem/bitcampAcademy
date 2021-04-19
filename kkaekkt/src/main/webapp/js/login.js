@@ -2,23 +2,22 @@ $(document).ready(function() {
 		
 		$("#modal_show").click(function() {
 			$("#modal_container").show()
+			$("#mask").show()
 		})
 		$("#modal_close").click(function() {
 			$("#modal_container").hide()
+			$("#mask").hide()
+		})
+    $("#mask").click(function() {
+			$("#modal_container").hide()
+			$("#mask").hide()
 		})
 	})
 
-
-
-$(document).ready(function() {
-  $('#login').click(function(){ 
-    login();
-  });
-});
 function login() {
   var userData={
-    id:$('#id').val(),
-    password:$('#password').val()
+    id:$('#login_id').val(),
+    password:$('#login_password').val()
   }
   $.post({
     url:"/login.do",
@@ -35,4 +34,11 @@ function login() {
       }
     }
   })
+}
+
+function enterkey() {
+  if (window.event.keyCode == 13) {
+
+    login();
+  }
 }

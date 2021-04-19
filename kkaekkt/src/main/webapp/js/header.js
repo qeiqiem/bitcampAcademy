@@ -57,7 +57,8 @@ function sendAlarm() {//알림 보내는 공용 메서드
         success:function(ano) {
             if(socket){
                 var receiver=alertObj.addressee;
-                var msg='<li class="alertLi'+ano+'"><div>'+
+                var msg='<li class="alertLi'+ano+'">'+
+                            '<div class="msgTop">'+
                                 '<span class="msgHeader">'+alertType+'</span>⠀<span class="msgBody" id="msg'+ano+'">'+alertObj.msg+'</span>'+
                             '</div>'+
                             '<div>'+
@@ -268,16 +269,18 @@ function readAlert(header) {//알림 탭 페이지 공용메서드... 이 부분
         if(header=='[결제]')//헤더가 결제라면
             url="/jsp/mypageUser/mypagePs.jsp";
         else if(header=='[완료]')//헤더가 완료라면..이슈
-            url="/jsp/mypageUser/mypagePs.jsp";
+            url="/jsp/mypageUser/mypagePs_com.jsp";
         else if(header=='[답글]')//헤더가 답글이라면
-            url="/jsp/mypageUser/mypagePs.jsp";
+            url="/jsp/mypageUser/mypagePs_com.jsp";
         else if(header=='[취소]')//헤더가 취소라면..이슈
-            url="/jsp/mypageUser/mypagePs.jsp";
+            url="/jsp/mypageUser/mypagePs_com.jsp";
     }else if(alertObj.mtype==2){//만약 업체회원이라면..리뷰 추가해야할 듯
         if(header=='[결제]')//헤더가 결제라면
             url="/jsp/mypageBiz/mpbProg_Num.jsp";
         else if(header=='[취소]')//헤더가 취소라면..이슈
             url="/jsp/mypageBiz/mypageBs_com.jsp";
+        else if(header=='[주문]')
+            url="/jsp/mypageBiz/mpbProg_Num.jsp";
     }
     $.post({
         url:'/updateAlert.do',
@@ -293,7 +296,7 @@ function crtRoom(guest) {
         for(var i=0;i<rooms.length;i++){
             mno=rooms.eq(i) //i 번째 방의
                 .attr('id') //id 에서
-                .split('room')[0] //mno부분을 추출한다.
+                .split('room')[0]; //mno부분을 추출한다.
             if(Number(mno)==chatObj.addressee){//열려있는 방 중 이미 상대방과의 채팅방이 있다면,
                 return; //아무것도 하지 않고 리턴한다.
             }
@@ -338,7 +341,7 @@ function printRoom(room){//필요한 정보:수신자번호,방번호,수신자 
     $('.chatContainer').append(//채팅방을 만듦
         '<li class="chatBox" id="'+room.addressee+'room'+room.roomnum+'">'+
             '<div class="chatBoxHeader">'+
-                '💬<span id="guest'+room.roomnum+'">'+room.guest+'</span>'+
+                '💬ㅤ<span id="guest'+room.roomnum+'">'+room.guest+'</span>'+
                 '<i class="fas fa-times closeChatBtn" id="'+room.addressee+'clsBtn'+room.roomnum+'"></i>'+
             '</div>'+
             '<ul class="chatRogUl" id="chatRog'+room.roomnum+'">'+

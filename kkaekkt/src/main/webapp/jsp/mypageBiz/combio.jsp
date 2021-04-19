@@ -8,8 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>매장관리</title>
         <script src="https://kit.fontawesome.com/415f6f6023.js" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-        <link rel="stylesheet" href="/css/combio.css">
+        <link rel="stylesheet" href="/css/bsbio.css">
 
 
     </head>
@@ -40,6 +39,7 @@
                 </div>
                 <hr>
                 <form action="/updateBs.do" method="POST">
+                    <div id="clickmask"></div>
                     <div id="bizform">
                         <div class="bizinfo">
                             업체정보
@@ -193,7 +193,7 @@
 
 
         </script>
-        <script src="/js/combio.js"></script>
+        <script src="/js/bsbio.js"></script>
 
     </body>
 

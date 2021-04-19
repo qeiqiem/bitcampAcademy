@@ -59,7 +59,8 @@
 	cursor: pointer;
 }
 
-.head_right span {
+/* headName */
+#headName{	
 	font-size: larger;
 }
 
@@ -144,7 +145,7 @@
 	position: absolute;
 	width: 235px;
 	right: 25px;
-	border: 1px solid var(- -gray-color);
+	border: 1px solid var(--gray-color);
 	box-shadow: 7px 10px 12px 0px rgba(196, 196, 196, 0.5);
 	background-color: white;
 	border-radius: 10px;
@@ -168,18 +169,19 @@
 }
 
 #noticeBox li {
-	border-bottom: 1px solid var(- -gray-color);
+	border-bottom: 1px solid var(--gray-color);
 	padding: 11px 17px;
 	margin-bottom: -1px;
 	position: relative;
-	font-size: 12px;
+	font-size: 12px !important;
 	cursor: pointer;
 	margin: 0;
 	float: none;
+	color: var(--text-gray);
 }
 
 #noticeBox li:hover {
-	background-color: var(- -key-color);
+	background-color: var(--key-color);
 }
 
 .msgTop {
@@ -202,7 +204,7 @@
 
 #noticeBox button:hover {
 	cursor: pointer;
-	background-color: var(- -key-color);
+	background-color: var(--key-color);
 }
 
 #noticeBox li .fas {
@@ -210,7 +212,7 @@
 	top: 23px;
 	right: 15px;
 	font-size: 10px;
-	color: var(- -text-gray);
+	color: var(--text-gray);
 }
 
 .msgBody:hover {
@@ -233,7 +235,7 @@
 }
 
 .msgHeader {
-	color: var(- -key-text);
+	color: var(--key-text);
 }
 
 .read {

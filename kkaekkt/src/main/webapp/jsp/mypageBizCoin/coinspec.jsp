@@ -6,7 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>매장관리</title>
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <link rel="stylesheet" href="/css/coinspec.css">
 </head>
 <body>
@@ -17,6 +16,7 @@
 			<div id="coinspec_title">설비관리</div>
 			<hr>
 			<div class="coinLaundry">
+				<div id="clickmask"></div>
 				<form action="/updateSpec.do" method="POST">
 					<!-- float left -->
 					<div id="coinspec_left">

@@ -310,7 +310,7 @@ function initKeyEvent() {
 
 // 중복확인
 $("#id").focusout(function () {
-  const idLbl = document.getElementById("id_label");
+  let idLbl = document.getElementById("id_label");
   idLbl.style.color = "var(--text-red)";
   if ($("#id").val() == "") {
     // alert("아이디를 입력하세요.");

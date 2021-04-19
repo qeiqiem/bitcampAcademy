@@ -18,7 +18,7 @@
         </div>
     </div>
     <div id="modal_container">
-        <button id="modal_close">x</button>
+        <button id="modal_close"><i class="fas fa-times"></i></button>
             <p class="modal_Header">예약 하기</p>
             <!-- <p>취급품목</p> -->
 	        <hr>

@@ -1,9 +1,22 @@
 $(document).ready(function () {
 	/* button click event */
 	/* 모달 생성 */
-	$("#modal_show").click(function () { $("#modal_container").show() })
-	$("#modal_close").click(function () { $("#modal_container").hide() })
-	$("#nope").click(function () { $("#modal_container").hide() });
+	$("#modal_show").click(function () {
+        $("#modal_container").show() 
+        $("#mask").show();
+    })
+	$("#modal_close").click(function () {
+        $("#modal_container").hide() 
+        $("#mask").hide();
+    })
+	$("#nope").click(function () { 
+        $("#modal_container").hide() 
+        $("#mask").hide();
+    });
+    $("#mask").click(function () { 
+        $("#modal_container").hide() 
+        $("#mask").hide();
+    });
 	
 })
 

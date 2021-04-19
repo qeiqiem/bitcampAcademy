@@ -39,7 +39,7 @@
 				</div>
 			</div>
 			<div id="modal_container">
-				<i class="fas fa-times"></i>
+				<i class="fas fa-times" id="modalClose"></i>
 				<div id="modal_bodycont">
 						<div id="modal_head">
 							<p>만족도를 평가해주세요</p>

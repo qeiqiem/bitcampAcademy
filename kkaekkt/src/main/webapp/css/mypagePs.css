@@ -378,7 +378,11 @@ font-size:14px;
     float: right;
     color: var(--gray-color);
 }
-
+#modalClose{
+    position: absolute;
+    right: 25px;
+    top: 20px;
+}
 #modal_bodycont{
     margin-top: 28px;
     height: 80%;

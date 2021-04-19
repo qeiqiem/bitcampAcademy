@@ -20,18 +20,13 @@ body {
   font-family: "Noto Sans KR", sans-serif;
 }
 
-.body_container {
-  position: relative;
-  top: 75px;
-  width: 100vw;
-  /* min-height: 90vh; */
-  margin: auto;
-}
-.content {
-  position: absolute;
-  left: 11vw;
-  width: 65vw;
-  padding: 20px 70px;
+
+hr {
+  height: 0.5px;
+  border: none;
+  background-color: var(--gray-color);
+  /* border: solid 0.5px var(--gray-color); */
+  /* width: 95%; */
 }
 
 footer {
@@ -79,6 +74,36 @@ ul {
 a {
   text-decoration: none;
 }
+.body_container {
+  position: relative;
+  top: 75px;
+  width: 100vw;
+  /* min-height: 90vh; */
+  margin: auto;
+}
+.content {
+  position: absolute;
+  left: 11vw;
+  padding: 30px 0 0 90px;
+  width: 66%;
+}
+.content_header {
+  display: flex;
+}
+.content_header p {
+  font-weight: bold;
+  font-size: 20px;
+  margin: 0 auto 0 10px;
+}
+.content_header span {
+  color: var(--key-text);
+}
+.content hr {
+  border: none;
+  background: var(--gray-color);
+  height: 1px;
+  margin-bottom: 30px;
+}
 
 #mask {
   width: 100vw;
@@ -96,6 +121,7 @@ a {
 }
 .fa-times {
   color: var(--text-gray);
+  cursor: pointer;
 }
 
 .key-sel {
@@ -127,12 +153,12 @@ a {
   width: 95%;
   height: 38px;
   margin: 20px auto 5px;
-  box-shadow: 0px 1px 0px 0px lightgrey;
+  /* box-shadow: 0px 1px 0px 0px lightgrey; */
 }
 .chatHeader p {
   text-align: left;
   margin-left: 30px;
-  font-weight: 500;
+  font-weight: bold;
   font-size: 18px;
   color: rgb(73,135,255);;
 }
@@ -318,11 +344,14 @@ a {
   width: 69%;
   border: none;
   height: 60px;
-  padding: 0px 10px;
+  padding: 10px 10px;
   resize: none;
   float: left;
   outline: none;
   box-sizing: border-box;
+  margin-left: 10px;
+  background: var(--background-gray);
+  border-radius: 10px;
 }
 .chatWriteBtn{
   width: 20%;
@@ -332,7 +361,7 @@ a {
   border-radius: 20px;
   font-weight: 800;
   color: white;
-  left: 20px;
+  left: 15px;
   background-color: rgb(73,135,255);
   position: relative;
   top: 12px;

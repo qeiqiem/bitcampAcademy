@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>마이페이지</title>
-<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <link rel="stylesheet" href="/css/mybio.css">
 <link rel="stylesheet" href="/css/delete.css">
 
@@ -27,6 +26,7 @@
 				</div>
 				<hr>
 				<div id="mybio_info">
+					<div id="clickmask"></div>
 					<table>
 						<tr>
 							<td>아이디</td>
@@ -106,6 +106,7 @@
 
 			</form>
 			<!-- 모달부분 -->
+			<div id="mask"></div>
 			<div class="word">
 				<input type="button" id="modal_show" value="회원탈퇴" /> <input
 					type="hidden" class="DUorderChk" value="${reservation.count}" />

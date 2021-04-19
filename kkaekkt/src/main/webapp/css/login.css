@@ -3,9 +3,12 @@
 #modal_foot hr {
 	height: 0.5px;
 	border: none;
-	background-color: #C4C4C4;
-	/* border: solid 0.5px var(--gray-color); */
-	width: 85%;
+	background-color: var(--gray-color);
+	width: 76%;
+    margin: 25px auto;
+    text-align: center;
+	
+
 }
 
 #login {
@@ -46,11 +49,12 @@
 }
 
 .login_API {
-	margin-left: 28%;
+	margin-left: 16%;
 }
 
 .login_API img {
-	width: 80px;
+	width: 312px;
+	height: 57px;
 	/* position: relative;
 	left: 80px; */
 }
@@ -91,42 +95,48 @@
 /* 모달 영역 */
 #modal_container {
 	display: none;
-	position: relative;
-	margin: 0 auto;
+  	position: fixed;
+  	margin: auto;
+  	top: 0;
+  	bottom: 0;
+  	left: 0;
+  	right: 0;
+  	margin: auto;
+  	background-color: white;
+ 	border: 1px solid lightgray;
+  	border-radius: 10px;
 	width: 450px;
-	height: 650px;
-	background-color: white;
-	border: 1px solid lightgray;
+	height: 710px;
 	z-index: 9999;
 	/* 	box-shadow: 5px 12px 5px rgb(212, 212, 212); */
 }
 
 #modal_close {
 	float: right;
-	width: 36px;
-	height: 36px;
-	background: white;
-	margin: 18px 20px 0 0;
-	font-size: 24px;
-	border: none;
-	cursor: pointer;
+    width: 36px;
+    height: 36px;
+    border: 1px solid;
+    background: white;
+    margin: 18px 20px 0 0;
+    font-size: 24px;
+    border: none;
+    cursor: pointer;
 }
 
 #modal_bodycont {
 	margin-top: 28px;
 	height: 80%;
-	padding-block: 14px;
 }
 
 #modal_head {
 	width: 80%;
-	height: 80px;
+	height: 65px;
 	text-align: center;
 	margin: 0 auto;
 }
 
 #modal_head h2 {
-  color: var(--black-color);
+  color: var(--text-gray);
 }
 
 /* #modal_foot {
