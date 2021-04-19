@@ -26,6 +26,7 @@
 				</div>
 				<hr>
 				<div id="mybio_info">
+					<div id="clickmask"></div>
 					<table>
 						<tr>
 							<td>아이디</td>
@@ -105,6 +106,7 @@
 
 			</form>
 			<!-- 모달부분 -->
+			<div id="mask"></div>
 			<div class="word">
 				<input type="button" id="modal_show" value="회원탈퇴" /> <input
 					type="hidden" class="DUorderChk" value="${reservation.count}" />

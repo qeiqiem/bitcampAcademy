@@ -16,6 +16,7 @@
 			<div id="coinspec_title">설비관리</div>
 			<hr>
 			<div class="coinLaundry">
+				<div id="clickmask"></div>
 				<form action="/updateSpec.do" method="POST">
 					<!-- float left -->
 					<div id="coinspec_left">

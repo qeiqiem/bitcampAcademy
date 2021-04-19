@@ -36,7 +36,7 @@
 				</ul>
 			</div>
 		</nav>
-
+		<div id="mask"></div>
 		<div id="modal_container">
 			<button id="modal_close"><i class="fas fa-times"></i></button>
 			<div id="modal_bodycont">
@@ -47,7 +47,7 @@
 					<!-- <form action="/login.do" method="post"> -->
 						<div class="login_box">
 							<input type="text" name="id" id="login_id" placeholder=" 아이디" /> 
-							<input type="password" name="password" id="login_password" placeholder=" 비밀번호" /> 
+							<input type="password" name="password" id="login_password"  onkeyup="enterkey();" placeholder=" 비밀번호" /> 
 							<input type="button" id="login" value="로그인" onclick="login()"/>
 						</div>
 					<!-- </form> -->
