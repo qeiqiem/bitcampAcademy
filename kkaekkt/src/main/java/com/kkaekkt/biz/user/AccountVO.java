@@ -2,7 +2,7 @@ package com.kkaekkt.biz.user;
 
 public class AccountVO {
 	private int mno;
-	private int bno;
+	private String bno;
     private String id;
 	private String password;
     private String name;
@@ -29,10 +29,11 @@ public class AccountVO {
 	public void setStno(int stno) {
 		this.stno = stno;
 	}
-	public int getBno() {
+	
+	public String getBno() {
 		return bno;
 	}
-	public void setBno(int bno) {
+	public void setBno(String bno) {
 		this.bno = bno;
 	}
 	public int getMno() {

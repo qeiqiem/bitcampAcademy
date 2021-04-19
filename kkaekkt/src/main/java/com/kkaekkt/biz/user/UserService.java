@@ -31,9 +31,9 @@ public interface UserService {
 	public int countLikeBs(BusinessVO vo);	
 	public PersonVO getPerson(int mno);
 	public BusinessVO getBusiness(BusinessVO vo);
-	public List<LaundryVO> getLaundryList(int bno);
+	public List<LaundryVO> getLaundryList(String bno);
     public void updatePw(AccountVO vo);
-	public int bnoChk(int bno);
+	public int bnoChk(String bno);
 	public Map<String, Object> crtRoom(ChatVO vo);
 	public void sendChat(ChatVO vo);
 	public void readChat(ChatVO vo);

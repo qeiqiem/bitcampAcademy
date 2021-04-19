@@ -186,7 +186,7 @@ public class UserServiceImpl implements UserService {
 		return userDao.getBusiness(vo);
 	}
 	@Override
-	public List<LaundryVO> getLaundryList(int bno) {
+	public List<LaundryVO> getLaundryList(String bno) {
 		return userDao.getLaundry(bno);
 	}
 	@Override
@@ -194,7 +194,7 @@ public class UserServiceImpl implements UserService {
 		//
 	}
 	@Override
-	public int bnoChk(int bno) {
+	public int bnoChk(String bno) {
 		return userDao.bnoChk(bno);
 	}
 	@Override

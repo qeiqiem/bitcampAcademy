@@ -26,8 +26,8 @@ function initEvent() {
             chatObj.mno=alertObj.sender;
             chatObj.addressee=addressee;
             var guest=$('#rsvBox'+rsvNum+' .mno')[0].innerHTML;//해당 예약번호의 주문박스 안에 mno클래스로 접근해서 업체명을 추출
-            chatObj.bno=Number($('#rsvBox'+rsvNum+' .like').eq(0)//해당 예약번호의 주문박스 안에 like클래스로 접근
-                                                           .attr('value'));//value 속성으로 접근해서 업체번호 추출
+            chatObj.bno=$('#rsvBox'+rsvNum+' .like').eq(0)//해당 예약번호의 주문박스 안에 like클래스로 접근
+                                                           .attr('value');//value 속성으로 접근해서 업체번호 추출
             crtRoom(guest);
         }
     });
@@ -62,7 +62,7 @@ function initEvent() {
         }
     });
     $('.rsvList').on('click','i.fa-heart',function() {//좋아요버튼
-        likeObj.bno=Number($(this).attr('value'));
+        likeObj.bno=$(this).attr('value');
         if($(this).hasClass('unlike')) {
             $(this).removeClass('unlike');
             likeOn(likeObj);
