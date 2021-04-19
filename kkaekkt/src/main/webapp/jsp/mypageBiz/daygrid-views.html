@@ -117,6 +117,8 @@
             console.log(result);
             inputEvent(result.sales);
             let inputtotalPrice = totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            var date = calendar.getDate ();
+            document.getElementById("month_mng").innerText = date.getMonth();
             document.getElementById("inputTotal").innerText = inputtotalPrice +" 원";
             document.getElementById("inputTotalNum").innerText = result.count +" 건";
             console.log(eventval);
@@ -131,7 +133,7 @@
               let price = item.price;
               totalPrice = totalPrice+price;
               let inputprice = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-              if (price <= 100000){
+              if (price < 100000){
                 eventval.push({
                 title: inputprice + " 원",
                 start: item.rsvDate,
@@ -139,7 +141,7 @@
 
                 }); // push end
               }
-              else if(price > 100000 && price <= 200000 ){
+              else if(price >= 100000 && price <= 200000 ){
                 eventval.push({
                 title: inputprice + " 원",
                 start: item.rsvDate,
