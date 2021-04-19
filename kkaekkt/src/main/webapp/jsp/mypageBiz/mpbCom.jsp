@@ -11,6 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>매장관리</title>
 <link rel="stylesheet" href="/css/mypageBs_com.css">
+<link rel="stylesheet" href="/css/orderList.css">
 </head>
 
 <body>

@@ -37,7 +37,7 @@
 			<div class="head_right">
 				<ul>
 					<li>
-						<span>${sessionScope.user.name}</span>님
+						<span id="headName">${sessionScope.user.name}</span>님
 					</li>
 					<li>
 						<div id="bellBox">
@@ -56,7 +56,7 @@
 							<span class="chatDot chatDotPs"></span>
 							<div id="chatCont">
 								<div class="chatHeader">
-										<p>💬ㅤ채팅상담</p>
+									<p>💬ㅤ채팅상담</p>
 								</div>
 								<div class="chatfooter">
 								</div>

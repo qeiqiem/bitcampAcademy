@@ -65,7 +65,7 @@ function enter() {
     }
 }
 function initSide() {
-    $(".content").css("left", "22vw");
+    // $(".content").css("left", "22vw");
     $('.side button').eq(1).addClass("side_select");
 }
 function initPageBtn() {

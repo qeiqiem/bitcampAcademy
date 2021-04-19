@@ -59,7 +59,8 @@
 	cursor: pointer;
 }
 
-.head_right span {
+/* headName */
+#headName{	
 	font-size: larger;
 }
 
