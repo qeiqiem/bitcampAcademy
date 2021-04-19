@@ -104,7 +104,7 @@
                                    </div>
                            <div class="btnSet">
                               <button class="resbtn">예약하기</button>
-                              <button class="chat">상담하기</button>                             
+                              <button class="mapChat">상담하기</button>                             
                            </div>
                                </div>
 									<div>
@@ -249,6 +249,7 @@
            
            var itemel;
            var bno= "";    
+           var bizMno; 
            var dbData = [];
            
            // 회원번호
@@ -429,7 +430,8 @@
 					var contentNum = 0
 					var grade = 0
 					var bno = 0
-	        		wirteHtml(i,place[i],contentNum,grade, bno)  
+                    var bizMno=0
+	        		wirteHtml(i,place[i],contentNum,grade, bno,bizMno)  
 				}else if(place[i].place_name == dbData[i].bname){	
 
 						place[i].place_name = dbData[i].bname
@@ -438,18 +440,19 @@
 						var contentNum = dbData[i].content
 						var grade = dbData[i].grade
 						var bno = dbData[i].bno
-						wirteHtml(i,place[i],contentNum,grade, bno)  
+                        var bizMno = dbData[i].bizMno
+						wirteHtml(i,place[i],contentNum,grade, bno,bizMno)  
 	        	}
 				
 				
            }
         
-           function wirteHtml(i,place ,contentNum, grade, bno) { 
+           function wirteHtml(i,place ,contentNum, grade, bno,bizMno) { 
         	   
         	   var el = document.createElement('table'),               
 	               itemStr =  '<tbody class="place_body">'
 	                     +'<tr>'
-                              + '<td class="place_name" value='+bno+'>'+ (i+1)+'&nbsp;&nbsp;' + place.place_name + '</td>'
+                              + '<td class="place_name" id="bizMno'+bizMno+'" value='+bno+'>'+ (i+1)+'&nbsp;&nbsp;' + place.place_name + '</td>'
                          + '</tr>'
                             if(grade != 0){
                                   itemStr += '<tr><td>'+grade+'.0 &nbsp;'

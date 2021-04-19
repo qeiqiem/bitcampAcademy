@@ -16,7 +16,6 @@
         <!-- 헤더 -->
         <jsp:include page="/jsp/header.jsp"></jsp:include>
 
-
         <div class="body_container">
             <div class="wrapper_joinInfo">
                 <!-- <h2>회원가입</h2> -->

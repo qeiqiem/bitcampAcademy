@@ -98,9 +98,10 @@ $(document).ready(function() {
    $('.list').on("click", ".gradescore", function() { alert("준비중입니다.")})
    
    // 2. 단일업체 페이지 전환
-   $('table').on("click", ".place_body", function() { 	 
-		   var s_title = $(this).find('td'); 
-		   findSingle(s_title); 
+   $('table').on("click", ".place_body", function() {
+		   var s_title = $(this).find('td');
+         bizMno=Number(s_title.attr('id').substr(6));
+		   findSingle(s_title);
 		   findReview(bno)  
 	   })   
 	   
@@ -224,13 +225,22 @@ $(document).ready(function() {
    
    
    /*insertResList() */
-   $('#chat').click(function() {
+   $('.mapChat').click(function() {
 	   if(mno == 0){
 		   alert("로그인후 이용해주세요")
 	   }else{
-		   alert("준비중입니다.")
-	   } 
-   })
+         var addressee=bizMno;
+         if($('.chatBox[id^='+addressee+'room]')[0]!=undefined){
+             $('.chatBox[id^='+addressee+'room]').remove();
+         }else{
+             chatObj.mno=alertObj.sender;
+             chatObj.addressee=addressee;
+             var guest=$('#s_title').text();
+             chatObj.bno=bno;
+             crtRoom(guest);
+	      } 
+      }
+   });
    
    $('.res_loading button').click(function() { $(".res_loading").hide(); $("#mask").hide(); })   
    $("#mask").on("click", function() {  $(".res_loading").hide(); $("#mask").hide();});
@@ -257,6 +267,8 @@ $(document).ready(function() {
       bnoArray = bnoArray[1].split('"')
       bno = bnoArray[0]
       
+      
+
       //화면정보 출력
       name = s_title[0].innerText.substr(3)
       var star = s_title[1].innerHTML
@@ -572,8 +584,8 @@ $(document).ready(function() {
            , method : 'POST'
            , data: rsvObj
            , success:function(result){
-           /* msgSet(result);
-            sendAlarm();*/
+         //   msgSet(result);
+         //   sendAlarm();
            }
 	   })
    }
@@ -590,32 +602,6 @@ $(document).ready(function() {
           alertObj.msg='새로운 주문(번호:'+rsvNum+')이 등록되었습니다.';
           alertObj.typenum=1;
   }
-  function sendAlarm() {
-     var msgType=0;//메시지 타입은 알람
-      $.post({
-          url:'/regitAlert.do',
-          data:alertObj,
-          success:function(ano) {
-              if(socket){
-                  var receiver=alertObj.addressee;
-                  var msg='<li>'+
-                              '<div class="msgTop">'+
-                                 '<span>[결제]</span> <span id="msg'+ano+'" class="msgBody">'+alertObj.msg+'</span>'+
-                              '</div>'+
-                              '<div class="msgBottom">'+
-                                  '<span class="date">'+today()+'</span>'+
-                                  '<span class="byBs">by '+alertObj.senderName+'</span>'+
-                              '</div>'+
-                              '<i id="'+ano+'" class="fas fa-times"></i>'+
-                          '</li>'
-                  socket.send(receiver+','+msgType+','+msg);//메시지 보냄
-              }
-          }
-      });
-  }
-
-
-
 	//날씨 js
 	function weather(lat,lon) {    
 	    var apiURI = "https://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&appid=" + "5da980755c49bb363969b9ad694421ac"; // 우편번호가 안되서 일단 도시명으로..

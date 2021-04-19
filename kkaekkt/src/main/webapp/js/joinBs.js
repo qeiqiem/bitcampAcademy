@@ -545,10 +545,12 @@ function nullchk() {
 function clicked() {
   if (nullchk()) {
     //유효성 검사를 통과했다면
-    //주소 데이터 처리
+    //주소 데이터 처리 - 우편번호, 도로명주소, 상세주소, 부가주소
+    var postcode = $('#postcode').val();
     var roadAddress = $("#roadAddress").val();
     var detailAddress = $("#detailAddress").val();
-    $("#address")[0].value = roadAddress + " " + detailAddress;
+    var extraAddress = $('#extraAddress').val();
+    $("#address")[0].value = postcode+", "+roadAddress + ", " + detailAddress+", "+extraAddress;
     // 운영시간 데이터 처리
     var weekLi = $(".weekBox ul li");
     var time = $(".weekBox select");

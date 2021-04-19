@@ -131,7 +131,7 @@
 								<input id="deleteid" name="id" value="${sessionScope.user.id}"
 									readonly />
 							</p>
-							<input type="password" name="password" id="deletepwd" placeholder="비밀번호">
+							<input type="password" name="password" id="deletepwd" onkeyup="enterkey();" placeholder="비밀번호">
 						</div>
 						<br>
 						<div id="modal_foot">
