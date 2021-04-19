@@ -1,15 +1,18 @@
 button{
     cursor: pointer;
 }
-.content{
+/* .content{
     width: 60vw;
     margin: 10px auto;
     font-size: 16px;
     color: var(--text-gray);
-}
+} */
 #alertHeader{
     display: flex;
     justify-content: space-between;
+}
+#headerLeft{
+   margin-bottom: 9px;
 }
 #headerRight button{
     margin: 0 5px;
@@ -17,8 +20,13 @@ button{
     padding: 10px 15px;
     border-radius: 20px;
 }
-#headerLeft{
-    padding-top: 23px;
+#headerRight{
+    position: absolute;
+    text-align: right;
+    width: 100%;
+    /* padding-right: 200px; */
+    right: 10px;
+    top: 23px;
 }
 #headerLeft button{
     background: none;
