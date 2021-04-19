@@ -34,27 +34,28 @@ function connectWs() {
         
         var guestRoomLi=$('#'+sendermno+'roomLi'+roomnum);//헤더의 채팅방 리스트에 상대방과의 채팅방 추출
         var guestRoom=$('#'+sendermno+'room'+roomnum);
-        var chat={//채팅로그를 더하기 위한 객체
-          roomnum:roomnum,
-          sender:sendermno,
-          content:content,
-          stime:dateTime(),
-          state:1
-        }
-        var room={//헤드의 채팅방을 만들기 위한 객체
-          addressee:sendermno,
-          roomnum:roomnum,
-          guest:senderName,
-          content:content,
-          counts:1
-        };
         if(guestRoom[0]!=undefined){//상대방과 열려있는 채팅방이 있다면
+          var chat={//채팅로그를 더하기 위한 객체
+            roomnum:roomnum,
+            sender:sendermno,
+            content:content,
+            stime:dateTime(),
+            state:1
+          }
           readChat({roomnum:roomnum,sender:chatObj.sender});
           appendChat(chat);//채팅로그를 추가한다.
         }else{//열려있는 채팅방이 없다면
           if(guestRoomLi[0]!=undefined){//헤드 채팅방 리스트에 해당 채팅방이 있다면
+            initLastChat(roomnum,content);
             rlDotCountUp(roomnum);
           }else{//헤드 채팅방 리스트에 해당 채팅방이 없다면
+            var room={//헤드의 채팅방을 만들기 위한 객체
+              addressee:sendermno,
+              roomnum:roomnum,
+              guest:senderName,
+              content:content,
+              counts:1
+            };
             printRoomLi(room);//헤더에 상대방과의 채팅방을 생성한다.
           }
         }

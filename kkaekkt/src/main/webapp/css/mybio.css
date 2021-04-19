@@ -8,6 +8,9 @@ hr {
     /* border: solid 0.5px var(—gray-color); */
     /* width: 95%; */
   }
+.wrap_info{
+    display: flex;
+}
 
 .content input {
     box-sizing: border-box;
@@ -18,16 +21,13 @@ hr {
     border: 1px solid var(--gray-color);
     border-radius: 10px;
 }
-.content {
+/* .content {
 float:left;
 width: 65vw;
 height: 100vh;
 padding: 0px 0px 30px 250px;
 font-size: 16px;
-}
-.content div {
-    padding-top: 20px;
-}
+} */
 
 .content #mybio_info {
     color: var(--text-gray);
@@ -63,12 +63,12 @@ font-size: 16px;
     border-radius: 10px;
 }
 
-#mybio_title {
+/* #mybio_title {
     display: inline-block;
     color: var(--text-gray)
-}
+} */
 
-#btn_mybio {
+/* #btn_mybio {
     background: var(--key-color);
     border-radius: 30px;
     border: none;
@@ -78,7 +78,6 @@ font-size: 16px;
     width: 100px;
     height: 45px;
     display: block;
-    /* 수정하기 버튼 클릭시 none으로*/
 
 }
 
@@ -86,7 +85,6 @@ font-size: 16px;
     float: right;
     margin-right: 10vw;
     display: none;
-    /* 수정하기 버튼 클릭시 inline-block으로*/
     
 }
 
@@ -98,7 +96,50 @@ font-size: 16px;
     height: 45px;
     color: var(--black-color);
 
+} */
+
+/* 보튼 */
+#btn_update {
+    position: absolute;
+    width: 100%;
+    /* width: 158px; */
+    height: 100px;
+    /* top: 88vh; */
+    top: 19px;
+    right: -92px;
+    display: block;
 }
+
+#btn_update button {
+    background: var(--key-color);
+    border-radius: 30px;
+    border: none;
+    width: 88px;
+    height: 40px;
+    color: var(--black-color);
+}
+#btn_mybioClick {
+    text-align: right;
+    margin-right: 100px;
+    display: none;
+}
+
+#btn_mybiofin {
+    /* width: 100px;
+    height: 30px;
+    margin: 10px; */
+    margin-left: 20px;
+}
+
+#btn_mybio {
+    /* margin-left: 500px; */
+    float: right;
+    margin-right: 100px;
+}
+/*  */
+
+
+
 #btn_mybiopwd{
     padding: 0;
 }
@@ -126,10 +167,10 @@ font-size: 16px;
     background-color:white;
 }
 .correct{
-    color : var(--key-color);
+    color : var(--key-text);
 }
 .incorrect{
-    color : red;
+    color :var(--text-red);
 }
 #mailChkDiv {
     position: relative;
@@ -140,7 +181,7 @@ font-size: 16px;
     left: 170px;
     top: 36px;
     font-size: 12px;
-    color: red;
+    ccolor :var(--text-red);
 }
 .mail_check_input{
     width: 200px;
@@ -148,7 +189,7 @@ font-size: 16px;
 #clickmask {
     width: 30vw;
     height: 82vh;
-    display: block;
+    display: none;
     background: black;
     opacity: 57%;
     z-index: 30;

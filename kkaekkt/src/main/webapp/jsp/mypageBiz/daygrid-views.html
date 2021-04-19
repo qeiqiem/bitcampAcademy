@@ -47,6 +47,8 @@
               calendar.next();
               console.log("다음달 클릭");
               var date = calendar.getDate();
+              month_mng = date.getMonth();
+              document.getElementById("month_mng").innerText = month_mng+1;
               var startDt = new Date(date.getFullYear(), date.getMonth(), 1);
               var endDt = new Date(date.getFullYear(), date.getMonth(), date.getDate());
               console.log(startDt);

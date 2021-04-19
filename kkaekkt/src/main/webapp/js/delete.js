@@ -32,11 +32,11 @@ function deleteUser() {
       success: function(count){
       	let deluser = JSON.parse(count);
             if(deluser == "success"){
-            console.log(deluser);
+            //console.log(deluser);
                 alert("회원탈퇴 되었습니다. 메인페이지로 돌아갑니다.");
                 location.href="/logout.do";
             }else if(deluser == "fail"){
-            console.log(deluser);
+            //console.log(deluser);
                 alert("예약이 있습니다. 다시 한 번 확인해주세요!");
                 location.href="/myBio.do";  
             } else {
