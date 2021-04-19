@@ -45,10 +45,10 @@
 					<a href="http://developers.kakao.com/logout"><h2 class="loginTitle">로그인</h2></a>
 					<hr>
 					<div>
-						<input type="text" name="id" id="id" placeholder="아이디" />
+						<input type="text" name="id" id="login_id" placeholder="아이디" />
 					</div>
 					<div>
-						<input type="password" name="password" id="password"
+						<input type="password" name="password" id="login_password"
 							placeholder="비밀번호" />
 					</div>
 					<input type="button" id="login" value="로그인" />

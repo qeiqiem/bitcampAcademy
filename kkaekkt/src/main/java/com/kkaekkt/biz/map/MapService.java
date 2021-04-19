@@ -13,5 +13,4 @@ public interface MapService {
 	public List<SingleListVO> reviewList(String bno);
 	public int respay(MapListVO mapvo);
 	public int likeYn(SingleListVO vo);
-
 }
