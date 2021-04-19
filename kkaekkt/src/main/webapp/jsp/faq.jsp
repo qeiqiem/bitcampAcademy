@@ -29,6 +29,9 @@
 
 </script>
 <style>
+.contend h2 {
+  color: black;
+}
 
 .Faqcontainer {
   margin: 0 auto;
@@ -140,10 +143,10 @@
     </c:choose>
 
 <div class="body_container">
-    <jsp:include page="mypageUser/sidebar_ps.jsp"></jsp:include>
 <div class="contend">
     <div class="Faqcontainer">
         <h2>자주 묻는 질문</h2>
+        <hr>
         <div class="accordion">
           <div class="accordion-item">
             <button id="accordion-button-1" aria-expanded="false"><span class="accordion-title">[이용방법]</span><span class="icon" aria-hidden="true"></span></button>

@@ -57,8 +57,10 @@ video {
   margin-left: 36px;
 } */
 /* 로그인 아이디/비번찾기 */
-.finds a{
-  color: var(--black-color);
+.finds a {
+	margin: 30px;
+	color: var(--text-gray);
+	text-decoration: none;
 }
 /* .head {
   padding: 15px 50px;
