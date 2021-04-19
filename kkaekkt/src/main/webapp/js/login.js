@@ -1,19 +1,22 @@
-$(document).ready(function() {
-		
-		$("#modal_show").click(function() {
-			$("#modal_container").show()
-			$("#mask").show()
-		})
-		$("#modal_close").click(function() {
-			$("#modal_container").hide()
-			$("#mask").hide()
-		})
-    $("#mask").click(function() {
-			$("#modal_container").hide()
-			$("#mask").hide()
-		})
-	})
+$(document).ready(function () {
+  $("#modal_close").click(function() {
+    $("#modal_container").hide()
+    $("#mask").hide()
+  })
+  $("#mask").click(function() {
+    $("#modal_container").hide()
+    $("#mask").hide()
+  })
+})
 
+
+function login_show(){
+  // $("#modal_show").click(function() {
+    $("#modal_container").show()
+    $("#mask").show()
+  // })
+  
+}
 function login() {
   var userData={
     id:$('#login_id').val(),

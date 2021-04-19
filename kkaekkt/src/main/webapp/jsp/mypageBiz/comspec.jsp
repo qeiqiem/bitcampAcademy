@@ -19,6 +19,7 @@
 				</div>
 				<hr>
 				<div class="comLaundry ">
+					<div id="clickmask"></div>
 					<form action="/updateSpec.do" method="POST">
 						<!-- float left -->
 						<div class="laundry" id="comspec_left">

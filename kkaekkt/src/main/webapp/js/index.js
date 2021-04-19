@@ -6,8 +6,8 @@ $(document).ready(function () {
   fadeIn();
 });
 function connectWs() {
-  socket = new WebSocket("ws://localhost:8080/echo.do");
-  // socket = new WebSocket("ws://54.180.33.3:8080/echo.do");
+  // socket = new WebSocket("ws://localhost:8080/echo.do");
+  socket = new WebSocket("ws://54.180.33.3:8080/echo.do");
   socket.onopen = function () {
     console.log("info: connection opened.");
   };

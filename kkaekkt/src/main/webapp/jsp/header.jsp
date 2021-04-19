@@ -31,7 +31,7 @@
 			<div class="head_right">
 				<ul>
 					<li><a href="/jsp/join/joinTerms.jsp">회원가입</a></li>
-					<li><a id="modal_show" style="cursor: pointer;">로그인</a></li>
+					<li><a href="#" onclick="login_show();" id="modal_show" style="cursor: pointer;">로그인</a></li>
 					<li><a href="/jsp/faq.jsp">FAQ</a></li>
 				</ul>
 			</div>
@@ -60,13 +60,12 @@
 						<p>다른 계정으로 로그인</p>
 						<form id="snsForm" action="/loginSNS.do" method="POST">
 							<input type="hidden" id="snsMail" name="email">
-
+		
 							<div class="login_API">
 								<a onclick="kakaoLogin()"><img id="kakao" src="/img/kakao.png"></a>
 								<div id="naver_id_login" style="display: none;"></div>
-								<a class="img_naver"
-									onclick="document.getElementById('naver_id_login_anchor').click();"><img id="naver"
-										src="/img/naver.png"></a>
+								<a class="img_naver" onclick="document.getElementById('naver_id_login_anchor').click();">
+								<img id="naver" src="/img/naver.png"></a>
 							</div>
 						</form>
 					</div>
