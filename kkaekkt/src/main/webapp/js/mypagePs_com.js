@@ -20,6 +20,23 @@ function initEvent() {
         commObj.bno=Number($('#rsvBox'+rsvNum+' .like').attr('value'));
         $("#modal_container").show();
     });
+    $('.rsvList').on("click",".chatBtn",function() {
+        //채팅방 만들기 코드
+        var rsvNum=Number($(this).attr('id').substr(7));//chatBtn+주문번호 형식의 id에서 주문번호 추출
+        var addressee=Number($('#rsvBox'+rsvNum+' .mno').eq(0) //해당 예약번호의 주문박스 안에 mno클래스로 접근
+                                                        .attr('id') //id 요소에 접근
+                                                        .substr(3)); //mno+업체회원번호 형식의 id에서 업체회원번호 추출
+        if($('.chatBox[id^='+addressee+'room]')[0]!=undefined){
+            $('.chatBox[id^='+addressee+'room]').remove();
+        }else{
+            chatObj.mno=alertObj.sender;
+            chatObj.addressee=addressee;
+            var guest=$('#rsvBox'+rsvNum+' .mno')[0].innerHTML;//해당 예약번호의 주문박스 안에 mno클래스로 접근해서 업체명을 추출
+            chatObj.bno=Number($('#rsvBox'+rsvNum+' .like').eq(0)//해당 예약번호의 주문박스 안에 like클래스로 접근
+                                                           .attr('value'));//value 속성으로 접근해서 업체번호 추출
+            crtRoom(guest);
+        }
+    });
     $('.rsvList').on("keyup",".commentBox",function() {//리뷰 텍스트 입력 시 글자 길이 반영
         if($(this).val().length>=300) {
             alert("300자 까지 입력할 수 있습니다.");
@@ -193,7 +210,7 @@ function initModal() {
     $('#review_text').keyup(function() {
         $('#review_texter').html($(this).val().length)
     });
-    $(".fa-times").click(function(){
+    $("#modalClose").click(function(){
         closeModal();
     });
     $("#closeBtn").click(function(event){ //모달 닫기
@@ -367,7 +384,7 @@ function printlist(list) {
                     '</tr>'+
                 '</table>'+
                 '<div id="btnDiv'+value.rsvNum+'" class="btnDiv">'+
-                    '<button>채팅상담</button>'+
+                    '<button class="chatBtn" id="chatBtn'+value.rsvNum+'">채팅상담</button>'+
                     '<button id="detailBtn'+value.rsvNum+'"class="detailBtn">상세보기</button>'+
                     (btnText!='리뷰보기'?(value.timeOut==0?'<button disabled>':'<button id="'+btnClass+value.rsvNum+'" class="'+btnClass+'">')// if 리뷰가 없으면 -> 7일이 지났으면 비활성화 아니면 활성화
                     :(comm[0].content=='삭제된 리뷰입니다.'?'<button disabled>':'<button id="'+btnClass+value.rsvNum+'" class="'+btnClass+'">')// else 삭제된 ~ 이면 비활성화 아니면 활성화

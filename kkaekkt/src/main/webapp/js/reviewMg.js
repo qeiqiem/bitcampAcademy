@@ -28,9 +28,13 @@ function initList() {
   $(".replyList").remove();
 }
 function printList(list) {
+  var date;
+  var time;
   //리뷰 리스트 출력
   initList();
   $.each(list, function (key, value) {
+    date=value.rdate.slice(0,10);
+    time=value.rdate.substr(11);
     if (value.depth == 0) {
       //리뷰일 때
       $(".process").append(
@@ -48,7 +52,7 @@ function printList(list) {
           value.eval +
           "/5</td>" +
           // '<td class="cell4" id="customer'+key+'">'+value.mname+'</td>'+
-          '<td class="cell4" id="' +
+          '<td class="cell4 reviewer" id="reviewer' +
           value.mno +
           '">' +
           value.mname +
@@ -57,11 +61,11 @@ function printList(list) {
           value.rsvNum +
           "</td>" +
           '<td class="cell6">' +
-          value.rdate +
+          date+'<br>'+time+
           "</td>" +
           '<td class="cell7"><button class="replyBtn" value=' +
           key +
-          (value.replytf == 1 ? " disabled>답글완료" : ">답글") +
+          (value.replytf == 1 ? " disabled>답글완료" : ">답글 남기기") +
           "</button></td>" +
           "</tr>" +
           "</table>"
@@ -81,7 +85,7 @@ function printList(list) {
           value.rsvNum +
           "</td>" +
           '<td class="cell6">' +
-          value.rdate +
+          date+'<br>'+time+
           "</td>" +
           '<td class="cell7"><button class="editBtn" value=' +
           key +
@@ -177,6 +181,10 @@ function initEvent() {
     $(this).toggleClass("open");
     $(this).toggleClass("close");
   });
+  $('.process').on("click",".reviewer",function(){//고객의 이름을 클릭했을 경우
+    var mno=Number($(this).attr('id').substr(8));
+    modal_userInfo(mno);
+  });
   $(".process").on("click", "td.replyCell", function () {
     //답글내용 누를경우 전체내용 출력
     $(this).toggleClass("open");
@@ -216,12 +224,16 @@ function initEvent() {
     delReply(idx);
   });
   $("#mask").on("click", function () {
-    $("#modal_container").hide();
-    $("#mask").hide();
+    modalClose();
+    userModalClose();
   });
 }
 function modalClose() {
   $("#modal_container").hide();
+  $("#mask").hide();
+}
+function userModalClose(){
+  $("#modal_userInfo").hide();
   $("#mask").hide();
 }
 function initModal() {
@@ -237,6 +249,14 @@ function initModal() {
   });
   $("#ok").click(function () {
     operate();
+  });
+  $('#openChatBtn').click(function(){//채팅 버튼 클릭 시
+    chatObj.mno=Number($('#modalmno').text());
+    chatObj.bno=pageObj.bno;
+    chatObj.addressee=Number(chatObj.mno);
+    var guest=$('#modalName').text();
+    crtRoom(guest);
+    userModalClose();
   });
 }
 function openModal(button) {
@@ -397,7 +417,7 @@ function cancelReply() {
   var idx = JSON.parse($("#comments button")[1].value); //폼의 인덱스를 추출한다.
   if (type == "submit") {
     //등록 폼의 경우
-    btnChange(idx, "답글", false); //리뷰의 버튼을 답글버튼으로 전환한다.
+    btnChange(idx, "답글 남기기", false); //리뷰의 버튼을 답글버튼으로 전환한다.
   } else {
     //수정 폼의 경우
     btnChange(idx - 1, "답글완료", true); //리뷰의 버튼을 답글완료로 전환한다.
@@ -498,4 +518,39 @@ function resetSearch() {
   pageObj.searchOption = 0;
   $(".search")[0].value = "";
   $(".searchBox select").eq(0).prop("selected", true);
+}
+function modal_userInfo(mno){
+  $("#mask").show();
+  $("#modal_userInfo").show();
+  $("#userInfo_bodycont *").remove();
+  $.ajax({
+      url: '/getuserInfo.do',
+      type: 'post',
+      data: {
+          mno: mno,   
+      }, success: function(data){
+          let info = JSON.parse(data);
+          let address = (info.address).replaceAll(",", " ");
+        $("#userInfo_bodycont").append(
+            '<table class="userInfo">' +
+            '<tr>'+
+                  '<th>회원번호</th>' +
+                  '<td id="modalmno">'+ info.mno + '</td>' +
+              '</tr>' +
+              '<tr>'+
+                  '<th>이&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;름</th>' +
+                  '<td id="modalName">'+ info.name + '</td>' +
+              '</tr>' +
+              '<tr>'+
+                  '<th>연&nbsp;&nbsp;락&nbsp;&nbsp;처</th>' +
+                  '<td>'+ info.phone + '</td>' +
+              '</tr>' +
+              '<tr>'+
+                  '<th>주&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;소</th>' +
+                  '<td>'+ address + '</td>' +
+              '</tr>' +
+            '</table>'
+        );
+      }   
+  });
 }
