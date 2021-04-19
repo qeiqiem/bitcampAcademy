@@ -281,9 +281,9 @@ input{
     width: 59vw;
     height: 64vh;
     display: block;
-    background: black;
+    /* background: black; */
     opacity: 57%;
-    z-index: 30;
+    z-index: 29;
     position: absolute;
 
   }

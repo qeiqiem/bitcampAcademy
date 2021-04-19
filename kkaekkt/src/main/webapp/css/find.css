@@ -70,6 +70,7 @@ i {
   font-size: smaller;
 }
 .mail a {
+  color: var(--text-gray);
   margin-left: 10px;
   text-decoration: underline;
   text-underline-position: under;

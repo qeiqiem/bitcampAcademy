@@ -56,7 +56,7 @@ window.onload = function () {
     "*".repeat(domainR[0].length - 2) +
     "." +
     "*".repeat(domainR[1].length);
-  //console.log(emailVal);
+  // console.log(emailVal);
   document.getElementById("emailValue").innerText = emailVal;
 };
 //타이머 전역변수 지정
@@ -103,7 +103,7 @@ function emailApi() {
     type: "GET",
     url: "/mailCheck.do?email=" + email,
     success: function (data) {
-      ////console.log("data : " + data);
+      //console.log("data : " + data);
       $(".mail_check_input").attr("disabled", false);
       document.getElementById("mail_check").disabled = false;
       $(".mail_check_input").attr("id", "mail_check_input_box_true");
@@ -185,18 +185,18 @@ function pwSubmit() {
         }
       },
 
-      error: function (request, status, error) {
-        //console.log(
-          "code:" +
-            request.status +
-            "\n" +
-            "message:" +
-            request.responseText +
-            "\n" +
-            "error:" +
-            error
-        );
-      },
+      // error: function (request, status, error) {
+      //   console.log(
+      //     "code:" +
+      //       request.status +
+      //       "\n" +
+      //       "message:" +
+      //       request.responseText +
+      //       "\n" +
+      //       "error:" +
+      //       error
+      //   );
+      // },
     });
   }
 }
