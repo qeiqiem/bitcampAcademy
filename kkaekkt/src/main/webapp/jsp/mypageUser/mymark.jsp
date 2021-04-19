@@ -9,6 +9,13 @@
 </head>
 <body>
     <div id="mask"></div>
+    <div class="choicePay">        
+        <p>결제수단 선택</p>
+         <button id="kakaoPay"  style="background-color: #ffe607;">카카오페이</button>
+         <button id="toss" value="2"  style="background-color: #3182f6;">toss</button>
+         <button id="ectPay" value="3"  style="background-color: #d50101;">일반결제</button>
+         <button class="outPaybtn">나가기</button>
+     </div>
 	<jsp:include page="/jsp/headerPs.jsp"></jsp:include>
 	  <div class="body_container">
         <jsp:include page="sidebar_ps.jsp"></jsp:include>

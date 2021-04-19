@@ -441,8 +441,6 @@ $(document).ready(function() {
    
    // selectbox 옵션
    function selectNum() {
-      $(".resOpc").append(
-            '<option value="" selected disabled hidden selected>1</option>')
       for (var i = 1; i < 11; i++) {
          $(".resOpc").append(
                '<option value="' + i + '">' + i + '</option')
@@ -552,7 +550,7 @@ $(document).ready(function() {
    //화면단에있는 목록 가져오기
    function insertResList() {
 		 //뿌려져있는 row 체크
-		  var cntChk = $('.chked')
+		   var cntChk = $('.chked')
 		   var arrayRes = new Array();
          var idx;
          var selc;
@@ -587,7 +585,7 @@ $(document).ready(function() {
            msgSet(result);
            sendAlarm();
            }
-	   })
+	   });
    }
    function today() {
       var date=new Date();

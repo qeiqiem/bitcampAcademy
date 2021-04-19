@@ -116,18 +116,11 @@ public class MapListVO {
 	public void setGrade(int grade) {
 		this.grade = grade;
 	}
-	
 	@Override
 	public String toString() {
-		return "MapListVO [bno=" + bno + ", bname=" + bname + ", phone=" + phone + ", address=" + address + ", content="
-				+ content + ", rdate=" + rdate + ", grade=" + grade + ", mno=" + mno + ", totalPrice=" + totalPrice
-				+ ", rbno=" + rbno + ", resList=" + resList + "]";
+		return "MapListVO [bno=" + bno + ", bizMno=" + bizMno + ", bname=" + bname + ", phone=" + phone + ", address="
+				+ address + ", content=" + content + ", rdate=" + rdate + ", grade=" + grade + ", mno=" + mno
+				+ ", totalPrice=" + totalPrice + ", rbno=" + rbno + ", ddate=" + ddate + ", resList=" + resList
+				+ ", resListData=" + resListData + "]";
 	}
-	
-	
-	
-		
-	
-	
-	
 }
