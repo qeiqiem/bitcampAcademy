@@ -73,7 +73,7 @@ function emailApi() {
     type: "GET",
     url: "/mailCheck.do?email=" + email,
     success: function (data) {
-      ////console.log("data : " + data);
+      console.log("data : " + data);
       $(".mail_check_input").attr("disabled", false);
       document.getElementById("mail_check").disabled = false;
       $(".mail_check_input").attr("id", "mail_check_input_box_true");
@@ -343,6 +343,7 @@ $("#id").focusout(function () {
       var key = JSON.parse(data);
       if (key != 0) {
         idLbl.innerText = "중복된 아이디가 있습니다.";
+        $("#id").focus();
         // alert("중복된 아이디가 있습니다.");
       } else if (key == 0) {
         formatidchk = 1;

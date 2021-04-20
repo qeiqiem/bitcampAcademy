@@ -29,35 +29,6 @@ hr {
   /* width: 95%; */
 }
 
-footer {
-  width: 100%;
-  background-color: var(--footer);
-  bottom: 0;
-  position: absolute;
-  padding: 1% 7%;
-  color: rgba(255, 255, 255, 0.6);
-}
-footer div {
-  font-size: 14px;
-  float: left;
-  margin-right: 180px;
-}
-footer p {
-  /* font-weight: bold; */
-  font-size: larger;
-}
-footer ul li {
-  margin: 10px;
-  /* color: white; */
-  font-weight: bolder;
-  /* font-size: larger; */
-  text-align: right;
-}
-
-footer a {
-  color: white;
-}
-
 button {
   outline: 0;
 }

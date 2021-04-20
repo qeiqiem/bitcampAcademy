@@ -9,7 +9,6 @@
         <title>Document</title>
         <link rel="stylesheet" href="/css/find.css">
         <link rel="stylesheet" href="/css/findId.css">
-        <script src="https://kit.fontawesome.com/2fc57dd2db.js" crossorigin="anonymous"></script>
     </head>
 
     <body>

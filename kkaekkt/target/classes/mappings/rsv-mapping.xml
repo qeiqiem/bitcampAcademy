@@ -262,10 +262,10 @@
 			<if test="listType!=2"> <!-- 일반 조회일 때 -->
 				AND r.mno=m.mno
 			</if>
-			<if test='bno==0'> <!-- 일반회원의 주문조회 -->
+			<if test='bno==null'> <!-- 일반회원의 주문조회 -->
 				AND r.mno=#{mno}
 			</if>
-			<if test='bno!=0'> <!-- 업체회원의 주문조회 -->
+			<if test='bno!=null'> <!-- 업체회원의 주문조회 -->
 				AND bno=#{bno}
 			</if>
 			<if test="searchOption==1"> <!-- 이름검색 -->

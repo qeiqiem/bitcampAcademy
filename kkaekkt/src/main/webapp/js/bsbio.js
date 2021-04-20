@@ -137,7 +137,7 @@ window.onload = function () {
                 document.getElementById("checkval").innerText = "";
             } else {
                 document.getElementById("checkval").innerHTML
-                = " 비밀번호 양식과 맞지 않습니다. <br>(특수문자,문자,숫자 포함 8~15자리이내)";
+                = " 비밀번호 양식과 맞지 않습니다. <br>(특수문자, 문자, 숫자 포함 8~15자리 이내)";
             }
             formatnewpw = 0;
         } else {

@@ -92,7 +92,7 @@
                             일상을 바꾸다.
                         </h1>
                     </div>
-                    <footer>
+                    <!-- <footer>
                         <div>
                             <p>고객센터</p>
                             전화 : 02-1234-5678 (평일 10:00 ~ 18:30 토·일요일, 공휴일 휴무) <br>
@@ -110,10 +110,18 @@
                                 <li><a href="#">이용약관</a></li>
                                 <li><a href="/jsp/faq.jsp">자주묻는 질문</a></li>
                                 <li><a href="mailto:kkaekkt@naver.com">제휴문의</a></li>
-                                <li><a href="#">About kkaekkt</a></li>
+                                <li><a href="/jsp/aboutUs.jsp">About kkaekkt</a></li>
                             </ul>
                         </div>
-                    </footer>
+                    </footer> -->
+                    <style>
+                        footer {
+                            height: auto;
+                            bottom: 0;
+                            position: absolute;
+                        }
+                    </style>
+                    <jsp:include page="/jsp/footer.jsp"></jsp:include>
                 </div>
                 <!-- <div class="section index6">
             <h1>kkaekkt과 함께 <br> 일상을 바꾸다.</h1>
