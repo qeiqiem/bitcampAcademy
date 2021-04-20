@@ -137,6 +137,12 @@
 				<a href="#" onclick="delete_show();" id="modal_show" style="cursor: pointer;">회원탈퇴</a>
 				<input type="hidden" class="DUorderChk" value="${reservation.count}" />
 			</p>
+			<style>
+                #mask{
+                    top: 0;
+                    left: 0;
+                }
+            </style>
 			<div class="word">
 				<div id="modal_container">
 					<button id="modal_close">
