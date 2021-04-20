@@ -204,14 +204,14 @@ window.onload = function () {
         if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
             var inputVal = $(this).val();
             $(this).val(inputVal.replace(/[^0-9]/gi, ""));
-        }else{
+        }
 
             if (!regPhone.test(inputphone.value)) {
                 formatphone1 = 0;
             } else {
                 formatphone1 = 1;
             }
-        }
+        
         
     })
     $("#phone2").keyup(function (event) {
@@ -220,14 +220,13 @@ window.onload = function () {
         if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
             var inputVal = $(this).val();
             $(this).val(inputVal.replace(/[^0-9]/gi, ""));
-        } else{
-
+        }
             if (!regPhone.test(inputphone.value)) {
                 formatphone2 = 0;
             } else {
                 formatphone2 = 1;
             }
-        }
+        
     })
     $("#phone3").keyup(function (event) {
         formatphone3 = 0;
@@ -235,12 +234,12 @@ window.onload = function () {
         if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
             var inputVal = $(this).val();
             $(this).val(inputVal.replace(/[^0-9]/gi, ""));
-        } else{
+        } 
         if (!regPhone.test(inputphone.value)) {
            formatphone3 = 0;
         } else {
             formatphone3 = 1;
-        }
+        
     }
     })
 
@@ -249,10 +248,10 @@ window.onload = function () {
         //20210101
         const regex = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
         let inputBirth = document.getElementsByName("birth")[0];
-        // if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
-        //     var inputVal = $(this).val();
-        //     $(this).val(inputVal.replace(/[^0-9]/gi, ""));
-        // } else {
+        if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
+            var inputVal = $(this).val();
+            $(this).val(inputVal.replace(/[^0-9]/gi, ""));
+        } 
             if (!regBth.test(inputBirth.value)) {
                 if (inputBirth.value.length == 0) {
                     document.getElementById("checkbirth").innerText = "";
@@ -265,7 +264,6 @@ window.onload = function () {
             document.getElementById("checkbirth").innerText = "";
 
             }
-        // }
     })
 
     // 이메일 입력형식 확인
