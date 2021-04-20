@@ -103,6 +103,7 @@ function emailDuplChk() {
         emailApi();
       }
     },
+    // 에러메세지
     // error: function (request, status, error) {
     //   console.log(
     //     "code:" +
@@ -115,6 +116,7 @@ function emailDuplChk() {
     //       error
     //   );
     // },
+    
   });
 }
 

@@ -295,7 +295,8 @@ function initEvent() {
       $(this).val(inputVal.replace(/[^a-z0-9]/gi, ""));
     }
   });
-  // 이름 영어+한글만 입력
+  
+  // 이름 영어+한글만 입력 -> 업체는 이름이 바뀔 수 있으니까 비활성화함
   // $("input[name=bname]").keyup(function (event) {
   //   if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
   //     var inputVal = $(this).val();
