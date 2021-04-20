@@ -201,7 +201,7 @@ public class UserController {
 				return "fail";
 			} else {
 				session.setAttribute("user", result);
-				return result.getMtype()+"";					
+				return result.getMtype()+"";				
 			}
 	}
 

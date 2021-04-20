@@ -31,6 +31,7 @@
                     </ul>
                 </div>
                 <hr>
+                <div class="bio_wrap">
                 <form action="/updateBs.do" method="POST">
                     <div id="clickmask"></div>
                     <div id="bizform">
@@ -161,6 +162,7 @@
                             <input type="hidden" name="mno" value="" id="mno">
                     
                 </form>
+                </div>
                  <!-- 모달부분 -->
 			<div id="mask"></div>
 			<p id="textDel">
