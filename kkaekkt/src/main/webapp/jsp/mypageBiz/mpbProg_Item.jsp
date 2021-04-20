@@ -21,6 +21,7 @@
 								<div class="my_container">
 									<jsp:include page="sidebar_bs.jsp"></jsp:include>
 									<div class="content">
+										<jsp:include page="/jsp/noListPage.jsp"></jsp:include>
 										<ul class="laundry_nav">
 											<li value=0 class="selected">전체보기</li>
 											<li value=1>일반의류</li>

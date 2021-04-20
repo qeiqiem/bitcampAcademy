@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>매장관리</title>
-    <script src="https://kit.fontawesome.com/415f6f6023.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/css/bsbio.css">
     <link rel="stylesheet" href="/css/delete.css">
 </head>
@@ -87,7 +86,7 @@
                                             <td>비밀번호</td>
                                             <td>
                                                 <input name="password" type="password" id="curpwd">
-                                                <button type="button" id="btn_checkpwd">수정</button></br>
+                                                <button type="button" id="btn_checkpwd">수정하기</button></br>
                                                 <label id="checkpwd"></label>
                                             </td>
                                         </tr>
@@ -163,6 +162,7 @@
                             <script src="/js/adress.js"></script>
                         </div>
                         <!-- 주소 -->
+
                     </div>
                     <input type="hidden" name="mno" value="" id="mno">
                 </form>
@@ -176,54 +176,51 @@
                 <!-- 버튼영역 -->
             </div>
             <!-- 모달부분 -->
-				<div id="mask"></div>
-					<p id="textDel">
-						kkaekkt을 탈퇴하고 싶으신가요? 정말요?...
-						<a href="#" onclick="delete_show();" id="modal_show" style="cursor: pointer;">회원탈퇴</a>
-						<input type="hidden" class="DUorderChk" value="${reservation.count}" />
-					</p>
-                    <style>
-                        #textDel{
-                            margin: 80px 0 0 43px;
-                        }
-                        #mask{
-                            top: 0;
-                            left: 0;
-                        }
-                    </style>
-				<div class="word">
-					<div id="modal_container">
-						<button id="modal_close">
-							<i class="fas fa-times"></i>
-						</button>
-						<div id="modal_bodycont">
-							<!--  <form action="/deletePs.do" name=form method="POST">-->
-							<div id="modal_head">
-								<p>
-                                    <div style="text-align: center;">
-                                        <input name="name" id="name" value="${sessionScope.user.name}님" readonly /><br>탈퇴 하시겠어요?
-                                    </div>
-								</p>
-								<p></p>
-								<hr>
-
-								<p>탈퇴하면 모든 정보가 지워집니다.</p>
-								<p>정말 탈퇴하시겠어요?</p>
-								<p>
-									<input id="deleteid" name="id" value="${sessionScope.user.id}" readonly />
-								</p>
+           			<div id="mask"></div>
+			<p id="textDel">
+				kkækkt을 탈퇴하고 싶으신가요? 정말요?...
+				<a href="#" onclick="delete_show();" id="modal_show" style="cursor: pointer;">회원탈퇴</a>
+				<input type="hidden" class="DUorderChk" value="${reservation.count}" />
+			</p>
+            <style>
+               <!-- #textDel{
+                    margin: 80px 0 0 43px;
+                } -->
+                #mask{
+                    top: 0;
+                    left: 0;
+                }
+               
+            </style>
+			<div class="word">
+				<div id="modal_container">
+					<button id="modal_close">
+						<i class="fas fa-times"></i>
+					</button>
+					<div id="modal_bodycont">
+						<!--  <form action="/deletePs.do" name=form method="POST">-->
+						<div id="modal_head">
+							<div>
+								<input name="name" id="name" value="${sessionScope.user.name} 님" readonly>
+							</div>
+							<!-- <hr> -->
+							<p>탈퇴하면 모든 정보가 지워집니다. <br>정말 탈퇴하시겠어요?</p>
+							<div>
+								<input id="deleteid" name="id" value="${sessionScope.user.id}" readonly />
+								<br>
 								<input type="password" name="password" id="deletepwd" onkeyup="enterkey();"
 									placeholder="비밀번호">
 							</div>
-							<br>
-							<div id="modal_foot">
-								<input id="yes" type="button" value="예" onclick="cheekpwd()" />
-								<input id="nope" type="button" value="아니오" />
-							</div>
-							<!--  </form> -->
 						</div>
+
+						<div id="modal_foot">
+							<input id="yes" type="button" value="예" onclick="cheekpwd()" />
+							<input id="nope" type="button" value="아니오" />
+						</div>
+						<!--  </form> -->
 					</div>
 				</div>
+			</div>
         </div>
     </div>
 

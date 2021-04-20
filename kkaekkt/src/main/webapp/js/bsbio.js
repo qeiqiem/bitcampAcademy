@@ -16,7 +16,7 @@ const regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z]
 const regAccount=/^[0-9,\-]{3,6}\-[0-9,\-]{2,6}\-[0-9,\-]{3,6}(\-[0-9]{1,3})?$/;
 const regMailCode =/^[0-9]{6}$/;
 
-const content = document.getElementsByClassName("content")[0];
+const content = document.getElementsByClassName("bio_wrap")[0];
 const bizMemberInfo = document.getElementsByClassName("bizMemberInfo")[0];
 let inputli = content.getElementsByTagName('input');
 let buttonli = bizMemberInfo.getElementsByTagName('button');
@@ -35,7 +35,7 @@ $ComTimer.prototype = {
         this.comSecond--;					// 1초씩 감소
         if (this.comSecond < 0) {			// 시간이 종료 되었으면..
             clearInterval(this.timer);		// 타이머 해제
-            alert("인증시간이 초과하였습니다. 다시 인증해주시기 바랍니다.");
+            alert("인증시간이 초과하였습니다. 다시 인증해 주세요.");
             $('#timeout').hide();
             $(".mail_check_input").attr("disabled",true);
             $("#mail_check").attr("disabled",true);
@@ -109,7 +109,7 @@ window.onload = function () {
         if (curpwd.value == pageObj["password"]) {
             formatpw = 1;
             document.getElementById("checkpwd").innerText = " 아래 새 비밀번호를 입력하세요";
-            document.getElementById("checkpwd").style.color = "rgb(116, 116, 116)";
+            // document.getElementById("checkpwd").style.color = "var(--text-red)";
 
             // 기존 비밀번호창 비활성화
             curpwd.value = null;
@@ -137,7 +137,7 @@ window.onload = function () {
                 document.getElementById("checkval").innerText = "";
             } else {
                 document.getElementById("checkval").innerHTML
-                = " 비밀번호 양식과 맞지 않습니다. <br>(특수문자, 문자, 숫자 포함 8~15자리 이내)";
+                = "비밀번호 양식과 맞지 않습니다. <br>(특수문자, 문자, 숫자 포함 8~15자리 이내)";
             }
             formatnewpw = 0;
         } else {
@@ -182,7 +182,7 @@ window.onload = function () {
                 = "";
             document.getElementById("match").innerHTML
                 = " 변경이 완료되었습니다, <br>이후 프로필 수정시, 변경된 비밀번호로 입력해주세요.";
-            document.getElementById("match").style.color = "rgba(254, 54, 54, 0.55)";
+            // document.getElementById("match").style.color = "rgba(254, 54, 54, 0.55)";
 
         }
         else {
@@ -207,7 +207,7 @@ window.onload = function () {
                     = "";
             } else {
                 document.getElementById("checkAcc").innerText
-                    = " 양식과 맞지 않습니다. >> 하이픈(-)을 포함하여 입력해주세요";
+                    = " 양식과 맞지 않습니다. 하이픈(-)을 포함하여 입력해주세요";
             }
         } else {
             formatAccNum = 1;
@@ -287,7 +287,7 @@ window.onload = function () {
             if(document.getElementById("email").value != pageObj["email"]){
                 emailDuplChk();
             } else{
-                alert("기존이메일과 동일합니다.");
+                alert("기존 이메일과 동일합니다.");
             }
         } else {
             alert("양식과 맞지 않습니다.")

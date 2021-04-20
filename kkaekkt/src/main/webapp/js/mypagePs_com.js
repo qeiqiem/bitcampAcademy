@@ -178,6 +178,9 @@ function initPageObj(data) {
     pageObj.isNextExist=data.isNextExist;
     pageObj.isPrevBlockExist=data.isPrevBlockExist;
     pageObj.isPrevExist=data.isPrevExist;
+    if(pageObj.blockLastPageNum==0){
+        $('.noList').attr('style','');
+    }
     initPageBtn();
 }
 function ajax() { //ajax로 리스트 받아오기

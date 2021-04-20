@@ -152,8 +152,8 @@
 				</foreach>
 				<foreach collection="etcList" item="etc">
 					INSERT INTO bsn_etc
-					VALUES((SELECT bno FROM
-			business WHERE mno=(SELECT MAX(mno) FROM business)),${etc.etcno},${etc.price});
+					VALUES(${etc.etcno},(SELECT bno FROM
+			business WHERE mno=(SELECT MAX(mno) FROM business)),${etc.price});
 				</foreach>
 			</otherwise>
 		</choose>
