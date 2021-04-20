@@ -224,13 +224,13 @@ window.onload = function () {
         if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
             var inputVal = $(this).val();
             $(this).val(inputVal.replace(/[^0-9]/gi, ""));
-        } else {
+        } 
             if (!regPhone.test(inputphone.value)) {
                 formatphone1 = 0;
             } else {
                 formatphone1 = 1;
             }
-        }
+        
     })
     $("#phone2").keyup(function (event) {
         formatphone2 = 0;
@@ -238,12 +238,12 @@ window.onload = function () {
         if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
             var inputVal = $(this).val();
             $(this).val(inputVal.replace(/[^0-9]/gi, ""));
-        } else {
+        } 
             if (!regPhone.test(inputphone.value)) {
                 formatphone2 = 0;
             } else {
                 formatphone2 = 1;
-            }
+            
         }
     })
     $("#phone3").keyup(function (event) {
@@ -252,13 +252,13 @@ window.onload = function () {
         if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
             var inputVal = $(this).val();
             $(this).val(inputVal.replace(/[^0-9]/gi, ""));
-        } else {
+        } 
             if (!regPhone.test(inputphone.value)) {
                 formatphone3 = 0;
             } else {
                 formatphone3 = 1;
             }
-        }
+        
     })
 
     // 이메일 입력형식 확인
