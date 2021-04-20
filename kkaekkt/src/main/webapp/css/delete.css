@@ -71,6 +71,9 @@ textarea {
     font-weight: bold;
     font-size: x-large;
     text-align: center;
+	width: 100%;
+	background: none;
+
 }
 #modal_head p{
 	font-size:11pt;

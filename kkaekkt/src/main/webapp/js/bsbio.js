@@ -16,7 +16,7 @@ const regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z]
 const regAccount=/^[0-9,\-]{3,6}\-[0-9,\-]{2,6}\-[0-9,\-]{3,6}(\-[0-9]{1,3})?$/;
 const regMailCode =/^[0-9]{6}$/;
 
-const content = document.getElementsByClassName("content")[0];
+const content = document.getElementsByClassName("bio_wrap")[0];
 const bizMemberInfo = document.getElementsByClassName("bizMemberInfo")[0];
 let inputli = content.getElementsByTagName('input');
 let buttonli = bizMemberInfo.getElementsByTagName('button');

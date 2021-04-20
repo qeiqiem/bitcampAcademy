@@ -18,15 +18,9 @@
 			<jsp:include page="sidebar_ps.jsp"></jsp:include>
 			<div class="content">
 				<style>
-<<<<<<< HEAD
-				.content {
-					width: 72%;
-				}
-=======
 					.content {
 						width: 72%;
 					}
->>>>>>> 2186efb5b776a964798329a55fcddcd5ef382ebd
 				</style>
 				<form action="/updatePs.do" method="POST" name="mybio">
 					<div class="content_header">
@@ -142,6 +136,12 @@
 				<a href="#" onclick="delete_show();" id="modal_show" style="cursor: pointer;">회원탈퇴</a>
 				<input type="hidden" class="DUorderChk" value="${reservation.count}" />
 			</p>
+			<style>
+                #mask{
+                    top: 0;
+                    left: 0;
+                }
+            </style>
 			<div class="word">
 				<div id="modal_container">
 					<button id="modal_close">

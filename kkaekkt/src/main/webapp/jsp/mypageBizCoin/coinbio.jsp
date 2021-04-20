@@ -162,53 +162,50 @@
                     
                 </form>
                  <!-- 모달부분 -->
-				<div id="mask"></div>
-					<p id="textDel">
-						kkaekkt을 탈퇴하고 싶으신가요? 정말요?...
-						<a href="#" onclick="delete_show();" id="modal_show" style="cursor: pointer;">회원탈퇴</a>
-						<input type="hidden" class="DUorderChk" value="${reservation.count}" />
-					</p>
-                    <style>
-                        #textDel{
-                            margin: 80px 0 0 43px;
-                        }
-                        #mask{
-                            top: 0;
-                            left: 0;
-                        }
-                    </style>
-				<div class="word">
-					<div id="modal_container">
-						<button id="modal_close">
-							<i class="fas fa-times"></i>
-						</button>
-						<div id="modal_bodycont">
-							<!--  <form action="/deletePs.do" name=form method="POST">-->
-							<div id="modal_head">
-								<p>
-									<input name="name" id="name" value="${sessionScope.user.name}님 탈퇴 하시겠어요?"
-										readonly />
-								</p>
-								<p></p>
-								<hr>
-
-								<p>탈퇴하면 모든 정보가 지워집니다.</p>
-								<p>정말 탈퇴하시겠어요?</p>
-								<p>
-									<input id="deleteid" name="id" value="${sessionScope.user.id}" readonly />
-								</p>
+			<div id="mask"></div>
+			<p id="textDel">
+				kkækkt을 탈퇴하고 싶으신가요? 정말요?...
+				<a href="#" onclick="delete_show();" id="modal_show" style="cursor: pointer;">회원탈퇴</a>
+				<input type="hidden" class="DUorderChk" value="${reservation.count}" />
+			</p>
+            <style>
+                #textDel{
+                    margin: 80px 0 0 43px;
+                }
+                #mask{
+                    top: 0;
+                    left: 0;
+                }
+            </style>
+			<div class="word">
+				<div id="modal_container">
+					<button id="modal_close">
+						<i class="fas fa-times"></i>
+					</button>
+					<div id="modal_bodycont">
+						<!--  <form action="/deletePs.do" name=form method="POST">-->
+						<div id="modal_head">
+							<div>
+								<input name="name" id="name" value="${sessionScope.user.name} 님" readonly>
+							</div>
+							<!-- <hr> -->
+							<p>탈퇴하면 모든 정보가 지워집니다. <br>정말 탈퇴하시겠어요?</p>
+							<div>
+								<input id="deleteid" name="id" value="${sessionScope.user.id}" readonly />
+								<br>
 								<input type="password" name="password" id="deletepwd" onkeyup="enterkey();"
 									placeholder="비밀번호">
 							</div>
-							<br>
-							<div id="modal_foot">
-								<input id="yes" type="button" value="예" onclick="cheekpwd()" />
-								<input id="nope" type="button" value="아니오" />
-							</div>
-							<!--  </form> -->
 						</div>
+
+						<div id="modal_foot">
+							<input id="yes" type="button" value="예" onclick="cheekpwd()" />
+							<input id="nope" type="button" value="아니오" />
+						</div>
+						<!--  </form> -->
 					</div>
 				</div>
+			</div>
             </div>
         </div>
         <script>
