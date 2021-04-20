@@ -10,7 +10,8 @@ textarea {
 }
 #textDel{
 	color: var(--text-gray);
-	margin: 90px 0 0 2px;
+	/* margin: 90px 0 0 2px; */
+    margin: 40px 0 30px 43px;
 	
 }
 #textDel a{

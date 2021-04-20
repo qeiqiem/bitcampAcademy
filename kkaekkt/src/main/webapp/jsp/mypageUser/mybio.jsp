@@ -21,7 +21,6 @@
 					.content {
 						width: 72%;
 					}
-					
 				</style>
 				<form action="/updatePs.do" method="POST" name="mybio">
 					<div class="content_header">
@@ -52,7 +51,7 @@
 								<tr>
 									<td>비밀번호</td>
 									<td><input name="password" type="password" id="curpwd">
-										<button type="button" id="btn_checkpwd">수 정</button> <br>
+										<button type="button" id="btn_checkpwd">수정하기</button> <br>
 										<label id="checkpwd"></label>
 									</td>
 								</tr>
@@ -96,13 +95,13 @@
 									<td id="emailText">이메일</td>
 									<td>
 										<input name="email" type="email" value="" id="email" class="mail_input">
-										<button type="button" id="btn_checkemail"
-											class="mail_check_button">이메일인증</button><br>
+										<button type="button" id="btn_checkemail" class="mail_check_button">이메일
+											인증</button><br>
 										<label id="checkemail" value=""></label></br>
 										<div id="mailChkDiv">
 											<input class="mail_check_input" id="mail_check_input_box_false"
 												disabled="disabled"><span id='timeout'></span>
-											<button type="button" id="mail_check">확인</button>
+											<button type="button" id="mail_check">확인하기</button>
 									</td>
 									<br>
 						</div>
@@ -138,11 +137,15 @@
 				<input type="hidden" class="DUorderChk" value="${reservation.count}" />
 			</p>
 			<style>
-                #mask{
-                    top: 0;
-                    left: 0;
-                }
-            </style>
+				#textDel {
+					margin-left: 0;
+				}
+
+				#mask {
+					top: 0;
+					left: 0;
+				}
+			</style>
 			<div class="word">
 				<div id="modal_container">
 					<button id="modal_close">

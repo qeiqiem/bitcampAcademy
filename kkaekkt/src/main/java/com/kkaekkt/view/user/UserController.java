@@ -201,7 +201,7 @@ public class UserController {
 				return "fail";
 			} else {
 				session.setAttribute("user", result);
-				return result.getMtype()+"";					
+				return result.getMtype()+"";				
 			}
 	}
 
@@ -218,7 +218,6 @@ public class UserController {
 			return "fail";
 		}
 	}
-
 	// 로그아웃
 	@RequestMapping("/logout.do")
 	public String logout(HttpSession session, HttpServletResponse response) {
@@ -331,7 +330,7 @@ public class UserController {
 	@RequestMapping(value = "/updatePw.do", method = RequestMethod.POST)
 	public String updatePw(AccountVO vo) {
 		userService.updatePw(vo);
-		return "/jsp/login/login.jsp";
+		return "/index.do";
 	}
 
 	@RequestMapping(value = "/mymark.do", method = {RequestMethod.GET,RequestMethod.POST})

@@ -115,7 +115,7 @@ input{
 }
 
 #btn_update button {
-    background: var(--gray-color);
+    background: var(--key-color);
     border-radius: 30px;
     border: none;
     width: 88px;

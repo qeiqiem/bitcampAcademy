@@ -38,7 +38,7 @@ font-size: 16px;
 
 .content #mybio_info button {
     height: 40px;
-    width: 120px;
+    width: 102px;
     margin-left: 10px;
     background: var(--gray-color);
     color:  var(--black-color);
@@ -213,4 +213,6 @@ font-size: 16px;
 
   }
 
-  
+  .content label{
+      font-size: small;
+  }
