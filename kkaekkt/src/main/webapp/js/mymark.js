@@ -153,6 +153,7 @@ function initSide() {
 function printList() {
     $('.card').remove();
     $.each(likedBsList,function(key,value){
+        var address= value.address.replaceAll(',',' ');
         $('.content').append(
                 '<div class="card" id="card'+value.bno+'">'+
                 '<div class="bsTagLeft">'+
@@ -164,7 +165,7 @@ function printList() {
                     '</div>'+
                     '<div class="tagBottom">'+
                         '<i class="fas fa-map-marker-alt"></i>'+
-                        '<span class="address">'+value.address+'</span>'+
+                        '<span class="address">'+address+'</span>'+
                         '<i class="fas fa-phone-alt"></i>'+
                         '<span class="phone">'+value.phone+'</span>'+
                         '<i class="fas fa-star"></i>'+
