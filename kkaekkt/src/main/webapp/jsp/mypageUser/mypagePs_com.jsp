@@ -18,8 +18,9 @@
 							<div class="body_container">
 								<jsp:include page="sidebar_ps.jsp"></jsp:include>
 								<div class="content">
+									<jsp:include page="/jsp/noListPage.jsp"></jsp:include>
 									<!-- <p class="content_header">완료된 주문</p>
-				<hr> -->
+				<hr> -->			
 									<div class="rsvList">
 									</div>
 									<div class="page_btn_container">

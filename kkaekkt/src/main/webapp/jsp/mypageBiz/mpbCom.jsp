@@ -20,6 +20,7 @@
 	<div class="body_container">
 			<jsp:include page="sidebar_bs.jsp"></jsp:include>
 			<div class="content">
+				<jsp:include page="/jsp/noListPage.jsp"></jsp:include>
 				<div class="content_header">
 					<p>전체 개수 <span></span>개</p>
 					<div class="searchBox">

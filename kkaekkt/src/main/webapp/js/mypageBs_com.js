@@ -199,6 +199,10 @@ function initPageObj(data) {
     pageObj.isNextExist=data.isNextExist;
     pageObj.isPrevBlockExist=data.isPrevBlockExist;
     pageObj.isPrevExist=data.isPrevExist;
+    if(data.totalPostCount==0){
+        $('.noList').attr('style','display:flex;left:15vw;');
+    }
+    initPageBtn();
 }
 function ajax() { //ajax로 리스트 받아오기
     //console.log('ajax 함수 진입');
@@ -211,7 +215,6 @@ function ajax() { //ajax로 리스트 받아오기
             var list=rsv.rsvListRno;
             printlist(list);
             initPageObj(rsv);
-            initPageBtn();
             //console.log('ajax 완료');
         }
     });
