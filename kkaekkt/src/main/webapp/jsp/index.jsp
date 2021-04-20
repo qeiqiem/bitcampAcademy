@@ -42,8 +42,8 @@
                         <div class="search_btn">
                             <!-- <h1 class="animate__animated animate__fadeInUp">오늘은 <br> -->
                             <h1>오늘은 <br>
-                                어디서 <br>
-                                빨래를 할까요?
+				                                어디서 <br>
+				                                빨래를 할까요?
                             </h1>
                             <div class="search_tab">
                                 <button class="tabBtn btn1" type="button" value='1'>일반세탁소</button>
@@ -52,7 +52,7 @@
                         </div>
 
                         <div class="search_box">
-                            <input type="text" placeholder="구와 동을 입력하세요" name="search" id="searchBar">
+                            <input type="text" placeholder="깨끗구 세탁동" name="search" id="searchBar">
                             <button onclick='showMap()'>
                                 <i class="fas fa-search fa-lg "></i>
                                 <!-- <i class="fas fa-search fa-2x"></i> -->
@@ -92,28 +92,7 @@
                             일상을 바꾸다.
                         </h1>
                     </div>
-                    <!-- <footer>
-                        <div>
-                            <p>고객센터</p>
-                            전화 : 02-1234-5678 (평일 10:00 ~ 18:30 토·일요일, 공휴일 휴무) <br>
-                            문의 : info@kkækkt.com <br>
-
-                        </div>
-                        <div>
-                            <p>kkækkt 깨끝</p>
-                            대표: 깨끝 | 주소: 서울특별시 마포구 백범로 23 구프라자 3층 <br>
-                            사업자등록번호: 012-34-56789 | 통신판매업신고: 제2021-서울 신촌-0001호 <br>
-                            Copyright © 2021 All right Reserved.
-                        </div>
-                        <div>
-                            <ul>
-                                <li><a href="#">이용약관</a></li>
-                                <li><a href="/jsp/faq.jsp">자주묻는 질문</a></li>
-                                <li><a href="mailto:kkaekkt@naver.com">제휴문의</a></li>
-                                <li><a href="/jsp/aboutUs.jsp">About kkaekkt</a></li>
-                            </ul>
-                        </div>
-                    </footer> -->
+                    
                     <style>
                         footer {
                             height: auto;

@@ -165,7 +165,7 @@
 						</div>
 
 						<div id="modal_foot">
-							<input id="yes" type="button" value="예" onclick="cheekpwd()" />
+							<input id="yes" type="button" value="예" onclick="deleteUser();" />
 							<input id="nope" type="button" value="아니오" />
 						</div>
 						<!--  </form> -->

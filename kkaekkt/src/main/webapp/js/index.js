@@ -7,7 +7,7 @@ $(document).ready(function () {
   initIndexEvent();
 });
 function connectWs() {
-  // socket = new WebSocket("ws://localhost:8080/echo.do");
+  //socket = new WebSocket("ws://localhost:8080/echo.do");
   socket = new WebSocket("ws://54.180.33.3:8080/echo.do");
   socket.onopen = function () {
     console.log("info: connection opened.");
@@ -104,7 +104,7 @@ function showMap() {
 
 	num = $('.btn_selected').attr('value');
 	
-	if(num = "" || inputText == ""){
+	if(num == "" || inputText == ""){
     alert("거주하는 시/군/구와 동이름을 입력해주세요. ")
     return;
   }
@@ -118,9 +118,6 @@ function showMap() {
 	case "2":
 		location.href = mapUrl+'?type=2&search='+inputText;
 		break;
-    
-	default:
-		location.href = mapUrl+'?type=1&search='+inputText;
-		break;
 	}
+
 }
