@@ -21,6 +21,7 @@
 					.content {
 						width: 72%;
 					}
+					
 				</style>
 				<form action="/updatePs.do" method="POST" name="mybio">
 					<div class="content_header">

@@ -18,6 +18,7 @@
 							<div class="body_container">
 								<jsp:include page="sidebar_ps.jsp"></jsp:include>
 								<div class="content">
+									<jsp:include page="/jsp/noListPage.jsp"></jsp:include>
 									<!-- <p class="content_header">진행중 주문</p>
 			<hr> -->
 									<div class="rsvList">

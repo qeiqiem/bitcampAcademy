@@ -73,7 +73,7 @@ function emailApi() {
     type: "GET",
     url: "/mailCheck.do?email=" + email,
     success: function (data) {
-      console.log("data : " + data);
+      ////console.log("data : " + data);
       $(".mail_check_input").attr("disabled", false);
       document.getElementById("mail_check").disabled = false;
       $(".mail_check_input").attr("id", "mail_check_input_box_true");

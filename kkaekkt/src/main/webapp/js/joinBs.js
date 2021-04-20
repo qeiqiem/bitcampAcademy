@@ -295,17 +295,18 @@ function initEvent() {
       $(this).val(inputVal.replace(/[^a-z0-9]/gi, ""));
     }
   });
-  // 이름 영어+한글만 입력
-  $("input[name=bname]").keyup(function (event) {
-    if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
-      var inputVal = $(this).val();
-      $(this).val(
-        inputVal.replace(/^[0-9]+$|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"\\]/gi, "")
-        // 이름 한글만 입력 가능
-        // inputVal.replace(/[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"\\]/g, "")
-      );
-    }
-  });
+  
+  // 이름 영어+한글만 입력 -> 업체는 이름이 바뀔 수 있으니까 비활성화함
+  // $("input[name=bname]").keyup(function (event) {
+  //   if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
+  //     var inputVal = $(this).val();
+  //     $(this).val(
+  //       inputVal.replace(/^[0-9]+$|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"\\]/gi, "")
+  //       // 이름 한글만 입력 가능
+  //       // inputVal.replace(/[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"\\]/g, "")
+  //     );
+  //   }
+  // });
 
   // 폰넘버 숫자+하이픈
   $("input[name=phone]").keyup(function (event) {

@@ -209,6 +209,10 @@ function initPageObj(data) {
   pageObj.isNextExist = data.isNextExist;
   pageObj.isPrevBlockExist = data.isPrevBlockExist;
   pageObj.isPrevExist = data.isPrevExist;
+  if(data.totalPostCount==0){
+    $('.noList').attr('style','');
+}
+  initPageBtn();
 }
 function resetSearch() {
   pageObj.search = "";
@@ -228,7 +232,7 @@ function ajax() {
       var list = result.rsvListLno;
       printlist(list);
       initPageObj(result);
-      initPageBtn();
+
       //console.log("ajax 완료");
     },
   });
