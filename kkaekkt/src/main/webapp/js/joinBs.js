@@ -484,6 +484,7 @@ function chkAccount() {
   }
 }
 
+// bnkChk변경됨
 // function bnoChk() {
 //   var bno = $("#bno").val();
 //   $.post({

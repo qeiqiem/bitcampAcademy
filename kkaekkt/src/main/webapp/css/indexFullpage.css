@@ -133,10 +133,10 @@ video {
 } */
 
 .btn_selected {
-  /* border: 4px solid white; */
-  color: var(--black-color);
-  /* color: var(--key-text); */
-  background-color: white;
+  /* border: 4px solid white !important; */
+  color: var(--black-color) !important;
+  /* color: var(--key-text) !important; */
+  background-color: white !important;
 }
 
 .text {
