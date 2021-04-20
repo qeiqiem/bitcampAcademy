@@ -162,3 +162,10 @@ h1 {
 .index4 .text {
   margin-bottom: 250px;
 }
+
+.btn_selected {   
+/* border: 4px solid white !important; */
+  color: var(--black-color) !important;
+  /* color: var(--key-text) !important; */
+  background-color: white !important;
+}

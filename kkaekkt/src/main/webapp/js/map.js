@@ -21,6 +21,10 @@ $(document).ready(function() {
 		   		locationFind(maploc)   
 			    
 		   }else {	//비로그인
+			   var mapaddr = []
+			    mapaddr = useraddress.split(",")
+			    //주소정보
+			    useraddress = mapaddr[0]+""+mapaddr[1]   
 			   $(".slide_mini").html(useraddress)
 			   lat = "37.527"; // 위도
 			   lon = "127.125";   // 경도	
@@ -98,23 +102,54 @@ $(document).ready(function() {
    $('.list').on("click", ".gradescore", function() { alert("준비중입니다.")})
    
    // 2. 단일업체 페이지 전환
+   //뒤로가기
+   $('.backList').click(function() {
+	   $('.single').hide()
+	   $('.list').show()
+   	})	
+   	
+   	//테이블 클릭시 싱글페이지 출력
    $('table').on("click", ".place_body", function() {
 		   var s_title = $(this).find('td');
-         bizMno=Number(s_title.attr('id').substr(6));
-		   findSingle(s_title);
+		   bizMno=Number(s_title.attr('id').substr(6));
+         
+		   findSingle(s_title);		   
 		   findReview(bno)  
 	   })   
 	   
    $(".latest").on("click",function() { findReview(bno)  }) 
    $(".grade").on("click",function() { findReviewGrade(bno) })  
    $(".likeThis").on("click",function() {
-	   alert("반응") 
-	   
-   })  
-	   
+	   console.log('클릭')
+	   if($("#heart").css("color")=="rgb(221, 221, 221)"){//좋아요가 눌리지않은 상태라면
+		   likeOn({mno:mno,bno:bno});
+		   $("#heart").css("color","var(--text-red)")
+	   }else{//좋아요가 눌린 상태라면
+		   likeOff({mno:mno,bno:bno});
+		   $("#heart").css("color","var(--gray-color)")
+	   }
+   });  
+   function likeOn(likeObj) {
+	    $.post({
+	        url:"/likeOn.do",
+	        data:likeObj
+	    });
+	}
+   function likeOff(likeObj) {
+	    $.post({
+	        url:"/likeOff.do",
+	        data:likeObj
+	    });
+	}
    // 2-1. 업체 블록페이지
+   $('.infoBtn').click(function(){
+	    $(this).addClass('checked');
+	    $(this).siblings().removeClass('checked');
+	});
+   
+  
    $('#infoData').click(function() { $('.cardinfo').show(); $('.cominfo').hide();})
-   // 2-2. 리뷰 블록페이지
+    //2-2. 리뷰 블록페이지
    $('#infoReview').click(function() { $('.cardinfo').hide(); $('.cominfo').show();})
 
    // 3. 예약슬라이드 (2depth) show
@@ -275,7 +310,8 @@ $(document).ready(function() {
         if(star != null)
            $("#memberlog").html('<input class="tag_kkaekkt" value="kkarkkt 가맹점 입니다">')       
            
-        $("#s_title").html(name)             
+        $("#s_title").html(name)      
+        $("#single_img").attr("src", '/img/Thumbnail/'+bno+'.PNG'); 
         $("#s_star").html(star)
         $("#s_address").html('<i class="fas fa-map-marker-alt"></i>&nbsp;'+address)
         $("#s_phone").html('<i class="fas fa-phone-alt"></i>&nbsp;'+phone)
@@ -291,10 +327,10 @@ $(document).ready(function() {
                , success: function(num) {
             	   var num = num
             	   if(num != 0){
-            		   $("#heart").css( "color", "red" )
+            		   $("#heart").css( "color", "var(--text-red)" )
             		   
             	   }else{
-            		   $("#heart").css( "color", "rgb(116, 116, 116)" )
+            		   $("#heart").css( "color", "var(--gray-color)" )
             	   }
             	   num = 0
 			}
@@ -688,6 +724,7 @@ $(document).ready(function() {
 		    		   console.log("위도 : "+result.lat)
 		    		   console.log("경도 : "+result.lon)    	
 		    		   weather(result.lat,result.lon)
+		    		   
 		    	   }		
 		       })
 		   })
@@ -696,15 +733,26 @@ $(document).ready(function() {
 	  //위도, 경도로 동이름 검색
 	  function lonLatFind(lat,lon) {		  
 		  //주소로 위도, 경도 찾기
-		  $.getJSON('/jsp/searchMap/latLon.json', function(data) {			  
+		  $.getJSON('/jsp/searchMap/latLon.json', function(data) {		
+			  var chkTf = true
 		       $.each(data, function(i, result) {
 		    	   if( lat == result.lat && lon == result.lon ){
 		    		   console.log("동이름 : "+result.dong)
 		    		   useraddress = result.dong
 		    		   $(".slide_mini").html(useraddress)	 
 		    		   bindinglandry(useraddress)
+		    		   chkTf = false
 		    	   }		
 		       })
+		       
+		       if(chkTf){
+		    	  alert("현 위치를 찾을 수 없습니다. 검색을 이용해주세요.")
+		    	  $('.findPoint').prop('checked', false);
+		    	 
+		         $(".slide_mini").html("강동구 천호동")	
+		          useraddress = "강동구, 천호동"
+		         bindinglandry(useraddress)
+		       }
 		   })
 	}
 	
