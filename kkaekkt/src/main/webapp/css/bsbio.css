@@ -32,7 +32,8 @@
     padding: 0 30px;
 }
 .info_wrap{
-   margin-top: -40px;
+    margin-top: -40px;
+    display: flex;
 }
 
 .content_wrap{
@@ -126,10 +127,7 @@ select::-ms-expand { /* for IE 11 */
 }
 
 .bioleft {
-    float: left;
-    width: 34vw;
-    height: 22vh;
-    margin: 0;
+    margin-right: 100px;
 }
 .bioleft input[name='id']{
     border:none;
@@ -287,3 +285,7 @@ select::-ms-expand { /* for IE 11 */
   #btn_update button{
     background-color: var(--key-color);
   }
+
+  .content label{
+    font-size: smaller;
+}
