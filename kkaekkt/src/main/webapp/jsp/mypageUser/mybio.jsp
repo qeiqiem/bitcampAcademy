@@ -21,7 +21,6 @@
 					.content {
 						width: 72%;
 					}
-					
 				</style>
 				<form action="/updatePs.do" method="POST" name="mybio">
 					<div class="content_header">
@@ -138,11 +137,15 @@
 				<input type="hidden" class="DUorderChk" value="${reservation.count}" />
 			</p>
 			<style>
-                #mask{
-                    top: 0;
-                    left: 0;
-                }
-            </style>
+				#textDel {
+					margin-left: 0;
+				}
+
+				#mask {
+					top: 0;
+					left: 0;
+				}
+			</style>
 			<div class="word">
 				<div id="modal_container">
 					<button id="modal_close">
