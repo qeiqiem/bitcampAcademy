@@ -111,7 +111,7 @@ button{
 .reviewHeader{
     width: 100%;
     border:1px solid var(--gray-color);
-    margin-bottom: -10px;
+    margin-bottom: 10px;
 }
 .reviewHeader tr th{
     padding: 10px 0;
@@ -227,7 +227,7 @@ td.cell6{
 .replyList {
     table-layout: fixed;
     width: 100%;
-    margin-top: 8.5px;
+    margin-top: 0px;
     border: 1px solid var(--gray-color);
     text-align: center;
     height: 48px;
