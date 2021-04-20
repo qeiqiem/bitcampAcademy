@@ -1,15 +1,14 @@
 *:focus {
     outline: none;
 }
-hr {
+/* hr {
     height: 0.5px;
     border: none;
     background-color: var(--gray-color);
-    /* border: solid 0.5px var(—gray-color); */
-    /* width: 95%; */
     width: 100%;
     margin-bottom: 10px;
-}
+} */
+
 .content input {
     box-sizing: border-box;
     padding: 15px;
@@ -19,27 +18,36 @@ hr {
     border: 1px solid var(--gray-color);
     border-radius: 10px;
 }
-.content {
+/* .content {
     float:left;
     width: 60vw;
     height: 100vh;
     padding: 0px 0px 0px 250px;
     font-size: 16px;
-}
-.content div {
+} */
+/* .content div {
     padding-bottom: 7px;
+} */
+.bio_wrap{
+    padding: 0 30px;
 }
-#combio_title li{
-    float: left;
-    list-style: none;
-    padding-bottom: 10px;
+.info_wrap{
+   margin-top: -40px;
 }
-#combio_title #title_right{
-    /* margin-left: 720px; */
-    float: right;
 
+.content_wrap{
+    margin: 30px 0;
 }
-#combio_title #bname{
+
+.content_header{
+    width: 100%;
+  justify-content: space-between;
+}
+
+.content #title_right{
+    padding-top: 10px;
+}
+.content #bname{
     font-size: 22px;
 }
 
@@ -49,14 +57,14 @@ hr {
 }
 .yellow{
     font-size: 16px;
-    color: yellow;
+    color: rgb(255, 236, 28);
 }
 .gray{
     font-size: 16px;
     color: var(--gray-color);
 }
 .bizinfo table td {
-    padding: 0px 180px 0px 10px;
+    padding: 0px 178px 0px 10px;
 }
 .content input {
     width: 200px;
@@ -85,7 +93,7 @@ select::-ms-expand { /* for IE 11 */
 }
 .content button {
     height: 40px;
-    width: 120px;
+    width: 87px;
     margin-left: 12px;
     background: var(--gray-color);
     border: none;
@@ -109,19 +117,17 @@ select::-ms-expand { /* for IE 11 */
 
 .bizMemberInfo table td {
     padding: 0 10px 0 10px;
-    color: var(--text-gray);
+    /* color: var(--text-gray); */
     
 }
 .bizInfo {
     margin-top: 30px;
     margin-left: 10px;
 }
-.bizMemberInfo{
-    margin-left: 10px;
-}
+
 .bioleft {
     float: left;
-    width: 30vw;
+    width: 34vw;
     height: 22vh;
     margin: 0;
 }
@@ -129,9 +135,7 @@ select::-ms-expand { /* for IE 11 */
     border:none;
 }
 .bioright{
-    height: 22vh;
-    padding-top: 20px;
-    
+  height: 25vh;
 }
 #btn_combiopwd{
     padding: 0;
@@ -147,13 +151,16 @@ select::-ms-expand { /* for IE 11 */
 #mailChkDiv {
     position: relative;
 }
+#btn_checkemail{
+    width: 100px;
+}
 #timeout{
     position: absolute;
     bottom: 7px;
     left: 150px;
     top: 17px;
     font-size: 12px;
-    color: red;
+    color: var(--text-red);
 }
 .mail_check_input{
     width: 200px;
@@ -163,13 +170,14 @@ select::-ms-expand { /* for IE 11 */
     margin-top: 20px;
 }
 
-#checkval, #checkpwd {
+#checkval, #checkpwd, #checkAcc, #checkemail {
     color: var(--text-red);
 }
 #btn_address{
+    width: 100px;
     color: var(--text-gray);
 }
-#btn_update {
+/* #btn_update {
     display: inline-block;
     
 }
@@ -183,8 +191,8 @@ select::-ms-expand { /* for IE 11 */
     height: 40px;
     font-size: 14px;
     color: var(--text-gray);
-}
-#btn_change {
+} */
+/* #btn_change {
     margin-left: 21vw;
 }
 
@@ -197,7 +205,50 @@ select::-ms-expand { /* for IE 11 */
     margin-left: 26vw;
     width: 100px;
     height: 40px;
+} */
+
+
+
+
+#btn_update {
+    position: absolute;
+    width: 100%;
+    /* width: 158px; */
+    height: 100px;
+    /* top: 88vh; */
+    top: 88px;
+    right: -67px;
+    display: block;
 }
+
+#btn_update button {
+    background: var(--gray-color);
+    border-radius: 30px;
+    border: none;
+    width: 88px;
+    height: 40px;
+    color: var(--black-color);
+}
+#btn_change {
+    /* margin-left: 422px;
+    margin-top: -5px; */
+    float: right;
+    margin-right: 96px;
+}
+
+#submitBio {
+    /* width: 100px;
+    height: 30px;
+    margin: 10px; */
+    margin-left: 20px;
+}
+
+#updateBio {
+    /* margin-left: 500px; */
+    float: right;
+    margin-right: 100px;
+}
+
 #bankAccNum{
     width: 250px;
 }
@@ -218,18 +269,21 @@ select::-ms-expand { /* for IE 11 */
     background-color:white;
 }
 .correct{
-    color : var(--key-color);
+    color : var(--key-text);
 }
 .incorrect{
-    color : red;
+    color : var(--text-red);
 }
 #clickmask {
-    width: 62vw;
-    height: 66vh;
+    width: 64vw;
+    height: 71vh;
     display: block;
-    background: black;
+    /* background: rgba(255,255,255,1); */
     opacity: 57%;
-    z-index: 30;
+    z-index: 28;
     position: absolute;
+  }
 
+  #btn_update button{
+    background-color: var(--key-color);
   }

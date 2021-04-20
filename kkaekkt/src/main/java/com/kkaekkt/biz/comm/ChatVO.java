@@ -2,7 +2,7 @@ package com.kkaekkt.biz.comm;
 
 public class ChatVO {
 	int mno;
-	int bno;
+	String bno;
 	int mtype;//채팅방 DB 검색시에 사용
 	
 	int roomnum; //방번호
@@ -46,10 +46,11 @@ public class ChatVO {
 	public void setMno(int mno) {
 		this.mno = mno;
 	}
-	public int getBno() {
+	
+	public String getBno() {
 		return bno;
 	}
-	public void setBno(int bno) {
+	public void setBno(String bno) {
 		this.bno = bno;
 	}
 	public int getRoomnum() {

@@ -94,7 +94,7 @@ function msgSet(result) {
     alertObj.msg = "주문번호" + rsvObj.rsvNum + "의 세탁이 완료되었습니다.";
     alertObj.typenum = 3;
   } else {
-    console.log("알림메시지 처리 에러");
+    //console.log("알림메시지 처리 에러");
   }
 }
 function modalClose() {
@@ -209,6 +209,10 @@ function initPageObj(data) {
   pageObj.isNextExist = data.isNextExist;
   pageObj.isPrevBlockExist = data.isPrevBlockExist;
   pageObj.isPrevExist = data.isPrevExist;
+  if(data.totalPostCount==0){
+    $('.noList').attr('style','');
+}
+  initPageBtn();
 }
 function resetSearch() {
   pageObj.search = "";
@@ -218,7 +222,7 @@ function resetSearch() {
 }
 function ajax() {
   //ajax로 리스트 받아오기
-  console.log("ajax 함수 진입");
+  //console.log("ajax 함수 진입");
   $.post({
     url: "/getRsvListBs.do",
     data: pageObj,
@@ -228,8 +232,8 @@ function ajax() {
       var list = result.rsvListLno;
       printlist(list);
       initPageObj(result);
-      initPageBtn();
-      console.log("ajax 완료");
+
+      //console.log("ajax 완료");
     },
   });
 }

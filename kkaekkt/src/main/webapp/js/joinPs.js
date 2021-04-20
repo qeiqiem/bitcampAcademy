@@ -56,7 +56,7 @@ var AuthTimer = new $ComTimer();
 
 // 이메일 입력형식 확인
 document.getElementById("btn_checkemail").onclick = function () {
-  console.log(formatemail);
+  //console.log(formatemail);
   if (formatemail == 1) {
     // emailApi(); //ajax 실행
     emailDuplChk();
@@ -66,14 +66,14 @@ document.getElementById("btn_checkemail").onclick = function () {
 };
 // 인증번호 이메일 전송
 function emailApi() {
-  console.log("이메일인증 클릭");
+  //console.log("이메일인증 클릭");
   var email = $(".mail_input").val(); // 입력한 이메일
 
   $.ajax({
     type: "GET",
     url: "/mailCheck.do?email=" + email,
     success: function (data) {
-      //console.log("data : " + data);
+      ////console.log("data : " + data);
       $(".mail_check_input").attr("disabled", false);
       document.getElementById("mail_check").disabled = false;
       $(".mail_check_input").attr("id", "mail_check_input_box_true");
@@ -94,7 +94,7 @@ function emailDuplChk() {
       email: $("#email").val(),
     },
     success: function (data) {
-      console.log(data);
+      //console.log(data);
       var key = JSON.parse(data);
       if (key != 0) {
         alert("해당 이메일로 가입된 아이디가 존재합니다.");
@@ -104,7 +104,7 @@ function emailDuplChk() {
       }
     },
     // error: function (request, status, error) {
-    //   console.log(
+    //   //console.log(
     //     "code:" +
     //       request.status +
     //       "\n" +
@@ -343,6 +343,7 @@ $("#id").focusout(function () {
       var key = JSON.parse(data);
       if (key != 0) {
         idLbl.innerText = "중복된 아이디가 있습니다.";
+        $("#id").focus();
         // alert("중복된 아이디가 있습니다.");
       } else if (key == 0) {
         formatidchk = 1;
@@ -363,11 +364,11 @@ function fn_combine() {
     document.getElementById("detailAddress").value +
     ", " +
     document.getElementById("extraAddress").value;
-  console.log(ad);
+  //console.log(ad);
   // document.getElementById("address").value = address;
   address.value = ad;
   formatad = 1;
-  console.log(address);
+  //console.log(address);
 }
 
 //submit check

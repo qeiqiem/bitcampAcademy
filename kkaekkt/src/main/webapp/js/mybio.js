@@ -14,6 +14,7 @@ let formatAccNum = 1;
 const regPw = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
 const regPhone = /^[0-9]+$/;
 const regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/;
+const regBth = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
 const regAccount=/^[0-9,\-]{3,6}\-[0-9,\-]{2,6}\-[0-9,\-]{3,6}(\-[0-9]{1,3})?$/;
 const regMailCode =/^[0-9]{6}$/;
 
@@ -147,7 +148,7 @@ window.onload = function () {
     // 새 비밀번호, 새 비밀번호 확인 인풋 값 같은지 비교 => 비밀법호 업데이트 
     $("#btn_updatepwd").click(function undatePwd() {
         if ($('#pwd').val() == $('#newpwd').val() && formatnewpw == 1) {
-            console.log($('#pwd').val() + $('#newpwd').val() + formatnewpw);
+            //console.log($('#pwd').val() + $('#newpwd').val() + formatnewpw);
             $.ajax({
                 url: '/updatePspwd.do',
                 type: 'post',
@@ -157,7 +158,7 @@ window.onload = function () {
                     password: $('#newpwd').val()
                 }, success: function(data){
                     let password = JSON.parse(data);
-                    console.log("ajax성공 "+password);
+                    //console.log("ajax성공 "+password);
                     pageObj["password"] = password;
                     
                 }, error: function() {
@@ -184,7 +185,7 @@ window.onload = function () {
             document.getElementById("match").style.color = "rgba(254, 54, 54, 0.55)";
 
         } else {
-            console.log("if문탈출" + $('#pwd').val() + $('#newpwd').val() + formatnewpw);
+            //console.log("if문탈출" + $('#pwd').val() + $('#newpwd').val() + formatnewpw);
 
             if (formatnewpw == 0) {
                 document.getElementById("match").innerText = "입력형식을 확인하세요";
@@ -203,14 +204,14 @@ window.onload = function () {
         if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
             var inputVal = $(this).val();
             $(this).val(inputVal.replace(/[^0-9]/gi, ""));
-        }else{
+        }
 
             if (!regPhone.test(inputphone.value)) {
                 formatphone1 = 0;
             } else {
                 formatphone1 = 1;
             }
-        }
+        
         
     })
     $("#phone2").keyup(function (event) {
@@ -219,14 +220,13 @@ window.onload = function () {
         if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
             var inputVal = $(this).val();
             $(this).val(inputVal.replace(/[^0-9]/gi, ""));
-        } else{
-
+        }
             if (!regPhone.test(inputphone.value)) {
                 formatphone2 = 0;
             } else {
                 formatphone2 = 1;
             }
-        }
+        
     })
     $("#phone3").keyup(function (event) {
         formatphone3 = 0;
@@ -234,37 +234,36 @@ window.onload = function () {
         if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
             var inputVal = $(this).val();
             $(this).val(inputVal.replace(/[^0-9]/gi, ""));
-        } else{
+        } 
         if (!regPhone.test(inputphone.value)) {
            formatphone3 = 0;
         } else {
             formatphone3 = 1;
-        }
+        
     }
     })
 
     // 생년월일 입력형식 확인
         $("input[name=birth]").keyup(function (event) {
         //20210101
-        var regex = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
+        const regex = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
         let inputBirth = document.getElementsByName("birth")[0];
         if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
             var inputVal = $(this).val();
             $(this).val(inputVal.replace(/[^0-9]/gi, ""));
-        } else{
-        if (!regex.test(inputBirth.value)) {
-            if (inputBirth.value.length == 0) {
-                document.getElementById("checkbirth").innerText = "";
-            } else {
-                document.getElementById("checkbirth").innerText = " 양식과 맞지 않습니다. ex) 20210101";
+        } 
+            if (!regBth.test(inputBirth.value)) {
+                if (inputBirth.value.length == 0) {
+                    document.getElementById("checkbirth").innerText = "";
+                } else {
+                    document.getElementById("checkbirth").innerText = " 양식과 맞지 않습니다. ex) 20210101";
             }
             formatbirth = 0;
-        } else {
+            } else {
             formatbirth = 1;
             document.getElementById("checkbirth").innerText = "";
 
-        }
-    }
+            }
     })
 
     // 이메일 입력형식 확인
@@ -288,7 +287,7 @@ window.onload = function () {
         }
     })
     document.getElementById("btn_checkemail").onclick = function(){
-        console.log(formatemail);
+        //console.log(formatemail);
         if(formatemail == 1){
             //emailApi();
             if(document.getElementById("email").value != pageObj["email"]){
@@ -331,7 +330,7 @@ function inputInfo(){
     document.getElementsByName('mno')[0].value = pageObj["mno"];
     document.getElementsByName('id')[0].value = pageObj["id"];
     document.getElementsByName('mname')[0].value = pageObj["name"];
-    console.log(pageObj["name"]);
+    //console.log(pageObj["name"]);
     var phoneSplit = pageObj["phone"].split('-');
     document.getElementById('phone1').value = phoneSplit[0];
     document.getElementById('phone2').value = phoneSplit[1];
@@ -355,7 +354,7 @@ function emailDuplChk() {
         email: $("#email").val(),
       },
       success: function (data) {
-        console.log(data);
+        //console.log(data);
         var key = JSON.parse(data);
         if (key != 0) {
           alert("해당 이메일로 가입된 아이디가 존재합니다.");
@@ -369,7 +368,7 @@ function emailDuplChk() {
 
 // 인증번호 이메일 전송 
 function emailApi(){
-       console.log("이메일인증 클릭");
+       //console.log("이메일인증 클릭");
        var email = $(".mail_input").val();        // 입력한 이메일
        
        $.ajax({

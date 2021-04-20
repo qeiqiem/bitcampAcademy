@@ -87,7 +87,7 @@ public class UserController {
 	
 	@RequestMapping(value="/bnoChk.do",method=RequestMethod.POST)
 	@ResponseBody
-	public int bnoChk(int bno) {
+	public int bnoChk(String bno) {
 		return userService.bnoChk(bno);
 	}
 	@RequestMapping(value = "/likeOff.do", method = RequestMethod.POST)
@@ -367,7 +367,7 @@ public class UserController {
 	}
 	@RequestMapping(value="/getLaundryList.do", method = RequestMethod.POST, produces = "application/text;charset=utf-8")
 	@ResponseBody
-	public String getLaundryList(int bno) {
+	public String getLaundryList(String bno) {
 		Gson gson = new Gson();
 		return gson.toJson(userService.getLaundryList(bno));
 	}
@@ -377,9 +377,4 @@ public class UserController {
 		Gson gson = new Gson();
 		return gson.toJson(userService.getPerson(mno));
 	}
-	
-	
-
-	
-  
 }

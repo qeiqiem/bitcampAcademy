@@ -7,7 +7,7 @@ $(document).ready(function() {
     printList();
 });
 function modalAjax(bno) { //ajax로 리스트 받아오기
-    console.log('ajax 함수 진입');
+    //console.log('ajax 함수 진입');
     $.post({
         url:"/getLaundryList.do",
         data:{bno:bno},
@@ -15,7 +15,7 @@ function modalAjax(bno) { //ajax로 리스트 받아오기
             var list=JSON.parse(data);
             modalprint(list);
             openModal();
-            console.log('ajax 완료');
+            //console.log('ajax 완료');
         }
     });
 }
@@ -84,13 +84,13 @@ function initBodyEvent() {
     initModal();//모달 이벤트 관리fn
     var table=$('#single_option');
     $('.content').on('click','.unlikeBtn',function() {//좋아요 취소 버튼 클릭
-        var bno=Number($(this).attr("value"));
+        var bno=$(this).attr("value");
         likeObj.bno=bno;
         likeOff(likeObj);
     });
     $('.content').on("click",'.rsvBtn',function() {
         var bno=$(this).attr('id').substr(6);
-        rsvObj.rbno=Number(bno);//업체의 bno
+        rsvObj.rbno=bno;//업체의 bno
         alertObj.addressee=Number($(this).val());//업체의 mno 
         modalAjax(bno);
     });
@@ -153,6 +153,7 @@ function initSide() {
 function printList() {
     $('.card').remove();
     $.each(likedBsList,function(key,value){
+        var address= value.address.replaceAll(',',' ');
         $('.content').append(
                 '<div class="card" id="card'+value.bno+'">'+
                 '<div class="bsTagLeft">'+
@@ -164,7 +165,7 @@ function printList() {
                     '</div>'+
                     '<div class="tagBottom">'+
                         '<i class="fas fa-map-marker-alt"></i>'+
-                        '<span class="address">'+value.address+'</span>'+
+                        '<span class="address">'+address+'</span>'+
                         '<i class="fas fa-phone-alt"></i>'+
                         '<span class="phone">'+value.phone+'</span>'+
                         '<i class="fas fa-star"></i>'+
@@ -196,8 +197,7 @@ function initModal() {//모달 이벤트 관리
         }else {
             resListSet();//체크된 품목 리스트 입력
             rsvObj.totalPrice=totalPrice;//총 금액 입력
-            requestPay(totalPrice);
-            // console.log(JSON.stringify(rsvObj));
+            $(".choicePay").show();
         }
     });
     $("#mask").click(function(){//마스크 쪽이 눌렸다면
@@ -206,12 +206,31 @@ function initModal() {//모달 이벤트 관리
     $("#agreement i").click(function() {
         $(this).toggleClass('fa-chevron-down');
         $(this).toggleClass('fa-chevron-up');
-        console.log($(this).css('display'));
+        //console.log($(this).css('display'));
         if($('.termsText').eq($(this).attr('value')).css('display')=="none"){
             $('.termsText').eq($(this).attr('value')).show();
         }else{
             $('.termsText').eq($(this).attr('value')).hide();
         }
+    });
+       //버튼이벤트
+    $("#kakaoPay").click(function() {
+        var payType = 1
+        requestPay(payType)
+        $(".choicePay").hide();
+        $("#mask").show()
+    });
+    $("#toss").click(function() {
+        var payType = 2
+        requestPay(payType)
+        $(".choicePay").hide();
+        $("#mask").show()
+    });
+    $("#ectPay").click(function() {
+        var payType = 3
+        requestPay(payType)
+        $(".choicePay").hide();
+        $("#mask").show()
     });
 }
 function resListSet(){
@@ -239,14 +258,32 @@ function modalClose() {
     $('#modal_container').hide();
     $("#mask").hide();
 }
-function requestPay(totalPrice) {
+function requestPay(payType) {
+    //버튼값에따라 pay open
+    switch (payType) {
+        case 1:
+            //kakao
+            IMP.init("imp27421713")
+            break;
+            
+        case 2:
+            //toss
+            IMP.init("imp76861865")
+            break;	
+            
+        case 3:
+            //ectpay
+            IMP.init("imp02061320")
+         break;
+   }
+
     //결제관련 api 기능
      IMP.request_pay({
            pg : 'kakao', // 결제방식
            pay_method : 'card',   // 결제 수단
            merchant_uid : 'merchant_' + new Date().getTime(),
            name : '주문명: 결제 테스트',   // order 테이블에 들어갈 주문명 혹은 주문 번호
-           amount : totalPrice,   // 결제 금액
+           amount : rsvObj.totalPrice,   // 결제 금액
            buyer_email : 'test',   // 구매자 email
            buyer_name :  'test',   // 구매자 이름
            buyer_tel :  'test',   // 구매자 전화번호
@@ -264,7 +301,9 @@ function requestPay(totalPrice) {
           msg += '이름 : ' + rsp.buyer_name
           msg += '우편번호 : ' + rsp.buyer_postcode
           rsvAjax();
+          alert('주문이 접수되었습니다.');
           modalClose();
+          location.href="/jsp/mypageUser/mypagePs.jsp";
           //알림과 insert 들어갈 예정
        } else { // 실패시
           var msg = '결제에 실패하였습니다.';

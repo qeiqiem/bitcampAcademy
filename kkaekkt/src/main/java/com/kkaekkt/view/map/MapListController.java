@@ -34,110 +34,42 @@ public class MapListController {
 	@Autowired
 	UserService userService;
 	
-//	    @RequestMapping(value="/showMap.do", method = {RequestMethod.GET, RequestMethod.POST})
-//	    public String loginView( HttpSession session ,Model model ,int type, String search) throws UnknownHostException {
-//	    	AccountVO vo = new AccountVO();
-//	    	
-//	       if(session.getAttribute("user")==null) {//비 로그인 상태
-//	          vo.setMtype(0);
-//	          vo.setMno(0);
-//	       
-//	          if(type==1) {
-//	             vo.setAddress("강동구, 천호동");
-//	          }else {
-//	             vo.setAddress("강동구, 천호동");
-//	          }
-//	          
-//	          model.addAttribute("user", vo);
-//	       }else { //로그인 상태
-//	          vo=(AccountVO)session.getAttribute("user");
-//	          vo=userService.getPerson(vo.getMno());
-//	          
-//	          if(type==1) {//일반 세탁소
-//	        	  
-//	        	 String address = vo.getAddress(); 
-//
-//	        	 String[] arrayDong = address.split(",");
-//	        	 String[] loadaddr = arrayDong[1].split("로");
-//	        	 String addr = loadaddr[0];
-//	        	 addr = addr.substring(3,addr.length());
-//	        	 
-//	        	 String dong = arrayDong[3].trim();
-//	        	 dong = dong.substring(1,dong.length()-1);       	 
-//	        	 addr = addr+","+dong;
-//	        	 
-//	        	 System.out.println(addr); 
-//	        	 vo.setAddress(addr);	        	 
-//	        	 
-//	          }else {//코인 세탁소
-//	        	  
-//	        	 String address = vo.getAddress(); 
-//
-//	        	 String[] arrayDong = address.split(",");
-//	        	 String[] loadaddr = arrayDong[1].split("로");
-//	        	 String addr = loadaddr[0].trim();
-//	        	 addr = addr.substring(3,addr.length());
-//	        	 
-//	        	 String dong = arrayDong[3].trim();
-//	        	 dong = dong.substring(1,dong.length()-1);       	 
-//	        	 addr = addr+","+dong;
-//	        	 
-//	        	 System.out.println(addr); 
-//	        	 vo.setAddress(addr);	
-//
-//	          }
-//	          session.setAttribute("user",vo);
-//	       }
-//	       return "jsp/searchMap/map.jsp";
-//	    }
-//	    
-	
-	
-    @RequestMapping(value="/showMap.do", method = {RequestMethod.GET, RequestMethod.POST}, produces="application/text;charset=utf-8")
-    public String loginView( HttpSession session ,Model model ,String search) throws UnknownHostException {
-       AccountVO vo = new AccountVO();
-       if(session.getAttribute("user")==null) {//비 로그인 상태
-          vo.setMtype(0);
-          vo.setMno(0);
-          
-          if(search==null) {
-        	  vo.setAddress("강동구,천호동");                            
-          }else {
-             vo.setAddress(search+",");
-          }
-          
-          model.addAttribute("user", vo);
-       }else { //로그인 상태
-    	   
-          vo=(AccountVO)session.getAttribute("user");
-          vo=userService.getPerson(vo.getMno());
-          
-          if(search==null) {
-             String address = vo.getAddress(); 
-             
-             String[] arrayDong = address.split(",");
-             String[] loadaddr = arrayDong[1].split("로");
-             String addr = loadaddr[0].trim();
-             addr = addr.substring(3,addr.length());
-             
-             String dong = arrayDong[3].trim();
-             dong = dong.substring(1,dong.length()-1);           
-             addr = addr+","+dong;
-             
-             System.out.println(addr); 
-             vo.setAddress(addr);        
-             
-          }else {
-             vo.setAddress(search+",");
-          }
-          
-          session.setAttribute("user",vo);
-       }
-       return "jsp/searchMap/map.jsp";
-    }
-	
-	
-	
+	    @RequestMapping(value="/showMap.do", method = {RequestMethod.GET, RequestMethod.POST})
+	    public String loginView( HttpSession session ,Model model ,String search) throws UnknownHostException {
+	    	AccountVO vo = new AccountVO();
+	       if(session.getAttribute("user")==null) {//비 로그인 상태
+	          vo.setMtype(0);
+	          vo.setMno(0);
+	          if(search==null) {
+	        	  vo.setAddress("강동구 천호동");        	  	        	  
+	          }else {
+	        	  vo.setAddress(search);
+	          }	          
+	          model.addAttribute("user", vo);
+	       }else { //로그인 상태
+	          vo=(AccountVO)session.getAttribute("user");
+	          vo=userService.getPerson(vo.getMno());
+	          if(search==null) {
+	        	  String address = vo.getAddress(); 
+	        	  
+	        	  String[] arrayDong = address.split(",");
+	        	  String[] loadaddr = arrayDong[1].split("로");
+	        	  String addr = loadaddr[0].trim();
+	        	  addr = addr.substring(3,addr.length());
+	        	  
+	        	  String dong = arrayDong[3].trim();
+	        	  dong = dong.substring(1,dong.length()-1);       	 
+	        	  addr = addr+","+dong;
+	        	  
+	        	  System.out.println(addr); 
+	        	  vo.setAddress(addr);		        	  
+	          }else {
+	        	  vo.setAddress(search);
+	          }
+	          session.setAttribute("user",vo);
+	       }
+	       return "jsp/searchMap/map.jsp";
+	    }
 		@RequestMapping(value="/maplist.do", method=RequestMethod.POST,produces="application/text;charset=utf-8")   
 		public @ResponseBody String maplist(String keyaddr, int type) {
 		      String keyword = keyaddr;
@@ -162,7 +94,7 @@ public class MapListController {
 				
 		//업체 시간조회
 		@RequestMapping(value="/singleTime.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
-		public @ResponseBody String singleList(int bno) {
+		public @ResponseBody String singleList(String bno) {
 			List<SingleListVO>single = mapserv.selectSingle(bno); 
 			Gson gson=new Gson(); 
 			String singleList = gson.toJson(single); 			
@@ -171,7 +103,7 @@ public class MapListController {
 	  
 		//일반세탁 사양/가격조회
 		@RequestMapping(value="/singleOption.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
-		public @ResponseBody String singleOption(int bno) {
+		public @ResponseBody String singleOption(String bno) {
 			List<SingleListVO>single = mapserv.singleOption(bno); 
 			
 			Gson gson=new Gson(); 
@@ -182,7 +114,7 @@ public class MapListController {
 		
 		//회원업체 리뷰 조회
 		@RequestMapping(value="/reviewList.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
-		public @ResponseBody String reviewList(int bno) {
+		public @ResponseBody String reviewList(String bno) {
 			List<SingleListVO>single = mapserv.reviewList(bno); 
 			Gson gson=new Gson(); 
 			String singleList = gson.toJson(single); 
@@ -191,7 +123,7 @@ public class MapListController {
 		
 		//회원업체 별점별 리뷰조회
 		@RequestMapping(value="/reviewListGrade.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
-		public @ResponseBody String reviewListGrade(int bno) {
+		public @ResponseBody String reviewListGrade(String bno) {
 			List<SingleListVO>single = mapserv.reviewListGrade(bno); 
 			
 			Gson gson=new Gson(); 

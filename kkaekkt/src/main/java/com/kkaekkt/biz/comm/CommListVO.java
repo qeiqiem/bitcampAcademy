@@ -5,7 +5,7 @@ import java.util.List;
 public class CommListVO extends Criteria{
 	private final int COMMS_PER_PAGE=10;
 	private int mno;
-	private int bno;
+	private String bno;
 	private int order; // 정렬 : 1.등록 순  2.평점 순
 	private String search; //검색어
 	private int searchOption; // 1.이름   2.주문번호 조회 3.평점
@@ -42,10 +42,11 @@ public class CommListVO extends Criteria{
 	public void setMno(int mno) {
 		this.mno = mno;
 	}
-	public int getBno() {
+	
+	public String getBno() {
 		return bno;
 	}
-	public void setBno(int bno) {
+	public void setBno(String bno) {
 		this.bno = bno;
 	}
 	public int getOrder() {

@@ -4,9 +4,8 @@ var socket = null;
 $(document).ready(function () {
   connectWs();
   fadeIn();
-  initIndexEvent()
+  initIndexEvent();
 });
-
 function connectWs() {
   // socket = new WebSocket("ws://localhost:8080/echo.do");
   socket = new WebSocket("ws://54.180.33.3:8080/echo.do");
@@ -36,27 +35,28 @@ function connectWs() {
         
         var guestRoomLi=$('#'+sendermno+'roomLi'+roomnum);//헤더의 채팅방 리스트에 상대방과의 채팅방 추출
         var guestRoom=$('#'+sendermno+'room'+roomnum);
-        var chat={//채팅로그를 더하기 위한 객체
-          roomnum:roomnum,
-          sender:sendermno,
-          content:content,
-          stime:dateTime(),
-          state:1
-        }
-        var room={//헤드의 채팅방을 만들기 위한 객체
-          addressee:sendermno,
-          roomnum:roomnum,
-          guest:senderName,
-          content:content,
-          counts:1
-        };
         if(guestRoom[0]!=undefined){//상대방과 열려있는 채팅방이 있다면
+          var chat={//채팅로그를 더하기 위한 객체
+            roomnum:roomnum,
+            sender:sendermno,
+            content:content,
+            stime:dateTime(),
+            state:1
+          }
           readChat({roomnum:roomnum,sender:chatObj.sender});
           appendChat(chat);//채팅로그를 추가한다.
         }else{//열려있는 채팅방이 없다면
           if(guestRoomLi[0]!=undefined){//헤드 채팅방 리스트에 해당 채팅방이 있다면
+            initLastChat(roomnum,content);
             rlDotCountUp(roomnum);
           }else{//헤드 채팅방 리스트에 해당 채팅방이 없다면
+            var room={//헤드의 채팅방을 만들기 위한 객체
+              addressee:sendermno,
+              roomnum:roomnum,
+              guest:senderName,
+              content:content,
+              counts:1
+            };
             printRoomLi(room);//헤더에 상대방과의 채팅방을 생성한다.
           }
         }
@@ -83,6 +83,14 @@ function fadeIn() {
   $(".search_box").addClass("animate__animated animate__fadeInUp");
 }
 
+// $(".btn1").click(function () {
+//   $(this).toggleClass("btn_selected");
+//   $(".btn2").removeClass("btn_selected");
+// });
+// $(".btn2").click(function () {
+//   $(this).toggleClass("btn_selected");
+//   $(".btn1").removeClass("btn_selected");
+// })
 function initIndexEvent(){
   $('.search_tab button').click(function(){
     $(this).addClass('btn_selected');
@@ -91,28 +99,28 @@ function initIndexEvent(){
 }
 
 function showMap() {
-	   var num = ""
-	   var inputText = $("#searchBar").val();
+	var num = ""
+	var inputText = $("#searchBar").val();
 
-	   num = $('.btn_selected').attr('value');
-	   
-	   if(num = "" || inputText == ""){
-	    alert("거주하는 시/군/구와 동이름을 입력해주세요. ")
-	    return;
-	  }
-	   
-	   var mapUrl = '/showMap.do'   
-	   switch (num) {
-	   case "1":
-	      location.href = mapUrl+'?type=1&search='+inputText;
-	      break;
+	num = $('.btn_selected').attr('value');
+	
+	if(num = "" || inputText == ""){
+    alert("거주하는 시/군/구와 동이름을 입력해주세요. ")
+    return;
+  }
+	
+	var mapUrl = '/showMap.do'	
+	switch (num) {
+	case "1":
+		location.href = mapUrl+'?type=1&search='+inputText;
+		break;
 
-	   case "2":
-	      location.href = mapUrl+'?type=2&search='+inputText;
-	      break;
-	      
-	   default:
-	      location.href = mapUrl+'?type=1&search='+inputText;
-	      break;
-	   }
+	case "2":
+		location.href = mapUrl+'?type=2&search='+inputText;
+		break;
+    
+	default:
+		location.href = mapUrl+'?type=1&search='+inputText;
+		break;
+	}
 }

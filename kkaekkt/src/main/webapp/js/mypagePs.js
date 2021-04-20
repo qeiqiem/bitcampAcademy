@@ -26,8 +26,8 @@ function initEvent() {
             chatObj.mno=alertObj.sender;
             chatObj.addressee=addressee;
             var guest=$('#rsvBox'+rsvNum+' .mno')[0].innerHTML;//해당 예약번호의 주문박스 안에 mno클래스로 접근해서 업체명을 추출
-            chatObj.bno=Number($('#rsvBox'+rsvNum+' .like').eq(0)//해당 예약번호의 주문박스 안에 like클래스로 접근
-                                                           .attr('value'));//value 속성으로 접근해서 업체번호 추출
+            chatObj.bno=$('#rsvBox'+rsvNum+' .like').eq(0)//해당 예약번호의 주문박스 안에 like클래스로 접근
+                                                           .attr('value');//value 속성으로 접근해서 업체번호 추출
             crtRoom(guest);
         }
     });
@@ -62,7 +62,7 @@ function initEvent() {
         }
     });
     $('.rsvList').on('click','i.fa-heart',function() {//좋아요버튼
-        likeObj.bno=Number($(this).attr('value'));
+        likeObj.bno=$(this).attr('value');
         if($(this).hasClass('unlike')) {
             $(this).removeClass('unlike');
             likeOn(likeObj);
@@ -148,10 +148,13 @@ function initPageObj(data) {
     pageObj.isNextExist=data.isNextExist;
     pageObj.isPrevBlockExist=data.isPrevBlockExist;
     pageObj.isPrevExist=data.isPrevExist;
+    if(pageObj.blockLastPageNum==0){
+        $('.noList').attr('style','');
+    }
     initPageBtn();
 }
 function ajax() { //ajax로 리스트 받아오기
-    console.log('ajax 함수 진입');
+    //console.log('ajax 함수 진입');
     $.post({
         url:"/getRsvListPs.do",
         data:pageObj,
@@ -160,7 +163,7 @@ function ajax() { //ajax로 리스트 받아오기
             var list=rsv.rsvListRno;
             initPageObj(rsv);
             printlist(list);
-            console.log('ajax 완료');
+            //console.log('ajax 완료');
         }
     });
 }
@@ -172,7 +175,7 @@ function initSide() {
     
     $('.side_sub button').click(function() { // 서브 사이드 버튼(진행중인 주문, 완료된 주문) 클릭 시
         if($(this).index()==1){ //완료된 주문일 경우 이동  
-            console.log('완료 페이지로 이동');
+            //console.log('완료 페이지로 이동');
             location.href="mypagePs_com.jsp";
         }
     });

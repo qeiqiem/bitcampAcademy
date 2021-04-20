@@ -9,13 +9,7 @@
 		<title>Document</title>
 		<link rel="stylesheet" href="/css/join.css">
 		<link rel="stylesheet" href="/css/joinConfirmed.css">
-		<script src="https://kit.fontawesome.com/2fc57dd2db.js" crossorigin="anonymous"></script>
 	</head>
-	<style>
-		.confirmBox {
-			text-align: center;
-		}
-	</style>
 
 	<body>
 		<jsp:include page="/jsp/header.jsp"></jsp:include>
@@ -81,11 +75,12 @@
 				</div>
 				<div>
 					<button type="button" onclick="location.href='/index.do'">홈으로</button>
-					<button type="button" class="login_btn" onclick="login_show();" >로그인</button>
+					<button type="button" class="login_btn" onclick="login_show();">로그인</button>
 				</div>
 			</div>
 		</div>
 		<!-- footer -->
+		<jsp:include page="/jsp/footer.jsp"></jsp:include>
 	</body>
 
 	</html>

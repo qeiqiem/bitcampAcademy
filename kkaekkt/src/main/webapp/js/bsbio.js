@@ -16,7 +16,7 @@ const regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z]
 const regAccount=/^[0-9,\-]{3,6}\-[0-9,\-]{2,6}\-[0-9,\-]{3,6}(\-[0-9]{1,3})?$/;
 const regMailCode =/^[0-9]{6}$/;
 
-const content = document.getElementsByClassName("content")[0];
+const content = document.getElementsByClassName("bio_wrap")[0];
 const bizMemberInfo = document.getElementsByClassName("bizMemberInfo")[0];
 let inputli = content.getElementsByTagName('input');
 let buttonli = bizMemberInfo.getElementsByTagName('button');
@@ -136,8 +136,8 @@ window.onload = function () {
             if (inputNpwd.value.length == 0) {
                 document.getElementById("checkval").innerText = "";
             } else {
-                document.getElementById("checkval").innerText
-                = " 비밀번호 양식과 맞지 않습니다. (특수문자,문자,숫자 포함 8~15자리이내)";
+                document.getElementById("checkval").innerHTML
+                = " 비밀번호 양식과 맞지 않습니다. <br>(특수문자, 문자, 숫자 포함 8~15자리 이내)";
             }
             formatnewpw = 0;
         } else {
@@ -224,13 +224,13 @@ window.onload = function () {
         if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
             var inputVal = $(this).val();
             $(this).val(inputVal.replace(/[^0-9]/gi, ""));
-        } else {
+        } 
             if (!regPhone.test(inputphone.value)) {
                 formatphone1 = 0;
             } else {
                 formatphone1 = 1;
             }
-        }
+        
     })
     $("#phone2").keyup(function (event) {
         formatphone2 = 0;
@@ -238,12 +238,12 @@ window.onload = function () {
         if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
             var inputVal = $(this).val();
             $(this).val(inputVal.replace(/[^0-9]/gi, ""));
-        } else {
+        } 
             if (!regPhone.test(inputphone.value)) {
                 formatphone2 = 0;
             } else {
                 formatphone2 = 1;
-            }
+            
         }
     })
     $("#phone3").keyup(function (event) {
@@ -252,13 +252,13 @@ window.onload = function () {
         if (!(event.keyCode >= 37 && event.keyCode <= 40)) {
             var inputVal = $(this).val();
             $(this).val(inputVal.replace(/[^0-9]/gi, ""));
-        } else {
+        } 
             if (!regPhone.test(inputphone.value)) {
                 formatphone3 = 0;
             } else {
                 formatphone3 = 1;
             }
-        }
+        
     })
 
     // 이메일 입력형식 확인

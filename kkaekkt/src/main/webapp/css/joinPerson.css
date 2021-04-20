@@ -5,7 +5,9 @@
   margin: auto;
   text-align: left;
 }
-
+footer{
+  margin-top: 75px;
+}
 h3 {
   text-align: center;
   margin: 10%;
@@ -60,7 +62,7 @@ form div button:hover {
 }
 
 .wrapper_select {
-  height: 2000px;
+  height: 1730px;
 }
 
 /* #postcode {

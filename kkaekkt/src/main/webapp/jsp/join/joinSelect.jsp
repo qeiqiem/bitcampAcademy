@@ -9,8 +9,12 @@
         <title>Document</title>
         <script src="https://kit.fontawesome.com/2fc57dd2db.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="/css/join.css">
-
     </head>
+    <style>
+        .wrapper_select {
+            height: auto;
+        }
+    </style>
 
     <body>
         <jsp:include page="/jsp/header.jsp"></jsp:include>
@@ -91,11 +95,9 @@
                         </div>
                     </div>
                 </div>
-                <!-- <footer>
-                
-                </footer> -->
             </div>
-
+            <!-- footer -->
+            <jsp:include page="/jsp/footer.jsp"></jsp:include>
 
     </body>
 

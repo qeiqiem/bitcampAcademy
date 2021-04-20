@@ -80,7 +80,8 @@
 		<script src="/js/kakaoLogin.js"></script>
 		<script type="text/javascript">
 			var naver_id_login = new naver_id_login("kEvFCZyOPXmysr20FrkK",
-				"http://localhost:8080/jsp/login/callback.jsp");
+				//"http://localhost:8080/jsp/login/callback.jsp";
+				"http://54.180.33.3:8080/jsp/login/callback.jsp");
 			var state = naver_id_login.getUniqState();
 			// naver_id_login.setButton("green", 4, 45);
 			naver_id_login.setDomain("/jsp/index.jsp");

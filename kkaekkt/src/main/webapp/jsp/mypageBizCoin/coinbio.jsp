@@ -9,6 +9,7 @@
         <title>매장관리</title>
         <script src="https://kit.fontawesome.com/415f6f6023.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="/css/bsbio.css">
+        <link rel="stylesheet" href="/css/delete.css">
         
 
     </head>
@@ -160,8 +161,52 @@
                             <input type="hidden" name="mno" value="" id="mno">
                     
                 </form>
-            </div>
+                 <!-- 모달부분 -->
+			<div id="mask"></div>
+			<p id="textDel">
+				kkækkt을 탈퇴하고 싶으신가요? 정말요?...
+				<a href="#" onclick="delete_show();" id="modal_show" style="cursor: pointer;">회원탈퇴</a>
+				<input type="hidden" class="DUorderChk" value="${reservation.count}" />
+			</p>
+            <style>
+                #textDel{
+                    margin: 80px 0 0 43px;
+                }
+                #mask{
+                    top: 0;
+                    left: 0;
+                }
+            </style>
+			<div class="word">
+				<div id="modal_container">
+					<button id="modal_close">
+						<i class="fas fa-times"></i>
+					</button>
+					<div id="modal_bodycont">
+						<!--  <form action="/deletePs.do" name=form method="POST">-->
+						<div id="modal_head">
+							<div>
+								<input name="name" id="name" value="${sessionScope.user.name} 님" readonly>
+							</div>
+							<!-- <hr> -->
+							<p>탈퇴하면 모든 정보가 지워집니다. <br>정말 탈퇴하시겠어요?</p>
+							<div>
+								<input id="deleteid" name="id" value="${sessionScope.user.id}" readonly />
+								<br>
+								<input type="password" name="password" id="deletepwd" onkeyup="enterkey();"
+									placeholder="비밀번호">
+							</div>
+						</div>
 
+						<div id="modal_foot">
+							<input id="yes" type="button" value="예" onclick="cheekpwd()" />
+							<input id="nope" type="button" value="아니오" />
+						</div>
+						<!--  </form> -->
+					</div>
+				</div>
+			</div>
+            </div>
         </div>
         <script>
             var pageObj={//세션에서 정보를 받아오는건 독립된 js파일에서 불가능, jsp 내에서만 가능하기 때문에 여기서 값을 받아준다.
@@ -183,6 +228,7 @@
            
 </script>
         <script src="/js/bsbio.js"></script>
+        <script src="/js/delete.js"></script>
 
     </body>
 
