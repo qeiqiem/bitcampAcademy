@@ -138,8 +138,10 @@ function initChatEvent(){
     });
     $('.chatContainer').on('keydown','.chatText',function(key){
         if(key.keyCode == 13) {
-            $(this).siblings() //채팅입력박스 우측에 입력 버튼 지정
-                   .trigger('click'); //클릭 이벤트 활성화
+            if($(this)[0].value!=""){
+                $(this).siblings() //채팅입력박스 우측에 입력 버튼 지정
+                       .trigger('click'); //클릭 이벤트 활성화
+            }
         }
     });
 }
