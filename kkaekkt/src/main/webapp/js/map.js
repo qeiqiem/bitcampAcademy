@@ -14,13 +14,17 @@ $(document).ready(function() {
 		   	var mapaddr = []
 			    mapaddr = useraddress.split(",")
 			    //주소정보
-			    useraddress = mapaddr[0]	   	
+			    useraddress = mapaddr[0]+""+mapaddr[1]   	
 			   	// 주소 정보 출력
 			   	$(".slide_mini").html(useraddress)	  			   	
 			  var maploc = mapaddr[1]
 		   		locationFind(maploc)   
 			    
 		   }else {	//비로그인
+			   var mapaddr = []
+			    mapaddr = useraddress.split(",")
+			    //주소정보
+			    useraddress = mapaddr[0]+""+mapaddr[1]   
 			   $(".slide_mini").html(useraddress)
 			   lat = "37.527"; // 위도
 			   lon = "127.125";   // 경도	
@@ -40,7 +44,7 @@ $(document).ready(function() {
    $("#agreement i").click(function() {//약관 클릭 시
       $(this).toggleClass('fa-chevron-down');
       $(this).toggleClass('fa-chevron-up');
-      //console.log($(this).css('display'));
+      console.log($(this).css('display'));
       if($('.termsText').eq($(this).attr('value')).css('display')=="none"){
           $('.termsText').eq($(this).attr('value')).show();
       }else{
@@ -98,23 +102,54 @@ $(document).ready(function() {
    $('.list').on("click", ".gradescore", function() { alert("준비중입니다.")})
    
    // 2. 단일업체 페이지 전환
+   //뒤로가기
+   $('.backList').click(function() {
+	   $('.single').hide()
+	   $('.list').show()
+   	})	
+   	
+   	//테이블 클릭시 싱글페이지 출력
    $('table').on("click", ".place_body", function() {
 		   var s_title = $(this).find('td');
-         bizMno=Number(s_title.attr('id').substr(6));
-		   findSingle(s_title);
+		   bizMno=Number(s_title.attr('id').substr(6));
+         
+		   findSingle(s_title);		   
 		   findReview(bno)  
 	   })   
 	   
    $(".latest").on("click",function() { findReview(bno)  }) 
    $(".grade").on("click",function() { findReviewGrade(bno) })  
    $(".likeThis").on("click",function() {
-	   alert("반응") 
-	   
-   })  
-	   
+	   console.log('클릭')
+	   if($("#heart").css("color")=="rgb(221, 221, 221)"){//좋아요가 눌리지않은 상태라면
+		   likeOn({mno:mno,bno:bno});
+		   $("#heart").css("color","var(--text-red)")
+	   }else{//좋아요가 눌린 상태라면
+		   likeOff({mno:mno,bno:bno});
+		   $("#heart").css("color","var(--gray-color)")
+	   }
+   });  
+   function likeOn(likeObj) {
+	    $.post({
+	        url:"/likeOn.do",
+	        data:likeObj
+	    });
+	}
+   function likeOff(likeObj) {
+	    $.post({
+	        url:"/likeOff.do",
+	        data:likeObj
+	    });
+	}
    // 2-1. 업체 블록페이지
+   $('.infoBtn').click(function(){
+	    $(this).addClass('checked');
+	    $(this).siblings().removeClass('checked');
+	});
+   
+  
    $('#infoData').click(function() { $('.cardinfo').show(); $('.cominfo').hide();})
-   // 2-2. 리뷰 블록페이지
+    //2-2. 리뷰 블록페이지
    $('#infoReview').click(function() { $('.cardinfo').hide(); $('.cominfo').show();})
 
    // 3. 예약슬라이드 (2depth) show
@@ -196,8 +231,7 @@ $(document).ready(function() {
          alert("지불할 금액이없습니다. 옵션을 선택해주세요.")
       }else {
 		  $("#mask").show()
-        insertResList();
-    	//   $(".choicePay").show();
+		  insertResList()
       }     
    })
    
@@ -207,7 +241,6 @@ $(document).ready(function() {
 	   requestPay(payType)
 	   $(".choicePay").hide();
 	   $("#mask").show()
-	   
    })
       
    $("#toss").click(function() {
@@ -265,9 +298,7 @@ $(document).ready(function() {
       //bno를 가지고 select 하기위해 추출
       var bnoArray = s_title[0].outerHTML.split('value="')
       bnoArray = bnoArray[1].split('"')
-      bno = bnoArray[0]
-      
-      
+      bno = bnoArray[0]  
 
       //화면정보 출력
       name = s_title[0].innerText.substr(3)
@@ -277,7 +308,8 @@ $(document).ready(function() {
         if(star != null)
            $("#memberlog").html('<input class="tag_kkaekkt" value="kkarkkt 가맹점 입니다">')       
            
-        $("#s_title").html(name)
+        $("#s_title").html(name)      
+        $("#single_img").attr("src", '/img/Thumbnail/'+bno+'.PNG'); 
         $("#s_star").html(star)
         $("#s_address").html('<i class="fas fa-map-marker-alt"></i>&nbsp;'+address)
         $("#s_phone").html('<i class="fas fa-phone-alt"></i>&nbsp;'+phone)
@@ -293,10 +325,10 @@ $(document).ready(function() {
                , success: function(num) {
             	   var num = num
             	   if(num != 0){
-            		   $("#heart").css( "color", "red" )
+            		   $("#heart").css( "color", "var(--text-red)" )
             		   
             	   }else{
-            		   $("#heart").css( "color", "rgb(116, 116, 116)" )
+            		   $("#heart").css( "color", "var(--gray-color)" )
             	   }
             	   num = 0
 			}
@@ -324,35 +356,107 @@ $(document).ready(function() {
                        }   
        })       
      
-      //업체 가격정보 (추후 coin만 따로 만들예정:switch문으로)
-       $.ajax({
-           url:'/singleOption.do'
-           , method : 'POST'
-           , data: { bno : bno }
-           , dataType: 'json'
-           , success: function(data){ //성공후 처리는 추후 진행.  
-        	   			$("#single_option").empty()
-                        if(data==null)console.log("data 가 조회되지 않았습니다.") 
-                        var html =  ''
-                            html += '<tr><th class="option_title">1~3일 소요</th>'
-                            html += '<th class="option_title">금액(개당)</th></tr>'
-                              for (var j = 0; j <4; j++) {
-                                        var item = data[j].product              
-                                        var price = data[j].price
-                                        html += '<tr><td>'+item+'</td><td>'+price+'</td></tr>'
-                                    }
-                           html += '<tr><th class="option_title">4~7일 소요</th>'
-                           html += '<th class="option_title">금액(개당)</td></tr>'
-                              for (j; j <8; j++) {
-                                        var longitem = data[j].product              
-                                        var longprice = data[j].price
-                                        html += '<tr><td>'+longitem+'</td><td>'+longprice+'</td></tr>'
-                                    }
-                       $("#single_option").append(html)
-                  }                        
-       })
+       if( type == 1 ){
+    	 //업체 가격정보 (추후 coin만 따로 만들예정:switch문으로)
+           $.ajax({
+               url:'/singleOption.do'
+               , method : 'POST'
+               , data: { bno : bno }
+               , dataType: 'json'
+               , success: function(data){ //성공후 처리는 추후 진행.  
+            	   			$("#single_option").empty()
+                            if(data==null)console.log("data 가 조회되지 않았습니다.") 
+                            var html =  ''
+                                html += '<tr><th class="option_title">1~3일 소요</th>'
+                                html += '<th class="option_title">금액(개당)</th></tr>'
+                                  for (var j = 0; j <4; j++) {
+                                            var item = data[j].product              
+                                            var price = data[j].price
+                                            html += '<tr><td>'+item+'</td><td>'+price+'</td></tr>'
+                                        }
+                               html += '<tr><th class="option_title">4~7일 소요</th>'
+                               html += '<th class="option_title">금액(개당)</td></tr>'
+                                  for (j; j <8; j++) {
+                                            var longitem = data[j].product              
+                                            var longprice = data[j].price
+                                            html += '<tr><td>'+longitem+'</td><td>'+longprice+'</td></tr>'
+                                        }
+                           $("#single_option").append(html)
+                      }                        
+           })
+       }else{
+    	   var equipmentNames=['중형세탁기','대형세탁기','특대형세탁기','건조기'];  
+    	   var etcNames=['향균세탁','특수세제','섬유유연제','픽업봉투'];
+    	   var html="";
+         var etcHtml="";
+         var equipmentHtml="";
+    	   $.ajax({
+               url:'/singleOptionCoin.do'
+               , method : 'POST'
+               , data: { bno : bno }
+               , dataType: 'json'
+               , success: function(data){ //성공후 처리는 추후 진행.
+                  console.log(data+'...데이터체크');  
+            	   var equipmentList = data.equipmentList;      
+            	   var etcList=data.etcList;   
+                  console.log(JSON.stringify(equipmentList));
+                  console.log(JSON.stringify(etcList));
+                  console.log(equipmentList[0].eno);
+            	   $("#single_option").empty()
+                   if(data==null){
+                	   console.log("data 가 조회되지 않았습니다.") 
+                	   return;
+                   }else{
+                     for (var j = 0; j <equipmentList.length; j++) {      
+                        console.log(equipmentNames[(equipmentList[j].eno-1)]);
+                        if(equipmentList[j].eno!=4){
+                           equipmentHtml+='<tr>'+
+                                             '<td>'+equipmentNames[(equipmentList[j].eno-1)]+'</td>'+
+                                             '<td>'+equipmentList[j].cnt+'</td>'+
+                                             '<td>'+equipmentList[j].price+'</td>'+
+                                          '</tr>'
+                        }else{
+                           equipmentHtml+='<tr>'+
+                                             '<th class="singleCoin">건조기</th>'+
+                                             '<th class="singleCoin">개수</th>'+
+                                             '<th class="singleCoin">회당이용금액</th>'+
+                                          '</tr>'+
+                                          '<tr>'+
+                                             '<td>'+equipmentNames[(equipmentList[j].eno-1)]+'</td>'+
+                                             '<td>'+equipmentList[j].cnt+'</td>'+
+                                             '<td>'+equipmentList[j].price+'</td>'+
+                                          '</tr>'
+                        }
+                     }
+                     console.log(equipmentHtml);
+                     for (var j = 0; j <etcList.length; j++) {
+                        etcHtml+='<tr>'+
+                                    '<td>'+etcNames[(etcList[j].etcno-1)]+'</td><td></td>'+
+                                    '<td>'+etcList[j].price+'</td>'+
+                                 '</tr>'
+                     }
+                     console.log(etcHtml);
+                	   html='<tr>'+
+                                 '<th class="singleCoin">세탁기</th>'+
+                			         '<th class="singleCoin">개수</th>'+
+                				      '<th class="singleCoin">분당이용금액</th>'+
+                              '</tr>'+
+                                 equipmentHtml+
+                	            '<tr>'+
+                                 '<th class="singleCoin">부가서비스</th>'+
+                                 '<th class="singleCoin"></th>'+
+                		            '<th class="singleCoin">이용금액</th>'+
+                              '</tr>'+
+                                 etcHtml;
+                			   $("#single_option").append(html);                	   
+                   }
+               }                        
+           })
+       }
+      
        
       $('.list').hide()
+      $('.backList').show()
       $('.single').show()      
    }
    function resetInput() {
@@ -441,6 +545,8 @@ $(document).ready(function() {
    
    // selectbox 옵션
    function selectNum() {
+      $(".resOpc").append(
+            '<option value="" selected disabled hidden selected>1</option>')
       for (var i = 1; i < 11; i++) {
          $(".resOpc").append(
                '<option value="' + i + '">' + i + '</option')
@@ -550,11 +656,12 @@ $(document).ready(function() {
    //화면단에있는 목록 가져오기
    function insertResList() {
 		 //뿌려져있는 row 체크
-		   var cntChk = $('.chked')
-		   var arrayRes = new Array();
+		 var cntChk = $('.chked')
+		 var arrayRes = new Array();
          var idx;
          var selc;
          var ddate;
+         
 		     for (var i = 0; i < cntChk.length ; i++) {		    	 
 		    	//lno 발최
 		      idx = $('.chked').eq(i).attr('id').charAt(3);
@@ -567,26 +674,29 @@ $(document).ready(function() {
                      ddate=7;
                }
 		     }
+		     
            rsvObj.resListData=JSON.stringify(arrayRes);
            rsvObj.ddate=ddate;
-		   $(".choicePay").show();		   
+		   $(".choicePay").show()		   
 	   }
    
  //리스트 컨트롤러로 보내기
    function mapRes() {
 	  rsvObj.mno = mno;
       rsvObj.totalPrice=totalPrice;
-      rsvObj.rbno=bno;
+      rsvObj.rbno=bno;      
+      
 	   $.ajax({
            url:'/respay.do'
            , method : 'POST'
            , data: rsvObj
            , success:function(result){
-           msgSet(result);
-           sendAlarm();
+            msgSet(result);
+            sendAlarm();
            }
-	   });
+	   })
    }
+   
    function today() {
       var date=new Date();
       var mm=date.getMonth()+1;
@@ -594,6 +704,7 @@ $(document).ready(function() {
       var today=date.getFullYear()+'.'+(mm<10?'0'+mm:mm)+'.'+(dd<10?'0'+dd:dd);
       return today;
   }
+   
   function msgSet(rsvNum) {
           alertObj.addressee=Number($('#addressee').val());
           alertObj.rsvNum=rsvNum;
@@ -611,17 +722,17 @@ $(document).ready(function() {
 	        type: "GET",
 	        async: "false",
 	        success: function (resp) {
-	            //console.log(resp.weather);
+	            console.log(resp.weather);
 	             
-	            //console.log("현재온도 : " + Math.floor(resp.main.temp - 273.15));
-	            //console.log("현재습도 : " + resp.main.humidity);
-	            //console.log("날씨 : " + resp.weather[0].main);
-	            //console.log("상세날씨설명 : " + resp.weather[0].description);
-	            //console.log("날씨 이미지 : " + resp.weather[0].icon);
-	            //console.log("바람   : " + resp.wind.speed);
-	            //console.log("나라   : " + resp.sys.country);
-	            //console.log("도시이름  : " + resp.name);
-	            //console.log("구름  : " + (resp.clouds.all) + "%");
+	            console.log("현재온도 : " + Math.floor(resp.main.temp - 273.15));
+	            console.log("현재습도 : " + resp.main.humidity);
+	            console.log("날씨 : " + resp.weather[0].main);
+	            console.log("상세날씨설명 : " + resp.weather[0].description);
+	            console.log("날씨 이미지 : " + resp.weather[0].icon);
+	            console.log("바람   : " + resp.wind.speed);
+	            console.log("나라   : " + resp.sys.country);
+	            console.log("도시이름  : " + resp.name);
+	            console.log("구름  : " + (resp.clouds.all) + "%");
 	            imgURL = "/img/weather/" + resp.weather[0].icon + ".png";
 	            var weatherText;
 	            if(resp.weather[0].main == "Clear"){
@@ -677,11 +788,13 @@ $(document).ready(function() {
 		  //주소로 위도, 경도 찾기
 		  $.getJSON('/jsp/searchMap/latLon.json', function(data) {			  
 		       $.each(data, function(i, result) {
-		    	   if( maploc.trim() == result.dong ){
-		    		   //console.log("동이름 : "+result.dong)
-		    		   //console.log("위도 : "+result.lat)
-		    		   //console.log("경도 : "+result.lon)    	
+		    	   maploc = maploc.trim(maploc)
+		    	   if( maploc == result.dong ){
+		    		   console.log("동이름 : "+result.dong)
+		    		   console.log("위도 : "+result.lat)
+		    		   console.log("경도 : "+result.lon)    	
 		    		   weather(result.lat,result.lon)
+		    		   
 		    	   }		
 		       })
 		   })
@@ -690,15 +803,25 @@ $(document).ready(function() {
 	  //위도, 경도로 동이름 검색
 	  function lonLatFind(lat,lon) {		  
 		  //주소로 위도, 경도 찾기
-		  $.getJSON('/jsp/searchMap/latLon.json', function(data) {			  
+		  $.getJSON('/jsp/searchMap/latLon.json', function(data) {					  var chkTf = true
 		       $.each(data, function(i, result) {
 		    	   if( lat == result.lat && lon == result.lon ){
-		    		   //console.log("동이름 : "+result.dong)
+		    		   console.log("동이름 : "+result.dong)
 		    		   useraddress = result.dong
 		    		   $(".slide_mini").html(useraddress)	 
 		    		   bindinglandry(useraddress)
+		    		   chkTf = false
 		    	   }		
 		       })
+		       
+		       if(chkTf){
+		    	  alert("현 위치를 찾을 수 없습니다. 검색을 이용해주세요.")
+		    	  $('.findPoint').prop('checked', false);
+		    	 
+		         $(".slide_mini").html("강동구 천호동")	
+		          useraddress = "강동구, 천호동"
+		         bindinglandry(useraddress)
+		       }
 		   })
 	}
 	

@@ -29,6 +29,9 @@ public class MapListDAO {
 	public List<SingleListVO> selectOption(String bno) {
 		return mybatis.selectList("MapListDAO.selectOption",bno); 
 	}
+	public List<CoinSingleListVO> selectOptionCoin(String bno) {
+		return mybatis.selectList("MapListDAO.CoinOption",bno);
+	}
 	
 	public List<SingleListVO> reviewList(String bno) {
 		return mybatis.selectList("MapListDAO.reviewList",bno); 
@@ -49,4 +52,5 @@ public class MapListDAO {
 	public int likeYn(SingleListVO vo) {
 		return mybatis.selectOne("MapListDAO.selectLike",vo);
 	}
+
 }

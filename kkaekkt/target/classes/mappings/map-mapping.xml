@@ -46,7 +46,31 @@
 			     , product
 			     , price 
 			  FROM laundryinfo
-			 WHERE bno = #{bno};
+			 WHERE bno = #{bno}
+			 AND price != 0;			 
+	</select>
+	
+	<!-- 코인 세탁기 사양조회-->
+	<select id="CoinOption" parameterType="String" resultType="singleCoin">
+			SELECT e.eno AS eno
+			     , cnt
+			     , price
+			     , e.ename AS ename
+			 FROM bsn_equipment be
+			 JOIN equipment e on e.eno = be.eno
+			 WHERE bno = #{bno}
+			 AND price != 0;			 
+	</select>
+	
+		<!-- 코인 부가서비스 사양조회-->
+	<select id="CoinEct" parameterType="String" resultType="singleCoin">
+			SELECT  etc.etcno AS etcno
+			     , price
+			     , e2.etcname AS etcname
+			 FROM bsn_etc etc
+			 JOIN etc e2 on etc.etcno = e2.etcno
+			 WHERE bno = #{bno}
+			 AND price != 0;
 	</select>
 	
 	
@@ -59,6 +83,8 @@
 			FROM infor_review 
 			WHERE bno = #{bno}
 			ORDER BY rdate DESC;
+			
+			
 	</select>
 	
 	<!-- 업체 리뷰 조회 : 별점순 -->

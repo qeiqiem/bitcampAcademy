@@ -109,11 +109,11 @@
 							<div id="pagination"></div>
 						</div>
 					</div>
-					<div class="footer single">
-						<button class="backList">
+					<button class="backList">
 							<i class="fas fa-arrow-left" aria-hidden="true"
-								style="margin-right: 10px;"></i> 뒤로가기
+								style="margin-right: 10px;"></i>
 						</button>
+					<div class="footer single">						
 						<div class="card">
 							<img id="single_img" onerror="this.src='/img/kkaekkt.png'" src=""
 								style="width: 100%; height: 224px; background-color: aliceblue;">
@@ -274,7 +274,7 @@
 </body>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=51280b09b2db933ece103871000a2518&libraries=services"></script>
-<!--<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3845f493917a302d1ea69e946c0443ff&libraries=services"></script>-->
+   <!--  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3845f493917a302d1ea69e946c0443ff&libraries=services"></script> -->
 <script>
 	//위도 경도
 	let lat;

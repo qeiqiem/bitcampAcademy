@@ -3,6 +3,7 @@ package com.kkaekkt.biz.map;
 import java.util.List;
 
 import com.kkaekkt.biz.user.AccountVO;
+import com.kkaekkt.biz.user.BusinessVO;
 
 public interface MapService {
 	//데이터 바인딩을 위한 리스트 조회.
@@ -13,4 +14,5 @@ public interface MapService {
 	public List<SingleListVO> reviewList(String bno);
 	public int respay(MapListVO mapvo);
 	public int likeYn(SingleListVO vo);
+	public BusinessVO singleOptionCoin(String bno);
 }
