@@ -336,27 +336,27 @@ $(document).ready(function() {
            })   
       }
 
-      //업체 업무시간 정보
-      $.ajax({
-           url:'/singleTime.do'
-           , method : 'POST'
-           , data: { bno : bno }
-           , dataType: 'json'
-           , success: function(data){ //성공후 처리는 추후 진행. 
-        	   			$("#s_time").empty()        	   		  
-                        if(data==null)console.log("data 가 조회되지 않았습니다.")                      
-                        var html = ''   
-                        html += ' <i class="far fa-clock"></i> 업무시간 </br>'
-                              for (var i = 0; i <7; i++) {
-                                        var week = data[i].week                 
-                                        var time = data[i].time
-                                        html += "&nbsp&nbsp&nbsp&nbsp<span class='weektext'>"+week+"</span>&nbsp"+time+"</br>"
-                                   }
-                        $("#s_time").append(html)         
-                       }   
-       })       
-     
        if( type == 1 ){
+    	 //업체 업무시간 정보
+    	   $.ajax({
+               url:'/singleTime.do'
+               , method : 'POST'
+               , data: { bno : bno }
+               , dataType: 'json'
+               , success: function(data){ //성공후 처리는 추후 진행. 
+            	   			$("#s_time").empty()        	   		  
+                            if(data==null)console.log("data 가 조회되지 않았습니다.")                      
+                            var html = ''   
+                            html += ' <i class="far fa-clock"></i> 업무시간 </br>'
+                                  for (var i = 0; i <data.length; i++) {
+                                            var week = data[i].week                 
+                                            var time = data[i].time
+                                            html += "&nbsp&nbsp&nbsp&nbsp<span class='weektext'>"+week+"</span>&nbsp"+time+"</br>"
+                                       }
+                            $("#s_time").append(html)         
+                           }   
+           })       
+           
     	 //업체 가격정보 (추후 coin만 따로 만들예정:switch문으로)
            $.ajax({
                url:'/singleOption.do'
@@ -376,7 +376,7 @@ $(document).ready(function() {
                                         }
                                html += '<tr><th class="option_title">4~7일 소요</th>'
                                html += '<th class="option_title">금액(개당)</td></tr>'
-                                  for (j; j <8; j++) {
+                                  for (j; j <data.length; j++) {
                                             var longitem = data[j].product              
                                             var longprice = data[j].price
                                             html += '<tr><td>'+longitem+'</td><td>'+longprice+'</td></tr>'
@@ -385,6 +385,31 @@ $(document).ready(function() {
                       }                        
            })
        }else{
+    	   
+    	  
+	    	 //업체 업무시간 정보
+	    	   $.ajax({
+	               url:'/coinList.do'
+	               , method : 'POST'
+	               , data: { bno : bno }
+	               , dataType: 'json'
+	               , success: function(data){ //성공후 처리는 추후 진행. 
+	            	   			$("#s_time").empty()        	   		  
+	                            if(data==null)console.log("data 가 조회되지 않았습니다.")                      
+	                            var html = ''   
+	                            html += ' <i class="far fa-clock"></i> 업무시간 </br>'
+	                                  for (var i = 0; i <data.length; i++) {
+	                                            var week = data[i].week                 
+	                                            var time = data[i].time
+	                                            html += "&nbsp&nbsp&nbsp&nbsp<span class='weektext'>"+week+"</span>&nbsp"+time+"</br>"
+	                                       }
+	                            $("#s_time").append(html)         
+	                           }   
+	           })  
+	   
+    	   
+    	   
+    	   
     	   var equipmentNames=['중형세탁기','대형세탁기','특대형세탁기','건조기'];  
     	   var etcNames=['향균세탁','특수세제','섬유유연제','픽업봉투'];
     	   var html="";
@@ -803,7 +828,8 @@ $(document).ready(function() {
 	  //위도, 경도로 동이름 검색
 	  function lonLatFind(lat,lon) {		  
 		  //주소로 위도, 경도 찾기
-		  $.getJSON('/jsp/searchMap/latLon.json', function(data) {					  var chkTf = true
+		  $.getJSON('/jsp/searchMap/latLon.json', function(data) {					  
+			  var chkTf = true
 		       $.each(data, function(i, result) {
 		    	   if( lat == result.lat && lon == result.lon ){
 		    		   console.log("동이름 : "+result.dong)

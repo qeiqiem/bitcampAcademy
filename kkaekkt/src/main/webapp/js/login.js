@@ -18,27 +18,27 @@ function login_show(){
   
 }
 function login() {
-  var userData={
-    id:$('#login_id').val(),
-    password:$('#login_password').val()
-  }
-  $.post({
-    url:"/login.do",
-    data:userData,
-    success:function(result) {
-      if(result=='fail'){
-        alert('아이디 또는 비밀번호가 일치하지 않습니다.');
-        
-      }else if(result == "1"){
-        location.href="/index.do";
-        
-      }else if(result == "2"){
-        location.href='/jsp/mypageBiz/mpbProg_Num.jsp';
-      }else if(result =="3"){
-        location.href='/jsp/mypageBizCoin/coinspec.jsp';
-      }
-    }
-  })
+	  var userData={
+	    id:$('#login_id').val(),
+	    password:$('#login_password').val()
+	  }
+	  $.post({
+	    url:"/login.do",
+	    data:userData,
+	    success:function(result) {
+	      if(result=='fail'){
+	        alert('아이디 또는 비밀번호가 일치하지 않습니다.');
+	        
+	      }else if(result == "1"){
+	        location.href="/index.do";
+	        
+	      }else if(result == "2"){
+	        location.href='/jsp/mypageBiz/mpbProg_Num.jsp';
+	      }else if(result =="3"){
+	        location.href='/jsp/mypageBizCoin/coinspec.jsp';
+	      }
+	    }
+	  });
 }
 
 function enterkey() {

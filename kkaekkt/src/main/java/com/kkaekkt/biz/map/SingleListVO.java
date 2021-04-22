@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class SingleListVO {
 	
 	//laundryinfo-------------------------
-	int no;
+	String no;
 	int mno; //알림 전송을 위한 업체의 mno?
 	String bno; //like 조회
 	int lno;
@@ -20,6 +20,14 @@ public class SingleListVO {
 	String time;
 	String content;
 	String mname;
+	public String getNo() {
+		return no;
+	}
+
+	public void setNo(String no) {
+		this.no = no;
+	}
+
 	String grade;
 	
 	
@@ -99,13 +107,6 @@ public class SingleListVO {
 	public void setProduct(String product) {
 		this.product = product;
 	}
-
-	public int getNo() {
-		return no;
-	}
-	public void setNo(int no) {
-		this.no = no;
-	}
 	
 	public String getName() {
 		return name;
@@ -134,9 +135,11 @@ public class SingleListVO {
 	@Override
 	public String toString() {
 		return "SingleListVO [no=" + no + ", mno=" + mno + ", bno=" + bno + ", lno=" + lno + ", price=" + price
-				+ ", product=" + product + ", name=" + name + ", week=" + week + ", time=" + time
-				+ ", content=" + content + ", mname=" + mname + ", grade=" + grade + ", rdate=" + rdate + "]";
+				+ ", product=" + product + ", name=" + name + ", week=" + week + ", time=" + time + ", content="
+				+ content + ", mname=" + mname + ", grade=" + grade + ", rdate=" + rdate + "]";
 	}
+
+
 
 	
 	

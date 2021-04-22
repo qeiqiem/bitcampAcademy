@@ -181,7 +181,7 @@ window.onload = function () {
             document.getElementById("checkpwd").innerText
                 = "";
             document.getElementById("match").innerHTML
-                = " 변경이 완료되었습니다, <br>이후 프로필 수정시, 변경된 비밀번호로 입력해주세요.";
+                = " 변경이 완료되었습니다. <br>이후 프로필 수정시, 변경된 비밀번호로 입력해주세요.";
             // document.getElementById("match").style.color = "rgba(254, 54, 54, 0.55)";
 
         }

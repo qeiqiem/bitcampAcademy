@@ -238,7 +238,7 @@ function resListSet(){
     var cntChk=$('.chked');
     var ddate;
     for(var i=0;i<cntChk.length;i++){
-        lno = Number($('.chked').eq(i).attr('id').charAt(3))+1;//lno추출
+        lno = Number($('.chked').eq(i).attr('id').charAt(3));//lno추출
         cnt = $('#selc'+lno).val();//cnt추출
         list.push({lno:lno,cnt:cnt});//리스트 셋
         if(lno<5){

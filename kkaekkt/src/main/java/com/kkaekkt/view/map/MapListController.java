@@ -103,6 +103,18 @@ public class MapListController {
 			String singleList = gson.toJson(single); 			
 			return singleList; 
 		}
+		
+		
+		
+		//코인시간조회
+		@RequestMapping(value="/coinList.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")
+		public @ResponseBody String coinList(String bno) {
+			List<SingleListVO>single = mapserv.coinList(bno); 
+			Gson gson=new Gson(); 
+			String singleList = gson.toJson(single); 			
+			return singleList; 
+		}
+		
 	  
 		//일반세탁 사양/가격조회
 		@RequestMapping(value="/singleOption.do",method=RequestMethod.POST,produces="application/text;charset=utf-8")

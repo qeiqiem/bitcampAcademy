@@ -272,10 +272,11 @@
 		</div>
 	</div>
 </body>
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=51280b09b2db933ece103871000a2518&libraries=services"></script>
-   <!--  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3845f493917a302d1ea69e946c0443ff&libraries=services"></script> -->
-<script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3845f493917a302d1ea69e946c0443ff&libraries=services"></script>
+    <!-- 
+	<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=51280b09b2db933ece103871000a2518&libraries=services"></script>-->
+  <script>
 	//위도 경도
 	let lat;
 	let lon;

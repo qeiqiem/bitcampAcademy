@@ -15,4 +15,5 @@ public interface MapService {
 	public int respay(MapListVO mapvo);
 	public int likeYn(SingleListVO vo);
 	public BusinessVO singleOptionCoin(String bno);
+	public List<SingleListVO> coinList(String bno);
 }

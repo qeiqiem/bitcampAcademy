@@ -27,12 +27,8 @@ table {
 #mailChkDiv {
   position: relative;
 }
-#timeOut {
-  position: absolute;
-  right: 121px;
-  color: var(--text-red);
-  width: 37px;
-  top: 21px;
+#timeout {
+  top: 18px;
 }
 
 button {

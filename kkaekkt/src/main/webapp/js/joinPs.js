@@ -209,8 +209,9 @@ function initKeyEvent() {
       document.getElementById("repw_label").innerText = "";
     }
   });
-  // 생년월일 입력형식 확인
+//생년월일 입력형식 확인
   birth.addEventListener("keyup", () => {
+    let formatbirth = 0;
     //20210101
     if (!regBth.test(birth.value)) {
       if (birth.value.length == 0) {
@@ -225,8 +226,9 @@ function initKeyEvent() {
       document.getElementById("birth_label").innerText = "";
     }
   });
-  // 전화번호 입력형식 확인
+//전화번호 입력형식 확인
   birth.addEventListener("keyup", () => {
+    let formatph = 0;
     // if (!regPh.test(phone.value)) {
     if (!regPh.test(phone.value)) {
       if (phone.value.length == 0) {

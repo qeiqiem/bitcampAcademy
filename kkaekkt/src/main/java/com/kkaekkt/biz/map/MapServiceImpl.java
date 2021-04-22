@@ -29,7 +29,12 @@ public class MapServiceImpl implements MapService {
 	@Override public List<SingleListVO> selectSingle(String bno) {
 		 return maplistDao.selectSingle(bno); 
 	 }
-
+	
+	@Override
+	public List<SingleListVO> coinList(String bno) {
+		return maplistDao.coinList(bno); 
+	}
+	
 	@Override
 	public List<SingleListVO> singleOption(String bno) {
 		return maplistDao.selectOption(bno); 
@@ -64,6 +69,8 @@ public class MapServiceImpl implements MapService {
 	public int likeYn(SingleListVO vo) {		
 		return maplistDao.likeYn(vo);
 	}
+
+
 
 
 

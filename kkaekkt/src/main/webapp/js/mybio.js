@@ -180,8 +180,8 @@ window.onload = function () {
 
             document.getElementById("checkpwd").innerText
                 = "";
-            document.getElementById("match").innerText
-                = " 변경이 완료되었습니다, 이후 프로필 수정시, 변경된 비밀번호로 입력해주세요.";
+            document.getElementById("match").innerHTML
+                = " 변경이 완료되었습니다.<br> 이후 프로필 수정시, 변경된 비밀번호로 입력해주세요.";
             document.getElementById("match").style.color = "var(--text-red)";
 
         } else {
