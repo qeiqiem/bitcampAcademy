@@ -15,7 +15,6 @@ function login_show(){
     $("#modal_container").show()
     $("#mask").show()
   // })
-  
 }
 function login() {
   var userData={
@@ -38,7 +37,7 @@ function login() {
         location.href='/jsp/mypageBizCoin/coinspec.jsp';
       }
     }
-  })
+  });
 }
 
 function enterkey() {
