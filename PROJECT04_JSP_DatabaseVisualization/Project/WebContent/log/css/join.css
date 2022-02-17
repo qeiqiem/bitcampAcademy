@@ -1,0 +1,94 @@
+@charset "UTF-8";
+ul {
+  list-style: none;
+}
+
+.join_input li {
+  margin-bottom: 10px;
+ 
+}
+
+input {
+  height: 20px;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+select {
+  padding: 6px;
+}
+
+h2 {
+  text-align: center;
+}
+
+.join_container {
+  box-sizing: border-box;
+  width: 550px;
+  justify-content: center;
+  margin: auto;
+  margin-top: 90px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 30px;
+}
+.join_list {
+  display: flex;
+  box-sizing: border-box;
+  /* flex-direction: row; */
+  /* justify-content: center; */
+  width: 500px;
+  height: 300px;
+  margin-top: 40px;
+  margin-left: 60px;
+  margin-bottom: 50px;
+}
+
+.join_info li {
+  margin-bottom: 24px;
+}
+
+.join_info {
+  margin-top: 8px; 
+  margin-right: 40px;
+}
+
+.join_btn {
+  text-align: center;
+  padding: 30px 0;
+}
+
+/* .join_btn button {
+  font-size: 14px;
+  padding: 7px 10px;
+  margin: 0 20px;
+}
+ */
+.post_container {
+  display: absolute;
+  margin-left: 300px;
+}
+
+.post_btn.w {
+	background-color: #efefef;
+	border: none;
+	border-radius: 10px;
+	padding: 10px 15px;
+	margin: 0 10px;
+}
+
+.post_btn.w:hover {
+	background-color: black;
+	border: none;
+	border-radius: 10px;
+	padding: 10px 15px;
+	color: white;
+}
+
+.post_btn.w.m:hover {
+	background-color: rgb(255, 97, 97);
+	border: none;
+	border-radius: 10px;
+	padding: 10px 15px;
+	color: white;
+}

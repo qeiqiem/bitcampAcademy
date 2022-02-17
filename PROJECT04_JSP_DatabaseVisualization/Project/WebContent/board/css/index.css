@@ -1,0 +1,138 @@
+@charset "UTF-8";
+
+* {
+	margin: 0;
+	padding: 0;
+	/* vertical-align: baseline; */
+	font-family: "Noto Sans KR", sans-serif;
+}
+
+ul {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+	color: #000;
+}
+/* a:link { color: red; text-decoration: none;}
+a:visited { color: black; text-decoration: none;}
+a:hover { color: blue; text-decoration: underline;} */
+.sidebar_container {
+	width: 300px;
+	height: 100vh;
+	display: block;
+	position: fixed;
+	left: 0;
+	overflow: auto;
+	box-sizing: border-box;
+	background: linear-gradient(to right, rgb(169, 211, 198), white);
+	padding: 20px 30px;
+}
+
+.index {
+	margin: 10px;
+	
+}
+
+.index.logout{
+	margin-bottom:50px; 
+}
+
+.logo {
+	margin-bottom: 10px;
+}
+
+.logo img {
+	width: 160px;
+	margin: 10px 10px 40px;
+}
+
+.no_signin {
+	display: inline-block;
+}
+
+
+
+.log_btn {
+	display: block;
+	box-sizing: border-box;
+	-webkit-appearance: none; -moz-appearance : none; appearance : none;
+	/* border: 1px solid white; */
+	border:none;
+	width: 100px;
+	display: inline-block;
+	text-align: center;
+	padding: 8px;
+ 	margin: 5px 3px;
+	/* margin: 5px -1.5px; */
+	font-size: 13px;
+	color:rgba(0,0,0,0.5);
+	border-radius: 50px;
+ 	 background-color: rgba(255,255,255,0.5); 
+ /* 	background:white; */
+ 	
+}
+
+.log_btn:hover{
+	color:black;
+	transition: 0.4s ease-in-out;
+}
+
+.loginfo {
+	width: 100%;
+	margin: auto;
+	/* text-align: center;  */
+	text-indent:20px; 
+	font-size: 14px;
+	color: rgba(0, 0, 0, 0.5);
+	color: rgba(255, 255, 255);
+	letter-spacing: 2px
+}
+
+.loginfo span {
+	text-decoration: underline;
+}
+
+.loginfo:hover {
+	color: rgba(0, 0, 0, 0.5);
+	transition: 0.4s ease-in-out;
+}
+
+.menu_list {
+	margin-top: 30px;
+}
+
+.menu_list li {
+	padding: 10px 5px;
+	font-weight: 500;
+	font-size: 18px;
+}
+
+.menu_list a {
+	color: rgba(0, 0, 0, 0.5);
+}
+
+.menu_list a:hover {
+	color: black;
+	text-decoration: underline;
+	transition: 0.5s ease-in-out;
+}
+
+footer {
+	font-size: smaller;
+	font-weight: lighter;
+	position: absolute;
+	bottom: 0;
+	margin-bottom: 20px;
+}
+
+footer li {
+	color: rgba(0, 0, 0, 0.5)
+}
+
+.post_container {
+	position: absolute;
+	left: 300px;
+	padding: 35px 30px;
+}

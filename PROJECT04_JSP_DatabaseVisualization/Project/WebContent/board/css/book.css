@@ -1,0 +1,43 @@
+.box > ul {
+    list-style: none;
+}
+.box {
+    position: relative;
+    width: 430px;
+    height: 200px;
+    border: 1px solid #eee;
+    border-radius: 15px;
+    padding:20px;
+    margin: 30px;
+    font-size: 1.4em;
+}
+.box:hover {
+    border: 1px solid #acd4c8;
+}
+.viewDate {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    width: 120px;
+    height: 40px;
+    font-size:1em;
+    border-radius: 7px;
+    height:46px;
+    border:none;
+    outline: 0;
+}
+.viewDate:hover {
+	background-color: #acd4c8;
+	transition: 0.7s;
+	color: #fff;
+}
+.line {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+}
+.line > h1 {
+    font-size: 1.4em;
+}
+.far {
+    margin-right: 10px;
+}

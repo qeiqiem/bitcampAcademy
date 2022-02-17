@@ -1,0 +1,82 @@
+@charset "UTF-8";
+body,
+html {
+  margin: 0;
+}
+
+video {
+  top: 0;
+  position: fixed;
+}
+
+/* .logo {
+  color: white;
+  margin: auto;
+  text-align: center;
+  z-index: 100;
+  top: 0;
+  position: fixed;
+
+  font-size: 100px;
+} */
+
+.logo {
+  z-index: 100;
+  position: fixed;
+  margin: 50px;
+  padding-left: 50px;
+  display: flex;
+}
+
+.logo img {
+  width: 600px;
+  margin-right: 500px;
+}
+
+.logo a {
+  display: inline-block;
+  margin-left: 30px;
+  right: 10;
+  width: 100px;
+  text-decoration: none;
+  color: white;
+  font-size: 22px;
+  margin-top: 30px;
+  font-weight: 700;
+}
+
+.logo a:hover {
+  text-decoration: underline;
+  color: black;
+  transition: 0.3s ease-in-out;
+}
+
+.inqury {
+  z-index: 200;
+  position: absolute;
+  bottom: 0;
+}
+.inqury a {
+  font-size: 18px;
+  color: rgb(255, 255, 255, 0.7);
+  text-decoration: none;
+  margin-left: 115px;
+}
+
+.inqury a:link {
+  text-decoration: underline wavy;
+}
+
+.inqury a:hover {
+  color: rgba(0, 0, 0, 0.192);
+  transition: 0.3s ease-in-out;
+}
+
+i {
+  margin-right: 10px;
+}
+
+.container {
+  position: relative;
+  height: 768px;
+}
