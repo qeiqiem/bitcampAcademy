@@ -1,0 +1,90 @@
+p{
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+.processHeader tr th{
+    width: 11%;
+    border: none;
+    padding: 10px 0;
+}
+/* .processList {
+    width: 100%;
+    border: 1px solid var(--gray-color);
+    text-align: center;
+    margin-bottom: 5px;
+    min-height: 85px;
+} */
+
+.processList tr td{
+    padding: 10px 0;
+    width: 11%;
+    border: none;
+}
+.processList tr td:nth-child(9){
+    position: relative;
+}
+.processList tr td:nth-child(9) div {
+    position: absolute;
+    margin: auto;
+    top:0;
+    bottom:0;
+    left: 0;
+    right: 0;
+    width: 60%;
+    height: 75px;
+    color: black;
+}
+.processList tr td:nth-child(9) div button:nth-child(1) {
+    position: relative;
+    background: rgb(251, 135, 135);
+    margin-bottom: 5px;
+    border:none;
+    width: 100%;
+    font-size: 14px;
+    border-radius: 30px;
+    height: 35px;
+}
+.processList tr td:nth-child(9) div button:nth-child(2) {
+    position:relative;
+    background: var(--key-color);
+    border:none;
+    width: 100%;
+    font-size: 14px;
+    border-radius: 30px;
+    height: 35px;
+}
+.completeList {
+    width: 100%;
+    border: 1px solid var(--gray-color);
+    text-align: center;
+    margin-bottom: 5px;
+    min-height: 85px;
+    margin-top: 9px;
+    padding: 12px 0;
+}
+.completeList tr{
+    position: relative;
+}
+.completeList tr td{
+    padding: 10px 0;
+    width: 11%;
+    border: none;
+}
+.completeList tr td:nth-child(9){
+    position: relative;
+}
+.completeList tr td:nth-child(9) button {
+    position: absolute;
+    margin: auto;
+    top:0;
+    bottom:0;
+    left: 0;
+    right: 0;
+    background: var(--key-color);
+    width: 60%;
+    height: 45px;
+    border-radius: 30px;
+    border: none;
+}

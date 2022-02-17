@@ -1,0 +1,79 @@
+.content .laundry_nav {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+  margin-top: 0;
+  padding: 0 10px;
+}
+.laundry_nav li {
+  color: gray;
+  cursor: pointer;
+}
+.selected {
+  color: black !important;
+  font-weight: bold;
+}
+
+.order {
+  display: flex;
+  margin-bottom: 20px;
+}
+.order p {
+  margin: 0 auto 0 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+.processTitle {
+  font-weight: bold;
+  font-size: 20px;
+  margin-left: 10px;
+}
+
+.processHeader tr th {
+  width: 14%;
+  border: none;
+  padding: 10px 0;
+}
+.processList{
+  height: 100px;
+}
+
+.processList tr td {
+  padding: 10px 0;
+  width: 14%;
+  border: none;
+}
+.processList tr td:nth-child(7) {
+  position: relative;
+}
+.processList tr td:nth-child(7) div {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 60%;
+  height: 75px;
+  color: black;
+}
+.processList tr td:nth-child(7) div:nth-child(1) button:nth-child(1) {
+  position: relative;
+  background: rgb(251, 135, 135);
+  margin-bottom: 5px;
+  width: 95%;
+  border: none;
+  font-size: 1rem;
+  border-radius: 30px;
+  height: 35px;
+}
+.processList tr td:nth-child(7) div:nth-child(1) button:nth-child(2) {
+  position: relative;
+  background: var(--key-color);
+  width: 95%;
+  border: none;
+  font-size: 1rem;
+  border-radius: 30px;
+  height: 35px;
+}
+

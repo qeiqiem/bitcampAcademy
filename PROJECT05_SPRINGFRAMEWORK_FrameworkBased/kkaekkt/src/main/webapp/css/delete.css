@@ -1,0 +1,95 @@
+textarea {
+	resize: none;
+	height: 12em; /* height 안먹는데 이유를 모름.. */
+}
+
+.word {
+	width: 100vw;
+	/* height: 100vh; */
+	position: relative;
+}
+#textDel{
+	color: var(--text-gray);
+	/* margin: 90px 0 0 2px; */
+    margin: 40px 0 30px 43px;
+	
+}
+#textDel a{
+	color: var(--text-gray);
+	text-decoration: underline;
+}
+
+/* 모달 container 입니다 기본은 none 상태로 두셔야합니다.
+        본인 화면에서 사용할때, position을 정해주셔야 합니다. */
+#modal_container {
+	display: none;
+    position: fixed;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 364px;
+    height: 417px;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    /* box-shadow: 5px 12px 5px rgb(212, 212, 212); */
+    z-index: 1000;
+}
+
+
+#modal_close {
+    width: 36px;
+    height: 36px;
+    border: 1px solid;
+    background: white;
+    margin: 12px 16px 0 0;
+    font-size: 19px;
+    border: none;
+    cursor: pointer;
+	float: right;
+}
+
+#modal_bodycont {
+    /* height: 80%; */
+    width: 100%;
+    position: absolute;
+    top: 51px;
+}
+
+#modal_head {
+	width: 80%;
+	height: 80px;
+	text-align: center;
+	margin: 0 auto;
+}
+#modal_head #name{
+    border: none;
+    /* padding: 0; */
+    /* font-size: 12pt; */
+    font-weight: bold;
+    font-size: x-large;
+    text-align: center;
+	width: 100%;
+	background: none;
+
+}
+#modal_head p{
+	font-size:11pt;
+}
+
+#modal_foot {
+	margin-top: 171px;
+    /* margin-left: 17%; */
+    text-align: center;
+}
+#modal_foot input{
+	border-radius: 30px;
+    border: none;
+	background: var(--gray-color);
+    width: 100px;
+    height: 45px;
+	margin: 10px;
+}

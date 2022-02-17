@@ -1,0 +1,125 @@
+#modal_foot hr {
+	height: 0.5px;
+	border: none;
+	background-color: var(--gray-color);
+	width: 76%;
+    margin: 25px auto;
+    text-align: center;
+}
+
+#login {
+	width: 324px;
+	height: 59px;
+	left: 557px;
+	top: 478px;
+	margin-bottom: 20px;
+	border: none;
+	font-size: medium;
+	border-radius: 30px;
+	cursor: pointer;
+}
+
+.login_box input {
+	border: solid 1px var(--gray-color);
+	width: 301px;
+    height: 35px;
+    left: 556px;
+    top: 339px;
+    margin: 10px;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: medium;
+}
+
+.content button {
+	float: left;
+	position: relative;
+	/* left:250px; */
+	top: -50px;
+}
+
+.loginTitle {
+	text-align: center;
+	margin-bottom: 60px;
+}
+
+.login_API {
+	text-align: center;
+}
+
+.login_API img {
+    height: 57px;
+    margin: 10px;
+}
+
+
+.login_foot p {
+	font-size:smaller;
+	color: #BCBCBC;
+	margin-top: 30px;
+}
+
+.finds a {
+	margin: 30px;
+	color: var(--text-gray);
+	text-decoration: none;
+}
+
+.the_others p {
+	margin-top: 20px;
+	color: var(--text-gray);
+	font-weight: bold;
+}
+
+/* 모달 영역 */
+#modal_container {
+	display: none;
+  	position: fixed;
+  	margin: auto;
+  	top: 0;
+  	bottom: 0;
+  	left: 0;
+  	right: 0;
+  	margin: auto;
+  	background-color: white;
+ 	border: 1px solid lightgray;
+  	border-radius: 10px;
+	width: 450px;
+	height: 673px;
+	z-index: 9999;
+	
+	/* 	box-shadow: 5px 12px 5px rgb(212, 212, 212); */
+}
+
+#modal_close {
+	float: right;
+    width: 36px;
+    height: 36px;
+    border: 1px solid;
+    background: white;
+    margin: 18px 20px 0 0;
+    font-size: 24px;
+    border: none;
+    cursor: pointer;
+}
+
+#modal_bodycont {
+	margin-top: 64px;
+	text-align: center;
+	/* height: 80%; */
+}
+
+#modal_head {
+	width: 80%;
+	height: 65px;
+	text-align: center;
+	margin: 0 auto;
+	color: var(--black-color);
+}
+
+
+/* #modal_foot {
+	margin: 0px 15%;
+	width: 80%;
+	height: 315px;
+} */

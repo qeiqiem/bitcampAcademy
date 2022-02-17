@@ -1,0 +1,245 @@
+p{
+    padding: 0;
+    margin: 0;
+}
+button{
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.none{
+    display: none;
+}
+
+
+/* .content_header .searchBox{
+    position: relative;
+    margin: 0 0 0 auto;
+    width: 200px;
+    height: 30px;
+    border-radius: 20px;
+    outline: none;
+    border: 1px solid var(--gray-color);
+    background-color: white;
+} */
+/* .searchBox .search {
+    right: 33px;
+    position: absolute;
+    width: 48%;
+    height: 93%;
+    border: 0;
+    outline: none;
+    background-color: white;
+}
+.searchBox i{
+    position: absolute;
+    top: 7px;
+    right: 13px;
+    cursor: pointer;
+}
+.searchBox select{
+    position:absolute;
+    border:0px;
+    appearance:none;
+    outline: none;
+    border-radius: 20px;
+    top: 8px;
+    left: 8px;
+    text-align-last: center;
+    background-color: white;
+} */
+
+.searchBox .search {
+    background: none;
+}
+.order {
+    display: flex;
+    margin-bottom: 5px;
+}
+.order p {
+    font-weight: bold;
+    font-size: 16px;
+    margin: 0 auto 0 10px;
+}
+.selectbox {
+    position: relative;
+    width: 103px;
+    border: 1px solid var(--gray-color);
+    z-index: 1;
+    height: 25px;
+    padding: 3px;
+    margin-bottom: 10px;
+}
+/* 가상 선택자를 활용 화살표 대체 */
+.selectbox:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    width: 0;
+    height: 0;
+    margin-top: -1px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #333;
+    
+}
+.selectbox label {
+    position: absolute;
+    top: -8px;  /* 위치정렬 */
+    left: 3px;  /* 위치정렬 */
+    font-size: 14px;
+    padding: .8em .5em;  /* select의 여백 크기 만큼 */
+    color: #999;
+    z-index: -1;  /* IE8에서 label이 위치한 곳이 클릭되지 않는 것 해결 */
+    
+}
+.selectbox select {
+    width: 100%;
+    height: auto;  /* 높이 초기화 */
+    line-height: normal;  /* line-height 초기화 */
+    font-family: inherit;  /* 폰트 상속 */
+    padding: .4em .5em;  /* 여백과 높이 결정 */
+    border: 0;
+    opacity: 0;  /* 숨기기 */
+    filter:alpha(opacity=0);  /* IE8 숨기기 */
+    -webkit-appearance: none; /* 네이티브 외형 감추기 */
+    -moz-appearance: none;
+    appearance: none;
+    cursor: pointer;
+}
+.reviewHeader{
+    width: 100%;
+    border:1px solid var(--gray-color);
+    margin-bottom: 10px;
+}
+.reviewHeader tr th{
+    padding: 10px 0;
+}
+.cell1 {
+    width: 7%;
+}
+.cell2 {
+    text-align: left;
+    width: 41%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+td.cell2:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+.cell3 {
+    width: 8%;
+}
+.cell4 {
+    width: 8%;
+}
+.reviewer{
+    cursor: pointer;
+}
+.cell5 {
+    width: 12%;
+}
+.cell6{
+    width: 12%;
+}
+td.cell6{
+    font-size: 12px;
+}
+.cell7{
+    width: 12%;
+}
+.open {/*리뷰 내용 펼치기*/
+    word-break: break-all;
+}
+.close {/*리뷰 내용 닫기*/
+    white-space: nowrap;
+}
+.cell7 button{
+    border: none;
+    margin: 0 3px;
+    height: 33px;
+    border-radius: 30px;
+}
+.cell7 button:not(.replyCom) {
+    background: var(--gray-color);
+}
+.cell7 button.replyBtn {
+    width: 84px;
+}
+.comments {
+    width: 100%;
+    padding: 5px 10px;
+    border: 1px solid lightgray;
+    box-sizing: border-box;
+    margin-top: -1px;
+    background-color: var(--background-gray);
+}
+.comments_header {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 30px;
+}
+.comments_header p {
+    margin-right: auto;
+}
+.comments_header button {
+    background-color: unset;
+    width: 40px;
+    height: 30px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.comments_header button:hover{
+    text-decoration: underline;
+}
+.comments_body{
+    position: relative;
+}
+.comments_body span:nth-child(1){
+    position: absolute;
+    left: 15px;
+}
+.comments_body textarea {
+    margin-left: 40px;
+    width: 95%;
+    resize: none;
+    border: 1px solid var(--gray-color);
+    outline-color: var(--key-color);
+}
+.comments_body span:nth-child(3) {
+    position: absolute;
+    right: 30px;
+    bottom: 10px;
+    color: gray;
+    font-size: 12px;
+}
+.reviewList {
+    table-layout: fixed;
+    width: 100%;
+    margin-top: 8.5px;
+    border: 1px solid var(--gray-color);
+    text-align: center;
+    height: 48px;
+}
+.replyList {
+    table-layout: fixed;
+    width: 100%;
+    margin-top: 0px;
+    border: 1px solid var(--gray-color);
+    text-align: center;
+    height: 48px;
+    background: var(--background-gray);
+}
+.replyCell {
+    width: 57%;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+td.replyCell:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
