@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community</title>
+    <script src="https://kit.fontawesome.com/2fc57dd2db.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/community.css">
+</head>
+
+<body>
+    <nav class="sidebar_container">
+        <header>
+            <div class="index logo">
+                <img src="logo.png" alt="">
+            </div>
+            <!-- 로그인 O -->
+            <!-- <nav class="login">
+                <div class="myinfo">
+                    <i class="fas fa-user">내 정보</i>
+                </div>
+                <div>
+                    <i class="fas fa-sign-out-alt">로그아웃</i>
+                </div>
+            </nav> -->
+
+            <!-- 로그인 X -->
+            <div class="index logout">
+                <button type="submit" class="btn login">
+                    <i class="fas fa-sign-in-alt"> 로그인</i>
+                </button>
+                <button type="submit" class="btn join">
+                    <i class="fas fa-user"> 회원가입</i>
+                </button>
+            </div>
+
+            <div class="index menu_list">
+
+                <ul>
+                    <li><a href="">산</a></li>
+                    <li><a href="">인증샷</a></li>
+                    <li><a href="">커뮤니티</a></li>
+                    <li><a href="">소모임</a></li>
+                    <li><a href="">FAQ</a></li>
+                </ul>
+
+            </div>
+
+
+        </header>
+        <footer>
+            <ul class="footer_list">
+                <li>
+                    산, 산, 산
+                </li>
+                <li>
+                    info@mountains.kr
+                </li>
+                <li>
+                    Copyright © 2021 All right Reserved.
+                </li>
+        </footer>
+    </nav>
+
+
+    <section class="post_container">
+        <div class="post_community">
+            <div class="title">
+                <h2>커뮤니티 Community</h2>
+                <button type="submit" class="post_btn">글쓰기</button>
+            </div>
+            <nav class="search">
+                <div class="order_link">
+                    <a href="">최신순</a>
+                    <a href="">추천순</a>
+                    <a href="">조회순</a>
+                </div>
+                <form action="" method="GET">
+                    <div class="input_search">
+                        <select name="head">
+                            <option value="none">말머리 선택</option>
+                            <option value="none" disabled>======</option>
+                            <option value="chat">사담</option>
+                            <option value="ques">질문</option>
+                            <option value="info">정보</option>
+                            <option value="pr">클럽홍보</option>
+                        </select>
+                        <select name="head">
+                            <option value="none">제목+내용</option>
+                            <option value="chat">제목</option>
+                            <option value="ques">글작성자</option>
+                            <option value="info">댓글</option>
+                        </select>
+
+                        <input type="search" placeholder="검색어" value>
+                        <button type="submit" class="post_btn search_btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </nav>
+
+            <div class="post_list">
+                <!-- 공지사항 반복문   -->
+                <c:forEach var="notice" items="${notice}">
+                    <div class="notice post">
+                        <div class="post_no">
+                            ${notice.bno}
+                        </div>
+                        <div class="post_head">
+                            ${notice.header}
+                        </div>
+                        <div class="post_title">
+                            <a href="">${notice.title}</a>
+                        </div>
+
+                        <div class="post_info">
+                            <div class="infos">
+                                <i class="far fa-thumbs-up"> 추천수 getno</i>
+                                <i class="far fa-eye"> 조회수 getno</i>
+                            </div>
+
+                            <div class="writer_info">
+                                ${notice.name } <br>
+                                <span style="font-size: x-small;">${notice.createdDate }</span>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+
+                <!-- 게시글 반복문 -->
+                <c:forEach var="post" items="${posts}">
+                    <div class="post">
+                        <div class="post_no">
+                            ${post.bno}
+                        </div>
+                        <div class="post_head">
+                            ${post.header}
+                        </div>
+                        <div class="post_title">
+                            <a href="">${post.title}</a>
+                        </div>
+
+                        <div class="post_info">
+                            <div class="infos">
+                                <i class="far fa-thumbs-up"> 추천수 getno</i>
+                                <i class="far fa-eye"> 조회수 getno</i>
+                            </div>
+
+                            <div class="writer_info">
+                                ${post.name } <br>
+                                <span style="font-size: x-small;">${post.createdDate }</span>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+
+            </div>
+        </div>
+
+        <nav class="page_btn">
+            <button>
+                <i class="fas fa-angle-left"></i>
+            </button>
+            <!-- page no 배열..?? -->
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button disabled><i class="fas fa-ellipsis-h"></i></button>
+            <!-- 마지막 저장값 숫자 -->
+            <button>100</button>
+            <button>
+                <i class="fas fa-angle-right"></i>
+            </button>
+        </nav>
+    </section>
+</body>
+
+</html>

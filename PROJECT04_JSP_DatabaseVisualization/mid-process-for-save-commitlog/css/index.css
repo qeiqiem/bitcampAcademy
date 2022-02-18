@@ -1,0 +1,83 @@
+* {
+  margin: 0;
+  padding: 0;
+  /* vertical-align: baseline; */
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+/* a:link { color: red; text-decoration: none;}
+a:visited { color: black; text-decoration: none;}
+a:hover { color: blue; text-decoration: underline;} */
+
+.sidebar_container {
+  width: 300px;
+  height: 100vh;
+  display: block;
+  position: fixed;
+  left: 0;
+  overflow: auto;
+  box-sizing: border-box;
+  background-color: chartreuse;
+  padding: 20px 30px;
+}
+
+.index {
+  margin: 10px;
+}
+
+.logo {
+  margin-bottom: 10px;
+}
+.logo img {
+  width: 200px;
+}
+
+.no_signin {
+  display: inline-block;
+}
+
+.btn {
+  display: block;
+  box-sizing: border-box;
+  /* border: 1px solid #ccc; */
+  box-sizing: border-box;
+  width: 100px;
+  display: inline-block;
+  text-align: center;
+  padding: 8px;
+  margin: 10px 2px;
+  font-size: 13px;
+  /* border-radius: 10px; */
+  /* background-color: white; */
+}
+
+.menu_list {
+  margin-top: 30px;
+}
+.menu_list li {
+  padding: 5px 0;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+footer {
+  font-size: smaller;
+  font-weight: lighter;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 20px;
+}
+
+.post_container {
+  position: absolute;
+  left: 300px;
+  padding: 35px 30px;
+}

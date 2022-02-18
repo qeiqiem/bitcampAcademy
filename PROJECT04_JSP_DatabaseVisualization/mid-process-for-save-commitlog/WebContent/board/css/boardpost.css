@@ -1,0 +1,94 @@
+@charset "UTF-8";
+ul {
+  list-style: none;
+}
+
+hr {
+  margin: 20px 0;
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid rgb(228, 228, 228);
+  padding: 0;
+}
+.post_btn {
+  padding: 3px 5px;
+}
+
+.title {
+  width: 100vh;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.list_btn {
+  display: flex;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  /* padding: 5px; */
+  margin-top: 30px;
+}
+
+.list_btn button {
+  margin-left: 20px;
+  /* padding: 5px 10px; */
+  font-size: 13px;
+  border: none;
+  background: none;
+  /* background: #ccc;
+  border-radius: 3px; */
+}
+
+.post {
+  box-sizing: border-box;
+  border: 1px solid rgb(228, 228, 228);
+  padding: 20px;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.post_head li {
+  display: inline-block;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.post_title ul {
+  font-size: 12px;
+}
+
+.post_title h3 {
+  margin: 5px 0 8px;
+}
+
+.post_text {
+  padding: 20px;
+}
+
+.far {
+  margin-right: 20px;
+  font-size: 14px;
+}
+
+.comm li {
+  margin: 5px 0;
+}
+
+.commtext {
+  font-size: 14px;
+}
+
+form li {
+  margin-bottom: 10px;
+}
+
+form button {
+  float: right;
+  /* border: none; */
+  padding: 7px 10px;
+}
+
+form ul {
+  margin-bottom: 50px;
+}
